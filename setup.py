@@ -11,7 +11,7 @@ setuptools.setup(
     description="Computer Vision Package Manager",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/unarixv/cvpm",
+    url="https://github.com/unarxiv/cvpm",
     packages=setuptools.find_packages(),
     classifiers=[
         "Programming Language :: Python :: 3",
