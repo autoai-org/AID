@@ -3,9 +3,10 @@ default:
 	@echo "\tmake test"
 	@echo "\tmake format"
 	@echo "\tmake docs"
-
+	@echo "\tmake package"
+	@echo "\tmake clean"
+	@echo "\tmake publish"
 test:
-
 
 format:
 	autoflake -i cvpm/*.py
@@ -19,5 +20,16 @@ format:
 
 docs:
 	cd docs && npm run docs:build
+
+package:
+	python setup.py sdist bdist_wheel
+
+clean:
+	rm -rf build
+	rm -rf dist
+	rm -rf cvpm.egg-info
+
+publish:
+	twine upload dist/*
 
 .PHONY: docs
