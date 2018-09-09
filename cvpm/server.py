@@ -1,12 +1,12 @@
-import os
 import json
+import logging
+import os
 import socket
 import traceback
-import logging
+
 import gevent.pywsgi
-from flask import g
-from flask import Flask
-from flask import request
+from flask import Flask, g, request
+from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
 logger = logging.getLogger()
@@ -18,6 +18,7 @@ ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png'])
 UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+
 
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -38,10 +39,11 @@ def get_available_port(start=8080):
             break
     return port
 
+
 def allowed_file(filename, phase):
     ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS_TRAIN
     if phase == 'infer':
-        ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS_INFER 
+        ALLOWED_EXTENSIONS = ALLOWED_EXTENSIONS_INFER
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -56,23 +58,27 @@ def help():
 def infer():
     if request.method == 'POST':
         results = {}
-        config = request.json
-        print(request)
+        config = ImmutableMultiDict(request.form)
         if 'file' not in request.files:
             return json.dumps({"error": "no file part!", "code": "400"}), 400
         file = request.files['file']
         if file and allowed_file(file.filename, 'infer'):
             filename = secure_filename(file.filename)
-            file_abs_path = os.path.join(server.config['UPLOAD_FOLDER'], filename)
+            file_abs_path = os.path.join(server.config['UPLOAD_FOLDER'],
+                                         filename)
             file.save(file_abs_path)
             try:
-                results = server.solver.infer(file_abs_path, config)
+                results = server.solver.infer(file_abs_path, config.to_dict())
                 return json.dumps(results), 200
             except Exception as e:
                 traceback.print_exc()
-                return json.dumps({"error": str(e), "code":"500"}), 500
+                return json.dumps({"error": str(e), "code": "500"}), 500
         else:
-            return json.dumps({"error": "Forbidden Filename!", "code": "400"}), 400
+            return json.dumps({
+                "error": "Forbidden Filename!",
+                "code": "400"
+            }), 400
+
 
 @server.route("/train", methods=["GET", "POST"])
 def train():

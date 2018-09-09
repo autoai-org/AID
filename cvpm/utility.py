@@ -54,8 +54,6 @@ class BundleAnalyzer(object):
     def load(self):
         result = {}
         for name, value in vars(self.bundle).items():
-            if name not in [
-                    "__doc__", "__module__", "__dict__", "__weakref__"
-            ]:
+            if not name.startsWith("__"):
                 result[name] = value
         return result

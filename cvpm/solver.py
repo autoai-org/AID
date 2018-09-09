@@ -4,14 +4,15 @@ import requests
 import toml
 import tqdm
 
-from cvpm.Server import run_server
-from cvpm.Utility import BundleAnalyzer, Downloader
+from cvpm.bundle import Bundle
+from cvpm.server import run_server
+from cvpm.utility import BundleAnalyzer, Downloader
 
 
 class Solver(object):
     def __init__(self, toml_file=None):
         self._isReady = False
-        self.bundle = {}
+        self.bundle = None
         self._enable_train = False
         if toml_file is None:
             toml_file = "./pretrained/pretrained.toml"
@@ -27,8 +28,11 @@ class Solver(object):
 
     @property
     def help_message(self):
-        ba = BundleAnalyzer(self.bundle)
-        return json.dumps(ba.load())
+        if self.is_ready:
+            members = self.bundle.members()
+            return json.dumps(members)
+        else:
+            return json.dumps({"error": "Initializing...", "code": "101"}), 101
 
     def _prepare_models(self, toml_file):
         parsed_toml = toml.load(toml_file)
@@ -38,6 +42,12 @@ class Solver(object):
 
     def set_ready(self):
         self._isReady = True
+
+    def set_bundle(self, bundle):
+        if issubclass(bundle, Bundle):
+            self.bundle = bundle
+            solver = self
+            bundle.add_solver(self=bundle, solver=solver)
 
     def infer(self, input, config):
         pass
