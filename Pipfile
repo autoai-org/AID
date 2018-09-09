@@ -13,11 +13,10 @@ toml = "*"
 requests = "*"
 pillow = "*"
 numpy = "*"
-autoflake = "*"
 isort = "*"
 yapf = "*"
 gevent = "*"
-
+flask-cors="*"
 
 [requires]
 

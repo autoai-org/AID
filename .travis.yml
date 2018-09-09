@@ -1,0 +1,39 @@
+language: go
+sudo: required
+git:
+  clone: quiet
+
+addons:
+  apt:
+    packages:
+    # needed for the nfpm pipe:
+    - rpm
+    # needed for the snap pipe:
+    - snapd
+
+env:
+# needed for the snap pipe:
+  - PATH=/snap/bin:$PATH
+
+script:
+  - go test -race -v ./...
+
+go: '1.11.2'
+
+matrix:
+  allow_failures:
+    - go: tip
+
+install:
+  - sudo snap install snapcraft --classic
+  - go get github.com/unarxiv/cvpm/cli
+
+services:
+  - docker
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: curl -sL https://git.io/goreleaser | bash
+    on:
+      tags: true
