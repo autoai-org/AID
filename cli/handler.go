@@ -2,8 +2,8 @@ package main
 
 import (
 	"strings"
-	"log"
 	"github.com/urfave/cli"
+	"github.com/fatih/color"
 )
 
 func InstallHandler (c *cli.Context) {
@@ -11,11 +11,11 @@ func InstallHandler (c *cli.Context) {
 	localFolder := config.Local.LocalFolder
 	remoteURL := c.Args().Get(0)
 	if (remoteURL == "cvpm:test") {
-		log.Printf("Installing... Please wait patiently")
+		color.Cyan("Installing... Please wait patiently")
 		pip([]string{"install", "--index-url", "https://test.pypi.org/simple/", "cvpm", "--user"})
 		return
 	} else {
-		log.Printf("Installing to " + localFolder)
+		color.Cyan("Installing to " + localFolder)
 	}
 	var repoFolder string
 	// Download Codebase
@@ -23,6 +23,8 @@ func InstallHandler (c *cli.Context) {
 		repoFolder = CloneFromGit(remoteURL, localFolder)	
 	}
 	// Install Dependencies
-	log.Printf("Installing Dependencies... Please wait patiently")
+	color.Cyan("Installing Dependencies... please wait patiently")
 	InstallDependencies(repoFolder)
+	color.Blue("Generating Runners")
+	GeneratingRunners(repoFolder)
 }

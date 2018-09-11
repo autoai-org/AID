@@ -11,6 +11,10 @@ func pip(args []string) {
 	_ = _execCommand(localPip, args)
 }
 
+func python(args []string) {
+	
+}
+
 func _execCommand(commandName string, params []string) bool {
 	cmd := exec.Command(commandName, params...)
 	output, err := cmd.CombinedOutput()

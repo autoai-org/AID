@@ -14,6 +14,7 @@ type cvpmConfig struct {
 type local struct {
 	LocalFolder string
 	Pip string
+	Python string
 }
 
 var apiURL = "http://192.168.1.12:8080/"
