@@ -1,7 +1,7 @@
 #coding:utf-8
 
-from {{solver.Package}}.{{solver.Filename}} import {{solver.Classname}}
+from {{Package}}.{{Filename}} import {{Classname}}
 
-solver = {{solver.Classname}}()
+solver = {{Classname}}()
 
 solver.start()
