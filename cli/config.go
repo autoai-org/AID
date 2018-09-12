@@ -2,13 +2,16 @@ package main
 
 import(
 	"log"
+	"io/ioutil"
 	"path/filepath"
 	"github.com/BurntSushi/toml"
 	"github.com/mitchellh/go-homedir"
+	"bytes"
 )
 
 type cvpmConfig struct {
 	Local local `toml:"local"`
+	Repositories []Repository `toml:repository`
 }
 
 type local struct {
@@ -28,4 +31,17 @@ func readConfig () cvpmConfig {
 		return config
 	}
 	return config
+}
+
+func writeConfig (config cvpmConfig) {
+	buf := new(bytes.Buffer)
+	if err := toml.NewEncoder(buf).Encode(config); err != nil {
+		log.Fatal(err)
+	}
+	homepath, _ := homedir.Dir()
+	configFile := filepath.Join(homepath, "cvpm", "config.toml")
+	err := ioutil.WriteFile(configFile, []byte(buf.String()), 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

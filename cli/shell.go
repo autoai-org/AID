@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"os/exec"
 )
@@ -12,11 +13,14 @@ func pip(args []string) {
 }
 
 func python(args []string) {
-	
+	config := readConfig()
+	localPython := config.Local.Python
+	_ = _execCommand(localPython, args)
 }
 
 func _execCommand(commandName string, params []string) bool {
 	cmd := exec.Command(commandName, params...)
+	fmt.Println(cmd.Args)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
 		log.Fatal(err)

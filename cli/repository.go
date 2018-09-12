@@ -6,6 +6,7 @@ import (
 	"path/filepath"
 	"fmt"
 	"strings"
+	"io/ioutil"
 	"gopkg.in/src-d/go-git.v4"
 	"github.com/fatih/color"
 	"github.com/BurntSushi/toml"
@@ -14,6 +15,7 @@ import (
 type Repository struct {
 	Name string
 	LocalFolder string
+	Vendor string
 }
 
 type solver struct {
@@ -25,19 +27,56 @@ type solvers struct {
 	Solvers []solver
 }
 
-func readRepos () {
-
+func readRepos () []Repository {
+	configs := readConfig()
+	repos := configs.Repositories
+	return repos
 }
 
-func addRepo () {
-
+func addRepo (repos []Repository, repo Repository) []Repository {
+	alreadyInstalled := false
+	for _, existed_repo := range repos {
+		if (repo.Name == existed_repo.Name && repo.Vendor == existed_repo.Vendor) {
+			alreadyInstalled = true
+		}
+	}
+	if alreadyInstalled {
+		log.Fatal("Repo Already Exists! Remove it first.")
+	}
+	repos = append(repos, repo)
+	return repos
 }
 
-func delRepo () {
-
+func delRepo (repos []Repository, Vendor string, Name string) []Repository {
+	for i, repo := range repos {
+		if (repo.Name == Name && repo.Vendor == Vendor) {
+			repos = append(repos[:i], repos[i+1:]...)
+		}
+	}
+	return repos
 }
 
-func CloneFromGit (remoteURL string, targetFolder string) string {
+func runRepo (Vendor string, Name string, Solver string) {
+	repos := readRepos()
+	existed := false
+	for _, existed_repo := range repos {
+		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
+			files, _ := ioutil.ReadDir(existed_repo.LocalFolder)
+			for _, file := range files {
+				if (file.Name() == "runner_" + Solver + ".py") {
+					existed = true
+					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
+					python([]string{runfileFullPath})
+				}
+			}
+		}
+	}
+	if !existed {
+		log.Fatal("Solver Not Found!")
+	}
+}
+
+func CloneFromGit (remoteURL string, targetFolder string) Repository {
 	localFolderName := strings.Split(remoteURL, "/")
 	vendorName := localFolderName[len(localFolderName)-2]
 	repoName := localFolderName[len(localFolderName)-1]
@@ -50,11 +89,8 @@ func CloneFromGit (remoteURL string, targetFolder string) string {
 	if err != nil {
 		fmt.Println(err)
 	}
-	return localFolder
-}
-
-func InstallCVPMPyPI () {
-	
+	repo := Repository{Name:repoName, Vendor: vendorName, LocalFolder: localFolder}
+	return repo
 }
 
 func InstallDependencies (localFolder string) {
@@ -67,6 +103,5 @@ func GeneratingRunners (localFolder string) {
 	if _, err := toml.DecodeFile(cvpmFile, &mySolvers); err!=nil {
 		log.Fatal(err)
 	}
-	fmt.Println(len(mySolvers.Solvers))
 	renderRunnerTpl(localFolder, mySolvers)
 }

@@ -12,12 +12,12 @@ import (
 )
 
 func main() {
-	sessionToken := getCache("session-token")
+	// sessionToken := getCache("session-token")
 	var currentUser User
-	if sessionToken != "" {
-		currentUser = User{"", "", sessionToken}
-		// currentUser.become()
-	}
+	// if sessionToken != "" {
+  //		currentUser = User{"", "", sessionToken}
+	// currentUser.become()
+	// }
 	cvpm := cli.NewApp()
 	cvpm.Name = "CVPM"
 	cvpm.Usage = "Computer Vision Package Manager"
@@ -41,6 +41,27 @@ func main() {
 			Name: "install",
 			Action: func(c *cli.Context) error {
 				InstallHandler(c)
+				return nil
+			},
+		},
+		{
+			Name: "list",
+			Action: func(c *cli.Context) error {
+				listRepos(c)
+				return nil
+			},
+		},
+		{
+			Name: "daemon",
+			Action: func(c *cli.Context) error {
+				DaemonHandler(c)
+				return nil
+			},
+		},
+		{
+			Name: "repo",
+			Action: func(c *cli.Context) error {
+				RepoHandler(c)
 				return nil
 			},
 		},
