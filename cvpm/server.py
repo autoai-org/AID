@@ -88,8 +88,9 @@ def train():
         return json.dumps({"error": "not supported!", "code": "404"}), 404
 
 
-def run_server(solver):
-    port = get_available_port()
+def run_server(solver, port=None):
+    if port is None:
+        port = get_available_port()
     logger.info("Server Running On: " + str(port))
     with server.app_context():
         server.solver = solver

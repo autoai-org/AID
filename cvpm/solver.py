@@ -55,5 +55,5 @@ class Solver(object):
     def train(self, train_x, train_y, **kwargs):
         pass
 
-    def start(self):
-        run_server(self)
+    def start(self, port=None):
+        run_server(self, port)
