@@ -21,6 +21,9 @@ format:
 docs:
 	cd docs && npm run docs:build
 
+docs-dev:
+	cd docs && npm run docs:dev
+
 package:
 	python setup.py sdist bdist_wheel
 

@@ -1,39 +1,39 @@
 package main
 
-import(
-	"log"
-	"io/ioutil"
-	"path/filepath"
+import (
+	"bytes"
 	"github.com/BurntSushi/toml"
 	"github.com/mitchellh/go-homedir"
-	"bytes"
+	"io/ioutil"
+	"log"
+	"path/filepath"
 )
 
 type cvpmConfig struct {
-	Local local `toml:"local"`
+	Local        local        `toml:"local"`
 	Repositories []Repository `toml:repository`
 }
 
 type local struct {
 	LocalFolder string
-	Pip string
-	Python string
+	Pip         string
+	Python      string
 }
 
 var apiURL = "http://192.168.1.12:8080/"
 
-func readConfig () cvpmConfig {
+func readConfig() cvpmConfig {
 	var config cvpmConfig
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
-	if _, err := toml.DecodeFile(configFile, &config); err!=nil {
+	if _, err := toml.DecodeFile(configFile, &config); err != nil {
 		log.Fatal(err)
 		return config
 	}
 	return config
 }
 
-func writeConfig (config cvpmConfig) {
+func writeConfig(config cvpmConfig) {
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(config); err != nil {
 		log.Fatal(err)

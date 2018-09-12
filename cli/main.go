@@ -15,7 +15,7 @@ func main() {
 	// sessionToken := getCache("session-token")
 	var currentUser User
 	// if sessionToken != "" {
-  //		currentUser = User{"", "", sessionToken}
+	//		currentUser = User{"", "", sessionToken}
 	// currentUser.become()
 	// }
 	cvpm := cli.NewApp()

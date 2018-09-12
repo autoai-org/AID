@@ -1,20 +1,22 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"github.com/fatih/color"
+	"github.com/gin-gonic/gin"
 	"net/http"
 )
 
 const DaemonPort = "10590"
+
 var RunningRepos []Repository
+
 type RunRepoRequest struct {
-	Name string `json:name`
+	Name   string `json:name`
 	Vendor string `json:vendor`
 	Solver string `json:solver`
 }
 
-func PostRepoHandler (c *gin.Context) {
+func PostRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
 	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver)
@@ -23,18 +25,18 @@ func PostRepoHandler (c *gin.Context) {
 	})
 }
 
-func GetReposHandler (c *gin.Context) {
+func GetReposHandler(c *gin.Context) {
 
 }
 
-func runServer (port string) {
+func runServer(port string) {
 	color.Red("Initiating")
-  r := gin.Default()
-  r.GET("/status", func (c *gin.Context) {
+	r := gin.Default()
+	r.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
-			"daemon":"running",
+			"daemon": "running",
 		})
-  })
+	})
 	r.POST("/repo", PostRepoHandler)
-  r.Run("127.0.0.1:" + port)
+	r.Run("127.0.0.1:" + port)
 }

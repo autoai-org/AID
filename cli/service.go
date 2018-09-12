@@ -1,63 +1,62 @@
 package main
 
 import (
-	"log"
 	"github.com/kardianos/service"
+	"log"
 )
 
 type sol struct {
-
 }
 
 func (s *sol) Start(srv service.Service) error {
 	go runServer(DaemonPort)
-  return nil
+	return nil
 }
 
 func (s *sol) Stop(srv service.Service) error {
-  return nil
+	return nil
 }
 
-func getCVPMDConfig () *service.Config {
-  srvConf := &service.Config{
-		Name: "cvpmd",
+func getCVPMDConfig() *service.Config {
+	srvConf := &service.Config{
+		Name:        "cvpmd",
 		DisplayName: "CVPM Daemon",
 		Description: "Computer Vision Package Manager[Daemon]",
-		Arguments: []string{"daemon", "run"},
-  }
+		Arguments:   []string{"daemon", "run"},
+	}
 	return srvConf
 }
 
-func InstallService () {
+func InstallService() {
 	srvConfig := getCVPMDConfig()
 	dae := &sol{}
-  s, err := service.New(dae, srvConfig)
-  if err != nil {
+	s, err := service.New(dae, srvConfig)
+	if err != nil {
 		log.Fatal(err)
-  }
+	}
 	err = s.Install()
-  if err != nil {
+	if err != nil {
 		log.Fatal(err)
-  }
+	}
 	err = s.Start()
 	if err != nil {
 		log.Fatal(err)
 	}
 }
 
-func UninstallService () {
+func UninstallService() {
 	srvConfig := getCVPMDConfig()
-  dae := &sol{}
+	dae := &sol{}
 	s, err := service.New(dae, srvConfig)
-  if err != nil {
+	if err != nil {
 		log.Fatal(err)
-  }
+	}
 	err = s.Stop()
-  if err != nil {
+	if err != nil {
 		log.Fatal(err)
-  }
-  err = s.Uninstall()
-  if err != nil {
+	}
+	err = s.Uninstall()
+	if err != nil {
 		log.Fatal(err)
-  }
+	}
 }

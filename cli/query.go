@@ -1,14 +1,14 @@
 package main
 
 import (
-	"log"
 	"github.com/levigross/grequests"
+	"log"
 )
 
 func ClientPost(endpoint string, params map[string]string) {
 	url := "http://127.0.0.1:10590/" + endpoint
 	resp, err := grequests.Post(url, &grequests.RequestOptions{
-		JSON: params,
+		JSON:   params,
 		IsAjax: true,
 	})
 	if err != nil {
