@@ -3,6 +3,9 @@ package main
 import (
 	"github.com/kardianos/service"
 	"log"
+	"os/user"
+	"os"
+	"runtime"
 )
 
 type sol struct {
@@ -18,11 +21,19 @@ func (s *sol) Stop(srv service.Service) error {
 }
 
 func getCVPMDConfig() *service.Config {
+	currentUser, _ := user.Current()
+	var realUsername string
+	if currentUser.Username == "root" && runtime.GOOS != "windows" {
+		realUsername = os.Getenv("SUDO_USER")	
+	} else {
+		realUsername = currentUser.Username
+	}
 	srvConf := &service.Config{
 		Name:        "cvpmd",
 		DisplayName: "CVPM Daemon",
 		Description: "Computer Vision Package Manager[Daemon]",
 		Arguments:   []string{"daemon", "run"},
+		UserName: realUsername,
 	}
 	return srvConf
 }

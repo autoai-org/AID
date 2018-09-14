@@ -33,6 +33,12 @@ func readRepos() []Repository {
 	return repos
 }
 
+func readClientRepos (currentHomedir string) []Repository {
+	configs := readClientConfig(currentHomedir)
+	repos := configs.Repositories
+	return repos
+}
+
 func addRepo(repos []Repository, repo Repository) []Repository {
 	alreadyInstalled := false
 	for _, existed_repo := range repos {
@@ -65,6 +71,7 @@ func runRepo(Vendor string, Name string, Solver string) {
 			for _, file := range files {
 				if file.Name() == "runner_"+Solver+".py" {
 					existed = true
+					RunningRepos = append(RunningRepos, existed_repo)
 					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
 					python([]string{runfileFullPath})
 				}

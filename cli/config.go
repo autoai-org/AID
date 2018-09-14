@@ -27,8 +27,16 @@ func readConfig() cvpmConfig {
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
 	if _, err := toml.DecodeFile(configFile, &config); err != nil {
-		log.Fatal(err)
 		return config
+	}
+	return config
+}
+
+func readClientConfig(clientDir string) cvpmConfig {
+	var config cvpmConfig
+	configFile := filepath.Join(clientDir, "cvpm", "config.toml")
+	if _, err := toml.DecodeFile(configFile, &config); err != nil {
+		log.Fatal(err)
 	}
 	return config
 }

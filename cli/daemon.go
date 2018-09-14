@@ -26,7 +26,7 @@ func PostRepoHandler(c *gin.Context) {
 }
 
 func GetReposHandler(c *gin.Context) {
-
+	c.JSON(http.StatusOK, RunningRepos)
 }
 
 func runServer(port string) {
@@ -38,5 +38,6 @@ func runServer(port string) {
 		})
 	})
 	r.POST("/repo", PostRepoHandler)
+	r.GET("/repos", GetReposHandler)
 	r.Run("127.0.0.1:" + port)
 }

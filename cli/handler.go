@@ -74,7 +74,9 @@ func RepoHandler(c *cli.Context) {
 			"solver": runParams[2],
 		}
 		ClientPost("repo", requestParams)
-		// runRepo(runParams[0], runParams[1], runParams[2])
+	case "ps":
+		requestParams := map[string]string{}
+		ClientGet("repos", requestParams)
 	default:
 		color.Red("Command Not Supported!")
 	}
