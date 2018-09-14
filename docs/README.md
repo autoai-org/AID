@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: https://i.loli.net/2018/04/20/5ad9fa0eefc5a.png
+heroImage: /logo.svg
 actionText: Get Started →
 actionLink: /en-US/guide/
 features:
@@ -12,3 +12,19 @@ features:
   details: Feel free to use it in your commercial product. Some companies have tested it in production environment already. We are also providing consulting service.
 footer: MIT Licensed | Copyright © 2018-Present UnArxiv Foundation
 ---
+### As Easy as 1, 2, 3
+
+``` bash
+# install
+curl xxx # OR npm install -g vuepress
+
+# Download Computer Vision Package
+cvpm install xzyaoi/Face_Utility # OR cvpm install https://github.com/xzyaoi/Face_Utility
+
+# start writing
+cvpm repo run xzyaoi/Face_Utility/Face_Detection
+```
+
+::: warning COMPATIBILITY NOTE
+CVPM requires Python >= 3.5
+:::
