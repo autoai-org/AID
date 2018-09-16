@@ -4,9 +4,11 @@ import (
 	"github.com/fatih/color"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
+	"github.com/mitchellh/go-homedir"
 	"os"
 	"strconv"
 	"strings"
+	"path/filepath"
 )
 
 func InstallHandler(c *cli.Context) {
@@ -81,3 +83,16 @@ func RepoHandler(c *cli.Context) {
 		color.Red("Command Not Supported!")
 	}
 }
+
+func ConfigHandler(c* cli.Context) {
+	configFilePath := filepath.Join(homedir.Dir(), "cvpm", "config.toml")
+	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
+		file, err := os.Create(configFilePath)
+		if err != nil {
+			color.Red("An error occured!")
+		}
+		defer file.Close()
+	}
+
+}
+

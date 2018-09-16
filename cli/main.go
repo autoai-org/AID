@@ -65,6 +65,13 @@ func main() {
 				return nil
 			},
 		},
+		{
+			Name: "config",
+			Action: func(c *cli.Context) error {
+				ConfigHandler(c)
+				return nil
+			},
+		},
 	}
 	err := cvpm.Run(os.Args)
 	if err != nil {
