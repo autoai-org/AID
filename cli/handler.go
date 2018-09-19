@@ -1,17 +1,17 @@
 package main
 
 import (
+	"bufio"
+	"fmt"
 	"github.com/fatih/color"
+	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
-	"github.com/mitchellh/go-homedir"
-	"fmt"
+	"log"
 	"os"
+	"path/filepath"
 	"strconv"
 	"strings"
-	"bufio"
-	"path/filepath"
-	"log"
 )
 
 func InstallHandler(c *cli.Context) {
@@ -87,7 +87,7 @@ func RepoHandler(c *cli.Context) {
 	}
 }
 
-func ConfigHandler(c* cli.Context) {
+func ConfigHandler(c *cli.Context) {
 	homepath, _ := homedir.Dir()
 	configFilePath := filepath.Join(homepath, "cvpm", "config.toml")
 	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
@@ -118,7 +118,7 @@ func ConfigHandler(c* cli.Context) {
 	nextConfig.Local.Python = newPyLocation
 	// Handle Pypi Location
 	fmt.Printf("Pip Location[" + prevConfig.Local.Pip + "]")
-	newPipLocation, _:= reader.ReadString('\n')
+	newPipLocation, _ := reader.ReadString('\n')
 	newPipLocation = strings.TrimSpace(newPipLocation)
 	if newPipLocation == "y" || newPipLocation == "Y" || newPipLocation == "Yes" || newPipLocation == "" {
 		newPipLocation = prevConfig.Local.Pip

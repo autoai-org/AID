@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/mitchellh/go-homedir"
 	"github.com/levigross/grequests"
-	"os/user"
+	"github.com/mitchellh/go-homedir"
 	"log"
+	"os/user"
 )
 
 func ClientPost(endpoint string, params map[string]string) {
@@ -15,8 +15,8 @@ func ClientPost(endpoint string, params map[string]string) {
 	}
 	resp, err := grequests.Post(url, &grequests.RequestOptions{
 		Headers: map[string]string{"X-Current-User": currentUser.Username},
-		JSON:   params,
-		IsAjax: true,
+		JSON:    params,
+		IsAjax:  true,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -34,7 +34,7 @@ func ClientGet(endpoint string, params map[string]string) {
 	}
 	resp, err := grequests.Get(url, &grequests.RequestOptions{
 		Headers: map[string]string{"X-Current-Homedir": myhomedir},
-		Params: params,
+		Params:  params,
 	})
 	if err != nil {
 		log.Fatal(err)

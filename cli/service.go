@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/kardianos/service"
 	"log"
-	"os/user"
 	"os"
+	"os/user"
 	"runtime"
 )
 
@@ -24,7 +24,7 @@ func getCVPMDConfig() *service.Config {
 	currentUser, _ := user.Current()
 	var realUsername string
 	if currentUser.Username == "root" && runtime.GOOS != "windows" {
-		realUsername = os.Getenv("SUDO_USER")	
+		realUsername = os.Getenv("SUDO_USER")
 	} else {
 		realUsername = currentUser.Username
 	}
@@ -33,7 +33,7 @@ func getCVPMDConfig() *service.Config {
 		DisplayName: "CVPM Daemon",
 		Description: "Computer Vision Package Manager[Daemon]",
 		Arguments:   []string{"daemon", "run"},
-		UserName: realUsername,
+		UserName:    realUsername,
 	}
 	return srvConf
 }

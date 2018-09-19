@@ -57,7 +57,7 @@ func writeConfig(config cvpmConfig) {
 func getDefaultConfig() cvpmConfig {
 	localPath, _ := homedir.Dir()
 	cvpmPath := filepath.Join(localPath, "cvpm")
-	var defaultLocal = local{LocalFolder:cvpmPath, Pip:"pip", Python:"python"}
+	var defaultLocal = local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
 	var defaultCVPMConfig = cvpmConfig{Local: defaultLocal, Repositories: []Repository{}}
 	return defaultCVPMConfig
 }
