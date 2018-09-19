@@ -33,7 +33,7 @@ func readRepos() []Repository {
 	return repos
 }
 
-func readClientRepos (currentHomedir string) []Repository {
+func readClientRepos(currentHomedir string) []Repository {
 	configs := readClientConfig(currentHomedir)
 	repos := configs.Repositories
 	return repos
