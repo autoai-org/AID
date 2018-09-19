@@ -5,10 +5,13 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
 	"github.com/mitchellh/go-homedir"
+	"fmt"
 	"os"
 	"strconv"
 	"strings"
+	"bufio"
 	"path/filepath"
+	"log"
 )
 
 func InstallHandler(c *cli.Context) {
@@ -85,14 +88,45 @@ func RepoHandler(c *cli.Context) {
 }
 
 func ConfigHandler(c* cli.Context) {
-	configFilePath := filepath.Join(homedir.Dir(), "cvpm", "config.toml")
+	homepath, _ := homedir.Dir()
+	configFilePath := filepath.Join(homepath, "cvpm", "config.toml")
 	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
+		// config file not exists, create it
 		file, err := os.Create(configFilePath)
 		if err != nil {
 			color.Red("An error occured!")
 		}
 		defer file.Close()
+		// config file not exists, write default to it
+		writeConfig(getDefaultConfig())
 	}
-
+	prevConfig := readConfig()
+	var nextConfig cvpmConfig
+	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
+	// Handle Python Location
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Python Location[" + prevConfig.Local.Python + "]")
+	newPyLocation, _ := reader.ReadString('\n')
+	newPyLocation = strings.TrimSpace(newPyLocation)
+	if newPyLocation == "y" || newPyLocation == "Y" || newPyLocation == "Yes" || newPyLocation == "" {
+		newPyLocation = prevConfig.Local.Python
+	} else {
+		if _, err := os.Stat(newPyLocation); os.IsNotExist(err) {
+			log.Fatal("Python executable file not found: No such file")
+		}
+	}
+	nextConfig.Local.Python = newPyLocation
+	// Handle Pypi Location
+	fmt.Printf("Pip Location[" + prevConfig.Local.Pip + "]")
+	newPipLocation, _:= reader.ReadString('\n')
+	newPipLocation = strings.TrimSpace(newPipLocation)
+	if newPipLocation == "y" || newPipLocation == "Y" || newPipLocation == "Yes" || newPipLocation == "" {
+		newPipLocation = prevConfig.Local.Pip
+	} else {
+		if _, err := os.Stat(newPipLocation); os.IsNotExist(err) {
+			log.Fatal("Pip executable file not found: No such file")
+		}
+	}
+	nextConfig.Local.Pip = newPipLocation
+	writeConfig(nextConfig)
 }
-
