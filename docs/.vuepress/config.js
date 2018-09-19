@@ -60,7 +60,7 @@ module.exports = {
             }
           ],
           sidebar: {
-            '/guide/': genSidebarConfig('Guide')
+            '/en-US/guide/': genSidebarConfig('Guide')
           }
         },
         '/zh-CN/': {
@@ -108,6 +108,8 @@ module.exports = {
         title,
         collapsable: true,
         children: [
+          '',
+          'getting-started',
         ]
       }
     ]
