@@ -94,7 +94,7 @@ func ConfigHandler(c *cli.Context) {
 		// config file not exists, create it
 		file, err := os.Create(configFilePath)
 		if err != nil {
-			color.Red("An error occured!")
+			color.Red("An error occurred!")
 		}
 		defer file.Close()
 		// config file not exists, write default to it
