@@ -11,8 +11,6 @@ builds:
       - arm64
     env:
       - CGO_ENABLED=0
-    hooks:
-      post: ./cleanup.sh
 archive:
   replacements:
     darwin: Darwin
