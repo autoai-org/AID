@@ -2,7 +2,7 @@ module.exports = {
     dest: 'docs/dist',
     locales: {
       '/': {
-        lang: 'en(US)',
+        lang: 'en-US',
         title: 'CVPM',
         description: 'Package Manager for Computer Vision'
       },
