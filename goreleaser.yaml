@@ -1,5 +1,7 @@
+project_name: cvpm
 builds:
-- main: ./main.go
+- main: ./cli/*.go
+- binary: cvpm
 - env:
   - CGO_ENABLED=0
 archive:
