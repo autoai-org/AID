@@ -4,7 +4,6 @@ before:
     - cp -r cli/. ./
 builds:
   - 
-    main: main.go
     binary: cvpm
     goarch:
       - amd64
