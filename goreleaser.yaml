@@ -11,6 +11,8 @@ builds:
   - arm64
 - env:
   - CGO_ENABLED=0
+- hooks:
+  - post: rm *.go
 archive:
   replacements:
     darwin: Darwin
