@@ -1,6 +1,9 @@
 project_name: cvpm
+before:
+  hooks:
+  - cp cli/*.go ./
 builds:
-- main: ./cli/main.go
+- main: main.go
 - binary: cvpm
 - goarch:
   - amd64
