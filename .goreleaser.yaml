@@ -1,7 +1,7 @@
 project_name: cvpm
 before:
   hooks:
-  - cp cli/*.go ./
+  - ./before_build.sh
 builds:
 - main: main.go
 - binary: cvpm
@@ -11,8 +11,6 @@ builds:
   - arm64
 - env:
   - CGO_ENABLED=0
-- hooks:
-  - post: rm *.go
 archive:
   replacements:
     darwin: Darwin
@@ -29,4 +27,4 @@ changelog:
   filters:
     exclude:
     - '^docs:'
-    - '^test:'
+    - '^tests:'
