@@ -1,7 +1,11 @@
 project_name: cvpm
 builds:
-- main: ./cli/*.go
+- main: ./cli/main.go
 - binary: cvpm
+- goarch:
+  - amd64
+  - arm
+  - arm64
 - env:
   - CGO_ENABLED=0
 archive:
