@@ -4,6 +4,11 @@ before:
     - cp -r cli/. ./
 builds:
   - 
+    goos:
+      - freebsd
+      - linux
+      - windows
+      - darwin
     binary: cvpm
     goarch:
       - amd64
@@ -11,6 +16,10 @@ builds:
       - arm64
     env:
       - CGO_ENABLED=0
+    goarm:
+      - 5
+      - 6
+      - 7
 archive:
   replacements:
     darwin: Darwin
