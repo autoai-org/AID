@@ -1,12 +1,12 @@
 package main
 
 import (
-	"os"
 	"bytes"
 	"github.com/BurntSushi/toml"
 	"github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"log"
+	"os"
 	"path/filepath"
 )
 
@@ -75,13 +75,16 @@ func getDefaultConfig() cvpmConfig {
 }
 
 func validateConfig() {
-	localConfig := readConfig()
+	// localConfig := readConfig()
 	homepath, _ := homedir.Dir()
 	// Validate CVPM Path
 	cvpmPath := filepath.Join(homepath, "cvpm")
 	exist, err := isPathExists(cvpmPath)
+	if err != nil {
+		log.Fatal(err)
+	}
 	if !exist {
-		err:= os.Mkdir(cvpmPath, os.ModePerm)
+		err := os.Mkdir(cvpmPath, os.ModePerm)
 		if err != nil {
 			log.Fatal(err)
 		}

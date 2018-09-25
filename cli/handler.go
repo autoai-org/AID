@@ -8,12 +8,12 @@ import (
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
 	"golang.org/x/crypto/ssh/terminal"
-	"syscall"
 	"log"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
+	"syscall"
 )
 
 func LoginHandler(c *cli.Context) User {
