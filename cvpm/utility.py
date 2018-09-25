@@ -19,6 +19,9 @@ class Downloader(object):
         pass
 
     def download(self, url, target):
+        # check if target folder exists
+        if not os.path.isdir(target):
+            os.makedirs(target)
         filename = url.split('/')[-1]
         file_size = int(urlopen(url).info().get('Content-Length', -1))
         chunk_size = 1024

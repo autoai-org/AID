@@ -32,7 +32,7 @@ class Solver(object):
             members = self.bundle.members()
             return json.dumps(members)
         else:
-            return json.dumps({"error": "Initializing...", "code": "101"}), 101
+            return json.dumps({"error": "Failed to start", "code": "101"}), 101
 
     def _prepare_models(self, toml_file):
         parsed_toml = toml.load(toml_file)

@@ -14,6 +14,18 @@ import (
 	"strings"
 )
 
+func LoginHandler(c *cli.Context) {
+	reader := bufio.NewReader(os.Stdin)
+	fmt.Printf("Username: ")
+	username, _ := reader.ReadString('\n')
+	username = strings.TrimSpace(username)
+	fmt.Printf("Password: ")
+	bytePassword, _ := terminal.ReadPassword(int(syscall.Stdin))
+	password := strings.TrimSpace(string(bytePassword))
+	u := User{username, password, ""}
+	currentUser = u.login()
+}
+
 func InstallHandler(c *cli.Context) {
 	config := readConfig()
 	localFolder := config.Local.LocalFolder

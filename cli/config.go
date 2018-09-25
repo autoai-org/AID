@@ -1,6 +1,7 @@
 package main
 
 import (
+	"os"
 	"bytes"
 	"github.com/BurntSushi/toml"
 	"github.com/mitchellh/go-homedir"
@@ -21,6 +22,17 @@ type local struct {
 }
 
 var apiURL = "http://192.168.1.12:8080/"
+
+func isPathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err != nil {
+		return true, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return false, err
+}
 
 func readConfig() cvpmConfig {
 	var config cvpmConfig
@@ -60,4 +72,17 @@ func getDefaultConfig() cvpmConfig {
 	var defaultLocal = local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
 	var defaultCVPMConfig = cvpmConfig{Local: defaultLocal, Repositories: []Repository{}}
 	return defaultCVPMConfig
+}
+
+func validateConfig() {
+	localConfig := readConfig()
+	// Validate CVPM Path
+	cvpmPath := filepath.Join(homepath, "cvpm")
+	exist, err := isPathExists(cvpmPath)
+	if !exist {
+		err:= os.Mkdir(cvpmPath, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
