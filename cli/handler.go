@@ -7,6 +7,8 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
+	"golang.org/x/crypto/ssh/terminal"
+	"syscall"
 	"log"
 	"os"
 	"path/filepath"
@@ -14,7 +16,7 @@ import (
 	"strings"
 )
 
-func LoginHandler(c *cli.Context) {
+func LoginHandler(c *cli.Context) User {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Printf("Username: ")
 	username, _ := reader.ReadString('\n')
@@ -23,7 +25,8 @@ func LoginHandler(c *cli.Context) {
 	bytePassword, _ := terminal.ReadPassword(int(syscall.Stdin))
 	password := strings.TrimSpace(string(bytePassword))
 	u := User{username, password, ""}
-	currentUser = u.login()
+	currentUser := u.login()
+	return currentUser
 }
 
 func InstallHandler(c *cli.Context) {

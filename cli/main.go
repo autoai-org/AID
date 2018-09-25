@@ -1,17 +1,13 @@
 package main
 
 import (
-	"bufio"
-	"fmt"
 	"github.com/urfave/cli"
-	"golang.org/x/crypto/ssh/terminal"
 	"log"
 	"os"
-	"strings"
-	"syscall"
 )
 
 func main() {
+	validateConfig()
 	// sessionToken := getCache("session-token")
 	var currentUser User
 	// if sessionToken != "" {
@@ -25,7 +21,7 @@ func main() {
 		{
 			Name: "login",
 			Action: func(c *cli.Context) error {
-				LoginHandler(c)
+				currentUser = LoginHandler(c)
 				return nil
 			},
 		},

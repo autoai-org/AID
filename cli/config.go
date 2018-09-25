@@ -76,6 +76,7 @@ func getDefaultConfig() cvpmConfig {
 
 func validateConfig() {
 	localConfig := readConfig()
+	homepath, _ := homedir.Dir()
 	// Validate CVPM Path
 	cvpmPath := filepath.Join(homepath, "cvpm")
 	exist, err := isPathExists(cvpmPath)
