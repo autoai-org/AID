@@ -29,7 +29,7 @@ clean:
 	rm -rf dist
 	rm -rf cvpm.egg-info
 
-publish:
-	twine upload dist/*
+publish-test:
+	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
 .PHONY: docs

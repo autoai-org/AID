@@ -5,7 +5,7 @@ with open("docs/README.md", "r") as fh:
 
 setuptools.setup(
     name="cvpm",
-    version="0.0.1",
+    version="0.0.2",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
     description="Computer Vision Package Manager",
