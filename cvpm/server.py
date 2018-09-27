@@ -3,7 +3,6 @@ import logging
 import os
 import socket
 import traceback
-
 import gevent.pywsgi
 from flask import Flask, g, request
 from werkzeug.datastructures import ImmutableMultiDict
@@ -19,6 +18,8 @@ UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+def str2bool(v):
+    return str(v).lower() in ("true", "false", "yes","t","1")
 
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -59,16 +60,22 @@ def infer():
     if request.method == 'POST':
         results = {}
         config = ImmutableMultiDict(request.form)
+        config = config.to_dict()
         if 'file' not in request.files:
             return json.dumps({"error": "no file part!", "code": "400"}), 400
         file = request.files['file']
         if file and allowed_file(file.filename, 'infer'):
             filename = secure_filename(file.filename)
+            # make sure the UPLOAD_FOLDER exists
+            if not os.path.isdir(server.config['UPLOAD_FOLDER']):
+                os.makedirs(server.config['UPLOAD_FOLDER'])
             file_abs_path = os.path.join(server.config['UPLOAD_FOLDER'],
                                          filename)
             file.save(file_abs_path)
             try:
-                results = server.solver.infer(file_abs_path, config.to_dict())
+                results = server.solver.infer(file_abs_path, config)
+                if str2bool(config['delete_after_process']):
+                    os.remove(file_abs_path)
                 return json.dumps(results), 200
             except Exception as e:
                 traceback.print_exc()

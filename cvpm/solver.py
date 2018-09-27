@@ -56,4 +56,5 @@ class Solver(object):
         pass
 
     def start(self, port=None):
+        print('Server will run on port: ' + str(port))
         run_server(self, port)
