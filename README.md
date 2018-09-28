@@ -9,6 +9,8 @@
 
 CVPM is a package manager for computer vision. It helps you to download, install and run a computer vision service.
 
+[![asciicast](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl.png)](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl)
+
 ## Documentation
 
 Full documentation can be found [here](https://cvpm.autoai.org).
