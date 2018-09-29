@@ -26,12 +26,12 @@ var apiURL = "http://192.168.1.12:8080/"
 func isPathExists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err != nil {
-		return true, nil
+		return false, nil
 	}
 	if os.IsNotExist(err) {
 		return false, nil
 	}
-	return false, err
+	return true, err
 }
 
 func readConfig() cvpmConfig {
