@@ -1,8 +1,15 @@
 # CVPM - Computer Vision Package Manager
 
-![CVPM](https://img.shields.io/github/license/mashape/apistatus.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/unarxiv/cvpm)](https://goreportcard.com/report/github.com/unarxiv/cvpm)
 [![Build Status](https://travis-ci.org/unarxiv/CVPM.svg?branch=master)](https://travis-ci.org/unarxiv/CVPM)
+[![GitHub issues](https://img.shields.io/github/issues/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/cvpm/issues)
+[![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
+
+## Introduction
+
+CVPM is a package manager for computer vision. It helps you to download, install and run a computer vision service.
+
+[![asciicast](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl.png)](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl)
 
 ## Documentation
 
