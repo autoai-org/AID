@@ -60,7 +60,7 @@
     "portfinder": "1.0.17",
     "postcss-import": "11.1.0",
     "postcss-loader": "2.1.6",
-    "postcss-url": "7.3.2",
+    "postcss-url": "8.0.0",
     "rimraf": "2.6.2",
     "selenium-server": "3.14.0",
     "semver": "5.5.1",
