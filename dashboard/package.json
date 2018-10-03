@@ -56,7 +56,7 @@
     "nightwatch": "0.9.21",
     "node-notifier": "5.2.1",
     "optimize-css-assets-webpack-plugin": "5.0.1",
-    "ora": "1.4.0",
+    "ora": "3.0.0",
     "portfinder": "1.0.17",
     "postcss-import": "12.0.0",
     "postcss-loader": "2.1.6",
