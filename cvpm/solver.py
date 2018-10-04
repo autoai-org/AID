@@ -37,8 +37,9 @@ class Solver(object):
     def _prepare_models(self, toml_file):
         parsed_toml = toml.load(toml_file)
         downloader = Downloader()
-        for each in parsed_toml["models"]:
-            downloader.download(each["url"], "pretrained")
+        if "models" in parsed_toml.keys():
+            for each in parsed_toml["models"]:
+                downloader.download(each["url"], "pretrained")
 
     def set_ready(self):
         self._isReady = True
