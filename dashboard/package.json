@@ -68,7 +68,7 @@
     "uglifyjs-webpack-plugin": "2.0.1",
     "url-loader": "1.1.1",
     "vue-jest": "2.6.0",
-    "vue-loader": "13.7.3",
+    "vue-loader": "15.4.2",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.5.17",
     "webpack": "4.20.2",
