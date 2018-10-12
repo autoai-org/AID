@@ -4,11 +4,11 @@ heroImage: /logo.png
 actionText: Get Started →
 actionLink: /en-US/guide/
 features:
-- title: User Friendly
+- title: Reproducible
   details: It is smaller and less complex than some other computer vision libraries. It provide an easy-to-use user interface to interacts with.
-- title: Developer Friendly
+- title: Source/Binary
   details: Enjoy the dev experience of developing with CVTron. Adopting it to your own product is very soon and easy. Join our community will bring you more fun to develop with.
-- title: Commercial Ready
+- title: Production Ready
   details: Feel free to use it in your commercial product. Some companies have tested it in production environment already. We are also providing consulting service.
 footer: MIT Licensed | Copyright © 2018-Present UnArxiv Foundation
 ---
