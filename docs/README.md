@@ -21,7 +21,7 @@ curl https://get.autoai.org/cvpm/latest.sh # OR manually download binary
 # Download Computer Vision Package
 cvpm install xzyaoi/Face_Utility # OR cvpm install https://github.com/xzyaoi/Face_Utility
 
-# start writing
+# start serving
 cvpm repo run xzyaoi/Face_Utility/Face_Detection
 ```
 
