@@ -112,7 +112,8 @@ module.exports = {
           'getting-started',
           'install-package',
           'write-package',
-          'contributing'
+          'contributing',
+          'credits'
         ]
       }
     ]
