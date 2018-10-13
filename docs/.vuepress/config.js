@@ -110,6 +110,9 @@ module.exports = {
         children: [
           '',
           'getting-started',
+          'install-package',
+          'write-package',
+          'contributing'
         ]
       }
     ]
