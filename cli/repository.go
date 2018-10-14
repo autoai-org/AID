@@ -62,7 +62,7 @@ func delRepo(repos []Repository, Vendor string, Name string) []Repository {
 	return repos
 }
 
-func runRepo(Vendor string, Name string, Solver string) {
+func runRepo(Vendor string, Name string, Solver string, Port string) {
 	repos := readRepos()
 	existed := false
 	for _, existed_repo := range repos {
@@ -73,7 +73,7 @@ func runRepo(Vendor string, Name string, Solver string) {
 					existed = true
 					RunningRepos = append(RunningRepos, existed_repo)
 					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
-					python([]string{runfileFullPath})
+					python([]string{runfileFullPath, Port})
 				}
 			}
 		}

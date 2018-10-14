@@ -14,12 +14,13 @@ type RunRepoRequest struct {
 	Name   string `json:name`
 	Vendor string `json:vendor`
 	Solver string `json:solver`
+	Port string `json:port`
 }
 
 func PostRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
-	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver)
+	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver, runRepoRequest.Port)
 	c.JSON(http.StatusOK, gin.H{
 		"code": "success",
 	})
