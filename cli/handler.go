@@ -93,7 +93,7 @@ func RepoHandler(c *cli.Context) {
 			"vendor": runParams[0],
 			"name":   runParams[1],
 			"solver": runParams[2],
-			"port": runningPort
+			"port": runningPort,
 		}
 		ClientPost("repo", requestParams)
 	case "ps":

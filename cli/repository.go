@@ -79,7 +79,7 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 		}
 	}
 	if !existed {
-		log.Fatal("Solver Not Found!")
+		log.Fatal("Solver Not Found! Expecting " + Solver)
 	}
 }
 
