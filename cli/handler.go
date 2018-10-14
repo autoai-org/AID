@@ -86,12 +86,14 @@ func RepoHandler(c *cli.Context) {
 	switch taskParams {
 	case "run":
 		solverstring := c.Args().Get(1)
+		runningPort := c.Args().Get(2)
 		runParams := strings.Split(solverstring, "/")
 		color.Cyan("Running " + runParams[0] + "/" + runParams[1] + "/" + runParams[2])
 		requestParams := map[string]string{
 			"vendor": runParams[0],
 			"name":   runParams[1],
 			"solver": runParams[2],
+			"port": runningPort,
 		}
 		ClientPost("repo", requestParams)
 	case "ps":
