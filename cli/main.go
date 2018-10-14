@@ -8,7 +8,6 @@ import (
 )
 
 func main() {
-	initRaven()
 	validateConfig()
 	// sessionToken := getCache("session-token")
 	var currentUser User
