@@ -9,7 +9,3 @@ We would like to extend our sincere appreciate for the following organizations a
 * [Amazon Web Services](https://aws.amazon.com) for providing general web services.
 
 During the development, we are standing on the shoulders of many open source software listed below but not limited to.
-
-* []
-* []
-* []
