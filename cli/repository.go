@@ -94,6 +94,7 @@ func CloneFromGit(remoteURL string, targetFolder string) Repository {
 		Progress: os.Stdout,
 	})
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		fmt.Println(err)
 	}
 	repo := Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder}

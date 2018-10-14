@@ -26,6 +26,7 @@ var apiURL = "http://192.168.1.12:8080/"
 func isPathExists(path string) (bool, error) {
 	_, err := os.Stat(path)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		return false, nil
 	}
 	if os.IsNotExist(err) {
@@ -62,6 +63,7 @@ func writeConfig(config cvpmConfig) {
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
 	err := ioutil.WriteFile(configFile, []byte(buf.String()), 0644)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 }
@@ -81,11 +83,13 @@ func validateConfig() {
 	cvpmPath := filepath.Join(homepath, "cvpm")
 	exist, err := isPathExists(cvpmPath)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 	if !exist {
 		err := os.Mkdir(cvpmPath, os.ModePerm)
 		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
 			log.Fatal(err)
 		}
 	}

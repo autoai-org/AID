@@ -63,6 +63,7 @@ func main() {
 	}
 	err := cvpm.Run(os.Args)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 }

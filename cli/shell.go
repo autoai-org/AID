@@ -23,6 +23,7 @@ func _execCommand(commandName string, params []string) bool {
 	fmt.Println(cmd.Args)
 	output, err := cmd.CombinedOutput()
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 		return false
 	}

@@ -111,6 +111,7 @@ func ConfigHandler(c *cli.Context) {
 		// config file not exists, create it
 		file, err := os.Create(configFilePath)
 		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
 			color.Red("An error occurred!")
 		}
 		defer file.Close()
