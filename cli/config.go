@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"github.com/BurntSushi/toml"
+	"github.com/getsentry/raven-go"
 	"github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"log"

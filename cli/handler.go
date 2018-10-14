@@ -7,6 +7,7 @@ import (
 	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
+	"github.com/getsentry/raven-go"
 	"golang.org/x/crypto/ssh/terminal"
 	"log"
 	"os"

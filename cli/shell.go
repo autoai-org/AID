@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os/exec"
+	"github.com/getsentry/raven-go"
 )
 
 func pip(args []string) {

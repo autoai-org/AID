@@ -2,11 +2,13 @@ package main
 
 import (
 	"github.com/urfave/cli"
+	"github.com/getsentry/raven-go"
 	"log"
 	"os"
 )
 
 func main() {
+	initRaven()
 	validateConfig()
 	// sessionToken := getCache("session-token")
 	var currentUser User

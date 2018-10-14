@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/getsentry/raven-go"
 	"github.com/BurntSushi/toml"
 	"github.com/fatih/color"
 	"gopkg.in/src-d/go-git.v4"
