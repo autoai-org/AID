@@ -44,7 +44,9 @@ class SampleSolver(Solver):
 
 ### Bundle
     
-::: tip 注意 请确保你的 Node.js 版本 >= 8。 :::
+::: tip 
+This chapter and its related function may have broken changes recently. ([#64](https://github.com/unarxiv/CVPM/issues/64))
+:::
 
 
 
