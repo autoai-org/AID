@@ -19,7 +19,7 @@
     "vuetify": "1.2.9"
   },
   "devDependencies": {
-    "autoprefixer": "9.1.5",
+    "autoprefixer": "9.2.0",
     "babel-core": "6.26.3",
     "babel-eslint": "10.0.1",
     "babel-helper-vue-jsx-merge-props": "2.0.3",
@@ -67,7 +67,7 @@
     "shelljs": "0.8.2",
     "uglifyjs-webpack-plugin": "2.0.1",
     "url-loader": "1.1.2",
-    "vue-jest": "2.6.0",
+    "vue-jest": "3.0.0",
     "vue-loader": "15.4.2",
     "vue-style-loader": "4.1.2",
     "vue-template-compiler": "2.5.17",
