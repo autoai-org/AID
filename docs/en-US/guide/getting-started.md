@@ -33,4 +33,13 @@ Or, RUN ```cvpm install https://github.com/vendor/repo``` to install a package f
 Before you run any of your installed repo, a daemon process must be enabled. Note that you only need to enable it once by running 
 ```cvpm daemon install```. It may requires you administrator permission to install on most systems.
 
-Some repos may have more than one solver in it, therefore, you have to know the exact solver name to run. By running ```cvpm run vendor/repo/solver```, you can start a service.
+Some repos may have more than one solver in it, therefore, you have to know the exact solver name to run. By running ```cvpm run vendor/repo/solver port```, you can start a service.
+
+### Example
+
+For example, we have an official model named Face_Utility with three solvers. If you want to run a face detection solver, after your installation, simply do as following:
+
+```
+cvpm install https://github.com/cvmodel/Face_Utility
+cvpm repo run cvmodel/Face_Utility/Face_Detection 8080
+```
