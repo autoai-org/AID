@@ -8,14 +8,8 @@ import (
 )
 
 func main() {
-	initRaven()
 	validateConfig()
-	// sessionToken := getCache("session-token")
 	var currentUser User
-	// if sessionToken != "" {
-	//		currentUser = User{"", "", sessionToken}
-	// currentUser.become()
-	// }
 	cvpm := cli.NewApp()
 	cvpm.Name = "CVPM"
 	cvpm.Usage = "Computer Vision Package Manager"

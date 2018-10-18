@@ -149,3 +149,7 @@ func ConfigHandler(c *cli.Context) {
 	nextConfig.Local.Pip = newPipLocation
 	writeConfig(nextConfig)
 }
+
+func InitHandler(c *cli.Context) {
+	
+}
