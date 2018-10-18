@@ -5,5 +5,5 @@ import (
 )
 
 func initRaven() {
-	log.Fatal("Please init it in environment variables")
+	log.Fatal("Init it with environment variable")
 }

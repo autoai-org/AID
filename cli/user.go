@@ -3,7 +3,13 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 	"github.com/fatih/color"
+	"github.com/alexrudd/cognito-srp"
+	"github.com/aws/aws-sdk-go-v2/aws"
+	"github.com/aws/aws-sdk-go-v2/aws/external"
+	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
+	cip "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/levigross/grequests"
 	"log"
 )
@@ -15,24 +21,29 @@ type User struct {
 }
 
 func (u *User) login() User {
-	var respUser User
-	loginURL := apiURL + "user/login"
-	loginRequestHeader := &grequests.RequestOptions{
-		JSON:   map[string]string{"username": u.Username, "password": u.Password},
-		IsAjax: true,
-	}
-	resp, err := grequests.Post(loginURL, loginRequestHeader)
-	if err != nil {
-		log.Fatal(err)
-	}
-	if resp.Ok != true {
-		fmt.Println("\nLogin Failed!")
+	fmt.Println(u.Username)
+	csrp, _:= cognitosrp.NewCognitoSRP(u.Username, u.Password, "us-east-1_IYJ3FvCKZ", "1jinmsd412vcs8pkhqg5u0gjd2", nil)
+	cfg, _ := external.LoadDefaultAWSConfig()
+	cfg.Region = endpoints.UsEast1RegionID
+	cfg.Credentials = aws.AnonymousCredentials
+	svc := cip.New(cfg)
+	req := svc.InitiateAuthRequest(&cip.InitiateAuthInput{
+		AuthFlow: cip.AuthFlowTypeUserSrpAuth,
+		ClientId: aws.String(csrp.GetClientId()),
+		AuthParameters: csrp.GetAuthParams(),
+	})
+	resp, _:= req.Send()
+	fmt.Println("123456")
+	fmt.Println(resp.ChallengeName)
+	if resp.ChallengeName == cip.ChallengeNameTypePasswordVerifier {
+		challengeInput, _:= csrp.PasswordVerifierChallenge(resp.ChallengeParameters, time.Now())
+		chal := svc.RespondToAuthChallengeRequest(challengeInput)
+		resp, _:= chal.Send()
+		fmt.Println(resp.AuthenticationResult)
 	} else {
-		_ = json.Unmarshal(resp.Bytes(), &respUser)
-		setCache("session-token", respUser.SessionToken)
-		color.Green("\nLogin Successfully")
+	
 	}
-	return respUser
+	return *u
 }
 
 func (u *User) become() User {
