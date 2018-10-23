@@ -6,6 +6,7 @@
 [![Build Status](https://travis-ci.org/unarxiv/CVPM.svg?branch=master)](https://travis-ci.org/unarxiv/CVPM)
 [![GitHub issues](https://img.shields.io/github/issues/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/cvpm/issues)
 [![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_shield)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
 
@@ -38,3 +39,6 @@ This project is inspired from [CVTron](https://docs.cvtron.org).
 Q: Where can I find useful models?
 
 A: There are three places. The first one, which is we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, search models. The second one is GitHub, in GiHub, you can search for CVPM_Available in readme file, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for others models.
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_large)
