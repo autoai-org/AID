@@ -1,10 +1,16 @@
 # CVPM - Computer Vision Package Manager
 
+[简体中文](https://cvpm.autoai.org/zh-CN/guide/)
+
 [![Go Report Card](https://goreportcard.com/badge/github.com/unarxiv/cvpm)](https://goreportcard.com/report/github.com/unarxiv/cvpm)
 [![Build Status](https://travis-ci.org/unarxiv/CVPM.svg?branch=master)](https://travis-ci.org/unarxiv/CVPM)
 [![GitHub issues](https://img.shields.io/github/issues/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/cvpm/issues)
 [![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_shield)
+[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
+
+![logo-with-slogan-landscape.png](https://i.loli.net/2018/10/20/5bcb455c17616.png)
 
 ## Introduction
 
@@ -19,6 +25,10 @@ Full documentation can be found [here](https://cvpm.autoai.org).
 ## Contributing
 
 If you found a security bugs, please do not post it in issues or any other public forum. You can send me [email](mailto:xiaozhe.yaoi@qq.com) directly.
+
+## Contributors
+[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/0)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/0)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/1)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/1)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/2)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/2)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/3)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/3)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/4)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/4)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/5)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/5)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/6)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/6)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/7)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/7)
+
 
 ## Affiliated Project
 

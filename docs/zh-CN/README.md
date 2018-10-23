@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /logo.png
+heroImage: https://i.loli.net/2018/10/20/5bcb455c17616.png
 actionText: 快速上手 →
 actionLink: /zh-CN/guide/
 features:
