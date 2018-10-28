@@ -9,6 +9,7 @@
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_shield)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
+[![BCH compliance](https://bettercodehub.com/edge/badge/unarxiv/CVPM?branch=master)](https://bettercodehub.com/)
 
 ![logo-with-slogan-landscape.png](https://i.loli.net/2018/10/20/5bcb455c17616.png)
 
