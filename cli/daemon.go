@@ -1,3 +1,8 @@
+/*
+	This file handles daemon and services related tasks.
+	By using cvpm daemon install, it will install a system service under current user. 
+	You can uninstall that service by using cvpm daemon uninstall
+*/
 package main
 
 import (
@@ -5,11 +10,13 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
-
+// Default Running Port
 const DaemonPort = "10590"
 
+// Definition of Running Repos
 var RunningRepos []Repository
 
+// Struct of a Request to Run Repo
 type RunRepoRequest struct {
 	Name   string `json:name`
 	Vendor string `json:vendor`
@@ -17,6 +24,7 @@ type RunRepoRequest struct {
 	Port string `json:port`
 }
 
+// Handle Post Request -> Run a Repo
 func PostRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
@@ -26,10 +34,16 @@ func PostRepoHandler(c *gin.Context) {
 	})
 }
 
+// Handle Get Request -> Get Running Repo
 func GetReposHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, RunningRepos)
 }
 
+/* Run the Server and Do Mount Endpoint
+	/status -> Get to fetch System Status
+	/repo -> Post to Run a Repo
+	/repos -> Get to fetch Running Repos
+*/
 func runServer(port string) {
 	color.Red("Initiating")
 	r := gin.Default()

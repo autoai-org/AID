@@ -1,3 +1,11 @@
+/*
+	This file defines the handlers for different command.
+		Login
+		Install
+		List
+		Repo
+	and etc.
+*/
 package main
 
 import (
@@ -17,6 +25,7 @@ import (
 	"syscall"
 )
 
+// Handle User Login
 func LoginHandler(c *cli.Context) User {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Printf("Username: ")
@@ -30,6 +39,7 @@ func LoginHandler(c *cli.Context) User {
 	return currentUser
 }
 
+// Handle installation
 func InstallHandler(c *cli.Context) {
 	config := readConfig()
 	localFolder := config.Local.LocalFolder
@@ -58,6 +68,7 @@ func InstallHandler(c *cli.Context) {
 	writeConfig(config)
 }
 
+// Handle List
 func listRepos(c *cli.Context) {
 	config := readConfig()
 	table := tablewriter.NewWriter(os.Stdout)
@@ -68,6 +79,7 @@ func listRepos(c *cli.Context) {
 	table.Render()
 }
 
+// Handle Daemon Related
 func DaemonHandler(c *cli.Context) {
 	params := c.Args().Get(0)
 	switch params {

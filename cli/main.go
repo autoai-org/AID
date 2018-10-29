@@ -1,3 +1,11 @@
+/*
+Package CVPM (main) implements the CLI for CVPM.
+To get started, use:
+
+cvpm help 
+
+to get a detailed explanation.
+*/
 package main
 
 import (
