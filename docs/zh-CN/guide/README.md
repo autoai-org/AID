@@ -21,6 +21,10 @@ CVPM is a package manager for computer vision. It helps you to download, install
 
 Full documentation can be found [here](https://cvpm.autoai.org).
 
+## News
+
+* *[2018-10-29]* The development of CVPM is under heavy development and we have changed many api designs in the last 2 weeks. There might be some minor differences in the documentation because of that broken change. We **Strongly** recommend you to wait until the next official release (v0.1). It is supposed to be the first stable version, and there should not be any major api changes since that.
+
 ## Contributing
 
 If you found a security bugs, please do not post it in issues or any other public forum. You can send me [email](mailto:xiaozhe.yaoi@qq.com) directly.
