@@ -23,6 +23,7 @@ setuptools.setup(
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Image Recognition",
+        "Topic :: Scientific/Engineering :: Computer Vision",
         "Topic :: Software Development",
     ],
 )
