@@ -21,6 +21,7 @@ class Package {
 
     @attribute()
     linkedTo: string;
+
 }
 
 export {

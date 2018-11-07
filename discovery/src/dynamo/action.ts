@@ -1,8 +1,8 @@
 import mapper from './dynamo'
-import { Package } from './model'
+import { Package } from './entity'
 import { Guid } from 'guid-typescript';
 /**
- * Following will be object manipulations
+ * Following will be package manipulations
  */
 function putPackage (isSymbol: boolean, linkedTo: string) {
     const toPutPackage = Object.assign(new Package, {
