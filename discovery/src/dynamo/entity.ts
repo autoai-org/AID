@@ -41,4 +41,4 @@ class Pretrained {
 export {
     Package,
     Pretrained
-}
+};

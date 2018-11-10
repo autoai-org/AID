@@ -12,7 +12,7 @@ const app = new Koa();
 
 app.use(cors());
 app.use(helmet());
-app.use(logger(winston))
+app.use(logger(winston));
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
 

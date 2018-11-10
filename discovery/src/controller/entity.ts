@@ -1,6 +1,6 @@
-interface importPackageRequest {
-    linkedTo: string
+interface ImportPackageRequest {
+    linkedTo: string;
 }
 export {
-    importPackageRequest
-}
+    ImportPackageRequest
+};

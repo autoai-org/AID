@@ -8,28 +8,28 @@ import { isSymbol } from 'util';
  */
 
 /**
- * 
- * @param isSymbol 
- * @param linkedTo 
+ *
+ * @param isSymbol
+ * @param linkedTo
  */
 function putPackage (isSymbol: boolean, linkedTo: string) {
     const toPutPackage = Object.assign(new Package, {
         id: Guid.create(),
         isSymbol: isSymbol,
         linkedTo: linkedTo
-    })
+    });
     mapper.put(toPutPackage).then(objectSaved => {
-        console.log(objectSaved)
-    })
+        console.log(objectSaved);
+    });
 }
 /**
- * 
+ *
  * Following will be pretrained manipulations
  */
 
 /**
- * 
- * @param linkedTo 
+ *
+ * @param linkedTo
  * @param name
  */
 function putPretrained (name: string, linkedTo: string) {
@@ -37,25 +37,25 @@ function putPretrained (name: string, linkedTo: string) {
         id: Guid.create(),
         name: name,
         linkedTo: linkedTo
-    })
+    });
     mapper.put(toPutPretrained).then(objectSaved => {
-        console.log(objectSaved)
-    })
+        console.log(objectSaved);
+    });
 }
 
 /**
- * 
+ *
  */
 async function getPretrained () {
-    let results: Pretrained[] = []
+    const results: Pretrained[] = [];
     for await (const item of mapper.scan(Pretrained)) {
-        results.push(item)
+        results.push(item);
     }
-    return results
+    return results;
 }
 
 export {
     putPretrained,
     putPackage,
     getPretrained
-}
+};
