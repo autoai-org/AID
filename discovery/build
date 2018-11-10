@@ -1,2 +1,0 @@
-#!/bin/bash
-docker build -t cvpm-discovery . --build-arg AWS_ACCESS_KEY=$AWS_ACCESS_KEY AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY LOGSENE_TOKEN=$LOGSENE_TOKEN
