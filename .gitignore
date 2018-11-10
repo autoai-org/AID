@@ -7,3 +7,4 @@ dist
 .env
 .idea
 .DS_Store
+!discovery/build
