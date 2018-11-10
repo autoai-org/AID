@@ -4,7 +4,7 @@ import { ImportPackageRequest } from './entity';
 export default class PackageController {
     public static async importPackage (ctx: Context) {
         const toImportPackage: Package = new Package();
-
+        
         console.log(toImportPackage);
     }
 }
