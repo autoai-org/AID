@@ -43,7 +43,7 @@ export function logger(winstonInstance: any) {
                 new Logsene({
                     token: process.env.LOGSENE_TOKEN,
                     type: 'discovery',
-                    level:'error',
+                    level: 'error',
                 })
             ]
         });

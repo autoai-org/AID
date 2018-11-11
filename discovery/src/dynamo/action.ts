@@ -1,5 +1,5 @@
 import mapper from './dynamo';
-import { Package, Pretrained } from './entity';
+import { Package, Pretrained, Registry } from './entity';
 import { Guid } from 'guid-typescript';
 import { isSymbol } from 'util';
 
@@ -54,8 +54,20 @@ async function getPretrained () {
     return results;
 }
 
+async function addRegistry (name: string, urlPrefix: string) {
+    const toAddRegistry = Object.assign(new Registry, {
+        id: Guid.create(),
+        name: name,
+        urlPrefix: urlPrefix,
+    });
+    mapper.put(toAddRegistry).then(objectSaved => {
+        console.log(objectSaved);
+    });
+}
+
 export {
     putPretrained,
     putPackage,
-    getPretrained
+    getPretrained,
+    addRegistry
 };

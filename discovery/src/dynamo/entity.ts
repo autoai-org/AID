@@ -38,7 +38,23 @@ class Pretrained {
     name: string;
 }
 
+@table('cvpm-registry')
+class Registry {
+    @hashKey()
+    id: string;
+
+    @rangeKey({defaultProvider: () => new Date()})
+    createdAt: Date;
+
+    @attribute()
+    name: string;
+
+    @attribute()
+    urlPrefix: string;
+}
+
 export {
     Package,
-    Pretrained
+    Pretrained,
+    Registry
 };

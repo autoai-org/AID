@@ -1,6 +1,6 @@
 import * as cors from '@koa/cors';
 import * as Koa from 'koa';
-import * as bodyParser from 'koa-bodyparser';
+import bodyParser from 'koa-bodyparser-ts';
 import * as helmet from 'koa-helmet';
 import * as winston from 'winston';
 
