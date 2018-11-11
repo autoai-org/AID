@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/getsentry/raven-go"
 	"github.com/BurntSushi/toml"
 	"github.com/fatih/color"
+	"github.com/getsentry/raven-go"
 	"gopkg.in/src-d/go-git.v4"
 	"io/ioutil"
 	"log"
