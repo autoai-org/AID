@@ -7,6 +7,7 @@ export interface IConfig {
     debugLogging: boolean;
     dbsslconn: boolean;
     jwtSecret: string;
+    version: string;
 }
 
 const config: IConfig = {
@@ -14,6 +15,7 @@ const config: IConfig = {
     debugLogging: process.env.NODE_ENV == 'development',
     dbsslconn: process.env.NODE_ENV != 'development',
     jwtSecret: process.env.JWT_SECRET || 'your-secret-whatever',
+    version: process.env.VERSION || 'v0.0.3@alpha'
 };
 
 export { config };

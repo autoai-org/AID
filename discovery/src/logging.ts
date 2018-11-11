@@ -2,8 +2,10 @@ import * as Koa from 'koa';
 import { config } from './config';
 import * as winston from 'winston';
 
+const Logsene = require('winston-logsene');
+
 export function logger(winstonInstance: any) {
-    return async(ctx: Koa.Context, next: () => Promise<any>) => {
+    return async (ctx: Koa.Context, next: () => Promise<any>) => {
 
         const start = new Date().getMilliseconds();
 
@@ -32,13 +34,19 @@ export function logger(winstonInstance: any) {
                 new winston.transports.File({ filename: 'error.log', level: 'error' }),
                 //
                 // - Write to all logs with specified level to console.
-                new winston.transports.Console({ format: winston.format.combine(
-                    winston.format.colorize(),
-                    winston.format.simple()
-                  ) })
+                new winston.transports.Console({
+                    format: winston.format.combine(
+                        winston.format.colorize(),
+                        winston.format.simple()
+                    )
+                }),
+                new Logsene({
+                    token: process.env.LOGSENE_TOKEN,
+                    type: 'discovery',
+                    level: 'error',
+                })
             ]
         });
-
         winstonInstance.log(logLevel, msg);
     };
 }
