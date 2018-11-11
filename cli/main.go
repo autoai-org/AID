@@ -2,15 +2,15 @@
 Package CVPM (main) implements the CLI for CVPM.
 To get started, use:
 
-cvpm help 
+cvpm help
 
 to get a detailed explanation.
 */
 package main
 
 import (
-	"github.com/urfave/cli"
 	"github.com/getsentry/raven-go"
+	"github.com/urfave/cli"
 	"log"
 	"os"
 )

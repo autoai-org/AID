@@ -19,7 +19,7 @@ format:
 	# yapf -i cvpm/**/*.py
 
 docs:
-	npm run docs:build
+	cd docs && npm run docs:build
 
 package:
 	python setup.py sdist bdist_wheel

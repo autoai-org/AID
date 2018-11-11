@@ -2,9 +2,9 @@ package main
 
 import (
 	"fmt"
+	"github.com/getsentry/raven-go"
 	"log"
 	"os/exec"
-	"github.com/getsentry/raven-go"
 )
 
 func pip(args []string) {

@@ -12,10 +12,10 @@ import (
 	"bufio"
 	"fmt"
 	"github.com/fatih/color"
+	"github.com/getsentry/raven-go"
 	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
-	"github.com/getsentry/raven-go"
 	"golang.org/x/crypto/ssh/terminal"
 	"log"
 	"os"
@@ -106,7 +106,7 @@ func RepoHandler(c *cli.Context) {
 			"vendor": runParams[0],
 			"name":   runParams[1],
 			"solver": runParams[2],
-			"port": runningPort,
+			"port":   runningPort,
 		}
 		ClientPost("repo", requestParams)
 	case "ps":
@@ -163,5 +163,5 @@ func ConfigHandler(c *cli.Context) {
 }
 
 func InitHandler(c *cli.Context) {
-	
+
 }

@@ -4,7 +4,7 @@
 	writeConfig()
 	validateConfig()
 	getDefaultConfig()
-	
+
 	The config file is located at the home dir of current user, under ~/cvpm/config.toml
 */
 package main
