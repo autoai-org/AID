@@ -40,6 +40,6 @@ Our Discovery Service provides the following services:
 * **Registry Management**
 * **Pretrained Discovery**
 * **User Authentication**
-* 
+* **Other Utilities**
 
 ## API Reference
