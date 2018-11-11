@@ -22,3 +22,23 @@ class Package {
     @attribute()
     linkedTo: string;
 }
+
+@table('cvpm-pretrained')
+class Pretrained {
+    @hashKey()
+    id: string;
+
+    @rangeKey({defaultProvider: () => new Date()})
+    createdAt: Date;
+
+    @attribute()
+    linkedTo: string;
+
+    @attribute()
+    name: string;
+}
+
+export {
+    Package,
+    Pretrained
+};

@@ -1,11 +1,27 @@
 {
+    "compileOnSave": false,
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2017",
         "noImplicitAny": true,
         "outDir": "./dist",
         "sourceMap": true,
-        "experimentalDecorators": true
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "moduleResolution": "node",
+        "typeRoots": [
+            "node_modules/koa-bodyparser",
+            "node_modules/**/*",
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2017",
+            "es6",
+            "esnext.asynciterable"
+        ],
+        "types": [
+            "node"
+        ],
     },
     "include": [
         "./src/**/*"
