@@ -13,13 +13,14 @@ Thanks to our generous [sponsors](https://cvpm.autoai.org/en-US/guide/credits.ht
 Our main infrastructure depends on the following cloud services:
 
 * **AWS DynamoDB** for providing database.
-* **Open Stack** for providing virtual machines.
-* **Docker Cloud** for providing container build and deploy services. 
+* **AWS Cognito** for user authentication.
 * **Cloudflare** for DNS.
+* **Docker Cloud** for providing container build and deploy services. 
+* **Open Stack** for providing virtual machines.
 
 ### Region
 
-Our servers locates in difference regions and by using load balancer, it should be able to help users in different areas with enjoying the benefit. We now support the following supported area:
+Our servers locates in difference regions. By using load balancer, it should be able to provide users in different areas with nearly the same request overhead. We now support the following area:
 
 * **Hong Kong** (Provided by Cyberport Hong Kong)
 * **Mainland China** (Provided by Tencent Cloud)
@@ -30,7 +31,7 @@ But for now, our storage service in only available in the following area and our
 * **Nova, US**(Provided by Open Source Lab, Oregon State University)
 * **Mainland China** (Provided by DiDi Cloud)
 
-Other *paid* models are currently served by Amazon S3 and therefore have a better bandwidth support.
+Other *paid* models are currently served by Amazon S3 and therefore have a better bandwidth support. Noted that some other models are stored by our registry provider, therefore the request and download time may vary due to their bandwidth.
 
 ## Services
 
@@ -40,6 +41,7 @@ Our Discovery Service provides the following services:
 * **Registry Management**
 * **Pretrained Discovery**
 * **User Authentication**
+* **Statistics**
 * **Other Utilities**
 
 ## API Reference
