@@ -25,7 +25,6 @@ class Downloader(object):
         filename = url.split('/')[-1]
         file_size = int(urlopen(url).info().get('Content-Length', -1))
         chunk_size = 1024
-        bars = int(file_size / chunk_size)
         dest = os.path.join(target, filename)
         if os.path.exists(dest):
             first_byte = os.path.getsize(dest)
@@ -48,15 +47,3 @@ class Downloader(object):
                     pbar.update(1024)
         pbar.close()
         return file_size
-
-
-class BundleAnalyzer(object):
-    def __init__(self, bundle):
-        self.bundle = bundle
-
-    def load(self):
-        result = {}
-        for name, value in vars(self.bundle).items():
-            if not name.startsWith("__"):
-                result[name] = value
-        return result
