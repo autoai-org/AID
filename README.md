@@ -10,9 +10,10 @@
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
 [![BCH compliance](https://bettercodehub.com/edge/badge/unarxiv/CVPM?branch=master)](https://bettercodehub.com/)
-
-
-![logo-with-slogan-landscape.png](https://i.loli.net/2018/10/20/5bcb455c17616.png)
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/2343/badge)](https://bestpractices.coreinfrastructure.org/projects/2343)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/context:javascript)
+[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/context:python)
 
 ## Introduction
 

@@ -55,13 +55,12 @@ module.exports = {
             link: 'https://status.cvtron.xyz/'
           },
           {
-            text: 'Forum',
-            link: 'https://forum.cvtron.xyz/'
-          },
-          {
             text: 'Community',
             items: [
-              { text: 'CVTron', link: 'https://github.com/unarxiv/CVTron' }
+              { text: 'CVTron', link: 'https://github.com/unarxiv/CVTron' },
+              { text: 'Gitter', link: 'https://gitter.im/Unarxiv/cvpm' },
+              { text: 'Forum', link: 'https://spectrum.chat/autoai' },
+              { text: 'Open Collective', link: 'https://opencollective.com/autoai' },
             ]
           }
         ],
@@ -103,6 +102,9 @@ module.exports = {
             text: '社群',
             items: [
               { text: 'CVTron', link: 'https://github.com/unarxiv/CVTron' },
+              { text: 'Gitter', link: 'https://gitter.im/Unarxiv/cvpm' },
+              { text: 'Forum', link: 'https://spectrum.chat/autoai' },
+              { text: 'Open Collective', link: 'https://opencollective.com/autoai' },
             ]
           }
         ],

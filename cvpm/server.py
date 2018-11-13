@@ -4,7 +4,7 @@ import os
 import socket
 import traceback
 import gevent.pywsgi
-from flask import Flask, g, request
+from flask import Flask, request
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
@@ -24,12 +24,11 @@ def str2bool(v):
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     result = s.connect_ex(('127.0.0.1', port))
+    s.close()
     if result == 0:
         return True
     else:
         return False
-    s.close()
-
 
 def get_available_port(start=8080):
     port = start

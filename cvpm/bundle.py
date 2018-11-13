@@ -5,6 +5,8 @@ def is_jsonable(x):
     try:
         json.dumps(x)
         return True
+    except Exception as ex:
+        print(ex)
     except:
         return False
 

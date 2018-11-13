@@ -1,12 +1,10 @@
 import json
 
-import requests
 import toml
-import tqdm
 
 from cvpm.bundle import Bundle
 from cvpm.server import run_server
-from cvpm.utility import BundleAnalyzer, Downloader
+from cvpm.utility import Downloader
 
 
 class Solver(object):
