@@ -64,7 +64,7 @@
     "rimraf": "2.6.2",
     "selenium-server": "3.141.5",
     "semver": "5.6.0",
-    "shelljs": "0.8.2",
+    "shelljs": "0.8.3",
     "uglifyjs-webpack-plugin": "2.0.1",
     "url-loader": "1.1.2",
     "vue-jest": "3.0.0",
