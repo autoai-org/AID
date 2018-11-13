@@ -4,6 +4,7 @@
     "docs:build": "vuepress build ."
   },
   "dependencies": {
+    "amazon-cognito-identity-js-typescript": "^1.22.0",
     "vuepress": "0.14.4"
   }
 }
