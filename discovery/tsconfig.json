@@ -20,10 +20,11 @@
             "esnext.asynciterable"
         ],
         "types": [
-            "node"
+            "node", "jest"
         ],
+
     },
     "include": [
-        "./src/**/*", "winston-logsene.d.ts"
+        "./src/**/*", "winston-logsene.d.ts", "tests/app.spec.ts"
     ]
 }

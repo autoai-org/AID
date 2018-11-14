@@ -10,7 +10,7 @@ import { logger } from './logging';
 
 import * as os from 'os';
 
-const app = new Koa();
+export const app = new Koa();
 
 /**
  * Global Headers
