@@ -3,7 +3,8 @@ import * as Koa from 'koa';
 import bodyParser from 'koa-bodyparser-ts';
 import * as helmet from 'koa-helmet';
 import * as winston from 'winston';
-
+import * as passport from 'koa-passport';
+import * as session from 'koa-session';
 import { config } from './config';
 import { router } from './routes';
 import { logger } from './logging';
@@ -11,6 +12,14 @@ import { logger } from './logging';
 import * as os from 'os';
 
 export const app = new Koa();
+
+/**
+ * Passport Settings
+ */
+app.keys = [config.secret];
+app.use(session(app));
+app.use(passport.initialize());
+app.use(passport.session());
 
 /**
  * Global Headers
