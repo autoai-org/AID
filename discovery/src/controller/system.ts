@@ -15,6 +15,6 @@ export default class SystemController {
             'code': 200,
             'version': config.version,
             'port': config.port
-        }
+        };
     }
 }

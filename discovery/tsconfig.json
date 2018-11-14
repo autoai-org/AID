@@ -15,6 +15,7 @@
             "node_modules/@types"
         ],
         "lib": [
+            "dom",
             "es2017",
             "es6",
             "esnext.asynciterable"
