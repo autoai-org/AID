@@ -21,7 +21,7 @@
             "esnext.asynciterable"
         ],
         "types": [
-            "node", "jest"
+            "node", "jest", "koa-bodyparser-ts"
         ],
 
     },

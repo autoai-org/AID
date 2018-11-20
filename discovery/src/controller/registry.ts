@@ -9,7 +9,7 @@ export default class RegistryController {
         ctx.body = {
             'code': 200,
             'desc': 'success',
-            'req': body
+            'request': body
         };
     }
     public static async getRegistries (ctx: Context) {
