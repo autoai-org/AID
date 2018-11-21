@@ -1,6 +1,6 @@
 const Parse = require('parse/node').Parse;
 
-import { CountResult } from './entity';
+import { CountResult, PojoResult } from './entity';
 
 function initParse() {
     Parse.initialize(process.env.PARSE_ID, process.env.PARSE_TOKEN, process.env.PARSE_MASTER_KEY);
@@ -25,10 +25,16 @@ async function getCount(limit: number) {
     const results: any[] = await query.find();
     const result: CountResult[] = [];
     for (let i = 0; i < results.length; i++) {
-        result[i].models = results[i]['models'];
-        result[i].registries = results[i]['registries'];
-        result[i].users = results[i]['users'];
+        let pojo_result:PojoResult = results[i].toJSON()
+        let each_result: CountResult = {
+            user: pojo_result.user,
+            model: pojo_result.model,
+            registry: pojo_result.registry,
+            updatedAt: pojo_result.updatedAt,
+        }
+        result.push(each_result)
     }
+    console.log(result)
     return result;
 }
 

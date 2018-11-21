@@ -1,9 +1,20 @@
 interface CountResult {
-    users: number;
-    registries: number;
-    models: number;
+    user: number;
+    registry: number;
+    model: number;
+    updatedAt: string;
+}
+
+interface PojoResult {
+    user: number;
+    registry: number;
+    model: number;
+    createdAt: string;
+    updatedAt: string;
+    objectId: string;
 }
 
 export {
-    CountResult
+    CountResult,
+    PojoResult
 };

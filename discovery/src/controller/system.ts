@@ -32,7 +32,7 @@ export default class SystemController {
         ctx.status = 200;
         ctx.body = {
             'code': 200,
-            'request': await updateCount(+body.users, +body.registries, +body.models)
+            'request': await updateCount(+body.user, +body.registry, +body.model)
         };
     }
 }
