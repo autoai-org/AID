@@ -25,16 +25,16 @@ async function getCount(limit: number) {
     const results: any[] = await query.find();
     const result: CountResult[] = [];
     for (let i = 0; i < results.length; i++) {
-        let pojo_result:PojoResult = results[i].toJSON()
-        let each_result: CountResult = {
+        const pojo_result: PojoResult = results[i].toJSON();
+        const each_result: CountResult = {
             user: pojo_result.user,
             model: pojo_result.model,
             registry: pojo_result.registry,
             updatedAt: pojo_result.updatedAt,
-        }
-        result.push(each_result)
+        };
+        result.push(each_result);
     }
-    console.log(result)
+    console.log(result);
     return result;
 }
 
