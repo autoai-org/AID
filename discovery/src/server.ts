@@ -6,7 +6,7 @@ import * as winston from 'winston';
 import * as passport from 'koa-passport';
 import * as session from 'koa-session';
 
-import { initParse } from './parse'
+import { initParse } from './parse';
 import { config } from './config';
 import { router } from './routes';
 import { logger } from './logging';
@@ -18,7 +18,7 @@ export const app = new Koa();
 /**
  * Initialize Parse independently
  */
-initParse()
+initParse();
 /**
  * Passport Settings
  */

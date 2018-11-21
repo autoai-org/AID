@@ -1,7 +1,7 @@
 import { BaseContext, Context } from 'koa';
 import { config } from '../config';
 
-import { getCount, updateCount } from '../parse' 
+import { getCount, updateCount } from '../parse';
 
 export default class SystemController {
     public static async getSystemStatus(ctx: BaseContext) {
@@ -20,7 +20,7 @@ export default class SystemController {
         };
     }
     public static async getStatInfo (ctx: Context) {
-        const body = ctx.request.query
+        const body = ctx.request.query;
         ctx.status = 200;
         ctx.body = {
             'code': 200,

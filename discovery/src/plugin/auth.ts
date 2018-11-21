@@ -1,6 +1,6 @@
-import passport from 'passport';
+import * as passport from 'passport';
 import { config } from '../config';
-var CognitoStrategy = require('passport-cognito')
+const CognitoStrategy = require('passport-cognito');
 
 passport.use(new CognitoStrategy({
     userPoolId: config.cognitoPoolId,
@@ -9,7 +9,7 @@ passport.use(new CognitoStrategy({
 },
     function (accessToken: string, idToken: string, refreshToken: string, user: any, cb: any) {
         process.nextTick(function() {
-            cb(null, user);
+            cb(undefined, user);
         });
     }
 ));
