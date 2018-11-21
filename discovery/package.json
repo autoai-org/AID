@@ -8,7 +8,7 @@
     "test:watch": "cross-env PROJECT_ENV=testing jest --watch",
     "build": "tslint --project . --fix && tsc",
     "watch-server": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts",
-    "start": "node dist/server.js"
+    "start": "node dist/src/server.js"
   },
   "author": "",
   "license": "ISC",

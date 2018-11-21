@@ -9,5 +9,5 @@ docker run  \
             --env PARSE_ID=$PARSE_ID \
             --env PARSE_TOKEN=$PARSE_TOKEN \
             --env PARSE_URL=$PARSE_URL \
-            --env PARSE_MASTER_KEY=$PARSE_MASTER_KEY
+            --env PARSE_MASTER_KEY=$PARSE_MASTER_KEY \
             -d -p 3000:3000 docker.io/autoai/cvpm-discovery
