@@ -3,6 +3,9 @@
     <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" persistent="persistent" enable-resize-watcher="enable-resize-watcher" :dark="dark">
         <div class="pa-3 text-xs-center" v-show="!mini">
             <div class="display-2 py-4">CVPM</div>
+            <!--
+            <img src="https://i.loli.net/2018/10/20/5bcb455c17616.png" class="cvpm-logo"/>
+            -->
             <p>Dashboard</p>
             <div style="padding-left:5em;">
                 <v-switch :label="(!dark ? 'Light' : 'Dark') + ' Theme'" v-model="dark" :dark="dark" hide-details="hide-details"></v-switch>
@@ -16,33 +19,33 @@
             <div class="display-2">A</div>
         </div>
         <v-divider></v-divider>
-        <!--
+        
         <v-list dense="dense">
             <template v-for="item in menu">
-                <v-list-group v-if="item.items" v-bind:group="item.group">
+                <v-list-group v-if="item.items" v-bind:group="item.group" :key="item.header">
                     <v-list-tile :to="item.href" slot="item" :title="item.title">
                         <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
-                        <v-list-tile-content><v-list-tile-title>{{ $t(item.title) }}</v-list-tile-title></v-list-tile-content>
+                        <v-list-tile-content><v-list-tile-title>{{ item.title }}</v-list-tile-title></v-list-tile-content>
                         <v-list-tile-action><v-icon>keyboard_arrow_down</v-icon></v-list-tile-action></v-list-tile>
                     <v-list-tile v-for="subItem in item.items" :key="subItem.href" :to="subItem.href" v-bind:router="!subItem.target" ripple="ripple" v-bind:disabled="subItem.disabled" v-bind:target="subItem.target">
                         <v-list-tile-action v-if="subItem.icon"><v-icon class="success--text">{{ subItem.icon }}</v-icon></v-list-tile-action>
-                        <v-list-tile-content><v-list-tile-title>{{ $t(subItem.title) }}</v-list-tile-title></v-list-tile-content>
+                        <v-list-tile-content><v-list-tile-title>{{ subItem.title }}</v-list-tile-title></v-list-tile-content>
                     </v-list-tile>
                 </v-list-group>
-                <v-subheader v-else-if="item.header">{{ item.header }}</v-subheader>
-                <v-divider v-else-if="item.divider"></v-divider>
-                <v-list-tile v-else="v-else" :to="item.href" router="router" ripple="ripple" v-bind:disabled="item.disabled" :title="item.title">
+                <v-subheader v-else-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
+                <v-divider v-else-if="item.header" :key="item.header"></v-divider>
+                <v-list-tile  v-else :to="item.href" router="router" ripple="ripple" v-bind:disabled="item.disabled" :title="item.title" :key="item.header">
                     <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
-                    <v-list-tile-content><v-list-tile-title>{{ $t(item.title) }}</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-content><v-list-tile-title>{{ item.title }}</v-list-tile-title></v-list-tile-content>
                     <v-list-tile-action v-if="item.subAction"><v-icon class="success--text">{{ item.subAction }}</v-icon></v-list-tile-action>
                 </v-list-tile>
             </template>
         </v-list>
-        -->
+        
     </v-navigation-drawer>
     <v-toolbar class="darken-1" fixed="fixed" dark="dark" :class="theme">
         <v-toolbar-side-icon dark="dark" @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>pageTitle</v-toolbar-title>
+        <v-toolbar-title>CVPM Dashboard</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-menu offset-y="offset-y">
             <v-btn icon="icon" dark="dark" slot="activator">
@@ -67,6 +70,7 @@
 </template>
 
 <script>
+import { getMenus } from '@/services/web'
 export default {
   data () {
     return {
@@ -78,7 +82,8 @@ export default {
       colors: ['blue', 'green', 'purple', 'red'],
       message: {
         body: 'Hello'
-      }
+      },
+      menu: []
     }
   },
   methods: {
@@ -86,8 +91,7 @@ export default {
       global.helper.ls.set('locale', to)
     },
     fetchMenu () {
-      // fetch menu from server
-      // this.$http.get('menu').then(({data}) => this.$store.commit('setMenu', data))
+      this.menu = getMenus()
     }
   },
   created () {
@@ -96,5 +100,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.cvpm-logo {
+    width: 20em;
+}
 </style>
