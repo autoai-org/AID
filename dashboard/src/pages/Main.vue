@@ -69,7 +69,7 @@
     <main>
         <v-container class="pa-4" fluid>
             <v-alert v-if="message.display" v-bind="message" v-model="message.body" dismissible="dismissible">{{message.body}}</v-alert>
-            <div class="py-2">
+            <div class="py-2" :class="{'cvpm-main-content-with-drawer': drawer, 'cvpm-main-content-without-drawer':!drawer}">
                 <v-slide-y-transition mode="out-in">
                     <router-view></router-view>
                 </v-slide-y-transition>
@@ -117,5 +117,13 @@ export default {
 }
 .cvpm-main-drawer {
     position:fixed;
+}
+.cvpm-main-content-with-drawer {
+    margin-top: 5em;
+    margin-left:  320px;
+}
+.cvpm-main-content-without-drawer {
+    margin-top: 5em;
+    margin-left:  20px;
 }
 </style>
