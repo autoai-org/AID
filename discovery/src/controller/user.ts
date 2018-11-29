@@ -1,18 +1,12 @@
 import { Context } from 'koa';
-import * as passport from 'passport';
+import { getUserInfo } from '../service/auth'
 export default class UserController {
     /**
-     * Create Session, a.k.a Log In
+     * Validate Access Token, a.k.a Get User information
      * @param ctx
      */
-    public static async createSession(ctx: Context) {
-        passport.authenticate('cognito', {
-            successRedirect: '/',
-            failureRedirect: '/login'
-        });
-        ctx.status = 200;
-        ctx.body = {
-            'status': 'ok'
-        };
+    public static async validateAccessToken(ctx: Context) {
+        const body = ctx.request.body;
+        getUserInfo(body.accessToken)
     }
 }

@@ -54,6 +54,9 @@ async function getPretrained () {
     return results;
 }
 
+/**
+ * Following will be registry related operation
+ */
 async function getRegistries () {
     const results: Registry[] = [];
     for await (const item of mapper.scan(Registry)) {

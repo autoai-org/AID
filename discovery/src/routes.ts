@@ -18,6 +18,6 @@ router.get('/pretrained', controller.pretrained.getAllPretrained);
 router.put('/registry', controller.registry.putRegistry);
 router.get('/registries', controller.registry.getRegistries);
 
-router.post('/session', controller.user.createSession);
+router.post('/session', controller.user.validateAccessToken);
 
 export { router };
