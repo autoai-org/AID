@@ -1,6 +1,6 @@
 <template>
 <v-app :dark="dark" standalone="standalone">
-    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" persistent="persistent" enable-resize-watcher="enable-resize-watcher" :dark="dark">
+    <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" persistent="persistent" enable-resize-watcher="enable-resize-watcher" :dark="dark" class="cvpm-main-drawer">
         <div class="pa-3 text-xs-center" v-show="!mini">
             <div class="display-2 py-4">CVPM</div>
             <!--
@@ -66,6 +66,16 @@
             </v-list>
         </v-menu>
     </v-toolbar>
+    <main>
+        <v-container class="pa-4" fluid>
+            <v-alert v-if="message.display" v-bind="message" v-model="message.body" dismissible="dismissible">{{message.body}}</v-alert>
+            <div class="py-2">
+                <v-slide-y-transition mode="out-in">
+                    <router-view></router-view>
+                </v-slide-y-transition>
+            </div>
+        </v-container>
+    </main>
 </v-app>
 </template>
 
@@ -81,6 +91,7 @@ export default {
       locales: ['en-US', 'zh-CN'],
       colors: ['blue', 'green', 'purple', 'red'],
       message: {
+        display: false,
         body: 'Hello'
       },
       menu: []
@@ -102,6 +113,9 @@ export default {
 
 <style scoped>
 .cvpm-logo {
-    width: 20em;
+  width: 20em;
+}
+.cvpm-main-drawer {
+    position:fixed;
 }
 </style>
