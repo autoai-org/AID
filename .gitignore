@@ -8,3 +8,4 @@ dist
 .idea
 .DS_Store
 !discovery/hooks/build
+!dashboard/build

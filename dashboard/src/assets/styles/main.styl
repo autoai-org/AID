@@ -1,0 +1,49 @@
+// @import '../../node_modules/vuetify/src/stylus/settings/_colors'
+ 
+// $theme := {
+//   primary: $red.darken-2
+//   accent: $red.accent-2
+//   secondary: $grey.darken-3
+//   info: $blue.lighten-1
+//   warning: $amber.darken-2
+//   error: $red.accent-4
+//   success: $green.lighten-2
+// }
+
+// @import '../../node_modules/vuetify/src/stylus/main'
+body{
+  background: #f9f9f9;
+  font-family: Helvetica, Tahoma, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei" , sans-serif;
+}
+.jl{
+  justify-content: flex-start;
+}
+.jc{
+  justify-content: center;
+}
+.jr{
+  justify-content: flex-end;
+}
+.fixed-bottom{
+  position: fixed;
+  width:300px;
+  bottom:0
+}
+.crud-grid-thumb{
+  margin:0.5em 0;
+  max-height:5em;
+}
+.quill-editor button {
+  margin-bottom:0;
+}
+
+// vuetify reset
+.btn--floating .btn__content{
+  flex:1 0 auto;
+}
+table.table tr:not(:last-child){
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+.application--light .input-group:not(.input-group--error) .input-group__details:before{
+  background-color: rgba(0,0,0,0.2);
+}

@@ -1,6 +1,6 @@
 # dashboard
 
-> CVPM Dashboard
+> A Vue.js project
 
 ## Build Setup
 
