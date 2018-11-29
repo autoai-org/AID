@@ -15,15 +15,17 @@
             "node_modules/@types"
         ],
         "lib": [
+            "dom",
             "es2017",
             "es6",
             "esnext.asynciterable"
         ],
         "types": [
-            "node"
+            "node", "jest", "koa-bodyparser-ts"
         ],
+
     },
     "include": [
-        "./src/**/*", "winston-logsene.d.ts"
+        "./src/**/*", "winston-logsene.d.ts", "tests/app.spec.ts"
     ]
 }
