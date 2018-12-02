@@ -17,6 +17,16 @@ function getNews (num) {
   return news
 }
 
+function getStatus () {
+  const status = {
+    'status': 'running',
+    'installed': 5,
+    'running': 3
+  }
+  return status
+}
+
 export {
-    getNews
+    getNews,
+    getStatus
 }
