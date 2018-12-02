@@ -8,6 +8,7 @@ export interface IConfig {
     dbsslconn: boolean;
     jwtSecret: string;
     version: string;
+    blogURL: string;
 }
 
 const config: IConfig = {
@@ -15,7 +16,8 @@ const config: IConfig = {
     debugLogging: process.env.NODE_ENV == 'development',
     dbsslconn: process.env.NODE_ENV != 'development',
     jwtSecret: process.env.JWT_SECRET || 'your-secret-whatever',
-    version: process.env.VERSION || 'v0.0.3@alpha'
+    version: process.env.VERSION || 'v0.0.3@alpha',
+    blogURL: process.env.BLOG_URL || 'https://write.as/api/collections/autoai'
 };
 
 export { config };

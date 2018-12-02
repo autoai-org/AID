@@ -13,4 +13,6 @@ router.get('/pretrained', controller.pretrained.getAllPretrained);
 
 router.put('/registry', controller.registry.putRegistry);
 
+router.get('/news', controller.news.queryNews);
+
 export { router };
