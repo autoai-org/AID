@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Main from '@/pages/Main'
 import Settings from '@/pages/Settings'
+import Landing from '@/pages/Landing'
 Vue.use(Router)
 
 export default new Router({
@@ -15,6 +16,11 @@ export default new Router({
           path: '/settings',
           name: 'Settings',
           component: Settings
+        },
+        {
+          path: '/home',
+          name: 'Home',
+          component: Landing
         }
       ]
     }

@@ -24,6 +24,6 @@
         ],
     },
     "include": [
-        "./src/**/*", "winston-logsene.d.ts"
+        "./src/**/*", "winston-logsene.d.ts", "../dashboard/src/services/mock.js"
     ]
 }
