@@ -54,6 +54,17 @@ async function getPretrained () {
     return results;
 }
 
+/**
+ * Following will be registry related operation
+ */
+async function getRegistries () {
+    const results: Registry[] = [];
+    for await (const item of mapper.scan(Registry)) {
+        results.push(item);
+    }
+    return results;
+}
+
 async function addRegistry (name: string, urlPrefix: string) {
     const toAddRegistry = Object.assign(new Registry, {
         id: Guid.create(),
@@ -69,5 +80,6 @@ export {
     putPretrained,
     putPackage,
     getPretrained,
-    addRegistry
+    addRegistry,
+    getRegistries
 };
