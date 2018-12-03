@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/pages/Main'
 import Settings from '@/pages/Settings'
 import Landing from '@/pages/Landing'
+import SystemLog from '@/pages/SystemLog'
 Vue.use(Router)
 
 export default new Router({
@@ -21,6 +22,11 @@ export default new Router({
           path: '/home',
           name: 'Home',
           component: Landing
+        },
+        {
+          path: '/log',
+          name: 'Log',
+          component: SystemLog
         }
       ]
     }
