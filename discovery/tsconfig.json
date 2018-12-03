@@ -26,6 +26,7 @@
 
     },
     "include": [
+        "./src/**/*", "winston-logsene.d.ts", "../dashboard/src/services/mock.js",
         "./src/**/*", "winston-logsene.d.ts", "tests/app.spec.ts"
     ]
 }

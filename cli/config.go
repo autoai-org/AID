@@ -103,4 +103,19 @@ func validateConfig() {
 			log.Fatal(err)
 		}
 	}
+	// check if system log file exists
+	cvpmLogPath := filepath.Join(cvpmPath, "system.log")
+	exist, err := isPathExists(cvpmLogPath)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		log.Fatal(err)
+	}
+	if !exist {
+		f, err := os.Create(cvpmLogPath)
+		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
+			log.Fatal(err)
+		}
+		defer f.Close()
+	}
 }

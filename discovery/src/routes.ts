@@ -20,4 +20,6 @@ router.get('/registries', controller.registry.getRegistries);
 
 router.post('/session', controller.user.validateAccessToken);
 
+router.get('/news', controller.news.queryNews);
+
 export { router };

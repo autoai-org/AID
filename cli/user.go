@@ -21,7 +21,6 @@ type User struct {
 }
 
 func (u *User) login() User {
-	fmt.Println(u.Username)
 	csrp, _ := cognitosrp.NewCognitoSRP(u.Username, u.Password, "us-east-1_IYJ3FvCKZ", "1jinmsd412vcs8pkhqg5u0gjd2", nil)
 	cfg, _ := external.LoadDefaultAWSConfig()
 	cfg.Region = endpoints.UsEast1RegionID
@@ -33,8 +32,6 @@ func (u *User) login() User {
 		AuthParameters: csrp.GetAuthParams(),
 	})
 	resp, _ := req.Send()
-	fmt.Println("123456")
-	fmt.Println(resp.ChallengeName)
 	if resp.ChallengeName == cip.ChallengeNameTypePasswordVerifier {
 		challengeInput, _ := csrp.PasswordVerifierChallenge(resp.ChallengeParameters, time.Now())
 		chal := svc.RespondToAuthChallengeRequest(challengeInput)
