@@ -54,6 +54,6 @@ export default {
   padding-right: 1em;
 }
 .cvpm-news-card {
-  width: 40%;
+  width: 90%;
 }
 </style>

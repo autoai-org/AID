@@ -1,7 +1,13 @@
 <template>
 <v-container>
+  <v-layout row wrap>
+    <v-flex xs6>
     <cvpm-news></cvpm-news>
+    </v-flex>
+    <v-flex xs6>
     <cvpm-status></cvpm-status>
+    </v-flex>
+  </v-layout>
 </v-container>
 </template>
 

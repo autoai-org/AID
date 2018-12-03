@@ -33,7 +33,7 @@ export default {
 
 <style scoped>
 .cvpm-status-card {
-  width: 40%;
+  width: 95%;
 }
 .cvpm-status-content {
   padding-left: 2em;
