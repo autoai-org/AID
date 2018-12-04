@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"sync"
 	"time"
 )
@@ -17,7 +18,8 @@ func pip(args []string) {
 	// _ = _execCommand(localPip, args)
 	proc := NewProcess(localPip, args...)
 	out := proc.StreamOutput()
-	file, err := os.OpenFile("system.log", os.O_WRONLY|os.O_APPEND, 0644)
+	logFile := filepath.Join(getLogsLocation(), "system.log")
+	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatalf("failed opening file: %s", err)
 	}

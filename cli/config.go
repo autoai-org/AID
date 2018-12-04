@@ -87,35 +87,44 @@ func getDefaultConfig() cvpmConfig {
 }
 
 func validateConfig() {
-	// localConfig := readConfig()
+	if !isRoot() {
+		// localConfig := readConfig()
+		homepath := getHomeDir()
+		log.Println(homepath)
+		// Validate CVPM Path
+		cvpmPath := filepath.Join(homepath, "cvpm")
+		exist, err := isPathExists(cvpmPath)
+		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
+			log.Fatal(err)
+		}
+		if !exist {
+			err := os.Mkdir(cvpmPath, os.ModePerm)
+			if err != nil {
+				raven.CaptureErrorAndWait(err, nil)
+				log.Fatal(err)
+			}
+		}
+		// check if system log file exists
+		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
+		exist, err = isPathExists(cvpmLogPath)
+		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
+			log.Fatal(err)
+		}
+		if !exist {
+			f, err := os.Create(cvpmLogPath)
+			if err != nil {
+				raven.CaptureErrorAndWait(err, nil)
+				log.Fatal(err)
+			}
+			defer f.Close()
+		}
+	}
+}
+
+func getLogsLocation() string {
 	homepath, _ := homedir.Dir()
-	// Validate CVPM Path
-	cvpmPath := filepath.Join(homepath, "cvpm")
-	exist, err := isPathExists(cvpmPath)
-	if err != nil {
-		raven.CaptureErrorAndWait(err, nil)
-		log.Fatal(err)
-	}
-	if !exist {
-		err := os.Mkdir(cvpmPath, os.ModePerm)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
-		}
-	}
-	// check if system log file exists
-	cvpmLogPath := filepath.Join(cvpmPath, "system.log")
-	exist, err := isPathExists(cvpmLogPath)
-	if err != nil {
-		raven.CaptureErrorAndWait(err, nil)
-		log.Fatal(err)
-	}
-	if !exist {
-		f, err := os.Create(cvpmLogPath)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
-		}
-		defer f.Close()
-	}
+	cvpmLogPath := filepath.Join(homepath, "cvpm", "logs")
+	return cvpmLogPath
 }

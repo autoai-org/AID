@@ -2,6 +2,7 @@ package main
 
 import (
 	"os"
+	"os/user"
 )
 
 func isExists(path string) bool {
@@ -13,4 +14,24 @@ func isExists(path string) bool {
 		return false
 	}
 	return true
+}
+
+func getHomeDir() string {
+	usr, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	return usr.HomeDir
+}
+
+func isRoot() bool {
+	usr, err := user.Current()
+	if err != nil {
+		panic(err)
+	}
+	if usr.Username == "root" {
+		return true
+	} else {
+		return false
+	}
 }
