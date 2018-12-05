@@ -99,7 +99,7 @@ func validateConfig() {
 			log.Fatal(err)
 		}
 		if !exist {
-			err := os.Mkdir(cvpmPath, os.ModePerm)
+			err = os.Mkdir(cvpmPath, os.ModePerm)
 			if err != nil {
 				raven.CaptureErrorAndWait(err, nil)
 				log.Fatal(err)
