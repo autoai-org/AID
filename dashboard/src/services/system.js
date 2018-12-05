@@ -35,6 +35,11 @@ class SystemService {
       })
     })
   }
+  runRepoSolver (vendor, name, solver) {
+    return new Promise((resolve, reject) => {
+      axios.post(this.endpoint + '/repo/running')
+    })
+  }
 }
 
 const configService = new ConfigService()
