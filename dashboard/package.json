@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "js-base64": "^2.4.9",
     "vue": "^2.5.2",
     "vue-i18n": "^8.3.2",
     "vue-markdown": "^2.2.4",

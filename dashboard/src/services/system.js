@@ -1,4 +1,5 @@
-import { configService } from './config'
+import axios from 'axios'
+import { ConfigService } from './config'
 import { getStatus } from './mock'
 class SystemServiceMock {
   constructor (endpoint) {
@@ -16,7 +17,27 @@ class SystemService {
   getStatus () {
     return getStatus()
   }
+  getPackages () {
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/repos').then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
+        reject(err)
+      })
+    })
+  }
+  getRepoMeta (vendor, name) {
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/repo/meta/' + vendor + '/' + name).then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
+        reject(err)
+      })
+    })
+  }
 }
+
+const configService = new ConfigService()
 
 let systemService
 
@@ -27,5 +48,5 @@ if (configService.developerMode) {
 }
 
 export {
-    systemService
+  systemService
 }

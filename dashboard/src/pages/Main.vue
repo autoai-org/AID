@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { getMenus } from '@/services/web'
+import { getMenus } from '@/services/menu'
 export default {
   data () {
     return {

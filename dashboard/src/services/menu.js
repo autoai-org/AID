@@ -2,8 +2,8 @@ function getMenus () {
   return [
         { 'header': 'Admin' },
         { 'href': '/home', 'title': 'Home', 'icon': 'home' },
-        { 'href': '/local/package', 'title': 'Packages', 'icon': 'view_list' },
-        { 'href': '/local/pretrained', 'title': 'Pre-trained', 'icon': 'view_list' },
+        { 'href': '/package', 'title': 'Packages', 'icon': 'grain' },
+        { 'href': '/pretrained', 'title': 'Pre-trained', 'icon': 'storage' },
         { 'header': 'System' },
         { 'href': '/log', 'title': 'Log', 'icon': 'info' },
         { 'href': '/settings', 'title': 'Settings', 'icon': 'settings' },

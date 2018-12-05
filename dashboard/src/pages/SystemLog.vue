@@ -7,17 +7,14 @@ import Log from '@/components/CVPM-Log'
 export default {
   data () {
     return {
-      messageList: ['an error occured', 'everything works fine']
+      messageList: []
     }
   },
   components: {
     'cvpm-log': Log
   },
   sockets: {
-    connect: function () {
-      console.log('socket connected')
-    },
-    logevent: function (data) {
+    system: function (data) {
       this.messageList.push(data)
     }
   }
