@@ -7,7 +7,7 @@ import Log from '@/components/CVPM-Log'
 export default {
   data () {
     return {
-      messageList: []
+      messageList: ['an error occured', 'everything works fine']
     }
   },
   components: {
