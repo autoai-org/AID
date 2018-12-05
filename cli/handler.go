@@ -100,6 +100,10 @@ func RepoHandler(c *cli.Context) {
 	case "run":
 		solverstring := c.Args().Get(1)
 		runningPort := c.Args().Get(2)
+		if (runningPort == "") {
+			runningPort = findNextOpenPort(8080)
+			color.Red("No Running Port specified! Server will listen on: " + runningPort)
+		}
 		runParams := strings.Split(solverstring, "/")
 		color.Cyan("Running " + runParams[0] + "/" + runParams[1] + "/" + runParams[2])
 		requestParams := map[string]string{
@@ -108,7 +112,7 @@ func RepoHandler(c *cli.Context) {
 			"solver": runParams[2],
 			"port":   runningPort,
 		}
-		ClientPost("repo", requestParams)
+		ClientPost("repo/running", requestParams)
 	case "ps":
 		requestParams := map[string]string{}
 		ClientGet("repos", requestParams)

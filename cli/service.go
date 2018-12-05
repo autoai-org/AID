@@ -20,14 +20,17 @@ func (s *sol) Stop(srv service.Service) error {
 	return nil
 }
 
-func getCVPMDConfig() *service.Config {
+func getRunUser() string {
 	currentUser, _ := user.Current()
-	var realUsername string
 	if currentUser.Username == "root" && runtime.GOOS != "windows" {
-		realUsername = os.Getenv("SUDO_USER")
+		return os.Getenv("SUDO_USER")
 	} else {
-		realUsername = currentUser.Username
+		return currentUser.Username
 	}
+}
+
+func getCVPMDConfig() *service.Config {
+	realUsername := getRunUser()
 	srvConf := &service.Config{
 		Name:        "cvpmd",
 		DisplayName: "CVPM Daemon",

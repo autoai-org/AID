@@ -35,7 +35,6 @@ export default {
           }
           return each
         })
-        console.log(self.news)
       })
     }
   },

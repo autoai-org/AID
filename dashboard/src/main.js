@@ -4,12 +4,20 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
+import VueSocketIO from 'vue-socket.io'
+import TreeView from "vue-json-tree-view"
+
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
 
 import i18n from '@/i18n'
 
+Vue.use(new VueSocketIO({
+  debug: true,
+  connection: 'http://192.168.1.11:10590'
+}))
 Vue.use(Vuetify)
+Vue.use(TreeView)
 
 Vue.config.productionTip = false
 
