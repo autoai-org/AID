@@ -112,7 +112,7 @@ func RepoHandler(c *cli.Context) {
 			"solver": runParams[2],
 			"port":   runningPort,
 		}
-		ClientPost("repo", requestParams)
+		ClientPost("repo/running", requestParams)
 	case "ps":
 		requestParams := map[string]string{}
 		ClientGet("repos", requestParams)

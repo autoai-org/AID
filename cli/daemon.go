@@ -31,12 +31,13 @@ type RunRepoRequest struct {
 }
 
 // Handle Post Request -> Run a Repo
-func PostRepoHandler(c *gin.Context) {
+func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
 	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver, runRepoRequest.Port)
 	c.JSON(http.StatusOK, gin.H{
 		"code": "success",
+		"port": runRepoRequest.Port,
 	})
 }
 
@@ -117,7 +118,7 @@ func runServer(port string) {
 		})
 	})
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
-	r.POST("/repo", PostRepoHandler)
+	r.POST("/repo/running", PostRunningRepoHandler)
 	r.GET("/repos", GetReposHandler)
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
