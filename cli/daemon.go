@@ -41,8 +41,21 @@ func PostRepoHandler(c *gin.Context) {
 }
 
 // Handle Get Request -> Get Running Repo
-func GetReposHandler(c *gin.Context) {
+func GetRunningReposHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, RunningRepos)
+}
+
+// Handle Get Request -> Get All Repos
+func GetReposHandler(c *gin.Context) {
+	config := readConfig()
+	c.JSON(http.StatusOK, config.Repositories)
+}
+
+// Handle Get Repository Meta Info
+func GetRepoMetaHandler(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
 }
 
 // Handle Socket Request
@@ -54,15 +67,14 @@ func socketHandler(c *gin.Context) {
 }
 
 // write log to socket stream
-func writeLog(filepath string, server *socketio.Server) {
+func writeLog(filepath string, server *socketio.Server, eventName string) {
 	log.Println("Writing Logs")
 	t, err := tail.TailFile(filepath, tail.Config{Follow: true})
 	if err != nil {
 		panic(err)
 	}
 	for line := range t.Lines {
-		log.Println("Broadcasting")
-		server.BroadcastTo("cvpm-webtail", "logevent", line.Text)
+		server.BroadcastTo("cvpm-webtail", eventName, line.Text)
 	}
 }
 
@@ -70,8 +82,8 @@ func writeLog(filepath string, server *socketio.Server) {
 func watchLogs(server *socketio.Server) {
 	// System Log
 	cvpmLogsLocation := getLogsLocation()
-	log.Println(cvpmLogsLocation)
-	go writeLog(filepath.Join(cvpmLogsLocation, "system.log"), server)
+	go writeLog(filepath.Join(cvpmLogsLocation, "system.log"), server, "system")
+	go writeLog(filepath.Join(cvpmLogsLocation, "package.log"), server, "package")
 }
 
 // global header
@@ -104,6 +116,7 @@ func runServer(port string) {
 			"daemon": "running",
 		})
 	})
+	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
 	r.POST("/repo", PostRepoHandler)
 	r.GET("/repos", GetReposHandler)
 	r.GET("/socket.io/", socketHandler)

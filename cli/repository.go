@@ -17,6 +17,14 @@ type Repository struct {
 	Name        string
 	LocalFolder string
 	Vendor      string
+	Port        string
+}
+
+type RepositoryMetaInfo struct {
+	Config     string
+	Dependency string
+	DiskSize   float64
+	Readme     string
 }
 
 type solver struct {
@@ -106,6 +114,7 @@ func InstallDependencies(localFolder string) {
 	pip([]string{"install", "-r", filepath.Join(localFolder, "requirements.txt"), "--user"})
 }
 
+// Generating Runners for future use
 func GeneratingRunners(localFolder string) {
 	var mySolvers solvers
 	cvpmFile := filepath.Join(localFolder, "cvpm.toml")
@@ -113,4 +122,38 @@ func GeneratingRunners(localFolder string) {
 		log.Fatal(err)
 	}
 	renderRunnerTpl(localFolder, mySolvers)
+}
+
+// After Installation
+
+// Return Repository Meta Info: Dependency, Config, Disk Size and Readme
+func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
+	repos := readRepos()
+	repositoryMeta := RepositoryMetaInfo{}
+	for _, existed_repo := range repos {
+		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
+			// Read config file etc
+			byte_config, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "cvpm.toml"))
+			if err != nil {
+				repositoryMeta.Config = "Read cvpm.toml failed"
+			} else {
+				repositoryMeta.Config = string(byte_config)
+			}
+			byte_dependency, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "requirements.txt"))
+			if err != nil {
+				repositoryMeta.Dependency = "Read requirements.txt failed"
+			} else {
+				repositoryMeta.Dependency = string(byte_dependency)
+			}
+			byte_readme, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "README.md"))
+			if err != nil {
+				repositoryMeta.Readme = "Read Readme.md failed"
+			} else {
+				repositoryMeta.Readme = string(byte_readme)
+			}
+			packageSize := getDirSizeMB(existed_repo.LocalFolder)
+			repositoryMeta.DiskSize = packageSize
+		}
+	}
+	return repositoryMeta
 }
