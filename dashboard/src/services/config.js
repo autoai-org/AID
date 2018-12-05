@@ -18,6 +18,7 @@ class ConfigService {
       'developerMode': this.developerMode
     }
     localStorage.setItem('cvpm-config', JSON.stringify(persistConfig))
+    this.read()
   }
 }
 
