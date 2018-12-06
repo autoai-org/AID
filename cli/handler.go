@@ -25,6 +25,12 @@ import (
 	"syscall"
 )
 
+// Run Repo Response Struct
+type RunRepoResponse struct {
+	Code string `json:code`
+	Port string `json:port`
+}
+
 // Handle User Login
 func LoginHandler(c *cli.Context) User {
 	reader := bufio.NewReader(os.Stdin)
@@ -100,10 +106,6 @@ func RepoHandler(c *cli.Context) {
 	case "run":
 		solverstring := c.Args().Get(1)
 		runningPort := c.Args().Get(2)
-		if (runningPort == "") {
-			runningPort = findNextOpenPort(8080)
-			color.Red("No Running Port specified! Server will listen on: " + runningPort)
-		}
 		runParams := strings.Split(solverstring, "/")
 		color.Cyan("Running " + runParams[0] + "/" + runParams[1] + "/" + runParams[2])
 		requestParams := map[string]string{
@@ -112,7 +114,10 @@ func RepoHandler(c *cli.Context) {
 			"solver": runParams[2],
 			"port":   runningPort,
 		}
-		ClientPost("repo/running", requestParams)
+		resp := ClientPost("repo/running", requestParams)
+		var respJson RunRepoResponse
+		log.Println(resp.JSON(respJson))
+		color.Red("No port is specified, solver will running on" + respJson.Port)
 	case "ps":
 		requestParams := map[string]string{}
 		ClientGet("repos", requestParams)
