@@ -5,7 +5,7 @@ import App from './App'
 import router from './router'
 import Vuetify from 'vuetify'
 import VueSocketIO from 'vue-socket.io'
-import TreeView from "vue-json-tree-view"
+import TreeView from 'vue-json-tree-view'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'

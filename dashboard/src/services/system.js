@@ -35,9 +35,27 @@ class SystemService {
       })
     })
   }
-  runRepoSolver (vendor, name, solver) {
+  getRunningSolver (vendor, name) {
     return new Promise((resolve, reject) => {
-      axios.post(this.endpoint + '/repo/running')
+      axios.get(this.endpoint + '/solvers/running/' + vendor + '/' + name).then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
+        reject(err)
+      })
+    })
+  }
+  runRepoSolver (vendor, name, solver, port) {
+    return new Promise((resolve, reject) => {
+      axios.post(this.endpoint + '/repo/running', {
+        'vendor': vendor,
+        'name': name,
+        'solver': solver,
+        'port': port
+      }).then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
+        reject(err)
+      })
     })
   }
 }

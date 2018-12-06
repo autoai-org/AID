@@ -12,14 +12,22 @@
       <v-flex xs5 class="cvpm-package-detail-card">
         <cvpm-log :title="'Package Log'" :messageList="messageList"></cvpm-log>
       </v-flex>
+      <v-flex xs6 class="cvpm-package-detail-card">
+          <cvpm-repo-solver
+            :config="config"
+            :vendor="toSelectVendor"
+            :packageName="toSelectPackage"
+          ></cvpm-repo-solver>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
 
 <script>
 import cvpmRepoMeta from '@/components/CVPM-Repo-Meta'
-import { systemService } from '@/services/system'
 import Log from '@/components/CVPM-Log'
+import cvpmRepoSolver from '@/components/CVPM-Repo-Solver'
+import { systemService } from '@/services/system'
 
 export default {
   data () {
@@ -33,7 +41,8 @@ export default {
   },
   components: {
     'cvpm-repo-meta': cvpmRepoMeta,
-    'cvpm-log': Log
+    'cvpm-log': Log,
+    'cvpm-repo-solver': cvpmRepoSolver
   },
   methods: {
     fetchMeta () {
@@ -54,6 +63,14 @@ export default {
   sockets: {
     package: function (data) {
       this.messageList.push(data)
+    }
+  },
+  computed: {
+    toSelectVendor () {
+      return [this.$route.params.vendor]
+    },
+    toSelectPackage () {
+      return [this.$route.params.name]
     }
   }
 }
