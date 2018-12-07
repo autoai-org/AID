@@ -3,18 +3,13 @@
     <v-card-title>
       <h2>Solvers</h2>
     </v-card-title>
-    <v-layout class="cvpm-solver-runner-selection">
-      <v-select v-model="selectedVendor" :items="vendor" label="Vendor"></v-select>
-      <v-select v-model="selectedPackage" :items="packageName" label="Package"></v-select>
-      <v-flex xs6>
-        <v-select
-          v-model="selectedSolver"
-          :items="configObject.solvers"
-          item-text="name"
-          label="Solver"
-        ></v-select>
-      </v-flex>
-    </v-layout>
+    <cvpm-solver-selection 
+        :config=config
+        :vendor=vendor
+        :packageName=packageName
+        v-on:finishSelection="onFinishSelection"
+    >
+    </cvpm-solver-selection>
     <v-flex class="cvpm-solver-run-btn">
       <v-btn @click="run()" color="indigo" outline>Run</v-btn>
     </v-flex>
@@ -67,7 +62,7 @@
 
 <script>
 import { systemService } from '@/services/system'
-import toml from 'toml'
+import cvpmSolverSelection from '@/components/basic/CVPM-Solver-Selection'
 export default {
   data () {
     return {
@@ -98,12 +93,10 @@ export default {
       }
     }
   },
-  props: ['config', 'vendor', 'packageName'],
-  computed: {
-    configObject () {
-      return toml.parse(this.config)
-    }
+  components: {
+    'cvpm-solver-selection': cvpmSolverSelection
   },
+  props: ['config', 'vendor', 'packageName'],
   methods: {
     fetchRunningSolver () {
       let self = this
@@ -111,8 +104,12 @@ export default {
         .getRunningSolver(this.vendor, this.packageName)
         .then(function (res) {
           self.runningSolvers = res.data
-          console.log(self.runningSolvers)
         })
+    },
+    onFinishSelection (value) {
+      this.selectedSolver = value.selectedSolver
+      this.selectedVendor = value.selectedVendor
+      this.selectedPackage = value.selectedPackage
     },
     triggerDialog () {
       this.runningConfirmDialog = !this.runningConfirmDialog

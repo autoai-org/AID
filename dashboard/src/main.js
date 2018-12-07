@@ -13,7 +13,7 @@ import '@/assets/styles/main.css'
 import i18n from '@/i18n'
 
 Vue.use(new VueSocketIO({
-  debug: true,
+  debug: false,
   connection: 'http://192.168.1.11:10590'
 }))
 Vue.use(Vuetify)

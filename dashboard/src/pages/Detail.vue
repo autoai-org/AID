@@ -14,10 +14,17 @@
       </v-flex>
       <v-flex xs6 class="cvpm-package-detail-card">
           <cvpm-repo-solver
-            :config="config"
+            :config="parsedConfig"
             :vendor="toSelectVendor"
             :packageName="toSelectPackage"
           ></cvpm-repo-solver>
+      </v-flex>
+      <v-flex xs6 class="cvpm-package-detail-card">
+          <cvpm-actions 
+            :config="parsedConfig"
+            :vendor="toSelectVendor"
+            :packageName="toSelectPackage"
+          ></cvpm-actions>
       </v-flex>
     </v-layout>
   </v-container>
@@ -27,13 +34,15 @@
 import cvpmRepoMeta from '@/components/CVPM-Repo-Meta'
 import Log from '@/components/CVPM-Log'
 import cvpmRepoSolver from '@/components/CVPM-Repo-Solver'
+import cvpmActions from '@/components/CVPM-Actions'
 import { systemService } from '@/services/system'
-
+import toml from 'toml'
 export default {
   data () {
     return {
       readme: '',
       config: '',
+      parsedConfig: '',
       diskSize: '',
       dependency: '',
       messageList: []
@@ -42,7 +51,8 @@ export default {
   components: {
     'cvpm-repo-meta': cvpmRepoMeta,
     'cvpm-log': Log,
-    'cvpm-repo-solver': cvpmRepoSolver
+    'cvpm-repo-solver': cvpmRepoSolver,
+    'cvpmActions': cvpmActions
   },
   methods: {
     fetchMeta () {
@@ -52,6 +62,7 @@ export default {
         .then(function (res) {
           self.readme = res.data.Readme
           self.config = res.data.Config
+          self.parsedConfig = toml.parse(res.data.Config)
           self.diskSize = res.data.DiskSize.toFixed(2)
           self.dependency = res.data.Dependency
         })
