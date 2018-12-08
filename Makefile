@@ -32,4 +32,7 @@ clean:
 publish-test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
+publish-prod:
+	twine upload dist/*
+
 .PHONY: docs
