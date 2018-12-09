@@ -16,4 +16,4 @@ We would like to extend our sincere appreciate for the following organizations a
 * [Amazon Web Services](https://aws.amazon.com)提供的部分云计算服务。
 * [DiDi Cloud](https://www.didiyun.com/?channel=14204)免费提供云计算服务。
 
-![DiDi Cloud](/public/sponsors/didi_logo.png)
+![DiDi Cloud](https://dicloud.didistatic.com/static/dicloudpub/www/img/logo-didiyun.6cbb8a2db4.png)
