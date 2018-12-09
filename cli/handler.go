@@ -57,21 +57,10 @@ func InstallHandler(c *cli.Context) {
 	} else {
 		color.Cyan("Installing to " + localFolder)
 	}
-	var repoFolder string
-	var repo Repository
 	// Download Codebase
 	if strings.HasPrefix(remoteURL, "https://github.com") {
-		repo = CloneFromGit(remoteURL, localFolder)
+		InstallFromGit(remoteURL)
 	}
-	repoFolder = repo.LocalFolder
-	// Install Dependencies
-	color.Cyan("Installing Dependencies... please wait patiently")
-	InstallDependencies(repoFolder)
-	color.Blue("Generating Runners")
-	GeneratingRunners(repoFolder)
-	color.Cyan("Adding to Local Configuration")
-	config.Repositories = addRepo(config.Repositories, repo)
-	writeConfig(config)
 }
 
 // Handle List
