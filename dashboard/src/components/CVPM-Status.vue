@@ -20,7 +20,6 @@ export default {
   methods: {
     getStatus () {
       this.status = systemService.getStatus()
-      console.log(this.status)
     }
   },
   created () {
