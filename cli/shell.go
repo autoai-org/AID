@@ -162,7 +162,7 @@ func (p *Process) OpenInputStream() (io.WriteCloser, error) {
 }
 func (p *Process) StreamOutput() *bufio.Scanner {
 	//pipe both stdout and stderr into the same pipe
-	//panics if you do streamoutput after proccess starting or
+	//panics if you do streamoutput after process starting or
 	//if the output stream is already set
 	if p.started {
 		panic("Cant set output stream after starting")

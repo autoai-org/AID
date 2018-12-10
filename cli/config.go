@@ -1,5 +1,4 @@
-/*
-	This file handles config related tasks, include:
+/*  This file handles config related tasks, include:
 	readConfig()
 	writeConfig()
 	validateConfig()
@@ -87,16 +86,16 @@ func getDefaultConfig() cvpmConfig {
 }
 
 func createFolderIfNotExist(folderPath string) {
-		exist, err := isPathExists(folderPath)
+	exist, err := isPathExists(folderPath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if !exist {
+		err = os.Mkdir(folderPath, os.ModePerm)
 		if err != nil {
 			log.Fatal(err)
 		}
-		if !exist {
-			err = os.Mkdir(folderPath, os.ModePerm)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
+	}
 }
 
 func createFileIfNotExist(filePath string) {
@@ -131,6 +130,7 @@ func validateConfig() {
 		createFileIfNotExist(cvpmLogPath)
 		// check if package log file exists
 		cvpmPackageLogPath := filepath.Join(cvpmPath, "logs", "package.log")
+		createFileIfNotExist(cvpmPackageLogPath)
 	}
 }
 

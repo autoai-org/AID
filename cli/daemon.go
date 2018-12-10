@@ -1,8 +1,6 @@
-/*
-	This file handles daemon and services related tasks.
+/*  This file handles daemon and services related tasks.
 	By using cvpm daemon install, it will install a system service under current user.
-	You can uninstall that service by using cvpm daemon uninstall
-*/
+	You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (

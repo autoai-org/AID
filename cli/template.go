@@ -12,6 +12,9 @@ import (
 func _getRunnerTpl() string {
 	var runnerTpl = "https://tpl.cvtron.xyz/runners/runner.tpl"
 	resp, err := http.Get(runnerTpl)
+	if err != nil {
+		log.Fatal(err)
+	}
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)

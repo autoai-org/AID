@@ -39,9 +39,8 @@ func isRoot() bool {
 	}
 	if usr.Username == "root" {
 		return true
-	} else {
-		return false
-	}
+	} 
+	return false
 }
 
 func getDirSizeMB(path string) float64 {
@@ -62,19 +61,18 @@ func isPortOpen(port string, timeout time.Duration) bool {
 	if conn != nil {
 		conn.Close()
 		return false
-	} else {
-		return true
 	}
+	return true
 }
 
 func findNextOpenPort(port int) string {
 	var hasFound bool = false
-	var str_port string
+	var strPort string
 	for ; !hasFound; port++ {
-		str_port = strconv.Itoa(port)
-		if isPortOpen(str_port, defaultTimeout) {
+		strPort = strconv.Itoa(port)
+		if isPortOpen(strPort, defaultTimeout) {
 			hasFound = true
 		}
 	}
-	return str_port
+	return strPort
 }

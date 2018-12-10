@@ -24,9 +24,8 @@ func getRunUser() string {
 	currentUser, _ := user.Current()
 	if currentUser.Username == "root" && runtime.GOOS != "windows" {
 		return os.Getenv("SUDO_USER")
-	} else {
-		return currentUser.Username
 	}
+	return currentUser.Username
 }
 
 func getCVPMDConfig() *service.Config {
@@ -41,6 +40,7 @@ func getCVPMDConfig() *service.Config {
 	return srvConf
 }
 
+// cvpm daemon install -> install the background daemon service
 func InstallService() {
 	srvConfig := getCVPMDConfig()
 	dae := &sol{}
@@ -57,7 +57,7 @@ func InstallService() {
 		log.Fatal(err)
 	}
 }
-
+// cvpm daemon uninstall -> uninstall the background daemon service
 func UninstallService() {
 	srvConfig := getCVPMDConfig()
 	dae := &sol{}
