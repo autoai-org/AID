@@ -57,6 +57,7 @@ func InstallService() {
 		log.Fatal(err)
 	}
 }
+
 // cvpm daemon uninstall -> uninstall the background daemon service
 func UninstallService() {
 	srvConfig := getCVPMDConfig()

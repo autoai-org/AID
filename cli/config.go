@@ -1,10 +1,10 @@
 /*  This file handles config related tasks, include:
-	readConfig()
-	writeConfig()
-	validateConfig()
-	getDefaultConfig()
+readConfig()
+writeConfig()
+validateConfig()
+getDefaultConfig()
 
-	The config file is located at the home dir of current user, under ~/cvpm/config.toml
+The config file is located at the home dir of current user, under ~/cvpm/config.toml
 */
 package main
 

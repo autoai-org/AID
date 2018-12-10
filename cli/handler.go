@@ -1,9 +1,9 @@
 /*  This file defines the handlers for different command.
-		Login
-		Install
-		List
-		Repo
-	and etc. */
+	Login
+	Install
+	List
+	Repo
+and etc. */
 package main
 
 import (

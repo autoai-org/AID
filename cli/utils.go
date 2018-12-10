@@ -39,7 +39,7 @@ func isRoot() bool {
 	}
 	if usr.Username == "root" {
 		return true
-	} 
+	}
 	return false
 }
 
