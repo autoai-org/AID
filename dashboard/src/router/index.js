@@ -7,11 +7,23 @@ import SystemLog from '@/pages/SystemLog'
 import Package from '@/pages/Package'
 import Pretrained from '@/pages/Pretrained'
 import Detail from '@/pages/Detail'
+import SignIn from '@/pages/auth/SignIn'
+import SignUp from '@/pages/auth/SignUp'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {
+      path: '/auth/signin',
+      name: 'SignIn',
+      component: SignIn
+    },
+    {
+      path: '/auth/signup',
+      name: 'SignUp',
+      component: SignUp
+    },
     {
       path: '/',
       name: 'Main',

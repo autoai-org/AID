@@ -3,10 +3,13 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
+import store from './store'
+import '@/components/auth'
 import Vuetify from 'vuetify'
 import VueSocketIO from 'vue-socket.io'
 import TreeView from 'vue-json-tree-view'
 import VueTour from 'vue-tour'
+import colors from 'vuetify/es5/util/colors'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
@@ -24,10 +27,19 @@ Vue.use(VueTour)
 
 Vue.config.productionTip = false
 
+Vue.use(Vuetify, {
+  theme: {
+    primary: colors.indigo.darken1,
+    secondary: colors.red.lighten4,
+    accent: colors.indigo.base
+  }
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   i18n,
   components: { App },
   template: '<App/>'
