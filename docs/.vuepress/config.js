@@ -128,7 +128,9 @@ function genSidebarConfig(title) {
         'write-package',
         'discovery',
         'contributing',
-        'credits'
+        'credits',
+        'api',
+        'dashboard'
       ]
     }
   ]

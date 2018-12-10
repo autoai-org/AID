@@ -12,5 +12,6 @@ We would like to extend our sincere appreciate for the following organizations a
 * [Netlify](https://www.netlify.com/) for providing CI/CD for documentation.
 * [Clarifai](https://clarifai.com/) for providing image recognition models.
 * [Amazon Web Services](https://aws.amazon.com) for providing general web services.
+* [DiDi Cloud](https://www.didiyun.com/?channel=14204) for providing cloud services for free.
 
 During the development, we are standing on the shoulders of many open source software listed below but not limited to.
