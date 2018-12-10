@@ -50,9 +50,9 @@ func InstallHandler(c *cli.Context) {
 	config := readConfig()
 	localFolder := config.Local.LocalFolder
 	remoteURL := c.Args().Get(0)
-	if remoteURL == "cvpm:test" {
+	if remoteURL == "cvpm:py" {
 		color.Cyan("Installing... Please wait patiently")
-		pip([]string{"install", "--index-url", "https://test.pypi.org/simple/", "cvpm", "--user"})
+		pip([]string{"install", "cvpm", "--user"})
 		return
 	} else {
 		color.Cyan("Installing to " + localFolder)
