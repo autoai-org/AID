@@ -133,6 +133,20 @@ func GeneratingRunners(localFolder string) {
 }
 
 // After Installation
+func PostInstallation(repoFolder string) {
+	// Create pretrained folder
+	preTrainedFolder := filepath.Join(repoFolder, "pretrained")
+	exist, err := isPathExists(preTrainedFolder)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if !exist {
+		err = os.Mkdir(preTrainedFolder, os.ModePerm)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+}
 
 // Return Repository Meta Info: Dependency, Config, Disk Size and Readme
 func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
@@ -170,10 +184,11 @@ func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 func InstallFromGit(remoteURL string) {
 	config := readConfig()
 	var repo Repository
-  repo = CloneFromGit(remoteURL, config.Local.LocalFolder)
+	repo = CloneFromGit(remoteURL, config.Local.LocalFolder)
 	repoFolder := repo.LocalFolder
 	InstallDependencies(repoFolder)
 	GeneratingRunners(repoFolder)
 	config.Repositories = addRepo(config.Repositories, repo)
 	writeConfig(config)
+	PostInstallation(repoFolder)
 }

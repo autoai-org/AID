@@ -69,16 +69,18 @@ func GetRunningSolversByPackageHandler(c *gin.Context) {
 }
 
 // Handle Post Repos Request -> Install Package
-type addRepoRequest struct {
-	RepoType string `json:type`
-	URL string `json:url`
+type AddRepoRequest struct {
+	RepoType string `json:"type"`
+	URL      string `json:"url"`
 }
+
 func PostReposHandler(c *gin.Context) {
 	config := readConfig()
-	var _addRepoRequest addRepoRequest
-	c.BindJSON(&_addRepoRequest)
-	if (_addRepoRequest.RepoType == "git") {
-		InstallFromGit(_addRepoRequest.URL)
+	var addRepoRequest AddRepoRequest
+	c.BindJSON(&addRepoRequest)
+	log.Println(addRepoRequest.RepoType)
+	if addRepoRequest.RepoType == "git" {
+		InstallFromGit(addRepoRequest.URL)
 		c.JSON(http.StatusOK, config.Repositories)
 	} else {
 		c.JSON(http.StatusBadRequest, config.Repositories)
@@ -173,7 +175,7 @@ func runServer(port string) {
 	r.POST("/repo/running", PostRunningRepoHandler)
 	r.GET("/repos", GetReposHandler)
 	r.GET("/repos/running", GetRunningReposHandler)
-
+	r.POST("/repos", PostReposHandler)
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)

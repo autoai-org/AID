@@ -3,7 +3,7 @@
     <v-navigation-drawer v-model="drawer" :mini-variant.sync="mini" persistent="persistent" enable-resize-watcher="enable-resize-watcher" :dark="dark" class="cvpm-main-drawer">
         <div class="pa-3 text-xs-center" v-show="!mini">
             <div class="display-2 py-4">CVPM</div>
-            <!--
+            <!-- if enable logo
             <img src="https://i.loli.net/2018/10/20/5bcb455c17616.png" class="cvpm-logo"/>
             -->
             <p>Dashboard</p>
@@ -12,7 +12,7 @@
             </div>
             <div>
                 <v-btn dark="dark" tag="a" href="https://github.com/unarxiv/cvpm" primary="primary">
-                    <v-icon left="left" dark="dark">star</v-icon><span>Github </span></v-btn>
+                    <v-icon left="left" dark="dark">fab fa-github</v-icon><span>Star Us! </span></v-btn>
             </div>
         </div>
         <div class="pa-3 text-xs-center" v-show="mini">
@@ -34,9 +34,14 @@
                 </v-list-group>
                 <v-subheader v-else-if="item.header" :key="item.header">{{ item.header }}</v-subheader>
                 <v-divider v-else-if="item.header" :key="item.header"></v-divider>
-                <v-list-tile  v-else :to="item.href" router="router" ripple="ripple" v-bind:disabled="item.disabled" :title="item.title" :key="item.header">
+                <v-list-tile v-else-if="item.openType==='nav'" :to="item.href" router="router" ripple="ripple" v-bind:disabled="item.disabled" :title="item.title" :key="item.header" >
                     <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
-                    <v-list-tile-content><v-list-tile-title>{{ item.title }}</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-content><v-list-tile-title :id="item.id">{{ item.title }}</v-list-tile-title></v-list-tile-content>
+                    <v-list-tile-action v-if="item.subAction"><v-icon class="success--text">{{ item.subAction }}</v-icon></v-list-tile-action>
+                </v-list-tile>
+                <v-list-tile v-else-if="item.openType==='_blank'" :href="item.href" :target="item.openType" ripple="ripple" v-bind:disabled="item.disabled" :title="item.title" :key="item.header" >
+                    <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
+                    <v-list-tile-content><v-list-tile-title :id="item.id">{{ item.title }}</v-list-tile-title></v-list-tile-content>
                     <v-list-tile-action v-if="item.subAction"><v-icon class="success--text">{{ item.subAction }}</v-icon></v-list-tile-action>
                 </v-list-tile>
             </template>

@@ -6,9 +6,11 @@ import router from './router'
 import Vuetify from 'vuetify'
 import VueSocketIO from 'vue-socket.io'
 import TreeView from 'vue-json-tree-view'
+import VueTour from 'vue-tour'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
+import 'vue-tour/dist/vue-tour.css'
 
 import i18n from '@/i18n'
 
@@ -18,6 +20,7 @@ Vue.use(new VueSocketIO({
 }))
 Vue.use(Vuetify)
 Vue.use(TreeView)
+Vue.use(VueTour)
 
 Vue.config.productionTip = false
 

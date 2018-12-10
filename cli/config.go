@@ -105,6 +105,18 @@ func validateConfig() {
 				log.Fatal(err)
 			}
 		}
+		// create logs folder
+		logsFolder := filepath.Join(cvpmPath, "logs")
+		exist, err = isPathExists(logsFolder)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if !exist {
+			err = os.Mkdir(logsFolder, os.ModePerm)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
 		exist, err = isPathExists(cvpmLogPath)
