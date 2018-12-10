@@ -31,7 +31,7 @@ type RunRepoRequest struct {
 	Port   string `json:port`
 }
 
-// Handle Post Request -> Run a Repo
+// POST /repos/running -> run a solver in this repo
 func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
@@ -46,16 +46,17 @@ func PostRunningRepoHandler(c *gin.Context) {
 	})
 }
 
-// Handle Get Request -> Get Running Repo
+// GET /repos/running -> return running repositories
 func GetRunningReposHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, RunningRepos)
 }
 
-//
+// GET /solvers/running -> return running solvers
 func GetRunningSolversHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, RunningSolvers)
 }
 
+// GET /solvers/running/:vendor/:name -> return running solvers in this package
 func GetRunningSolversByPackageHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	packageName := c.Param("package")
@@ -68,7 +69,7 @@ func GetRunningSolversByPackageHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, runningSolversInPackage)
 }
 
-// Handle Post Repos Request -> Install Package
+// POST /repos -> install a repo
 type AddRepoRequest struct {
 	RepoType string `json:"type"`
 	URL      string `json:"url"`
@@ -87,20 +88,20 @@ func PostReposHandler(c *gin.Context) {
 	}
 }
 
-// Handle Get Request -> Get All Repos
+// GET /repos -> return all repositories
 func GetReposHandler(c *gin.Context) {
 	config := readConfig()
 	c.JSON(http.StatusOK, config.Repositories)
 }
 
-// Handle Get Repository Meta Info
+// GET /repo/meta/:vendor/:name -> return repository meta info
 func GetRepoMetaHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
 	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
 }
 
-// Handle Get System Information
+// GET /system -> return system info
 func GetSystemHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, getSystemInfo())
 }
@@ -133,7 +134,8 @@ func watchLogs(server *socketio.Server) {
 	go writeLog(filepath.Join(cvpmLogsLocation, "package.log"), server, "package")
 }
 
-// global header
+// set global header to enable cors
+// and set response header
 func BeforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
@@ -163,6 +165,7 @@ func runServer(port string) {
 	r := gin.Default()
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
+	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"daemon": "running",

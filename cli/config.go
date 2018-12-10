@@ -86,52 +86,51 @@ func getDefaultConfig() cvpmConfig {
 	return defaultCVPMConfig
 }
 
+func createFolderIfNotExist(folderPath string) {
+		exist, err := isPathExists(folderPath)
+		if err != nil {
+			log.Fatal(err)
+		}
+		if !exist {
+			err = os.Mkdir(folderPath, os.ModePerm)
+			if err != nil {
+				log.Fatal(err)
+			}
+		}
+}
+
+func createFileIfNotExist(filePath string) {
+	exist, err := isPathExists(filePath)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if !exist {
+		f, err := os.Create(filePath)
+		if err != nil {
+			log.Fatal(err)
+		}
+		defer f.Close()
+	}
+}
+
 func validateConfig() {
 	if !isRoot() {
-		// localConfig := readConfig()
 		homepath := getHomeDir()
 		log.Println(homepath)
 		// Validate CVPM Path
 		cvpmPath := filepath.Join(homepath, "cvpm")
-		exist, err := isPathExists(cvpmPath)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
-		}
-		if !exist {
-			err = os.Mkdir(cvpmPath, os.ModePerm)
-			if err != nil {
-				raven.CaptureErrorAndWait(err, nil)
-				log.Fatal(err)
-			}
-		}
+		createFolderIfNotExist(cvpmPath)
+		// check if cvpm.toml file exists
+		cvpmConfigToml := filepath.Join(homepath, "cvpm", "config.toml")
+		createFileIfNotExist(cvpmConfigToml)
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
-		exist, err = isPathExists(logsFolder)
-		if err != nil {
-			log.Fatal(err)
-		}
-		if !exist {
-			err = os.Mkdir(logsFolder, os.ModePerm)
-			if err != nil {
-				log.Fatal(err)
-			}
-		}
+		createFolderIfNotExist(logsFolder)
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
-		exist, err = isPathExists(cvpmLogPath)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
-		}
-		if !exist {
-			f, err := os.Create(cvpmLogPath)
-			if err != nil {
-				raven.CaptureErrorAndWait(err, nil)
-				log.Fatal(err)
-			}
-			defer f.Close()
-		}
+		createFileIfNotExist(cvpmLogPath)
+		// check if package log file exists
+		cvpmPackageLogPath := filepath.Join(cvpmPath, "logs", "package.log")
 	}
 }
 
