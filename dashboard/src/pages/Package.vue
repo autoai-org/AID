@@ -2,8 +2,8 @@
   <v-container fluid grid-list-xl>
     <v-layout row wrap>
       <v-flex xs12>
-      <v-btn outline color="indigo" @click="trigger_git_import">
-        <v-icon left dark>add</v-icon>Import from Git
+      <v-btn outline color="indigo" @click="trigger_git_import" id="cvpm-tour-import-git">
+        <v-icon left dark>fab fa-github</v-icon>Import from Git
       </v-btn>
       <v-btn outline color="indigo" @click="trigger_hub_import">
         <v-icon left dark>device_hub</v-icon>Import fron Hub
@@ -66,7 +66,16 @@ export default {
     fetch_packages () {
       let self = this
       systemService.getPackages().then(function (res) {
-        self.packages = res.data
+        if (res.data === null) {
+          self.packages = []
+          self.loading = false
+        } else {
+          self.packages = res.data
+          self.loading = false
+        }
+      }).catch(function (err) {
+        console.log(err)
+        self.packages = []
         self.loading = false
       })
     }

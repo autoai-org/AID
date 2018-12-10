@@ -81,6 +81,19 @@ class SystemService {
       })
     })
   }
+  installRepo (type, id) {
+    // if type === 'git', id => git url
+    return new Promise((resolve, reject) => {
+      axios.post(this.endpoint + '/repos', {
+        type: type,
+        url: id
+      }).then(function (res) {
+        resolve(res)
+      }).then(function (err) {
+        reject(err)
+      })
+    })
+  }
 }
 
 const configService = new ConfigService()
