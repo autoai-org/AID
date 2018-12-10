@@ -68,6 +68,23 @@ func GetRunningSolversByPackageHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, runningSolversInPackage)
 }
 
+// Handle Post Repos Request -> Install Package
+type addRepoRequest struct {
+	RepoType string `json:type`
+	URL string `json:url`
+}
+func PostReposHandler(c *gin.Context) {
+	config := readConfig()
+	var _addRepoRequest addRepoRequest
+	c.BindJSON(&_addRepoRequest)
+	if (_addRepoRequest.RepoType == "git") {
+		InstallFromGit(_addRepoRequest.URL)
+		c.JSON(http.StatusOK, config.Repositories)
+	} else {
+		c.JSON(http.StatusBadRequest, config.Repositories)
+	}
+}
+
 // Handle Get Request -> Get All Repos
 func GetReposHandler(c *gin.Context) {
 	config := readConfig()
@@ -79,6 +96,11 @@ func GetRepoMetaHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
 	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
+}
+
+// Handle Get System Information
+func GetSystemHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, getSystemInfo())
 }
 
 // Handle Socket Request
@@ -144,6 +166,8 @@ func runServer(port string) {
 			"daemon": "running",
 		})
 	})
+	// System Related Handlers
+	r.GET("/system", GetSystemHandler)
 	// Repo Related Routes
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
 	r.POST("/repo/running", PostRunningRepoHandler)

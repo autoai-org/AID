@@ -165,3 +165,15 @@ func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 	}
 	return repositoryMeta
 }
+
+// Install Repository from Git
+func InstallFromGit(remoteURL string) {
+	config := readConfig()
+	var repo Repository
+  repo = CloneFromGit(remoteURL, config.Local.LocalFolder)
+	repoFolder := repo.LocalFolder
+	InstallDependencies(repoFolder)
+	GeneratingRunners(repoFolder)
+	config.Repositories = addRepo(config.Repositories, repo)
+	writeConfig(config)
+}
