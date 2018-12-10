@@ -2,6 +2,31 @@
 # yarn lockfile v1
 
 
+"@aws-amplify/auth@^1.2.4":
+  version "1.2.12"
+  resolved "http://registry.npm.taobao.org/@aws-amplify/auth/download/@aws-amplify/auth-1.2.12.tgz#c361d3a546db494b8d5648382170f6964973798f"
+  integrity sha1-w2HTpUbbSUuNVkg4IXD2lklzeY8=
+  dependencies:
+    "@aws-amplify/cache" "^1.0.19"
+    "@aws-amplify/core" "^1.0.19"
+    amazon-cognito-auth-js "^1.1.9"
+    amazon-cognito-identity-js "^3.0.5"
+
+"@aws-amplify/cache@^1.0.19":
+  version "1.0.19"
+  resolved "http://registry.npm.taobao.org/@aws-amplify/cache/download/@aws-amplify/cache-1.0.19.tgz#d523c3500090c96d167a3cadb21717ab0ff1eb0c"
+  integrity sha1-1SPDUACQyW0WejytshcXqw/x6ww=
+  dependencies:
+    "@aws-amplify/core" "^1.0.19"
+
+"@aws-amplify/core@^1.0.13", "@aws-amplify/core@^1.0.19":
+  version "1.0.19"
+  resolved "http://registry.npm.taobao.org/@aws-amplify/core/download/@aws-amplify/core-1.0.19.tgz#63893efa04c5c8db8624b84707bdd092bf3a8a8a"
+  integrity sha1-Y4k++gTFyNuGJLhHB73Qkr86ioo=
+  dependencies:
+    aws-sdk "2.329.0"
+    url "^0.11.0"
+
 "@types/node@^10.11.7":
   version "10.12.12"
   resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.12.tgz#e15a9d034d9210f00320ef718a50c4a799417c47"
@@ -17,6 +42,14 @@
 "@types/strip-json-comments@0.0.30":
   version "0.0.30"
   resolved "http://registry.npm.taobao.org/@types/strip-json-comments/download/@types/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
+
+"@vuetify/vuex-cognito-module@^0.4.0":
+  version "0.4.0"
+  resolved "http://registry.npm.taobao.org/@vuetify/vuex-cognito-module/download/@vuetify/vuex-cognito-module-0.4.0.tgz#fc4e558227d5c72015e1b018588ec328d4cb38ee"
+  integrity sha1-/E5VgifVxyAV4bAYWI7DKNTLOO4=
+  dependencies:
+    "@aws-amplify/auth" "^1.2.4"
+    "@aws-amplify/core" "^1.0.13"
 
 abab@^1.0.3:
   version "1.0.4"
@@ -118,6 +151,22 @@ align-text@^0.1.1, align-text@^0.1.3:
 alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/alphanum-sort/download/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
+
+amazon-cognito-auth-js@^1.1.9:
+  version "1.2.4"
+  resolved "http://registry.npm.taobao.org/amazon-cognito-auth-js/download/amazon-cognito-auth-js-1.2.4.tgz#40d82f0ed389905fd0751693ba46a5386ac6864a"
+  integrity sha1-QNgvDtOJkF/QdRaTukalOGrGhko=
+  dependencies:
+    js-cookie "^2.1.4"
+
+amazon-cognito-identity-js@^3.0.5:
+  version "3.0.5"
+  resolved "http://registry.npm.taobao.org/amazon-cognito-identity-js/download/amazon-cognito-identity-js-3.0.5.tgz#b79f3d8d4e0d500a09695ef7eda5af3f99ad9882"
+  integrity sha1-t589jU4NUAoJaV737aWvP5mtmII=
+  dependencies:
+    buffer "4.9.1"
+    crypto-js "^3.1.9-1"
+    js-cookie "^2.1.4"
 
 amdefine@>=0.0.4:
   version "1.0.1"
@@ -341,6 +390,21 @@ autoprefixer@^6.3.1:
     num2fraction "^1.2.2"
     postcss "^5.2.16"
     postcss-value-parser "^3.2.3"
+
+aws-sdk@2.329.0:
+  version "2.329.0"
+  resolved "http://registry.npm.taobao.org/aws-sdk/download/aws-sdk-2.329.0.tgz#616da7ca5e1909e53333148694990e068272150f"
+  integrity sha1-YW2nyl4ZCeUzMxSGlJkOBoJyFQ8=
+  dependencies:
+    buffer "4.9.1"
+    events "1.1.1"
+    ieee754 "1.1.8"
+    jmespath "0.15.0"
+    querystring "0.2.0"
+    sax "1.2.1"
+    url "0.10.3"
+    uuid "3.1.0"
+    xml2js "0.4.19"
 
 aws-sign2@~0.7.0:
   version "0.7.0"
@@ -1261,7 +1325,7 @@ buffer-xor@^1.0.3:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/buffer-xor/download/buffer-xor-1.0.3.tgz#26e61ed1422fb70dd42e6e36729ed51d855fe8d9"
 
-buffer@^4.3.0:
+buffer@4.9.1, buffer@^4.3.0:
   version "4.9.1"
   resolved "http://registry.npm.taobao.org/buffer/download/buffer-4.9.1.tgz#6d1bb601b07a4efced97094132093027c95bc298"
   dependencies:
@@ -1870,6 +1934,11 @@ crypto-browserify@^3.11.0:
     public-encrypt "^4.0.0"
     randombytes "^2.0.0"
     randomfill "^1.0.3"
+
+crypto-js@^3.1.9-1:
+  version "3.1.9-1"
+  resolved "http://registry.npm.taobao.org/crypto-js/download/crypto-js-3.1.9-1.tgz#fda19e761fc077e01ffbfdc6e9fdfc59e8806cd8"
+  integrity sha1-/aGedh/Ad+Af+/3G6f38WeiAbNg=
 
 css-color-names@0.0.4:
   version "0.0.4"
@@ -2672,7 +2741,7 @@ eventemitter3@^3.0.0:
   version "3.1.0"
   resolved "http://registry.npm.taobao.org/eventemitter3/download/eventemitter3-3.1.0.tgz#090b4d6cdbd645ed10bf750d4b5407942d7ba163"
 
-events@^1.0.0:
+events@1.1.1, events@^1.0.0:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/events/download/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
 
@@ -3582,6 +3651,11 @@ icss-utils@^2.1.0:
   dependencies:
     postcss "^6.0.1"
 
+ieee754@1.1.8:
+  version "1.1.8"
+  resolved "http://registry.npm.taobao.org/ieee754/download/ieee754-1.1.8.tgz#be33d40ac10ef1926701f6f08a2d86fbfd1ad3e4"
+  integrity sha1-vjPUCsEO8ZJnAfbwii2G+/0a0+Q=
+
 ieee754@^1.1.4:
   version "1.1.12"
   resolved "http://registry.npm.taobao.org/ieee754/download/ieee754-1.1.12.tgz#50bf24e5b9c8bb98af4964c941cdb0918da7b60b"
@@ -4308,6 +4382,11 @@ jest@21.2.1:
   dependencies:
     jest-cli "^21.2.1"
 
+jmespath@0.15.0:
+  version "0.15.0"
+  resolved "http://registry.npm.taobao.org/jmespath/download/jmespath-0.15.0.tgz#a3f222a9aae9f966f5d27c796510e28091764217"
+  integrity sha1-o/Iiqarp+Wb10nx5ZRDigJF2Qhc=
+
 js-base64@2.4.9, js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.9"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.9.tgz#748911fb04f48a60c4771b375cac45a80df11c03"
@@ -4320,6 +4399,11 @@ js-beautify@^1.6.12, js-beautify@^1.6.14:
     editorconfig "^0.15.0"
     mkdirp "~0.5.0"
     nopt "~4.0.1"
+
+js-cookie@^2.1.4:
+  version "2.2.0"
+  resolved "http://registry.npm.taobao.org/js-cookie/download/js-cookie-2.2.0.tgz#1b2c279a6eece380a12168b92485265b35b1effb"
+  integrity sha1-Gywnmm7s44ChIWi5JIUmWzWx7/s=
 
 "js-tokens@^3.0.0 || ^4.0.0":
   version "4.0.0"
@@ -6690,7 +6774,12 @@ sass-loader@7.1.0:
     pify "^3.0.0"
     semver "^5.5.0"
 
-sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
+sax@1.2.1:
+  version "1.2.1"
+  resolved "http://registry.npm.taobao.org/sax/download/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+  integrity sha1-e45lYZCyKOgaZq6nSEgNgozS03o=
+
+sax@>=0.6.0, sax@^1.2.1, sax@^1.2.4, sax@~1.2.1:
   version "1.2.4"
   resolved "http://registry.npm.taobao.org/sax/download/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
 
@@ -7598,6 +7687,14 @@ url-parse@^1.1.8, url-parse@^1.4.3:
     querystringify "^2.0.0"
     requires-port "^1.0.0"
 
+url@0.10.3:
+  version "0.10.3"
+  resolved "http://registry.npm.taobao.org/url/download/url-0.10.3.tgz#021e4d9c7705f21bbf37d03ceb58767402774c64"
+  integrity sha1-Ah5NnHcF8hu/N9A861h2dAJ3TGQ=
+  dependencies:
+    punycode "1.3.2"
+    querystring "0.2.0"
+
 url@^0.11.0:
   version "0.11.0"
   resolved "http://registry.npm.taobao.org/url/download/url-0.11.0.tgz#3838e97cfc60521eb73c525a8e55bfdd9e2e28f1"
@@ -7644,6 +7741,11 @@ utila@^0.4.0, utila@~0.4:
 utils-merge@1.0.1:
   version "1.0.1"
   resolved "http://registry.npm.taobao.org/utils-merge/download/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
+
+uuid@3.1.0:
+  version "3.1.0"
+  resolved "http://registry.npm.taobao.org/uuid/download/uuid-3.1.0.tgz#3dd3d3e790abc24d7b0d3a034ffababe28ebbc04"
+  integrity sha1-PdPT55Crwk17DToDT/q6vijrvAQ=
 
 uuid@^3.0.1, uuid@^3.3.2:
   version "3.3.2"
@@ -7795,6 +7897,11 @@ vuetify@^1.3.12:
   version "1.3.12"
   resolved "http://registry.npm.taobao.org/vuetify/download/vuetify-1.3.12.tgz#a605a978e88385ace60301fc50502fe53ae940fb"
   integrity sha1-pgWpeOiDhazmAwH8UFAv5TrpQPs=
+
+vuex@^3.0.1:
+  version "3.0.1"
+  resolved "http://registry.npm.taobao.org/vuex/download/vuex-3.0.1.tgz#e761352ebe0af537d4bb755a9b9dc4be3df7efd2"
+  integrity sha1-52E1Lr4K9TfUu3Vam53Evj3379I=
 
 walker@~1.0.5:
   version "1.0.7"
@@ -8041,6 +8148,19 @@ ws@~6.1.0:
 xml-name-validator@^2.0.1:
   version "2.0.1"
   resolved "http://registry.npm.taobao.org/xml-name-validator/download/xml-name-validator-2.0.1.tgz#4d8b8f1eccd3419aa362061becef515e1e559635"
+
+xml2js@0.4.19:
+  version "0.4.19"
+  resolved "http://registry.npm.taobao.org/xml2js/download/xml2js-0.4.19.tgz#686c20f213209e94abf0d1bcf1efaa291c7827a7"
+  integrity sha1-aGwg8hMgnpSr8NG88e+qKRx4J6c=
+  dependencies:
+    sax ">=0.6.0"
+    xmlbuilder "~9.0.1"
+
+xmlbuilder@~9.0.1:
+  version "9.0.7"
+  resolved "http://registry.npm.taobao.org/xmlbuilder/download/xmlbuilder-9.0.7.tgz#132ee63d2ec5565c557e20f4c22df9aca686b10d"
+  integrity sha1-Ey7mPS7FVlxVfiD0wi35rKaGsQ0=
 
 xmlhttprequest-ssl@~1.5.4:
   version "1.5.5"
