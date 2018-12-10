@@ -38,7 +38,6 @@ export default {
     }
   },
   created () {
-    console.log(this.items)
   }
 }
 </script>

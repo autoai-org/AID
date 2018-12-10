@@ -7,7 +7,7 @@ import (
 	"os/user"
 )
 
-func ClientPost(endpoint string, params map[string]string) {
+func ClientPost(endpoint string, params map[string]string) *grequests.Response {
 	url := "http://127.0.0.1:10590/" + endpoint
 	currentUser, err := user.Current()
 	if err != nil {
@@ -24,6 +24,7 @@ func ClientPost(endpoint string, params map[string]string) {
 	if resp.Ok != true {
 		log.Fatal("Bad Response from Daemon")
 	}
+	return resp
 }
 
 func ClientGet(endpoint string, params map[string]string) {

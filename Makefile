@@ -8,7 +8,10 @@ default:
 	@echo "\tmake publish"
 test:
 
-format:
+build-arm:
+	cd cli && env GOOS=linux GOARCH=arm go build cli/
+
+format-py:
 	autoflake -i cvpm/*.py
 	# autoflake -i cvpm/**/*.py
 
@@ -17,6 +20,9 @@ format:
 
 	yapf -i cvpm/*.py
 	# yapf -i cvpm/**/*.py
+
+format-go:
+	gofmt -l -s -w *.go
 
 docs:
 	cd docs && npm run docs:build
@@ -31,5 +37,8 @@ clean:
 
 publish-test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+publish-prod:
+	twine upload dist/*
 
 .PHONY: docs

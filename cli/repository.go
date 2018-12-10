@@ -36,6 +36,13 @@ type solvers struct {
 	Solvers []solver
 }
 
+type RepoSolver struct {
+	Vendor     string
+	Package    string
+	SolverName string
+	Port       string
+}
+
 func readRepos() []Repository {
 	configs := readConfig()
 	repos := configs.Repositories
@@ -80,7 +87,8 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 			for _, file := range files {
 				if file.Name() == "runner_"+Solver+".py" {
 					existed = true
-					RunningRepos = append(RunningRepos, existed_repo)
+					RunningRepos = append(RunningRepos, Repository{Vendor, Name, Solver, Port})
+					RunningSolvers = append(RunningSolvers, RepoSolver{Vendor: Vendor, Package: Name, SolverName: Solver, Port: Port})
 					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
 					python([]string{runfileFullPath, Port})
 				}
@@ -156,4 +164,16 @@ func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 		}
 	}
 	return repositoryMeta
+}
+
+// Install Repository from Git
+func InstallFromGit(remoteURL string) {
+	config := readConfig()
+	var repo Repository
+  repo = CloneFromGit(remoteURL, config.Local.LocalFolder)
+	repoFolder := repo.LocalFolder
+	InstallDependencies(repoFolder)
+	GeneratingRunners(repoFolder)
+	config.Repositories = addRepo(config.Repositories, repo)
+	writeConfig(config)
 }

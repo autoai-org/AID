@@ -10,7 +10,6 @@ class ConfigService {
       this.endpoint = persistConfig['endpoint']
       this.developerMode = persistConfig['developerMode']
     }
-    console.log(this.endpoint)
   }
   loadDefault () {
     this.endpoint = 'http://127.0.0.1:10590'

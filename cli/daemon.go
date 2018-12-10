@@ -20,6 +20,7 @@ const DaemonPort = "10590"
 
 // Definition of Running Repos
 var RunningRepos []Repository
+var RunningSolvers []RepoSolver
 var socketServer *socketio.Server
 
 // Struct of a Request to Run Repo
@@ -34,6 +35,10 @@ type RunRepoRequest struct {
 func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
+	log.Println(runRepoRequest.Port)
+	if runRepoRequest.Port == "" {
+		runRepoRequest.Port = findNextOpenPort(8080)
+	}
 	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver, runRepoRequest.Port)
 	c.JSON(http.StatusOK, gin.H{
 		"code": "success",
@@ -44,6 +49,40 @@ func PostRunningRepoHandler(c *gin.Context) {
 // Handle Get Request -> Get Running Repo
 func GetRunningReposHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, RunningRepos)
+}
+
+//
+func GetRunningSolversHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, RunningSolvers)
+}
+
+func GetRunningSolversByPackageHandler(c *gin.Context) {
+	vendor := c.Param("vendor")
+	packageName := c.Param("package")
+	var runningSolversInPackage []RepoSolver
+	for _, runningSolver := range RunningSolvers {
+		if runningSolver.Vendor == vendor && runningSolver.Package == packageName {
+			runningSolversInPackage = append(runningSolversInPackage, runningSolver)
+		}
+	}
+	c.JSON(http.StatusOK, runningSolversInPackage)
+}
+
+// Handle Post Repos Request -> Install Package
+type addRepoRequest struct {
+	RepoType string `json:type`
+	URL string `json:url`
+}
+func PostReposHandler(c *gin.Context) {
+	config := readConfig()
+	var _addRepoRequest addRepoRequest
+	c.BindJSON(&_addRepoRequest)
+	if (_addRepoRequest.RepoType == "git") {
+		InstallFromGit(_addRepoRequest.URL)
+		c.JSON(http.StatusOK, config.Repositories)
+	} else {
+		c.JSON(http.StatusBadRequest, config.Repositories)
+	}
 }
 
 // Handle Get Request -> Get All Repos
@@ -57,6 +96,11 @@ func GetRepoMetaHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
 	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
+}
+
+// Handle Get System Information
+func GetSystemHandler(c *gin.Context) {
+	c.JSON(http.StatusOK, getSystemInfo())
 }
 
 // Handle Socket Request
@@ -94,6 +138,11 @@ func BeforeResponse() gin.HandlerFunc {
 		c.Writer.Header().Set("cvpm-version", "0.0.3@alpha")
 		c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "authorization, origin, content-type, accept")
+		if c.Request.Method == "OPTIONS" {
+			c.Writer.WriteHeader(http.StatusOK)
+		}
 	}
 }
 
@@ -117,9 +166,18 @@ func runServer(port string) {
 			"daemon": "running",
 		})
 	})
+	// System Related Handlers
+	r.GET("/system", GetSystemHandler)
+	// Repo Related Routes
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
 	r.POST("/repo/running", PostRunningRepoHandler)
 	r.GET("/repos", GetReposHandler)
+	r.GET("/repos/running", GetRunningReposHandler)
+
+	// Solver Related Routers
+	r.GET("/solvers/running", GetRunningSolversHandler)
+	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
+	// Socket Related Routes
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
 	r.Handle("WS", "/socket.io/", socketHandler)

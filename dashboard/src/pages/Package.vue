@@ -5,7 +5,7 @@
       <v-btn outline color="indigo" @click="trigger_git_import">
         <v-icon left dark>add</v-icon>Import from Git
       </v-btn>
-      <v-btn outline color="indigo">
+      <v-btn outline color="indigo" @click="trigger_hub_import">
         <v-icon left dark>device_hub</v-icon>Import fron Hub
       </v-btn>
       </v-flex>
@@ -59,6 +59,9 @@ export default {
   methods: {
     trigger_git_import () {
       this.gitImport = !this.gitImport
+    },
+    trigger_hub_import () {
+      alert('coming soon')
     },
     fetch_packages () {
       let self = this

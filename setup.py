@@ -1,11 +1,11 @@
 import setuptools
 
-with open("docs/README.md", "r") as fh:
+with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="cvpm",
-    version="0.0.2",
+    version="0.0.1",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
     description="Computer Vision Package Manager",
@@ -23,7 +23,16 @@ setuptools.setup(
         "Intended Audience :: Science/Research",
         "Topic :: Scientific/Engineering",
         "Topic :: Scientific/Engineering :: Image Recognition",
-        "Topic :: Scientific/Engineering :: Computer Vision",
         "Topic :: Software Development",
+    ],
+    install_requires=[
+        "flask",
+        "tqdm",
+        "toml",
+        "requests",
+        "pillow",
+        "numpy",
+        "gevent",
+        "flask-cors",
     ],
 )

@@ -42,9 +42,9 @@
     </v-expansion-panel>
     <v-card-actions>
       <v-spacer></v-spacer>
-      <v-btn color="indigo darken-1" flat @click="closeDialog()">Close</v-btn>
-      <v-btn color="indigo darken-1" flat @click="fetchMeta()">Fetch Meta</v-btn>
-      <v-btn color="indigo darken-1" flat @click="save()">Install</v-btn>
+      <v-btn color="indigo darken-1" outline @click="closeDialog()">Close</v-btn>
+      <v-btn color="indigo darken-1" outline @click="fetchMeta()">Fetch Meta</v-btn>
+      <v-btn color="indigo darken-1" outline @click="save()">Install</v-btn>
     </v-card-actions>
   </v-card>
 </template>
