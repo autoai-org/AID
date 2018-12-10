@@ -15,7 +15,13 @@ class SystemService {
     this.endpoint = endpoint
   }
   getStatus () {
-    return getStatus()
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/system').then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
+        reject(err)
+      })
+    })
   }
   getPackages () {
     return new Promise((resolve, reject) => {

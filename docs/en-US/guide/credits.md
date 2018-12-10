@@ -14,4 +14,4 @@ We would like to extend our sincere appreciate for the following organizations a
 * [Amazon Web Services](https://aws.amazon.com) for providing general web services.
 * [DiDi Cloud](https://www.didiyun.com/?channel=14204) for providing cloud services for free.
 
-During the development, we are standing on the shoulders of many open source software listed below but not limited to.
+[![didi_logo.png](https://i.loli.net/2018/12/10/5c0de4006eac3.png)](https://www.didiyun.com/?channel=14204)
