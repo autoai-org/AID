@@ -14,6 +14,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/context:javascript)
 [![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/unarxiv/CVPM.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/unarxiv/CVPM/context:python)
+[![Build Status](https://dev.azure.com/2013150080/CVPM/_apis/build/status/unarxiv.CVPM)](https://dev.azure.com/2013150080/CVPM/_build/latest?definitionId=1)
 
 ## Introduction
 
