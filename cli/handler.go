@@ -25,8 +25,8 @@ import (
 
 // Run Repo Response Struct
 type RunRepoResponse struct {
-	Code string `json:code`
-	Port string `json:port`
+	Code string `json:"code"`
+	Port string `json:"port"`
 }
 
 // Handle User Login

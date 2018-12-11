@@ -21,7 +21,7 @@ import (
 
 type cvpmConfig struct {
 	Local        local        `toml:"local"`
-	Repositories []Repository `toml:repository`
+	Repositories []Repository `toml:"repository"`
 }
 
 type local struct {

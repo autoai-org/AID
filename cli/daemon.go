@@ -23,10 +23,10 @@ var socketServer *socketio.Server
 
 // Struct of a Request to Run Repo
 type RunRepoRequest struct {
-	Name   string `json:name`
-	Vendor string `json:vendor`
-	Solver string `json:solver`
-	Port   string `json:port`
+	Name   string `json:"name"`
+	Vendor string `json:"vendor"`
+	Solver string `json:"solver"`
+	Port   string `json:"port"`
 }
 
 // POST /repos/running -> run a solver in this repo
