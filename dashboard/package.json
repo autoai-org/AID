@@ -47,7 +47,7 @@
     "chromedriver": "2.44.0",
     "copy-webpack-plugin": "4.6.0",
     "cross-spawn": "5.1.0",
-    "css-loader": "0.28.11",
+    "css-loader": "2.0.1",
     "eslint": "3.19.0",
     "eslint-config-standard": "10.2.1",
     "eslint-friendly-formatter": "3.0.0",
