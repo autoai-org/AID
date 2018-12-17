@@ -13,28 +13,20 @@
             "url": "https://raw.githubusercontent.com/unarxiv/CVPM/master/LICENSE"
         }
     },
-    "host": "petstore.swagger.io",
-    "basePath": "/v2",
+    "host": "https://instance.cvtron.xyz",
+    "basePath": "/",
     "tags": [
         {
-            "name": "pet",
-            "description": "Everything about your Pets",
+            "name": "Daemon",
+            "description": "Everything about the Daemon Service",
             "externalDocs": {
                 "description": "Find out more",
                 "url": "http://swagger.io"
             }
         },
         {
-            "name": "store",
-            "description": "Access to Petstore orders"
-        },
-        {
-            "name": "user",
-            "description": "Operations about user",
-            "externalDocs": {
-                "description": "Find out more about our store",
-                "url": "http://swagger.io"
-            }
+            "name": "Discovery",
+            "description": "Everything about the Discovery Service"
         }
     ],
     "schemes": [
@@ -42,17 +34,16 @@
         "http"
     ],
     "paths": {
-        "/pet": {
+        "/repos": {
             "post": {
                 "tags": [
-                    "pet"
+                    "Daemon"
                 ],
-                "summary": "Add a new pet to the store",
+                "summary": "Add a new repo to the daemon",
                 "description": "",
-                "operationId": "addPet",
+                "operationId": "addRepo",
                 "consumes": [
-                    "application/json",
-                    "application/xml"
+                    "application/json"
                 ],
                 "produces": [
                     "application/xml",
@@ -65,13 +56,16 @@
                         "description": "Pet object that needs to be added to the store",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/Pet"
+                            "$ref": "#/definitions/Repos"
                         }
                     }
                 ],
                 "responses": {
-                    "405": {
-                        "description": "Invalid input"
+                    "404": {
+                        "description": "Type not supported"
+                    },
+                    "200": {
+                        "description": "Installed Successfully"
                     }
                 },
                 "security": [
