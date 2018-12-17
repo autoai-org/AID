@@ -1,7 +1,7 @@
 // import axios from 'axios'
 import { discoveryConfig } from './config'
 import { getNews } from './mock'
-import { newsService } from './news'
+import { _request } from './request'
 class DiscoveryMock {
   constructor (endpoint) {
     self.endpoint = endpoint
@@ -16,7 +16,10 @@ class Discovery {
     self.endpoint = endpoint
   }
   fetchNews () {
-    return newsService.fetchNews()
+    return _request('GET', self.endpoint + '/news')
+  }
+  putTicket (data) {
+    return _request('PUT', self.endpoint + '/tickets', data)
   }
 }
 let discovery

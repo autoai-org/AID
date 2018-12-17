@@ -37,7 +37,7 @@
       <v-spacer></v-spacer>
       <v-btn color="indigo darken-1" outline @click="closeDialog()">Close</v-btn>
       <v-btn color="indigo darken-1" outline @click="fetchMeta()">Fetch Meta</v-btn>
-      <v-btn color="indigo darken-1" outline @click="save()">Install</v-btn>
+      <v-btn color="indigo darken-1" :loading="installing" outline @click="save()">Install</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -55,12 +55,14 @@ export default {
       dependency: '',
       readme: '',
       error: '',
-      info: ''
+      info: '',
+      installing: false
     }
   },
   components: {
     'vue-markdown': VueMarkdown
   },
+  inject: ['reload'],
   methods: {
     closeDialog () {
       this.$emit('closeDialog', true)
@@ -96,11 +98,12 @@ export default {
     },
     save () {
       let self = this
+      self.installing = true
       systemService
         .installRepo('git', this.repo)
         .then(function (res) {
-          console.log(res)
-          self.$router.replace('/package')
+          self.installing = false
+          self.reload()
         })
         .catch(function (err) {
           self.error = err.response.data

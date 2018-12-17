@@ -6,6 +6,8 @@ const router = new Router();
 
 router.get('/', controller.system.getMetaInfo);
 
+router.put('/tickets', controller.ticket.createTicket);
+
 router.get('/system/status', controller.system.getSystemStatus);
 router.get('/system/stats', controller.system.getStatInfo);
 router.put('/system/stats', controller.system.putStatInfo);

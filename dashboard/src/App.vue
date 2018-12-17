@@ -1,7 +1,7 @@
 <template>
   <div>
     <transition mode="out-in">
-      <router-view></router-view>
+      <router-view v-if="isRouterAlive"></router-view>
     </transition>
     <v-tour name="cvpm-tour" :steps="steps" :callbacks="tourCallbacks"></v-tour>
   </div>
@@ -12,6 +12,7 @@ import { ConfigService } from '@/services/config'
 export default {
   data () {
     return {
+      isRouterAlive: true,
       steps: [
         {
           target: '#cvpm-tour-news',
@@ -48,6 +49,17 @@ export default {
       let config = new ConfigService()
       config.hintMode = false
       config.write()
+    },
+    reload () {
+      this.isRouterAlive = false
+      this.$nextTick(function () {
+        this.isRouterAlive = true
+      })
+    }
+  },
+  provide () {
+    return {
+      reload: this.reload
     }
   },
   mounted: function () {

@@ -49,7 +49,7 @@
           <v-btn color="indigo darken-1" flat @click="triggerDialog()" outline>Close</v-btn>
           <v-btn
             color="indigo darken-1"
-            @loading="isRequesting"
+            :loading="isRequesting"
             flat
             @click="confirmedRun()"
             outline
@@ -133,7 +133,9 @@ export default {
         )
         .then(function (res) {
           self.isRequesting = false
+          self.runningConfirmDialog = false
           self.responseRunningPort = res.data.port
+          self.fetchRunningSolver()
         })
     }
   },
