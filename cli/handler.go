@@ -7,8 +7,8 @@ and etc. */
 package main
 
 import (
-	"errors"
 	"bufio"
+	"errors"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
@@ -123,6 +123,7 @@ func RepoHandler(c *cli.Context) {
 // Handle Config Related Command
 
 // validate if python/pip/others exists or does not change
+
 func validateIfProgramAllowed(rawInput string) error {
 	input := strings.TrimSpace(rawInput)
 	if input == "y" || input == "Y" || input == "Yes" || input == "" {
@@ -131,9 +132,23 @@ func validateIfProgramAllowed(rawInput string) error {
 		if _, err := os.Stat(input); os.IsNotExist(err) {
 			return errors.New(input + " not exists")
 		} else {
-			return errors.New("Unknown Error")
+			return nil
 		}
 	}
+}
+
+// trigger and parse input filepath
+func InputAndParseConfigContent(label string, validate promptui.ValidateFunc) string {
+	prompt := promptui.Prompt{
+		Label:    label,
+		Validate: validate,
+	}
+	result, err := prompt.Run()
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return ""
+	}
+	return result
 }
 
 func ConfigHandler(c *cli.Context) {
@@ -154,33 +169,17 @@ func ConfigHandler(c *cli.Context) {
 	var nextConfig cvpmConfig
 	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
 	// Handle Python Location
-	promptPy := promptui.Prompt{
-		Label: "Python(3) Path",
-		Validate: validateIfProgramAllowed,
-	}
-	fmt.Printf("Original Python Location [" + prevConfig.Local.Python + "]")
-	result, err := promptPy.Run()
-	if err != nil {
-		fmt.Printf("%v\n", err)
-		return
-	}
-	newPyLocation := strings.TrimSpace(result)
+	fmt.Println("Original Python Location: " + prevConfig.Local.Python)
+	newPyLocation := InputAndParseConfigContent("Python(3)", validateIfProgramAllowed)
+	newPyLocation = strings.TrimSpace(newPyLocation)
 	if newPyLocation == "y" || newPyLocation == "Y" || newPyLocation == "Yes" || newPyLocation == "" {
 		newPyLocation = prevConfig.Local.Python
 	}
 	nextConfig.Local.Python = newPyLocation
 	// Handle Pypi Location
-	fmt.Printf("Original Pip Location [" + prevConfig.Local.Pip + "]")
-	promptPip := promptui.Prompt{
-		Label: "Pip(3) Path",
-		Validate: validateIfProgramAllowed,
-	}
-	result, err = promptPip.Run()
-	if err != nil {
-		fmt.Printf("%v\n", err)
-		return
-	}
-	newPipLocation := strings.TrimSpace(result)
+	fmt.Println("Original Pip Location: " + prevConfig.Local.Pip)
+	newPipLocation := InputAndParseConfigContent("Pip(3)", validateIfProgramAllowed)
+	newPipLocation = strings.TrimSpace(newPipLocation)
 	if newPipLocation == "y" || newPipLocation == "Y" || newPipLocation == "Yes" || newPipLocation == "" {
 		newPipLocation = prevConfig.Local.Pip
 	}
@@ -197,4 +196,10 @@ func InitHandler(c *cli.Context) {
 		panic(err)
 	}
 	InitNewRepo(result)
+	// rename {package_name} to real package name
+	pyFolderName := filepath.Join(result, "{package_name}")
+	err = os.Rename(pyFolderName, filepath.Join(result, result))
+	if err != nil {
+		fmt.Println(err)
+	}
 }
