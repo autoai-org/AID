@@ -45,7 +45,7 @@
   "devDependencies": {
     "@types/dotenv": "6.1.0",
     "@types/jest": "23.3.10",
-    "@types/node": "10.12.17",
+    "@types/node": "10.12.18",
     "@types/supertest": "2.0.6",
     "cross-env": "5.2.0",
     "jest": "23.6.0",
