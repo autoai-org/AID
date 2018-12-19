@@ -193,7 +193,7 @@ func InitHandler(c *cli.Context) {
 	}
 	result, err := prompt.Run()
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	InitNewRepo(result)
 	// rename {package_name} to real package name
