@@ -9,6 +9,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"github.com/manifoldco/promptui"
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
 	"github.com/mitchellh/go-homedir"
@@ -52,6 +53,8 @@ func InstallHandler(c *cli.Context) {
 		color.Cyan("Installing... Please wait patiently")
 		pip([]string{"install", "cvpm", "--user"})
 		return
+	} else if remoteURL == "webui" {
+		InstallWebUi()	
 	} else {
 		color.Cyan("Installing to " + localFolder)
 	}
@@ -87,6 +90,7 @@ func DaemonHandler(c *cli.Context) {
 	}
 }
 
+// Handle Repo Related Command
 func RepoHandler(c *cli.Context) {
 	taskParams := c.Args().Get(0)
 	switch taskParams {
@@ -113,6 +117,7 @@ func RepoHandler(c *cli.Context) {
 	}
 }
 
+// Handle Config Related Command
 func ConfigHandler(c *cli.Context) {
 	homepath, _ := homedir.Dir()
 	configFilePath := filepath.Join(homepath, "cvpm", "config.toml")
@@ -159,5 +164,12 @@ func ConfigHandler(c *cli.Context) {
 }
 
 func InitHandler(c *cli.Context) {
-
+	prompt := promptui.Prompt{
+		Label: "String",
+	}
+	result, err := prompt.Run()
+	if err != nil {
+		panic(err)
+	}
+	InitNewRepo(result)
 }

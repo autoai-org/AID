@@ -192,3 +192,9 @@ func InstallFromGit(remoteURL string) {
 	writeConfig(config)
 	PostInstallation(repoFolder)
 }
+
+// Init a new repoo by using bolierplate
+func InitNewRepo (repoName string) {
+  bolierplateURL := "https://github.com/cvmodel/bolierplate.git"
+	CloneFromGit(bolierplateURL, repoName)
+}
