@@ -10,3 +10,4 @@ dist
 !discovery/hooks/build
 !dashboard/build
 !docs/dist/api.html
+cli/cvpm

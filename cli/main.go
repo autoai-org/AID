@@ -12,7 +12,6 @@ import (
 	"github.com/getsentry/raven-go"
 	"github.com/urfave/cli"
 	"log"
-	"net/http"
 	"os"
 )
 
