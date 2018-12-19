@@ -4,6 +4,7 @@ You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (
+	"github.com/gin-contrib/static"
 	"github.com/fatih/color"
 	"github.com/gin-gonic/gin"
 	"github.com/googollee/go-socket.io"
@@ -154,6 +155,8 @@ func BeforeResponse() gin.HandlerFunc {
 /repos -> Get to fetch Running Repos
 */
 func runServer(port string) {
+	config := readConfig()
+	webuiFolder := filepath.Join(config.Local.LocalFolder, "webui")
 	color.Red("Initiating")
 	var err error
 	socketServer, err = socketio.NewServer(nil)
@@ -163,6 +166,7 @@ func runServer(port string) {
 	r := gin.Default()
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
+	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
 	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
