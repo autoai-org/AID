@@ -7,11 +7,12 @@ and etc. */
 package main
 
 import (
+	"errors"
 	"bufio"
 	"fmt"
-	"github.com/manifoldco/promptui"
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
+	"github.com/manifoldco/promptui"
 	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
@@ -54,7 +55,7 @@ func InstallHandler(c *cli.Context) {
 		pip([]string{"install", "cvpm", "--user"})
 		return
 	} else if remoteURL == "webui" {
-		InstallWebUi()	
+		InstallWebUi()
 	} else {
 		color.Cyan("Installing to " + localFolder)
 	}
@@ -112,12 +113,29 @@ func RepoHandler(c *cli.Context) {
 	case "ps":
 		requestParams := map[string]string{}
 		ClientGet("repos", requestParams)
+	case "init":
+		InitHandler(c)
 	default:
 		color.Red("Command Not Supported!")
 	}
 }
 
 // Handle Config Related Command
+
+// validate if python/pip/others exists or does not change
+func validateIfProgramAllowed(rawInput string) error {
+	input := strings.TrimSpace(rawInput)
+	if input == "y" || input == "Y" || input == "Yes" || input == "" {
+		return nil
+	} else {
+		if _, err := os.Stat(input); os.IsNotExist(err) {
+			return errors.New(input + " not exists")
+		} else {
+			return errors.New("Unknown Error")
+		}
+	}
+}
+
 func ConfigHandler(c *cli.Context) {
 	homepath, _ := homedir.Dir()
 	configFilePath := filepath.Join(homepath, "cvpm", "config.toml")
@@ -136,28 +154,35 @@ func ConfigHandler(c *cli.Context) {
 	var nextConfig cvpmConfig
 	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
 	// Handle Python Location
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Python Location[" + prevConfig.Local.Python + "]")
-	newPyLocation, _ := reader.ReadString('\n')
-	newPyLocation = strings.TrimSpace(newPyLocation)
+	promptPy := promptui.Prompt{
+		Label: "Python(3) Path",
+		Validate: validateIfProgramAllowed,
+	}
+	fmt.Printf("Original Python Location [" + prevConfig.Local.Python + "]")
+	result, err := promptPy.Run()
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return
+	}
+	newPyLocation := strings.TrimSpace(result)
 	if newPyLocation == "y" || newPyLocation == "Y" || newPyLocation == "Yes" || newPyLocation == "" {
 		newPyLocation = prevConfig.Local.Python
-	} else {
-		if _, err := os.Stat(newPyLocation); os.IsNotExist(err) {
-			log.Fatal("Python executable file not found: No such file")
-		}
 	}
 	nextConfig.Local.Python = newPyLocation
 	// Handle Pypi Location
-	fmt.Printf("Pip Location[" + prevConfig.Local.Pip + "]")
-	newPipLocation, _ := reader.ReadString('\n')
-	newPipLocation = strings.TrimSpace(newPipLocation)
+	fmt.Printf("Original Pip Location [" + prevConfig.Local.Pip + "]")
+	promptPip := promptui.Prompt{
+		Label: "Pip(3) Path",
+		Validate: validateIfProgramAllowed,
+	}
+	result, err = promptPip.Run()
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return
+	}
+	newPipLocation := strings.TrimSpace(result)
 	if newPipLocation == "y" || newPipLocation == "Y" || newPipLocation == "Yes" || newPipLocation == "" {
 		newPipLocation = prevConfig.Local.Pip
-	} else {
-		if _, err := os.Stat(newPipLocation); os.IsNotExist(err) {
-			log.Fatal("Pip executable file not found: No such file")
-		}
 	}
 	nextConfig.Local.Pip = newPipLocation
 	writeConfig(nextConfig)
@@ -165,7 +190,7 @@ func ConfigHandler(c *cli.Context) {
 
 func InitHandler(c *cli.Context) {
 	prompt := promptui.Prompt{
-		Label: "String",
+		Label: "Your Package Name",
 	}
 	result, err := prompt.Run()
 	if err != nil {

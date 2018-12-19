@@ -6,6 +6,7 @@ import (
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
 	"gopkg.in/src-d/go-git.v4"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -99,7 +100,7 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 	}
 }
 
-func CloneFromGit(remoteURL string, targetFolder string) Repository {
+func CloneFromGit(remoteURL string, targetFolder string) {
 	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
 		URL:      remoteURL,
@@ -109,8 +110,6 @@ func CloneFromGit(remoteURL string, targetFolder string) Repository {
 		raven.CaptureErrorAndWait(err, nil)
 		fmt.Println(err)
 	}
-	repo := Repository{Name: repoName, Vendor: vendorName, LocalFolder: targetFolder}
-	return repo
 }
 
 func InstallDependencies(localFolder string) {
@@ -173,8 +172,9 @@ func InstallFromGit(remoteURL string) {
 	vendorName := localFolderName[len(localFolderName)-2]
 	repoName := localFolderName[len(localFolderName)-1]
 	localFolder := filepath.Join(config.Local.LocalFolder, vendorName, repoName)
+	CloneFromGit(remoteURL, localFolder)
+	repo = Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder}
 
-	repo = CloneFromGit(remoteURL, localFolder)
 	repoFolder := repo.LocalFolder
 	InstallDependencies(repoFolder)
 	GeneratingRunners(repoFolder)
@@ -184,7 +184,7 @@ func InstallFromGit(remoteURL string) {
 }
 
 // Init a new repoo by using bolierplate
-func InitNewRepo (repoName string) {
-  bolierplateURL := "https://github.com/cvmodel/bolierplate.git"
-  CloneFromGit(bolierplateURL, repoName)
+func InitNewRepo(repoName string) {
+	bolierplateURL := "https://github.com/cvmodel/bolierplate.git"
+	CloneFromGit(bolierplateURL, repoName)
 }

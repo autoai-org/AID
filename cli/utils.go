@@ -1,10 +1,10 @@
 package main
 
 import (
+	"io/ioutil"
 	"net"
 	"os"
 	"os/user"
-	"io/ioutil"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -78,11 +78,11 @@ func findNextOpenPort(port int) string {
 	return strPort
 }
 
-func readFileContent(filepath) string {
+func readFileContent(filename string) string {
 	var content string
-	byte_content, err := ioutil.ReadFile(filepath)
+	byte_content, err := ioutil.ReadFile(filename)
 	if err != nil {
-		content = "Read " + filepath + "Failed!"		
+		content = "Read " + filename + "Failed!"
 	} else {
 		content = string(byte_content)
 	}

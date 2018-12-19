@@ -4,8 +4,8 @@ You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (
-	"github.com/gin-contrib/static"
 	"github.com/fatih/color"
+	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/googollee/go-socket.io"
 	"github.com/hpcloud/tail"
