@@ -8,9 +8,11 @@ package main
 
 import (
 	"bufio"
+	"errors"
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
+	"github.com/manifoldco/promptui"
 	"github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
@@ -52,6 +54,8 @@ func InstallHandler(c *cli.Context) {
 		color.Cyan("Installing... Please wait patiently")
 		pip([]string{"install", "cvpm", "--user"})
 		return
+	} else if remoteURL == "webui" {
+		InstallWebUi()
 	} else {
 		color.Cyan("Installing to " + localFolder)
 	}
@@ -87,6 +91,7 @@ func DaemonHandler(c *cli.Context) {
 	}
 }
 
+// Handle Repo Related Command
 func RepoHandler(c *cli.Context) {
 	taskParams := c.Args().Get(0)
 	switch taskParams {
@@ -108,9 +113,42 @@ func RepoHandler(c *cli.Context) {
 	case "ps":
 		requestParams := map[string]string{}
 		ClientGet("repos", requestParams)
+	case "init":
+		InitHandler(c)
 	default:
 		color.Red("Command Not Supported!")
 	}
+}
+
+// Handle Config Related Command
+
+// validate if python/pip/others exists or does not change
+
+func validateIfProgramAllowed(rawInput string) error {
+	input := strings.TrimSpace(rawInput)
+	if input == "y" || input == "Y" || input == "Yes" || input == "" {
+		return nil
+	} else {
+		if _, err := os.Stat(input); os.IsNotExist(err) {
+			return errors.New(input + " not exists")
+		} else {
+			return nil
+		}
+	}
+}
+
+// trigger and parse input filepath
+func InputAndParseConfigContent(label string, validate promptui.ValidateFunc) string {
+	prompt := promptui.Prompt{
+		Label:    label,
+		Validate: validate,
+	}
+	result, err := prompt.Run()
+	if err != nil {
+		fmt.Printf("%v\n", err)
+		return ""
+	}
+	return result
 }
 
 func ConfigHandler(c *cli.Context) {
@@ -131,33 +169,37 @@ func ConfigHandler(c *cli.Context) {
 	var nextConfig cvpmConfig
 	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
 	// Handle Python Location
-	reader := bufio.NewReader(os.Stdin)
-	fmt.Printf("Python Location[" + prevConfig.Local.Python + "]")
-	newPyLocation, _ := reader.ReadString('\n')
+	fmt.Println("Original Python Location: " + prevConfig.Local.Python)
+	newPyLocation := InputAndParseConfigContent("Python(3)", validateIfProgramAllowed)
 	newPyLocation = strings.TrimSpace(newPyLocation)
 	if newPyLocation == "y" || newPyLocation == "Y" || newPyLocation == "Yes" || newPyLocation == "" {
 		newPyLocation = prevConfig.Local.Python
-	} else {
-		if _, err := os.Stat(newPyLocation); os.IsNotExist(err) {
-			log.Fatal("Python executable file not found: No such file")
-		}
 	}
 	nextConfig.Local.Python = newPyLocation
 	// Handle Pypi Location
-	fmt.Printf("Pip Location[" + prevConfig.Local.Pip + "]")
-	newPipLocation, _ := reader.ReadString('\n')
+	fmt.Println("Original Pip Location: " + prevConfig.Local.Pip)
+	newPipLocation := InputAndParseConfigContent("Pip(3)", validateIfProgramAllowed)
 	newPipLocation = strings.TrimSpace(newPipLocation)
 	if newPipLocation == "y" || newPipLocation == "Y" || newPipLocation == "Yes" || newPipLocation == "" {
 		newPipLocation = prevConfig.Local.Pip
-	} else {
-		if _, err := os.Stat(newPipLocation); os.IsNotExist(err) {
-			log.Fatal("Pip executable file not found: No such file")
-		}
 	}
 	nextConfig.Local.Pip = newPipLocation
 	writeConfig(nextConfig)
 }
 
 func InitHandler(c *cli.Context) {
-
+	prompt := promptui.Prompt{
+		Label: "Your Package Name",
+	}
+	result, err := prompt.Run()
+	if err != nil {
+		panic(err)
+	}
+	InitNewRepo(result)
+	// rename {package_name} to real package name
+	pyFolderName := filepath.Join(result, "{package_name}")
+	err = os.Rename(pyFolderName, filepath.Join(result, result))
+	if err != nil {
+		fmt.Println(err)
+	}
 }

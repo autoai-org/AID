@@ -100,13 +100,9 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 	}
 }
 
-func CloneFromGit(remoteURL string, targetFolder string) Repository {
-	localFolderName := strings.Split(remoteURL, "/")
-	vendorName := localFolderName[len(localFolderName)-2]
-	repoName := localFolderName[len(localFolderName)-1]
-	localFolder := filepath.Join(targetFolder, vendorName, repoName)
-	color.Cyan("Cloning " + remoteURL + " into " + localFolder)
-	_, err := git.PlainClone(localFolder, false, &git.CloneOptions{
+func CloneFromGit(remoteURL string, targetFolder string) {
+	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
+	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
 		URL:      remoteURL,
 		Progress: os.Stdout,
 	})
@@ -114,8 +110,6 @@ func CloneFromGit(remoteURL string, targetFolder string) Repository {
 		raven.CaptureErrorAndWait(err, nil)
 		fmt.Println(err)
 	}
-	repo := Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder}
-	return repo
 }
 
 func InstallDependencies(localFolder string) {
@@ -149,30 +143,19 @@ func PostInstallation(repoFolder string) {
 }
 
 // Return Repository Meta Info: Dependency, Config, Disk Size and Readme
+
 func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 	repos := readRepos()
 	repositoryMeta := RepositoryMetaInfo{}
 	for _, existed_repo := range repos {
 		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
 			// Read config file etc
-			byte_config, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "cvpm.toml"))
-			if err != nil {
-				repositoryMeta.Config = "Read cvpm.toml failed"
-			} else {
-				repositoryMeta.Config = string(byte_config)
-			}
-			byte_dependency, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "requirements.txt"))
-			if err != nil {
-				repositoryMeta.Dependency = "Read requirements.txt failed"
-			} else {
-				repositoryMeta.Dependency = string(byte_dependency)
-			}
-			byte_readme, err := ioutil.ReadFile(filepath.Join(existed_repo.LocalFolder, "README.md"))
-			if err != nil {
-				repositoryMeta.Readme = "Read Readme.md failed"
-			} else {
-				repositoryMeta.Readme = string(byte_readme)
-			}
+			readmeFilePath := filepath.Join(existed_repo.LocalFolder, "README.md")
+			cvpmConfigFilePath := filepath.Join(existed_repo.LocalFolder, "cvpm.toml")
+			requirementsFilePath := filepath.Join(existed_repo.LocalFolder, "requirements.txt")
+			repositoryMeta.Config = readFileContent(cvpmConfigFilePath)
+			repositoryMeta.Dependency = readFileContent(requirementsFilePath)
+			repositoryMeta.Readme = readFileContent(readmeFilePath)
 			packageSize := getDirSizeMB(existed_repo.LocalFolder)
 			repositoryMeta.DiskSize = packageSize
 		}
@@ -184,11 +167,24 @@ func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 func InstallFromGit(remoteURL string) {
 	config := readConfig()
 	var repo Repository
-	repo = CloneFromGit(remoteURL, config.Local.LocalFolder)
+	// prepare local folder
+	localFolderName := strings.Split(remoteURL, "/")
+	vendorName := localFolderName[len(localFolderName)-2]
+	repoName := localFolderName[len(localFolderName)-1]
+	localFolder := filepath.Join(config.Local.LocalFolder, vendorName, repoName)
+	CloneFromGit(remoteURL, localFolder)
+	repo = Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder}
+
 	repoFolder := repo.LocalFolder
 	InstallDependencies(repoFolder)
 	GeneratingRunners(repoFolder)
 	config.Repositories = addRepo(config.Repositories, repo)
 	writeConfig(config)
 	PostInstallation(repoFolder)
+}
+
+// Init a new repoo by using bolierplate
+func InitNewRepo(repoName string) {
+	bolierplateURL := "https://github.com/cvmodel/bolierplate.git"
+	CloneFromGit(bolierplateURL, repoName)
 }

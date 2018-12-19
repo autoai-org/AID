@@ -115,7 +115,6 @@ func createFileIfNotExist(filePath string) {
 func validateConfig() {
 	if !isRoot() {
 		homepath := getHomeDir()
-		log.Println(homepath)
 		// Validate CVPM Path
 		cvpmPath := filepath.Join(homepath, "cvpm")
 		createFolderIfNotExist(cvpmPath)
@@ -125,6 +124,9 @@ func validateConfig() {
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
 		createFolderIfNotExist(logsFolder)
+		// create webui folder
+		webuiFolder := filepath.Join(cvpmPath, "webui")
+		createFolderIfNotExist(webuiFolder)
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
 		createFileIfNotExist(cvpmLogPath)
