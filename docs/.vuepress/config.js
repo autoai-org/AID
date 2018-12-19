@@ -126,6 +126,7 @@ function genSidebarConfig(title) {
         'getting-started',
         'install-package',
         'write-package',
+        'developer',
         'discovery',
         'contributing',
         'credits',

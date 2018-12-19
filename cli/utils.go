@@ -4,6 +4,7 @@ import (
 	"net"
 	"os"
 	"os/user"
+	"io/ioutil"
 	"path/filepath"
 	"strconv"
 	"time"
@@ -75,4 +76,15 @@ func findNextOpenPort(port int) string {
 		}
 	}
 	return strPort
+}
+
+func readFileContent(filepath) string {
+	var content string
+	byte_content, err := ioutil.ReadFile(filepath)
+	if err != nil {
+		content = "Read " + filepath + "Failed!"		
+	} else {
+		content = string(byte_content)
+	}
+	return content
 }
