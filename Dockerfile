@@ -1,4 +1,13 @@
-FROM Python:3
+FROM library/golang
 
-RUN pip3 install cvpm
+WORKDIR /go/src/cvpm
 
+COPY cli/ .
+
+RUN go get -d -v ./...
+RUN go install -v ./...
+RUN go build
+
+EXPOSE 10590
+
+CMD [ "cvpm", "daemon", "run" ]
