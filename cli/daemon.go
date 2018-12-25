@@ -148,6 +148,13 @@ func BeforeResponse() gin.HandlerFunc {
 		}
 	}
 }
+// Reverse Proxy for Calling Solvers and return real results
+func ReverseProxy(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	solver := c.Param("solver")
+	
+}
 
 /* Run the Server and Do Mount Endpoint
 /status -> Get to fetch System Status
@@ -184,6 +191,8 @@ func runServer(port string) {
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
+	// Reverse Proxy for solvers
+	r.POST("/solvers/:vendor/:name/:solver", ReverseProxy)
 	// Socket Related Routes
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)

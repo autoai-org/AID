@@ -100,6 +100,8 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 	}
 }
 
+// Clone a repo from @params remoteURL to @params targetFolder by Git Protocol.
+// Used for installing and initialize a repo
 func CloneFromGit(remoteURL string, targetFolder string) {
 	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
@@ -143,7 +145,6 @@ func PostInstallation(repoFolder string) {
 }
 
 // Return Repository Meta Info: Dependency, Config, Disk Size and Readme
-
 func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 	repos := readRepos()
 	repositoryMeta := RepositoryMetaInfo{}
