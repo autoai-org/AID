@@ -1,11 +1,11 @@
 cvpm.egg-info/
 *.pyc
-.vscode
-node_modules
+.vscode/
+node_modules/
 build
 dist
 .env
-.idea
+.idea/
 .DS_Store
 !discovery/hooks/build
 !dashboard/build
