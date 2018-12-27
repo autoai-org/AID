@@ -1,4 +1,7 @@
 language: go
+sudo: required
+git:
+  clone: quiet
 
 addons:
   apt:
