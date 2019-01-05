@@ -1,11 +1,10 @@
 import setuptools
 
-with open("README.md", "r") as fh:
-    long_description = fh.read()
+long_description = "For full description, please go to [Our Documentation](https://cvpm.autoai.org)"
 
 setuptools.setup(
     name="cvpm",
-    version="0.0.1",
+    version="0.0.2.1",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
     description="Computer Vision Package Manager",
@@ -33,6 +32,5 @@ setuptools.setup(
         "pillow",
         "numpy",
         "gevent",
-        "flask-cors",
     ],
 )

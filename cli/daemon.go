@@ -148,7 +148,9 @@ func BeforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
 		c.Writer.Header().Set("cvpm-version", "0.0.3@alpha")
-		c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
+		if c.Writer.Header().Get("Access-Control-Allow-Origin") == "" {
+			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
+		}
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS")
 		c.Writer.Header().Set("Access-Control-Allow-Headers", "authorization, origin, content-type, accept")

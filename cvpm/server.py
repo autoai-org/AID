@@ -9,13 +9,11 @@ from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
 # extensions
-from flask_cors import CORS
 
 logger = logging.getLogger()
 logger.setLevel("INFO")
 
 server = Flask(__name__)
-CORS(server)
 
 ALLOWED_EXTENSIONS_TRAIN = set(['zip'])
 ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png'])
