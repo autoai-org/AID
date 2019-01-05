@@ -64,17 +64,14 @@ class SystemService {
       })
     })
   }
-  testRepoSolver (port, parameters, file) {
+  testRepoSolver (vendor, packageName, solver, parameters, file) {
     return new Promise((resolve, reject) => {
       let payload = new FormData()
       payload.append('file', file)
       for (let i = 0; i < parameters.length; i++) {
         payload.append(parameters[i].key, parameters[i].value)
       }
-      var parser = document.createElement('a')
-      parser.href = this.endpoint
-      parser.port = port
-      axios.post(parser.href + '/infer', payload).then(function (res) {
+      axios.post(this.endpoint + '/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
         resolve(res)
       }).catch(function (err) {
         reject(err)
