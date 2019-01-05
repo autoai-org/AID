@@ -63,7 +63,7 @@ export default {
       solverDefinedParams: []
     }
   },
-  props: ['file'],
+  props: ['file', 'vendor', 'packageName', 'solverName'],
   methods: {
     addParams () {
       this.solverDefinedParams.push({
@@ -74,9 +74,17 @@ export default {
     startTest () {
       let self = this
       self.loading = true
-      const requestParams = this.systemRequiredParams.concat(this.solverDefinedParams)
+      const requestParams = this.systemRequiredParams.concat(
+        this.solverDefinedParams
+      )
       systemService
-        .testRepoSolver('8080', requestParams, this.file)
+        .testRepoSolver(
+          this.vendor,
+          this.packageName,
+          this.solverName,
+          requestParams,
+          this.file
+        )
         .then(function (res) {
           self.loading = false
           self.$emit('finishInfer', res)
