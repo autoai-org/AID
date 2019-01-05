@@ -1,3 +1,7 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 /*  This file handles config related tasks, include:
 readConfig()
 writeConfig()
@@ -10,13 +14,14 @@ package main
 
 import (
 	"bytes"
-	"github.com/BurntSushi/toml"
-	"github.com/getsentry/raven-go"
-	"github.com/mitchellh/go-homedir"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/BurntSushi/toml"
+	raven "github.com/getsentry/raven-go"
+	homedir "github.com/mitchellh/go-homedir"
 )
 
 type cvpmConfig struct {

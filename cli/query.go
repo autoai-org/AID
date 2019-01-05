@@ -1,10 +1,15 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
-	"github.com/levigross/grequests"
-	"github.com/mitchellh/go-homedir"
 	"log"
 	"os/user"
+
+	"github.com/levigross/grequests"
+	homedir "github.com/mitchellh/go-homedir"
 )
 
 func ClientPost(endpoint string, params map[string]string) *grequests.Response {

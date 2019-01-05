@@ -1,12 +1,16 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
-	"os/exec"
+	"bufio"
 	"io"
 	"log"
-	"bufio"
-	"time"
+	"os/exec"
 	"sync"
+	"time"
 )
 
 // used for shell/cmd command
