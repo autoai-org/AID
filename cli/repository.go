@@ -1,16 +1,21 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
 	"fmt"
-	"github.com/BurntSushi/toml"
-	"github.com/fatih/color"
-	"github.com/getsentry/raven-go"
-	"gopkg.in/src-d/go-git.v4"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/BurntSushi/toml"
+	"github.com/fatih/color"
+	raven "github.com/getsentry/raven-go"
+	git "gopkg.in/src-d/go-git.v4"
 )
 
 type Repository struct {
@@ -100,6 +105,8 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 	}
 }
 
+// Clone a repo from @params remoteURL to @params targetFolder by Git Protocol.
+// Used for installing and initialize a repo
 func CloneFromGit(remoteURL string, targetFolder string) {
 	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
@@ -143,7 +150,6 @@ func PostInstallation(repoFolder string) {
 }
 
 // Return Repository Meta Info: Dependency, Config, Disk Size and Readme
-
 func GetMetaInfo(Vendor string, Name string) RepositoryMetaInfo {
 	repos := readRepos()
 	repositoryMeta := RepositoryMetaInfo{}

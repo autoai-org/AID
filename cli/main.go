@@ -6,13 +6,18 @@ cvpm help
 
 to get a detailed explanation.
 */
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
-	"github.com/getsentry/raven-go"
-	"github.com/urfave/cli"
 	"log"
 	"os"
+
+	raven "github.com/getsentry/raven-go"
+	"github.com/urfave/cli"
 )
 
 func main() {

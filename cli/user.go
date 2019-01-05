@@ -1,17 +1,22 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 package main
 
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/alexrudd/cognito-srp"
+	"log"
+	"time"
+
+	cognitosrp "github.com/alexrudd/cognito-srp"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/aws/endpoints"
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	cip "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 	"github.com/fatih/color"
 	"github.com/levigross/grequests"
-	"log"
-	"time"
 )
 
 type User struct {

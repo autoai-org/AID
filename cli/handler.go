@@ -1,3 +1,7 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 /*  This file defines the handlers for different command.
 	Login
 	Install
@@ -10,19 +14,20 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
-	"github.com/fatih/color"
-	"github.com/getsentry/raven-go"
-	"github.com/manifoldco/promptui"
-	"github.com/mitchellh/go-homedir"
-	"github.com/olekukonko/tablewriter"
-	"github.com/urfave/cli"
-	"golang.org/x/crypto/ssh/terminal"
 	"log"
 	"os"
 	"path/filepath"
 	"strconv"
 	"strings"
 	"syscall"
+
+	"github.com/fatih/color"
+	raven "github.com/getsentry/raven-go"
+	"github.com/manifoldco/promptui"
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/olekukonko/tablewriter"
+	"github.com/urfave/cli"
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 // Run Repo Response Struct

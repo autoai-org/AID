@@ -1,17 +1,23 @@
+// Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
 /*  This file handles daemon and services related tasks.
 By using cvpm daemon install, it will install a system service under current user.
 You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"path/filepath"
+
 	"github.com/fatih/color"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
-	"github.com/googollee/go-socket.io"
+	socketio "github.com/googollee/go-socket.io"
 	"github.com/hpcloud/tail"
-	"log"
-	"net/http"
-	"path/filepath"
 )
 
 // Default Running Port
@@ -149,6 +155,31 @@ func BeforeResponse() gin.HandlerFunc {
 	}
 }
 
+// Reverse Proxy for Calling Solvers and return real results
+func ReverseProxy(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	solver := c.Param("solver")
+	var runningPort string
+	for _, runningSolver := range RunningSolvers {
+		if runningSolver.Vendor == vendor && runningSolver.Package == name && runningSolver.SolverName == solver {
+			runningPort = runningSolver.Port
+		}
+	}
+	// if the solver is not found
+
+	//
+	target := "localhost:" + runningPort
+	director := func(req *http.Request) {
+		r := c.Request
+		req = r
+		req.URL.Scheme = "http"
+		req.URL.Host = target
+	}
+	proxy := &httputil.ReverseProxy{Director: director}
+	proxy.ServeHTTP(c.Writer, c.Request)
+}
+
 /* Run the Server and Do Mount Endpoint
 /status -> Get to fetch System Status
 /repo -> Post to Run a Repo
@@ -184,6 +215,8 @@ func runServer(port string) {
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
+	// Reverse Proxy for solvers
+	r.POST("/solvers/:vendor/:name/:solver", ReverseProxy)
 	// Socket Related Routes
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
