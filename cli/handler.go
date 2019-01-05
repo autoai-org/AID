@@ -22,9 +22,7 @@ import (
 	"syscall"
 
 	"github.com/fatih/color"
-	raven "github.com/getsentry/raven-go"
 	"github.com/manifoldco/promptui"
-	homedir "github.com/mitchellh/go-homedir"
 	"github.com/olekukonko/tablewriter"
 	"github.com/urfave/cli"
 	"golang.org/x/crypto/ssh/terminal"
@@ -128,7 +126,6 @@ func RepoHandler(c *cli.Context) {
 // Handle Config Related Command
 
 // validate if python/pip/others exists or does not change
-
 func validateIfProgramAllowed(rawInput string) error {
 	input := strings.TrimSpace(rawInput)
 	if input == "y" || input == "Y" || input == "Yes" || input == "" {
@@ -157,21 +154,8 @@ func InputAndParseConfigContent(label string, validate promptui.ValidateFunc) st
 }
 
 func ConfigHandler(c *cli.Context) {
-	homepath, _ := homedir.Dir()
-	configFilePath := filepath.Join(homepath, "cvpm", "config.toml")
-	if _, err := os.Stat(configFilePath); os.IsNotExist(err) {
-		// config file not exists, create it
-		file, err := os.Create(configFilePath)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			color.Red("An error occurred!")
-		}
-		defer file.Close()
-		// config file not exists, write default to it
-		writeConfig(getDefaultConfig())
-	}
 	prevConfig := readConfig()
-	var nextConfig cvpmConfig
+	var nextConfig CvpmConfig
 	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
 	// Handle Python Location
 	fmt.Println("Original Python Location: " + prevConfig.Local.Python)

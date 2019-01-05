@@ -5,9 +5,9 @@
 package main
 
 import (
-	"log"
+	raven "github.com/getsentry/raven-go"
 )
 
 func initRaven() {
-	log.Fatal("Init it with environment variable")
+	raven.SetDSN("https://fac4164f7c644a27bfb34b748a1c56b5:8db93294332f4df087560540d71ca7ae@sentry.io/1300718")
 }

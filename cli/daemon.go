@@ -11,9 +11,11 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+	"net/url"
 	"path/filepath"
 
 	"github.com/fatih/color"
+	raven "github.com/getsentry/raven-go"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
@@ -124,6 +126,7 @@ func writeLog(filepath string, server *socketio.Server, eventName string) {
 	log.Println("Writing Logs")
 	t, err := tail.TailFile(filepath, tail.Config{Follow: true})
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		panic(err)
 	}
 	for line := range t.Lines {
@@ -167,16 +170,27 @@ func ReverseProxy(c *gin.Context) {
 		}
 	}
 	// if the solver is not found
-
-	//
-	target := "localhost:" + runningPort
-	director := func(req *http.Request) {
-		r := c.Request
-		req = r
-		req.URL.Scheme = "http"
-		req.URL.Host = target
+	if runningPort == "" {
+		c.JSON(http.StatusNotImplemented, gin.H{
+			"error": "501",
+			"info":  "Solver Not Running, if you want to force it running, please attach a force=true in your request body",
+			"help":  "https://cvpm.autoai.org",
+		})
 	}
-	proxy := &httputil.ReverseProxy{Director: director}
+	// the solver is running
+	target := url.URL{
+		Scheme: "http",
+		Host:   "localhost:" + runningPort,
+		Path:   "/infer",
+	}
+	director := func(req *http.Request) {
+		req.Host = target.Host
+		req.URL.Host = req.Host
+		req.URL.Scheme = target.Scheme
+		req.URL.Path = target.Path
+	}
+	proxy := httputil.NewSingleHostReverseProxy(&target)
+	proxy.Director = director
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
 
@@ -192,6 +206,7 @@ func runServer(port string) {
 	var err error
 	socketServer, err = socketio.NewServer(nil)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		panic(err)
 	}
 	r := gin.Default()

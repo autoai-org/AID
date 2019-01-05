@@ -14,6 +14,7 @@ package main
 
 import (
 	"bytes"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -24,12 +25,12 @@ import (
 	homedir "github.com/mitchellh/go-homedir"
 )
 
-type cvpmConfig struct {
-	Local        local        `toml:"local"`
+type CvpmConfig struct {
+	Local        Local        `toml:"local"`
 	Repositories []Repository `toml:"repository"`
 }
 
-type local struct {
+type Local struct {
 	LocalFolder string
 	Pip         string
 	Python      string
@@ -49,8 +50,8 @@ func isPathExists(path string) (bool, error) {
 	return true, err
 }
 
-func readConfig() cvpmConfig {
-	var config cvpmConfig
+func readConfig() CvpmConfig {
+	var config CvpmConfig
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
 	if _, err := toml.DecodeFile(configFile, &config); err != nil {
@@ -59,18 +60,22 @@ func readConfig() cvpmConfig {
 	return config
 }
 
-func readClientConfig(clientDir string) cvpmConfig {
-	var config cvpmConfig
+func readClientConfig(clientDir string) CvpmConfig {
+	var config CvpmConfig
 	configFile := filepath.Join(clientDir, "cvpm", "config.toml")
 	if _, err := toml.DecodeFile(configFile, &config); err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 	return config
 }
 
-func writeConfig(config cvpmConfig) {
+func writeConfig(config CvpmConfig) {
+	fmt.Println(config.Local.LocalFolder)
+	fmt.Println(config.Local.Python)
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(config); err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 	homepath, _ := homedir.Dir()
@@ -82,22 +87,24 @@ func writeConfig(config cvpmConfig) {
 	}
 }
 
-func getDefaultConfig() cvpmConfig {
-	localPath, _ := homedir.Dir()
-	cvpmPath := filepath.Join(localPath, "cvpm")
-	var defaultLocal = local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
-	var defaultCVPMConfig = cvpmConfig{Local: defaultLocal, Repositories: []Repository{}}
+func getDefaultConfig() CvpmConfig {
+	homePath, _ := homedir.Dir()
+	cvpmPath := filepath.Join(homePath, "cvpm")
+	var defaultLocal = Local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
+	var defaultCVPMConfig = CvpmConfig{Local: defaultLocal, Repositories: []Repository{}}
 	return defaultCVPMConfig
 }
 
 func createFolderIfNotExist(folderPath string) {
 	exist, err := isPathExists(folderPath)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 	if !exist {
 		err = os.Mkdir(folderPath, os.ModePerm)
 		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
 			log.Fatal(err)
 		}
 	}
@@ -106,11 +113,13 @@ func createFolderIfNotExist(folderPath string) {
 func createFileIfNotExist(filePath string) {
 	exist, err := isPathExists(filePath)
 	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
 	}
 	if !exist {
 		f, err := os.Create(filePath)
 		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
 			log.Fatal(err)
 		}
 		defer f.Close()
@@ -125,7 +134,11 @@ func validateConfig() {
 		createFolderIfNotExist(cvpmPath)
 		// check if cvpm.toml file exists
 		cvpmConfigToml := filepath.Join(homepath, "cvpm", "config.toml")
-		createFileIfNotExist(cvpmConfigToml)
+		if _, err := os.Stat(cvpmConfigToml); os.IsNotExist(err) {
+			createFileIfNotExist(cvpmConfigToml)
+			// config file not exists, write default to it
+			writeConfig(getDefaultConfig())
+		}
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
 		createFolderIfNotExist(logsFolder)
@@ -139,6 +152,7 @@ func validateConfig() {
 		cvpmPackageLogPath := filepath.Join(cvpmPath, "logs", "package.log")
 		createFileIfNotExist(cvpmPackageLogPath)
 	}
+	initRaven()
 }
 
 func getLogsLocation() string {

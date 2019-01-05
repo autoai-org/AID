@@ -23,6 +23,7 @@ type Repository struct {
 	LocalFolder string
 	Vendor      string
 	Port        string
+	Origin      string
 }
 
 type RepositoryMetaInfo struct {
@@ -92,7 +93,7 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 			for _, file := range files {
 				if file.Name() == "runner_"+Solver+".py" {
 					existed = true
-					RunningRepos = append(RunningRepos, Repository{Vendor, Name, Solver, Port})
+					RunningRepos = append(RunningRepos, Repository{Vendor, Name, Solver, Port, ""})
 					RunningSolvers = append(RunningSolvers, RepoSolver{Vendor: Vendor, Package: Name, SolverName: Solver, Port: Port})
 					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
 					python([]string{runfileFullPath, Port})
@@ -179,7 +180,7 @@ func InstallFromGit(remoteURL string) {
 	repoName := localFolderName[len(localFolderName)-1]
 	localFolder := filepath.Join(config.Local.LocalFolder, vendorName, repoName)
 	CloneFromGit(remoteURL, localFolder)
-	repo = Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder}
+	repo = Repository{Name: repoName, Vendor: vendorName, LocalFolder: localFolder, Origin: remoteURL}
 
 	repoFolder := repo.LocalFolder
 	InstallDependencies(repoFolder)
