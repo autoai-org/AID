@@ -22,7 +22,6 @@ import (
 
 func main() {
 	validateConfig()
-	var currentUser User
 	cvpm := cli.NewApp()
 	cvpm.Name = "CVPM"
 	cvpm.Usage = "Computer Vision Package Manager"
@@ -30,7 +29,10 @@ func main() {
 		{
 			Name: "login",
 			Action: func(c *cli.Context) error {
-				currentUser = LoginHandler(c)
+				currentUser := LoginHandler(c)
+				if currentUser.SessionToken == "" {
+					log.Fatal("Login Failed")
+				}
 				return nil
 			},
 		},
