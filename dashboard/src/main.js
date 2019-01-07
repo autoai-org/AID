@@ -10,16 +10,18 @@ import VueSocketIO from 'vue-socket.io'
 import TreeView from 'vue-json-tree-view'
 import VueTour from 'vue-tour'
 import colors from 'vuetify/es5/util/colors'
+import { ConfigService } from '@/services/config'
 
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
 import 'vue-tour/dist/vue-tour.css'
 
 import i18n from '@/i18n'
+const configService = new ConfigService()
 
 Vue.use(new VueSocketIO({
   debug: false,
-  connection: 'http://192.168.1.11:10590'
+  connection: configService.endpoint
 }))
 Vue.use(Vuetify)
 Vue.use(TreeView)

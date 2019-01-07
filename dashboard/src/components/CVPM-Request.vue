@@ -24,7 +24,7 @@
             <cvpm-image-upload v-on:fileSelected="onFileSelected"></cvpm-image-upload>
           </v-stepper-content>
           <v-stepper-content step="2">
-            <cvpm-parameter-input :file=file v-on:finishInfer="onFinishInfer"></cvpm-parameter-input>
+            <cvpm-parameter-input :file=file v-on:finishInfer="onFinishInfer" :vendor=selectedVendor :packageName=selectedPackage :solverName=selectedSolver></cvpm-parameter-input>
           </v-stepper-content>
           <v-stepper-content step="3">
             <cvpm-json-view :jsonObject="inferResponse"></cvpm-json-view>
