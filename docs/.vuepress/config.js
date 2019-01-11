@@ -131,7 +131,8 @@ function genSidebarConfig(title) {
         'contributing',
         'credits',
         'api',
-        'dashboard'
+        'dashboard',
+        'privacy'
       ]
     }
   ]

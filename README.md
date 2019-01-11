@@ -42,7 +42,7 @@ This project is inspired from [CVTron](https://docs.cvtron.org).
 
 Q: Where can I find useful models?
 
-A: There are three places. The first one, which is we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, search models. The second one is GitHub, in GiHub, you can search for CVPM_Available in readme file, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for others models.
+A: There are three places. The first one, which we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, search models. The second one is GitHub. At GiHub, you can search for CVPM_Available in readme file, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for other models.
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_large)
