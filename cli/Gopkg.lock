@@ -148,11 +148,11 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:2b0df69b0d482719446858d567d12f4565d1908ff563db27250cb2cde7f461ec"
+  digest = "1:5833221fe0e85bc4c96eaed8fa241a417a650dfefd192fc93789c8802970e6c2"
   name = "github.com/gin-contrib/static"
   packages = ["."]
   pruneopts = "UT"
-  revision = "8cbcdde04781ade853025b0ff7001aaf0ed06150"
+  revision = "cf5e10bbd933040ff603b7f0fb85510bae9916f0"
 
 [[projects]]
   digest = "1:d5083934eb25e45d17f72ffa86cae3814f4a9d6c073c4f16b64147169b245606"
@@ -446,12 +446,12 @@
   version = "v1.2.0"
 
 [[projects]]
-  digest = "1:40e195917a951a8bf867cd05de2a46aaf1806c50cf92eebf4c16f78cd196f747"
+  digest = "1:cf31692c14422fa27c83a05292eb5cbe0fb2775972e8f1f8446a71549bd8980b"
   name = "github.com/pkg/errors"
   packages = ["."]
   pruneopts = "UT"
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
+  revision = "ba968bfe8b2f7e042a574c888954fccecfa385b4"
+  version = "v0.8.1"
 
 [[projects]]
   digest = "1:d917313f309bda80d27274d53985bc65651f81a5b66b820749ac7f8ef061fd04"
@@ -462,9 +462,10 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:d3542de226344b4256cc0844ccc88fa815a187b3b6ea251e75f726179a81cea5"
+  digest = "1:0ba34643d8d8ce5aadd4d09283fa4c06301ac6bfc9d2b0d12a90b740d7074d0f"
   name = "github.com/shirou/gopsutil"
   packages = [
+    ".",
     "cpu",
     "host",
     "internal/common",
@@ -473,8 +474,8 @@
     "process",
   ]
   pruneopts = "UT"
-  revision = "0f70a4a06f7a1039305ec9b3ba9c2800f8929fba"
-  version = "v2.18.11"
+  revision = "ccc1c1016bc5d10e803189ee43417c50cdde7f1b"
+  version = "v2.18.12"
 
 [[projects]]
   branch = "master"
@@ -574,11 +575,11 @@
     "ssh/terminal",
   ]
   pruneopts = "UT"
-  revision = "505ab145d0a99da450461ae2c1a9f6cd10d1f447"
+  revision = "ff983b9c42bc9fbf91556e191cc8efb585c16908"
 
 [[projects]]
   branch = "master"
-  digest = "1:fa44bfbd6a531dbb03a45ba46765f876abd24579fcf6d1b64b8546b98a00f15b"
+  digest = "1:5c35c66b18d41a0cec66fa7af4f4b3d9333bea2c91ad6f47191716eccdd49489"
   name = "golang.org/x/net"
   packages = [
     "context",
@@ -586,11 +587,11 @@
     "publicsuffix",
   ]
   pruneopts = "UT"
-  revision = "e147a9138326bc0e9d4e179541ffd8af41cff8a9"
+  revision = "915654e7eabcea33ae277abbecf52f0d8b7a9fdc"
 
 [[projects]]
   branch = "master"
-  digest = "1:0fe9b4ed1745aefb33ca883590a0f414c0ef6ef3046aaa3f46327c5962755201"
+  digest = "1:855068a5678b36e39c328bda5631065635b0d5fa95a207da9f47a8b1fc54a467"
   name = "golang.org/x/sys"
   packages = [
     "unix",
@@ -601,7 +602,7 @@
     "windows/svc/mgr",
   ]
   pruneopts = "UT"
-  revision = "074acd46bca67915925527c07849494d115e7c43"
+  revision = "11f53e03133963fb11ae0588e08b5e0b85be8be5"
 
 [[projects]]
   digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
@@ -637,7 +638,7 @@
     "go/types/typeutil",
   ]
   pruneopts = "UT"
-  revision = "d4971274fe382404aee0e8c163af974f2bf738e6"
+  revision = "16909d206f00da7d0d5ba28cd9dc7fb223648ecf"
 
 [[projects]]
   branch = "v3-unstable"
@@ -772,6 +773,7 @@
     "github.com/manifoldco/promptui",
     "github.com/mitchellh/go-homedir",
     "github.com/olekukonko/tablewriter",
+    "github.com/shirou/gopsutil",
     "github.com/shirou/gopsutil/cpu",
     "github.com/shirou/gopsutil/host",
     "github.com/shirou/gopsutil/mem",
