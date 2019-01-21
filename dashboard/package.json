@@ -16,7 +16,7 @@
   "dependencies": {
     "@vuetify/vuex-cognito-module": "0.4.0",
     "axios": "0.18.0",
-    "js-base64": "2.5.0",
+    "js-base64": "2.5.1",
     "toml": "2.3.5",
     "vue": "2.5.22",
     "vue-i18n": "8.7.0",
