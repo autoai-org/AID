@@ -195,3 +195,11 @@ func InitNewRepo(repoName string) {
 	bolierplateURL := "https://github.com/cvmodel/bolierplate.git"
 	CloneFromGit(bolierplateURL, repoName)
 }
+
+func GetPretrained(vendorName string, packageName string) []os.FileInfo {
+	config := readConfig()
+	localFolder := filepath.Join(config.Local.LocalFolder, vendorName, packageName)
+	localPretrainedFolder := filepath.Join(localFolder, "pretrained")
+	files, _ := ioutil.ReadDir(localPretrainedFolder)
+	return files
+}
