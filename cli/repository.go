@@ -5,7 +5,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -107,7 +106,7 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 }
 
 // Clone a repo from @params remoteURL to @params targetFolder by Git Protocol.
-// Used for installing and initialize a repo
+// Used for installing and initializing a repo
 func CloneFromGit(remoteURL string, targetFolder string) {
 	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
@@ -116,7 +115,7 @@ func CloneFromGit(remoteURL string, targetFolder string) {
 	})
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
-		fmt.Println(err)
+		log.Fatal(err)
 	}
 }
 

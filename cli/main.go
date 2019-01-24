@@ -25,6 +25,7 @@ func main() {
 	cvpm := cli.NewApp()
 	cvpm.Name = "CVPM"
 	cvpm.Usage = "Computer Vision Package Manager"
+	cvpm.Version = "0.0.3@alpha"
 	cvpm.Commands = []cli.Command{
 		{
 			Name: "login",
