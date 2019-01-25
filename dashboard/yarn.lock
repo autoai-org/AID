@@ -9098,10 +9098,10 @@ vue-router@3.0.2:
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
   integrity sha512-opKtsxjp9eOcFWdp6xLQPLmRGgfM932Tl56U9chYTnoWqKxQ8M20N7AkdEbM5beUh6wICoFGYugAX9vQjyJLFg==
 
-vue-socket.io@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/vue-socket.io/-/vue-socket.io-3.0.4.tgz#bcaade9d6dc117219fa9880538faf8ab5b2553a9"
-  integrity sha512-5Ei9h3LqFxj1SDCu9nS9jDdviM+0CMe64UaF0qUUmbsjJm4UEee8TdNVp6ST1XXf4LhssYpvk2uR00J9AIFn7A==
+vue-socket.io@3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/vue-socket.io/-/vue-socket.io-3.0.5.tgz#2923cbc601262577159080627828031d6ea0e10f"
+  integrity sha512-+caWHVSphz0iEJOdHK8inAth7E4r97/9w3XD+vxMxCkfKtZNf/D07/ZmRrwFUSlCLJ1EDph/gYFoHy06KBUBCg==
   dependencies:
     socket.io-client "^2.1.1"
 
