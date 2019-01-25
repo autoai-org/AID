@@ -10,7 +10,7 @@ setuptools.setup(
     description="Computer Vision Package Manager",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/unarxiv/cvpm",
+    url="https://cvpm.autoai.org",
     packages=setuptools.find_packages(),
     license="MIT",
     classifiers=[
@@ -34,4 +34,9 @@ setuptools.setup(
         "numpy",
         "gevent",
     ],
+    project_urls={
+        "Bug Tracker": "https://github.com/unarxiv/CVPM/issues",
+        "Documentation": "https://cvpm.autoai.org",
+        "Source Code": "https://github.com/unarxiv/CVPM/issues",
+    },
 )
