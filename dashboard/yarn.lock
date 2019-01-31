@@ -9306,10 +9306,10 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
-toml@2.3.5:
-  version "2.3.5"
-  resolved "https://registry.yarnpkg.com/toml/-/toml-2.3.5.tgz#a1f5d7f7efd300fa426258f3e74374536191e3db"
-  integrity sha512-ulY/Z2yPWKl/3JvGJvnEe7mXqVt2+TtDoRxJNgTAwO+3lwXefeCHS697NN0KRy6q7U/b1MnSnj/UGF/4U0U2WQ==
+toml@2.3.6:
+  version "2.3.6"
+  resolved "https://registry.yarnpkg.com/toml/-/toml-2.3.6.tgz#25b0866483a9722474895559088b436fd11f861b"
+  integrity sha512-gVweAectJU3ebq//Ferr2JUY4WKSDe5N+z0FvjDncLGyHmIDoxgY/2Ie4qfEIDm4IS7OA6Rmdm7pdEEdMcV/xQ==
 
 toposort@^1.0.0:
   version "1.0.7"
@@ -9692,10 +9692,10 @@ vue-hot-reload-api@^2.2.0:
   resolved "http://registry.npm.taobao.org/vue-hot-reload-api/download/vue-hot-reload-api-2.3.1.tgz#b2d3d95402a811602380783ea4f566eb875569a2"
   integrity sha512-AA86yKZ5uOKz87/q1UpngEXhbRkaYg1b7HMMVRobNV1IVKqZe8oLIzo6iMocVwZXnYitlGwf2k4ZRLOZlS8oPQ==
 
-vue-i18n@8.7.0:
-  version "8.7.0"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.7.0.tgz#846269ad9d9c40c77479a540398d4024356fa4e1"
-  integrity sha512-qey+OyZSUIje0xJW8HZrvpIss1jW8yBBRe+0QlUn7HENU31m/+Med/u4pcwjoeCaErHU9WMscBEhqK5aAvvEEQ==
+vue-i18n@8.8.0:
+  version "8.8.0"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-8.8.0.tgz#9454bd44cc5a75912478a641cb87c1feeed2e944"
+  integrity sha512-1sRCZuTQYfM3LyG3avRI97mIFYYeflgSRLliP29cPLZkZDif4XK8iMmIGxZM6jQwACaEhKKEmzz7fzA8aW7iCg==
 
 vue-jest@1.4.0:
   version "1.4.0"
@@ -9817,10 +9817,10 @@ vue@^2.5.17:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.5.19.tgz#c4c9ba01a97a23ea24018d4702e994c15785e025"
   integrity sha1-xMm6Aal6I+okAY1HAumUwVeF4CU=
 
-vuetify@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.3.tgz#dfa187a2bd37427c352bdd194837430a06b45735"
-  integrity sha512-BRTETa3rQ016OOkL1Y28vOYPPJFU0TwSr9nwjT/M840bnk0A9znk1mGvdk1W+qb9IbtWJ9RUk2W1+7l9RcKa8A==
+vuetify@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.4.tgz#0a08d98e685a875e3d7fd035235932d9abf3fd5b"
+  integrity sha512-i0fNciTrzP+U6NinB2kmNMC5vWXtrTy5QcVFLOxv4dhhqTiMTyHj7rV1B2lwBTZYoDhimmSAYRfqHeKdCMx+Gg==
 
 vuex@3.1.0:
   version "3.1.0"
