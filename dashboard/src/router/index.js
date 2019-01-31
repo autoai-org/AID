@@ -9,7 +9,7 @@ import Pretrained from '@/pages/Pretrained'
 import Detail from '@/pages/Detail'
 import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
-
+import Datasets from '@/pages/contrib/dataset/Datasets'
 Vue.use(Router)
 
 export default new Router({
@@ -53,6 +53,11 @@ export default new Router({
           path: '/pretrained',
           name: 'Pretrained',
           component: Pretrained
+        },
+        {
+          path: '/datasets',
+          name: 'Datasets',
+          component: Datasets
         },
         {
           path: '/detail/:vendor/:name',

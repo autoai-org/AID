@@ -145,6 +145,10 @@ func validateConfig() {
 		// create webui folder
 		webuiFolder := filepath.Join(cvpmPath, "webui")
 		createFolderIfNotExist(webuiFolder)
+		// create database folder
+		databaseFolder := filepath.Join(cvpmPath, "database")
+		createFolderIfNotExist(databaseFolder)
+		createFileIfNotExist(filepath.Join(databaseFolder, "cvpm-database.db"))
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
 		createFileIfNotExist(cvpmLogPath)

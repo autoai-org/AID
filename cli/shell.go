@@ -19,20 +19,17 @@ func pip(args []string) {
 	proc := NewProcess(localPip, args...)
 	out := proc.StreamOutput()
 	logFile := filepath.Join(getLogsLocation(), "system.log")
-	log.Println(logFile)
 	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatalf("failed opening file: %s", err)
 	}
 	go func() {
 		for out.Scan() {
-			log.Println(out.Text())
 			_, err := file.WriteString(out.Text() + "\n")
 			if err != nil {
 				log.Fatalf("failed writing to file: %s", err)
 			}
 			defer file.Close()
-			log.Println(out.Text())
 		}
 	}()
 	proc.Start()
