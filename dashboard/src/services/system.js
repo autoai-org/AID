@@ -91,6 +91,17 @@ class SystemService {
       })
     })
   }
+  // contrib
+  getAllDatasets () {
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/datasets', {
+      }).then(function (res) {
+        resolve(res)
+      }).then(function (err) {
+        reject(err)
+      })
+    })
+  }
 }
 
 const configService = new ConfigService()

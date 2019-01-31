@@ -462,10 +462,9 @@
   version = "v1.0.0"
 
 [[projects]]
-  digest = "1:0ba34643d8d8ce5aadd4d09283fa4c06301ac6bfc9d2b0d12a90b740d7074d0f"
+  digest = "1:014d86c6b3f1811b99a705133b4f9e9d9c1270fed55497f0387362c728c414b3"
   name = "github.com/shirou/gopsutil"
   packages = [
-    ".",
     "cpu",
     "host",
     "internal/common",
@@ -773,7 +772,6 @@
     "github.com/manifoldco/promptui",
     "github.com/mitchellh/go-homedir",
     "github.com/olekukonko/tablewriter",
-    "github.com/shirou/gopsutil",
     "github.com/shirou/gopsutil/cpu",
     "github.com/shirou/gopsutil/host",
     "github.com/shirou/gopsutil/mem",

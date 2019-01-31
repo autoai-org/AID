@@ -8,6 +8,8 @@ function getMenus () {
         { 'href': '/log', 'title': 'Log', 'icon': 'fas fa-terminal', 'id': 'cvpm-tour-logs', 'openType': 'nav' },
         { 'href': '/settings', 'title': 'Settings', 'icon': 'settings', 'id': 'cvpm-tour-settings', 'openType': 'nav' },
         { 'href': '/login', 'icon': 'lock', 'title': 'Logout' },
+        { 'header': 'Contrib' },
+        { 'href': '/datasets', 'title': 'Datasets', 'icon': 'fas fa-terminal', 'id': 'cvpm-tour-logs', 'openType': 'nav' },
         { 'header': 'About' },
         { 'href': 'https://hub.autoai.org', 'title': 'Hub', 'icon': 'device_hub', 'id': 'cvpm-tour-logs', 'openType': '_blank' },
         { 'href': 'https://github.com/unarxiv/cvpm', 'title': 'GitHub', 'icon': 'fab fa-github', 'id': 'cvpm-tour-settings', 'openType': '_blank' },
