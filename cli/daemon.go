@@ -238,7 +238,8 @@ func runServer(port string) {
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
 	// Contrib Related Routes
-	r.GET("/datasets", GetAllDatasets)
+	r.GET("/contrib/datasets", GetAllDatasets)
+	r.POST("/contrib/datasets/registries", AddNewRegistry)
 	r.Handle("WS", "/socket.io/", socketHandler)
 	r.Handle("WSS", "/socket.io/", socketHandler)
 	r.Run("0.0.0.0:" + port)

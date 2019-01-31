@@ -1,6 +1,9 @@
 <template>
   <v-container>
     <v-card>
+      <v-btn outline color="indigo" @click="trigger_sync()">
+        <v-icon left dark>fas fa-sync</v-icon>Sync
+      </v-btn>
       <v-data-table :items="datasets" :headers="headers" class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-left">{{ props.item.Name }}</td>
@@ -46,6 +49,24 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-dialog v-model="datasetSyncDialog">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Sync Database</span>
+        </v-card-title>
+        <v-card-text>
+          <v-text-field
+            label="Datasets URL*"
+            required
+            v-model="databaseURL"
+            hint="e.g: https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml"
+          ></v-text-field>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="indigo darken-1" outline @click="sync()">Sync</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
@@ -57,6 +78,8 @@ export default {
       datasets: [],
       searchName: '',
       detailDialog: false,
+      datasetSyncDialog: false,
+      databaseURL: 'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
       detailInfo: {},
       searchTag: '',
       headers: [
@@ -88,6 +111,14 @@ export default {
     }
   },
   methods: {
+    trigger_sync () {
+      this.datasetSyncDialog = true
+    },
+    sync () {
+      systemService.SyncDatabase(this.databaseURL).then(function (res) {
+        location.reload()
+      })
+    },
     filterTags (tag) {
       if (tag !== '') {
         return tag
