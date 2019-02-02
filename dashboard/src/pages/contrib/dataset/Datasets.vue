@@ -1,9 +1,12 @@
 <template>
   <v-container>
-    <v-card>
+    <v-btn outline color="indigo" @click="trigger_sync()">
+      <v-icon left dark>fas fa-sync</v-icon>Sync
+    </v-btn>
       <v-btn outline color="indigo" @click="trigger_sync()">
-        <v-icon left dark>fas fa-sync</v-icon>Sync
-      </v-btn>
+      <v-icon left dark>fas fa-star</v-icon>Starred
+    </v-btn>
+    <v-card>
       <v-data-table :items="datasets" :headers="headers" class="elevation-1">
         <template slot="items" slot-scope="props">
           <td class="text-xs-left">{{ props.item.Name }}</td>
@@ -32,7 +35,7 @@
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>{{detailInfo.Name}}</v-card-title>
 
-        <v-card-text>{{detailInfo.FullDesc}}</v-card-text>
+        <v-card-text><pre>{{detailInfo.FullDesc}}</pre></v-card-text>
 
         <v-divider></v-divider>
         <v-card-text>
@@ -168,5 +171,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
 </style>
