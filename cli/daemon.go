@@ -160,6 +160,41 @@ func BeforeResponse() gin.HandlerFunc {
 	}
 }
 
+// Delete Running Solver Process
+func StopInferProcess(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	solver := c.Param("solver")
+	var runningPort string
+	for _, runningSolver := range RunningSolvers {
+		if runningSolver.Vendor == vendor && runningSolver.Package == name && runningSolver.SolverName == solver {
+			runningPort = runningSolver.Port
+		}
+	}
+	// if the solver is not found
+	if runningPort == "" {
+		c.JSON(http.StatusNotFound, gin.H{
+			"error": "404",
+			"info":  "Solver Not Running, if you want to force it running, please attach a force=true in your request body",
+			"help":  "https://cvpm.autoai.org",
+		})
+	}
+	stopReturnValue := StopInferEngine(runningPort)
+	if !stopReturnValue {
+		c.JSON(http.StatusForbidden, gin.H{
+			"error": "403",
+			"info":  "Bad request from the infer engine",
+			"help":  "https://cvpm.autoai.org",
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"error": "200",
+			"info":  "Successfully stopped",
+			"help":  "https://cvpm.autoai.org",
+		})
+	}
+}
+
 // Reverse Proxy for Calling Solvers and return real results
 func ReverseProxy(c *gin.Context) {
 	vendor := c.Param("vendor")
@@ -232,6 +267,7 @@ func runServer(port string) {
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
+	r.DELETE("/solvers/:vendor/:name/:solver", StopInferProcess)
 	// Reverse Proxy for solvers
 	r.POST("/solvers/:vendor/:name/:solver", ReverseProxy)
 	// Socket Related Routes

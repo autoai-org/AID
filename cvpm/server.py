@@ -96,6 +96,10 @@ def train():
     else:
         return json.dumps({"error": "not supported!", "code": "404"}), 404
 
+@server.route("/exit", methods=["GET"])
+def exit_server():
+    # Exit under request
+    exit()
 
 def run_server(solver, port=None):
     if port is None:

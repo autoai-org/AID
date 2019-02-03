@@ -2,6 +2,9 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
+// This file (process.go) handles two things:
+// 1. Shell Command, like Python/Pip.
+// 2. Daemon Process, typically goroutine.
 package main
 
 import (
