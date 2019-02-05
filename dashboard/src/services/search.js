@@ -22,7 +22,6 @@ class SearchService {
         threshold: 5, // >= initial threshold
         depth: 3,     // <= initial depth
         callback: function (results) {
-          console.log(results)
           resolve(results)
         }
       })
