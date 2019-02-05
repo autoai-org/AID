@@ -3,7 +3,7 @@ before:
   hooks:
 builds:
   -
-    main: ./cli/
+    main: ./cli/main.go
   - 
     goos:
       - freebsd
