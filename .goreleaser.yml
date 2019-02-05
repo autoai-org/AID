@@ -1,11 +1,9 @@
 project_name: cvpm
 before:
   hooks:
-    - mkdir build
-    - cp -r cli/. build/.
 builds:
   -
-    main: ./build/
+    main: ./cli/
   - 
     goos:
       - freebsd
@@ -15,6 +13,8 @@ builds:
     binary: cvpm
     goarch:
       - amd64
+      - arm
+      - arm64
     env:
       - CGO_ENABLED=0
     goarm:
