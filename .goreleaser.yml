@@ -8,8 +8,8 @@ builds:
     main: ./build/
   - 
     goos:
+      - freebsd
       - linux
-      - windows
       - darwin
     binary: cvpm
     goarch:
