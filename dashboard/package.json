@@ -16,6 +16,7 @@
   "dependencies": {
     "@vuetify/vuex-cognito-module": "0.4.0",
     "axios": "0.18.0",
+    "flexsearch": "^0.3.61",
     "js-base64": "2.5.1",
     "toml": "2.3.6",
     "vue": "2.5.22",
