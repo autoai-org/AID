@@ -50,7 +50,7 @@ func ClientGet(endpoint string, params map[string]string) {
 	}
 }
 
-func ClientDelete(endpoint string) {
+func ClientDelete(endpoint string) *grequests.Response {
 	url := "http://127.0.0.1:10590/" + endpoint
 	resp, err := grequests.Delete(url, &grequests.RequestOptions{})
 	if err != nil {
@@ -59,6 +59,7 @@ func ClientDelete(endpoint string) {
 	if resp.Ok != true {
 		log.Fatal("Bad Response from Daemon")
 	}
+	return resp
 }
 
 func StopInferEngine(port string) bool {
