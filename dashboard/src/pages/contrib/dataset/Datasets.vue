@@ -3,9 +3,10 @@
     <v-btn outline color="indigo" @click="trigger_sync()">
       <v-icon left dark>fas fa-sync</v-icon>Sync
     </v-btn>
-      <v-btn outline color="indigo" @click="trigger_sync()">
+    <v-btn outline color="indigo" @click="alert('Coming Soon')">
       <v-icon left dark>fas fa-star</v-icon>Starred
     </v-btn>
+    <v-text-field label="Search" v-model="searchKW"></v-text-field>
     <v-card>
       <v-data-table :items="datasets" :headers="headers" class="elevation-1">
         <template slot="items" slot-scope="props">
@@ -35,7 +36,9 @@
       <v-card>
         <v-card-title class="headline grey lighten-2" primary-title>{{detailInfo.Name}}</v-card-title>
 
-        <v-card-text><pre>{{detailInfo.FullDesc}}</pre></v-card-text>
+        <v-card-text>
+          <pre>{{detailInfo.FullDesc}}</pre>
+        </v-card-text>
 
         <v-divider></v-divider>
         <v-card-text>
@@ -73,16 +76,22 @@
   </v-container>
 </template>
 
+
 <script>
+
 import { systemService } from '@/services/system'
+import { searchService } from '@/services/search'
 export default {
   data () {
     return {
       datasets: [],
+      allDatasets: [],
       searchName: '',
       detailDialog: false,
+      searchKW: '',
       datasetSyncDialog: false,
-      databaseURL: 'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
+      databaseURL:
+        'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
       detailInfo: {},
       searchTag: '',
       headers: [
@@ -113,7 +122,25 @@ export default {
       ]
     }
   },
+  watch: {
+    searchKW (val) {
+      let self = this
+      if (val === '') {
+        self.datasets = self.allDatasets
+      }
+      searchService.searchItems(val).then(function (res) {
+        if (res.length !== 0) {
+          self.datasets = res.map(function (each) {
+            return self.allDatasets[each]
+          })
+        }
+      })
+    }
+  },
   methods: {
+    alert (message) {
+      alert(message)
+    },
     trigger_sync () {
       this.datasetSyncDialog = true
     },
@@ -162,6 +189,10 @@ export default {
           }
         })
         self.datasets = self.datasets.filter(self.filterDatasets)
+        self.allDatasets = self.datasets
+        for (var index in self.datasets) {
+          searchService.addItem(index, self.datasets[index])
+        }
       })
     }
   },
@@ -175,5 +206,8 @@ export default {
 pre {
   white-space: pre-wrap;
   word-wrap: break-word;
+}
+.keyword-hit {
+  color: red;
 }
 </style>

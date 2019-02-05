@@ -267,7 +267,7 @@ func runServer(port string) {
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
-	r.DELETE("/solvers/:vendor/:name/:solver", StopInferProcess)
+	r.DELETE("/solvers/running/:vendor/:name/:solver", StopInferProcess)
 	// Reverse Proxy for solvers
 	r.POST("/solvers/:vendor/:name/:solver", ReverseProxy)
 	// Socket Related Routes

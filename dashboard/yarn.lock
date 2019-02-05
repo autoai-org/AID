@@ -3779,6 +3779,11 @@ flatten@^1.0.2:
   resolved "http://registry.npm.taobao.org/flatten/download/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
   integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
 
+flexsearch@^0.3.61:
+  version "0.3.61"
+  resolved "http://registry.npm.taobao.org/flexsearch/download/flexsearch-0.3.61.tgz#ca65068bfc81e6738a92b55c1036f6ffb30eaed0"
+  integrity sha1-ymUGi/yB5nOKkrVcEDb2/7MOrtA=
+
 flush-write-stream@^1.0.0:
   version "1.0.3"
   resolved "http://registry.npm.taobao.org/flush-write-stream/download/flush-write-stream-1.0.3.tgz#c5d586ef38af6097650b49bc41b55fabb19f35bd"
