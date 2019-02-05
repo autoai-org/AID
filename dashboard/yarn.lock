@@ -9833,10 +9833,10 @@ vue@^2.5.17:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.5.19.tgz#c4c9ba01a97a23ea24018d4702e994c15785e025"
   integrity sha1-xMm6Aal6I+okAY1HAumUwVeF4CU=
 
-vuetify@1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.4.tgz#0a08d98e685a875e3d7fd035235932d9abf3fd5b"
-  integrity sha512-i0fNciTrzP+U6NinB2kmNMC5vWXtrTy5QcVFLOxv4dhhqTiMTyHj7rV1B2lwBTZYoDhimmSAYRfqHeKdCMx+Gg==
+vuetify@1.4.6:
+  version "1.4.6"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.4.6.tgz#908cbe4e39e842a23e26fe0d25f059dc39b7eef6"
+  integrity sha512-EALZORyKuxKRGhXdjDJVIRP2ulZzS8cqvhas/7wI0hpOeqONLoOLL6PTOYELf3ZFIc2xawSOLvz2HfBihuFHMQ==
 
 vuex@3.1.0:
   version "3.1.0"
