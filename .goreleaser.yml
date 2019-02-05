@@ -1,8 +1,11 @@
 project_name: cvpm
 before:
   hooks:
-    - cp -r cli/. ./
+    - mkdir build
+    - cp -r cli/. build/.
 builds:
+  -
+    main: build/main.go
   - 
     goos:
       - freebsd
