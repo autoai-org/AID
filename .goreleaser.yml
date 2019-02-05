@@ -8,7 +8,6 @@ builds:
     main: ./build/
   - 
     goos:
-      - freebsd
       - linux
       - windows
       - darwin
