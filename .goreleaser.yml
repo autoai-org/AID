@@ -5,7 +5,7 @@ before:
     - cp -r cli/. build/.
 builds:
   -
-    main: build/main.go
+    main: build
   - 
     goos:
       - freebsd
