@@ -15,7 +15,6 @@ builds:
     binary: cvpm
     goarch:
       - amd64
-      - arm64
     env:
       - CGO_ENABLED=0
     goarm:
