@@ -10,11 +10,11 @@ builds:
     goos:
       - freebsd
       - linux
+      - windows
       - darwin
     binary: cvpm
     goarch:
       - amd64
-      - arm
       - arm64
     env:
       - CGO_ENABLED=0
