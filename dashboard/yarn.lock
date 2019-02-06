@@ -9774,10 +9774,10 @@ vue@^2.5.16, vue@^2.5.17:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.2.tgz#1cc9c9c8f7ba8df45e9b97c284947de78b76301c"
   integrity sha1-HMnJyPe6jfRem5fChJR954t2MBw=
 
-vuetify@1.4.6:
-  version "1.4.6"
-  resolved "http://registry.npm.taobao.org/vuetify/download/vuetify-1.4.6.tgz#908cbe4e39e842a23e26fe0d25f059dc39b7eef6"
-  integrity sha1-kIy+TjnoQqI+Jv4NJfBZ3Dm37vY=
+vuetify@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.0.tgz#b7334f525b5dd416b01d5e9ddbadad22beeb9d7f"
+  integrity sha512-I2bITwvtkfbUf2hfrKo3Uta4egpv5KzEcKR1czgdyjZdA1nlo96XV2EDu0XetLl6p+AjhOqwlZWbLSezy9ZZmQ==
 
 vuex@3.1.0:
   version "3.1.0"
