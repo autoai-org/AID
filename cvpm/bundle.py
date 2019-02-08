@@ -2,6 +2,12 @@ import json
 
 
 def is_jsonable(x):
+    """
+    Tells you if an object is jsonable
+    :return: if it is jsonable or not
+    :rtype: bool
+    :param x: the object you are testing
+    """
     try:
         json.dumps(x)
         return True
@@ -14,7 +20,13 @@ def is_jsonable(x):
 class Bundle(object):
     __SOLVERS__ = []
 
-    def add_solver(self, solver):
+    def add_solver(self, solver) -> None:
+        """
+        Adds a solver
+        :param self:
+        :param solver: solver to add
+        :return: None
+        """
         self.__SOLVERS__.append(solver)
 
     @classmethod
