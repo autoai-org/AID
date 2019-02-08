@@ -3772,10 +3772,10 @@ flatten@^1.0.2:
   resolved "http://registry.npm.taobao.org/flatten/download/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
   integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
 
-flexsearch@^0.3.61:
+flexsearch@0.3.61:
   version "0.3.61"
-  resolved "http://registry.npm.taobao.org/flexsearch/download/flexsearch-0.3.61.tgz#ca65068bfc81e6738a92b55c1036f6ffb30eaed0"
-  integrity sha1-ymUGi/yB5nOKkrVcEDb2/7MOrtA=
+  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.3.61.tgz#ca65068bfc81e6738a92b55c1036f6ffb30eaed0"
+  integrity sha512-CrzQDICJggD0X41gV2PR6JiACdqWTQiGRqjyt2EaBLJVmOI0+/KaJC69AIOVjzE2yw3pzzyrHYo+hpxdKUQlpg==
 
 flush-write-stream@^1.0.0:
   version "1.1.0"
@@ -9777,10 +9777,10 @@ vue@^2.5.16, vue@^2.5.17:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.2.tgz#1cc9c9c8f7ba8df45e9b97c284947de78b76301c"
   integrity sha1-HMnJyPe6jfRem5fChJR954t2MBw=
 
-vuetify@1.5.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.0.tgz#b7334f525b5dd416b01d5e9ddbadad22beeb9d7f"
-  integrity sha512-I2bITwvtkfbUf2hfrKo3Uta4egpv5KzEcKR1czgdyjZdA1nlo96XV2EDu0XetLl6p+AjhOqwlZWbLSezy9ZZmQ==
+vuetify@1.4.6:
+  version "1.4.6"
+  resolved "http://registry.npm.taobao.org/vuetify/download/vuetify-1.4.6.tgz#908cbe4e39e842a23e26fe0d25f059dc39b7eef6"
+  integrity sha1-kIy+TjnoQqI+Jv4NJfBZ3Dm37vY=
 
 vuex@3.1.0:
   version "3.1.0"
