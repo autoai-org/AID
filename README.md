@@ -28,7 +28,7 @@ Full documentation can be found [here](https://cvpm.autoai.org).
 
 ## Contributing
 
-If you found a security bugs, please do not post it in issues or any other public forum. You can send me [email](mailto:xiaozhe.yaoi@qq.com) directly.
+If you found a security bug, please do not post it in issues or any other public forum. You can send me [email](mailto:xiaozhe.yaoi@qq.com) directly.
 
 ## Contributors
 [![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/0)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/0)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/1)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/1)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/2)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/2)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/3)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/3)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/4)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/4)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/5)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/5)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/6)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/6)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/7)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/7)
@@ -42,7 +42,7 @@ This project is inspired from [CVTron](https://docs.cvtron.org).
 
 Q: Where can I find useful models?
 
-A: There are three places. The first one, which we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, search models. The second one is GitHub. At GiHub, you can search for CVPM_Available in readme file, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for other models.
+A: There are three places. The first one, which we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, and search models. The second one is GitHub. On GitHub, you can search for CVPM_Available in readme files, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for other models.
 
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_large)
