@@ -11,6 +11,7 @@ export interface IConfig {
     cognitoPoolId: string;
     cognitoClientId: string;
     cognitoRegion: string;
+    stripe: string;
 }
 
 const config: IConfig = {
@@ -21,7 +22,8 @@ const config: IConfig = {
     blogURL: process.env.BLOG_URL || 'https://write.as/api/collections/autoai',
     cognitoPoolId: process.env.COGNITO_POOL_ID || '',
     cognitoClientId: process.env.COGNITO_CLIENT_ID || '',
-    cognitoRegion: process.env.COGNITO_REGION || ''
+    cognitoRegion: process.env.COGNITO_REGION || '',
+    stripe: process.env.stripeID || '',
 };
 
 export { config };
