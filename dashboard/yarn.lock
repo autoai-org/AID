@@ -3813,10 +3813,10 @@ flatten@^1.0.2:
   resolved "http://registry.npm.taobao.org/flatten/download/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
   integrity sha1-2uRqnXj74lKSJYzB54CkHZXAN4I=
 
-flexsearch@0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.4.0.tgz#1a149c000dc2eec90b774d9b4976b08ac5136b7d"
-  integrity sha512-AF6XS6m70s2StAQrJq3bnAP5rurtBVhfffJYGmf4gzRpDIQoV0YM6fJS+6OrIbryAQr8CzUcVc00/yePbvRzfQ==
+flexsearch@0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.6.2.tgz#f9e8de90914ce82096952571b937863a6b75a474"
+  integrity sha512-EMKrxmskJHNFxsVwsmnDMxVmWnNy6WMa3PkTXRs+UK5/eJofHCL8YCA8tfoOvFTMQhgCxvrsR2fkwBn39OrxPA==
 
 flush-write-stream@^1.0.0:
   version "1.1.0"
