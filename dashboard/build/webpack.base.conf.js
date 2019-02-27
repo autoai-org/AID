@@ -1,7 +1,6 @@
 'use strict'
 
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 const utils = require('./utils')
@@ -16,7 +15,7 @@ module.exports = {
       'assets': utils.resolve('assets'),
       '@': utils.resolve('src'),
       'static': utils.resolve('static'),
-      vue:'vue/dist/vue.js'
+      vue: 'vue/dist/vue.js'
     }
   },
 
@@ -40,6 +39,11 @@ module.exports = {
         test: /\.js$/,
         use: {
           loader: 'babel-loader',
+          options: {
+            plugins: [
+              "@babel/plugin-syntax-dynamic-import"
+            ]
+          }
         }
       }, {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
