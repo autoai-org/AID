@@ -2,14 +2,13 @@ import * as cors from '@koa/cors';
 import * as Koa from 'koa';
 import bodyParser from 'koa-bodyparser-ts';
 import * as helmet from 'koa-helmet';
-import * as winston from 'winston';
 import * as passport from 'koa-passport';
 import * as session from 'koa-session';
 
 import { initParse } from './parse';
 import { config } from './config';
 import { router } from './routes';
-import { logger } from './logging';
+import { Sentry } from './logging'
 
 import * as os from 'os';
 
@@ -38,9 +37,12 @@ app.use(async (ctx: Koa.Context, next) => {
 
 app.use(cors());
 app.use(helmet());
-app.use(logger(winston));
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
-
+app.on('error', err=>{
+    console.error(err)
+    Sentry.captureException(err)
+})
 app.listen(config.port);
-winston.log('info', `Server running on port ${config.port}`);
+console.log('CVPM Discovery Service Started on port: ' + config.port)
+console.info(config)

@@ -24,4 +24,6 @@ router.post('/session', controller.user.validateAccessToken);
 
 router.get('/news', controller.news.queryNews);
 
+router.post('/paywall/customer', controller.paywall.createCustomer);
+
 export { router };

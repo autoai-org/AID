@@ -95,20 +95,20 @@ func PostReposHandler(c *gin.Context) {
 	}
 }
 
-// GET /repos -> return all repositories
+// GetReposHandler : GET /repos -> return all repositories
 func GetReposHandler(c *gin.Context) {
 	config := readConfig()
 	c.JSON(http.StatusOK, config.Repositories)
 }
 
-// GET /repo/meta/:vendor/:name -> return repository meta info
+// GetRepoMetaHandler : GET /repo/meta/:vendor/:name -> return repository meta info
 func GetRepoMetaHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
 	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
 }
 
-// GET /system -> return system info
+// GetSystemHandler : GET /system -> return system info
 func GetSystemHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, getSystemInfo())
 }
