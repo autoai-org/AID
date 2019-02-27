@@ -1,5 +1,8 @@
 <template>
-  <section id="home" class="signInPage">
+  <section
+    id="home"
+    class="signInPage"
+  >
     <BaseCard>
       <VCardText class="pa-5">
         <VImg
@@ -25,15 +28,15 @@
 </template>
 
 <script>
-  export default {
-    components: {
-      Email: () => import('@/components/auth/Email'),
-      Password: () => import('@/components/auth/Password')
-    },
-    data: () => ({
-      model: 0
-    })
-  }
+export default {
+  components: {
+    Email: () => import('@/components/auth/Email'),
+    Password: () => import('@/components/auth/Password')
+  },
+  data: () => ({
+    model: 0
+  })
+}
 </script>
 
 <style scoped>

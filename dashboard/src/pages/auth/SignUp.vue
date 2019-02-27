@@ -1,12 +1,29 @@
 <template>
-  <section id="signup" class="signUpPage">
-    <VCard class="v-card--auth pa-5" color="white">
-      <VContainer pa-0 grid-list-xl>
+  <section
+    id="signup"
+    class="signUpPage"
+  >
+    <VCard
+      class="v-card--auth pa-5"
+      color="white"
+    >
+      <VContainer
+        pa-0
+        grid-list-xl
+      >
         <VLayout>
           <VFlex xs8>
-            <h2 class="headline font-weight-black primary--text">AutoAI</h2>
-            <h1 class="headline font-weight-regular mb-5">Create your AutoAI Account</h1>
-            <VForm ref="form" v-model="form" class="mb-5">
+            <h2 class="headline font-weight-black primary--text">
+              AutoAI
+            </h2>
+            <h1 class="headline font-weight-regular mb-5">
+              Create your AutoAI Account
+            </h1>
+            <VForm
+              ref="form"
+              v-model="form"
+              class="mb-5"
+            >
               <VContainer pa-0>
                 <VLayout wrap>
                   <VFlex xs6>
@@ -59,18 +76,37 @@
                     />
                   </VFlex>
                 </VLayout>
-                <VLayout align-center justify-space-between pt-3>
+                <VLayout
+                  align-center
+                  justify-space-between
+                  pt-3
+                >
                   <VFlex grow>
-                    <BaseText to="/auth/signin">Sign in instead</BaseText>
+                    <BaseText to="/auth/signin">
+                      Sign in instead
+                    </BaseText>
                   </VFlex>
                   <VFlex shrink>
-                    <BaseBtn :disabled="!form" :loading="isLoading" prominent @click="submit">Next</BaseBtn>
+                    <BaseBtn
+                      :disabled="!form"
+                      :loading="isLoading"
+                      prominent
+                      @click="submit"
+                    >
+                      Next
+                    </BaseBtn>
                   </VFlex>
                 </VLayout>
               </VContainer>
             </VForm>
           </VFlex>
-          <VFlex align-center column layout justify-center xs4>
+          <VFlex
+            align-center
+            column
+            layout
+            justify-center
+            xs4
+          >
             <VImg
               :src="require('@/assets/logo.png')"
               class="mb-3"
@@ -81,7 +117,8 @@
             />
             <div
               class="flex-grow subheading font-weight-regular text-xs-center"
-            >One account. All of AutoAI
+            >
+              One account. All of AutoAI
               <br>working for you.
             </div>
           </VFlex>

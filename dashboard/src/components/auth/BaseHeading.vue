@@ -16,18 +16,18 @@
 </template>
 
 <script>
-  export default {
-    inheritAttrs: false,
+export default {
+  inheritAttrs: false,
 
-    props: {
-      sub: {
-        type: String,
-        default: undefined
-      },
-      text: {
-        type: String,
-        default: undefined
-      }
+  props: {
+    sub: {
+      type: String,
+      default: undefined
+    },
+    text: {
+      type: String,
+      default: undefined
     }
   }
+}
 </script>

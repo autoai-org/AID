@@ -5,39 +5,79 @@
     </v-card-title>
     <v-card-text>
       <v-text-field
+        v-model="repo"
         label="Git URL*"
         required
-        v-model="repo"
         hint="e.g: https://github.com/cvmodel/Face_Utility"
-      ></v-text-field>
+      />
     </v-card-text>
-    <v-alert class="cvpm-git-alert" :value="error" type="error">{{ error }}</v-alert>
-    <v-alert outline class="cvpm-git-alert" :value="info" type="info">{{ info }}</v-alert>
+    <v-alert
+      class="cvpm-git-alert"
+      :value="error"
+      type="error"
+    >
+      {{ error }}
+    </v-alert>
+    <v-alert
+      outline
+      class="cvpm-git-alert"
+      :value="info"
+      type="info"
+    >
+      {{ info }}
+    </v-alert>
     <v-expansion-panel class="cvpm-git-import-detail">
       <v-expansion-panel-content v-if="cvpmConfig">
-        <div slot="header">cvpm.toml</div>
+        <div slot="header">
+          cvpm.toml
+        </div>
         <v-card class="cvpm-config-text">
           <pre>{{ cvpmConfig }}</pre>
         </v-card>
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="readme">
-        <div slot="header">Readme</div>
+        <div slot="header">
+          Readme
+        </div>
         <v-card>
-          <vue-markdown class="cvpm-repo-readme">{{ readme }}</vue-markdown>
+          <vue-markdown class="cvpm-repo-readme">
+            {{ readme }}
+          </vue-markdown>
         </v-card>
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="dependency">
-        <div slot="header">Dependency</div>
+        <div slot="header">
+          Dependency
+        </div>
         <v-card class="cvpm-config-text">
           <pre>{{ dependency }}</pre>
         </v-card>
       </v-expansion-panel-content>
     </v-expansion-panel>
     <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="indigo darken-1" outline @click="closeDialog()">Close</v-btn>
-      <v-btn color="indigo darken-1" outline @click="fetchMeta()">Fetch Meta</v-btn>
-      <v-btn color="indigo darken-1" :loading="installing" outline @click="save()">Install</v-btn>
+      <v-spacer />
+      <v-btn
+        color="indigo darken-1"
+        outline
+        @click="closeDialog()"
+      >
+        Close
+      </v-btn>
+      <v-btn
+        color="indigo darken-1"
+        outline
+        @click="fetchMeta()"
+      >
+        Fetch Meta
+      </v-btn>
+      <v-btn
+        color="indigo darken-1"
+        :loading="installing"
+        outline
+        @click="save()"
+      >
+        Install
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -48,6 +88,9 @@ import { systemService } from '@/services/system'
 import VueMarkdown from 'vue-markdown'
 let Base64 = require('js-base64').Base64
 export default {
+  components: {
+    'vue-markdown': VueMarkdown
+  },
   data () {
     return {
       repo: '',
@@ -58,9 +101,6 @@ export default {
       info: '',
       installing: false
     }
-  },
-  components: {
-    'vue-markdown': VueMarkdown
   },
   inject: ['reload'],
   methods: {

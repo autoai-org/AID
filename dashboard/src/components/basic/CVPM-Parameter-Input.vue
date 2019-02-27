@@ -2,25 +2,27 @@
   <div>
     <h4>Paramters required by CVPM</h4>
     <v-text-field
-      v-if="typeof(item.value) === 'string'"
-      v-for="(item, index) in systemRequiredParams"
+      v-for="(item, index) in stringParameters"
       :key="index"
+      v-model="item.value"
       :label="item.key"
       required
-      v-model="item.value"
       :hint="item.hint"
-    ></v-text-field>
+    />
     <v-checkbox
-      v-for="(item, index) in systemRequiredParams"
+      v-for="(item, index) in booleanParamters"
       :key="index"
-      v-if="typeof(item.value) === 'boolean'"
-      :label="item.key"
       v-model="item.value"
+      :label="item.key"
       :hint="item.hint"
-    ></v-checkbox>
-    <v-divider></v-divider>
+    />
+    <v-divider />
     <h4>Parameters required by Solver</h4>
-    <v-btn color="indigo darken-1" outline @click="addParams()">
+    <v-btn
+      color="indigo darken-1"
+      outline
+      @click="addParams()"
+    >
       <v-icon>add</v-icon>
     </v-btn>
     <v-layout>
@@ -28,28 +30,36 @@
         <v-text-field
           v-for="(item, index) in solverDefinedParams"
           :key="index"
-          label="Key"
           v-model="item.key"
+          label="Key"
           hint
-        ></v-text-field>
+        />
       </v-flex>
       <v-flex xs6>
         <v-text-field
           v-for="(item, index) in solverDefinedParams"
           :key="index"
-          label="Value"
           v-model="item.value"
+          label="Value"
           hint
-        ></v-text-field>
+        />
       </v-flex>
     </v-layout>
-    <v-btn color="indigo darken-1" outline @click="startTest()" :loading="loading">Start!</v-btn>
+    <v-btn
+      color="indigo darken-1"
+      outline
+      :loading="loading"
+      @click="startTest()"
+    >
+      Start!
+    </v-btn>
   </div>
 </template>
 
 <script>
 import { systemService } from '@/services/system'
 export default {
+  props: ['file', 'vendor', 'packageName', 'solverName'],
   data () {
     return {
       loading: false,
@@ -63,7 +73,14 @@ export default {
       solverDefinedParams: []
     }
   },
-  props: ['file', 'vendor', 'packageName', 'solverName'],
+  computed: {
+    stringParameters () {
+      return this.systemRequiredParams.filter(each => typeof (each.value) === 'string')
+    },
+    booleanParamters () {
+      return this.systemRequiredParams.filter(each => typeof (each.value) === 'boolean')
+    }
+  },
   methods: {
     addParams () {
       this.solverDefinedParams.push({

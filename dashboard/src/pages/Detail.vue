@@ -1,30 +1,48 @@
 <template>
   <v-container>
-    <v-layout row wrap>
-      <v-flex xs6 class="cvpm-package-detail-card">
+    <v-layout
+      row
+      wrap
+    >
+      <v-flex
+        xs6
+        class="cvpm-package-detail-card"
+      >
         <cvpm-repo-meta
           :config="config"
           :dependency="dependency"
-          :diskSize="diskSize"
+          :disk-size="diskSize"
           :readme="readme"
-        ></cvpm-repo-meta>
+        />
       </v-flex>
-      <v-flex xs5 class="cvpm-package-detail-card">
-        <cvpm-log :title="'Package Log'" :messageList="messageList"></cvpm-log>
+      <v-flex
+        xs5
+        class="cvpm-package-detail-card"
+      >
+        <cvpm-log
+          :title="'Package Log'"
+          :message-list="messageList"
+        />
       </v-flex>
-      <v-flex xs6 class="cvpm-package-detail-card">
-          <cvpm-repo-solver
-            :config="parsedConfig"
-            :vendor="toSelectVendor"
-            :packageName="toSelectPackage"
-          ></cvpm-repo-solver>
+      <v-flex
+        xs6
+        class="cvpm-package-detail-card"
+      >
+        <cvpm-repo-solver
+          :config="parsedConfig"
+          :vendor="toSelectVendor"
+          :package-name="toSelectPackage"
+        />
       </v-flex>
-      <v-flex xs6 class="cvpm-package-detail-card">
-          <cvpm-actions 
-            :config="parsedConfig"
-            :vendor="toSelectVendor"
-            :packageName="toSelectPackage"
-          ></cvpm-actions>
+      <v-flex
+        xs6
+        class="cvpm-package-detail-card"
+      >
+        <cvpm-actions
+          :config="parsedConfig"
+          :vendor="toSelectVendor"
+          :package-name="toSelectPackage"
+        />
       </v-flex>
     </v-layout>
   </v-container>
@@ -38,6 +56,12 @@ import cvpmActions from '@/components/CVPM-Actions'
 import { systemService } from '@/services/system'
 import toml from 'toml'
 export default {
+  components: {
+    'cvpm-repo-meta': cvpmRepoMeta,
+    'cvpm-log': Log,
+    'cvpm-repo-solver': cvpmRepoSolver,
+    'cvpmActions': cvpmActions
+  },
   data () {
     return {
       readme: '',
@@ -48,11 +72,16 @@ export default {
       messageList: []
     }
   },
-  components: {
-    'cvpm-repo-meta': cvpmRepoMeta,
-    'cvpm-log': Log,
-    'cvpm-repo-solver': cvpmRepoSolver,
-    'cvpmActions': cvpmActions
+  computed: {
+    toSelectVendor () {
+      return [this.$route.params.vendor]
+    },
+    toSelectPackage () {
+      return [this.$route.params.name]
+    }
+  },
+  created () {
+    this.fetchMeta()
   },
   methods: {
     fetchMeta () {
@@ -68,20 +97,9 @@ export default {
         })
     }
   },
-  created () {
-    this.fetchMeta()
-  },
   sockets: {
     package: function (data) {
       this.messageList.push(data)
-    }
-  },
-  computed: {
-    toSelectVendor () {
-      return [this.$route.params.vendor]
-    },
-    toSelectPackage () {
-      return [this.$route.params.name]
     }
   }
 }

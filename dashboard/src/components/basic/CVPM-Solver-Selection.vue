@@ -1,33 +1,49 @@
 <template>
   <v-layout class="cvpm-solver-runner-selection">
-    <v-select v-model="selectedVendor" :items="vendor" label="Vendor"></v-select>
-    <v-select v-model="selectedPackage" :items="packageName" label="Package"></v-select>
+    <v-select
+      v-model="selectedVendor"
+      :items="vendor"
+      label="Vendor"
+    />
+    <v-select
+      v-model="selectedPackage"
+      :items="packageName"
+      label="Package"
+    />
     <v-flex xs6>
       <v-select
         v-model="selectedSolver"
         :items="config.solvers"
         item-text="name"
         label="Solver"
-      ></v-select>
+      />
     </v-flex>
   </v-layout>
 </template>
 
 <script>
 export default {
+  props: {
+    config: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    vendor: {
+      type: String,
+      default: ''
+    },
+    packageName: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       selectedVendor: this.vendor[0],
       selectedPackage: this.packageName[0],
       selectedSolver: ''
-    }
-  },
-  props: ['config', 'vendor', 'packageName'],
-  watch: {
-    hasFinishSelection: function (val) {
-      if (val) {
-        this.finishSelection()
-      }
     }
   },
   computed: {
@@ -36,6 +52,13 @@ export default {
         return true
       } else {
         return false
+      }
+    }
+  },
+  watch: {
+    hasFinishSelection: function (val) {
+      if (val) {
+        this.finishSelection()
       }
     }
   },

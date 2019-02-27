@@ -27,6 +27,6 @@ function getStatus () {
 }
 
 export {
-    getNews,
-    getStatus
+  getNews,
+  getStatus
 }

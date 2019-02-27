@@ -30,5 +30,5 @@ if (discoveryConfig.developerMode) {
 }
 
 export {
-    discovery
+  discovery
 }

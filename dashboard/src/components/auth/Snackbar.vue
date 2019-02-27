@@ -18,34 +18,34 @@
 </template>
 
 <script>
-  // Utilities
-  import {
-    mapState
-  } from 'vuex'
+// Utilities
+import {
+  mapState
+} from 'vuex'
 
-  const ICON_MAP = {
-    error: 'mdi-alert-octagon',
-    info: 'mdi-information',
-    success: 'mdi-check-circle',
-    warning: 'mdi-alert-circle'
-  }
+const ICON_MAP = {
+  error: 'mdi-alert-octagon',
+  info: 'mdi-information',
+  success: 'mdi-check-circle',
+  warning: 'mdi-alert-circle'
+}
 
-  export default {
-    data: () => ({
-      model: false
-    }),
+export default {
+  data: () => ({
+    model: false
+  }),
 
-    computed: {
-      ...mapState(['snackbar']),
-      icon () {
-        return ICON_MAP[this.snackbar.type] || 'mdi-playlist-check'
-      }
-    },
+  computed: {
+    ...mapState(['snackbar']),
+    icon () {
+      return ICON_MAP[this.snackbar.type] || 'mdi-playlist-check'
+    }
+  },
 
-    watch: {
-      snackbar () {
-        this.model = true
-      }
+  watch: {
+    snackbar () {
+      this.model = true
     }
   }
+}
 </script>

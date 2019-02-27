@@ -11,9 +11,9 @@
 </template>
 
 <script>
-  export default {
-    inheritAttrs: false
-  }
+export default {
+  inheritAttrs: false
+}
 </script>
 
 <style lang="scss" scoped>

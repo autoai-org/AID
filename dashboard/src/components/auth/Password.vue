@@ -60,71 +60,71 @@
 </template>
 
 <script>
-  // Utilities
-  import {
-    mapActions,
-    mapMutations,
-    mapState
-  } from 'vuex'
+// Utilities
+import {
+  mapActions,
+  mapMutations,
+  mapState
+} from 'vuex'
 
-  export default {
-    data: () => ({
-      show: false
-    }),
+export default {
+  data: () => ({
+    show: false
+  }),
 
-    computed: {
-      ...mapState([
-        'email',
-        'password',
-        'isLoading'
-      ]),
-      internalValue: {
-        get () {
-          return this.$store.state.password
-        },
-        set (val) {
-          this.setPassword(val)
-        }
-      }
-    },
-
-    methods: {
-      ...mapActions('cognito', ['signInUser']),
-      ...mapMutations([
-        'setEmail',
-        'setPassword',
-        'setIsLoading',
-        'setSnackbar'
-      ]),
-      submit () {
-        this.hasError = false
-        this.setIsLoading(true)
-        this.signInUser({
-          username: this.email,
-          password: this.password
-        })
-          .then(() => {
-            this.setSnackbar({
-              type: 'success',
-              msg: `Successfully signed in user ${this.email}`
-            })
-
-            this.setEmail('')
-            this.$router.replace('/home')
-          })
-          .catch(res => {
-            this.setSnackbar({
-              type: 'error',
-              msg: res
-            })
-          })
-          .finally(() => {
-            this.setIsLoading(false)
-            this.setPassword('')
-          })
+  computed: {
+    ...mapState([
+      'email',
+      'password',
+      'isLoading'
+    ]),
+    internalValue: {
+      get () {
+        return this.$store.state.password
+      },
+      set (val) {
+        this.setPassword(val)
       }
     }
+  },
+
+  methods: {
+    ...mapActions('cognito', ['signInUser']),
+    ...mapMutations([
+      'setEmail',
+      'setPassword',
+      'setIsLoading',
+      'setSnackbar'
+    ]),
+    submit () {
+      this.hasError = false
+      this.setIsLoading(true)
+      this.signInUser({
+        username: this.email,
+        password: this.password
+      })
+        .then(() => {
+          this.setSnackbar({
+            type: 'success',
+            msg: `Successfully signed in user ${this.email}`
+          })
+
+          this.setEmail('')
+          this.$router.replace('/home')
+        })
+        .catch(res => {
+          this.setSnackbar({
+            type: 'error',
+            msg: res
+          })
+        })
+        .finally(() => {
+          this.setIsLoading(false)
+          this.setPassword('')
+        })
+    }
   }
+}
 </script>
 
 <style lang="scss">

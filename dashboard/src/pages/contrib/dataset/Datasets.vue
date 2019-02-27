@@ -1,17 +1,49 @@
 <template>
   <v-container>
-    <v-btn outline color="indigo" @click="trigger_sync()">
-      <v-icon left dark>fas fa-sync</v-icon>Sync
+    <v-btn
+      outline
+      color="indigo"
+      @click="trigger_sync()"
+    >
+      <v-icon
+        left
+        dark
+      >
+        fas fa-sync
+      </v-icon>Sync
     </v-btn>
-    <v-btn outline color="indigo" @click="alert('Coming Soon')">
-      <v-icon left dark>fas fa-star</v-icon>Starred
+    <v-btn
+      outline
+      color="indigo"
+      @click="alert('Coming Soon')"
+    >
+      <v-icon
+        left
+        dark
+      >
+        fas fa-star
+      </v-icon>Starred
     </v-btn>
-    <v-text-field label="Search" v-model="searchKW"></v-text-field>
+    <v-text-field
+      v-model="searchKW"
+      label="Search"
+    />
     <v-card>
-      <v-data-table :items="datasets" :headers="headers" class="elevation-1">
-        <template slot="items" slot-scope="props">
-          <td class="text-xs-left">{{ props.item.Name }}</td>
-          <td class="text-xs-left">{{ props.item.Desc }}</td>
+      <v-data-table
+        :items="datasets"
+        :headers="headers"
+        class="elevation-1"
+      >
+        <template
+          slot="items"
+          slot-scope="props"
+        >
+          <td class="text-xs-left">
+            {{ props.item.Name }}
+          </td>
+          <td class="text-xs-left">
+            {{ props.item.Desc }}
+          </td>
           <td class="text-xs-left">
             <v-chip
               v-for="(item, index) in props.item.Tags"
@@ -20,13 +52,22 @@
               text-color="white"
               @click="setSearchTag(item);search()"
             >
-              <B style="color:yellow" v-if="item===searchTag">
+              <B
+                v-if="item===searchTag"
+                style="color:yellow"
+              >
                 <I>{{ item }}</I>
               </B>
               <span v-else>{{ item }}</span>
             </v-chip>
           </td>
-          <v-btn outline small fab color="indigo" @click="viewDetail(props.item)">
+          <v-btn
+            outline
+            small
+            fab
+            color="indigo"
+            @click="viewDetail(props.item)"
+          >
             <v-icon>info</v-icon>
           </v-btn>
         </template>
@@ -34,24 +75,35 @@
     </v-card>
     <v-dialog v-model="detailDialog">
       <v-card>
-        <v-card-title class="headline grey lighten-2" primary-title>{{detailInfo.Name}}</v-card-title>
+        <v-card-title
+          class="headline grey lighten-2"
+          primary-title
+        >
+          {{ detailInfo.Name }}
+        </v-card-title>
 
         <v-card-text>
-          <pre>{{detailInfo.FullDesc}}</pre>
+          <pre>{{ detailInfo.FullDesc }}</pre>
         </v-card-text>
 
-        <v-divider></v-divider>
+        <v-divider />
         <v-card-text>
           External Link:
-          <a :href="detailInfo.Link">{{detailInfo.Link}}</a>
+          <a :href="detailInfo.Link">{{ detailInfo.Link }}</a>
         </v-card-text>
         <v-card-text>
           Files:
-          {{detailInfo.Files}}
+          {{ detailInfo.Files }}
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" flat @click="detailDialog = false">Close</v-btn>
+          <v-spacer />
+          <v-btn
+            color="primary"
+            flat
+            @click="detailDialog = false"
+          >
+            Close
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -62,20 +114,25 @@
         </v-card-title>
         <v-card-text>
           <v-text-field
+            v-model="databaseURL"
             label="Datasets URL*"
             required
-            v-model="databaseURL"
             hint="e.g: https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml"
-          ></v-text-field>
+          />
         </v-card-text>
         <v-card-actions>
-          <v-btn color="indigo darken-1" outline @click="sync()">Sync</v-btn>
+          <v-btn
+            color="indigo darken-1"
+            outline
+            @click="sync()"
+          >
+            Sync
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   </v-container>
 </template>
-
 
 <script>
 
@@ -137,6 +194,9 @@ export default {
       })
     }
   },
+  created () {
+    this.fetchAllDatasets()
+  },
   methods: {
     alert (message) {
       alert(message)
@@ -195,9 +255,6 @@ export default {
         }
       })
     }
-  },
-  created () {
-    this.fetchAllDatasets()
   }
 }
 </script>

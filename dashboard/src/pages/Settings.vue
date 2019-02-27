@@ -1,17 +1,48 @@
 <template>
-  <v-layout row wrap>
-    <v-flex xs12 v-if="info">
-    <v-alert outline class="cvpm-setting-alert" :value="info" type="info">{{ info }}</v-alert>
+  <v-layout
+    row
+    wrap
+  >
+    <v-flex
+      v-if="info"
+      xs12
+    >
+      <v-alert
+        outline
+        class="cvpm-setting-alert"
+        :value="info"
+        type="info"
+      >
+        {{ info }}
+      </v-alert>
     </v-flex>
-    <v-flex md8="md8" xs12>
+    <v-flex
+      md8="md8"
+      xs12
+    >
       <v-form>
-        <v-switch label="Developer Mode" v-model="config.developerMode"></v-switch>
-        <v-switch label="Enable Hint" v-model="config.hintMode"></v-switch>
-        <v-text-field v-model="config.endpoint" label="Endpoint" required></v-text-field>
+        <v-switch
+          v-model="config.developerMode"
+          label="Developer Mode"
+        />
+        <v-switch
+          v-model="config.hintMode"
+          label="Enable Hint"
+        />
+        <v-text-field
+          v-model="config.endpoint"
+          label="Endpoint"
+          required
+        />
       </v-form>
     </v-flex>
-    <v-flex md4="md4"></v-flex>
-    <v-btn primary @click="writeConfig()">Save</v-btn>
+    <v-flex md4="md4" />
+    <v-btn
+      primary
+      @click="writeConfig()"
+    >
+      Save
+    </v-btn>
   </v-layout>
 </template>
 
@@ -24,6 +55,9 @@ export default {
     endpoint: '',
     config: configService
   }),
+  mounted () {
+    this.loadConfig()
+  },
   methods: {
     onSubmit () {},
     onSuccess (data) {},
@@ -34,9 +68,6 @@ export default {
       configService.write()
       this.info = 'The page needs to be refreshed to apply changes'
     }
-  },
-  mounted () {
-    this.loadConfig()
   }
 }
 </script>

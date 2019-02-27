@@ -1,12 +1,19 @@
 <template>
-    <div>
-        <tree-view :data="jsonObject"></tree-view>
-    </div>
+  <div>
+    <tree-view :data="jsonObject" />
+  </div>
 </template>
 
 <script>
 export default {
-  props: ['jsonObject'],
+  props: {
+    jsonObject: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    }
+  },
   created () {
     console.log(this.jsonObject)
   }

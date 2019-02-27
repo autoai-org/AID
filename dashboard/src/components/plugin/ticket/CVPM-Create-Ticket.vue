@@ -4,18 +4,54 @@
       <h2>Create Ticket / Report Abuse</h2>
       <v-subheader>We strongly recommend you to login first to track your tickets</v-subheader>
     </v-card-title>
-    <v-alert :value="submitSuccess" type="success">{{submitSuccessInfo}}</v-alert>
-    <v-alert :value="submitError" type="error">{{submitErrorInfo}}</v-alert>
+    <v-alert
+      :value="submitSuccess"
+      type="success"
+    >
+      {{ submitSuccessInfo }}
+    </v-alert>
+    <v-alert
+      :value="submitError"
+      type="error"
+    >
+      {{ submitErrorInfo }}
+    </v-alert>
     <v-card-text>
-      <v-select :items="items" label="Type" v-model="selectedType"></v-select>
-      <v-text-field v-model="email" label="Email"></v-text-field>
-      <v-text-field v-model="subject" label="Subject"></v-text-field>
-      <v-textarea label="Description" v-model="description"></v-textarea>
+      <v-select
+        v-model="selectedType"
+        :items="items"
+        label="Type"
+      />
+      <v-text-field
+        v-model="email"
+        label="Email"
+      />
+      <v-text-field
+        v-model="subject"
+        label="Subject"
+      />
+      <v-textarea
+        v-model="description"
+        label="Description"
+      />
     </v-card-text>
     <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn color="indigo darken-1" outline :loading="requesting" @click="submit()">Submit</v-btn>
-      <v-btn color="indigo darken-1" outline @click="closeDialog()">Close</v-btn>
+      <v-spacer />
+      <v-btn
+        color="indigo darken-1"
+        outline
+        :loading="requesting"
+        @click="submit()"
+      >
+        Submit
+      </v-btn>
+      <v-btn
+        color="indigo darken-1"
+        outline
+        @click="closeDialog()"
+      >
+        Close
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -23,6 +59,16 @@
 <script>
 import { discovery } from '@/services/discovery'
 export default {
+  props: {
+    vendor: {
+      type: String,
+      default: ''
+    },
+    packageName: {
+      type: String,
+      default: ''
+    }
+  },
   data: () => ({
     email: '',
     subject: '',
@@ -35,7 +81,6 @@ export default {
     selectedType: 'Not Working',
     items: ['Not Working', 'Malware', 'Abuse', 'Others']
   }),
-  props: ['vendor', 'packageName'],
   methods: {
     submit () {
       let self = this

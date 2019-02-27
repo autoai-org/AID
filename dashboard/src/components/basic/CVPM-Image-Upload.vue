@@ -1,13 +1,17 @@
 <template>
   <div>
-    <v-btn color="indigo darken-1" outline @click="selectFile()">
+    <v-btn
+      color="indigo darken-1"
+      outline
+      @click="selectFile()"
+    >
       <v-icon>camera_alt</v-icon>Upload
     </v-btn>
     <input
       id="files"
+      ref="uploadInput"
       type="file"
       name="file"
-      ref="uploadInput"
       accept="image/*"
       :multiple="false"
       @change="uploadFile($event)"

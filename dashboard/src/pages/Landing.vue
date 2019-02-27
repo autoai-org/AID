@@ -1,11 +1,14 @@
 <template>
   <v-container>
-    <v-layout row wrap>
+    <v-layout
+      row
+      wrap
+    >
       <v-flex xs6>
-        <cvpm-news id="cvpm-tour-news"></cvpm-news>
+        <cvpm-news id="cvpm-tour-news" />
       </v-flex>
       <v-flex xs6>
-        <cvpm-status id="cvpm-tour-status"></cvpm-status>
+        <cvpm-status id="cvpm-tour-status" />
       </v-flex>
     </v-layout>
   </v-container>
