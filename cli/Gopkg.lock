@@ -80,6 +80,12 @@
   version = "v1.7.0"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/fatihkahveci/gin-inspector"
+  packages = ["."]
+  revision = "ffbe3a21bb6b5e72dd82b4cc85fac59ed04a06fe"
+
+[[projects]]
   name = "github.com/flosch/pongo2"
   packages = ["."]
   revision = "5e81b817a0c48c1c57cdf1a9056cf76bdee02ca9"
@@ -391,10 +397,22 @@
   revision = "df19058c872cddcd279411d709047160e543a700"
 
 [[projects]]
+  name = "gopkg.in/appleboy/gin-status-api.v1"
+  packages = ["."]
+  revision = "d41a075a5a6883245b7fdefbefd4fa4d1462e1f1"
+  version = "v1.0.1"
+
+[[projects]]
   name = "gopkg.in/fsnotify/fsnotify.v1"
   packages = ["."]
   revision = "c2828203cd70a50dcccfb2761f8b1f8ceef9a8e9"
   version = "v1.4.7"
+
+[[projects]]
+  name = "gopkg.in/fukata/golang-stats-api-handler.v1"
+  packages = ["."]
+  revision = "90f0b59102629831cc109845475a8d77043412ec"
+  version = "v1.0.0"
 
 [[projects]]
   name = "gopkg.in/go-playground/validator.v8"
@@ -441,6 +459,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "577dffcc2d28dd648701b58f029d833f61719ac26b53dbdace15f3ec9840ac45"
+  inputs-digest = "f019dabc72b83b75ee5509c27a540b5eb0405051ccc3ef8f2568dc46b3bf17d3"
   solver-name = "gps-cdcl"
   solver-version = 1
