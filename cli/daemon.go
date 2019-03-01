@@ -16,11 +16,13 @@ import (
 	"path/filepath"
 
 	"github.com/fatih/color"
+	inspector "github.com/fatihkahveci/gin-inspector"
 	raven "github.com/getsentry/raven-go"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
 	"github.com/hpcloud/tail"
+	api "gopkg.in/appleboy/gin-status-api.v1"
 )
 
 // DaemonPort Default Running Port
@@ -262,6 +264,8 @@ func runServer(port string) {
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
 	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
+	r.Use(inspector.InspectorStats())
+	r.Use(gin.Logger())
 	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
@@ -288,6 +292,12 @@ func runServer(port string) {
 	// Contrib Related Routes
 	r.GET("/contrib/datasets", GetAllDatasets)
 	r.POST("/contrib/datasets/registries", AddNewRegistry)
+	// Plugin Related Routes
+	r.GET("/_inspector", func(c *gin.Context) {
+		c.JSON(200, inspector.GetPaginator())
+	})
+	r.GET("/_api/status", api.StatusHandler)
+	// Socket Related Routes
 	r.Handle("WS", "/socket.io/", socketHandler)
 	r.Handle("WSS", "/socket.io/", socketHandler)
 	r.Run("0.0.0.0:" + port)

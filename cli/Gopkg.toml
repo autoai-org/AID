@@ -112,3 +112,11 @@
 [[constraint]]
   name = "github.com/HouzuoGuo/tiedot"
   version = "3.4.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/fatihkahveci/gin-inspector"
+
+[[constraint]]
+  name = "gopkg.in/appleboy/gin-status-api.v1"
+  version = "1.0.1"
