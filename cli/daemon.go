@@ -8,6 +8,7 @@ You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -22,7 +23,7 @@ import (
 	"github.com/hpcloud/tail"
 )
 
-// Default Running Port
+// DaemonPort Default Running Port
 const DaemonPort = "10590"
 
 // Definition of Running Repos
@@ -115,9 +116,15 @@ func GetSystemHandler(c *gin.Context) {
 
 // Handle Socket Request
 func socketHandler(c *gin.Context) {
+	socketServer.OnConnect("/", func(so socketio.Conn) error {
+		// so.J
+		return nil
+	})
+	/* Todo: Upgrade to v1.4 of go-socket.io
 	socketServer.On("connection", func(so socketio.Socket) {
 		so.Join("cvpm-webtail")
 	})
+	*/
 	socketServer.ServeHTTP(c.Writer, c.Request)
 }
 
@@ -130,7 +137,12 @@ func writeLog(filepath string, server *socketio.Server, eventName string) {
 		panic(err)
 	}
 	for line := range t.Lines {
-		server.BroadcastTo("cvpm-webtail", eventName, line.Text)
+		/* Todo: Upgrade to v1.4 of go-socket.io
+
+		// server.BroadcastTo("cvpm-webtail", eventName, line.Text)
+		// server.
+		*/
+		fmt.Println(line)
 	}
 }
 
