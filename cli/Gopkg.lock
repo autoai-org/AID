@@ -95,13 +95,13 @@
   branch = "master"
   name = "github.com/gin-contrib/sse"
   packages = ["."]
-  revision = "a7658810eb745c2f22927282dea478278103a897"
+  revision = "996076df5b3348fd04ff02aa5f9abd971c2d2d28"
 
 [[projects]]
   branch = "master"
   name = "github.com/gin-contrib/static"
   packages = ["."]
-  revision = "cf5e10bbd933040ff603b7f0fb85510bae9916f0"
+  revision = "d0344934c94f721ba850a8d2d61b11094eb3d28b"
 
 [[projects]]
   name = "github.com/gin-gonic/gin"
@@ -112,8 +112,8 @@
 [[projects]]
   name = "github.com/go-ole/go-ole"
   packages = [".","oleutil"]
-  revision = "39dc8486bd0952279431257138bc428275b86797"
-  version = "v1.2.2"
+  revision = "97b6244175ae18ea6eef668034fd6565847501c9"
+  version = "v1.2.4"
 
 [[projects]]
   branch = "travis-1.9"
@@ -124,14 +124,14 @@
 [[projects]]
   name = "github.com/golang/protobuf"
   packages = ["proto"]
-  revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
-  version = "v1.2.0"
+  revision = "c823c79ea1570fb5ff454033735a8e68575d1d0f"
+  version = "v1.3.0"
 
 [[projects]]
-  branch = "master"
   name = "github.com/golang/snappy"
   packages = ["."]
-  revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
+  revision = "2a8bb927dd31d8daada140a5d09578521ce5c36a"
+  version = "v0.0.1"
 
 [[projects]]
   name = "github.com/google/go-querystring"
@@ -146,16 +146,16 @@
   revision = "c34317bd91bf98fab745d77b03933cf8769299fe"
 
 [[projects]]
-  branch = "master"
   name = "github.com/googollee/go-engine.io"
-  packages = [".","message","parser","polling","transport","websocket"]
-  revision = "4e7e01159ce8afb20b7091f0bd5a92b7ee1ed00f"
+  packages = [".","base","packet","payload","transport","transport/polling","transport/websocket"]
+  revision = "cc5b8c07e074e97f6bc6f4c6dbc03cf06267e6e0"
+  version = "v1.4.1"
 
 [[projects]]
   branch = "master"
   name = "github.com/googollee/go-socket.io"
-  packages = ["."]
-  revision = "acaa89b622f661b3deccc2c45dfd685968c95d23"
+  packages = [".","parser"]
+  revision = "c43b313245ee4a3605376cdf85a07c55446b77bc"
 
 [[projects]]
   branch = "master"
@@ -237,8 +237,8 @@
 [[projects]]
   name = "github.com/mattn/go-isatty"
   packages = ["."]
-  revision = "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
-  version = "v0.0.4"
+  revision = "369ecd8cea9851e459abb67eb171853e3986591e"
+  version = "v0.0.6"
 
 [[projects]]
   name = "github.com/mattn/go-runewidth"
@@ -308,9 +308,15 @@
 
 [[projects]]
   name = "github.com/shirou/gopsutil"
-  packages = ["cpu","host","internal/common","mem","process"]
+  packages = ["cpu","host","internal/common","mem","net","process"]
   revision = "071446942108a03a13cf0717275ad3bdbcb691b4"
   version = "v2.19.01"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/shirou/w32"
+  packages = ["."]
+  revision = "bb4de0191aa41b5507caa14b0650cdbddcd9280b"
 
 [[projects]]
   name = "github.com/src-d/gcfg"
@@ -322,7 +328,7 @@
   branch = "master"
   name = "github.com/syndtr/goleveldb"
   packages = ["leveldb","leveldb/cache","leveldb/comparer","leveldb/errors","leveldb/filter","leveldb/iterator","leveldb/journal","leveldb/memdb","leveldb/opt","leveldb/storage","leveldb/table","leveldb/util"]
-  revision = "2f17a3356c6616cbfc4ae4c38147dc062a68fb0e"
+  revision = "4217c9f31f5816db02addc94e56061da77f288d8"
 
 [[projects]]
   branch = "master"
@@ -345,26 +351,26 @@
 [[projects]]
   name = "github.com/xanzy/ssh-agent"
   packages = ["."]
-  revision = "640f0ab560aeb89d523bb6ac322b1244d5c3796c"
-  version = "v0.2.0"
+  revision = "6a3e2ff9e7c564f36873c2e36413f634534f1c44"
+  version = "v0.2.1"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/crypto"
   packages = ["cast5","curve25519","ed25519","ed25519/internal/edwards25519","internal/chacha20","internal/subtle","openpgp","openpgp/armor","openpgp/elgamal","openpgp/errors","openpgp/packet","openpgp/s2k","poly1305","ssh","ssh/agent","ssh/knownhosts","ssh/terminal"]
-  revision = "74369b46fc6756741c016591724fd1cb8e26845f"
+  revision = "31a38585487a4b1fd6ff4f8f3db26f1fb296ac82"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
   packages = ["context","idna","publicsuffix"]
-  revision = "3a22650c66bd7f4fb6d1e8072ffd7b75c8a27898"
+  revision = "c95aed5357e77a4bf7d3955c46740000a17adee1"
 
 [[projects]]
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix","windows","windows/registry","windows/svc","windows/svc/eventlog","windows/svc/mgr"]
-  revision = "d0b11bdaac8adb652bff00e49bcacf992835621a"
+  revision = "a34e9553db1e492c9a76e60db2296ae7e5fbb772"
 
 [[projects]]
   name = "golang.org/x/text"
@@ -376,7 +382,7 @@
   branch = "master"
   name = "golang.org/x/tools"
   packages = ["go/ast/astutil","go/gcexportdata","go/internal/gcimporter","go/types/typeutil"]
-  revision = "8dcb7bc8c7fe0a895995c76c721cef79419ac98a"
+  revision = "f0a709d59f0fd2d705cf7767149e23a7a99f585b"
 
 [[projects]]
   branch = "v3-unstable"

@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-/*  This file handles third party contributions and libraries.*/
+/*This file handles third party contributions and libraries.*/
 package main
 
 import (
@@ -12,16 +12,17 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GET /datasets
+// GetAllDatasets GET /datasets
 func GetAllDatasets(c *gin.Context) {
 	c.JSON(http.StatusOK, dataset.FetchAllDatasets())
 }
 
+// AddRegistryRequest Definition for AddRegistryRequest
 type AddRegistryRequest struct {
 	URL string `json:"url"`
 }
 
-// POST /datasets/registry
+// AddNewRegistry POST /datasets/registry
 func AddNewRegistry(c *gin.Context) {
 	var addRegistryRequest AddRegistryRequest
 	c.BindJSON(&addRegistryRequest)

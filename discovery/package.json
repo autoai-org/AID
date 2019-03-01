@@ -4,6 +4,7 @@
   "description": "The CVTron Discovery Service in Node",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts",
     "test": "cross-env PROJECT_ENV=testing jest --coverage --forceExit --config jest-config.json",
     "test:watch": "cross-env PROJECT_ENV=testing jest --watch",
     "build": "tslint --project . --fix && tsc",
@@ -16,6 +17,7 @@
     "@aws/dynamodb-data-mapper": "^0.7.3",
     "@aws/dynamodb-data-mapper-annotations": "^0.7.3",
     "@koa/cors": "^2.2.2",
+    "@sentry/node": "4.6.4",
     "@types/koa": "^2.0.47",
     "@types/koa-helmet": "^3.1.2",
     "@types/koa-passport": "^4.0.2",
@@ -25,7 +27,6 @@
     "@types/parse": "^2.1.0",
     "@types/passport": "^1.0.0",
     "@types/stripe": "^6.19.7",
-    "@types/winston": "^2.4.4",
     "aws-sdk": "^2.362.0",
     "axios": "^0.18.0",
     "dotenv": "^6.1.0",
@@ -40,9 +41,7 @@
     "parse": "^2.1.0",
     "passport": "^0.4.0",
     "passport-cognito": "^0.1.13",
-    "stripe": "^6.25.1",
-    "winston": "^3.1.0",
-    "winston-logsene": "^2.0.2"
+    "stripe": "^6.25.1"
   },
   "devDependencies": {
     "@types/dotenv": "6.1.0",
