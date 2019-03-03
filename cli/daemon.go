@@ -16,7 +16,6 @@ import (
 	"path/filepath"
 
 	"github.com/fatih/color"
-	inspector "github.com/fatihkahveci/gin-inspector"
 	raven "github.com/getsentry/raven-go"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -264,7 +263,7 @@ func runServer(port string) {
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
 	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
-	r.Use(inspector.InspectorStats())
+	r.Use(InspectorStats())
 	r.Use(gin.Logger())
 	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
@@ -285,7 +284,7 @@ func runServer(port string) {
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
 	r.DELETE("/solvers/running/:vendor/:name/:solver", StopInferProcess)
 	// Reverse Proxy for solvers
-	r.POST("/solvers/:vendor/:name/:solver", ReverseProxy)
+	r.POST("/engine/solvers/:vendor/:name/:solver", ReverseProxy)
 	// Socket Related Routes
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
@@ -294,7 +293,7 @@ func runServer(port string) {
 	r.POST("/contrib/datasets/registries", AddNewRegistry)
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {
-		c.JSON(200, inspector.GetPaginator())
+		c.JSON(200, GetPaginator())
 	})
 	r.GET("/_api/status", api.StatusHandler)
 	// Socket Related Routes

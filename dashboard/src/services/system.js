@@ -92,6 +92,7 @@ class SystemService {
     })
   }
   // contrib
+  // datasets
   getAllDatasets () {
     return new Promise((resolve, reject) => {
       axios.get(this.endpoint + '/contrib/datasets', {
@@ -109,6 +110,16 @@ class SystemService {
       }).then(function (res) {
         resolve(res)
       }).then(function (err) {
+        reject(err)
+      })
+    })
+  }
+  // inspector
+  getInspectorInfo () {
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/_inspector').then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
         reject(err)
       })
     })
