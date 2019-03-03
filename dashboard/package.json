@@ -9,7 +9,7 @@
     "start": "npm run dev",
     "e2e": "node test/e2e/runner.js",
     "test": "jest --config test/jest.config.js --coverage",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs --fix",
+    "lint": "eslint --ext .js,.vue src --fix",
     "build": "webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {

@@ -9,7 +9,10 @@ import Pretrained from '@/pages/Pretrained'
 import Detail from '@/pages/Detail'
 import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
+// Extensions
 import Datasets from '@/pages/contrib/dataset/Datasets'
+import Inspector from '@/pages/contrib/inspector/Inspector'
+
 Vue.use(Router)
 
 export default new Router({
@@ -58,6 +61,11 @@ export default new Router({
           path: '/datasets',
           name: 'Datasets',
           component: Datasets
+        },
+        {
+          path: '/inspector',
+          name: 'Inspector',
+          component: Inspector
         },
         {
           path: '/detail/:vendor/:name',

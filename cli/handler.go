@@ -182,6 +182,7 @@ func ConfigHandler(c *cli.Context) {
 	writeConfig(nextConfig)
 }
 
+// InitHandler handles init repo command
 func InitHandler(c *cli.Context) {
 	prompt := promptui.Prompt{
 		Label: "Your Package Name",
