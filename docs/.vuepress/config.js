@@ -132,7 +132,7 @@ function genSidebarConfig(title) {
         'credits',
         'api',
         'dashboard',
-        'privacy'
+        'other'
       ]
     }
   ]
