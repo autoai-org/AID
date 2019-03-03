@@ -49,7 +49,7 @@ func isRoot() bool {
 }
 
 func getDirSizeMB(path string) float64 {
-	var dirSize int64 = 0
+	var dirSize int64
 	readSize := func(path string, file os.FileInfo, err error) error {
 		if !file.IsDir() {
 			dirSize += file.Size()
@@ -71,7 +71,7 @@ func isPortOpen(port string, timeout time.Duration) bool {
 }
 
 func findNextOpenPort(port int) string {
-	var hasFound bool = false
+	var hasFound = false
 	var strPort string
 	for ; !hasFound; port++ {
 		strPort = strconv.Itoa(port)
@@ -84,11 +84,20 @@ func findNextOpenPort(port int) string {
 
 func readFileContent(filename string) string {
 	var content string
-	byte_content, err := ioutil.ReadFile(filename)
+	byteContent, err := ioutil.ReadFile(filename)
 	if err != nil {
 		content = "Read " + filename + "Failed!"
 	} else {
-		content = string(byte_content)
+		content = string(byteContent)
 	}
 	return content
+}
+
+func isStringInSlice(a string, list []string) bool {
+	for _, b := range list {
+		if b == a {
+			return true
+		}
+	}
+	return false
 }
