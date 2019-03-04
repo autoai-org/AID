@@ -86,15 +86,15 @@ func delRepo(repos []Repository, Vendor string, Name string) []Repository {
 func runRepo(Vendor string, Name string, Solver string, Port string) {
 	repos := readRepos()
 	existed := false
-	for _, existed_repo := range repos {
-		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
-			files, _ := ioutil.ReadDir(existed_repo.LocalFolder)
+	for _, existedRepo := range repos {
+		if existedRepo.Name == Name && existedRepo.Vendor == Vendor {
+			files, _ := ioutil.ReadDir(existedRepo.LocalFolder)
 			for _, file := range files {
 				if file.Name() == "runner_"+Solver+".py" {
 					existed = true
 					RunningRepos = append(RunningRepos, Repository{Vendor, Name, Solver, Port, ""})
 					RunningSolvers = append(RunningSolvers, RepoSolver{Vendor: Vendor, Package: Name, SolverName: Solver, Port: Port})
-					runfileFullPath := filepath.Join(existed_repo.LocalFolder, file.Name())
+					runfileFullPath := filepath.Join(existedRepo.LocalFolder, file.Name())
 					python([]string{runfileFullPath, Port})
 				}
 			}
