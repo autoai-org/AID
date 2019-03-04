@@ -14,7 +14,7 @@ def load_image_file(file, mode='RGB'):
 
 class InterfaceTester(unittest.TestCase):
     def test_detect_interface(self):
-        image_np = load_image_file('cvpm/tests/assets/lenna.jpg')
+        image_np = load_image_file('tests/assets/lenna.jpg')
         x_start, x_stop, y_start, y_stop = 12,13,14,15
         postDetectionInterface = ObjectDetectionInterface('post_detection')
         postDetectionInterface.addObjectCoordinates(x_start, x_stop, y_start, y_stop, 'face')
