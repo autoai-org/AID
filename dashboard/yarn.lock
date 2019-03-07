@@ -9144,10 +9144,10 @@ vue-router@3.0.2:
   resolved "http://registry.npm.taobao.org/vue-router/download/vue-router-3.0.2.tgz#dedc67afe6c4e2bc25682c8b1c2a8c0d7c7e56be"
   integrity sha1-3txnr+bE4rwlaCyLHCqMDXx+Vr4=
 
-vue-socket.io@3.0.5:
-  version "3.0.5"
-  resolved "http://registry.npm.taobao.org/vue-socket.io/download/vue-socket.io-3.0.5.tgz#2923cbc601262577159080627828031d6ea0e10f"
-  integrity sha1-KSPLxgEmJXcVkIBieCgDHW6g4Q8=
+vue-socket.io@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/vue-socket.io/-/vue-socket.io-3.0.7.tgz#fa6db12014243039f2d633d4458e461075d52dc8"
+  integrity sha512-dTo0Vr6jIziIax5/m+mY+iwzSBdH9ZgcUR0FkyfFNklBYvb6bdNbo5tJTydMh0DTZ8f+gK4Xl6Ihtnv6YIsulQ==
   dependencies:
     socket.io-client "^2.1.1"
 
