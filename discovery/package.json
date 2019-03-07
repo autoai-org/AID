@@ -53,7 +53,7 @@
     "nodemon": "1.18.10",
     "supertest": "3.4.2",
     "ts-jest": "24.0.0",
-    "ts-node": "8.0.2",
+    "ts-node": "8.0.3",
     "tslint": "5.13.1",
     "typescript": "3.3.3333"
   }
