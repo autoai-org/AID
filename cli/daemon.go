@@ -289,8 +289,10 @@ func runServer(port string) {
 	r.GET("/socket.io/", socketHandler)
 	r.POST("/socket.io/", socketHandler)
 	// Contrib Related Routes
+	// Datasets
 	r.GET("/contrib/datasets", GetAllDatasets)
 	r.POST("/contrib/datasets/registries", AddNewRegistry)
+	// Camera
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {
 		c.JSON(200, GetPaginator())

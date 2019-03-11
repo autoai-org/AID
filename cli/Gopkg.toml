@@ -108,11 +108,7 @@
 [prune]
   go-tests = true
   unused-packages = true
-
-[[constraint]]
-  name = "github.com/HouzuoGuo/tiedot"
-  version = "3.4.0"
-
+  
 [[constraint]]
   branch = "master"
   name = "github.com/fatihkahveci/gin-inspector"
