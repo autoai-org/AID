@@ -49,7 +49,26 @@ export default {
   components: {
     'vue-markdown': VueMarkdown
   },
-  props: ['config', 'dependency', 'diskSize', 'readme']
+  props: {
+    config: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    dependency: {
+      type: String,
+      default: ''
+    },
+    diskSize: {
+      type: String,
+      default: ''
+    },
+    readme: {
+      type: String,
+      default: ''
+    }
+  }
 }
 </script>
 
@@ -58,14 +77,14 @@ export default {
   padding: 2em;
 }
 pre {
-    word-wrap: break-word;
-    white-space: pre-wrap;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .cvpm-repo-readme {
-    padding: 2em;
+  padding: 2em;
 }
 .cvpm-meta-detail {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

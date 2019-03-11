@@ -15,6 +15,7 @@ import (
 	"net/url"
 	"path/filepath"
 
+	auth "github.com/cvpm-contrib/auth"
 	"github.com/fatih/color"
 	raven "github.com/getsentry/raven-go"
 	"github.com/gin-contrib/static"
@@ -263,7 +264,7 @@ func runServer(port string) {
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
 	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
-	r.Use(InspectorStats())
+	r.Use(auth.InspectorStats())
 	r.Use(gin.Logger())
 	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
@@ -295,7 +296,7 @@ func runServer(port string) {
 	// Camera
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {
-		c.JSON(200, GetPaginator())
+		c.JSON(200, auth.GetRequests())
 	})
 	r.GET("/_api/status", api.StatusHandler)
 	// Socket Related Routes

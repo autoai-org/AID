@@ -59,7 +59,26 @@
 <script>
 import { systemService } from '@/services/system'
 export default {
-  props: ['file', 'vendor', 'packageName', 'solverName'],
+  props: {
+    file: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    vendor: {
+      type: String,
+      default: ''
+    },
+    packageName: {
+      type: String,
+      default: ''
+    },
+    solverName: {
+      type: String,
+      default: ''
+    }
+  },
   data () {
     return {
       loading: false,

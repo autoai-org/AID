@@ -57,6 +57,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/cvpm-contrib/auth"
+  packages = ["."]
+  revision = "dca9c6e3b3f7814906b9f83cfbb5dccf8f04f696"
+
+[[projects]]
+  branch = "master"
   name = "github.com/cvpm-contrib/database"
   packages = ["."]
   revision = "bce1ba9a371803bcf60714a7e056bd823f271b1a"
@@ -78,12 +84,6 @@
   packages = ["."]
   revision = "5b77d2a35fb0ede96d138fc9a99f5c9b6aef11b4"
   version = "v1.7.0"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/fatihkahveci/gin-inspector"
-  packages = ["."]
-  revision = "ffbe3a21bb6b5e72dd82b4cc85fac59ed04a06fe"
 
 [[projects]]
   name = "github.com/flosch/pongo2"
@@ -314,15 +314,9 @@
 
 [[projects]]
   name = "github.com/shirou/gopsutil"
-  packages = ["cpu","host","internal/common","mem","net","process"]
+  packages = ["cpu","host","internal/common","mem","process"]
   revision = "071446942108a03a13cf0717275ad3bdbcb691b4"
   version = "v2.19.01"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/shirou/w32"
-  packages = ["."]
-  revision = "bb4de0191aa41b5507caa14b0650cdbddcd9280b"
 
 [[projects]]
   name = "github.com/src-d/gcfg"
@@ -459,6 +453,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "f019dabc72b83b75ee5509c27a540b5eb0405051ccc3ef8f2568dc46b3bf17d3"
+  inputs-digest = "687d4158e5687cec27aa36ef0352f936f5a953dadcf581480a22889e8e4c0372"
   solver-name = "gps-cdcl"
   solver-version = 1
