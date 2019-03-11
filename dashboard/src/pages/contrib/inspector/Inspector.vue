@@ -2,7 +2,7 @@
   <v-container>
     <v-card>
       <v-data-table
-        :items="datasets"
+        :items="inspectInfo"
         :headers="headers"
         class="elevation-1"
       >
@@ -11,37 +11,30 @@
           slot-scope="props"
         >
           <td class="text-xs-left">
-            {{ props.item.Name }}
+            {{ props.item.client_ip }}
           </td>
           <td class="text-xs-left">
-            {{ props.item.Desc }}
+            {{ props.item.request_url }}
           </td>
           <td class="text-xs-left">
             <v-chip
-              v-for="(item, index) in props.item.Tags"
-              :key="index"
-              color="primary"
+              v-if="isSuccessfulRequest(props.item.http_status)"
+              color="green"
               text-color="white"
-              @click="setSearchTag(item);search()"
             >
-              <B
-                v-if="item===searchTag"
-                style="color:yellow"
-              >
-                <I>{{ item }}</I>
-              </B>
-              <span v-else>{{ item }}</span>
+              {{ props.item.http_status }}
+            </v-chip>
+            <v-chip
+              v-else
+              color="red"
+              text-color="white"
+            >
+              {{ props.item.http_status }}
             </v-chip>
           </td>
-          <v-btn
-            outline
-            small
-            fab
-            color="indigo"
-            @click="viewDetail(props.item)"
-          >
-            <v-icon>info</v-icon>
-          </v-btn>
+          <td class="text-xs-left">
+            <time :datetime="props.item.requested_at">{{ formatRequestTime(props.item.requested_at) }}</time>
+          </td>
         </template>
       </v-data-table>
     </v-card>
@@ -50,11 +43,37 @@
 
 <script>
 import { systemService } from '@/services/system'
-
+import dayjs from 'dayjs'
 export default {
   data () {
     return {
-      inspectInfo: []
+      inspectInfo: [],
+      headers: [
+        {
+          text: 'Client IP',
+          align: 'left',
+          sortable: true,
+          value: 'client_ip'
+        },
+        {
+          text: 'Target',
+          align: 'left',
+          sortable: true,
+          value: 'request_url'
+        },
+        {
+          text: 'Result',
+          align: 'left',
+          sortable: false,
+          value: 'http_status'
+        },
+        {
+          text: 'Time',
+          align: 'left',
+          sortable: false,
+          value: 'requested_at'
+        }
+      ]
     }
   },
   created () {
@@ -64,9 +83,16 @@ export default {
     fetchInspector () {
       let self = this
       systemService.getInspectorInfo().then(function (res) {
-        self.inspectInfo = res
-        console.log(res)
+        self.inspectInfo = res.data.requests
+        console.log(self.inspectInfo)
       })
+    },
+    formatRequestTime (requestAt) {
+      return dayjs(requestAt).format('YYYY-MM-DD HH:mm:ss A')
+    },
+    isSuccessfulRequest (requestStatus) {
+      console.log(requestStatus)
+      return requestStatus.toString().startsWith('2')
     }
   }
 }

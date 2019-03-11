@@ -6,6 +6,7 @@
 package main
 
 import (
+	"io"
 	"net/http"
 
 	dataset "github.com/cvpm-contrib/dataset"
@@ -30,5 +31,12 @@ func AddNewRegistry(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"code":   "200",
 		"status": "Finished",
+	})
+}
+
+// StreamCamera GET /camera
+func StreamCamera(c *gin.Context) {
+	c.Stream(func(w io.Writer) bool {
+		return true
 	})
 }

@@ -42,7 +42,24 @@
 
 <script>
 export default {
-  props: ['items', 'headers', 'loading'],
+  props: {
+    config: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    headers: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    loading: {
+      type: Boolean,
+      default: false
+    }
+  },
   data () {
     return {}
   },
