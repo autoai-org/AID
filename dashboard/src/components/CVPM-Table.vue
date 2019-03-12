@@ -58,6 +58,12 @@ export default {
     loading: {
       type: Boolean,
       default: false
+    },
+    items: {
+      type: Array,
+      default: function () {
+        return []
+      }
     }
   },
   data () {

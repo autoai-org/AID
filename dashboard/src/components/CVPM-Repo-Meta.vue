@@ -51,10 +51,8 @@ export default {
   },
   props: {
     config: {
-      type: Object,
-      default: function () {
-        return {}
-      }
+      type: String,
+      default: ''
     },
     dependency: {
       type: String,

@@ -8,7 +8,9 @@ You can uninstall that service by using cvpm daemon uninstall */
 package main
 
 import (
+	"bytes"
 	"fmt"
+	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
@@ -229,17 +231,25 @@ func ReverseProxy(c *gin.Context) {
 		})
 	}
 	// the solver is running
+	body, err := ioutil.ReadAll(c.Request.Body)
+	if err != nil {
+		log.Println(err)
+		raven.CaptureErrorAndWait(err, nil)
+	}
 	target := url.URL{
 		Scheme: "http",
 		Host:   "localhost:" + runningPort,
 		Path:   "/infer",
 	}
+
 	director := func(req *http.Request) {
 		req.Host = target.Host
 		req.URL.Host = req.Host
 		req.URL.Scheme = target.Scheme
 		req.URL.Path = target.Path
+		req.Body = ioutil.NopCloser(bytes.NewBuffer(body))
 	}
+
 	proxy := httputil.NewSingleHostReverseProxy(&target)
 	proxy.Director = director
 	proxy.ServeHTTP(c.Writer, c.Request)
@@ -263,7 +273,7 @@ func runServer(port string) {
 	r := gin.Default()
 	r.Use(BeforeResponse())
 	watchLogs(socketServer)
-	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
+	r.Use(static.Serve("/webui", static.LocalFile(webuiFolder, false)))
 	r.Use(auth.InspectorStats())
 	r.Use(gin.Logger())
 	// Status Related Handlers

@@ -100,12 +100,16 @@ export default {
       }
     },
     vendor: {
-      type: String,
-      default: ''
+      type: Array,
+      default: function () {
+        return []
+      }
     },
     packageName: {
-      type: String,
-      default: ''
+      type: Array,
+      default: function () {
+        return []
+      }
     }
   },
   data () {

@@ -12,7 +12,7 @@
       ref="uploadInput"
       type="file"
       name="file"
-      accept="image/*"
+      accept="*"
       :multiple="false"
       @change="uploadFile($event)"
     >

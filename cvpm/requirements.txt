@@ -2,3 +2,4 @@ gevent
 flask
 toml
 psutil
+pillow
