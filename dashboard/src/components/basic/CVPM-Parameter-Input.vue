@@ -61,7 +61,7 @@ import { systemService } from '@/services/system'
 export default {
   props: {
     file: {
-      type: Object,
+      type: File,
       default: function () {
         return {}
       }
@@ -94,10 +94,14 @@ export default {
   },
   computed: {
     stringParameters () {
-      return this.systemRequiredParams.filter(each => typeof (each.value) === 'string')
+      return this.systemRequiredParams.filter(
+        each => typeof each.value === 'string'
+      )
     },
     booleanParamters () {
-      return this.systemRequiredParams.filter(each => typeof (each.value) === 'boolean')
+      return this.systemRequiredParams.filter(
+        each => typeof each.value === 'boolean'
+      )
     }
   },
   methods: {
@@ -113,21 +117,29 @@ export default {
       const requestParams = this.systemRequiredParams.concat(
         this.solverDefinedParams
       )
-      systemService
-        .testRepoSolver(
-          this.vendor,
-          this.packageName,
-          this.solverName,
-          requestParams,
-          this.file
-        )
-        .then(function (res) {
-          self.loading = false
-          self.$emit('finishInfer', res)
-        })
-        .catch(function (err) {
-          alert('an error occured' + err)
-        })
+      if (
+        typeof this.selectedSolver === 'undefined' ||
+        typeof this.selectedVendor === 'undefined' ||
+        typeof this.selectedPackage === 'undefined'
+      ) {
+        alert('Select Solver/Vendor/Package First!')
+      } else {
+        systemService
+          .testRepoSolver(
+            this.vendor,
+            this.packageName,
+            this.solverName,
+            requestParams,
+            this.file
+          )
+          .then(function (res) {
+            self.loading = false
+            self.$emit('finishInfer', res)
+          })
+          .catch(function (err) {
+            alert('an error occured' + err)
+          })
+      }
     }
   }
 }

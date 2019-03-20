@@ -15,7 +15,7 @@ import (
 )
 
 func _getRunnerTpl() string {
-	var runnerTpl = "https://tpl.cvtron.xyz/runners/runner.tpl"
+	var runnerTpl = "https://raw.githubusercontent.com/unarxiv/CVPM/master/templates/runner.tpl"
 	resp, err := http.Get(runnerTpl)
 	if err != nil {
 		log.Fatal(err)
