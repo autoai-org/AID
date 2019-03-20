@@ -232,7 +232,6 @@ func ReverseProxy(c *gin.Context) {
 	}
 	// the solver is running
 	body, err := ioutil.ReadAll(c.Request.Body)
-	log.Println(body)
 	if err != nil {
 		log.Println(err)
 		raven.CaptureErrorAndWait(err, nil)
