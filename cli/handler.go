@@ -159,6 +159,7 @@ func InputAndParseConfigContent(label string, validate promptui.ValidateFunc) st
 	return result
 }
 
+// ConfigHandler Handles Config Related
 func ConfigHandler(c *cli.Context) {
 	prevConfig := readConfig()
 	var nextConfig CvpmConfig
