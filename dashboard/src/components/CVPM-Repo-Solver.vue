@@ -28,12 +28,8 @@
             v-for="(solver, index) in runningSolvers"
             :key="index"
           >
-            <v-list-tile-content>
-              {{ solver.SolverName }}
-            </v-list-tile-content>
-            <v-list-tile-avatar>
-              {{ solver.Port }}
-            </v-list-tile-avatar>
+            <v-list-tile-content>{{ solver.SolverName }}</v-list-tile-content>
+            <v-list-tile-avatar>{{ solver.Port }}</v-list-tile-avatar>
           </v-list-tile>
         </v-list>
       </v-expansion-panel-content>
@@ -171,19 +167,27 @@ export default {
     confirmedRun () {
       this.isRequesting = true
       let self = this
-      systemService
-        .runRepoSolver(
-          this.selectedVendor,
-          this.selectedPackage,
-          this.selectedSolver,
-          this.runningPort
-        )
-        .then(function (res) {
-          self.isRequesting = false
-          self.runningConfirmDialog = false
-          self.responseRunningPort = res.data.port
-          self.fetchRunningSolver()
-        })
+      if (
+        this.selectedSolver === '' ||
+        this.selectedVendor === '' ||
+        this.selectedPackage === ''
+      ) {
+        alert('Select Solver/Vendor/Package First!')
+      } else {
+        systemService
+          .runRepoSolver(
+            this.selectedVendor,
+            this.selectedPackage,
+            this.selectedSolver,
+            this.runningPort
+          )
+          .then(function (res) {
+            self.isRequesting = false
+            self.runningConfirmDialog = false
+            self.responseRunningPort = res.data.port
+            self.fetchRunningSolver()
+          })
+      }
     }
   }
 }

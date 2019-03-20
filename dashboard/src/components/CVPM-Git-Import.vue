@@ -108,6 +108,10 @@ export default {
       this.$emit('closeDialog', true)
     },
     fetchMeta () {
+      // re-init error/info to avoid #282
+      // For more info: https://github.com/unarxiv/CVPM/issues/282
+      this.error = ''
+      this.info = ''
       let self = this
       const pureRepo = this.repo.split('/')[3] + '/' + this.repo.split('/')[4]
       let githubService = new GithubService(pureRepo)
