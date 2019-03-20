@@ -39,10 +39,7 @@ type EnvironmentVariable struct {
 }
 
 func (virtualenv VirtualEnv) validate() bool {
-	if isStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV) {
-		return true
-	}
-	return false
+	return isStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV)
 }
 
 func (virtualenv VirtualEnv) initiate() {

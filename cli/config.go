@@ -80,7 +80,7 @@ func writeConfig(config CvpmConfig) {
 	}
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
-	err := ioutil.WriteFile(configFile, []byte(buf.String()), 0644)
+	err := ioutil.WriteFile(configFile, buf.Bytes(), 0644)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)

@@ -26,7 +26,7 @@ func ClientPost(endpoint string, params map[string]string) *grequests.Response {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if resp.Ok != true {
+	if !resp.Ok {
 		log.Fatal("Bad Response from Daemon")
 	}
 	return resp
@@ -45,7 +45,7 @@ func ClientGet(endpoint string, params map[string]string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if resp.Ok != true {
+	if !resp.Ok {
 		log.Fatal("Bad Response from Daemon")
 	}
 }
@@ -56,7 +56,7 @@ func ClientDelete(endpoint string) *grequests.Response {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if resp.Ok != true {
+	if !resp.Ok {
 		log.Fatal("Bad Response from Daemon")
 	}
 	return resp
@@ -68,7 +68,7 @@ func StopInferEngine(port string) bool {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if resp.Ok != true {
+	if !resp.Ok {
 		log.Fatal("Bad Response from Infer Engine")
 		return false
 	}
