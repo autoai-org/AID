@@ -17,7 +17,7 @@ logger.setLevel("INFO")
 server = Flask(__name__)
 
 ALLOWED_EXTENSIONS_TRAIN = set(['zip'])
-ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png'])
+ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png', 'zip'])
 UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER

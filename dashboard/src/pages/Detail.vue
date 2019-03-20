@@ -66,7 +66,7 @@ export default {
     return {
       readme: '',
       config: '',
-      parsedConfig: '',
+      parsedConfig: {},
       diskSize: '',
       dependency: '',
       messageList: []

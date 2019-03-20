@@ -71,7 +71,7 @@ class SystemService {
       for (let i = 0; i < parameters.length; i++) {
         payload.append(parameters[i].key, parameters[i].value)
       }
-      axios.post(this.endpoint + '/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
+      axios.post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
         resolve(res)
       }).catch(function (err) {
         reject(err)

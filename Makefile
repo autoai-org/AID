@@ -28,7 +28,7 @@ docs:
 	cd docs && npm run docs:build
 
 package:
-	python setup.py sdist bdist_wheel
+	python3 setup.py sdist bdist_wheel
 
 clean:
 	rm -rf build

@@ -11,6 +11,12 @@
  */
 package main
 
+import (
+	"log"
+
+	"github.com/cvpm-contrib/database"
+)
+
 // Constants
 // SUPPORTEDVIRTUALENV declares all supported virtual environment method
 var SUPPORTEDVIRTUALENV = []string{"venv"}
@@ -22,6 +28,14 @@ type VirtualEnv struct {
 	RelativePipPath    string
 	IsEnabled          bool
 	RepositoryFolder   string
+}
+
+// EnvironmentVariable declares the envs for runner to RUN
+type EnvironmentVariable struct {
+	Key         string `db:"env-Key"`
+	Value       string `db:"env-Var"`
+	Vendor      string `db:"env-Vendor`
+	PackageName string `db:"env-PackageName"`
 }
 
 func (virtualenv VirtualEnv) validate() bool {
@@ -37,4 +51,33 @@ func (virtualenv VirtualEnv) initiate() {
 
 func (virtualenv VirtualEnv) triggerEnable() {
 
+}
+
+func QueryVariables(Vendor string, PackageName string) []EnvironmentVariable {
+	var envs []EnvironmentVariable
+	sess := database.GetDBInstance()
+	envCollection := sess.Collection("environment")
+	res := envCollection.Find()
+	err := res.All(&envs)
+	if err != nil {
+		log.Fatalf("res.All(): %q\n", err)
+	}
+	database.CloseDB(sess)
+	return envs
+}
+
+func AddNewEnvToPackage(Vendor string, PackageName string, Key string, Value string) {
+	envObject := EnvironmentVariable{
+		Vendor:      Vendor,
+		PackageName: PackageName,
+		Key:         Key,
+		Value:       Value,
+	}
+	sess := database.GetDBInstance()
+	envCollection := sess.Collection("environment")
+	err := envCollection.InsertReturning(&envObject)
+	if err != nil {
+		panic(err)
+	}
+	database.CloseDB(sess)
 }
