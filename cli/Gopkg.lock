@@ -129,7 +129,7 @@
 
 [[projects]]
   name = "github.com/golang/protobuf"
-  packages = ["proto"]
+  packages = ["proto","ptypes","ptypes/any","ptypes/duration","ptypes/timestamp"]
   revision = "b5d812f8a3706043e23a9cd5babf2e5423744d30"
   version = "v1.3.1"
 
@@ -363,7 +363,7 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/net"
-  packages = ["context","idna","publicsuffix"]
+  packages = ["context","http/httpguts","http2","http2/hpack","idna","internal/timeseries","publicsuffix","trace"]
   revision = "1272bf9dcd53ea65c09668fb4c76e65deb740072"
 
 [[projects]]
@@ -383,6 +383,18 @@
   name = "golang.org/x/tools"
   packages = ["go/ast/astutil","go/gcexportdata","go/internal/gcimporter","go/types/typeutil"]
   revision = "3f1ed9edd1b43b011064eb59e5c9e73f5537ddd9"
+
+[[projects]]
+  branch = "master"
+  name = "google.golang.org/genproto"
+  packages = ["googleapis/rpc/status"]
+  revision = "5fe7a883aa19554f42890211544aa549836af7b7"
+
+[[projects]]
+  name = "google.golang.org/grpc"
+  packages = [".","balancer","balancer/base","balancer/roundrobin","binarylog/grpc_binarylog_v1","codes","connectivity","credentials","credentials/internal","encoding","encoding/proto","grpclog","internal","internal/backoff","internal/binarylog","internal/channelz","internal/envconfig","internal/grpcrand","internal/grpcsync","internal/syscall","internal/transport","keepalive","metadata","naming","peer","resolver","resolver/dns","resolver/passthrough","stats","status","tap"]
+  revision = "3507fb8e1a5ad030303c106fef3a47c9fdad16ad"
+  version = "v1.19.1"
 
 [[projects]]
   branch = "v3-unstable"
@@ -453,6 +465,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "b4cee036460267c7f2530e505da099072911e2b969644dc6bd98c53c8b16321f"
+  inputs-digest = "d86946e57173e67a81c3b70cb34bdd051d53db24300d24cfcccf56cad81cf529"
   solver-name = "gps-cdcl"
   solver-version = 1
