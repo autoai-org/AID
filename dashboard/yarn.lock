@@ -9193,10 +9193,10 @@ vue@2.6.8, vue@^2.5.16, vue@^2.5.17:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.8.tgz#f21cbc536bfc14f7d1d792a137bb12f69e60ea91"
   integrity sha1-8hy8U2v8FPfR15KhN7sS9p5g6pE=
 
-vuetify@1.5.6:
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.6.tgz#4f53bd061b3930391088fc2833d7b9ecf43fecf0"
-  integrity sha512-3cpuqCRZam6mpWZwq2M7aCFCFmE5qvu3vaq4MMXRYzJCTtOJ+nCxkDXuilNbjh/eKz/Pi95dQZOYXvccwq6rGA==
+vuetify@1.5.7:
+  version "1.5.7"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.7.tgz#92e7558f590ccb5696bbd1156381e8537c86c2f9"
+  integrity sha512-e7Vvj9gh41Pth7pXJxH1hrm8wfnvWt3nvxPCnwBWTgr4kiUXTG4CaUBqWVVgyfLjJGJSyR1y1EoRNEP5tJv0HQ==
 
 vuex@3.1.0:
   version "3.1.0"
