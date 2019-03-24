@@ -35,6 +35,8 @@ app.use(async (ctx: Koa.Context, next) => {
     await next();
 });
 
+console.log(config)
+
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser());

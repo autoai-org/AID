@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { config } from '../config'
 
 interface ticketRequest {
     name: string;
@@ -33,7 +34,8 @@ class FreshDesk {
     }
 }
 
-const freshdesk: FreshDesk = new FreshDesk('https://autoai.freshdesk.com', 'a1DuC27QtPoQj61d2NFo');
+const freshdesk: FreshDesk = new FreshDesk(config.freshdeskDomain, config.freshdeskToken);
+
 export {
     freshdesk
 };
