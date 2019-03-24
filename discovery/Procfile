@@ -1,2 +1,2 @@
 release: npm install && npm run build
-web: node discovery/dist/src/server.js
+web: node dist/src/server.js
