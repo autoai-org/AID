@@ -1,1 +1,2 @@
+release: npm install tslint -g && npm install && npm run build
 web: node dist/src/server.js
