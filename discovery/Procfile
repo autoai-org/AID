@@ -1,2 +1,2 @@
-release: make build-discovery
+release: npm run build
 web: node discovery/dist/src/server.js
