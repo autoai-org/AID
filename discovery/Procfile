@@ -1,2 +1,0 @@
-release: yarn run build
-web: node dist/src/server.js

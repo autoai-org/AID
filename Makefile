@@ -41,4 +41,7 @@ publish-test:
 publish-prod:
 	twine upload dist/*
 
+build-discovery:
+	cd discovery && yarn run build
+
 .PHONY: docs
