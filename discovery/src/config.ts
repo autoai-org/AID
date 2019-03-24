@@ -13,6 +13,8 @@ export interface IConfig {
     version: string;
     stripe: string;
     sentryDSN: string;
+    freshdeskDomain: string;
+    freshdeskToken: string;
 }
 
 const config: IConfig = {
@@ -26,6 +28,8 @@ const config: IConfig = {
     version: process.env.VERSION || 'v0.0.3@alpha',
     stripe: process.env.STRIPEID || '',
     sentryDSN: process.env.SENTRYDSN || '',
+    freshdeskDomain: process.env.FRESHDESKDOMAIN || '',
+    freshdeskToken: process.env.FRESHDESKTOKEN || ''
 };
 
 export { config };

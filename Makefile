@@ -44,4 +44,7 @@ publish-prod:
 build-discovery:
 	cd discovery && yarn run build
 
+publish-discovery:
+	git subtree push --prefix discovery heroku master
+
 .PHONY: docs

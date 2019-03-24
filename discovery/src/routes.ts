@@ -25,5 +25,6 @@ router.post('/session', controller.user.validateAccessToken);
 router.get('/news', controller.news.queryNews);
 
 router.post('/paywall/customer', controller.paywall.createCustomer);
+router.post('/paywall/charge', controller.paywall.createCharge);
 
 export { router };
