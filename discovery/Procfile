@@ -1,2 +1,1 @@
-release: npm install && npm run build
 web: node dist/src/server.js
