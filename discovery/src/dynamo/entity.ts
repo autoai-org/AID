@@ -11,46 +11,46 @@ import {
 @table('cvpm-package')
 class Package {
     @hashKey()
-    id: string;
+    public id: string;
 
     @rangeKey({defaultProvider: () => new Date()})
-    createdAt: Date;
+    public createdAt: Date;
 
     @attribute()
-    isSymbol: boolean;
+    public isSymbol: boolean;
 
     @attribute()
-    linkedTo: string;
+    public linkedTo: string;
 }
 
 @table('cvpm-pretrained')
 class Pretrained {
     @hashKey()
-    id: string;
+    public id: string;
 
     @rangeKey({defaultProvider: () => new Date()})
-    createdAt: Date;
+    public createdAt: Date;
 
     @attribute()
-    linkedTo: string;
+    public linkedTo: string;
 
     @attribute()
-    name: string;
+    public name: string;
 }
 
 @table('cvpm-registry')
 class Registry {
     @hashKey()
-    id: string;
+    public id: string;
 
     @rangeKey({defaultProvider: () => new Date()})
-    createdAt: Date;
+    public createdAt: Date;
 
     @attribute()
-    name: string;
+    public name: string;
 
     @attribute()
-    urlPrefix: string;
+    public urlPrefix: string;
 }
 
 export {
