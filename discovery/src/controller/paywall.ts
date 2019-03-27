@@ -23,4 +23,17 @@ export default class PaywallController {
             'results': 'success'
         };
     }
+    public static async createSubscription (ctx: BaseContext) {
+        const requestbody = ctx.request.body;
+        const charge = await paymentService.createSubscription(requestbody.email, requestbody.subtype);
+        ctx.status = 200;
+        ctx.body = {
+            'code': 200,
+            'charges': charge,
+            'results': 'success'
+        };
+    }
+    public static async checkout (ctx: BaseContext) {
+        
+    }
 }
