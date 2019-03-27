@@ -1,4 +1,4 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 
 dotenv.config({ path: '.env' });
 
@@ -9,6 +9,7 @@ export interface IConfig {
     cognitoRegion: string;
     debugLogging: boolean;
     port: number;
+    mongostring: string;
     secret: string;
     version: string;
     stripe: string;
@@ -24,6 +25,7 @@ const config: IConfig = {
     cognitoRegion: process.env.COGNITO_REGION || '',
     debugLogging: process.env.NODE_ENV === 'development',
     port: +process.env.PORT || 3000,
+    mongostring: process.env.MONGO_STRING || '',
     secret: process.env.secret || 'your-secret-whatever',
     version: process.env.VERSION || 'v0.0.3@alpha',
     stripe: process.env.STRIPEID || '',

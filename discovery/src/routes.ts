@@ -1,4 +1,4 @@
-import * as Router from 'koa-router';
+import * as Router from 'koa-router'
 
 import controller = require('./controller');
 
