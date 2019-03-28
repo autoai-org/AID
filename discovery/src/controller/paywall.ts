@@ -1,6 +1,6 @@
 import { BaseContext } from 'koa'
 import paymentService from '../service/payment'
-import Token, { ITokenModel } from '../service/database/entity/token'
+import Token from '../service/database/entity/token'
 import { v4 as uuid } from 'uuid'
 export default class PaywallController {
     public static async createCustomer(ctx: BaseContext) {
@@ -41,11 +41,75 @@ export default class PaywallController {
         const requestbody = ctx.request.body
         const email = requestbody.email
         //TODO: Check if the user has paid
-        const token: ITokenModel = new Token({
+        const token = new Token({
             email: email,
             token: uuid(),
-            validUntil: Date.now()
+            validUntil: Date.now(),
+            createdAt: Date.now(),
         })
-        token.save()
+        await token.save().then(function (res) {
+            ctx.status = 200;
+            ctx.body = {
+                'code': 200,
+                'token': res,
+                'results': 'success'
+            }
+        }).catch(function (err) {
+            ctx.status = 500;
+            ctx.body = {
+                'code': 500,
+                'token': err,
+                'results': 'failed'
+            }
+        })
+    }
+    public static async deleteAccessToken(ctx: BaseContext) {
+        const token = ctx.request.body.token
+        await Token.findOne({
+            'token': token
+        }).then(function (res) {
+            res.deactivate()
+            ctx.status = 200;
+            ctx.body = {
+                'code': 200,
+                'token': res,
+                'results': 'deactivated'
+            }
+        }).catch(function (err) {
+            ctx.status = 500;
+            ctx.body = {
+                'code': 500,
+                'token': err,
+                'results': 'failed'
+            }
+        })
+    }
+    public static async queryAccessTokens(ctx: BaseContext) {
+        const email = ctx.request.query.email
+        console.log(email)
+        await Token.find({
+            'email': email
+        }).then(function (res) {
+            console.log(res)
+            ctx.status = 200;
+            ctx.body = {
+                'code': 200,
+                'tokens': res.map(function(each){
+                    return {
+                        'id': each.id,
+                        'validUntil': each.validUntil,
+                        'createdAt': each.createdAt
+                    }
+                }),
+                'results': 'success'
+            }
+        }).catch(function (err) {
+            ctx.status = 500;
+            ctx.body = {
+                'code': 500,
+                'token': err,
+                'results': 'failed'
+            }
+        })
     }
 }

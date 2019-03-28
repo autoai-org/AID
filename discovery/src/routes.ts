@@ -25,6 +25,9 @@ router.get('/news', controller.news.queryNews);
 router.post('/paywall/customer', controller.paywall.createCustomer);
 router.post('/paywall/charge', controller.paywall.createCharge);
 router.post('/paywall/subscription', controller.paywall.createSubscription);
+router.put('/paywall/token', controller.paywall.addAccessToken);
+router.delete('/paywall/token', controller.paywall.deleteAccessToken);
+router.get('/paywall/tokens', controller.paywall.queryAccessTokens);
 
 router.get('/', controller.system.getMetaInfo);
 
