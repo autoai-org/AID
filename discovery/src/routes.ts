@@ -4,8 +4,6 @@ import controller = require('./controller');
 
 const router = new Router();
 
-router.get('/', controller.system.getMetaInfo);
-
 router.put('/tickets', controller.ticket.createTicket);
 
 router.get('/system/status', controller.system.getSystemStatus);
@@ -26,5 +24,8 @@ router.get('/news', controller.news.queryNews);
 
 router.post('/paywall/customer', controller.paywall.createCustomer);
 router.post('/paywall/charge', controller.paywall.createCharge);
+router.post('/paywall/subscription', controller.paywall.createSubscription);
+
+router.get('/', controller.system.getMetaInfo);
 
 export { router };

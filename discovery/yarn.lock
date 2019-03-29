@@ -354,10 +354,10 @@
   dependencies:
     vary "^1.1.2"
 
-"@sentry/core@4.6.5":
-  version "4.6.5"
-  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.6.5.tgz#70b4bcfc555f7eff80581a17baadac5500c2f75d"
-  integrity sha512-dT0FATtKAgd4dashwK+S2vYzCXIga3VJFJgkZVTK2aoy45E56ztxcbmNdI8O+3e67tGM5Il6CrD2fZg5yLty9A==
+"@sentry/core@4.6.6":
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/@sentry/core/-/core-4.6.6.tgz#dea96a88533a3bdbdcc86ae18e35272c57e0fd20"
+  integrity sha512-7z9HKLTNr3zVBR3tBRheTxkkkuK2IqISUc5Iyo3crN2OecOLtpptT96f5XjLndBEL2ab39eCBPpA5OFjbpzrIA==
   dependencies:
     "@sentry/hub" "4.6.5"
     "@sentry/minimal" "4.6.5"
@@ -383,12 +383,12 @@
     "@sentry/types" "4.5.3"
     tslib "^1.9.3"
 
-"@sentry/node@4.6.5":
-  version "4.6.5"
-  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-4.6.5.tgz#48d8a63e0ef693b2560f5b031e1fc8ddf28dd515"
-  integrity sha512-Od57hWxJ2V+I0Hg7uIyVxMDxebCTM9fFVKv4n3FeLvA9XAIRtE6iC8/+5YsbKwUOW5eRNLIvRD90rCUsvNf52Q==
+"@sentry/node@4.6.6":
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/@sentry/node/-/node-4.6.6.tgz#50531a1a857d836b7eaf94a5f90556bae3074435"
+  integrity sha512-+zZHE2uOwQTgypP6N9oBd0Io6BKXaJh6mdmZBauF0G46/8V28sBQ/dXBtJJNZ8tW7eVlLGpLSGuJb9Ai7c/rNw==
   dependencies:
-    "@sentry/core" "4.6.5"
+    "@sentry/core" "4.6.6"
     "@sentry/hub" "4.6.5"
     "@sentry/types" "4.5.3"
     "@sentry/utils" "4.6.5"
