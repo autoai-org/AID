@@ -42,7 +42,7 @@
     "passport": "^0.4.0",
     "passport-cognito": "^0.1.13",
     "stripe": "^6.25.1",
-    "@types/dotenv": "6.1.0",
+    "@types/dotenv": "6.1.1",
     "@types/jest": "24.0.11",
     "@types/node": "10.14.4",
     "@types/supertest": "2.0.6",
