@@ -1,7 +1,7 @@
-import mapper from './dynamo';
-import { Package, Pretrained, Registry } from './entity';
 import { Guid } from 'guid-typescript';
 import { isSymbol } from 'util';
+import mapper from './dynamo';
+import { Package, Pretrained, Registry } from './entity';
 
 /**
  * Following will be package manipulations
@@ -15,11 +15,10 @@ import { isSymbol } from 'util';
 function putPackage (isSymbol: boolean, linkedTo: string) {
     const toPutPackage = Object.assign(new Package, {
         id: Guid.create(),
-        isSymbol: isSymbol,
-        linkedTo: linkedTo
+        isSymbol,
+        linkedTo
     });
     mapper.put(toPutPackage).then(objectSaved => {
-        console.log(objectSaved);
     });
 }
 /**
@@ -35,11 +34,10 @@ function putPackage (isSymbol: boolean, linkedTo: string) {
 function putPretrained (name: string, linkedTo: string) {
     const toPutPretrained = Object.assign(new Pretrained, {
         id: Guid.create(),
-        name: name,
-        linkedTo: linkedTo
+        name,
+        linkedTo
     });
     mapper.put(toPutPretrained).then(objectSaved => {
-        console.log(objectSaved);
     });
 }
 
@@ -68,11 +66,10 @@ async function getRegistries () {
 async function addRegistry (name: string, urlPrefix: string) {
     const toAddRegistry = Object.assign(new Registry, {
         id: Guid.create(),
-        name: name,
-        urlPrefix: urlPrefix,
+        name,
+        urlPrefix,
     });
     mapper.put(toAddRegistry).then(objectSaved => {
-        console.log(objectSaved);
     });
 }
 

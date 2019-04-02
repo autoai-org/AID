@@ -5,10 +5,10 @@ import * as helmet from 'koa-helmet';
 import * as passport from 'koa-passport';
 import * as session from 'koa-session';
 
-import { initParse } from './parse';
 import { config } from './config';
+import { Sentry } from './logging';
+import { initParse } from './parse';
 import { router } from './routes';
-import { Sentry } from './logging'
 
 import * as os from 'os';
 
@@ -35,14 +35,13 @@ app.use(async (ctx: Koa.Context, next) => {
     await next();
 });
 
+console.log(config)
+
 app.use(cors());
 app.use(helmet());
 app.use(bodyParser());
 app.use(router.routes()).use(router.allowedMethods());
-app.on('error', err=>{
-    console.error(err)
-    Sentry.captureException(err)
-})
+app.on('error', err => {
+    Sentry.captureException(err);
+});
 app.listen(config.port);
-console.log('CVPM Discovery Service Started on port: ' + config.port)
-console.info(config)

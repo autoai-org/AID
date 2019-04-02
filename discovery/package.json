@@ -1,7 +1,7 @@
 {
-  "name": "cvtron-discovery-node",
+  "name": "cvpm-discovery-node",
   "version": "1.0.0",
-  "description": "The CVTron Discovery Service in Node",
+  "description": "The CVPM Discovery Service in Node",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'ts-node' ./src/server.ts",
@@ -17,7 +17,7 @@
     "@aws/dynamodb-data-mapper": "^0.7.3",
     "@aws/dynamodb-data-mapper-annotations": "^0.7.3",
     "@koa/cors": "^3.0.0",
-    "@sentry/node": "4.6.4",
+    "@sentry/node": "4.6.6",
     "@types/koa": "^2.0.47",
     "@types/koa-helmet": "^3.1.2",
     "@types/koa-passport": "^4.0.2",
@@ -41,20 +41,24 @@
     "parse": "^2.1.0",
     "passport": "^0.4.0",
     "passport-cognito": "^0.1.13",
-    "stripe": "^6.25.1"
-  },
-  "devDependencies": {
-    "@types/dotenv": "6.1.0",
+    "stripe": "^6.25.1",
+    "@types/dotenv": "6.1.1",
     "@types/jest": "24.0.11",
-    "@types/node": "10.14.1",
+    "@types/node": "10.14.4",
     "@types/supertest": "2.0.6",
     "cross-env": "5.2.0",
     "jest": "24.5.0",
     "nodemon": "1.18.10",
-    "supertest": "4.0.0",
-    "ts-jest": "24.0.0",
+    "prettier": "1.16.4",
+    "supertest": "4.0.2",
+    "ts-jest": "24.0.1",
     "ts-node": "8.0.3",
     "tslint": "5.14.0",
-    "typescript": "3.3.3333"
+    "tslint-config-prettier": "1.18.0",
+    "tslint-plugin-prettier": "2.0.1",
+    "typescript": "3.4.1"
+  },
+  "engines": {
+    "node": "10.x"
   }
 }

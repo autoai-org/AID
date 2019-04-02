@@ -30,7 +30,7 @@ class ConfigService {
 const configService = new ConfigService()
 
 const discoveryConfig = {
-  'endpoint': 'http://192.168.1.4:3000'
+  'endpoint': 'https://cvpm-discovery.herokuapp.com'
 }
 
 export {
