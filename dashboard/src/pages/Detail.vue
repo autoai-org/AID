@@ -5,7 +5,7 @@
       wrap
     >
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-repo-meta
@@ -34,7 +34,7 @@
         />
       </v-flex>
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-repo-solver
@@ -44,7 +44,7 @@
         />
       </v-flex>
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-actions
