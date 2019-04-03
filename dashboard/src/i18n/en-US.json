@@ -1,1 +1,58 @@
-{}
+{
+    "Dashboard":"Dashboard",
+    "Theme":{
+        "lighttheme":"Light",
+        "darktheme":"Dark",
+        "theme":" Theme"
+    },
+    "Admin":"Admin",
+    "Home":{
+        "title":"Home",
+        "latest_news":"Latest News",
+        "status":"Status",
+        "cpu":"CPU",
+        "memory":"Memory",
+        "operating_system":"Operating System"
+    },
+    "Packages":{
+        "title":"Packages",
+        "vendor":"Vendor",
+        "name":"Name",
+        "local_folder":"LocalFolder",
+        "action":"Actions"
+    },
+    "System":"System",
+    "Log":{
+        "title":"Log",
+        "system_log":"System Log"
+    },
+    "Settings":{
+        "title":"Setting",
+        "developer_mode":"Developer Mode",
+        "enable_hint":"Enable Hint",
+        "endpoint":"Endpoint",
+        "save":"Save"
+    },
+    "Contrib":"Contrib",
+    "Datasets":{
+        "title":"Datasets",
+        "sync":"SYNC",
+        "starred":"STARRED",
+        "search":"Search",
+        "name":"Name",
+        "desc":"Desc",
+        "tags":"Tags",
+        "actions":"Actions"
+    },
+    "Inspector":{
+        "title":"Inspector",
+        "client_ip":"Clinet IP",
+        "target":"Target",
+        "result":"Result",
+        "time":"Time"
+    },
+    "About":"About",
+    "Hub":"Hub",
+    "Github":"Github",
+    "Blog":"Blog"
+}
