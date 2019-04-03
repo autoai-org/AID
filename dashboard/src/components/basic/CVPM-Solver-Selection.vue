@@ -15,7 +15,7 @@
         v-model="selectedSolver"
         :items="config.solvers"
         item-text="name"
-        label="Solver"
+        :label="$t('Packages_detail.solver')"
       />
     </v-flex>
   </v-layout>

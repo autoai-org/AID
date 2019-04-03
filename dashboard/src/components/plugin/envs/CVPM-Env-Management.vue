@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>{{$t('Packages_detail.environment')}}</h2>
+      <h2>{{ $t('Packages_detail.environment') }}</h2>
     </v-card-title>
   </v-card>
 </template>

@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>{{$t('Packages_detail.meat_info')}}</h2>
+      <h2>{{ $t('Packages_detail.meat_info') }}</h2>
     </v-card-title>
     <v-expansion-panel class="cvpm-meta-detail">
       <v-expansion-panel-content v-if="config">
@@ -14,7 +14,7 @@
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="readme">
         <div slot="header">
-          {{$t('Packages_detail.readme')}}
+          {{ $t('Packages_detail.readme') }}
         </div>
         <v-card>
           <vue-markdown class="cvpm-repo-readme">
@@ -24,7 +24,7 @@
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="dependency">
         <div slot="header">
-          {{$t('Packages_detail.dependency')}}
+          {{ $t('Packages_detail.dependency') }}
         </div>
         <v-card class="cvpm-config-text">
           <pre>{{ dependency }}</pre>
@@ -32,7 +32,7 @@
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="diskSize">
         <div slot="header">
-          {{$t('Packages_detail.disk_usage')}}
+          {{ $t('Packages_detail.disk_usage') }}
         </div>
         <v-card class="cvpm-config-text">
           <pre>{{ diskSize }} MB</pre>

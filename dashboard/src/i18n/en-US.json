@@ -64,6 +64,7 @@
         "dependency":"Dependency",
         "disk_usage":"Disk Usage",
         "solvers":"Solvers",
+        "solver":"Solver",
         "vendor":"Vendor",
         "package":"Package",
         "run":"Run",

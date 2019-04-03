@@ -64,6 +64,7 @@
         "dependency":"依赖",
         "disk_usage":"磁盘使用",
         "solvers":"推导器",
+        "solver":"推导器",
         "vendor":"开发者",
         "package":"包",
         "run":"运行",

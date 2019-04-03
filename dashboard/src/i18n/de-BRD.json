@@ -64,6 +64,7 @@
         "dependency":"Abhängigkeit",
         "disk_usage":"Festplattennutzung",
         "solvers":"Solvers",
+        "solver":"Solver",
         "vendor":"Löser",
         "package":"Paket",
         "run":"Lauf",

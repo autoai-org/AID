@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <span class="headline">{{$t('Packages.import_from_git')}}</span>
+      <span class="headline">{{ $t('Packages.import_from_git') }}</span>
     </v-card-title>
     <v-card-text>
       <v-text-field
@@ -37,7 +37,7 @@
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="readme">
         <div slot="header">
-          {{$t('Packages_detail.readme')}}
+          {{ $t('Packages_detail.readme') }}
         </div>
         <v-card>
           <vue-markdown class="cvpm-repo-readme">
@@ -47,7 +47,7 @@
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="dependency">
         <div slot="header">
-          {{$t('Packages_detail.dependency')}}
+          {{ $t('Packages_detail.dependency') }}
         </div>
         <v-card class="cvpm-config-text">
           <pre>{{ dependency }}</pre>

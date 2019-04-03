@@ -1,27 +1,12 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>{{$t('Packages_detail.solvers')}}</h2>
+      <h2>{{ $t('Packages_detail.solvers') }}</h2>
     </v-card-title>
-    <cvpm-solver-selection
-      :config="config"
-      :vendor="vendor"
-      :package-name="packageName"
-      @finishSelection="onFinishSelection"
-    />
-    <v-flex class="cvpm-solver-run-btn">
-      <v-btn
-        color="indigo"
-        outline
-        @click="run()"
-      >
-        {{$t('Packages_detail.run')}}
-      </v-btn>
-    </v-flex>
-    <v-expansion-panel>
+    <v-expansion-panel popout>
       <v-expansion-panel-content>
         <div slot="header">
-          {{$t('Packages_detail.running')}}
+          {{ $t('Packages_detail.running') }}
         </div>
         <v-list>
           <v-list-tile
@@ -34,6 +19,22 @@
         </v-list>
       </v-expansion-panel-content>
     </v-expansion-panel>
+    <cvpm-solver-selection
+      :config="config"
+      :vendor="vendor"
+      :package-name="packageName"
+      @finishSelection="onFinishSelection"
+    />
+    <v-card-actions>
+    <v-spacer></v-spacer>
+      <v-btn
+        color="indigo"
+        outline
+        @click="run()"
+      >
+        {{ $t('Packages_detail.run') }}
+      </v-btn>
+    </v-card-actions>
     <v-dialog
       v-model="runningConfirmDialog"
       persistent
@@ -200,6 +201,6 @@ export default {
   width: 95%;
 }
 .cvpm-solver-run-btn {
-  margin-right: 10%;
+  background-color: bisque;
 }
 </style>

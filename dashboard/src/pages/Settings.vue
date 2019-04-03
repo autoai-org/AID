@@ -41,7 +41,7 @@
       primary
       @click="writeConfig()"
     >
-      {{$t(`Settings.save`)}}
+      {{ $t(`Settings.save`) }}
     </v-btn>
   </v-layout>
 </template>

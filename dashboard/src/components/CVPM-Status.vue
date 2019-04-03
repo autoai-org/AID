@@ -7,7 +7,7 @@
       <p
         class="cvpm-status-content-no-capitalize"
       >
-        <B>{{$t(`Home.host`)}}:</B> {{ configService.endpoint.toLowerCase() }}
+        <B>{{ $t(`Home.host`) }}:</B> {{ configService.endpoint.toLowerCase() }}
       </p>
       <p
         v-if="status.cpu"

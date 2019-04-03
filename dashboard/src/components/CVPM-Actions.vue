@@ -1,22 +1,23 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>{{$t('Packages_detail.actions')}}</h2>
+      <h2>{{ $t('Packages_detail.actions') }}</h2>
     </v-card-title>
     <v-card-actions>
+      <v-spacer />
       <v-btn
         color="indigo darken-1"
         outline
         @click="triggerDialog('test')"
       >
-        {{$t('Packages_detail.test')}}
+        {{ $t('Packages_detail.test') }}
       </v-btn>
       <v-btn
         color="indigo darken-1"
         outline
         @click="triggerDialog('ticket')"
       >
-        {{$t('Packages_detail.ticket')}}
+        {{ $t('Packages_detail.ticket') }}
       </v-btn>
     </v-card-actions>
     <v-dialog v-model="enableTest">
