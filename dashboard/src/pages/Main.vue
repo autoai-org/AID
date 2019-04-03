@@ -21,7 +21,7 @@
         <!-- if enable logo
             <img src="https://i.loli.net/2018/10/20/5bcb455c17616.png" class="cvpm-logo"/>
             -->
-        <p>{{$t(`Dashboard`)}}</p>
+        <p>{{ $t(`Dashboard`) }}</p>
         <div style="padding-left:5em;">
           <v-switch
             v-model="dark"
