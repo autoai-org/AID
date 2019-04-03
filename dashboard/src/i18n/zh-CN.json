@@ -16,10 +16,12 @@
     },
     "Packages":{
         "title":"模型库",
-        "vendor":"发行商",
+        "import_from_git":"从Git引入",
+        "import_from_hub":"从Hub引入",
+        "vendor":"发行者",
         "name":"包名",
         "local_folder":"本地目录",
-        "action":"操作"
+        "actions":"操作"
     },
     "System":"系统",
     "Log":{
