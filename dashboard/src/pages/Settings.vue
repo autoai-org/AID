@@ -23,15 +23,15 @@
       <v-form>
         <v-switch
           v-model="config.developerMode"
-          label="Developer Mode"
+          :label="$t(`Settings.developer_mode`)"
         />
         <v-switch
           v-model="config.hintMode"
-          label="Enable Hint"
+          :label="$t(`Settings.enable_hint`)"
         />
         <v-text-field
           v-model="config.endpoint"
-          label="Endpoint"
+          :label="$t(`Settings.endpoint`)"
           required
         />
       </v-form>
@@ -41,7 +41,7 @@
       primary
       @click="writeConfig()"
     >
-      Save
+      {{$t(`Settings.save`)}}
     </v-btn>
   </v-layout>
 </template>

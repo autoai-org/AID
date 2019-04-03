@@ -16,10 +16,12 @@
     },
     "Packages":{
         "title":"Packages",
+        "import_from_git":"IMPORT FROM GIT",
+        "import_from_hub":"IMPORT FROM HUB",
         "vendor":"Vendor",
         "name":"Name",
         "local_folder":"LocalFolder",
-        "action":"Actions"
+        "actions":"Actions"
     },
     "System":"System",
     "Log":{
@@ -27,7 +29,7 @@
         "system_log":"System Log"
     },
     "Settings":{
-        "title":"Setting",
+        "title":"Settings",
         "developer_mode":"Developer Mode",
         "enable_hint":"Enable Hint",
         "endpoint":"Endpoint",

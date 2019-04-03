@@ -10,7 +10,7 @@
         dark
       >
         fas fa-sync
-      </v-icon>Sync
+      </v-icon>{{$t(`Datasets.sync`)}}
     </v-btn>
     <v-btn
       outline
@@ -22,11 +22,11 @@
         dark
       >
         fas fa-star
-      </v-icon>Starred
+      </v-icon>{{$t(`Datasets.starred`)}}
     </v-btn>
     <v-text-field
       v-model="searchKW"
-      label="Search"
+      :label="$t(`Datasets.search`)"
     />
     <v-card>
       <v-data-table
@@ -153,25 +153,25 @@ export default {
       searchTag: '',
       headers: [
         {
-          text: 'Name',
+          text: this.$t(`Datasets.name`),
           align: 'left',
           sortable: true,
           value: 'Name'
         },
         {
-          text: 'Desc',
+          text: this.$t(`Datasets.desc`),
           align: 'left',
           sortable: true,
           value: 'Desc'
         },
         {
-          text: 'Tags',
+          text: this.$t(`Datasets.tags`),
           align: 'left',
           sortable: false,
           value: 'Tags'
         },
         {
-          text: 'Actions',
+          text: this.$t(`Datasets.actions`),
           align: 'left',
           sortable: false,
           value: 'Tags'
