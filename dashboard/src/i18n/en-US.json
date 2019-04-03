@@ -57,5 +57,20 @@
     "About":"About",
     "Hub":"Hub",
     "Github":"Github",
-    "Blog":"Blog"
+    "Blog":"Blog",
+    "Packages_detail":{
+        "meat_info":"Meta Info",
+        "readme":"Readme",
+        "dependency":"Dependency",
+        "disk_usage":"Disk Usage",
+        "solvers":"Solvers",
+        "vendor":"Vendor",
+        "package":"Package",
+        "run":"Run",
+        "running":"Running",
+        "actions":"Actions",
+        "test":"TEST",
+        "ticket":"TICKET",
+        "package_log":"Package Log"
+    }
 }
