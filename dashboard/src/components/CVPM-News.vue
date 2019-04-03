@@ -1,7 +1,7 @@
 <template>
   <v-card class="cvpm-news-card">
     <v-card-title primary-title>
-      <h2>{{$t(`Home.latest_news`)}}</h2>
+      <h2>{{ $t(`Home.latest_news`) }}</h2>
     </v-card-title>
     <v-list
       two-line
