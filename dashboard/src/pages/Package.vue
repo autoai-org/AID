@@ -19,7 +19,7 @@
             dark
           >
             fab fa-github
-          </v-icon>Import from Git
+          </v-icon>{{$t('Packages.import_from_git')}}
         </v-btn>
         <v-btn
           outline
@@ -31,7 +31,7 @@
             dark
           >
             device_hub
-          </v-icon>Import fron Hub
+          </v-icon>{{$t('Packages.import_from_hub')}}
         </v-btn>
       </v-flex>
       <v-flex xs12>
@@ -81,12 +81,12 @@ export default {
           value: 'Name'
         },
         {
-          text: 'LocalFolder',
+          text: this.$t('Packages.local_folder'),
           align: 'left',
           sortable: true,
           value: 'LocalFolder'
         },
-        { text: 'Actions',
+        { text: this.$t('Packages.actions'),
           align: 'left',
           value: 'name',
           sortable: false
