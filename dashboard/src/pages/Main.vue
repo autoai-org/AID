@@ -170,7 +170,7 @@
           <v-list-tile
             v-for="lang in locales"
             :key="lang"
-            @mouseover.native="changeLocale(lang)"
+            @click="changeLocale(lang)"
           >
             <v-list-tile-title>{{ lang }}</v-list-tile-title>
           </v-list-tile>
@@ -224,6 +224,7 @@
 
 <script>
 import { getMenus } from '@/services/menu'
+import { setLang } from '@/i18n/config'
 export default {
   data () {
     return {
@@ -231,7 +232,7 @@ export default {
       theme: 'primary',
       mini: false,
       drawer: true,
-      locales: ['en-US', 'zh-CN'],
+      locales: ['English', '中文(简体)', 'Deutschland'],
       colors: ['blue', 'green', 'purple', 'red'],
       message: {
         display: false,
@@ -245,7 +246,7 @@ export default {
   },
   methods: {
     changeLocale (to) {
-      global.helper.ls.set('locale', to)
+      setLang(to)
     },
     fetchMenu () {
       this.menu = getMenus()
