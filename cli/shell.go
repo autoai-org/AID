@@ -5,18 +5,15 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 )
 
 func pip(args []string) {
 	config := readConfig()
 	localPip := config.Local.Pip
-	// _ = _execCommand(localPip, args)
-	proc := NewProcess(localPip, args...)
+	proc := NewProcess(localPip, "", args...)
 	out := proc.StreamOutput()
 	logFile := filepath.Join(getLogsLocation(), "system.log")
 	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
@@ -35,11 +32,11 @@ func pip(args []string) {
 	proc.Start()
 }
 
-func python(args []string) {
+func python(args []string, envs string) {
 	config := readConfig()
 	localPython := config.Local.Python
-	//_ = _execCommand(localPython, args)
-	proc := NewProcess(localPython, args...)
+	// handles environment variables
+	proc := NewProcess(localPython, "", args...)
 	out := proc.StreamOutput()
 	logFile := filepath.Join(getLogsLocation(), "package.log")
 	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
@@ -57,11 +54,4 @@ func python(args []string) {
 		}
 	}()
 	proc.Start()
-}
-
-func _execCommand(commandName string, params []string) bool {
-	cmd := exec.Command(commandName, params...)
-	cmd.Stdout = os.Stdout
-	fmt.Println(cmd.Args)
-	return true
 }

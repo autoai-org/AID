@@ -69,13 +69,13 @@ export default {
       loading: true,
       headers: [
         {
-          text: 'Vendor',
+          text: this.$t('Packages.vendor'),
           align: 'left',
           sortable: true,
           value: 'Vendor'
         },
         {
-          text: 'Name',
+          text: this.$t('Packages.name'),
           align: 'left',
           sortable: true,
           value: 'Name'

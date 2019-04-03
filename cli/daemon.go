@@ -47,7 +47,6 @@ type RunRepoRequest struct {
 func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
-	log.Println(runRepoRequest.Port)
 	if runRepoRequest.Port == "" {
 		runRepoRequest.Port = findNextOpenPort(8080)
 	}
@@ -91,7 +90,6 @@ func PostReposHandler(c *gin.Context) {
 	config := readConfig()
 	var addRepoRequest AddRepoRequest
 	c.BindJSON(&addRepoRequest)
-	log.Println(addRepoRequest.RepoType)
 	if addRepoRequest.RepoType == "git" {
 		InstallFromGit(addRepoRequest.URL)
 		c.JSON(http.StatusOK, config.Repositories)
@@ -134,7 +132,6 @@ func socketHandler(c *gin.Context) {
 
 // write log to socket stream
 func writeLog(filepath string, server *socketio.Server, eventName string) {
-	log.Println("Writing Logs")
 	t, err := tail.TailFile(filepath, tail.Config{Follow: true})
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
@@ -289,7 +286,9 @@ func runServer(port string) {
 	r.GET("/system", GetSystemHandler)
 	// Repo Related Routes
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
+	r.GET("/repo/env/:vendor/:name", QueryRepoEnvironments)
 	r.POST("/repo/running", PostRunningRepoHandler)
+	r.POST("/repo/envs/:vendor/:name", AddRepoEnvironments)
 	r.GET("/repos", GetReposHandler)
 	r.GET("/repos/running", GetRunningReposHandler)
 	r.POST("/repos", PostReposHandler)

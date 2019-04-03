@@ -8,11 +8,17 @@
 * it support:
 * Venv, Supported
 * Docker, Planned but not supported yet.
+* Besides, the file also handles environment variables.
  */
+
 package main
 
 import (
 	"log"
+	"net/http"
+	"strings"
+
+	"github.com/gin-gonic/gin"
 
 	"github.com/cvpm-contrib/database"
 )
@@ -39,11 +45,14 @@ type EnvironmentVariable struct {
 }
 
 func (virtualenv VirtualEnv) validate() bool {
-	return isStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV)
+	if isStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV) {
+		return true
+	}
+	return false
 }
 
 func (virtualenv VirtualEnv) initiate() {
-	python([]string{"-m", "venv", virtualenv.RepositoryFolder})
+	python([]string{"-m", "venv", virtualenv.RepositoryFolder}, "")
 }
 
 func (virtualenv VirtualEnv) triggerEnable() {
@@ -77,4 +86,40 @@ func AddNewEnvToPackage(Vendor string, PackageName string, Key string, Value str
 		panic(err)
 	}
 	database.CloseDB(sess)
+}
+
+func parseEnvs(envs []EnvironmentVariable) string {
+	var envsString string
+	for _, env := range envs {
+		envString := env.Key + "=" + env.Value
+		envsString += envString
+		envsString += " "
+	}
+	return strings.TrimSpace(envsString)
+}
+
+// QueryEnvString returns the string for runnning
+func QueryEnvString(Vendor string, PackageName string) string {
+	envs := QueryVariables(Vendor, PackageName)
+	return parseEnvs(envs)
+}
+
+// Gin Handlers for Envs
+
+// QueryRepoEnvironments is a web handler returning all env variables
+// for this repo and package
+func QueryRepoEnvironments(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	c.JSON(http.StatusOK, QueryVariables(vendor, name))
+}
+
+// AddRepoEnvironments receives the env vars and add it to the database
+func AddRepoEnvironments(c *gin.Context) {
+	vendor := c.Param("vendor")
+	name := c.Param("name")
+	var addEnvvarRequest EnvironmentVariable
+	c.BindJSON(&addEnvvarRequest)
+	AddNewEnvToPackage(vendor, name, addEnvvarRequest.Key, addEnvvarRequest.Value)
+	c.JSON(http.StatusOK, QueryVariables(vendor, name))
 }
