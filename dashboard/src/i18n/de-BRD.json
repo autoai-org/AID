@@ -1,0 +1,60 @@
+{
+    "Dashboard":"Instrumententafel",
+    "Theme":{
+        "lighttheme":"Licht",
+        "darktheme":"Dunkel",
+        "theme":" Thema"
+    },
+    "Admin":"Administrator",
+    "Home":{
+        "title":"Homepage",
+        "latest_news":"Neuesten Nachrichten",
+        "status":"Status",
+        "cpu":"CPU",
+        "memory":"Erinnerung",
+        "operating_system":"Betriebssystem"
+    },
+    "Packages":{
+        "title":"Pakete",
+        "import_from_git":"Einführen von GIT",
+        "import_from_hub":"Einführen von HUB",
+        "vendor":"Entwickler",
+        "name":"Name",
+        "local_folder":"Lokaler Ordner",
+        "actions":"Aktionen"
+    },
+    "System":"System",
+    "Log":{
+        "title":"Log",
+        "system_log":"System Log"
+    },
+    "Settings":{
+        "title":"die Einstellungen",
+        "developer_mode":"Entwicklermodus",
+        "enable_hint":"Hinweis aktivieren",
+        "endpoint":"Endpunkt",
+        "save":"Sparen"
+    },
+    "Contrib":"Contrib",
+    "Datasets":{
+        "title":"Datensätze",
+        "sync":"SYNC",
+        "starred":"STARRED",
+        "search":"Suche",
+        "name":"Name",
+        "desc":"Desc",
+        "tags":"Stichworte",
+        "actions":"Aktionen"
+    },
+    "Inspector":{
+        "title":"Inspektor",
+        "client_ip":"Clinet IP",
+        "target":"Ziel",
+        "result":"Ergebnis",
+        "time":"Zeit"
+    },
+    "About":"Über",
+    "Hub":"Hub",
+    "Github":"Github",
+    "Blog":"Blog"
+}
