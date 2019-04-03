@@ -22,7 +22,7 @@ format-py:
 	# yapf -i cvpm/**/*.py
 
 format-go:
-	gofmt -l -s -w *.go
+	gofmt -l -s -w **/*.go
 
 docs:
 	cd docs && npm run docs:build

@@ -11,12 +11,13 @@ import (
 	"bufio"
 	"io"
 	"log"
+	"os"
 	"os/exec"
 	"sync"
 	"time"
 )
 
-// used for shell/cmd command
+// Process is used for shell/cmd command
 type Process struct {
 	proc               *exec.Cmd
 	cancellationSignal chan uint8
@@ -34,9 +35,15 @@ type Process struct {
 	mutex sync.RWMutex
 }
 
-func NewProcess(command string, args ...string) *Process {
+// NewProcess creates a new process for the specific command
+func NewProcess(command string, envs string, args ...string) *Process {
+	cmd := exec.Command(command, args...)
+	// load system environments
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, envs)
+	// parse package related envs
 	process := &Process{
-		exec.Command(command, args...),
+		cmd,
 		make(chan uint8, 1),
 		make(chan error, 1),
 		make(chan error, 1),
@@ -52,6 +59,7 @@ func NewProcess(command string, args ...string) *Process {
 	return process
 }
 
+// Start runs the process with go-routine
 func (p *Process) Start() *Process {
 	if p.timeout > 0 {
 		log.Println("Its greater than 0")
@@ -72,6 +80,8 @@ func (p *Process) Start() *Process {
 	return p
 }
 
+// SetTimeout set a timeout duration for the process
+// Started process cannot be set a timeout.
 func (p *Process) SetTimeout(d time.Duration) {
 	if p.started {
 		panic("Can not set timeout after process started")
@@ -79,6 +89,7 @@ func (p *Process) SetTimeout(d time.Duration) {
 	p.timeout = d
 }
 
+// Wait returns the returncode
 func (p *Process) Wait() error {
 	return <-p.returnCode
 }
@@ -88,6 +99,7 @@ func (p *Process) awaitOutput() {
 	p.done <- p.proc.Wait()
 }
 
+// Kill kills the process immediately
 func (p *Process) Kill() {
 	p.mutex.Lock()
 	if !p.completed {
@@ -96,6 +108,7 @@ func (p *Process) Kill() {
 	p.mutex.Unlock()
 }
 
+// OpenInputStream returns a stream for the input
 func (p *Process) OpenInputStream() (io.WriteCloser, error) {
 	if p.inputStreamSet {
 		panic("Input stream already set")
@@ -108,6 +121,8 @@ func (p *Process) OpenInputStream() (io.WriteCloser, error) {
 	return stdIn, err
 
 }
+
+// StreamOutput streams the output
 func (p *Process) StreamOutput() *bufio.Scanner {
 	//pipe both stdout and stderr into the same pipe
 	//panics if you do streamoutput after process starting or

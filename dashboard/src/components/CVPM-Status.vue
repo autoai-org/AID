@@ -5,6 +5,11 @@
     </v-card-title>
     <v-card-text>
       <p
+        class="cvpm-status-content-no-capitalize"
+      >
+        <B>Host:</B> {{ configService.endpoint.toLowerCase() }}
+      </p>
+      <p
         v-if="status.cpu"
         class="cvpm-status-content"
       >
@@ -46,11 +51,14 @@
 
 <script>
 import { systemService } from '@/services/system'
+import { configService } from '@/services/config'
+
 export default {
   components: {
   },
   data: () => ({
-    status: {}
+    status: {},
+    configService: configService
   }),
   created () {
     this.getStatus()
@@ -74,5 +82,10 @@ export default {
   padding-left: 2em;
   padding-right: 1em;
   text-transform: capitalize;
+}
+.cvpm-status-content-no-capitalize {
+  padding-left: 2em;
+  padding-right: 1em;
+
 }
 </style>

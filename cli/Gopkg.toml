@@ -120,3 +120,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/cvpm-contrib/auth"
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  version = "1.19.1"
