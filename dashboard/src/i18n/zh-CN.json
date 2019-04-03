@@ -10,6 +10,7 @@
         "title":"首页",
         "latest_news":"最新消息",
         "status":"系统状态",
+        "host":"主机地址",
         "cpu":"处理器",
         "memory":"内存",
         "operating_system":"操作系统"

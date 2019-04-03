@@ -10,6 +10,7 @@
         "title":"Home",
         "latest_news":"Latest News",
         "status":"Status",
+        "host":"Host",
         "cpu":"CPU",
         "memory":"Memory",
         "operating_system":"Operating System"
