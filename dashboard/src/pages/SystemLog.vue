@@ -1,6 +1,6 @@
 <template>
   <cvpm-log
-    :title="'System Log'"
+    :title="$t(`Log.system_log`)"
     :message-list="messageList"
   />
 </template>
