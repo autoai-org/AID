@@ -71,6 +71,7 @@
         "actions":"Actions",
         "test":"TEST",
         "ticket":"TICKET",
-        "package_log":"Package Log"
+        "package_log":"Package Log",
+        "environment":"Environment_variables"
     }
 }

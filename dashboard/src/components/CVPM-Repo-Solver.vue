@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>Solvers</h2>
+      <h2>{{$t('Packages_detail.solvers')}}</h2>
     </v-card-title>
     <cvpm-solver-selection
       :config="config"
@@ -15,13 +15,13 @@
         outline
         @click="run()"
       >
-        Run
+        {{$t('Packages_detail.run')}}
       </v-btn>
     </v-flex>
     <v-expansion-panel>
       <v-expansion-panel-content>
         <div slot="header">
-          Running
+          {{$t('Packages_detail.running')}}
         </div>
         <v-list>
           <v-list-tile

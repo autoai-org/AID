@@ -20,7 +20,7 @@
         class="cvpm-package-detail-card"
       >
         <cvpm-log
-          :title="'Package Log'"
+          :title="$t('Packages_detail.package_log')"
           :message-list="messageList"
         />
       </v-flex>

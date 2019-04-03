@@ -71,6 +71,7 @@
         "actions":"操作",
         "test":"测试",
         "ticket":"工单",
-        "package_log":"模型日志"
+        "package_log":"模型日志",
+        "environment":"环境变量"
     }
 }

@@ -61,16 +61,17 @@
     "Packages_detail":{
         "meat_info":"Meta Info",
         "readme":"Readme",
-        "dependency":"Dependency",
-        "disk_usage":"Disk Usage",
+        "dependency":"Abhängigkeit",
+        "disk_usage":"Festplattennutzung",
         "solvers":"Solvers",
-        "vendor":"Vendor",
-        "package":"Package",
-        "run":"Run",
-        "running":"Running",
-        "actions":"Actions",
-        "test":"TEST",
-        "ticket":"TICKET",
-        "package_log":"Package Log"
+        "vendor":"Löser",
+        "package":"Paket",
+        "run":"Lauf",
+        "running":"Laufen",
+        "actions":"Aktionen",
+        "test":"PRÜFUNG",
+        "ticket":"FAHRKARTE",
+        "package_log":"Paket Log",
+        "environment":"Umgebungsvariablen"
     }
 }
