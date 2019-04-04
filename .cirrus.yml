@@ -1,0 +1,33 @@
+task:
+  auto_cancellation: false
+  install_script: |
+    go get github.com/unarxiv/cvpm/cli
+  script: |
+    go test -race -v ./...
+  env:
+    PATH: /snap/bin:$PATH
+  matrix:
+    - container:
+        image: golang:latest
+      only_if: $CIRRUS_TAG != ''
+      deploy_script: curl -sL https://git.io/goreleaser | bash
+    - container:
+        image: golang:latest
+      env:
+        GOBIN: '$(GOPATH)/bin'
+        GOROOT: '/usr/local/go1.11'
+        GOPATH: '$(system.defaultWorkingDirectory)/gopath'
+        modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)'
+      prep_script: |
+        mkdir -p '$(GOBIN)'
+        mkdir -p '$(GOPATH)/pkg'
+        mkdir -p '$(modulePath)'
+        shopt -s extglob
+        mv !(gopath) '$(modulePath)'
+        go version
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+          curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+          dep ensure
+        fi
+      build_script: go build -v
