@@ -10,6 +10,7 @@
         "title":"Homepage",
         "latest_news":"Neuesten Nachrichten",
         "status":"Status",
+        "host":"Fernbedienung",
         "cpu":"CPU",
         "memory":"Erinnerung",
         "operating_system":"Betriebssystem"
@@ -56,5 +57,22 @@
     "About":"Über",
     "Hub":"Hub",
     "Github":"Github",
-    "Blog":"Blog"
+    "Blog":"Blog",
+    "Packages_detail":{
+        "meat_info":"Meta Info",
+        "readme":"Readme",
+        "dependency":"Abhängigkeit",
+        "disk_usage":"Festplattennutzung",
+        "solvers":"Solvers",
+        "solver":"Solver",
+        "vendor":"Löser",
+        "package":"Paket",
+        "run":"Lauf",
+        "running":"Laufen",
+        "actions":"Aktionen",
+        "test":"PRÜFUNG",
+        "ticket":"FAHRKARTE",
+        "package_log":"Paket Log",
+        "environment":"Umgebungsvariablen"
+    }
 }

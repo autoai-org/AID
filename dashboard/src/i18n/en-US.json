@@ -10,6 +10,7 @@
         "title":"Home",
         "latest_news":"Latest News",
         "status":"Status",
+        "host":"Host",
         "cpu":"CPU",
         "memory":"Memory",
         "operating_system":"Operating System"
@@ -56,5 +57,22 @@
     "About":"About",
     "Hub":"Hub",
     "Github":"Github",
-    "Blog":"Blog"
+    "Blog":"Blog",
+    "Packages_detail":{
+        "meat_info":"Meta Info",
+        "readme":"Readme",
+        "dependency":"Dependency",
+        "disk_usage":"Disk Usage",
+        "solvers":"Solvers",
+        "solver":"Solver",
+        "vendor":"Vendor",
+        "package":"Package",
+        "run":"Run",
+        "running":"Running",
+        "actions":"Actions",
+        "test":"TEST",
+        "ticket":"TICKET",
+        "package_log":"Package Log",
+        "environment":"Environment_variables"
+    }
 }

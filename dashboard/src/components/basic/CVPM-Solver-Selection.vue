@@ -3,19 +3,19 @@
     <v-select
       v-model="selectedVendor"
       :items="vendor"
-      label="Vendor"
+      :label="$t('Packages_detail.vendor')"
     />
     <v-select
       v-model="selectedPackage"
       :items="packageName"
-      label="Package"
+      :label="$t('Packages_detail.package')"
     />
     <v-flex xs6>
       <v-select
         v-model="selectedSolver"
         :items="config.solvers"
         item-text="name"
-        label="Solver"
+        :label="$t('Packages_detail.solver')"
       />
     </v-flex>
   </v-layout>
