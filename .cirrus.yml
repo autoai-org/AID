@@ -11,6 +11,7 @@ task:
         image: golang:latest
       only_if: $CIRRUS_TAG != ''
       deploy_script: curl -sL https://git.io/goreleaser | bash
+      name: Deploy Job
     - container:
         image: golang:latest
       env:
@@ -35,3 +36,8 @@ task:
         image: python:latest
       install_script: python3 -m pip install --upgrade setuptools wheel
       build_package_script: python3 setup.py sdist bdist_wheel
+      name: Python Job
+    - windows_container:
+        image: cirrusci/windowsservercore:2019
+        os_version: 2019
+      name: Windows Job
