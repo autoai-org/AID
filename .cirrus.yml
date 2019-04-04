@@ -31,3 +31,7 @@ task:
           dep ensure
         fi
       build_script: go build -v
+    - container:
+        image: python:latest
+      install_script: python3 -m pip install --upgrade setuptools wheel
+      build_package_script: python3 setup.py sdist bdist_wheel
