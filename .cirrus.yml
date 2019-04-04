@@ -2,10 +2,9 @@ task:
   auto_cancellation: false
   install_script: |
     go get github.com/unarxiv/cvpm/cli
-  script: |
-    go test -race -v ./...
   env:
     PATH: /snap/bin:$PATH
+    CIRRUS_WORKING_DIR: /go/src/github.com/$CIRRUS_REPO_FULL_NAME
   matrix:
     - container:
         image: golang:latest
@@ -32,6 +31,7 @@ task:
           dep ensure
         fi
       build_script: go build -v
+      name: Golang Job
     - container:
         image: python:latest
       install_script: python3 -m pip install --upgrade setuptools wheel
