@@ -15,6 +15,10 @@ import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
 import 'vue-tour/dist/vue-tour.css'
 
+import zhHans from 'vuetify/es5/locale/zh-Hans'
+import en from 'vuetify/es5/locale/en'
+import de from 'vuetify/es5/locale/de'
+
 import i18n from '@/i18n'
 const configService = new ConfigService()
 
@@ -29,6 +33,10 @@ Vue.use(VueTour)
 Vue.config.productionTip = false
 
 Vue.use(Vuetify, {
+  lang: {
+    locales: { en, zhHans, de },
+    current: 'zhHans'
+  },
   theme: {
     primary: colors.indigo.darken1,
     secondary: colors.red.lighten4,

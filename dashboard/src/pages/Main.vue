@@ -224,7 +224,7 @@
 
 <script>
 import { getMenus } from '@/services/menu'
-import { setLang } from '@/i18n/config'
+import { setLang, getVuetifyLang } from '@/i18n/config'
 export default {
   data () {
     return {
@@ -247,6 +247,8 @@ export default {
   methods: {
     changeLocale (to) {
       setLang(to)
+      console.log(getVuetifyLang(to))
+      this.$vuetify.lang.current = getVuetifyLang(to)
     },
     fetchMenu () {
       this.menu = getMenus()
