@@ -16,7 +16,7 @@ require (
 	github.com/cvpm-contrib/dataset v0.0.0-20190201103727-840ea55c2bb8
 	github.com/emirpasic/gods v1.12.0 // indirect
 	github.com/fatih/color v1.7.0
-	github.com/flosch/pongo2 v0.0.0-20141028000813-5e81b817a0c4
+	github.com/flosch/pongo2 v0.0.0-20190406115435-79872a7b2769
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/sse v0.0.0-20190301062529-5545eab6dad3 // indirect
 	github.com/gin-contrib/static v0.0.0-20190301062546-ed515893e96b
