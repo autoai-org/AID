@@ -13,6 +13,7 @@ apps:
 
 parts:
   cvpm:
+    after: [go]
     source: cli/
     plugin: go
     go-importpath: github.com/unarxiv/cvpm/cli
