@@ -4,6 +4,7 @@ go 1.12
 
 require (
 	github.com/BurntSushi/toml v0.3.1
+	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
 	github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c
 	github.com/appleboy/gofight v2.0.0+incompatible // indirect
@@ -40,7 +41,8 @@ require (
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/pelletier/go-toml v1.3.0 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
-	github.com/shirou/gopsutil v0.0.0-20190323131628-2cbc9195c892
+	github.com/shirou/gopsutil v2.18.12+incompatible
+	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
 	github.com/syndtr/goleveldb v0.0.0-20190318030020-c3a204f8e965
 	github.com/urfave/cli v1.20.0
 	github.com/valyala/fasttemplate v1.0.1 // indirect

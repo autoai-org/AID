@@ -1,5 +1,6 @@
 import * as utility from 'utility';
 import Axios from 'axios';
+import { config } from '../config'
 
 class GithubService {
     protected id:string
@@ -23,11 +24,15 @@ class GithubService {
             grant_type: 'authorization_code',
             state: utility.randomString()
         }, {
-            
+            headers: {
+                'Content-Type': 'application/json'
+            }
         })
     }
 }
 
+let githubService = new GithubService(config.githubId, config.githubSecret)
+
 export {
-    GithubService
+    githubService
 }

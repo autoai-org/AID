@@ -677,10 +677,10 @@
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
   integrity sha512-l42BggppR6zLmpfU6fq9HEa2oGPEI8yrSPL3GITjfRInppYFahObbIQOQK3UGxEnyQpltZLaPe75046NOZQikw==
 
-"@types/stripe@^6.25.6":
-  version "6.25.6"
-  resolved "https://registry.yarnpkg.com/@types/stripe/-/stripe-6.25.6.tgz#9a5108e39976b88803d8bdcfd0d9ee1c480490e3"
-  integrity sha512-4P3VDrUmuG4MjMYw326Cfz2Q+lI5uVVoTDBFBtElQWF/aExbCJXZTHlYovZG502+UAowVuNVo5IuFHxELhambQ==
+"@types/stripe@^6.19.7":
+  version "6.25.9"
+  resolved "https://registry.yarnpkg.com/@types/stripe/-/stripe-6.25.9.tgz#c60f88438f9e5756567bc22c63c7d82098a22c7e"
+  integrity sha512-5l/7puoWLOUnwLOXh3tm3wduwav7PHYMi+OyxoRrZgl6jDXD4j/IHIpkLlN2B/UYz7qlkvAxkl43Ef3l9psbSw==
   dependencies:
     "@types/node" "*"
 
@@ -2927,7 +2927,7 @@ jest-get-type@^24.3.0:
   resolved "https://registry.yarnpkg.com/jest-get-type/-/jest-get-type-24.3.0.tgz#582cfd1a4f91b5cdad1d43d2932f816d543c65da"
   integrity sha512-HYF6pry72YUlVcvUx3sEpMRwXEWGEPlJ0bSPVnB3b3n++j4phUEoSPcS6GC0pPJ9rpyPSe4cb5muFo6D39cXow==
 
-jest-haste-map@^24.7.1:
+jest-haste-map@^24.5.0, jest-haste-map@^24.7.1:
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/jest-haste-map/-/jest-haste-map-24.7.1.tgz#772e215cd84080d4bbcb759cfb668ad649a21471"
   integrity sha512-g0tWkzjpHD2qa03mTKhlydbmmYiA2KdcJe762SbfFo/7NIMgBWAA0XqQlApPwkWOF7Cxoi/gUqL0i6DIoLpMBw==
@@ -3025,7 +3025,7 @@ jest-resolve-dependencies@^24.7.1:
     jest-regex-util "^24.3.0"
     jest-snapshot "^24.7.1"
 
-jest-resolve@^24.7.1:
+jest-resolve@^24.5.0, jest-resolve@^24.7.1:
   version "24.7.1"
   resolved "https://registry.yarnpkg.com/jest-resolve/-/jest-resolve-24.7.1.tgz#e4150198299298380a75a9fd55043fa3b9b17fde"
   integrity sha512-Bgrc+/UUZpGJ4323sQyj85hV9d+ANyPNu6XfRDUcyFNX1QrZpSoM0kE4Mb2vZMAYTJZsBFzYe8X1UaOkOELSbw==
@@ -4965,7 +4965,7 @@ strip-json-comments@~2.0.1:
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
   integrity sha1-PFMZQukIwml8DsNEhYwobHygpgo=
 
-stripe@^6.28.0:
+stripe@^6.25.1:
   version "6.28.0"
   resolved "https://registry.yarnpkg.com/stripe/-/stripe-6.28.0.tgz#81f2bf174efe9503b50f24930a7e1d195c60f810"
   integrity sha512-4taF37geIr9DqvWEm3G9VCz2iJSV/DFc3PcElCQdQK5GUMI/MOj6XE0oJRYMOAHz0Oq8pT+4yDQmkh3SDI3nQA==
@@ -5250,10 +5250,10 @@ type-is@^1.6.14, type-is@^1.6.16:
     media-typer "0.3.0"
     mime-types "~2.1.18"
 
-typescript@3.4.2:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.2.tgz#9ed4e6475d906f589200193be056f5913caed481"
-  integrity sha512-Og2Vn6Mk7JAuWA1hQdDQN/Ekm/SchX80VzLhjKN9ETYrIepBFAd8PkOdOTK2nKt0FCkmMZKBJvQ1dV1gIxPu/A==
+typescript@3.4.1:
+  version "3.4.1"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.4.1.tgz#b6691be11a881ffa9a05765a205cb7383f3b63c6"
+  integrity sha512-3NSMb2VzDQm8oBTLH6Nj55VVtUEpe/rgkIzMir0qVoLyjDZlnMBva0U6vDiV3IH+sl/Yu6oP5QwsAQtHPmDd2Q==
 
 uglify-js@^3.1.4:
   version "3.5.2"

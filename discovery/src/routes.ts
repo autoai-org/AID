@@ -4,6 +4,8 @@ import controller = require('./controller');
 
 const router = new Router();
 
+router.post('/user/auth/social', controller.user.socialAuthenticate);
+
 router.put('/tickets', controller.ticket.createTicket);
 
 router.get('/system/status', controller.system.getSystemStatus);

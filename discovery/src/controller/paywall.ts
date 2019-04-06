@@ -6,7 +6,6 @@ export default class PaywallController {
     public static async createCustomer(ctx: BaseContext) {
         const requestbody = ctx.request.body;
         const customer = await paymentService.createCustomer(requestbody.email);
-        console.log(customer)
         ctx.status = 200;
         ctx.body = {
             'code': 200,
@@ -47,14 +46,14 @@ export default class PaywallController {
             validUntil: Date.now(),
             createdAt: Date.now(),
         })
-        await token.save().then(function (res) {
+        await token.save().then(function (res:any) {
             ctx.status = 200;
             ctx.body = {
                 'code': 200,
                 'token': res,
                 'results': 'success'
             }
-        }).catch(function (err) {
+        }).catch(function (err:any) {
             ctx.status = 500;
             ctx.body = {
                 'code': 500,
@@ -67,7 +66,7 @@ export default class PaywallController {
         const token = ctx.request.body.token
         await Token.findOne({
             'token': token
-        }).then(function (res) {
+        }).then(function (res:any) {
             res.deactivate()
             ctx.status = 200;
             ctx.body = {
@@ -75,7 +74,7 @@ export default class PaywallController {
                 'token': res,
                 'results': 'deactivated'
             }
-        }).catch(function (err) {
+        }).catch(function (err:any) {
             ctx.status = 500;
             ctx.body = {
                 'code': 500,
@@ -86,15 +85,13 @@ export default class PaywallController {
     }
     public static async queryAccessTokens(ctx: BaseContext) {
         const email = ctx.request.query.email
-        console.log(email)
         await Token.find({
             'email': email
-        }).then(function (res) {
-            console.log(res)
+        }).then(function (res:any) {
             ctx.status = 200;
             ctx.body = {
                 'code': 200,
-                'tokens': res.map(function(each){
+                'tokens': res.map(function(each:any){
                     return {
                         'id': each.id,
                         'validUntil': each.validUntil,
@@ -103,7 +100,7 @@ export default class PaywallController {
                 }),
                 'results': 'success'
             }
-        }).catch(function (err) {
+        }).catch(function (err:any) {
             ctx.status = 500;
             ctx.body = {
                 'code': 500,
