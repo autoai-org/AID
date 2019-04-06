@@ -153,6 +153,8 @@ github.com/labstack/gommon v0.2.8 h1:JvRqmeZcfrHC5u6uVleB4NxxNbzx6gpbJiQknDbKQu0
 github.com/labstack/gommon v0.2.8/go.mod h1:/tj9csK2iPSBvn+3NLM9e52usepMtrd5ilFYA+wQNJ4=
 github.com/levigross/grequests v0.0.0-20180715163950-d0df86deffcb h1:ah0KveUT2AATyy8fmPGbZoAfsEtLt5HA60innQYZnyM=
 github.com/levigross/grequests v0.0.0-20180715163950-d0df86deffcb/go.mod h1:uCZIhROSrVmuF/BPYFPwDeiiQ6juSLp0kikFoEcNcEs=
+github.com/levigross/grequests v0.0.0-20190406125301-37c80f76a0da h1:VMtIfrXe4g4d5SCez87g8H5FdkDSMhk2JE7Kk9d/AfU=
+github.com/levigross/grequests v0.0.0-20190406125301-37c80f76a0da/go.mod h1:uCZIhROSrVmuF/BPYFPwDeiiQ6juSLp0kikFoEcNcEs=
 github.com/lunixbochs/vtclean v0.0.0-20180621232353-2d01aacdc34a/go.mod h1:pHhQNgMf3btfWnGBVipUOjRYhoOsdGqdm/+2c2E2WMI=
 github.com/lunixbochs/vtclean v1.0.0 h1:xu2sLAri4lGiovBDQKxl5mrXyESr3gUr5m5SM5+LVb8=
 github.com/lunixbochs/vtclean v1.0.0/go.mod h1:pHhQNgMf3btfWnGBVipUOjRYhoOsdGqdm/+2c2E2WMI=
