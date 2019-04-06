@@ -8,8 +8,7 @@ env:
   - GO111MODULE=on
 
 script:
-  - go test -race -v ./...
-  - go build
+  - make test-cli
 
 go:
   - 1.12.x
