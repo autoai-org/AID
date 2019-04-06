@@ -23,7 +23,7 @@ require (
 	github.com/gin-gonic/gin v1.3.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/golang/protobuf v1.3.1 // indirect
-	github.com/googollee/go-socket.io v0.0.0-20190317095603-ed07a7212e28
+	github.com/googollee/go-socket.io v1.4.1
 	github.com/hpcloud/tail v1.0.0
 	github.com/jondot/goweight v1.0.4 // indirect
 	github.com/json-iterator/go v1.1.6 // indirect
