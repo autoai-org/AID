@@ -20,6 +20,11 @@ import (
 	"github.com/urfave/cli"
 )
 
+var (
+	Version string
+	Build   string
+)
+
 func main() {
 	validateConfig()
 	cvpm := cli.NewApp()

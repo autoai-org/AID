@@ -1,0 +1,28 @@
+language: go
+sudo: required
+git:
+  clone: quiet
+
+env:
+# needed for the snap pipe:
+  - GO111MODULE=on
+
+script:
+  - make test-cli
+
+go:
+  - 1.12.x
+  - master
+
+matrix:
+  allow_failures:
+    - go: tip
+
+install: true
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: curl -sL https://git.io/goreleaser | bash
+    on:
+      tags: true

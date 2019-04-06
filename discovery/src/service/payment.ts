@@ -33,14 +33,11 @@ class PaymentService {
                     'help': 'not supported subscription type, only free, pro and enterprise is supported'
                 }
             }
-            console.log(customerId)
-            console.log(subscriptionType)
             stripe.charges.create({
                 amount: amount,
                 currency: 'usd',
                 customer: customerId
             }, function(err, charge) {
-                console.log(err)
                 resolve(charge)
             })
             

@@ -18,6 +18,8 @@ export interface IConfig {
     sentryDSN: string;
     freshdeskDomain: string;
     freshdeskToken: string;
+    githubId: string;
+    githubSecret: string;
 }
 
 // process development settings
@@ -36,7 +38,9 @@ if (!isDev) {
         stripe: process.env.STRIPEID || '',
         sentryDSN: process.env.SENTRYDSN || '',
         freshdeskDomain: process.env.FRESHDESKDOMAIN || '',
-        freshdeskToken: process.env.FRESHDESKTOKEN || ''
+        freshdeskToken: process.env.FRESHDESKTOKEN || '',
+        githubId: process.env.GITHUBID || '',
+        githubSecret: process.env.GITHUBSECRET || ''
     };
 } else {
     config = {
@@ -52,7 +56,9 @@ if (!isDev) {
         stripe: process.env.STRIPEID || '',
         sentryDSN: process.env.SENTRYDSN || '',
         freshdeskDomain: process.env.FRESHDESKDOMAIN || '',
-        freshdeskToken: process.env.FRESHDESKTOKEN || ''
+        freshdeskToken: process.env.FRESHDESKTOKEN || '',
+        githubId: process.env.GITHUBID || '',
+        githubSecret: process.env.GITHUBSECRET || ''
     };
 
 }

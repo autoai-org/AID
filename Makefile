@@ -6,10 +6,9 @@ default:
 	@echo "\tmake package"
 	@echo "\tmake clean"
 	@echo "\tmake publish"
-test:
 
-build-arm:
-	cd cli && env GOOS=linux GOARCH=arm go build cli/
+test-cli:
+	cd cli && go test -race -v ./... && go build 
 
 format-py:
 	autoflake -i cvpm/*.py
