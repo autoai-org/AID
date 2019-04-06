@@ -11,7 +11,6 @@ script:
   - make test-cli
 
 go:
-  - 1.12.x
   - master
 
 matrix:
