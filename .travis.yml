@@ -3,33 +3,23 @@ sudo: required
 git:
   clone: quiet
 
-addons:
-  apt:
-    packages:
-    # needed for the nfpm pipe:
-    - rpm
-    # needed for the snap pipe:
-    - snapd
-
 env:
 # needed for the snap pipe:
-  - PATH=/snap/bin:$PATH
+  - GO111MODULE=on
 
 script:
   - go test -race -v ./...
+  - go build
 
-go: '1.12.1'
+go:
+  - 1.12.x
+  - master
 
 matrix:
   allow_failures:
     - go: tip
 
-install:
-  - sudo snap install snapcraft --classic
-  - go get github.com/unarxiv/cvpm/cli
-  
-services:
-  - docker
+install: true
 
 deploy:
   - provider: script
