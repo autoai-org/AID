@@ -9,6 +9,7 @@ import { config } from './config';
 import { Sentry } from './logging';
 import { initParse } from './parse';
 import { router } from './routes';
+import { connect } from './service/database'
 
 import * as os from 'os';
 
@@ -18,6 +19,7 @@ export const app = new Koa();
  * Initialize Parse independently
  */
 initParse();
+connect();
 /**
  * Passport Settings
  */
