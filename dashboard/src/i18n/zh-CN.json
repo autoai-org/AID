@@ -10,6 +10,7 @@
         "title":"首页",
         "latest_news":"最新消息",
         "status":"系统状态",
+        "host":"主机地址",
         "cpu":"处理器",
         "memory":"内存",
         "operating_system":"操作系统"
@@ -56,5 +57,22 @@
     "About":"关于",
     "Hub":"Hub",
     "Github":"Github",
-    "Blog":"博客"
+    "Blog":"博客",
+    "Packages_detail":{
+        "meat_info":"元信息",
+        "readme":"关于",
+        "dependency":"依赖",
+        "disk_usage":"磁盘使用",
+        "solvers":"推导器",
+        "solver":"推导器",
+        "vendor":"开发者",
+        "package":"包",
+        "run":"运行",
+        "running":"运行中",
+        "actions":"操作",
+        "test":"测试",
+        "ticket":"工单",
+        "package_log":"模型日志",
+        "environment":"环境变量"
+    }
 }

@@ -10,7 +10,7 @@
         dark
       >
         fas fa-sync
-      </v-icon>{{$t(`Datasets.sync`)}}
+      </v-icon>{{ $t(`Datasets.sync`) }}
     </v-btn>
     <v-btn
       outline
@@ -22,7 +22,7 @@
         dark
       >
         fas fa-star
-      </v-icon>{{$t(`Datasets.starred`)}}
+      </v-icon>{{ $t(`Datasets.starred`) }}
     </v-btn>
     <v-text-field
       v-model="searchKW"

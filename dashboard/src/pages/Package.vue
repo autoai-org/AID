@@ -19,7 +19,7 @@
             dark
           >
             fab fa-github
-          </v-icon>{{$t('Packages.import_from_git')}}
+          </v-icon>{{ $t('Packages.import_from_git') }}
         </v-btn>
         <v-btn
           outline
@@ -31,7 +31,7 @@
             dark
           >
             device_hub
-          </v-icon>{{$t('Packages.import_from_hub')}}
+          </v-icon>{{ $t('Packages.import_from_hub') }}
         </v-btn>
       </v-flex>
       <v-flex xs12>

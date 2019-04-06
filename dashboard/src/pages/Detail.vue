@@ -19,15 +19,6 @@
         xs5
         class="cvpm-package-detail-card"
       >
-        <cvpm-log
-          :title="'Package Log'"
-          :message-list="messageList"
-        />
-      </v-flex>
-      <v-flex
-        xs5
-        class="cvpm-package-detail-card"
-      >
         <cvpm-env-management
           :title="'environment variables'"
           :message-list="messageList"
@@ -51,6 +42,15 @@
           :config="parsedConfig"
           :vendor="toSelectVendor"
           :package-name="toSelectPackage"
+        />
+      </v-flex>
+      <v-flex
+        xs5
+        class="cvpm-package-detail-card"
+      >
+        <cvpm-log
+          :title="$t('Packages_detail.package_log')"
+          :message-list="messageList"
         />
       </v-flex>
     </v-layout>
@@ -120,4 +120,5 @@ export default {
 .cvpm-package-detail-card {
   margin: 1em;
 }
+
 </style>
