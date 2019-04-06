@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/StackExchange/wmi v0.0.0-20180116203802-5d049714c4a6 // indirect
+	github.com/StackExchange/wmi v0.0.0-20190406101743-e0a55b97c705 // indirect
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
 	github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c
 	github.com/appleboy/gofight v2.0.0+incompatible // indirect
