@@ -47,7 +47,7 @@ require (
 	github.com/urfave/cli v1.20.0
 	github.com/valyala/fasttemplate v1.0.1 // indirect
 	github.com/xanzy/ssh-agent v0.2.1 // indirect
-	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
+	golang.org/x/crypto v0.0.0-20190406125927-38d8ce5564a5
 	golang.org/x/net v0.0.0-20190328230028-74de082e2cca // indirect
 	golang.org/x/sys v0.0.0-20190402142545-baf5eb976a8c // indirect
 	golang.org/x/tools v0.0.0-20190402200628-202502a5a924 // indirect
