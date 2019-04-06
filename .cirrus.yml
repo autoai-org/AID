@@ -1,0 +1,43 @@
+task:
+  auto_cancellation: false
+  install_script: |
+    go get github.com/unarxiv/cvpm/cli
+  env:
+    PATH: /snap/bin:$PATH
+    CIRRUS_WORKING_DIR: /go/src/github.com/$CIRRUS_REPO_FULL_NAME
+  matrix:
+    - container:
+        image: golang:latest
+      only_if: $CIRRUS_TAG != ''
+      deploy_script: curl -sL https://git.io/goreleaser | bash
+      name: Deploy Job
+    - container:
+        image: golang:latest
+      env:
+        GOBIN: '$(GOPATH)/bin'
+        GOROOT: '/usr/local/go1.11'
+        GOPATH: '$(system.defaultWorkingDirectory)/gopath'
+        modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)'
+      prep_script: |
+        mkdir -p '$(GOBIN)'
+        mkdir -p '$(GOPATH)/pkg'
+        mkdir -p '$(modulePath)'
+        shopt -s extglob
+        mv !(gopath) '$(modulePath)'
+        go version
+        go get -v -t -d ./...
+        if [ -f Gopkg.toml ]; then
+          curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+          dep ensure
+        fi
+      build_script: go build -v
+      name: Golang Job
+    - container:
+        image: python:latest
+      install_script: python3 -m pip install --upgrade setuptools wheel
+      build_package_script: python3 setup.py sdist bdist_wheel
+      name: Python Job
+    - windows_container:
+        image: cirrusci/windowsservercore:2019
+        os_version: 2019
+      name: Windows Job
