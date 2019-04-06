@@ -59,7 +59,7 @@ func (u *User) become() User {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if resp.Ok != true {
+	if !resp.Ok {
 		fmt.Println("Login Failed")
 	} else {
 		_ = json.Unmarshal(resp.Bytes(), &respUser)

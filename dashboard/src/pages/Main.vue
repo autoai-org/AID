@@ -21,11 +21,11 @@
         <!-- if enable logo
             <img src="https://i.loli.net/2018/10/20/5bcb455c17616.png" class="cvpm-logo"/>
             -->
-        <p>Dashboard</p>
+        <p>{{ $t(`Dashboard`) }}</p>
         <div style="padding-left:5em;">
           <v-switch
             v-model="dark"
-            :label="(!dark ? 'Light' : 'Dark') + ' Theme'"
+            :label="(!dark ? $t(`Theme.lighttheme`): $t(`Theme.darktheme`)) + $t(`Theme.theme`)"
             :dark="dark"
             hide-details="hide-details"
           />
@@ -93,7 +93,7 @@
             v-else-if="item.header"
             :key="item.header"
           >
-            {{ item.header }}
+            {{ $t(item.header) }}
           </v-subheader>
           <v-divider
             v-else-if="item.header"
@@ -111,7 +111,7 @@
             <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :id="item.id">
-                {{ item.title }}
+                {{ $t(item.title + ".title") }}
               </v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action v-if="item.subAction">
@@ -132,7 +132,7 @@
             <v-list-tile-action><v-icon>{{ item.icon }}</v-icon></v-list-tile-action>
             <v-list-tile-content>
               <v-list-tile-title :id="item.id">
-                {{ item.title }}
+                {{ $t(item.title) }}
               </v-list-tile-title>
             </v-list-tile-content>
             <v-list-tile-action v-if="item.subAction">
@@ -170,7 +170,7 @@
           <v-list-tile
             v-for="lang in locales"
             :key="lang"
-            @mouseover.native="changeLocale(lang)"
+            @click="changeLocale(lang)"
           >
             <v-list-tile-title>{{ lang }}</v-list-tile-title>
           </v-list-tile>
@@ -224,6 +224,7 @@
 
 <script>
 import { getMenus } from '@/services/menu'
+import { setLang } from '@/i18n/config'
 export default {
   data () {
     return {
@@ -231,7 +232,7 @@ export default {
       theme: 'primary',
       mini: false,
       drawer: true,
-      locales: ['en-US', 'zh-CN'],
+      locales: ['English', '中文(简体)', 'Deutschland'],
       colors: ['blue', 'green', 'purple', 'red'],
       message: {
         display: false,
@@ -245,7 +246,7 @@ export default {
   },
   methods: {
     changeLocale (to) {
-      global.helper.ls.set('locale', to)
+      setLang(to)
     },
     fetchMenu () {
       this.menu = getMenus()

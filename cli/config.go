@@ -14,7 +14,6 @@ package main
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -71,8 +70,6 @@ func readClientConfig(clientDir string) CvpmConfig {
 }
 
 func writeConfig(config CvpmConfig) {
-	fmt.Println(config.Local.LocalFolder)
-	fmt.Println(config.Local.Python)
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(config); err != nil {
 		raven.CaptureErrorAndWait(err, nil)
@@ -80,7 +77,7 @@ func writeConfig(config CvpmConfig) {
 	}
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
-	err := ioutil.WriteFile(configFile, []byte(buf.String()), 0644)
+	err := ioutil.WriteFile(configFile, buf.Bytes(), 0644)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)

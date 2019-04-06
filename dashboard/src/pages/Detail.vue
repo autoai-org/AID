@@ -5,7 +5,7 @@
       wrap
     >
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-repo-meta
@@ -19,13 +19,13 @@
         xs5
         class="cvpm-package-detail-card"
       >
-        <cvpm-log
-          :title="'Package Log'"
+        <cvpm-env-management
+          :title="'environment variables'"
           :message-list="messageList"
         />
       </v-flex>
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-repo-solver
@@ -35,13 +35,22 @@
         />
       </v-flex>
       <v-flex
-        xs6
+        xs5
         class="cvpm-package-detail-card"
       >
         <cvpm-actions
           :config="parsedConfig"
           :vendor="toSelectVendor"
           :package-name="toSelectPackage"
+        />
+      </v-flex>
+      <v-flex
+        xs5
+        class="cvpm-package-detail-card"
+      >
+        <cvpm-log
+          :title="$t('Packages_detail.package_log')"
+          :message-list="messageList"
         />
       </v-flex>
     </v-layout>
@@ -52,6 +61,7 @@
 import cvpmRepoMeta from '@/components/CVPM-Repo-Meta'
 import Log from '@/components/CVPM-Log'
 import cvpmRepoSolver from '@/components/CVPM-Repo-Solver'
+import cvpmEnvManagement from '@/components/plugin/envs/CVPM-Env-Management'
 import cvpmActions from '@/components/CVPM-Actions'
 import { systemService } from '@/services/system'
 import toml from 'toml'
@@ -60,7 +70,8 @@ export default {
     'cvpm-repo-meta': cvpmRepoMeta,
     'cvpm-log': Log,
     'cvpm-repo-solver': cvpmRepoSolver,
-    'cvpmActions': cvpmActions
+    'cvpm-actions': cvpmActions,
+    'cvpm-env-management': cvpmEnvManagement
   },
   data () {
     return {
@@ -107,6 +118,7 @@ export default {
 
 <style scoped>
 .cvpm-package-detail-card {
-    margin: 1em;
+  margin: 1em;
 }
+
 </style>

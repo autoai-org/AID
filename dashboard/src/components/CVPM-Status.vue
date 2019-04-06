@@ -1,26 +1,31 @@
 <template>
   <v-card class="cvpm-status-card">
     <v-card-title primary-title>
-      <h2>Status</h2>
+      <h2>{{ $t('Home.status') }}</h2>
     </v-card-title>
     <v-card-text>
+      <p
+        class="cvpm-status-content-no-capitalize"
+      >
+        <B>{{ $t(`Home.host`) }}:</B> {{ configService.endpoint.toLowerCase() }}
+      </p>
       <p
         v-if="status.cpu"
         class="cvpm-status-content"
       >
-        <B>CPU:</B> {{ status.cpu }}
+        <B>{{ $t(`Home.cpu`) }}:</B> {{ status.cpu }}
       </p>
       <p
         v-if="status.memory"
         class="cvpm-status-content"
       >
-        <B>Memory:</B> {{ (status.memory / 1024 / 1024).toFixed(2) }} MB
+        <B>{{ $t(`Home.memory`) }}:</B> {{ (status.memory / 1024 / 1024).toFixed(2) }} MB
       </p>
       <p
         v-if="status.platformVersion"
         class="cvpm-status-content"
       >
-        <B>Operating System:</B> {{ status.platform }} {{ status.platformVersion }} on {{ status.os }}
+        <B>{{ $t(`Home.operating_system`) }}:</B> {{ status.platform }} {{ status.platformVersion }} on {{ status.os }}
       </p>
       <p
         v-if="status.installed"
@@ -46,11 +51,14 @@
 
 <script>
 import { systemService } from '@/services/system'
+import { configService } from '@/services/config'
+
 export default {
   components: {
   },
   data: () => ({
-    status: {}
+    status: {},
+    configService: configService
   }),
   created () {
     this.getStatus()
@@ -74,5 +82,10 @@ export default {
   padding-left: 2em;
   padding-right: 1em;
   text-transform: capitalize;
+}
+.cvpm-status-content-no-capitalize {
+  padding-left: 2em;
+  padding-right: 1em;
+
 }
 </style>

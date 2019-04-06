@@ -50,25 +50,25 @@ export default {
       inspectInfo: [],
       headers: [
         {
-          text: 'Client IP',
+          text: this.$t('Inspector.client_ip'),
           align: 'left',
           sortable: true,
           value: 'client_ip'
         },
         {
-          text: 'Target',
+          text: this.$t('Inspector.target'),
           align: 'left',
           sortable: true,
           value: 'request_url'
         },
         {
-          text: 'Result',
+          text: this.$t('Inspector.result'),
           align: 'left',
           sortable: false,
           value: 'http_status'
         },
         {
-          text: 'Time',
+          text: this.$t('Inspector.time'),
           align: 'left',
           sortable: false,
           value: 'requested_at'

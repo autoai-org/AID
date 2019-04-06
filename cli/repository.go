@@ -95,7 +95,9 @@ func runRepo(Vendor string, Name string, Solver string, Port string) {
 					RunningRepos = append(RunningRepos, Repository{Vendor, Name, Solver, Port, ""})
 					RunningSolvers = append(RunningSolvers, RepoSolver{Vendor: Vendor, Package: Name, SolverName: Solver, Port: Port})
 					runfileFullPath := filepath.Join(existedRepo.LocalFolder, file.Name())
-					python([]string{runfileFullPath, Port})
+					// TODO: add environment vars
+					envString := QueryEnvString(Vendor, Name)
+					python([]string{runfileFullPath, Port}, envString)
 				}
 			}
 		}
