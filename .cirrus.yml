@@ -38,6 +38,10 @@ task:
         image: python:latest
       install_script: python3 -m pip install --upgrade setuptools wheel
       build_package_script: python3 setup.py sdist bdist_wheel
+      wheel_artifacts:
+        path: ./dist/*.whl
+      artifacts:
+        path: ./dist/**/**
       name: Python Job
       env:
         python: "yup"
