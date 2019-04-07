@@ -368,6 +368,7 @@ gopkg.in/appleboy/gin-status-api.v1 v1.0.1 h1:c80nPT2SftCfE/2I9g/BbH5bQjG3kbnMMQ
 gopkg.in/appleboy/gin-status-api.v1 v1.0.1/go.mod h1:X8bhgN2h4PXwJthf69L7rIAqDdnRZptEroSSpFiSnUg=
 gopkg.in/appleboy/gofight.v1 v1.0.4 h1:TTaDOzxoUYfSoCnX6Bccct4EQUVPZwfv53aE5YEoyt4=
 gopkg.in/appleboy/gofight.v1 v1.0.4/go.mod h1:+uRfN6FDYnxTJ+ErmYp2sESG/haICL6CahBhD6RzsVw=
+gopkg.in/appleboy/gofight.v2 v2.0.0/go.mod h1:/oCUdVhE1UdRqheD5PmH/2GBvcaxShR7/cDBUoSk2wQ=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 h1:qIbj1fsPNlZgppZ+VLlY7N33q108Sa+fhmuc+sWQYwY=
 gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
