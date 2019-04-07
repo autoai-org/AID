@@ -27,7 +27,7 @@ require (
 	github.com/hpcloud/tail v1.0.0
 	github.com/jondot/goweight v1.0.4 // indirect
 	github.com/json-iterator/go v1.1.6 // indirect
-	github.com/kardianos/service v0.0.0-20190326161025-0e5bec1b9eec
+	github.com/kardianos/service v1.0.0
 	github.com/labstack/echo v3.3.10+incompatible // indirect
 	github.com/labstack/gommon v0.2.8 // indirect
 	github.com/levigross/grequests v0.0.0-20180715163950-d0df86deffcb
@@ -43,14 +43,14 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/syndtr/goleveldb v0.0.0-20190318030020-c3a204f8e965
+	github.com/syndtr/goleveldb v1.0.0
 	github.com/urfave/cli v1.20.0
 	github.com/valyala/fasttemplate v1.0.1 // indirect
 	github.com/xanzy/ssh-agent v0.2.1 // indirect
 	golang.org/x/crypto v0.0.0-20190406125927-38d8ce5564a5
-	golang.org/x/net v0.0.0-20190328230028-74de082e2cca // indirect
+	golang.org/x/net v0.0.0-20190406143732-eb5bcb51f2a3 // indirect
 	golang.org/x/sys v0.0.0-20190402142545-baf5eb976a8c // indirect
-	golang.org/x/tools v0.0.0-20190402200628-202502a5a924 // indirect
+	golang.org/x/tools v0.0.0-20190407034439-0fdf0c73855b // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
 	gopkg.in/appleboy/gofight.v1 v1.0.4 // indirect
