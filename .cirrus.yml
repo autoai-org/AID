@@ -1,7 +1,9 @@
 task:
   auto_cancellation: false
-  install_script: |
-    go get github.com/unarxiv/cvpm/cli
+  main_install_script: |
+    if [ $python != "nope" ]; then
+      go get github.com/unarxiv/cvpm/cli
+    fi
   env:
     PATH: /snap/bin:$PATH
     CIRRUS_WORKING_DIR: /go/src/github.com/$CIRRUS_REPO_FULL_NAME
@@ -11,6 +13,8 @@ task:
       only_if: $CIRRUS_TAG != ''
       deploy_script: curl -sL https://git.io/goreleaser | bash
       name: Deploy Job
+      env:
+        python: "nope"
     - container:
         image: golang:latest
       env:
@@ -32,11 +36,15 @@ task:
         fi
       build_script: go build -v
       name: Golang Job
+      env:
+        python: "nope"
     - container:
         image: python:latest
       install_script: python3 -m pip install --upgrade setuptools wheel
       build_package_script: python3 setup.py sdist bdist_wheel
       name: Python Job
+      env:
+        python: "yup"
     - windows_container:
         image: cirrusci/windowsservercore:2019
         os_version: 2019
