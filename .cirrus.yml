@@ -1,7 +1,7 @@
 task:
   auto_cancellation: false
   main_install_script: |
-    if [ $python != "nope" ]; then
+    if [ $python == "nope" ]; then
       go get github.com/unarxiv/cvpm/cli
     fi
   env:
