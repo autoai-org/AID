@@ -50,7 +50,7 @@ require (
 	golang.org/x/crypto v0.0.0-20190325154230-a5d413f7728c
 	golang.org/x/net v0.0.0-20190328230028-74de082e2cca // indirect
 	golang.org/x/sys v0.0.0-20190402142545-baf5eb976a8c // indirect
-	golang.org/x/tools v0.0.0-20190402200628-202502a5a924 // indirect
+	golang.org/x/tools v0.0.0-20190407034439-0fdf0c73855b // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
 	gopkg.in/appleboy/gofight.v1 v1.0.4 // indirect
