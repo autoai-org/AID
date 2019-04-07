@@ -28,7 +28,7 @@ require (
 	github.com/jondot/goweight v1.0.4 // indirect
 	github.com/json-iterator/go v1.1.6 // indirect
 	github.com/kardianos/service v1.0.0
-	github.com/labstack/echo v3.3.10+incompatible // indirect
+	github.com/labstack/echo v4.0.0 // indirect
 	github.com/labstack/gommon v0.2.8 // indirect
 	github.com/levigross/grequests v0.0.0-20180715163950-d0df86deffcb
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
