@@ -6,7 +6,7 @@ task:
     fi
   env:
     PATH: /snap/bin:$PATH
-    CIRRUS_WORKING_DIR: /go/src/github.com/$CIRRUS_REPO_FULL_NAME
+    CIRRUS_WORKING_DIR: /go/src/github.com/unarxiv/CVPM
   matrix:
     - container:
         image: golang:latest
@@ -18,17 +18,13 @@ task:
     - container:
         image: golang:latest
       env:
-        GOBIN: '$(GOPATH)/bin'
         GOROOT: '/usr/local/go1.11'
-        GOPATH: '$(system.defaultWorkingDirectory)/gopath'
-        modulePath: '$(GOPATH)/src/github.com/$(build.repository.name)'
+        modulePath: '/go/src/github.com/unarxiv/CVPM'
       prep_script: |
-        mkdir -p '$(GOBIN)'
         mkdir -p '$(GOPATH)/pkg'
         mkdir -p '$(modulePath)'
         shopt -s extglob
         mv !(gopath) '$(modulePath)'
-        go version
         go get -v -t -d ./...
         if [ -f Gopkg.toml ]; then
           curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
