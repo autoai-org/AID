@@ -45,7 +45,3 @@ task:
       name: Python Job
       env:
         python: "yup"
-    - windows_container:
-        image: cirrusci/windowsservercore:2019
-        os_version: 2019
-      name: Windows Job
