@@ -30,7 +30,7 @@ require (
 	github.com/kardianos/service v1.0.0
 	github.com/labstack/echo v3.3.10+incompatible // indirect
 	github.com/labstack/gommon v0.2.8 // indirect
-	github.com/levigross/grequests v0.0.0-20180715163950-d0df86deffcb
+	github.com/levigross/grequests v0.0.0-20190406125301-37c80f76a0da
 	github.com/lunixbochs/vtclean v1.0.0 // indirect
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-isatty v0.0.7 // indirect
