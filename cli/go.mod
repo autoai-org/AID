@@ -7,7 +7,7 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20190406101743-e0a55b97c705 // indirect
 	github.com/alecthomas/gometalinter v3.0.0+incompatible // indirect
 	github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c
-	github.com/appleboy/gofight v2.0.0+incompatible // indirect
+	github.com/appleboy/gofight v2.1.0 // indirect
 	github.com/aws/aws-sdk-go-v2 v0.7.0
 	github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23 // indirect
 	github.com/certifi/gocertifi v0.0.0-20190410013254-59a85de7f35e // indirect
