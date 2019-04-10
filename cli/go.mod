@@ -53,7 +53,7 @@ require (
 	golang.org/x/tools v0.0.0-20190408225411-e5b8258f4918 // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
-	gopkg.in/appleboy/gofight.v2 v2.0.0 // indirect
+	gopkg.in/appleboy/gofight.v2 v2.1.0 // indirect
 	gopkg.in/fukata/golang-stats-api-handler.v1 v1.0.0 // indirect
 	gopkg.in/gin-gonic/gin.v1 v1.3.0 // indirect
 	gopkg.in/src-d/go-billy.v4 v4.3.0 // indirect
