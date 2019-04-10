@@ -10,7 +10,7 @@ require (
 	github.com/appleboy/gofight v2.0.0+incompatible // indirect
 	github.com/aws/aws-sdk-go-v2 v0.7.0
 	github.com/buger/jsonparser v0.0.0-20181115193947-bf1c66bbce23 // indirect
-	github.com/certifi/gocertifi v0.0.0-20190406114230-abcd57078448 // indirect
+	github.com/certifi/gocertifi v0.0.0-20190410013254-59a85de7f35e // indirect
 	github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38
 	github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3
 	github.com/cvpm-contrib/dataset v0.0.0-20190201103727-840ea55c2bb8
