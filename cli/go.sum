@@ -38,6 +38,8 @@ github.com/certifi/gocertifi v0.0.0-20190406114230-abcd57078448 h1:2y3SxvdT8/d4H
 github.com/certifi/gocertifi v0.0.0-20190406114230-abcd57078448/go.mod h1:GJKEexRPVJrBSOjoqN5VNOIKJ5Q3RViH6eu3puDRwx4=
 github.com/certifi/gocertifi v0.0.0-20190410013254-59a85de7f35e h1:qC7CIUD/tURCHXGKrN+TvHbrc3KoPpSIvk2NhCZfB18=
 github.com/certifi/gocertifi v0.0.0-20190410013254-59a85de7f35e/go.mod h1:GJKEexRPVJrBSOjoqN5VNOIKJ5Q3RViH6eu3puDRwx4=
+github.com/certifi/gocertifi v0.0.0-20190415154051-92f724a62f3e h1:i8TmiYp7vZOvp38/h9s5mN57d/1ULsyKPg1762c3pZU=
+github.com/certifi/gocertifi v0.0.0-20190415154051-92f724a62f3e/go.mod h1:GJKEexRPVJrBSOjoqN5VNOIKJ5Q3RViH6eu3puDRwx4=
 github.com/chzyer/logex v1.1.10 h1:Swpa1K6QvQznwJRcfTfQJmTE72DqScAa40E+fbHEXEE=
 github.com/chzyer/logex v1.1.10/go.mod h1:+Ywpsq7O8HXn0nuIou7OrIPyXbp3wmkHB+jjWRnGsAI=
 github.com/chzyer/readline v0.0.0-20180603132655-2972be24d48e h1:fY5BOSpyZCqRo5OhCuC+XN+r/bBCmeuuJtjz+bCNIf8=
