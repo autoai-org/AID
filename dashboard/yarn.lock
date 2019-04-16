@@ -9301,10 +9301,10 @@ vue@2.6.10, vue@^2.5.16, vue@^2.5.17, vue@^2.5.2:
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
 
-vuetify@1.5.11:
-  version "1.5.11"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.11.tgz#ae1790df1dc1505289116dfd79426d83b38d2ba9"
-  integrity sha512-S4f0wXEbQNHnP4IUtSSIRmzU/fjyPtTN5fC80JlHdTcF78VLT1/xsTqXgNtSW5712UJtrLPpF6b0LfOTJrCCBg==
+vuetify@1.5.12:
+  version "1.5.12"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-1.5.12.tgz#77d18fc7ea5d6297bac40880df83fc241ba840a2"
+  integrity sha512-NxYNPiqEEgprTzNft0x0oiyOgbclbARgOJMKWRfeu3qx8pE0JG3XMgljVv1Ttq0ErKf1lvNLFRuajDgRdQxR/Q==
 
 vuex@3.1.0:
   version "3.1.0"
