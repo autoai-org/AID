@@ -49,7 +49,7 @@ require (
 	github.com/xanzy/ssh-agent v0.2.1 // indirect
 	golang.org/x/sys v0.0.0-20190412225501-97732733099d // indirect
 	golang.org/x/crypto v0.0.0-20190406125927-38d8ce5564a5
-	golang.org/x/net v0.0.0-20190406143732-eb5bcb51f2a3 // indirect
+	golang.org/x/net v0.0.0-20190420064738-afa5a82059c6 // indirect
 	golang.org/x/tools v0.0.0-20190409234035-96f2e7ef861b // indirect
 	gopkg.in/alecthomas/kingpin.v3-unstable v3.0.0-20180810215634-df19058c872c // indirect
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
