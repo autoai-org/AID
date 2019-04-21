@@ -1093,10 +1093,10 @@ acorn@^5.5.3:
   resolved "http://registry.npm.taobao.org/acorn/download/acorn-5.7.3.tgz#67aa231bf8812974b85235a96771eb6bd07ea279"
   integrity sha1-Z6ojG/iBKXS4UjWpZ3Hra9B+onk=
 
-acorn@^6.0.1, acorn@^6.0.2, acorn@^6.0.5, acorn@^6.0.7:
+acorn@^6.0.1, acorn@^6.0.2, acorn@^6.0.5, acorn@^6.0.7, acorn@^6.1.1:
   version "6.1.1"
-  resolved "http://registry.npm.taobao.org/acorn/download/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
-  integrity sha1-fSWuBbuK0fm2mRCOEJTs14hK3B8=
+  resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.1.1.tgz#7d25ae05bb8ad1f9b699108e1094ecd7884adc1f"
+  integrity sha512-jPTiwtOxaHNaAPg/dmrJ/beuzLRnXtB0kQPQ8JpotKJgTB6rX6c8mlf315941pyjBSaPg8NHXS9fhP4u17DpGA==
 
 after@0.8.2:
   version "0.8.2"
@@ -1113,10 +1113,10 @@ ajv-keywords@^3.1.0:
   resolved "http://registry.npm.taobao.org/ajv-keywords/download/ajv-keywords-3.4.0.tgz#4b831e7b531415a7cc518cd404e73f6193c6349d"
   integrity sha1-S4Mee1MUFafMUYzUBOc/YZPGNJ0=
 
-ajv@^6.1.0, ajv@^6.5.5, ajv@^6.9.1:
+ajv@^6.1.0, ajv@^6.10.0, ajv@^6.5.5, ajv@^6.9.1:
   version "6.10.0"
-  resolved "http://registry.npm.taobao.org/ajv/download/ajv-6.10.0.tgz#90d0d54439da587cd7e843bfb7045f50bd22bdf1"
-  integrity sha1-kNDVRDnaWHzX6EO/twRfUL0ivfE=
+  resolved "https://registry.yarnpkg.com/ajv/-/ajv-6.10.0.tgz#90d0d54439da587cd7e843bfb7045f50bd22bdf1"
+  integrity sha512-nffhOpkymDECQyR0mnsUtoCE8RlX38G0rYP+wgLWFyZuUyuuojSSvi/+euOiQBIn63whYwYVIIH1TvE3tu4OEg==
   dependencies:
     fast-deep-equal "^2.0.1"
     fast-json-stable-stringify "^2.0.0"
@@ -1420,7 +1420,7 @@ aws4@^1.8.0:
   resolved "http://registry.npm.taobao.org/aws4/download/aws4-1.8.0.tgz#f0e003d9ca9e7f59c7a508945d7b2ef9a04a542f"
   integrity sha1-8OAD2cqef1nHpQiUXXsu+aBKVC8=
 
-axios@0.18.0:
+axios@0.18.0, axios@^0.18.0:
   version "0.18.0"
   resolved "http://registry.npm.taobao.org/axios/download/axios-0.18.0.tgz#32d53e4851efdc0a11993b6cd000789d70c05102"
   integrity sha1-MtU+SFHv3AoRmTts0AB4nXDAUQI=
@@ -9156,18 +9156,21 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-authenticate@1.3.4:
-  version "1.3.4"
-  resolved "https://registry.yarnpkg.com/vue-authenticate/-/vue-authenticate-1.3.4.tgz#e02bbbc9024a057018fa2333576cc76f6efb2154"
-  integrity sha1-4Cu7yQJKBXAY+iMzV2zHb277IVQ=
+vue-authenticate@1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/vue-authenticate/-/vue-authenticate-1.4.1.tgz#c85441d00f747a35a9c4bfdb7e0ae2e51698aca3"
+  integrity sha512-9ekzeUeW07mMa/Q30ScFrsrBq2c38oEuQs7sUZdxRF+BPmDqawZlHdj/rZsikX09igJPg3MOi25/Yg6rZKvfRQ==
   dependencies:
-    vue "^2.5.2"
-    vue-axios "^2.0.2"
+    acorn "^6.1.1"
+    ajv "^6.10.0"
+    axios "^0.18.0"
+    vue "^2.6.10"
+    vue-axios "^2.1.4"
 
-vue-axios@^2.0.2:
+vue-axios@^2.1.4:
   version "2.1.4"
-  resolved "http://registry.npm.taobao.org/vue-axios/download/vue-axios-2.1.4.tgz#a9d298f7e876f9a87feb336b37adcbce34ff9f9f"
-  integrity sha1-qdKY9+h2+ah/6zNrN63LzjT/n58=
+  resolved "https://registry.yarnpkg.com/vue-axios/-/vue-axios-2.1.4.tgz#a9d298f7e876f9a87feb336b37adcbce34ff9f9f"
+  integrity sha512-DS8Q+WFT3i7nS0aZ/NMmTPf2yhbtlXhj4QEZmY69au/BshsGzGjC6dXaniZaPQlErP3J3Sv1HtQ4RVrXaUTkxA==
 
 vue-eslint-parser@^5.0.0:
   version "5.0.0"
@@ -9296,7 +9299,7 @@ vue-tour@1.1.0:
     popper.js "^1.14.4"
     vue "^2.5.17"
 
-vue@2.6.10, vue@^2.5.16, vue@^2.5.17, vue@^2.5.2:
+vue@2.6.10, vue@^2.5.16, vue@^2.5.17, vue@^2.6.10:
   version "2.6.10"
   resolved "http://registry.npm.taobao.org/vue/download/vue-2.6.10.tgz#a72b1a42a4d82a721ea438d1b6bf55e66195c637"
   integrity sha1-pysaQqTYKnIepDjRtr9V5mGVxjc=
