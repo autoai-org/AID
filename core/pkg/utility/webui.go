@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package cvpm
+package utility
 
 // Install Web UI -> Download Latest and Unzip
 func InstallWebUi() {

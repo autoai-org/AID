@@ -2,20 +2,22 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package cvpm
+package runtime
 
 import (
+	"github.com/unarxiv/cvpm/pkg/config"
 	"log"
 	"os"
 	"path/filepath"
 )
 
-func pip(args []string) {
-	config := readConfig()
-	localPip := config.Local.Pip
+// Pip calls the Pip program
+func Pip(args []string) {
+	localConfig := config.Read()
+	localPip := localConfig.Local.Pip
 	proc := NewProcess(localPip, "", args...)
 	out := proc.StreamOutput()
-	logFile := filepath.Join(getLogsLocation(), "system.log")
+	logFile := filepath.Join(config.GetLogLocation(), "system.log")
 	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatalf("failed opening file: %s", err)
@@ -32,13 +34,14 @@ func pip(args []string) {
 	proc.Start()
 }
 
-func python(args []string, envs string) {
-	config := readConfig()
-	localPython := config.Local.Python
+// Python calls the Python Program
+func Python(args []string, envs string) {
+	localConfig := config.Read()
+	localPython := localConfig.Local.Python
 	// handles environment variables
 	proc := NewProcess(localPython, "", args...)
 	out := proc.StreamOutput()
-	logFile := filepath.Join(getLogsLocation(), "package.log")
+	logFile := filepath.Join(config.GetLogLocation(), "package.log")
 	file, err := os.OpenFile(logFile, os.O_WRONLY|os.O_APPEND, 0644)
 	if err != nil {
 		log.Fatalf("failed opening file: %s", err)

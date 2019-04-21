@@ -3,19 +3,18 @@
 // license that can be found in the LICENSE file.
 
 /*This file handles third party contributions and libraries.*/
-package cvpm
+package contrib
 
 import (
 	"io"
 	"net/http"
 
-	dataset "github.com/cvpm-contrib/dataset"
 	"github.com/gin-gonic/gin"
 )
 
 // GetAllDatasets GET /datasets
 func GetAllDatasets(c *gin.Context) {
-	c.JSON(http.StatusOK, dataset.FetchAllDatasets())
+	c.JSON(http.StatusOK, fetchAllDatasets())
 }
 
 // AddRegistryRequest Definition for AddRegistryRequest
@@ -27,7 +26,7 @@ type AddRegistryRequest struct {
 func AddNewRegistry(c *gin.Context) {
 	var addRegistryRequest AddRegistryRequest
 	c.BindJSON(&addRegistryRequest)
-	dataset.AddNewRegistry(addRegistryRequest.URL)
+	addNewRegistry(addRegistryRequest.URL)
 	c.JSON(http.StatusOK, gin.H{
 		"code":   "200",
 		"status": "Finished",

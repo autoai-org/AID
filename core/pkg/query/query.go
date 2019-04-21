@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package cvpm
+package query
 
 import (
 	"log"
@@ -12,6 +12,7 @@ import (
 	homedir "github.com/mitchellh/go-homedir"
 )
 
+// ClientPost triggers a POST Request to the server
 func ClientPost(endpoint string, params map[string]string) *grequests.Response {
 	url := "http://127.0.0.1:10590/" + endpoint
 	currentUser, err := user.Current()
@@ -32,6 +33,7 @@ func ClientPost(endpoint string, params map[string]string) *grequests.Response {
 	return resp
 }
 
+// ClientGet triggers a GET Request to the server
 func ClientGet(endpoint string, params map[string]string) {
 	url := "http://127.0.0.1:10590/" + endpoint
 	myhomedir, err := homedir.Dir()
@@ -50,6 +52,7 @@ func ClientGet(endpoint string, params map[string]string) {
 	}
 }
 
+// ClientDelete triggers a DELETE Request to the server
 func ClientDelete(endpoint string) *grequests.Response {
 	url := "http://127.0.0.1:10590/" + endpoint
 	resp, err := grequests.Delete(url, &grequests.RequestOptions{})
@@ -62,6 +65,7 @@ func ClientDelete(endpoint string) *grequests.Response {
 	return resp
 }
 
+// StopInferEngine stops python interface
 func StopInferEngine(port string) bool {
 	url := "http://127.0.0.1:" + port + "/"
 	resp, err := grequests.Get(url, &grequests.RequestOptions{})

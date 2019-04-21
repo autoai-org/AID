@@ -5,7 +5,7 @@
 // This file (process.go) handles two things:
 // 1. Shell Command, like Python/Pip.
 // 2. Daemon Process, typically goroutine.
-package cvpm
+package runtime
 
 import (
 	"bufio"

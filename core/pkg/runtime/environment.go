@@ -11,9 +11,10 @@
 * Besides, the file also handles environment variables.
  */
 
-package cvpm
+package runtime
 
 import (
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"log"
 	"net/http"
 	"strings"
@@ -45,14 +46,14 @@ type EnvironmentVariable struct {
 }
 
 func (virtualenv VirtualEnv) validate() bool {
-	if isStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV) {
+	if utility.IsStringInSlice(virtualenv.Name, SUPPORTEDVIRTUALENV) {
 		return true
 	}
 	return false
 }
 
 func (virtualenv VirtualEnv) initiate() {
-	python([]string{"-m", "venv", virtualenv.RepositoryFolder}, "")
+	Python([]string{"-m", "venv", virtualenv.RepositoryFolder}, "")
 }
 
 func (virtualenv VirtualEnv) triggerEnable() {
