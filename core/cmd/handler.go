@@ -20,6 +20,7 @@ import (
 	"strconv"
 	"strings"
 	"syscall"
+	"github.com/unarxiv/cvpm"
 
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"

@@ -15,7 +15,7 @@ package main
 import (
 	"log"
 	"os"
-
+	"github.com/unarxiv/cvpm"
 	raven "github.com/getsentry/raven-go"
 	"github.com/urfave/cli"
 )

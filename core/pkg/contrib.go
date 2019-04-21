@@ -3,7 +3,7 @@
 // license that can be found in the LICENSE file.
 
 /*This file handles third party contributions and libraries.*/
-package main
+package cvpm
 
 import (
 	"io"

@@ -11,7 +11,7 @@
 * Besides, the file also handles environment variables.
  */
 
-package main
+package cvpm
 
 import (
 	"log"
