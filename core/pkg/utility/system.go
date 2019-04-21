@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package main
+package utility
 
 import (
 	"github.com/shirou/gopsutil/cpu"
@@ -18,7 +18,8 @@ type SystemInfo struct {
 	PlatformVersion string `json:"platformVersion"`
 }
 
-func getSystemInfo() SystemInfo {
+// GetSystemInfo returns the system information
+func GetSystemInfo() SystemInfo {
 	var systemInfo SystemInfo
 	v, _ := mem.VirtualMemory()
 	systemInfo.Memory = v.Total

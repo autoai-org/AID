@@ -11,3 +11,4 @@ dist
 !dashboard/build
 !docs/dist/api.html
 cli/cvpm
+core/cmd/cmd

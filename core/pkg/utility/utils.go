@@ -2,9 +2,10 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package main
+package utility
 
 import (
+	"github.com/getsentry/raven-go"
 	"io/ioutil"
 	"net"
 	"os"
@@ -18,7 +19,8 @@ const (
 	defaultTimeout = 5 * time.Second
 )
 
-func isExists(path string) bool {
+// IsExists return true if path exists, otherwise returns false
+func IsExists(path string) bool {
 	_, err := os.Stat(path)
 	if err != nil {
 		return os.IsExist(err)
@@ -26,7 +28,8 @@ func isExists(path string) bool {
 	return true
 }
 
-func getHomeDir() string {
+// GetHomeDir returns current user's home directory
+func GetHomeDir() string {
 	usr, err := user.Current()
 	if err != nil {
 		panic(err)
@@ -34,7 +37,8 @@ func getHomeDir() string {
 	return usr.HomeDir
 }
 
-func isRoot() bool {
+// IsRoot returns true if current user iis root, otherwise returns false
+func IsRoot() bool {
 	usr, err := user.Current()
 	if err != nil {
 		panic(err)
@@ -45,7 +49,8 @@ func isRoot() bool {
 	return false
 }
 
-func getDirSizeMB(path string) float64 {
+// GetDirSizeMB returns the size of path
+func GetDirSizeMB(path string) float64 {
 	var dirSize int64
 	readSize := func(path string, file os.FileInfo, err error) error {
 		if !file.IsDir() {
@@ -58,7 +63,8 @@ func getDirSizeMB(path string) float64 {
 	return sizeMB
 }
 
-func isPortOpen(port string, timeout time.Duration) bool {
+// IsPortOpen returns true if current port is open, otherwise returns false
+func IsPortOpen(port string, timeout time.Duration) bool {
 	conn, _ := net.DialTimeout("tcp", net.JoinHostPort("", port), timeout)
 	if conn != nil {
 		conn.Close()
@@ -67,19 +73,21 @@ func isPortOpen(port string, timeout time.Duration) bool {
 	return true
 }
 
-func findNextOpenPort(port int) string {
+// FindNextOpenPort returns the next open port starting from port
+func FindNextOpenPort(port int) string {
 	var hasFound = false
 	var strPort string
 	for ; !hasFound; port++ {
 		strPort = strconv.Itoa(port)
-		if isPortOpen(strPort, defaultTimeout) {
+		if IsPortOpen(strPort, defaultTimeout) {
 			hasFound = true
 		}
 	}
 	return strPort
 }
 
-func readFileContent(filename string) string {
+// ReadFileContent returns the content of filename
+func ReadFileContent(filename string) string {
 	var content string
 	byteContent, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -90,11 +98,25 @@ func readFileContent(filename string) string {
 	return content
 }
 
-func isStringInSlice(a string, list []string) bool {
+// IsStringInSlice returns true if the string is in the slice(list).
+func IsStringInSlice(a string, list []string) bool {
 	for _, b := range list {
 		if b == a {
 			return true
 		}
 	}
 	return false
+}
+
+// IsPathExists return true if the path exists, otherwise returns false
+func IsPathExists(path string) (bool, error) {
+	_, err := os.Stat(path)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		return false, nil
+	}
+	if os.IsNotExist(err) {
+		return false, nil
+	}
+	return true, err
 }

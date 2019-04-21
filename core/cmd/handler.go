@@ -14,6 +14,13 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"github.com/unarxiv/cvpm/pkg/authentication"
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/daemon"
+	"github.com/unarxiv/cvpm/pkg/query"
+	"github.com/unarxiv/cvpm/pkg/repository"
+	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"log"
 	"os"
 	"path/filepath"
@@ -35,7 +42,7 @@ type RunRepoResponse struct {
 }
 
 // Handle User Login
-func LoginHandler(c *cli.Context) User {
+func LoginHandler(c *cli.Context) authentication.User {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Printf("Username: ")
 	username, _ := reader.ReadString('\n')
@@ -43,37 +50,37 @@ func LoginHandler(c *cli.Context) User {
 	fmt.Printf("Password: ")
 	bytePassword, _ := terminal.ReadPassword(int(syscall.Stdin))
 	password := strings.TrimSpace(string(bytePassword))
-	u := User{username, password, ""}
-	currentUser := u.login()
+	u := authentication.User{username, password}
+	currentUser := u.Login()
 	return currentUser
 }
 
 // Handle installation
 func InstallHandler(c *cli.Context) {
-	config := readConfig()
-	localFolder := config.Local.LocalFolder
+	localConfig := config.Read()
+	localFolder := localConfig.Local.LocalFolder
 	remoteURL := c.Args().Get(0)
 	if remoteURL == "cvpm:py" {
 		color.Cyan("Installing... Please wait patiently")
-		pip([]string{"install", "cvpm", "--user"})
+		runtime.Pip([]string{"install", "cvpm", "--user"})
 		return
 	} else if remoteURL == "webui" {
-		InstallWebUi()
+		utility.InstallWebUi()
 	} else {
 		color.Cyan("Installing to " + localFolder)
 	}
 	// Download Codebase
 	if strings.HasPrefix(remoteURL, "https://github.com") {
-		InstallFromGit(remoteURL)
+		repository.InstallFromGit(remoteURL)
 	}
 }
 
 // Handle List
 func listRepos(c *cli.Context) {
-	config := readConfig()
+	localConfig := config.Read()
 	table := tablewriter.NewWriter(os.Stdout)
 	table.SetHeader([]string{"No.", "Name", "Vendor", "Path"})
-	for i, repo := range config.Repositories {
+	for i, repo := range localConfig.Repositories {
 		table.Append([]string{strconv.Itoa(i), repo.Name, repo.Vendor, repo.LocalFolder})
 	}
 	table.Render()
@@ -84,11 +91,11 @@ func DaemonHandler(c *cli.Context) {
 	params := c.Args().Get(0)
 	switch params {
 	case "install":
-		InstallService()
+		daemon.Install()
 	case "uninstall":
-		UninstallService()
+		daemon.Uninstall()
 	case "run":
-		runServer(DaemonPort)
+		daemon.RunServer(daemon.DaemonPort)
 	default:
 		color.Red("Unsupported command")
 	}
@@ -103,7 +110,7 @@ func RepoHandler(c *cli.Context) {
 		runParams := strings.Split(solverstring, "/")
 		color.Cyan("Stopping " + runParams[0] + "/" + runParams[1] + "/" + runParams[2])
 		url := "solvers/running/" + runParams[0] + "/" + runParams[1] + "/" + runParams[2]
-		ClientDelete(url)
+		query.ClientDelete(url)
 	case "run":
 		solverstring := c.Args().Get(1)
 		runningPort := c.Args().Get(2)
@@ -115,13 +122,13 @@ func RepoHandler(c *cli.Context) {
 			"solver": runParams[2],
 			"port":   runningPort,
 		}
-		resp := ClientPost("repo/running", requestParams)
+		resp := query.ClientPost("repo/running", requestParams)
 		var respJson RunRepoResponse
 		log.Println(resp.JSON(respJson))
 		color.Red("No port is specified, solver will running on" + respJson.Port)
 	case "ps":
 		requestParams := map[string]string{}
-		ClientGet("repos", requestParams)
+		query.ClientGet("repos", requestParams)
 	case "init":
 		InitHandler(c)
 	default:
@@ -161,8 +168,8 @@ func InputAndParseConfigContent(label string, validate promptui.ValidateFunc) st
 
 // ConfigHandler Handles Config Related
 func ConfigHandler(c *cli.Context) {
-	prevConfig := readConfig()
-	var nextConfig CvpmConfig
+	prevConfig := config.Read()
+	var nextConfig config.CvpmConfig
 	nextConfig.Local.LocalFolder = prevConfig.Local.LocalFolder
 	// Handle Python Location
 	fmt.Println("Original Python Location: " + prevConfig.Local.Python)
@@ -180,7 +187,7 @@ func ConfigHandler(c *cli.Context) {
 		newPipLocation = prevConfig.Local.Pip
 	}
 	nextConfig.Local.Pip = newPipLocation
-	writeConfig(nextConfig)
+	config.Write(nextConfig)
 }
 
 // InitHandler handles init repo command
@@ -192,7 +199,7 @@ func InitHandler(c *cli.Context) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	InitNewRepo(result)
+	repository.InitNewRepo(result)
 	// rename {package_name} to real package name
 	pyFolderName := filepath.Join(result, "{package_name}")
 	err = os.Rename(pyFolderName, filepath.Join(result, result))

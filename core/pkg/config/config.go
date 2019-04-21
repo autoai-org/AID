@@ -10,7 +10,7 @@ getDefaultConfig()
 
 The config file is located at the home dir of current user, under ~/cvpm/config.toml
 */
-package main
+package config
 
 import (
 	"bytes"
@@ -18,7 +18,8 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"github.com/BurntSushi/toml"
 	raven "github.com/getsentry/raven-go"
 	homedir "github.com/mitchellh/go-homedir"
@@ -26,7 +27,7 @@ import (
 
 type CvpmConfig struct {
 	Local        Local        `toml:"local"`
-	Repositories []Repository `toml:"repository"`
+	Repositories []entity.Repository `toml:"repository"`
 }
 
 type Local struct {
@@ -35,21 +36,8 @@ type Local struct {
 	Python      string
 }
 
-var apiURL = "http://192.168.1.12:8080/"
-
-func isPathExists(path string) (bool, error) {
-	_, err := os.Stat(path)
-	if err != nil {
-		raven.CaptureErrorAndWait(err, nil)
-		return false, nil
-	}
-	if os.IsNotExist(err) {
-		return false, nil
-	}
-	return true, err
-}
-
-func readConfig() CvpmConfig {
+// Read returns current config object stored in the config.toml
+func Read() CvpmConfig {
 	var config CvpmConfig
 	homepath, _ := homedir.Dir()
 	configFile := filepath.Join(homepath, "cvpm", "config.toml")
@@ -59,7 +47,8 @@ func readConfig() CvpmConfig {
 	return config
 }
 
-func readClientConfig(clientDir string) CvpmConfig {
+// ReadClient returns config object stored in a client directory named config.toml
+func ReadClient(clientDir string) CvpmConfig {
 	var config CvpmConfig
 	configFile := filepath.Join(clientDir, "cvpm", "config.toml")
 	if _, err := toml.DecodeFile(configFile, &config); err != nil {
@@ -69,7 +58,8 @@ func readClientConfig(clientDir string) CvpmConfig {
 	return config
 }
 
-func writeConfig(config CvpmConfig) {
+// Write writes config object into config.toml file
+func Write(config CvpmConfig) {
 	buf := new(bytes.Buffer)
 	if err := toml.NewEncoder(buf).Encode(config); err != nil {
 		raven.CaptureErrorAndWait(err, nil)
@@ -88,12 +78,12 @@ func getDefaultConfig() CvpmConfig {
 	homePath, _ := homedir.Dir()
 	cvpmPath := filepath.Join(homePath, "cvpm")
 	var defaultLocal = Local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
-	var defaultCVPMConfig = CvpmConfig{Local: defaultLocal, Repositories: []Repository{}}
+	var defaultCVPMConfig = CvpmConfig{Local: defaultLocal, Repositories: []entity.Repository{}}
 	return defaultCVPMConfig
 }
 
 func createFolderIfNotExist(folderPath string) {
-	exist, err := isPathExists(folderPath)
+	exist, err := utility.IsPathExists(folderPath)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
@@ -108,7 +98,7 @@ func createFolderIfNotExist(folderPath string) {
 }
 
 func createFileIfNotExist(filePath string) {
-	exist, err := isPathExists(filePath)
+	exist, err := utility.IsPathExists(filePath)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)
@@ -123,9 +113,10 @@ func createFileIfNotExist(filePath string) {
 	}
 }
 
-func validateConfig() {
-	if !isRoot() {
-		homepath := getHomeDir()
+// Validate init all params in config file
+func Validate() {
+	if !utility.IsRoot() {
+		homepath := utility.GetHomeDir()
 		// Validate CVPM Path
 		cvpmPath := filepath.Join(homepath, "cvpm")
 		createFolderIfNotExist(cvpmPath)
@@ -134,7 +125,7 @@ func validateConfig() {
 		if _, err := os.Stat(cvpmConfigToml); os.IsNotExist(err) {
 			createFileIfNotExist(cvpmConfigToml)
 			// config file not exists, write default to it
-			writeConfig(getDefaultConfig())
+			Write(getDefaultConfig())
 		}
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
@@ -153,10 +144,12 @@ func validateConfig() {
 		cvpmPackageLogPath := filepath.Join(cvpmPath, "logs", "package.log")
 		createFileIfNotExist(cvpmPackageLogPath)
 	}
-	initRaven()
+	utility.InitRaven()
 }
 
-func getLogsLocation() string {
+// GetLogLocation returns the logs file location (the directory, not the file)
+// Typically, there are system.log & package.log files in the directory
+func GetLogLocation() string {
 	homepath, _ := homedir.Dir()
 	cvpmLogPath := filepath.Join(homepath, "cvpm", "logs")
 	return cvpmLogPath

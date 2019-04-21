@@ -13,11 +13,11 @@ to get a detailed explanation.
 package main
 
 import (
+	"github.com/getsentry/raven-go"
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/urfave/cli"
 	"log"
 	"os"
-
-	raven "github.com/getsentry/raven-go"
-	"github.com/urfave/cli"
 )
 
 var (
@@ -26,19 +26,16 @@ var (
 )
 
 func main() {
-	validateConfig()
-	cvpm := cli.NewApp()
-	cvpm.Name = "CVPM"
-	cvpm.Usage = "Computer Vision Package Manager"
-	cvpm.Version = "0.0.3@alpha"
-	cvpm.Commands = []cli.Command{
+	config.Validate()
+	cvpmapp := cli.NewApp()
+	cvpmapp.Name = "CVPM"
+	cvpmapp.Usage = "Computer Vision Package Manager"
+	cvpmapp.Version = "0.0.4@alpha"
+	cvpmapp.Commands = []cli.Command{
 		{
 			Name: "login",
 			Action: func(c *cli.Context) error {
-				currentUser := LoginHandler(c)
-				if currentUser.SessionToken == "" {
-					log.Fatal("Login Failed")
-				}
+				LoginHandler(c)
 				return nil
 			},
 		},
@@ -78,7 +75,7 @@ func main() {
 			},
 		},
 	}
-	err := cvpm.Run(os.Args)
+	err := cvpmapp.Run(os.Args)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
 		log.Fatal(err)

@@ -5,11 +5,18 @@
 /*  This file handles daemon and services related tasks.
 By using cvpm daemon install, it will install a system service under current user.
 You can uninstall that service by using cvpm daemon uninstall */
-package main
+package daemon
 
 import (
 	"bytes"
 	"fmt"
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/contrib"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/query"
+	"github.com/unarxiv/cvpm/pkg/repository"
+	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -17,12 +24,12 @@ import (
 	"net/url"
 	"path/filepath"
 
-	auth "github.com/cvpm-contrib/auth"
+	"github.com/cvpm-contrib/auth"
 	"github.com/fatih/color"
-	raven "github.com/getsentry/raven-go"
+	"github.com/getsentry/raven-go"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
-	socketio "github.com/googollee/go-socket.io"
+	"github.com/googollee/go-socket.io"
 	"github.com/hpcloud/tail"
 	api "gopkg.in/appleboy/gin-status-api.v1"
 )
@@ -31,8 +38,6 @@ import (
 const DaemonPort = "10590"
 
 // Definition of Running Repos
-var RunningRepos []Repository
-var RunningSolvers []RepoSolver
 var socketServer *socketio.Server
 
 // Struct of a Request to Run Repo
@@ -48,9 +53,9 @@ func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
 	if runRepoRequest.Port == "" {
-		runRepoRequest.Port = findNextOpenPort(8080)
+		runRepoRequest.Port = utility.FindNextOpenPort(8080)
 	}
-	go runRepo(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver, runRepoRequest.Port)
+	go repository.Run(runRepoRequest.Vendor, runRepoRequest.Name, runRepoRequest.Solver, runRepoRequest.Port)
 	c.JSON(http.StatusOK, gin.H{
 		"code": "success",
 		"port": runRepoRequest.Port,
@@ -59,20 +64,20 @@ func PostRunningRepoHandler(c *gin.Context) {
 
 // GET /repos/running -> return running repositories
 func GetRunningReposHandler(c *gin.Context) {
-	c.JSON(http.StatusOK, RunningRepos)
+	c.JSON(http.StatusOK, runtime.RunningRepos)
 }
 
 // GET /solvers/running -> return running solvers
 func GetRunningSolversHandler(c *gin.Context) {
-	c.JSON(http.StatusOK, RunningSolvers)
+	c.JSON(http.StatusOK, runtime.RunningSolvers)
 }
 
 // GET /solvers/running/:vendor/:name -> return running solvers in this package
 func GetRunningSolversByPackageHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	packageName := c.Param("package")
-	var runningSolversInPackage []RepoSolver
-	for _, runningSolver := range RunningSolvers {
+	var runningSolversInPackage []entity.RepoSolver
+	for _, runningSolver := range runtime.RunningSolvers {
 		if runningSolver.Vendor == vendor && runningSolver.Package == packageName {
 			runningSolversInPackage = append(runningSolversInPackage, runningSolver)
 		}
@@ -87,11 +92,11 @@ type AddRepoRequest struct {
 }
 
 func PostReposHandler(c *gin.Context) {
-	config := readConfig()
+	config := config.Read()
 	var addRepoRequest AddRepoRequest
 	c.BindJSON(&addRepoRequest)
 	if addRepoRequest.RepoType == "git" {
-		InstallFromGit(addRepoRequest.URL)
+		repository.InstallFromGit(addRepoRequest.URL)
 		c.JSON(http.StatusOK, config.Repositories)
 	} else {
 		c.JSON(http.StatusBadRequest, config.Repositories)
@@ -100,7 +105,7 @@ func PostReposHandler(c *gin.Context) {
 
 // GetReposHandler : GET /repos -> return all repositories
 func GetReposHandler(c *gin.Context) {
-	config := readConfig()
+	config := config.Read()
 	c.JSON(http.StatusOK, config.Repositories)
 }
 
@@ -108,12 +113,12 @@ func GetReposHandler(c *gin.Context) {
 func GetRepoMetaHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
-	c.JSON(http.StatusOK, GetMetaInfo(vendor, name))
+	c.JSON(http.StatusOK, repository.GetMetaInfo(vendor, name))
 }
 
 // GetSystemHandler : GET /system -> return system info
 func GetSystemHandler(c *gin.Context) {
-	c.JSON(http.StatusOK, getSystemInfo())
+	c.JSON(http.StatusOK, utility.GetSystemInfo())
 }
 
 // Handle Socket Request
@@ -150,7 +155,7 @@ func writeLog(filepath string, server *socketio.Server, eventName string) {
 // watched log source
 func watchLogs(server *socketio.Server) {
 	// System Log
-	cvpmLogsLocation := getLogsLocation()
+	cvpmLogsLocation := config.GetLogLocation()
 	go writeLog(filepath.Join(cvpmLogsLocation, "system.log"), server, "system")
 	go writeLog(filepath.Join(cvpmLogsLocation, "package.log"), server, "package")
 }
@@ -179,7 +184,7 @@ func StopInferProcess(c *gin.Context) {
 	name := c.Param("name")
 	solver := c.Param("solver")
 	var runningPort string
-	for _, runningSolver := range RunningSolvers {
+	for _, runningSolver := range runtime.RunningSolvers {
 		if runningSolver.Vendor == vendor && runningSolver.Package == name && runningSolver.SolverName == solver {
 			runningPort = runningSolver.Port
 		}
@@ -192,7 +197,7 @@ func StopInferProcess(c *gin.Context) {
 			"help":  "https://cvpm.autoai.org",
 		})
 	}
-	stopReturnValue := StopInferEngine(runningPort)
+	stopReturnValue := query.StopInferEngine(runningPort)
 	if !stopReturnValue {
 		c.JSON(http.StatusForbidden, gin.H{
 			"error": "403",
@@ -214,7 +219,7 @@ func ReverseProxy(c *gin.Context) {
 	name := c.Param("name")
 	solver := c.Param("solver")
 	var runningPort string
-	for _, runningSolver := range RunningSolvers {
+	for _, runningSolver := range runtime.RunningSolvers {
 		if runningSolver.Vendor == vendor && runningSolver.Package == name && runningSolver.SolverName == solver {
 			runningPort = runningSolver.Port
 		}
@@ -252,13 +257,9 @@ func ReverseProxy(c *gin.Context) {
 	proxy.ServeHTTP(c.Writer, c.Request)
 }
 
-/* Run the Server and Do Mount Endpoint
-/status -> Get to fetch System Status
-/repo -> Post to Run a Repo
-/repos -> Get to fetch Running Repos
-*/
-func runServer(port string) {
-	config := readConfig()
+// RunServer starts the daemon server
+func RunServer(port string) {
+	config := config.Read()
 	webuiFolder := filepath.Join(config.Local.LocalFolder, "webui")
 	color.Red("Initiating")
 	var err error
@@ -286,9 +287,9 @@ func runServer(port string) {
 	r.GET("/system", GetSystemHandler)
 	// Repo Related Routes
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
-	r.GET("/repo/env/:vendor/:name", QueryRepoEnvironments)
+	r.GET("/repo/env/:vendor/:name", runtime.QueryRepoEnvironments)
 	r.POST("/repo/running", PostRunningRepoHandler)
-	r.POST("/repo/envs/:vendor/:name", AddRepoEnvironments)
+	r.POST("/repo/envs/:vendor/:name", runtime.AddRepoEnvironments)
 	r.GET("/repos", GetReposHandler)
 	r.GET("/repos/running", GetRunningReposHandler)
 	r.POST("/repos", PostReposHandler)
@@ -301,8 +302,8 @@ func runServer(port string) {
 	r.POST("/socket.io/", socketHandler)
 	// Contrib Related Routes
 	// Datasets
-	r.GET("/contrib/datasets", GetAllDatasets)
-	r.POST("/contrib/datasets/registries", AddNewRegistry)
+	r.GET("/contrib/datasets", contrib.GetAllDatasets)
+	r.POST("/contrib/datasets/registries", contrib.AddNewRegistry)
 	// Camera
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {

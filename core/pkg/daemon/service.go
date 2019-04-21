@@ -2,7 +2,7 @@
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
 
-package main
+package daemon
 
 import (
 	"log"
@@ -17,7 +17,7 @@ type sol struct {
 }
 
 func (s *sol) Start(srv service.Service) error {
-	go runServer(DaemonPort)
+	go RunServer(DaemonPort)
 	return nil
 }
 
@@ -45,8 +45,8 @@ func getCVPMDConfig() *service.Config {
 	return srvConf
 }
 
-// cvpm daemon install -> install the background daemon service
-func InstallService() {
+// Install adds the server into the background service
+func Install() {
 	srvConfig := getCVPMDConfig()
 	dae := &sol{}
 	s, err := service.New(dae, srvConfig)
@@ -63,8 +63,8 @@ func InstallService() {
 	}
 }
 
-// cvpm daemon uninstall -> uninstall the background daemon service
-func UninstallService() {
+// Uninstall removes the background daemon service
+func Uninstall() {
 	srvConfig := getCVPMDConfig()
 	dae := &sol{}
 	s, err := service.New(dae, srvConfig)
