@@ -34,6 +34,6 @@ require (
 	golang.org/x/crypto v0.0.0-20190411191339-88737f569e3a
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
 	gopkg.in/fukata/golang-stats-api-handler.v1 v1.0.0 // indirect
-	gopkg.in/src-d/go-git.v4 v4.10.0
+	gopkg.in/src-d/go-git.v4 v4.11.0
 	upper.io/db.v3 v3.5.7+incompatible // indirect
 )
