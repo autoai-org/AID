@@ -16,8 +16,8 @@ import (
 )
 
 type User struct {
-	Username     string `json:"username"`
-	Password     string
+	Username string `json:"username"`
+	Password string
 }
 
 // Login returns the authenticated user

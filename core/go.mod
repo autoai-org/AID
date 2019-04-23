@@ -10,6 +10,7 @@ require (
 	github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e // indirect
 	github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38
 	github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3
+	github.com/dsnet/compress v0.0.1 // indirect
 	github.com/fatih/color v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20181225140029-79872a7b2769
 	github.com/getsentry/raven-go v0.2.0
@@ -23,15 +24,25 @@ require (
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-runewidth v0.0.4 // indirect
 	github.com/mattn/go-sqlite3 v1.10.0 // indirect
+	github.com/mholt/archiver v3.1.1+incompatible // indirect
 	github.com/mitchellh/go-homedir v1.1.0
+	github.com/nmiyake/pkg v0.0.0-20181213185804-ae0375219445 // indirect
+	github.com/nwaples/rardecode v1.0.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.1
+	github.com/palantir/godel v2.16.0+incompatible // indirect
+	github.com/palantir/pkg v0.0.0-20190319222743-332184900c68 // indirect
+	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
+	github.com/spf13/cobra v0.0.3 // indirect
+	github.com/spf13/pflag v1.0.3 // indirect
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/urfave/cli v1.20.0
+	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.0.0-20190411191339-88737f569e3a
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
+	gopkg.in/cheggaaa/pb.v1 v1.0.28 // indirect
 	gopkg.in/fukata/golang-stats-api-handler.v1 v1.0.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.10.0
 	upper.io/db.v3 v3.5.7+incompatible // indirect

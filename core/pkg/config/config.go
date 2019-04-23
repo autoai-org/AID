@@ -14,19 +14,19 @@ package config
 
 import (
 	"bytes"
+	"github.com/BurntSushi/toml"
+	raven "github.com/getsentry/raven-go"
+	homedir "github.com/mitchellh/go-homedir"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/utility"
-	"github.com/BurntSushi/toml"
-	raven "github.com/getsentry/raven-go"
-	homedir "github.com/mitchellh/go-homedir"
 )
 
 type CvpmConfig struct {
-	Local        Local        `toml:"local"`
+	Local        Local               `toml:"local"`
 	Repositories []entity.Repository `toml:"repository"`
 }
 

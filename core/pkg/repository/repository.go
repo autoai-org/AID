@@ -5,8 +5,8 @@
 package repository
 
 import (
-	"github.com/unarxiv/cvpm/pkg/entity"
 	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
 	"github.com/unarxiv/cvpm/pkg/runtime"
 	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
@@ -20,7 +20,6 @@ import (
 	raven "github.com/getsentry/raven-go"
 	git "gopkg.in/src-d/go-git.v4"
 )
-
 
 func readRepos() []entity.Repository {
 	configs := config.Read()
@@ -129,7 +128,7 @@ func PostInstallation(repoFolder string) {
 // GetMetaInfo returns Repository Meta Info: Dependency, Config, Disk Size and Readme
 func GetMetaInfo(Vendor string, Name string) entity.RepositoryMetaInfo {
 	repos := readRepos()
-	repositoryMeta :=  entity.RepositoryMetaInfo{}
+	repositoryMeta := entity.RepositoryMetaInfo{}
 	for _, existed_repo := range repos {
 		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
 			// Read config file etc
