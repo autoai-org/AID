@@ -31,8 +31,6 @@ github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38 h1:0IJzYrbh0bpDj
 github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38/go.mod h1:ONfU9BTXt1k6glz/KrYhivPoBIGpSnw4T5gCOLTX/jM=
 github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3 h1:Do47kS9xtItRPDOp7s6ppjjyxYzDiJLz26CIJhSFbao=
 github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3/go.mod h1:4IjHwnaTUYaq2ghpL/ghO2KHB1RpJ1KnsgQUKmtQn7I=
-github.com/cvpm-contrib/dataset v0.0.0-20190201103727-840ea55c2bb8 h1:/nvAwE9HIpVFRHsA1yNMJMAdcuH+eFNRn+nniP/s2z0=
-github.com/cvpm-contrib/dataset v0.0.0-20190201103727-840ea55c2bb8/go.mod h1:ZvxYE1hYYhmRmRO7SayUAIS5+TkkCIA+e0jnIohXIUg=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25KnS6fMYU6eOk=

@@ -10,7 +10,6 @@ require (
 	github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e // indirect
 	github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38
 	github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3
-	github.com/cvpm-contrib/dataset v0.0.0-20190201103727-840ea55c2bb8
 	github.com/fatih/color v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20181225140029-79872a7b2769
 	github.com/getsentry/raven-go v0.2.0
