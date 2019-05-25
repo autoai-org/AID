@@ -49,7 +49,7 @@
     "koa-router": "^7.4.0",
     "koa-session": "^5.10.0",
     "mongoose": "^5.4.20",
-    "nodemon": "1.18.11",
+    "nodemon": "1.19.1",
     "parse": "^2.1.0",
     "passport": "^0.4.0",
     "passport-cognito": "^0.1.13",
