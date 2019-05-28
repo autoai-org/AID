@@ -17,6 +17,7 @@ github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c/go.mod h1:15I
 github.com/anmitsu/go-shlex v0.0.0-20161002113705-648efa622239/go.mod h1:2FmKhYUyUczH0OGQWaF5ceTx0UBShxjsH6f8oGKYe2c=
 github.com/aws/aws-sdk-go-v2 v0.7.0 h1:a5xRI/tBmUFKuAA0SOyEY2P1YhQb+jVOEI9P/7KfrP0=
 github.com/aws/aws-sdk-go-v2 v0.7.0/go.mod h1:17MaCZ9g0q5BIMxwzRQeiv8M3c8+W7iuBnlWAEprcxE=
+github.com/aws/aws-sdk-go-v2 v0.9.0/go.mod h1:sa1GePZ/LfBGI4dSq30f6uR4Tthll8axxtEPvlpXZ8U=
 github.com/beorn7/perks v0.0.0-20180321164747-3a771d992973/go.mod h1:Dwedo/Wpr24TaqPxmxbtue+5NUziq4I4S80YR8gNf3Q=
 github.com/bradfitz/go-smtpd v0.0.0-20170404230938-deb6d6237625/go.mod h1:HYsPBTaaSFSlLx/70C2HPIMNZpVV8+vt/A+FMnYP11g=
 github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e h1:9574pc8MX6rF/QyO14SPHhM5KKIOo9fkb/1ifuYMTKU=
