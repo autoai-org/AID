@@ -31,7 +31,7 @@ require (
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/palantir/godel v2.16.0+incompatible // indirect
 	github.com/palantir/pkg v0.0.0-20190319222743-332184900c68 // indirect
-	github.com/pierrec/lz4 v2.0.5+incompatible // indirect
+	github.com/pierrec/lz4 v2.2.3 // indirect
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
