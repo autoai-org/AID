@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/StackExchange/wmi v0.0.0-20181212234831-e0a55b97c705 // indirect
+	github.com/StackExchange/wmi v0.0.0-20190610160845-cbe66965904d // indirect
 	github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c
 	github.com/aws/aws-sdk-go-v2 v0.7.0
 	github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e // indirect
