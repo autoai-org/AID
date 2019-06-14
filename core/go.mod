@@ -12,7 +12,7 @@ require (
 	github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3
 	github.com/dsnet/compress v0.0.1 // indirect
 	github.com/fatih/color v1.7.0
-	github.com/flosch/pongo2 v0.0.0-20181225140029-79872a7b2769
+	github.com/flosch/pongo2 v0.0.0-20190614174733-8914e1cf9164
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/static v0.0.0-20190301062546-ed515893e96b
 	github.com/gin-gonic/gin v1.3.0
