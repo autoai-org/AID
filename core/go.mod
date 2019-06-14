@@ -7,7 +7,7 @@ require (
 	github.com/StackExchange/wmi v0.0.0-20190610160845-cbe66965904d // indirect
 	github.com/alexrudd/cognito-srp v0.0.0-20190402174326-7bb6280c912c
 	github.com/aws/aws-sdk-go-v2 v0.9.0
-	github.com/certifi/gocertifi v0.0.0-20190410005359-59a85de7f35e // indirect
+	github.com/certifi/gocertifi v0.0.0-20190614175218-d2eda7129713 // indirect
 	github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38
 	github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3
 	github.com/dsnet/compress v0.0.1 // indirect
