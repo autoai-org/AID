@@ -42,7 +42,7 @@ require (
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.0.0-20190611184726-5c40567a22f8
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
-	gopkg.in/cheggaaa/pb.v1 v1.0.28 // indirect
+	gopkg.in/cheggaaa/pb.v2 v2.0.6 // indirect
 	gopkg.in/fukata/golang-stats-api-handler.v1 v1.0.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.10.0
 	upper.io/db.v3 v3.5.7+incompatible // indirect
