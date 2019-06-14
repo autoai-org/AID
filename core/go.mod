@@ -14,8 +14,8 @@ require (
 	github.com/fatih/color v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190614174733-8914e1cf9164
 	github.com/getsentry/raven-go v0.2.0
-	github.com/gin-contrib/static v0.0.0-20190301062546-ed515893e96b
-	github.com/gin-gonic/gin v1.3.0
+	github.com/gin-contrib/static v0.0.0-20190614182541-c1cdf9c9ec7b
+	github.com/gin-gonic/gin v1.4.0
 	github.com/go-ole/go-ole v1.2.4 // indirect
 	github.com/googollee/go-socket.io v1.4.1
 	github.com/hpcloud/tail v1.0.0
