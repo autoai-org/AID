@@ -19,7 +19,7 @@
     "@koa/cors": "^3.0.0",
     "@sentry/node": "5.4.0",
     "@types/dotenv": "6.1.1",
-    "@types/jest": "24.0.11",
+    "@types/jest": "24.0.14",
     "@types/koa": "^2.0.47",
     "@types/koa-helmet": "^3.1.2",
     "@types/koa-passport": "^4.0.2",
