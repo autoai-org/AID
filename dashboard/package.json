@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@vuetify/vuex-cognito-module": "0.4.0",
-    "axios": "0.18.0",
+    "axios": "0.19.0",
     "dayjs": "1.8.14",
     "eslint-plugin-html": "5.0.3",
     "flexsearch": "0.6.22",
