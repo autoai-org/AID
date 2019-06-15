@@ -35,8 +35,7 @@ require (
 	github.com/pkg/errors v0.8.1 // indirect
 	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/shirou/w32 v0.0.0-20160930032740-bb4de0191aa4 // indirect
-	github.com/spf13/cobra v0.0.3 // indirect
-	github.com/spf13/pflag v1.0.3 // indirect
+	github.com/spf13/cobra v0.0.5 // indirect
 	github.com/syndtr/goleveldb v1.0.0
 	github.com/urfave/cli v1.20.0
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
