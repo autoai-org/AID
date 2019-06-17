@@ -35,4 +35,9 @@ func TestCVPMUtilitySpec(t *testing.T) {
 	Convey("Get Homedir should return current users directory", t, func() {
 		So(reflect.TypeOf(utility.GetHomeDir()).String(), ShouldEqual, "string")
 	})
+	Convey("IsStringInSlice should check if a string exists in a list", t, func() {
+		baseStringList := []string{"a", "b"}
+		So(utility.IsStringInSlice("a", baseStringList), ShouldEqual, true)
+		So(utility.IsStringInSlice("c", baseStringList), ShouldEqual, false)
+	})
 }
