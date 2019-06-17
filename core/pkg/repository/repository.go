@@ -5,15 +5,16 @@
 package repository
 
 import (
-	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/runtime"
-	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/utility"
 
 	"github.com/BurntSushi/toml"
 	"github.com/fatih/color"
@@ -178,4 +179,12 @@ func GetPretrained(vendorName string, packageName string) []os.FileInfo {
 	localPretrainedFolder := filepath.Join(localFolder, "pretrained")
 	files, _ := ioutil.ReadDir(localPretrainedFolder)
 	return files
+}
+
+// verifyLocalRepository verifies if the local repository is well set
+// check if cvpm.toml exists [err]
+// check if the classes it refers to exists [err]
+// check if pretrained.toml exists [warn]
+// check if the files that pretrained.toml refers exists[err]
+func verifyLocalRepository(path string) {
 }

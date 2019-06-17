@@ -4,6 +4,7 @@
 
 package authentication
 
+/*
 import (
 	"fmt"
 	"time"
@@ -14,6 +15,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws/external"
 	cip "github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider"
 )
+*/
 
 type User struct {
 	Username string `json:"username"`
@@ -22,23 +24,26 @@ type User struct {
 
 // Login returns the authenticated user
 func (u *User) Login() User {
-	csrp, _ := cognitosrp.NewCognitoSRP(u.Username, u.Password, "us-east-1_IYJ3FvCKZ", "1jinmsd412vcs8pkhqg5u0gjd2", nil)
-	cfg, _ := external.LoadDefaultAWSConfig()
-	cfg.Region = endpoints.UsEast1RegionID
-	cfg.Credentials = aws.AnonymousCredentials
-	svc := cip.New(cfg)
-	req := svc.InitiateAuthRequest(&cip.InitiateAuthInput{
-		AuthFlow:       cip.AuthFlowTypeUserSrpAuth,
-		ClientId:       aws.String(csrp.GetClientId()),
-		AuthParameters: csrp.GetAuthParams(),
-	})
-	resp, _ := req.Send()
-	if resp.ChallengeName == cip.ChallengeNameTypePasswordVerifier {
-		challengeInput, _ := csrp.PasswordVerifierChallenge(resp.ChallengeParameters, time.Now())
-		chal := svc.RespondToAuthChallengeRequest(challengeInput)
-		resp, _ := chal.Send()
-		fmt.Println(resp.AuthenticationResult)
-	} else {
-	}
+	// TODO: Refactor user login
+	/*
+		csrp, _ := cognitosrp.NewCognitoSRP(u.Username, u.Password, "us-east-1_IYJ3FvCKZ", "1jinmsd412vcs8pkhqg5u0gjd2", nil)
+		cfg, _ := external.LoadDefaultAWSConfig()
+		cfg.Region = endpoints.UsEast1RegionID
+		cfg.Credentials = aws.AnonymousCredentials
+		svc := cip.New(cfg)
+		req := svc.InitiateAuthRequest(&cip.InitiateAuthInput{
+			AuthFlow:       cip.AuthFlowTypeUserSrpAuth,
+			ClientId:       aws.String(csrp.GetClientId()),
+			AuthParameters: csrp.GetAuthParams(),
+		})
+		resp, _ := req.Send()
+		if resp.ChallengeName == cip.ChallengeNameTypePasswordVerifier {
+			challengeInput, _ := csrp.PasswordVerifierChallenge(resp.ChallengeParameters, time.Now())
+			chal := svc.RespondToAuthChallengeRequest(challengeInput)
+			resp, _ := chal.Send()
+			fmt.Println(resp.AuthenticationResult)
+		} else {
+		}
+	*/
 	return *u
 }
