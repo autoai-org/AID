@@ -4,7 +4,7 @@
 
 package utility
 
-// Install Web UI -> Download Latest and Unzip
+// InstallWebUi -> Download Latest and Unzip
 func InstallWebUi() {
 
 }

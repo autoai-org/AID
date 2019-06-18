@@ -1,5 +1,5 @@
 dist/
 cmd
 .vscode
-covers.out
-tests/covers.out
+c.out
+cc-test-reporter
