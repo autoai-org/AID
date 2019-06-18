@@ -20,7 +20,7 @@ script:
   - cd core && goveralls -service=travis-ci
   
 after_script:
-  - sed -i 's+github.com/unarxiv/cvpm/pkg+pkg+g' $TRAVIS_BUILD_DIR/unarxiv/cvpm/core/c.out
+  - sed -i 's+github.com/unarxiv/cvpm/pkg+pkg+g' $TRAVIS_BUILD_DIR/core/c.out
   - $TRAVIS_BUILD_DIR/cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
 go:
