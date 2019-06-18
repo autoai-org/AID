@@ -8,7 +8,7 @@ default:
 	@echo "\tmake publish"
 
 test-cli:
-	cd cli && go test -race -v ./... && go build 
+	cd core && go test -race -v ./... && go build 
 
 format-py:
 	autoflake -i cvpm/*.py
