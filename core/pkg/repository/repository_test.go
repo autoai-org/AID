@@ -1,4 +1,4 @@
-package cvpm_core_test
+package repository
 
 import (
 	"testing"

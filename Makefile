@@ -8,7 +8,7 @@ default:
 	@echo "\tmake publish"
 
 test-cli:
-	cd core/tests && go test -race -coverprofile c.out -v -coverpkg=../.
+	cd core && go test -race -coverprofile c.out -v ./...
 	cd core/cmd && go build
 
 format-py:
