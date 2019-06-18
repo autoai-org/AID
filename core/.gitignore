@@ -1,3 +1,5 @@
 dist/
 cmd
 .vscode
+covers.out
+tests/covers.out

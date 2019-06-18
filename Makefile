@@ -8,7 +8,8 @@ default:
 	@echo "\tmake publish"
 
 test-cli:
-	cd core && go test -race -coverprofile c.out -v ./...  && go build 
+	cd core/tests && go test -race -coverprofile covers.out -v
+	cd core/cmd && go build
 
 format-py:
 	autoflake -i cvpm/*.py
@@ -22,9 +23,6 @@ format-py:
 
 format-go:
 	gofmt -l -s -w **/*.go
-
-docs:
-	cd docs && npm run docs:build
 
 package:
 	python3 setup.py sdist bdist_wheel
