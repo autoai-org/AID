@@ -28,14 +28,14 @@ func TestSystemUtilitySpec(t *testing.T) {
 }
 
 func TestCVPMUtilitySpec(t *testing.T) {
-	Convey("IsExists should check if path exists", t, func() {
+	Convey("IsExists() should check if path exists", t, func() {
 		So(utility.IsExists("utility_test.go"), ShouldEqual, true)
 		So(utility.IsExists("utility_test_non_exist.go"), ShouldEqual, false)
 	})
-	Convey("Get Homedir should return current users directory", t, func() {
+	Convey("GetHomedir() should return current users directory", t, func() {
 		So(reflect.TypeOf(utility.GetHomeDir()).String(), ShouldEqual, "string")
 	})
-	Convey("IsStringInSlice should check if a string exists in a list", t, func() {
+	Convey("IsStringInSlice() should check if a string exists in a list", t, func() {
 		baseStringList := []string{"a", "b"}
 		So(utility.IsStringInSlice("a", baseStringList), ShouldEqual, true)
 		So(utility.IsStringInSlice("c", baseStringList), ShouldEqual, false)
