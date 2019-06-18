@@ -8,6 +8,7 @@
 [![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/test_coverage)](https://codeclimate.com/github/unarxiv/CVPM/test_coverage)
 [![Build Status](https://dev.azure.com/2013150080/CVPM/_apis/build/status/unarxiv.CVPM)](https://dev.azure.com/2013150080/CVPM/_build/latest?definitionId=1)
 
 ## Introduction
