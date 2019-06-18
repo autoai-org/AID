@@ -181,10 +181,24 @@ func GetPretrained(vendorName string, packageName string) []os.FileInfo {
 	return files
 }
 
-// verifyLocalRepository verifies if the local repository is well set
+// VerifyLocalRepository verifies if the local repository is well set
 // check if cvpm.toml exists [err]
 // check if the classes it refers to exists [err]
 // check if pretrained.toml exists [warn]
 // check if the files that pretrained.toml refers exists[err]
-func verifyLocalRepository(path string) {
+func VerifyLocalRepository(path string) {
+	cvpmConfigFilePath := filepath.Join(path, "cvpm.toml")
+	pretrainedFilePath := filepath.Join(path, "pretrained.toml")
+	cvpmConfigFileExist, err := utility.IsPathExists(cvpmConfigFilePath)
+	pretrainedFileExist, err := utility.IsPathExists(pretrainedFilePath)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		log.Fatal(err)
+	}
+	if !cvpmConfigFileExist {
+		log.Print("[Error] Cannot find cvpm.toml under " + path)
+	}
+	if !pretrainedFileExist {
+		log.Print(("[Warn] Cannot find pretrained.toml under " + path))
+	}
 }
