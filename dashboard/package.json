@@ -13,7 +13,7 @@
     "build": "webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
-    "@vuetify/vuex-cognito-module": "0.4.0",
+    "@vuetify/vuex-cognito-module": "0.5.3",
     "axios": "0.19.0",
     "dayjs": "1.8.14",
     "eslint-plugin-html": "5.0.5",
