@@ -15,8 +15,8 @@
         v-show="!mini"
         class="pa-3 text-xs-center"
       >
-        <div class="display-2 py-4">
-          CVPM
+        <div class="display-3 py-4">
+          <small>CVPM</small>
         </div>
         <!-- if enable logo
             <img src="https://i.loli.net/2018/10/20/5bcb455c17616.png" class="cvpm-logo"/>
