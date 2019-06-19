@@ -924,10 +924,10 @@
     dom-event-types "^1.0.0"
     lodash "^4.17.4"
 
-"@vuetify/vuex-cognito-module@0.5.3":
-  version "0.5.3"
-  resolved "https://registry.yarnpkg.com/@vuetify/vuex-cognito-module/-/vuex-cognito-module-0.5.3.tgz#3585d8609bc8d6de660f26d578ceb59f9c4e816a"
-  integrity sha512-+AQJn4vZArcKy4tWHogIhavCYSiFGcbrFcF7Rfd9q4EUgYhQoaE+EVEqhdoH310BwL6S+kTdhlOH51b3gosGug==
+"@vuetify/vuex-cognito-module@0.5.4":
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/@vuetify/vuex-cognito-module/-/vuex-cognito-module-0.5.4.tgz#a3b37b046415f02b5649ca00c423399c0fa0adf7"
+  integrity sha512-qzL/txIrbqAVpyOlqzwKYGRXyoAuBPBQWVmhqK0Y+JAng7U8c7H5FXo7cJF/HDK4U1Qv5d+QRARPpxA5hV42Eg==
   dependencies:
     "@aws-amplify/auth" "^1.2.18"
     "@aws-amplify/core" "^1.0.23"
