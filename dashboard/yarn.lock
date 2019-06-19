@@ -9298,10 +9298,10 @@ vuetify@1.5.14:
   resolved "https://registry.npm.taobao.org/vuetify/download/vuetify-1.5.14.tgz#ff67d0b8a398be5297da159b6cd1b31f4d2898b8"
   integrity sha1-/2fQuKOYvlKX2hWbbNGzH00omLg=
 
-vuex@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.npm.taobao.org/vuex/download/vuex-3.1.0.tgz#634b81515cf0cfe976bd1ffe9601755e51f843b9"
-  integrity sha1-Y0uBUVzwz+l2vR/+lgF1XlH4Q7k=
+vuex@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/vuex/-/vuex-3.1.1.tgz#0c264bfe30cdbccf96ab9db3177d211828a5910e"
+  integrity sha512-ER5moSbLZuNSMBFnEBVGhQ1uCBNJslH9W/Dw2W7GZN23UQA69uapP5GTT9Vm8Trc0PzBSVt6LzF3hGjmv41xcg==
 
 w3c-hr-time@^1.0.1:
   version "1.0.1"
