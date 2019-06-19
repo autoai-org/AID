@@ -186,7 +186,7 @@ func GetPretrained(vendorName string, packageName string) []os.FileInfo {
 // check if the classes it refers to exists [err]
 // check if pretrained.toml exists [warn]
 // check if the files that pretrained.toml refers exists[err]
-func VerifyLocalRepository(path string) {
+func VerifyLocalRepository(path string) bool {
 	cvpmConfigFilePath := filepath.Join(path, "cvpm.toml")
 	pretrainedFilePath := filepath.Join(path, "pretrained.toml")
 	cvpmConfigFileExist, err := utility.IsPathExists(cvpmConfigFilePath)
@@ -201,4 +201,8 @@ func VerifyLocalRepository(path string) {
 	if !pretrainedFileExist {
 		log.Print(("[Warn] Cannot find pretrained.toml under " + path))
 	}
+	if cvpmConfigFileExist && pretrainedFileExist {
+		return true
+	}
+	return false
 }

@@ -190,6 +190,7 @@ func ConfigHandler(c *cli.Context) {
 		newPipLocation = prevConfig.Local.Pip
 	}
 	nextConfig.Local.Pip = newPipLocation
+	config.Validate()
 	config.Write(nextConfig)
 }
 
