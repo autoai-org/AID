@@ -53,7 +53,7 @@
     "parse": "^2.1.0",
     "passport": "^0.4.0",
     "passport-cognito": "^0.1.13",
-    "prettier": "1.17.0",
+    "prettier": "1.18.2",
     "stripe": "^7.0.0",
     "supertest": "4.0.2",
     "ts-jest": "24.0.2",
