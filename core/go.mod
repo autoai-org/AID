@@ -28,7 +28,7 @@ require (
 	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a
 	github.com/sqs/goreturns v0.0.0-20181028201513-538ac6014518 // indirect
 	github.com/urfave/cli v1.20.0
-	golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
+	golang.org/x/crypto v0.0.0-20190619105803-ea8f1a30c443
 	golang.org/x/tools v0.0.0-20190618235325-04b924abaa25 // indirect
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.2
 	gopkg.in/fsnotify.v1 v1.4.7 // indirect
