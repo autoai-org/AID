@@ -7,9 +7,16 @@ package contrib
 
 import (
 	"io"
+	"os"
+	"path"
+	"strings"
+	"log"
 	"net/http"
-
+	"crypto/md5"
+	"encoding/hex"
+	"mime/multipart"
 	"github.com/gin-gonic/gin"
+	"github.com/unarxiv/cvpm/pkg/config"
 )
 
 // GetAllDatasets GET /datasets
@@ -42,5 +49,36 @@ func StreamCamera(c *gin.Context) {
 
 // UploadFile POST /files/upload
 func UploadFile(c *gin.Context) {
+	var (
+		src multipart.File
+		file *multipart.FileHeader
+		dist *os.File
+		err error
+	)
+	if file, err = c.FormFile(FILE_FIELD); err != nil {
+		parseFormFail(c)
+		return
+	}
 	
+	extname := strings.ToLower(path.Ext(file.Filename))
+	if src, err = file.Open(); err != nil {
+		log.Print(err)
+	}
+	defer src.Close()
+	hash := md5.New()
+	io.Copy(hash, src)
+	md5string := hex.EncodeToString(hash.Sum([]byte("")))
+	fileName := md5string + extname
+	distPath := path.Join(config.Read().Local.TmpFolder, fileName)
+	if dist, err = os.Create(distPath); err != nil {
+		log.Print(err)
+	}
+	defer dist.Close()
+	io.Copy(dist, src)
+	c.JSON(http.StatusOK, gin.H{
+		"hash":     md5string,
+		"filename": fileName,
+		"origin":   file.Filename,
+		"size":     file.Size,
+	})
 }

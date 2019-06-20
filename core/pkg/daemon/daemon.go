@@ -304,6 +304,8 @@ func RunServer(port string) {
 	// Datasets
 	r.GET("/contrib/datasets", contrib.GetAllDatasets)
 	r.POST("/contrib/datasets/registries", contrib.AddNewRegistry)
+	// Files
+	r.POST("/contrib/files/upload", contrib.UploadFile)
 	// Camera
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {

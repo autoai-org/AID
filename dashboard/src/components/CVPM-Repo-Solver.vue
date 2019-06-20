@@ -26,7 +26,7 @@
       @finishSelection="onFinishSelection"
     />
     <v-card-actions>
-    <v-spacer></v-spacer>
+      <v-spacer />
       <v-btn
         color="indigo"
         outline

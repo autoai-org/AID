@@ -13,11 +13,12 @@ to get a detailed explanation.
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/getsentry/raven-go"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/urfave/cli"
-	"log"
-	"os"
 )
 
 var (
@@ -30,7 +31,7 @@ func main() {
 	cvpmapp := cli.NewApp()
 	cvpmapp.Name = "CVPM"
 	cvpmapp.Usage = "Computer Vision Package Manager"
-	cvpmapp.Version = "0.0.4@alpha"
+	cvpmapp.Version = "0.0.4@beta"
 	cvpmapp.Commands = []cli.Command{
 		{
 			Name: "login",
