@@ -7,7 +7,6 @@ import (
 	. "github.com/smartystreets/goconvey/convey"
 )
 
-
 func TestCVPMUtilitySpec(t *testing.T) {
 	Convey("IsExists(path) should check if path exists", t, func() {
 		So(IsExists("utils_test.go"), ShouldEqual, true)

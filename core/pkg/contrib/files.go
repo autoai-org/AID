@@ -1,10 +1,10 @@
 package contrib
 
 import (
-	"os"
-	"log"
 	"io/ioutil"
+	"log"
 	"net/http"
+	"os"
 
 	"github.com/gin-gonic/gin"
 )
@@ -20,7 +20,7 @@ func parseFormFail(context *gin.Context) {
 func getFileLists(filepath string) []os.FileInfo {
 	files, err := ioutil.ReadDir(filepath)
 	if err != nil {
-        log.Print(err)
+		log.Print(err)
 	}
 	return files
 }

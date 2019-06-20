@@ -7,5 +7,5 @@ package entity
 // FileObject defines the file object to be used
 type FileObject struct {
 	Name string "json:`name`"
-	Size int64 "json:`size`"
+	Size int64  "json:`size`"
 }

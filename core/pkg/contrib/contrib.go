@@ -6,18 +6,18 @@
 package contrib
 
 import (
-	"io"
-	"os"
-	"path"
-	"strings"
-	"log"
-	"net/http"
 	"crypto/md5"
 	"encoding/hex"
-	"mime/multipart"
 	"github.com/gin-gonic/gin"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/entity"
+	"io"
+	"log"
+	"mime/multipart"
+	"net/http"
+	"os"
+	"path"
+	"strings"
 )
 
 // GetAllDatasets GET /datasets
@@ -51,16 +51,16 @@ func StreamCamera(c *gin.Context) {
 // UploadFile POST /files/upload
 func UploadFile(c *gin.Context) {
 	var (
-		src multipart.File
+		src  multipart.File
 		file *multipart.FileHeader
 		dist *os.File
-		err error
+		err  error
 	)
 	if file, err = c.FormFile(FILE_FIELD); err != nil {
 		parseFormFail(c)
 		return
 	}
-	
+
 	extname := strings.ToLower(path.Ext(file.Filename))
 	if src, err = file.Open(); err != nil {
 		log.Print(err)
@@ -89,18 +89,12 @@ func QueryFilesList(c *gin.Context) {
 	var filesList []entity.FileObject
 	files := getFileLists(config.Read().Local.TmpFolder)
 	for _, f := range files {
-		stat, err := f.Stat()
-
-		if err != nil {
-			log.Print("")
-		}
-
 		filesList = append(filesList, entity.FileObject{
 			Name: f.Name(),
-			Size: stat.Size(),
+			Size: f.Size(),
 		})
 	}
 	c.JSON(http.StatusOK, gin.H{
-		"result":     filesList,
+		"result": filesList,
 	})
 }
