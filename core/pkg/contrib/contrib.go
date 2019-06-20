@@ -17,6 +17,7 @@ import (
 	"mime/multipart"
 	"github.com/gin-gonic/gin"
 	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
 )
 
 // GetAllDatasets GET /datasets
@@ -80,5 +81,26 @@ func UploadFile(c *gin.Context) {
 		"filename": fileName,
 		"origin":   file.Filename,
 		"size":     file.Size,
+	})
+}
+
+// QueryFilesList GET /contrib/files/list
+func QueryFilesList(c *gin.Context) {
+	var filesList []entity.FileObject
+	files := getFileLists(config.Read().Local.TmpFolder)
+	for _, f := range files {
+		stat, err := f.Stat()
+
+		if err != nil {
+			log.Print("")
+		}
+
+		filesList = append(filesList, entity.FileObject{
+			Name: f.Name(),
+			Size: stat.Size(),
+		})
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"result":     filesList,
 	})
 }

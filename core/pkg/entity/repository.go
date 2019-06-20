@@ -4,6 +4,7 @@
 
 package entity
 
+// Repository defines the basic structure of a repository/package
 type Repository struct {
 	Name        string
 	LocalFolder string
@@ -12,6 +13,7 @@ type Repository struct {
 	Origin      string
 }
 
+// RepositoryMetaInfo defines the meta-information struct of a repository
 type RepositoryMetaInfo struct {
 	Config     string
 	Dependency string
@@ -19,15 +21,18 @@ type RepositoryMetaInfo struct {
 	Readme     string
 }
 
+// Solver defines the struct of a solver, the minimal struct of a inference program
 type Solver struct {
 	Name  string
 	Class string
 }
 
+// Solvers defines a list of solvers
 type Solvers struct {
 	Solvers []Solver
 }
 
+// RepoSolver defines a struct for using the port
 type RepoSolver struct {
 	Vendor     string
 	Package    string
