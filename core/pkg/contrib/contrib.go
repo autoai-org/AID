@@ -6,9 +6,8 @@
 package contrib
 
 import (
-	"crypto/md5"
-	"encoding/hex"
 	"github.com/gin-gonic/gin"
+	"github.com/dchest/uniuri"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/entity"
 	"io"
@@ -66,9 +65,7 @@ func UploadFile(c *gin.Context) {
 		log.Print(err)
 	}
 	defer src.Close()
-	hash := md5.New()
-	io.Copy(hash, src)
-	md5string := hex.EncodeToString(hash.Sum([]byte("")))
+	md5string := uniuri.New()
 	fileName := md5string + extname
 	distPath := path.Join(config.Read().Local.TmpFolder, fileName)
 	if dist, err = os.Create(distPath); err != nil {
