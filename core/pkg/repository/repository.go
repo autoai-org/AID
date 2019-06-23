@@ -36,8 +36,8 @@ func readClientRepos(currentHomedir string) []entity.Repository {
 
 func addRepo(repos []entity.Repository, repo entity.Repository) []entity.Repository {
 	alreadyInstalled := false
-	for _, existed_repo := range repos {
-		if repo.Name == existed_repo.Name && repo.Vendor == existed_repo.Vendor {
+	for _, existedRepo := range repos {
+		if repo.Name == existedRepo.Name && repo.Vendor == existedRepo.Vendor {
 			alreadyInstalled = true
 		}
 	}
@@ -82,7 +82,7 @@ func Run(Vendor string, Name string, Solver string, Port string) {
 	}
 }
 
-// Clone a repo from @params remoteURL to @params targetFolder by Git Protocol.
+// CloneFromGit clones a repo from @params remoteURL to @params targetFolder by Git Protocol.
 // Used for installing and initializing a repo
 func CloneFromGit(remoteURL string, targetFolder string) {
 	color.Cyan("Cloning " + remoteURL + " into " + targetFolder)
@@ -96,11 +96,12 @@ func CloneFromGit(remoteURL string, targetFolder string) {
 	}
 }
 
+// InstallDependencies installs all the dependencies declared in the requirements.txt file
 func InstallDependencies(localFolder string) {
 	runtime.Pip([]string{"install", "-r", filepath.Join(localFolder, "requirements.txt"), "--user"})
 }
 
-// Generating Runners for future use
+// GeneratingRunners generates runners for future use, it uses template
 func GeneratingRunners(localFolder string) {
 	var mySolvers entity.Solvers
 	cvpmFile := filepath.Join(localFolder, "cvpm.toml")
@@ -110,7 +111,7 @@ func GeneratingRunners(localFolder string) {
 	runtime.RenderRunnerTpl(localFolder, mySolvers)
 }
 
-// After Installation
+// PostInstallation handles folder creation and other things after Installation
 func PostInstallation(repoFolder string) {
 	// Create pretrained folder
 	preTrainedFolder := filepath.Join(repoFolder, "pretrained")
@@ -130,16 +131,16 @@ func PostInstallation(repoFolder string) {
 func GetMetaInfo(Vendor string, Name string) entity.RepositoryMetaInfo {
 	repos := readRepos()
 	repositoryMeta := entity.RepositoryMetaInfo{}
-	for _, existed_repo := range repos {
-		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
+	for _, existedRepo := range repos {
+		if existedRepo.Name == Name && existedRepo.Vendor == Vendor {
 			// Read config file etc
-			readmeFilePath := filepath.Join(existed_repo.LocalFolder, "README.md")
-			cvpmConfigFilePath := filepath.Join(existed_repo.LocalFolder, "cvpm.toml")
-			requirementsFilePath := filepath.Join(existed_repo.LocalFolder, "requirements.txt")
+			readmeFilePath := filepath.Join(existedRepo.LocalFolder, "README.md")
+			cvpmConfigFilePath := filepath.Join(existedRepo.LocalFolder, "cvpm.toml")
+			requirementsFilePath := filepath.Join(existedRepo.LocalFolder, "requirements.txt")
 			repositoryMeta.Config = utility.ReadFileContent(cvpmConfigFilePath)
 			repositoryMeta.Dependency = utility.ReadFileContent(requirementsFilePath)
 			repositoryMeta.Readme = utility.ReadFileContent(readmeFilePath)
-			packageSize := utility.GetDirSizeMB(existed_repo.LocalFolder)
+			packageSize := utility.GetDirSizeMB(existedRepo.LocalFolder)
 			repositoryMeta.DiskSize = packageSize
 		}
 	}

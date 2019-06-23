@@ -1,3 +1,4 @@
+// Package daemon handles the daemon server
 // Copyright 2019 The CVPM Authors. All rights reserved.
 // Use of this source code is governed by a MIT
 // license that can be found in the LICENSE file.
@@ -33,10 +34,10 @@ import (
 // DaemonPort Default Running Port
 const DaemonPort = "10590"
 
-// Definition of Running Repos
+// socketServer defines of Running Repos
 var socketServer *socketio.Server
 
-// Struct of a Request to Run Repo
+// RunRepoRequest is the struct of a Request to Run Repo
 type RunRepoRequest struct {
 	Name   string `json:"name"`
 	Vendor string `json:"vendor"`
@@ -44,7 +45,7 @@ type RunRepoRequest struct {
 	Port   string `json:"port"`
 }
 
-// POST /repos/running -> run a solver in this repo
+// PostRunningRepoHandler handles POST /repos/running -> run a solver in this repo
 func PostRunningRepoHandler(c *gin.Context) {
 	var runRepoRequest RunRepoRequest
 	c.BindJSON(&runRepoRequest)
@@ -58,17 +59,17 @@ func PostRunningRepoHandler(c *gin.Context) {
 	})
 }
 
-// GET /repos/running -> return running repositories
+// GetRunningReposHandler handles GET /repos/running -> return running repositories
 func GetRunningReposHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, runtime.RunningRepos)
 }
 
-// GET /solvers/running -> return running solvers
+// GetRunningSolversHandler handles GET /solvers/running -> return running solvers
 func GetRunningSolversHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, runtime.RunningSolvers)
 }
 
-// GET /solvers/running/:vendor/:name -> return running solvers in this package
+// GetRunningSolversByPackageHandler handles GET /solvers/running/:vendor/:name -> return running solvers in this package
 func GetRunningSolversByPackageHandler(c *gin.Context) {
 	vendor := c.Param("vendor")
 	packageName := c.Param("package")
@@ -81,12 +82,13 @@ func GetRunningSolversByPackageHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, runningSolversInPackage)
 }
 
-// POST /repos -> install a repo
+// AddRepoRequest handles POST /repos -> install a repo
 type AddRepoRequest struct {
 	RepoType string `json:"type"`
 	URL      string `json:"url"`
 }
 
+// PostReposHandler handles POST requests to /repos
 func PostReposHandler(c *gin.Context) {
 	config := config.Read()
 	var addRepoRequest AddRepoRequest
@@ -99,7 +101,7 @@ func PostReposHandler(c *gin.Context) {
 	}
 }
 
-// GetReposHandler : GET /repos -> return all repositories
+// GetReposHandler handles GET /repos -> return all repositories
 func GetReposHandler(c *gin.Context) {
 	config := config.Read()
 	c.JSON(http.StatusOK, config.Repositories)
@@ -117,7 +119,7 @@ func GetSystemHandler(c *gin.Context) {
 	c.JSON(http.StatusOK, utility.GetSystemInfo())
 }
 
-// Handle Socket Request
+// socketHandler handles Socket Request, this is to be fixed
 func socketHandler(c *gin.Context) {
 	socketServer.OnConnect("/", func(so socketio.Conn) error {
 		// so.J
@@ -131,7 +133,7 @@ func socketHandler(c *gin.Context) {
 	socketServer.ServeHTTP(c.Writer, c.Request)
 }
 
-// write log to socket stream
+// writeLog writes log to socket stream
 func writeLog(filepath string, server *socketio.Server, eventName string) {
 	t, err := tail.TailFile(filepath, tail.Config{Follow: true})
 	if err != nil {
@@ -148,7 +150,7 @@ func writeLog(filepath string, server *socketio.Server, eventName string) {
 	}
 }
 
-// watched log source
+// watchLogs watchs log source
 func watchLogs(server *socketio.Server) {
 	// System Log
 	cvpmLogsLocation := config.GetLogLocation()
@@ -156,8 +158,7 @@ func watchLogs(server *socketio.Server) {
 	go writeLog(filepath.Join(cvpmLogsLocation, "package.log"), server, "package")
 }
 
-// set global header to enable cors
-// and set response header
+// BeforeResponse set global header to enable cors and set response header
 func BeforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
@@ -174,7 +175,7 @@ func BeforeResponse() gin.HandlerFunc {
 	}
 }
 
-// Delete Running Solver Process
+// StopInferProcess deletes Running Solver Process
 func StopInferProcess(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
@@ -209,7 +210,7 @@ func StopInferProcess(c *gin.Context) {
 	}
 }
 
-// Reverse Proxy for Calling Solvers and return real results
+// ReverseProxy for Calling Solvers and return real results
 func ReverseProxy(c *gin.Context) {
 	vendor := c.Param("vendor")
 	name := c.Param("name")
