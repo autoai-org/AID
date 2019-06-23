@@ -1,78 +1,79 @@
 {
-    "Dashboard":"Dashboard",
-    "Theme":{
-        "lighttheme":"Light",
-        "darktheme":"Dark",
-        "theme":" Theme"
+    "Dashboard": "Dashboard",
+    "Theme": {
+        "lighttheme": "Light",
+        "darktheme": "Dark",
+        "theme": " Theme"
     },
-    "Admin":"Admin",
-    "Home":{
-        "title":"Home",
-        "latest_news":"Latest News",
-        "status":"Status",
-        "host":"Host",
-        "cpu":"CPU",
-        "memory":"Memory",
-        "operating_system":"Operating System"
+    "Admin": "Admin",
+    "Home": {
+        "title": "Home",
+        "latest_news": "Latest News",
+        "status": "Status",
+        "host": "Host",
+        "cpu": "CPU",
+        "memory": "Memory",
+        "operating_system": "Operating System"
     },
-    "Packages":{
-        "title":"Packages",
-        "import_from_git":"IMPORT FROM GIT",
-        "import_from_hub":"IMPORT FROM HUB",
-        "vendor":"Vendor",
-        "name":"Name",
-        "local_folder":"LocalFolder",
-        "actions":"Actions"
+    "Packages": {
+        "title": "Packages",
+        "import_from_git": "IMPORT FROM GIT",
+        "import_from_hub": "IMPORT FROM HUB",
+        "vendor": "Vendor",
+        "name": "Name",
+        "local_folder": "LocalFolder",
+        "actions": "Actions"
     },
-    "System":"System",
-    "Log":{
-        "title":"Log",
-        "system_log":"System Log"
+    "System": "System",
+    "Log": {
+        "title": "Log",
+        "system_log": "System Log"
     },
-    "Settings":{
-        "title":"Settings",
-        "developer_mode":"Developer Mode",
-        "enable_hint":"Enable Hint",
-        "endpoint":"Endpoint",
-        "save":"Save"
+    "Settings": {
+        "title": "Settings",
+        "developer_mode": "Developer Mode",
+        "enable_hint": "Enable Hint",
+        "endpoint": "Endpoint",
+        "save": "Save"
     },
-    "Contrib":"Contrib",
-    "Datasets":{
-        "title":"Datasets",
-        "sync":"SYNC",
-        "starred":"STARRED",
-        "search":"Search",
-        "name":"Name",
-        "desc":"Desc",
-        "tags":"Tags",
-        "actions":"Actions"
+    "Contrib": "Contrib",
+    "Datasets": {
+        "upload": "Upload",
+        "title": "Datasets",
+        "sync": "SYNC",
+        "starred": "STARRED",
+        "search": "Search",
+        "name": "Name",
+        "desc": "Desc",
+        "tags": "Tags",
+        "actions": "Actions"
     },
-    "Inspector":{
-        "title":"Inspector",
-        "client_ip":"Clinet IP",
-        "target":"Target",
-        "result":"Result",
-        "time":"Time"
+    "Inspector": {
+        "title": "Inspector",
+        "client_ip": "Clinet IP",
+        "target": "Target",
+        "result": "Result",
+        "time": "Time"
     },
-    "About":"About",
-    "Hub":"Hub",
-    "Github":"Github",
-    "Blog":"Blog",
-    "Packages_detail":{
-        "meat_info":"Meta Info",
-        "readme":"Readme",
-        "dependency":"Dependency",
-        "disk_usage":"Disk Usage",
-        "solvers":"Solvers",
-        "solver":"Solver",
-        "vendor":"Vendor",
-        "package":"Package",
-        "run":"Run",
-        "running":"Running",
-        "actions":"Actions",
-        "test":"TEST",
-        "ticket":"TICKET",
-        "package_log":"Package Log",
-        "environment":"Environment_variables"
+    "About": "About",
+    "Hub": "Hub",
+    "Github": "Github",
+    "Blog": "Blog",
+    "Packages_detail": {
+        "meat_info": "Meta Info",
+        "readme": "Readme",
+        "dependency": "Dependency",
+        "disk_usage": "Disk Usage",
+        "solvers": "Solvers",
+        "solver": "Solver",
+        "vendor": "Vendor",
+        "package": "Package",
+        "run": "Run",
+        "running": "Running",
+        "actions": "Actions",
+        "test": "TEST",
+        "ticket": "TICKET",
+        "package_log": "Package Log",
+        "environment": "Environment_variables"
     }
 }

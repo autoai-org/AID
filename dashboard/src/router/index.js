@@ -11,6 +11,8 @@ import SignIn from '@/pages/auth/SignIn'
 import SignUp from '@/pages/auth/SignUp'
 // Extensions
 import Datasets from '@/pages/contrib/dataset/Datasets'
+import MyDatasets from '@/pages/contrib/dataset/MyDatasets'
+
 import Inspector from '@/pages/contrib/inspector/Inspector'
 
 Vue.use(Router)
@@ -58,9 +60,14 @@ export default new Router({
           component: Pretrained
         },
         {
-          path: '/datasets',
+          path: '/datasets/open',
           name: 'Datasets',
           component: Datasets
+        },
+        {
+          path: '/datasets/my',
+          name: 'MyDatasets',
+          component: MyDatasets
         },
         {
           path: '/inspector',

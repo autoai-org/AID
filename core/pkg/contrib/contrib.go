@@ -47,7 +47,7 @@ func StreamCamera(c *gin.Context) {
 	})
 }
 
-// UploadFile POST /files/upload
+// UploadFile POST /files/upload/:type
 func UploadFile(c *gin.Context) {
 	var (
 		src  multipart.File
@@ -59,14 +59,14 @@ func UploadFile(c *gin.Context) {
 		parseFormFail(c)
 		return
 	}
-
+	fileType := c.Param("type")
 	extname := strings.ToLower(path.Ext(file.Filename))
 	if src, err = file.Open(); err != nil {
 		log.Print(err)
 	}
 	defer src.Close()
 	md5string := uniuri.New()
-	fileName := md5string + extname
+	fileName := fileType + "-" + md5string + extname
 	distPath := path.Join(config.Read().Local.TmpFolder, fileName)
 	if dist, err = os.Create(distPath); err != nil {
 		log.Print(err)

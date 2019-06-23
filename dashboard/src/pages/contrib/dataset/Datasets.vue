@@ -35,7 +35,7 @@
         left
         dark
       >
-        fas fa-star
+        fas fa-profile
       </v-icon>
       {{ $t(`Datasets.starred`) }}
     </v-btn>

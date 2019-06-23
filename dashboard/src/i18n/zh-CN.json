@@ -38,6 +38,7 @@
     },
     "Contrib":"第三方支持",
     "Datasets":{
+        "upload":"上传",
         "title":"数据集",
         "sync":"同步",
         "starred":"收藏",

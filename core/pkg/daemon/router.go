@@ -56,7 +56,7 @@ func getRouter() *gin.Engine {
 	r.GET("/contrib/datasets", contrib.GetAllDatasets)
 	r.POST("/contrib/datasets/registries", contrib.AddNewRegistry)
 	// Files
-	r.POST("/contrib/files/upload", contrib.UploadFile)
+	r.POST("/contrib/files/upload/:type", contrib.UploadFile)
 	r.GET("/contrib/files/list", contrib.QueryFilesList)
 	// Camera
 	// Plugin Related Routes

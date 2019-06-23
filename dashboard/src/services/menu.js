@@ -9,7 +9,7 @@ function getMenus () {
     { 'href': '/settings', 'title': 'Settings', 'icon': 'settings', 'id': 'cvpm-tour-settings', 'openType': 'nav' },
     { 'href': '/login', 'icon': 'lock', 'title': 'Logout' },
     { 'header': 'Contrib' },
-    { 'href': '/datasets', 'title': 'Datasets', 'icon': 'fas fa-database', 'id': 'cvpm-tour-datasets', 'openType': 'nav' },
+    { 'href': '/datasets/open', 'title': 'Datasets', 'icon': 'fas fa-database', 'id': 'cvpm-tour-datasets', 'openType': 'nav' },
     { 'href': '/inspector', 'title': 'Inspector', 'icon': 'fas fa-file-contract', 'id': 'cvpm-tour-inspector', 'openType': 'nav' },
     { 'header': 'About' },
     { 'href': 'https://hub.autoai.org', 'title': 'Hub', 'icon': 'device_hub', 'id': 'cvpm-tour-logs', 'openType': '_blank' },
