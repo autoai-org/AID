@@ -38,9 +38,12 @@
     },
     "Contrib": "Contrib",
     "Datasets": {
+        "status": "File Status",
+        "size": "File Size",
+        "mine": "Mine",
         "upload": "Upload",
         "title": "Datasets",
-        "sync": "SYNC",
+        "sync": "Sync",
         "starred": "STARRED",
         "search": "Search",
         "name": "Name",

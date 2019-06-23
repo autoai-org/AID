@@ -38,6 +38,9 @@
     },
     "Contrib":"第三方支持",
     "Datasets":{
+        "status": "文件状态",
+        "size" : "文件大小",
+        "mine": "我的",
         "upload":"上传",
         "title":"数据集",
         "sync":"同步",

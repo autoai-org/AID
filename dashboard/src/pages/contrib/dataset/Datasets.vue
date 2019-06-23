@@ -29,15 +29,15 @@
     <v-btn
       outline
       color="indigo"
-      @click="alert('Coming Soon')"
+      @click="turnToMine()"
     >
       <v-icon
         left
         dark
       >
-        fas fa-profile
+        fas fa-user
       </v-icon>
-      {{ $t(`Datasets.starred`) }}
+      {{ $t(`Datasets.mine`) }}
     </v-btn>
     <v-text-field
       v-model="searchKW"
@@ -188,7 +188,7 @@ export default {
           text: this.$t(`Datasets.actions`),
           align: 'left',
           sortable: false,
-          value: 'Tags'
+          value: 'Operation'
         }
       ]
     }
@@ -212,6 +212,9 @@ export default {
     this.fetchAllDatasets()
   },
   methods: {
+    turnToMine () {
+      this.$router.push('/datasets/my')
+    },
     alert (message) {
       alert(message)
     },
@@ -245,11 +248,11 @@ export default {
       this.detailInfo = item
     },
     search () {
-      this.fetchAllDatasets(this.searchName, this.searchTag)
+      this.fetchOpenDatasets(this.searchName, this.searchTag)
     },
-    fetchAllDatasets (name = '', tag = '') {
+    fetchOpenDatasets (name = '', tag = '') {
       let self = this
-      systemService.getAllDatasets().then(function (res) {
+      systemService.getOpenDatasets().then(function (res) {
         self.datasets = res.data.map(function (each) {
           if (each.Tags.search(tag) !== -1) {
             if (each.Name !== '' && each.Name.search(name) !== -1) {

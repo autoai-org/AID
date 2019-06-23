@@ -1,6 +1,7 @@
-import axios from 'axios'
 import { ConfigService } from './config'
 import { getStatus } from './mock'
+import { _get, _post } from './base'
+
 class SystemServiceMock {
   constructor (endpoint) {
     this.endpoint = endpoint
@@ -15,114 +16,57 @@ class SystemService {
     this.endpoint = endpoint
   }
   getStatus () {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/system').then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    return _get(this.endpoint + '/system')
   }
   getPackages () {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/repos').then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    return _get(this.endpoint + '/repos')
   }
   getRepoMeta (vendor, name) {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/repo/meta/' + vendor + '/' + name).then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    return _get(this.endpoint + '/repo/meta/' + vendor + '/' + name)
   }
   getRunningSolver (vendor, name) {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/solvers/running/' + vendor + '/' + name).then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    return _get(this.endpoint + '/solvers/running/' + vendor + '/' + name)
   }
   runRepoSolver (vendor, name, solver, port) {
-    return new Promise((resolve, reject) => {
-      axios.post(this.endpoint + '/repo/running', {
-        'vendor': vendor,
-        'name': name,
-        'solver': solver,
-        'port': port
-      }).then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
+    return _post(this.endpoint + '/repo/running', {
+      'vendor': vendor,
+      'name': name,
+      'solver': solver,
+      'port': port
     })
   }
   testRepoSolver (vendor, packageName, solver, parameters, file) {
-    return new Promise((resolve, reject) => {
-      let payload = new FormData()
-      payload.append('file', file)
-      for (let i = 0; i < parameters.length; i++) {
-        payload.append(parameters[i].key, parameters[i].value)
-      }
-      axios.post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    let payload = new FormData()
+    payload.append('file', file)
+    for (let i = 0; i < parameters.length; i++) {
+      payload.append(parameters[i].key, parameters[i].value)
+    }
+    return _post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver, payload)
   }
   installRepo (type, id) {
     // if type === 'git', id => git url
-    return new Promise((resolve, reject) => {
-      axios.post(this.endpoint + '/repos', {
-        type: type,
-        url: id
-      }).then(function (res) {
-        resolve(res)
-      }).then(function (err) {
-        reject(err)
-      })
+    return _post(this.endpoint + '/repos', {
+      type: type,
+      url: id
     })
   }
   // contrib
   // datasets
-  getAllDatasets () {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/contrib/datasets', {
-      }).then(function (res) {
-        resolve(res)
-      }).then(function (err) {
-        reject(err)
-      })
-    })
+  getOpenDatasets () {
+    return _get(this.endpoint + '/contrib/datasets')
   }
   SyncDatabase (datasetsUrl) {
-    return new Promise((resolve, reject) => {
-      axios.post(this.endpoint + '/contrib/datasets/registries', {
-        url: datasetsUrl
-      }).then(function (res) {
-        resolve(res)
-      }).then(function (err) {
-        reject(err)
-      })
+    return _post(this.endpoint + '/contrib/datasets/registries', {
+      url: datasetsUrl
     })
+  }
+  // files
+  getMyFiles () {
+    return _get(this.endpoint + '/contrib/files/list')
   }
   // inspector
   getInspectorInfo () {
-    return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/_inspector').then(function (res) {
-        resolve(res)
-      }).catch(function (err) {
-        reject(err)
-      })
-    })
+    return _get(this.endpoint + '/_inspector')
   }
 }
 
