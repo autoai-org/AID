@@ -32,6 +32,7 @@ github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38 h1:0IJzYrbh0bpDj
 github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38/go.mod h1:ONfU9BTXt1k6glz/KrYhivPoBIGpSnw4T5gCOLTX/jM=
 github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3 h1:Do47kS9xtItRPDOp7s6ppjjyxYzDiJLz26CIJhSFbao=
 github.com/cvpm-contrib/database v0.0.0-20190403053658-8054ddd981c3/go.mod h1:4IjHwnaTUYaq2ghpL/ghO2KHB1RpJ1KnsgQUKmtQn7I=
+github.com/cvpm-contrib/database v0.0.0-20190624145037-a875110d1a15/go.mod h1:mJfbBSwOh0U4FvEunDbKIzkbMcod/j+SIn/UlOc85B0=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
