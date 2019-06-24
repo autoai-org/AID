@@ -38,6 +38,7 @@
     },
     "Contrib": "Contrib",
     "Datasets": {
+        "uploadedAt": "Uploaded At",
         "status": "File Status",
         "size": "File Size",
         "mine": "Mine",

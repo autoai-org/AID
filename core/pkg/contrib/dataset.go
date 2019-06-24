@@ -1,8 +1,14 @@
+// Package contrib defines extra stuff for cvpm
+//Copyright 2019 The CVPM Authors. All rights reserved.
+// Use of this source code is governed by a MIT
+// license that can be found in the LICENSE file.
+
+/*This file handles third party contributions and libraries.*/
+
 package contrib
 
 import (
 	"github.com/BurntSushi/toml"
-	"github.com/cvpm-contrib/database"
 	"github.com/levigross/grequests"
 	"log"
 )
@@ -40,7 +46,7 @@ func addNewRegistry(remoteURL string) {
 	if _, err := toml.Decode(content, &datasetsInRegistry); err != nil {
 		panic(err)
 	}
-	sess := database.GetDBInstance()
+	sess := GetDBInstance()
 	datasetCollection := sess.Collection("dataset")
 	for _, item := range datasetsInRegistry.Datasets {
 		err := datasetCollection.InsertReturning(&item)
@@ -48,11 +54,11 @@ func addNewRegistry(remoteURL string) {
 			panic(err)
 		}
 	}
-	database.CloseDB(sess)
+	CloseDB(sess)
 }
 
 func fetchAllDatasets() []dataset {
-	sess := database.GetDBInstance()
+	sess := GetDBInstance()
 	datasetCollection := sess.Collection("dataset")
 	res := datasetCollection.Find()
 	var datasets []dataset
@@ -61,6 +67,6 @@ func fetchAllDatasets() []dataset {
 	if err != nil {
 		log.Fatalf("res.All(): %q\n", err)
 	}
-	database.CloseDB(sess)
+	CloseDB(sess)
 	return datasets
 }

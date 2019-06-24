@@ -28,10 +28,13 @@
           slot-scope="props"
         >
           <td class="text-xs-left">
-            {{ props.item.Name }}
+            {{ props.item.name }}
           </td>
           <td class="text-xs-left">
-            {{ (props.item.Size/1024/1024).toFixed(2) }} MB
+            {{ (props.item.size/1024/1024).toFixed(2) }} MB
+          </td>
+          <td class="text-xs-left">
+            {{ formatRequestTime(props.item.uploadedAt) }}
           </td>
           <v-btn
             outline
@@ -50,6 +53,8 @@
 <script>
 import { systemService } from '@/services/system'
 import { searchService } from '@/services/search'
+import dayjs from 'dayjs'
+
 export default {
   data () {
     return {
@@ -72,6 +77,12 @@ export default {
         },
         {
           text: this.$t(`Datasets.size`),
+          align: 'left',
+          sortable: true,
+          value: 'Size'
+        },
+        {
+          text: this.$t(`Datasets.uploadedAt`),
           align: 'left',
           sortable: true,
           value: 'Size'
@@ -104,6 +115,9 @@ export default {
     this.fetchMyDatasets()
   },
   methods: {
+    formatRequestTime (requestAt) {
+      return dayjs(requestAt).format('YYYY-MM-DD HH:mm:ss A')
+    },
     search () {
       this.fetchMyDatasets(this.searchName)
     },
@@ -111,8 +125,8 @@ export default {
       let self = this
       systemService.getMyFiles().then(function (res) {
         self.datasets = res.data.result.filter(function (each) {
-          if (each.Name.startsWith('dataset-')) {
-            if (each.Name !== '' && each.Name.search(name) !== -1) {
+          if (each.type === 'dataset') {
+            if (each.name !== '' && each.name.search(name) !== -1) {
               return each
             }
           }

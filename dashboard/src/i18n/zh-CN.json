@@ -38,6 +38,7 @@
     },
     "Contrib":"第三方支持",
     "Datasets":{
+        "uploadedAt": "上传时间",
         "status": "文件状态",
         "size" : "文件大小",
         "mine": "我的",

@@ -1,4 +1,4 @@
-import { _get, _post } from './base'
+import { _get } from './base'
 
 class GithubService {
   constructor (repo) {

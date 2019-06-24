@@ -10,7 +10,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/dchest/uniuri"
 	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"io"
 	"log"
 	"mime/multipart"
@@ -67,13 +67,17 @@ func UploadFile(c *gin.Context) {
 	}
 	defer src.Close()
 	md5string := uniuri.New()
-	fileName := fileType + "-" + md5string + extname
-	distPath := path.Join(config.Read().Local.TmpFolder, fileName)
+	fileName := md5string + extname
+	distPath := path.Join(config.Read().Local.TmpFolder, fileType, fileName)
+	distFolder := path.Join(config.Read().Local.TmpFolder, fileType)
+	utility.CreateFolderIfNotExist(distFolder)
 	if dist, err = os.Create(distPath); err != nil {
 		log.Print(err)
 	}
 	defer dist.Close()
 	io.Copy(dist, src)
+	// set filetype to dataset since all uploaded large file should be 'dataset'
+	insertFileObjectToDB(fileName, distPath, fileType, file.Size)
 	c.JSON(http.StatusOK, gin.H{
 		"hash":     md5string,
 		"filename": fileName,
@@ -84,14 +88,7 @@ func UploadFile(c *gin.Context) {
 
 // QueryFilesList GET /contrib/files/list
 func QueryFilesList(c *gin.Context) {
-	var filesList []entity.FileObject
-	files := getFileLists(config.Read().Local.TmpFolder)
-	for _, f := range files {
-		filesList = append(filesList, entity.FileObject{
-			Name: f.Name(),
-			Size: f.Size(),
-		})
-	}
+	filesList := queryFiles()
 	c.JSON(http.StatusOK, gin.H{
 		"result": filesList,
 	})

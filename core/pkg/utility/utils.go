@@ -8,6 +8,7 @@ import (
 	"github.com/getsentry/raven-go"
 	"io/ioutil"
 	"net"
+	"log"
 	"os"
 	"os/user"
 	"path/filepath"
@@ -119,4 +120,20 @@ func IsPathExists(path string) (bool, error) {
 		return false, nil
 	}
 	return true, err
+}
+
+// CreateFolderIfNotExist first checks if the @param folderPath exists, if not, it will create one
+func CreateFolderIfNotExist(folderPath string) {
+	exist, err := IsPathExists(folderPath)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		log.Print("error when creating " + folderPath + ": " + err.Error())
+	}
+	if !exist {
+		err = os.Mkdir(folderPath, os.ModePerm)
+		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
+			log.Print("error when creating " + folderPath + ": " + err.Error())
+		}
+	}
 }
