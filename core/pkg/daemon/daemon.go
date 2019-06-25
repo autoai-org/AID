@@ -11,12 +11,6 @@ package daemon
 import (
 	"bytes"
 	"fmt"
-	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/query"
-	"github.com/unarxiv/cvpm/pkg/repository"
-	"github.com/unarxiv/cvpm/pkg/runtime"
-	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -24,10 +18,17 @@ import (
 	"net/url"
 	"path/filepath"
 
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/query"
+	"github.com/unarxiv/cvpm/pkg/repository"
+	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/utility"
+
 	"github.com/fatih/color"
 	"github.com/getsentry/raven-go"
 	"github.com/gin-gonic/gin"
-	"github.com/googollee/go-socket.io"
+	socketio "github.com/googollee/go-socket.io"
 	"github.com/hpcloud/tail"
 )
 
@@ -226,7 +227,7 @@ func ReverseProxy(c *gin.Context) {
 		c.JSON(http.StatusNotImplemented, gin.H{
 			"error": "501",
 			"info":  "Solver Not Running, if you want to force it running, please attach a force=true in your request body",
-			"help":  "https://cvpm.autoai.org",
+			"help":  "https://cvflow.autoai.org",
 		})
 	}
 	// the solver is running

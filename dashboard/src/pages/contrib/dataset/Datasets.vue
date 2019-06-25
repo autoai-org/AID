@@ -209,7 +209,7 @@ export default {
     }
   },
   created () {
-    this.fetchAllDatasets()
+    this.fetchOpenDatasets()
   },
   methods: {
     turnToMine () {

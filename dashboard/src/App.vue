@@ -8,12 +8,17 @@
       :steps="steps"
       :callbacks="tourCallbacks"
     />
+    <cvpm-loading />
   </div>
 </template>
 
 <script>
 import { ConfigService } from '@/services/config'
+import Loading from '@/components/global/Loading'
 export default {
+  components: {
+    'cvpm-loading': Loading
+  },
   data () {
     return {
       isRouterAlive: true,

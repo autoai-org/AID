@@ -247,7 +247,6 @@ export default {
   methods: {
     changeLocale (to) {
       setLang(to)
-      console.log(getVuetifyLang(to))
       this.$vuetify.lang.current = getVuetifyLang(to)
     },
     fetchMenu () {

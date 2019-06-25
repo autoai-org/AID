@@ -68,6 +68,11 @@ class SystemService {
   getInspectorInfo () {
     return _get(this.endpoint + '/_inspector')
   }
+  uploadFile (file, type) {
+    let payload = new FormData()
+    payload.append('file', file)
+    return _post(this.endpoint + '/contrib/files/upload/' + type, payload)
+  }
 }
 
 const configService = new ConfigService()

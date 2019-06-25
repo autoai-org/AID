@@ -13,6 +13,16 @@
       </v-icon>
       {{ $t(`Datasets.upload`) }}
     </v-btn>
+    <input
+      id="files"
+      ref="uploadInput"
+      type="file"
+      name="file"
+      accept="*"
+      :multiple="false"
+      @change="uploadFile($event)"
+    >
+
     <v-text-field
       v-model="searchKW"
       :label="$t(`Datasets.search`)"
@@ -53,6 +63,7 @@
 <script>
 import { systemService } from '@/services/system'
 import { searchService } from '@/services/search'
+import store from '@/store'
 import dayjs from 'dayjs'
 
 export default {
@@ -121,6 +132,22 @@ export default {
     search () {
       this.fetchMyDatasets(this.searchName)
     },
+    uploadNewDatasets () {
+      this.$refs.uploadInput.click()
+    },
+    uploadFile (e) {
+      store.state.isLoading = true
+      let files = e.target.files
+      if (files.length) {
+        console.log(files[0])
+        systemService.uploadFile(files[0], 'dataset').then(function (res) {
+          store.state.isLoading = false
+          location.reload()
+        })
+      } else {
+        console.error('[err] no file selected!')
+      }
+    },
     fetchMyDatasets (name = '') {
       let self = this
       systemService.getMyFiles().then(function (res) {
@@ -131,7 +158,6 @@ export default {
             }
           }
         })
-        console.log(self.datasets)
         self.allDatasets = self.datasets
         for (var index in self.datasets) {
           searchService.addItem(index, self.datasets[index])
@@ -149,5 +175,9 @@ pre {
 }
 .keyword-hit {
   color: red;
+}
+input[type="file"] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
 }
 </style>

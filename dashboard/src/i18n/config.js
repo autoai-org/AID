@@ -1,6 +1,6 @@
 import i18n from '@/i18n'
-import map from '@/i18n/map'
-import vuetifyMap from '@/i18n/vuetify-map'
+import map from '@/i18n/map.json'
+import vuetifyMap from '@/i18n/vuetify-map.json'
 
 function setLang (lang) {
   localStorage.setItem('lang', lang)
