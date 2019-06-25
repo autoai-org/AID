@@ -11,6 +11,7 @@ import (
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/contrib"
 	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/daemon/socket"
 	api "gopkg.in/appleboy/gin-status-api.v1"
 	"net/http"
 	"path/filepath"
@@ -22,7 +23,6 @@ func getRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(BeforeResponse())
 	r.Use(gin.Recovery())
-	watchLogs(socketServer)
 	r.Use(static.Serve("/webui", static.LocalFile(webuiFolder, false)))
 	r.Use(auth.InspectorStats())
 	r.Use(gin.Logger())
@@ -48,9 +48,6 @@ func getRouter() *gin.Engine {
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
 	r.DELETE("/solvers/running/:vendor/:name/:solver", StopInferProcess)
-	// Socket Related Routes
-	r.GET("/socket.io/", socketHandler)
-	r.POST("/socket.io/", socketHandler)
 	// Contrib Related Routes
 	// Datasets
 	r.GET("/contrib/datasets", contrib.GetAllDatasets)
@@ -65,7 +62,8 @@ func getRouter() *gin.Engine {
 	})
 	r.GET("/_api/status", api.StatusHandler)
 	// Socket Related Routes
-	r.Handle("WS", "/socket.io/", socketHandler)
-	r.Handle("WSS", "/socket.io/", socketHandler)
+	r.GET("/socket/:channel", func(c *gin.Context) {
+		socket.ServeWs(c)
+	})
 	return r
 }

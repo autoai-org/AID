@@ -73,6 +73,9 @@ class SystemService {
     payload.append('file', file)
     return _post(this.endpoint + '/contrib/files/upload/' + type, payload)
   }
+  getWsEndpoint (channel) {
+    return configService.endpoint.replace('http', 'ws') + '/socket/' + channel
+  }
 }
 
 const configService = new ConfigService()

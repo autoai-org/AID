@@ -13,7 +13,7 @@ class ConfigService {
     }
   }
   loadDefault () {
-    this.endpoint = 'https://instance.cvtron.xyz'
+    this.endpoint = 'http://127.0.0.1:10590'
     this.developerMode = false
   }
   write () {

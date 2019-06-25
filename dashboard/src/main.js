@@ -6,11 +6,9 @@ import router from './router'
 import store from './store'
 import '@/components/auth'
 import Vuetify from 'vuetify'
-import VueSocketIO from 'vue-socket.io'
 import TreeView from 'vue-json-tree-view'
 import VueTour from 'vue-tour'
 import colors from 'vuetify/es5/util/colors'
-import { ConfigService } from '@/services/config'
 import 'vuetify/dist/vuetify.min.css'
 import '@/assets/styles/main.css'
 import 'vue-tour/dist/vue-tour.css'
@@ -20,12 +18,7 @@ import en from 'vuetify/es5/locale/en'
 import de from 'vuetify/es5/locale/de'
 
 import i18n from '@/i18n'
-const configService = new ConfigService()
 
-Vue.use(new VueSocketIO({
-  debug: false,
-  connection: configService.endpoint
-}))
 Vue.use(Vuetify)
 Vue.use(TreeView)
 Vue.use(VueTour)

@@ -6,17 +6,16 @@
 /*  This file handles daemon and services related tasks.
 By using cvpm daemon install, it will install a system service under current user.
 You can uninstall that service by using cvpm daemon uninstall */
+
 package daemon
 
 import (
 	"bytes"
-	"fmt"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
-	"path/filepath"
 
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/entity"
@@ -29,7 +28,6 @@ import (
 	"github.com/getsentry/raven-go"
 	"github.com/gin-gonic/gin"
 	socketio "github.com/googollee/go-socket.io"
-	"github.com/hpcloud/tail"
 )
 
 // DaemonPort Default Running Port
@@ -132,31 +130,6 @@ func socketHandler(c *gin.Context) {
 	})
 	*/
 	socketServer.ServeHTTP(c.Writer, c.Request)
-}
-
-// writeLog writes log to socket stream
-func writeLog(filepath string, server *socketio.Server, eventName string) {
-	t, err := tail.TailFile(filepath, tail.Config{Follow: true})
-	if err != nil {
-		raven.CaptureErrorAndWait(err, nil)
-		panic(err)
-	}
-	for line := range t.Lines {
-		/* Todo: Upgrade to v1.4 of go-socket.io
-
-		// server.BroadcastTo("cvpm-webtail", eventName, line.Text)
-		// server.
-		*/
-		fmt.Println(line)
-	}
-}
-
-// watchLogs watchs log source
-func watchLogs(server *socketio.Server) {
-	// System Log
-	cvpmLogsLocation := config.GetLogLocation()
-	go writeLog(filepath.Join(cvpmLogsLocation, "system.log"), server, "system")
-	go writeLog(filepath.Join(cvpmLogsLocation, "package.log"), server, "package")
 }
 
 // BeforeResponse set global header to enable cors and set response header

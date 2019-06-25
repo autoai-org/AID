@@ -14,6 +14,7 @@ require (
 	github.com/gin-contrib/static v0.0.0-20190511124741-c1cdf9c9ec7b
 	github.com/gin-gonic/gin v1.4.0
 	github.com/googollee/go-socket.io v1.4.1
+	github.com/gorilla/websocket v1.4.0
 	github.com/hpcloud/tail v1.0.0
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190130132859-37c80f76a0da
@@ -23,6 +24,7 @@ require (
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/shirou/gopsutil v2.18.12+incompatible
+	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a
 	github.com/urfave/cli v1.20.0
 	golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
