@@ -1,6 +1,7 @@
 package utility
 
 import (
+	"os"
 	"reflect"
 	"testing"
 
@@ -55,5 +56,6 @@ func TestCVPMUtilitySpec(t *testing.T) {
 		exists, _ = IsPathExists("./non_exists_2")
 		So(reflect.TypeOf(exists).String(), ShouldEqual, "bool")
 		So(exists, ShouldEqual, true)
+		os.Remove("./non_exists_2")
 	})
 }
