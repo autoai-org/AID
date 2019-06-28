@@ -92,7 +92,7 @@ func ReadFileContent(filename string) string {
 	var content string
 	byteContent, err := ioutil.ReadFile(filename)
 	if err != nil {
-		content = "Read " + filename + "Failed!"
+		content = "Read " + filename + " Failed!"
 	} else {
 		content = string(byteContent)
 	}
