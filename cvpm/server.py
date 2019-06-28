@@ -22,8 +22,10 @@ UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def str2bool(v):
-    return str(v).lower() in ("true", "false", "yes","t","1")
+    return str(v).lower() in ("true", "false", "yes", "t", "1")
+
 
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,6 +35,7 @@ def _isPortOpen(port):
         return True
     else:
         return False
+
 
 def get_available_port(start=8080):
     port = start
@@ -57,6 +60,7 @@ def help():
     help_message = server.solver.help_message
     return help_message
 
+
 @server.route("/_status", methods=["GET"])
 def status():
     process = psutil.Process(os.getpid())
@@ -66,6 +70,7 @@ def status():
         'id': process.pid
     }
     return json.dumps(result)
+
 
 @server.route("/infer", methods=["GET", "POST"])
 def infer():
@@ -101,15 +106,23 @@ def infer():
 
 @server.route("/train", methods=["GET", "POST"])
 def train():
-    if server.solver.enable_train:
-        pass
+    if request.method == 'POST':
+        if server.solver.enable_train:
+            pass
+        else:
+            return json.dumps({"error": "not supported!", "code": "404"}), 404
     else:
-        return json.dumps({"error": "not supported!", "code": "404"}), 404
+        return json.dumps({
+            "error": "Method Not Allowed!",
+            "code": "405"
+        }), 405
+
 
 @server.route("/exit", methods=["GET"])
 def exit_server():
     # Exit under request
     exit()
+
 
 def run_server(solver, port=None):
     if port is None:

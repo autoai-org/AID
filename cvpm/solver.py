@@ -51,7 +51,7 @@ class Solver(object):
     def infer(self, input, config):
         pass
 
-    def train(self, train_x, train_y, **kwargs):
+    def train(self, datapath, hyperparamters, config):
         pass
 
     def start(self, port=None):
