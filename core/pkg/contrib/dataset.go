@@ -8,9 +8,10 @@
 package contrib
 
 import (
+	"log"
+
 	"github.com/BurntSushi/toml"
 	"github.com/levigross/grequests"
-	"log"
 )
 
 type dataset struct {

@@ -7,8 +7,8 @@ package utility
 import (
 	"github.com/getsentry/raven-go"
 	"io/ioutil"
-	"net"
 	"log"
+	"net"
 	"os"
 	"os/user"
 	"path/filepath"

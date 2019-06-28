@@ -86,7 +86,6 @@ func getDefaultConfig() CvpmConfig {
 	return defaultCVPMConfig
 }
 
-
 func createFileIfNotExist(filePath string) {
 	exist, err := utility.IsPathExists(filePath)
 	if err != nil {

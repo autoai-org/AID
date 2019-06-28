@@ -38,10 +38,16 @@
           slot-scope="props"
         >
           <td class="text-xs-left">
+            {{ props.item.objectId }}
+          </td>
+          <td class="text-xs-left">
             {{ props.item.name }}
           </td>
           <td class="text-xs-left">
             {{ (props.item.size/1024/1024).toFixed(2) }} MB
+          </td>
+          <td class="text-xs-left">
+            {{ props.item.status }}
           </td>
           <td class="text-xs-left">
             {{ formatRequestTime(props.item.uploadedAt) }}
@@ -51,35 +57,55 @@
             small
             fab
             color="indigo"
+            @click="uncompressFile(props.item.objectId)"
           >
-            <v-icon>info</v-icon>
+            <v-icon>far fa-file-archive</v-icon>
+          </v-btn>
+          <v-btn
+            outline
+            small
+            fab
+            color="indigo"
+            @click="showAnnotationsMetrics(props.item.objectId)"
+          >
+            <v-icon>fas fa-chart-bar</v-icon>
           </v-btn>
         </template>
       </v-data-table>
     </v-card>
+    <v-dialog v-model="enableAnnotMetrics">
+      <anno-metrics :annodata="annots" />
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
+import AnnotationsMetrics from '@/components/metrics/AnnotationMetrics.vue'
 import { systemService } from '@/services/system'
 import { searchService } from '@/services/search'
 import store from '@/store'
 import dayjs from 'dayjs'
 
 export default {
+  components: {
+    'anno-metrics': AnnotationsMetrics
+  },
   data () {
     return {
       datasets: [],
       allDatasets: [],
       searchName: '',
-      detailDialog: false,
+      enableAnnotMetrics: false,
+      annots: [],
       searchKW: '',
-      datasetSyncDialog: false,
-      databaseURL:
-        'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
-      detailInfo: {},
       searchTag: '',
       headers: [
+        {
+          text: 'ObjectId',
+          align: 'left',
+          sortable: true,
+          value: 'Name'
+        },
         {
           text: this.$t(`Datasets.name`),
           align: 'left',
@@ -88,6 +114,12 @@ export default {
         },
         {
           text: this.$t(`Datasets.size`),
+          align: 'left',
+          sortable: true,
+          value: 'Size'
+        },
+        {
+          text: this.$t(`Datasets.status`),
           align: 'left',
           sortable: true,
           value: 'Size'
@@ -143,6 +175,8 @@ export default {
         systemService.uploadFile(files[0], 'dataset').then(function (res) {
           store.state.isLoading = false
           location.reload()
+        }).finally(function () {
+          store.state.isLoading = false
         })
       } else {
         console.error('[err] no file selected!')
@@ -162,6 +196,16 @@ export default {
         for (var index in self.datasets) {
           searchService.addItem(index, self.datasets[index])
         }
+      })
+    },
+    uncompressFile (id) {
+      console.log(id)
+    },
+    showAnnotationsMetrics (objectId) {
+      let self = this
+      systemService.getAnnotationInfo(objectId).then(function (res) {
+        self.annots = JSON.parse(res.data.annotation)
+        self.enableAnnotMetrics = true
       })
     }
   }

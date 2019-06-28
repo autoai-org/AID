@@ -5,16 +5,17 @@
 package daemon
 
 import (
+	"net/http"
+	"path/filepath"
+
 	"github.com/cvpm-contrib/auth"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/contrib"
-	"github.com/unarxiv/cvpm/pkg/runtime"
 	"github.com/unarxiv/cvpm/pkg/daemon/socket"
+	"github.com/unarxiv/cvpm/pkg/runtime"
 	api "gopkg.in/appleboy/gin-status-api.v1"
-	"net/http"
-	"path/filepath"
 )
 
 func getRouter() *gin.Engine {
@@ -55,6 +56,8 @@ func getRouter() *gin.Engine {
 	// Files
 	r.POST("/contrib/files/upload/:type", contrib.UploadFile)
 	r.GET("/contrib/files/list", contrib.QueryFilesList)
+	r.POST("/contrib/files/uncompress/:id", contrib.UncompressFile)
+	r.GET("/contrib/files/annotations/:id", contrib.QueryAnnotationFile)
 	// Camera
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {

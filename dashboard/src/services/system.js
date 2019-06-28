@@ -64,6 +64,9 @@ class SystemService {
   getMyFiles () {
     return _get(this.endpoint + '/contrib/files/list')
   }
+  getAnnotationInfo (objectId) {
+    return _get(this.endpoint + '/contrib/files/annotations/' + objectId)
+  }
   // inspector
   getInspectorInfo () {
     return _get(this.endpoint + '/_inspector')

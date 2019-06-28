@@ -10,9 +10,11 @@ require (
 	github.com/dchest/uniuri v0.0.0-20160212164326-8902c56451e9
 	github.com/fatih/color v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190505152737-8914e1cf9164
+	github.com/gen2brain/go-unarr v0.0.0-20190203132630-dd30f8db8e40
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/static v0.0.0-20190511124741-c1cdf9c9ec7b
 	github.com/gin-gonic/gin v1.4.0
+	github.com/google/uuid v1.1.1
 	github.com/googollee/go-socket.io v1.4.1
 	github.com/gorilla/websocket v1.4.0
 	github.com/hpcloud/tail v1.0.0

@@ -7,10 +7,6 @@
 package contrib
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/dchest/uniuri"
-	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/utility"
 	"io"
 	"log"
 	"mime/multipart"
@@ -18,6 +14,11 @@ import (
 	"os"
 	"path"
 	"strings"
+
+	"github.com/dchest/uniuri"
+	"github.com/gin-gonic/gin"
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/utility"
 )
 
 // GetAllDatasets GET /datasets
@@ -56,7 +57,7 @@ func UploadFile(c *gin.Context) {
 		dist *os.File
 		err  error
 	)
-	if file, err = c.FormFile(FILE_FIELD); err != nil {
+	if file, err = c.FormFile(FileField); err != nil {
 		parseFormFail(c)
 		return
 	}
@@ -77,7 +78,7 @@ func UploadFile(c *gin.Context) {
 	defer dist.Close()
 	io.Copy(dist, src)
 	// set filetype to dataset since all uploaded large file should be 'dataset'
-	insertFileObjectToDB(fileName, distPath, fileType, file.Size)
+	insertFileObjectToDB(fileName, distPath, fileType, file.Size, "compressed")
 	c.JSON(http.StatusOK, gin.H{
 		"hash":     md5string,
 		"filename": fileName,
@@ -91,5 +92,21 @@ func QueryFilesList(c *gin.Context) {
 	filesList := queryFiles()
 	c.JSON(http.StatusOK, gin.H{
 		"result": filesList,
+	})
+}
+
+// UncompressFile POST /contrib/files/uncompress/:id
+func UncompressFile(c *gin.Context) {
+	result := uncompressFile(c.Param("id"))
+	c.JSON(http.StatusOK, gin.H{
+		"result": result,
+	})
+}
+
+// QueryAnnotationFile returns the content of requested file
+func QueryAnnotationFile(c *gin.Context) {
+	result := getAnnotationFile(c.Param("id"))
+	c.JSON(http.StatusOK, gin.H{
+		"annotation": result,
 	})
 }

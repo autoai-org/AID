@@ -8,6 +8,7 @@ const set = property => (store, payload) => (store[property] = payload)
 const store = new Vuex.Store({
   state: {
     email: '',
+    loadingErrorInfo: '',
     isLoading: false,
     isReady: false,
     password: '',

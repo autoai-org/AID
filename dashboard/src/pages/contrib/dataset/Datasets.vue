@@ -162,7 +162,7 @@ export default {
       searchKW: '',
       datasetSyncDialog: false,
       databaseURL:
-        'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
+        'https://raw.githubusercontent.com/cvmodel/index/master/datasets.toml',
       detailInfo: {},
       searchTag: '',
       headers: [

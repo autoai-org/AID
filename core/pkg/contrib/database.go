@@ -32,7 +32,7 @@ func initDatabase() {
 	datasetSQLString := "CREATE TABLE IF NOT EXISTS dataset (id INTEGER PRIMARY KEY, Name TEXT, Desc TEXT, Tags TEXT, Files TEXT, Link TEXT)"
 	requestSQLString := "CREATE TABLE IF NOT EXISTS request (id INTEGER PRIMARY KEY, Ip TEXT, Vendor TEXT, Package TEXT, Solver TEXT, Ray TEXT, Token Text, Timestamp Text)"
 	environmentSQLString := "CREATE TABLE IF NOT EXISTS environment (id INTEGER PRIMARY KEY, Key TEXT, Value TEXT, Vendor TEXT, PackageName TEXT)"
-	fileSQLString := "CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, Size INTEGER, Filename TEXT, Type TEXT, Status TEXT, UploadedAt Text, Filepath Text)"
+	fileSQLString := "CREATE TABLE IF NOT EXISTS file (id INTEGER PRIMARY KEY, Size INTEGER, Comment TEXT, Filename TEXT, Type TEXT, ObjectId TEXT, Status TEXT, UploadedAt Text, Filepath Text)"
 	runSQL(datasetSQLString, database)
 	runSQL(requestSQLString, database)
 	runSQL(environmentSQLString, database)
