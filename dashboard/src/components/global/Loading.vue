@@ -24,6 +24,11 @@
 <script>
 import store from '@/store'
 export default {
+  data () {
+    return {
+      loadingHint: "Please stand by"
+    }
+  },
   computed: {
     loading () {
       return store.state.isLoading

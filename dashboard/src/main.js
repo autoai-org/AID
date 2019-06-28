@@ -39,10 +39,10 @@ Vue.use(Vuetify, {
 
 /* eslint-disable no-new */
 new Vue({
+  i18n,
   el: '#app',
   router,
   store,
-  i18n,
   components: { App },
   template: '<App/>'
 })

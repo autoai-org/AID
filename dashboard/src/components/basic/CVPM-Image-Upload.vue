@@ -21,11 +21,11 @@
 
 <script>
 export default {
-  methods: {
-    data () {
+      data () {
       return {
       }
     },
+  methods: {
     selectFile () {
       this.$refs.uploadInput.click()
     },
