@@ -21,10 +21,10 @@
 
 <script>
 export default {
-      data () {
-      return {
-      }
-    },
+  data () {
+    return {
+    }
+  },
   methods: {
     selectFile () {
       this.$refs.uploadInput.click()

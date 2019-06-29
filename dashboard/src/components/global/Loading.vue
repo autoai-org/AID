@@ -26,7 +26,7 @@ import store from '@/store'
 export default {
   data () {
     return {
-      loadingHint: "Please stand by"
+      loadingHint: 'Please stand by'
     }
   },
   computed: {

@@ -11,6 +11,7 @@ class Solver(object):
     def __init__(self, toml_file=None):
         self._isReady = False
         self.bundle = None
+        self._hyperparameters = {}
         self._enable_train = False
         if toml_file is None:
             toml_file = "./pretrained/pretrained.toml"
@@ -31,6 +32,10 @@ class Solver(object):
             return json.dumps(members)
         else:
             return json.dumps({"error": "Failed to start", "code": "101"}), 101
+
+    @property
+    def hyperparamters(self):
+        return self._hyperparameters
 
     def _prepare_models(self, toml_file):
         parsed_toml = toml.load(toml_file)
