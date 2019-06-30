@@ -24,15 +24,20 @@
         <td class="text-xs-left">
           {{ props.item.LocalFolder }}
         </td>
-        <td
-          v-if="hasActions"
-          class="text-xs-left"
-        >
+        <td class="text-xs-left">
           <v-icon
+            color="indigo"
             small
             @click="inspectDetails(props.item)"
           >
             info
+          </v-icon>
+          <v-icon
+            color="indigo"
+            small
+            @click="showTrainHistory()(props.item)"
+          >
+            fas fa-book-reader
           </v-icon>
         </td>
       </template>
@@ -69,23 +74,16 @@ export default {
   data () {
     return {}
   },
-  computed: {
-    hasActions () {
-      if (this.headers.slice(-1)[0].text === 'Actions') {
-        return true
-      } else {
-        return false
-      }
-    }
-  },
-  created () {
-  },
+  created () {},
   methods: {
     inspectDetails (item) {
       this.$router.push({
         name: 'Detail',
         params: { vendor: item.Vendor, name: item.Name }
       })
+    },
+    showTrainHistory (item) {
+      console.log(item)
     }
   }
 }

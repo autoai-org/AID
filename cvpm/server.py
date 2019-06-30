@@ -1,6 +1,7 @@
 import os
 import sys
 import json
+import uuid
 import psutil
 import socket
 import logging
@@ -9,7 +10,7 @@ import gevent.pywsgi
 from flask import Flask, request
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
-
+from cvpm.config import getLogDir
 from cvpm.train.pyqueue import TracedThread
 
 # extensions
@@ -112,22 +113,18 @@ def train():
     if server.solver.enable_train:
         if request.method == 'POST':
             requested_data = json.loads(request.data)
-            full_log_path = os.path.join(
-                requested_data['datapath'], 'full.log')
-            oldout = sys.stdout
-            with open(full_log_path, 'w+') as f:
-                sys.stdout = f
-                # launch a new thread to contain the train process
-                train_thread = TracedThread(target=server.solver.train, args=(
-                    requested_data['datapath'], requested_data['hyperparameters'], requested_data['config']))
-                train_thread.start()
-                result = {
-                    "id": train_thread.uuid,
-                    "result": True,
-                    "code": "200",
-                }
-                sys.stdout = oldout
-                return json.dumps(result), 200
+            train_id = str(uuid.uuid4())
+            # launch a new thread to contain the train process
+            train_thread = TracedThread(target=server.solver.train, args=(
+                requested_data['datapath'], requested_data['hyperparameters'], requested_data['config']))
+            train_thread.id = train_id
+            train_thread.start()
+            result = {
+                "id": train_thread.uuid,
+                "result": True,
+                "code": "200",
+            }
+            return json.dumps(result), 200
         else:
             return json.dumps({
                 "hyperparamters": server.solver.hyperparamters

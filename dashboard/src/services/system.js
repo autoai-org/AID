@@ -41,7 +41,7 @@ class SystemService {
     for (let i = 0; i < parameters.length; i++) {
       payload.append(parameters[i].key, parameters[i].value)
     }
-    return _post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver, payload)
+    return _post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver + '/infer', payload)
   }
   installRepo (type, id) {
     // if type === 'git', id => git url

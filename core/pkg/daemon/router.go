@@ -28,7 +28,7 @@ func getRouter() *gin.Engine {
 	r.Use(auth.InspectorStats())
 	r.Use(gin.Logger())
 	// Reverse Proxy for solvers
-	r.POST("/engine/solvers/:vendor/:name/:solver", ReverseProxy)
+	r.Any("/engine/solvers/:vendor/:name/:solver/:path", ReverseProxy)
 	// Status Related Handlers
 	r.GET("/status", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
