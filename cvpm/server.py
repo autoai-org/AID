@@ -116,7 +116,10 @@ def train():
             train_id = str(uuid.uuid4())
             # launch a new thread to contain the train process
             train_thread = TracedThread(target=server.solver.train, args=(
-                requested_data['datapath'], requested_data['hyperparameters'], requested_data['config']))
+                train_id,
+                requested_data['datapath'],
+                requested_data['hyperparameters'],
+                requested_data['config']))
             train_thread.id = train_id
             train_thread.start()
             result = {
