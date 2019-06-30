@@ -5,10 +5,10 @@
 package runtime
 
 import (
-	"os"
-	"log"
-	"path/filepath"
 	"github.com/unarxiv/cvpm/pkg/config"
+	"log"
+	"os"
+	"path/filepath"
 )
 
 // Pip calls the Pip program

@@ -1,20 +1,20 @@
 package daemon
 
 import (
-	"log"
 	"bytes"
-	"net/url"
-	"net/http"
-	"io/ioutil"
-	"net/http/httputil"
-	"github.com/gin-gonic/gin"
 	"github.com/getsentry/raven-go"
-	"github.com/unarxiv/cvpm/pkg/query"
+	"github.com/gin-gonic/gin"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/query"
+	"github.com/unarxiv/cvpm/pkg/repository"
 	"github.com/unarxiv/cvpm/pkg/runtime"
 	"github.com/unarxiv/cvpm/pkg/utility"
-	"github.com/unarxiv/cvpm/pkg/repository"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"net/http/httputil"
+	"net/url"
 )
 
 // PostRunningRepoHandler handles POST /repos/running -> run a solver in this repo

@@ -8,6 +8,12 @@
 package contrib
 
 import (
+	"github.com/gen2brain/go-unarr"
+	"github.com/gin-gonic/gin"
+	"github.com/google/uuid"
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -16,12 +22,6 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
-	"github.com/google/uuid"
-	"github.com/gen2brain/go-unarr"
-	"github.com/gin-gonic/gin"
-	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/utility"
 )
 
 const FileField = "file"
@@ -43,13 +43,13 @@ func getFileLists(filepath string) []os.FileInfo {
 func insertFileObjectToDB(filename string, filepath string, filetype string, filesize int64, status string) {
 	objectID := uuid.New().String()
 	fileObject := entity.FileObject{
-		ObjectID: objectID,
-		Name: filename, 
-		Size: filesize, 
-		Filepath: filepath, 
-		Type: filetype, 
-		UploadedAt: time.Now().Format(time.RFC3339), 
-		Status: status,
+		ObjectID:   objectID,
+		Name:       filename,
+		Size:       filesize,
+		Filepath:   filepath,
+		Type:       filetype,
+		UploadedAt: time.Now().Format(time.RFC3339),
+		Status:     status,
 	}
 	sess := GetDBInstance()
 	fileCollection := sess.Collection("file")

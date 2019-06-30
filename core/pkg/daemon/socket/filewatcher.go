@@ -1,16 +1,16 @@
 package socket
 
 import (
-	"os"
-	"log"
-	"path"
-	"time"
-	"strconv"
-	"net/http"
-	"io/ioutil"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"github.com/unarxiv/cvpm/pkg/config"
+	"io/ioutil"
+	"log"
+	"net/http"
+	"os"
+	"path"
+	"strconv"
+	"time"
 )
 
 const (
@@ -28,7 +28,7 @@ const (
 )
 
 var (
-	upgrader  = websocket.Upgrader{
+	upgrader = websocket.Upgrader{
 		ReadBufferSize:  1024,
 		WriteBufferSize: 1024,
 		CheckOrigin: func(r *http.Request) bool {
@@ -36,7 +36,6 @@ var (
 		},
 	}
 )
-
 
 var cvpmLogsLocation = config.GetLogLocation()
 
@@ -127,6 +126,6 @@ func ServeWs(c *gin.Context) {
 	if n, err := strconv.ParseInt(c.Request.FormValue("lastMod"), 16, 64); err == nil {
 		lastMod = time.Unix(0, n)
 	}
-	go writer(c.Param("channel") + ".log" , ws, lastMod)
+	go writer(c.Param("channel")+".log", ws, lastMod)
 	reader(ws)
 }
