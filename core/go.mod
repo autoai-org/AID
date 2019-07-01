@@ -14,10 +14,9 @@ require (
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-contrib/static v0.0.0-20190511124741-c1cdf9c9ec7b
 	github.com/gin-gonic/gin v1.4.0
+	github.com/google/go-querystring v1.0.0 // indirect
 	github.com/google/uuid v1.1.1
-	github.com/googollee/go-socket.io v1.4.1
 	github.com/gorilla/websocket v1.4.0
-	github.com/hpcloud/tail v1.0.0
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190130132859-37c80f76a0da
 	github.com/manifoldco/promptui v0.3.2
@@ -25,14 +24,11 @@ require (
 	github.com/mattn/go-sqlite3 v1.10.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.1
-	github.com/shirou/gopsutil v2.19.6+incompatible
-	github.com/smartystreets/goconvey v0.0.0-20190330032615-68dc04aab96a
+	github.com/shirou/gopsutil v2.18.12+incompatible
 	github.com/urfave/cli v1.20.0
-	golang.org/x/crypto v0.0.0-20190701102745-4def268fd1a4
+	golang.org/x/crypto v0.0.0-20190605123033-f99c8df09eb5
 	gopkg.in/appleboy/gin-status-api.v1 v1.0.1
-	gopkg.in/fsnotify.v1 v1.4.7 // indirect
 	gopkg.in/fukata/golang-stats-api-handler.v1 v1.0.0 // indirect
 	gopkg.in/src-d/go-git.v4 v4.11.0
-	gopkg.in/tomb.v1 v1.0.0-20141024135613-dd632973f1e7 // indirect
 	upper.io/db.v3 v3.5.7+incompatible
 )

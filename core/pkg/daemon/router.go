@@ -37,6 +37,7 @@ func getRouter() *gin.Engine {
 	})
 	// System Related Handlers
 	r.GET("/system", GetSystemHandler)
+
 	// Repo Related Routes
 	r.GET("/repo/meta/:vendor/:name", GetRepoMetaHandler)
 	r.GET("/repo/env/:vendor/:name", runtime.QueryRepoEnvironments)
@@ -45,25 +46,34 @@ func getRouter() *gin.Engine {
 	r.GET("/repos", GetReposHandler)
 	r.GET("/repos/running", GetRunningReposHandler)
 	r.POST("/repos", PostReposHandler)
+
 	// Solver Related Routers
 	r.GET("/solvers/running", GetRunningSolversHandler)
 	r.GET("/solvers/running/:vendor/:package", GetRunningSolversByPackageHandler)
 	r.DELETE("/solvers/running/:vendor/:name/:solver", StopInferProcess)
+
 	// Contrib Related Routes
 	// Datasets
 	r.GET("/contrib/datasets", contrib.GetAllDatasets)
 	r.POST("/contrib/datasets/registries", contrib.AddNewRegistry)
+
 	// Files
 	r.POST("/contrib/files/upload/:type", contrib.UploadFile)
 	r.GET("/contrib/files/list", contrib.QueryFilesList)
 	r.POST("/contrib/files/uncompress/:id", contrib.UncompressFile)
 	r.GET("/contrib/files/annotations/:id", contrib.QueryAnnotationFile)
+
+	// Train Record Related Requests
+	r.POST("/contrib/train", contrib.AddTrainRecord)
+
 	// Camera
+
 	// Plugin Related Routes
 	r.GET("/_inspector", func(c *gin.Context) {
 		c.JSON(200, auth.GetRequests())
 	})
 	r.GET("/_api/status", api.StatusHandler)
+	
 	// Socket Related Routes
 	r.GET("/socket/:channel", func(c *gin.Context) {
 		socket.ServeWs(c)

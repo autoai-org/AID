@@ -83,7 +83,6 @@
 import AnnotationsMetrics from '@/components/metrics/AnnotationMetrics.vue'
 import { systemService } from '@/services/system'
 import { searchService } from '@/services/search'
-import store from '@/store'
 import dayjs from 'dayjs'
 
 export default {
@@ -168,15 +167,11 @@ export default {
       this.$refs.uploadInput.click()
     },
     uploadFile (e) {
-      store.state.isLoading = true
       let files = e.target.files
       if (files.length) {
         console.log(files[0])
         systemService.uploadFile(files[0], 'dataset').then(function (res) {
-          store.state.isLoading = false
           location.reload()
-        }).finally(function () {
-          store.state.isLoading = false
         })
       } else {
         console.error('[err] no file selected!')

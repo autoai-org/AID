@@ -110,3 +110,32 @@ func QueryAnnotationFile(c *gin.Context) {
 		"annotation": result,
 	})
 }
+
+// trainRecordRequest is the request definition for AddTrainRecord
+type trainRecordRequest struct {
+	FilePath string `json:"filePath"`
+	Vendor   string `json:"vendor"`
+	Package  string `json:"package"`
+	Solver   string `json:"solver"`
+	RayId    string `json:"rayID"`
+}
+
+// AddTrainRecords receives feedback from training process and stores the result
+func AddTrainRecord(c *gin.Context) {
+	var addTrainRecordRequest trainRecordRequest
+	c.BindJSON(&addTrainRecordRequest)
+	// get DataId by Data Path
+	dataId := getFileByDataPath(addTrainRecordRequest.FilePath).ObjectID
+	success := insertTrainRecordToDB(addTrainRecordRequest.RayId, addTrainRecordRequest.Vendor, addTrainRecordRequest.Package, addTrainRecordRequest.Solver, dataId)
+	if success {
+		c.JSON(http.StatusOK, gin.H{
+			"code": 200,
+			"info": "Success",
+		})
+	} else {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"code": 500,
+			"info": "Failed",
+		})
+	}
+}

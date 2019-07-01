@@ -86,6 +86,18 @@ func getFileObjectByID(objectId string) entity.FileObject {
 	return fileObject
 }
 
+func getFileByDataPath(filePath string) entity.FileObject {
+	var fileObject entity.FileObject
+	sess := GetDBInstance()
+	fileCollection := sess.Collection("file")
+	res := fileCollection.Find("Filepath", filePath)
+	err := res.One(&fileObject)
+	if err != nil {
+		log.Println(err)
+	}
+	return fileObject
+}
+
 func setFileStatus(objectID string, status string) {
 	sess := GetDBInstance()
 	q := sess.Update("file").Set("Status", status).Where("ObjectId = ?", objectID)
