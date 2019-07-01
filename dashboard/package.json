@@ -52,7 +52,7 @@
     "babel-jest": "24.8.0",
     "babel-loader": "8.0.6",
     "chalk": "2.4.2",
-    "chromedriver": "75.0.0",
+    "chromedriver": "75.0.1",
     "copy-webpack-plugin": "5.0.3",
     "cross-spawn": "5.1.0",
     "css-loader": "3.0.0",
