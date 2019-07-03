@@ -59,6 +59,11 @@
         "result": "结果",
         "time": "时间"
     },
+    "Train":{
+        "title":"训练",
+        "new":"新训练",
+        "status":"状态"
+    },
     "About": "关于",
     "Hub": "Hub",
     "GitHub": "GitHub",

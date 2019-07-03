@@ -64,8 +64,8 @@ func getRouter() *gin.Engine {
 	r.GET("/contrib/files/annotations/:id", contrib.QueryAnnotationFile)
 
 	// Train Record Related Requests
-	r.POST("/contrib/train", contrib.AddTrainRecord)
-
+	r.POST("/contrib/trains", contrib.AddTrainRecord)
+	r.GET("/contrib/trains", contrib.QueryTrainsList)
 	// Camera
 
 	// Plugin Related Routes
@@ -73,7 +73,7 @@ func getRouter() *gin.Engine {
 		c.JSON(200, auth.GetRequests())
 	})
 	r.GET("/_api/status", api.StatusHandler)
-	
+
 	// Socket Related Routes
 	r.GET("/socket/:channel", func(c *gin.Context) {
 		socket.ServeWs(c)

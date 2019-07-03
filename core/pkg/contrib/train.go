@@ -2,6 +2,7 @@ package contrib
 
 import (
 	"github.com/unarxiv/cvpm/pkg/entity"
+	"log"
 	"time"
 )
 
@@ -24,3 +25,17 @@ func insertTrainRecordToDB(rayId string, vendor string, packageName string, solv
 	}
 	return true
 }
+
+func fetchAllTrainRecord() []entity.TrainRecord {
+	sess := GetDBInstance()
+	trainCollection := sess.Collection("train")
+	res := trainCollection.Find()
+	var trainRecords []entity.TrainRecord
+	err := res.All(&trainRecords)
+	if err != nil {
+		log.Fatalf("res.All(): %q\n", err)
+	}
+	CloseDB(sess)
+	return trainRecords
+}
+

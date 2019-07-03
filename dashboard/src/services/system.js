@@ -60,6 +60,9 @@ class SystemService {
       url: datasetsUrl
     })
   }
+  getTrainList () {
+    return _get(this.endpoint + '/contrib/trains')
+  }
   // files
   getMyFiles () {
     return _get(this.endpoint + '/contrib/files/list')

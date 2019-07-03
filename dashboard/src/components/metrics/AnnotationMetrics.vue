@@ -71,9 +71,6 @@ export default {
       })
     },
     drawClassPieChart () {
-      console.log(this.trainNum)
-      console.log(this.testNum)
-      console.log(this.valNum)
       let data = [
         {
           values: [this.trainNum, this.testNum, this.valNum],

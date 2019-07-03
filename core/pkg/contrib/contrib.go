@@ -95,6 +95,14 @@ func QueryFilesList(c *gin.Context) {
 	})
 }
 
+// QueryTrainsList returns all train records
+func QueryTrainsList(c *gin.Context) {
+	trainLists := fetchAllTrainRecord()
+	c.JSON(http.StatusOK, gin.H{
+		"result": trainLists,
+	})
+}
+
 // UncompressFile POST /contrib/files/uncompress/:id
 func UncompressFile(c *gin.Context) {
 	result := uncompressFile(c.Param("id"))

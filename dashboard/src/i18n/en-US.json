@@ -59,6 +59,11 @@
         "result": "Result",
         "time": "Time"
     },
+    "Train":{
+        "title":"Train",
+        "new":"New",
+        "status":"Status"
+    },
     "About": "About",
     "Hub": "Hub",
     "GitHub": "GitHub",

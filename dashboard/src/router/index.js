@@ -5,6 +5,9 @@ import Settings from '@/pages/Settings'
 import Landing from '@/pages/Landing'
 import SystemLog from '@/pages/SystemLog'
 import Package from '@/pages/Package'
+import Train from '@/pages/training/Train-List'
+import NewTrain from '@/pages/training/New'
+import TrainDetail from '@/pages/training/Detail'
 import Pretrained from '@/pages/Pretrained'
 import Detail from '@/pages/Detail'
 import SignIn from '@/pages/auth/SignIn'
@@ -53,6 +56,21 @@ export default new Router({
           path: '/package',
           name: 'Package',
           component: Package
+        },
+        {
+          path: '/train',
+          name: 'Train',
+          component: Train
+        },
+        {
+          path: '/train/new',
+          name: 'NewTrain',
+          component: NewTrain
+        },
+        {
+          path: '/train/detail/:rayId',
+          name: 'TrainDetail',
+          component: TrainDetail
         },
         {
           path: '/pretrained',
