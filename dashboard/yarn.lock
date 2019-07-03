@@ -9437,10 +9437,10 @@ vue-markdown@2.2.4:
     markdown-it-task-lists "^2.0.1"
     markdown-it-toc-and-anchor "^4.1.2"
 
-vue-router@3.0.4:
-  version "3.0.4"
-  resolved "https://registry.npm.taobao.org/vue-router/download/vue-router-3.0.4.tgz#d6023e9db64d0b335771f0316c8bde8956f2d75d"
-  integrity sha1-1gI+nbZNCzNXcfAxbIveiVby110=
+vue-router@3.0.7:
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-3.0.7.tgz#b36ca107b4acb8ff5bc4ff824584059c23fcb87b"
+  integrity sha512-utJ+QR3YlIC/6x6xq17UMXeAfxEvXA0VKD3PiSio7hBOZNusA1jXcbxZxVEfJunLp48oonjTepY8ORoIlRx/EQ==
 
 vue-socket.io@3.0.7:
   version "3.0.7"
