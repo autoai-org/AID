@@ -740,10 +740,10 @@
     "@types/cookiejar" "*"
     "@types/node" "*"
 
-"@types/supertest@2.0.6":
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/@types/supertest/-/supertest-2.0.6.tgz#a0665350c0e36315e1bccdf4785f2b76fcb71b6b"
-  integrity sha512-qRvPP8dO7IBqJz8LaQ7/Lw2oo/geiDUPAMx/L+CQCkR9sN622O30XCH7RSyUmilyCSyjxyhJ7cEtd3hmwPwvhw==
+"@types/supertest@2.0.8":
+  version "2.0.8"
+  resolved "https://registry.yarnpkg.com/@types/supertest/-/supertest-2.0.8.tgz#23801236e2b85204ed771a8e7c40febba7da2bda"
+  integrity sha512-wcax7/ip4XSSJRLbNzEIUVy2xjcBIZZAuSd2vtltQfRK7kxhx5WMHbLHkYdxN3wuQCrwpYrg86/9byDjPXoGMA==
   dependencies:
     "@types/superagent" "*"
 
