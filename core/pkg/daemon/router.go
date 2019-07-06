@@ -24,7 +24,7 @@ func getRouter() *gin.Engine {
 	r := gin.Default()
 	r.Use(BeforeResponse())
 	r.Use(gin.Recovery())
-	r.Use(static.Serve("/webui", static.LocalFile(webuiFolder, false)))
+	r.Use(static.Serve("/", static.LocalFile(webuiFolder, false)))
 	r.Use(auth.InspectorStats())
 	r.Use(gin.Logger())
 	// Reverse Proxy for solvers
