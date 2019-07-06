@@ -11,13 +11,13 @@
     </v-tab>
     <v-tab-item>
       <cvpm-log
-        :title="'Full Log for Train Task' + rayId"
+        :title="'Full Log for Train Task ' + rayId"
         :message="fullMessage"
       />
     </v-tab-item>
     <v-tab-item>
       <cvpm-log
-        :title="'Log for Train Task' + rayId"
+        :title="'Log for Train Task ' + rayId"
         :message="lessMessage"
       />
     </v-tab-item>
