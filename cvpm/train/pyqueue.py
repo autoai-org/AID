@@ -4,6 +4,23 @@ import sys
 import uuid
 import threading
 from cvpm.config import getLogDir
+import logging
+
+class ThreadPrinter:
+    def __init__(self, filename):
+        self.fhs = {}
+        self.filename = filename
+
+    def write(self, value):
+        try:
+            f = self.fhs.get(threading.current_thread().uuid)
+            if f is None:
+                f = open(self.filename, 'a')
+            f.write(value)
+            self.fhs[threading.current_thread().uuid] = f
+            f.flush()
+        except IOError as identifier:
+            logging.warn(identifier)
 
 
 class TracedThread(threading.Thread):
@@ -20,14 +37,11 @@ class TracedThread(threading.Thread):
     def start(self):
         if self.id is None:
             self.id = str(uuid.uuid4)
-        full_log_path= os.path.join(getLogDir(), self.id+".log")
-        self.oldout = sys.stdout
-        with open(full_log_path, 'w') as f:
-            sys.stdout = f
-            self.__run_backup = self.run
-            self.run = self.__run
-            threading.Thread.start(self)
-            sys.stdout = self.oldout
+        full_log_path= os.path.join(getLogDir(), self.id+".full.log")
+        self.__run_backup = self.run
+        self.run = self.__run
+        sys.stdout = ThreadPrinter(full_log_path)
+        threading.Thread.start(self)
 
     def __run(self):
         sys.settrace(self.globaltrace)

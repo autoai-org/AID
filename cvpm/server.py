@@ -12,7 +12,7 @@ from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 from cvpm.config import getLogDir
 from cvpm.train.pyqueue import TracedThread
-
+from cvpm.logger import Logger
 # extensions
 
 logger = logging.getLogger()
@@ -114,12 +114,18 @@ def train():
         if request.method == 'POST':
             requested_data = json.loads(request.data)
             train_id = str(uuid.uuid4())
+            less_log_filepath = os.path.join(
+                getLogDir(), train_id + '.less.log')
+            open(less_log_filepath, "x")
             # launch a new thread to contain the train process
+            readDataPath, file_extension = os.path.splitext(
+                requested_data['datapath'])
             train_thread = TracedThread(target=server.solver.train, args=(
                 train_id,
-                requested_data['datapath'],
+                readDataPath,
                 requested_data['hyperparameters'],
-                requested_data['config']))
+                requested_data['config'],
+                Logger(less_log_filepath)))
             train_thread.id = train_id
             train_thread.start()
             result = {
