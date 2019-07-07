@@ -1,3 +1,9 @@
+# Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#coding:utf-8
 import os
 import sys
 import json
