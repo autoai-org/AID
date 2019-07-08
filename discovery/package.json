@@ -61,7 +61,7 @@
     "tslint": "5.18.0",
     "tslint-config-prettier": "1.18.0",
     "tslint-plugin-prettier": "2.0.1",
-    "typescript": "3.5.2",
+    "typescript": "3.5.3",
     "utility": "^1.16.1"
   },
   "engines": {
