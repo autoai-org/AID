@@ -21,7 +21,7 @@ require (
 	github.com/levigross/grequests v0.0.0-20190130132859-37c80f76a0da
 	github.com/manifoldco/promptui v0.3.2
 	github.com/mattn/go-runewidth v0.0.4 // indirect
-	github.com/mattn/go-sqlite3 v1.10.0
+	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.1
 	github.com/shirou/gopsutil v2.18.12+incompatible
