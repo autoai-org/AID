@@ -3910,10 +3910,10 @@ flatted@^2.0.0:
   resolved "https://registry.npm.taobao.org/flatted/download/flatted-2.0.0.tgz#55122b6536ea496b4b44893ee2608141d10d9916"
   integrity sha1-VRIrZTbqSWtLRIk+4mCBQdENmRY=
 
-flexsearch@0.6.22:
-  version "0.6.22"
-  resolved "https://registry.npm.taobao.org/flexsearch/download/flexsearch-0.6.22.tgz#7e3966a3c117ffc4381f5ad065f0a89b2b7418ed"
-  integrity sha1-fjlmo8EX/8Q4H1rQZfComyt0GO0=
+flexsearch@0.6.23:
+  version "0.6.23"
+  resolved "https://registry.yarnpkg.com/flexsearch/-/flexsearch-0.6.23.tgz#7191f28e7a9adba75d1b1ac2e099ebfdd7d66212"
+  integrity sha512-WZWmAymAMpEX1un8gayWu3dgRk0Tmtm7QnZ1stPbzfihXyGQLneE3aEGxKIdZjHyh2WWUSPkBLjU/kkUy8rBXw==
 
 flush-write-stream@^1.0.0:
   version "1.1.1"
