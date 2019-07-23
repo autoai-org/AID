@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     fetchInspector () {
-      let self = this
+      const self = this
       systemService.getInspectorInfo().then(function (res) {
         self.inspectInfo = res.data.requests
         console.log(self.inspectInfo)

@@ -129,7 +129,7 @@ export default {
   },
   watch: {
     searchKW (val) {
-      let self = this
+      const self = this
       if (val === '') {
         self.datasets = self.allDatasets
       }
@@ -156,7 +156,7 @@ export default {
       this.$router.push('/train/new')
     },
     uploadFile (e) {
-      let files = e.target.files
+      const files = e.target.files
       if (files.length) {
         console.log(files[0])
         systemService.uploadFile(files[0], 'dataset').then(function (res) {
@@ -167,7 +167,7 @@ export default {
       }
     },
     fetchTrainList (name = '') {
-      let self = this
+      const self = this
       systemService.getTrainList().then(function (res) {
         self.trains = res.data.result
         self.allTrains = self.datasets
@@ -180,7 +180,7 @@ export default {
       console.log(id)
     },
     showAnnotationsMetrics (objectId) {
-      let self = this
+      const self = this
       systemService.getAnnotationInfo(objectId).then(function (res) {
         self.annots = JSON.parse(res.data.annotation)
         self.enableAnnotMetrics = true

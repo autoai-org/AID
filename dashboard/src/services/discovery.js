@@ -6,6 +6,7 @@ class DiscoveryMock {
   constructor (endpoint) {
     self.endpoint = endpoint
   }
+
   fetchNews (num) {
     return getNews(num)
   }
@@ -15,9 +16,11 @@ class Discovery {
   constructor (endpoint) {
     self.endpoint = endpoint
   }
+
   fetchNews () {
     return _request('GET', self.endpoint + '/news')
   }
+
   putTicket (data) {
     return _request('PUT', self.endpoint + '/tickets', data)
   }

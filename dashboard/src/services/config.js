@@ -2,6 +2,7 @@ class ConfigService {
   constructor () {
     this.read()
   }
+
   read () {
     const persistConfig = JSON.parse(localStorage.getItem('cvpm-config'))
     if (persistConfig === null) {
@@ -12,15 +13,17 @@ class ConfigService {
       this.hintMode = persistConfig['hintMode']
     }
   }
+
   loadDefault () {
     this.endpoint = 'http://127.0.0.1:10590'
     this.developerMode = false
   }
+
   write () {
     const persistConfig = {
-      'endpoint': this.endpoint,
-      'developerMode': this.developerMode,
-      'hintMode': this.hintMode
+      endpoint: this.endpoint,
+      developerMode: this.developerMode,
+      hintMode: this.hintMode
     }
     localStorage.setItem('cvpm-config', JSON.stringify(persistConfig))
     this.read()
@@ -30,7 +33,7 @@ class ConfigService {
 const configService = new ConfigService()
 
 const discoveryConfig = {
-  'endpoint': 'https://cvpm-discovery.herokuapp.com'
+  endpoint: 'https://cvpm-discovery.herokuapp.com'
 }
 
 export {

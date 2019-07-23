@@ -243,6 +243,9 @@ export default {
   },
   created () {
     this.fetchMenu()
+    if (this.$route.fullPath === '/') {
+      this.$router.replace('/home')
+    }
   },
   methods: {
     changeLocale (to) {

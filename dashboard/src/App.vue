@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted: function () {
-    let config = new ConfigService()
+    const config = new ConfigService()
     if (config.hintMode) {
       this.$tours['cvpm-tour'].start()
     }
@@ -61,7 +61,7 @@ export default {
     },
     cvpmStopHintMode () {
       console.log('stop hint')
-      let config = new ConfigService()
+      const config = new ConfigService()
       config.hintMode = false
       config.write()
     },

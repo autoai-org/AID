@@ -54,7 +54,7 @@ export default {
   },
   methods: {
     parseData () {
-      let self = this
+      const self = this
       this.annodata.map(function (res) {
         if (typeof self.classNum[res.class.label.toString()] === 'undefined') {
           self.classNum[res.class.label.toString()] = 0
@@ -71,14 +71,14 @@ export default {
       })
     },
     drawClassPieChart () {
-      let data = [
+      const data = [
         {
           values: [this.trainNum, this.testNum, this.valNum],
           labels: ['Train', 'Test', 'Validation'],
           type: 'pie'
         }
       ]
-      var layout = {
+      const layout = {
         height: 400,
         width: 500
       }

@@ -50,13 +50,13 @@ export default {
     initSocket () {
       store.state.isLoading = true
       this.rayId = this.$route.params.rayId
-      let fullConn = new WebSocket(
+      const fullConn = new WebSocket(
         systemService.getWsEndpoint(this.rayId + '.full')
       )
-      let lessConn = new WebSocket(
+      const lessConn = new WebSocket(
         systemService.getWsEndpoint(this.rayId + '.less')
       )
-      let self = this
+      const self = this
       fullConn.onmessage = function (evt) {
         self.fullMessage = evt.data
         store.state.isLoading = false
@@ -69,23 +69,23 @@ export default {
       }
     },
     parseLessMessage (lessLogMessage) {
-      let lines = lessLogMessage.split('\n')
+      const lines = lessLogMessage.split('\n')
       lines.splice(0, 1)
       return JSON.parse(lines.join('\n'))
     },
     drawLineChart (lessLogMessage) {
-      let x = lessLogMessage.map(function (each) {
+      const x = lessLogMessage.map(function (each) {
         return Number(each.global_step)
       })
-      let y = lessLogMessage.map(function (each) {
+      const y = lessLogMessage.map(function (each) {
         return Number(each.loss)
       })
-      let data = {
+      const data = {
         x: x,
         y: y,
         type: 'scatter'
       }
-      let plotData = [data]
+      const plotData = [data]
       console.log(y)
       Plotly.newPlot('trainLineChart', plotData)
     }

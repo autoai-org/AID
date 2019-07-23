@@ -46,7 +46,7 @@ export default {
   },
   methods: {
     getNews () {
-      let self = this
+      const self = this
       discovery.fetchNews().then(function (res) {
         self.news = res.data.map(function (each) {
           each.title = each.body.split('\n\n')[0]

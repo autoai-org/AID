@@ -10,8 +10,8 @@ function parseLogMessage (msg) {
   return sanitizeHtml(parsed, {
     allowedTags: ['b', 'i', 'em', 'strong', 'span'],
     allowedAttributes: {
-      'a': ['href'],
-      'span': ['style']
+      a: ['href'],
+      span: ['style']
     },
     allowedIframeHostnames: ['autoai.org']
   })

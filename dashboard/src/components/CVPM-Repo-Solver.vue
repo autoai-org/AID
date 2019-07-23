@@ -143,7 +143,7 @@ export default {
   },
   methods: {
     fetchRunningSolver () {
-      let self = this
+      const self = this
       systemService
         .getRunningSolver(this.vendor, this.packageName)
         .then(function (res) {
@@ -167,7 +167,7 @@ export default {
     },
     confirmedRun () {
       this.isRequesting = true
-      let self = this
+      const self = this
       if (
         this.selectedSolver === '' ||
         this.selectedVendor === '' ||

@@ -195,7 +195,7 @@ export default {
   },
   watch: {
     searchKW (val) {
-      let self = this
+      const self = this
       if (val === '') {
         self.datasets = self.allDatasets
       }
@@ -251,7 +251,7 @@ export default {
       this.fetchOpenDatasets(this.searchName, this.searchTag)
     },
     fetchOpenDatasets (name = '', tag = '') {
-      let self = this
+      const self = this
       systemService.getOpenDatasets().then(function (res) {
         self.datasets = res.data.map(function (each) {
           if (each.Tags.search(tag) !== -1) {

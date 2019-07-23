@@ -140,7 +140,7 @@ export default {
   },
   watch: {
     searchKW (val) {
-      let self = this
+      const self = this
       if (val === '') {
         self.datasets = self.allDatasets
       }
@@ -167,7 +167,7 @@ export default {
       this.$refs.uploadInput.click()
     },
     uploadFile (e) {
-      let files = e.target.files
+      const files = e.target.files
       if (files.length) {
         console.log(files[0])
         systemService.uploadFile(files[0], 'dataset').then(function (res) {
@@ -178,7 +178,7 @@ export default {
       }
     },
     fetchMyDatasets (name = '') {
-      let self = this
+      const self = this
       systemService.getMyFiles().then(function (res) {
         self.datasets = res.data.result.filter(function (each) {
           if (each.type === 'dataset') {
@@ -197,7 +197,7 @@ export default {
       console.log(id)
     },
     showAnnotationsMetrics (objectId) {
-      let self = this
+      const self = this
       systemService.getAnnotationInfo(objectId).then(function (res) {
         self.annots = JSON.parse(res.data.annotation)
         self.enableAnnotMetrics = true

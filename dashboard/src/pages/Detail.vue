@@ -96,7 +96,7 @@ export default {
   },
   methods: {
     fetchMeta () {
-      let self = this
+      const self = this
       systemService
         .getRepoMeta(this.$route.params.vendor, this.$route.params.name)
         .then(function (res) {

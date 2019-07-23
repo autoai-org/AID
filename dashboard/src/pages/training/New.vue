@@ -81,7 +81,7 @@ export default {
   },
   methods: {
     getVendors () {
-      let self = this
+      const self = this
       systemService.getPackages().then(function (res) {
         res.data.map(function (each) {
           if (self.vendors.indexOf(each.Vendor) === -1) {
@@ -91,7 +91,7 @@ export default {
       })
     },
     getPackages (vendorName) {
-      let self = this
+      const self = this
       systemService.getPackages().then(function (res) {
         res.data.map(function (each) {
           if (
@@ -104,16 +104,16 @@ export default {
       })
     },
     getSolvers (vendorName, packageName) {
-      let self = this
+      const self = this
       systemService.getRepoMeta(vendorName, packageName).then(function (res) {
-        let parsedConfig = toml.parse(res.data.Config)
+        const parsedConfig = toml.parse(res.data.Config)
         parsedConfig.solvers.map(function (each) {
           self.solvers.push(each.name)
         })
       })
     },
     getDatasets () {
-      let self = this
+      const self = this
       systemService.getMyFiles().then(function (res) {
         console.log(res.data)
         res.data.result.map(function (each) {
