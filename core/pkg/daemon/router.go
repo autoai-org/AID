@@ -15,7 +15,6 @@ import (
 	"github.com/unarxiv/cvpm/pkg/contrib"
 	"github.com/unarxiv/cvpm/pkg/daemon/socket"
 	"github.com/unarxiv/cvpm/pkg/runtime"
-	api "gopkg.in/appleboy/gin-status-api.v1"
 )
 
 func getRouter() *gin.Engine {
@@ -72,7 +71,6 @@ func getRouter() *gin.Engine {
 	r.GET("/_inspector", func(c *gin.Context) {
 		c.JSON(200, auth.GetRequests())
 	})
-	r.GET("/_api/status", api.StatusHandler)
 
 	// Socket Related Routes
 	r.GET("/socket/:channel", func(c *gin.Context) {
