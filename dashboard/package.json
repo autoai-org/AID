@@ -28,7 +28,7 @@
     "eslint-plugin-vue": "5.2.3",
     "flexsearch": "0.6.30",
     "js-base64": "2.5.1",
-    "plotly.js-dist": "1.48.3",
+    "plotly.js-dist": "1.49.0",
     "sanitize-html": "1.20.1",
     "toml": "2.3.6",
     "vue": "2.6.10",
