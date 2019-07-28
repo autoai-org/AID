@@ -630,10 +630,10 @@
   dependencies:
     "@types/koa" "*"
 
-"@types/koa-session@^5.7.4":
-  version "5.10.0"
-  resolved "https://registry.yarnpkg.com/@types/koa-session/-/koa-session-5.10.0.tgz#0e1299dea25afe92cf08a078c90761ce28aa5a20"
-  integrity sha512-qkbsJS6vBY6Tr+o/krqPagYsCQDSoAQtixjjldv0Tr94ap7BqkBjqEJHmCAi3Vv6VAwo6403eBNBw/dB+6P9/w==
+"@types/koa-session@^5.10.1":
+  version "5.10.1"
+  resolved "https://registry.yarnpkg.com/@types/koa-session/-/koa-session-5.10.1.tgz#f9de25e9e67a0d923f85c2eca51700ffccb4db77"
+  integrity sha512-5v1ELhB1u9GFQPOGEdZS1zl2WchQ9wRBsuqfU669Wq/yQtX98lyjjDIr0MAuMvRfmkTFRekYJO6wfyEh7idJtg==
   dependencies:
     "@types/cookies" "*"
     "@types/koa" "*"
