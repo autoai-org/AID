@@ -30,7 +30,7 @@
     "@types/node": "10.14.13",
     "@types/parse": "^2.1.0",
     "@types/passport": "^1.0.0",
-    "@types/stripe": "^6.19.7",
+    "@types/stripe": "^6.31.10",
     "@types/supertest": "2.0.8",
     "@types/uuid": "^3.4.4",
     "aws-sdk": "^2.362.0",
