@@ -27,6 +27,6 @@ require (
 	github.com/shirou/gopsutil v2.19.6+incompatible
 	github.com/urfave/cli v1.20.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
-	gopkg.in/src-d/go-git.v4 v4.12.0
+	gopkg.in/src-d/go-git.v4 v4.13.1
 	upper.io/db.v3 v3.5.7+incompatible
 )
