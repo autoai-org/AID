@@ -24,7 +24,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.11.0
 	github.com/mitchellh/go-homedir v1.1.0
 	github.com/olekukonko/tablewriter v0.0.1
-	github.com/shirou/gopsutil v2.19.6+incompatible
+	github.com/shirou/gopsutil v2.19.8+incompatible
 	github.com/urfave/cli v1.20.0
 	golang.org/x/crypto v0.0.0-20190701094942-4def268fd1a4
 	gopkg.in/src-d/go-git.v4 v4.12.0
