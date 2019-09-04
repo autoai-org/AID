@@ -693,10 +693,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.47.tgz#655b4a1cc52c8ab08f48cc055061990d6846bc97"
   integrity sha512-56wEJWXZs+3XXoTe/OCpdZ6czrONhy+6hT0GdPOb7HvudLTMJ1T5tuZPs37K5cPR5t+J9+vLPFDQgUQ8NWJE1w==
 
-"@types/parse@^2.1.0":
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/@types/parse/-/parse-2.2.1.tgz#b78df9fafe5491513d1044e7dd87044a9603b447"
-  integrity sha512-9smlfagWHFyLMU1UWESnDnNvv00TUmh14Wbo3Bo34tQnfSI9Vjcwj7ByoW/5Al96ig/sp7dziWrkXFurJMaJWA==
+"@types/parse@^2.2.8":
+  version "2.2.8"
+  resolved "https://registry.yarnpkg.com/@types/parse/-/parse-2.2.8.tgz#569ba1c68b499e8d578ee22905521e80ccf4b801"
+  integrity sha512-+xAG+ACdoUyXH5IEhwrxc63aous+VDmuMtV9RvONb9Tb1jGVcepHGXmWOPNwdaDW3E1D3/QKxDP6Nle2fydN9w==
   dependencies:
     "@types/node" "*"
 
