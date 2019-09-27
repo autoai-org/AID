@@ -4,7 +4,7 @@ go 1.12
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/certifi/gocertifi v0.0.0-20190506164543-d2eda7129713 // indirect
+	github.com/certifi/gocertifi a5e0173ced67 // indirect
 	github.com/cvpm-contrib/auth v0.0.0-20190320071300-b5f20060ba38
 	github.com/cvpm-contrib/database v0.0.0-20190624121735-a875110d1a15 // indirect
 	github.com/dchest/uniuri v0.0.0-20160212164326-8902c56451e9
