@@ -68,7 +68,7 @@
     "postcss-import": "11.1.0",
     "postcss-loader": "2.1.6",
     "postcss-url": "7.3.2",
-    "rimraf": "2.6.3",
+    "rimraf": "3.0.0",
     "sass-loader": "7.1.0",
     "selenium-server": "3.141.59",
     "semver": "6.3.0",
