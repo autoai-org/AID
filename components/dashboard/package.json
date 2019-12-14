@@ -4,22 +4,30 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.7.2",
+    "@material-ui/icons": "^4.5.1",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/history": "^4.7.3",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
+    "@types/redux-logger": "^3.0.7",
+    "history": "^4.10.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "3.3.0",
+    "redux": "^4.0.4",
+    "redux-logger": "^3.0.6",
     "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci":"react-scripts test --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
