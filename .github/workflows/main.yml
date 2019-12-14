@@ -1,0 +1,79 @@
+on:
+  push:
+    branches:    
+      - 'next'
+
+name: components/cmd CI
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: Install golangci-lint
+      run: |
+        go get github.com/golangci/golangci-lint/cmd/golangci-lint
+    - name: Run linters
+      run: |
+        export PATH=$PATH:$(go env GOPATH)/bin   
+        ./pre-commit
+
+  test:
+    strategy:
+      matrix:
+        go-version: [1.12.x, 1.13.x]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: Run tests
+      run: cd components/cmd && make test
+
+  coverage:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Install Go
+      if: success()
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: Calc coverage 
+      run: |
+        cd components/cmd
+        export PATH=$PATH:$(go env GOPATH)/bin   
+        go test -v -covermode=count -coverprofile=coverage.out
+    - name: Convert coverage to lcov
+      uses: jandelgado/gcov2lcov-action@v1.0.0
+      with:
+          infile: coverage.out
+          outfile: coverage.lcov
+    - name: Coveralls
+      uses: coverallsapp/github-action@v1.0.1
+      with:
+          github-token: ${{ secrets.github_token }}
+          path-to-lcov: coverage.lcov
+  build:
+    runs-on: ubuntu-latest
+    needs: [lint, test]
+    steps:
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.13.x
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: build
+      run: |
+          cd components/cmd && make build
