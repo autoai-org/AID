@@ -1,12 +1,11 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux'
 import { createLogger } from 'redux-logger'
-import createHistory from 'history/createBrowserHistory';
+import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'react-router-redux'
-import { composeWithDevTools } from 'redux-devtools-extension/developmentOnly';
 
-import reducer from './reducer'
+import createRootReducer from './reducer'
 
-export const history = createHistory();
+export const history = createBrowserHistory()
 
 const myRouterMiddleware = routerMiddleware(history);
 
@@ -18,6 +17,20 @@ const getMiddleware = () => {
         return applyMiddleware(myRouterMiddleware, createLogger())
     }
 };
-
-export const store = createStore(
-    reducer, composeWithDevTools(getMiddleware()));
+export default function configureStore(preloadedState: object) {
+    const store = createStore(
+        createRootReducer(history), // root reducer with router state
+        preloadedState,
+        compose(
+            getMiddleware(),
+        ),
+    )
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('./reducer', () => {
+          store.replaceReducer(createRootReducer(history));
+        });
+      }
+    
+    return store
+}
