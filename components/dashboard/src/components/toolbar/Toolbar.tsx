@@ -8,6 +8,7 @@ import InputBase from '@material-ui/core/InputBase';
 import Badge from '@material-ui/core/Badge';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import clsx from 'clsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -16,8 +17,13 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+import SideNav from '../sidenav/Drawer'
+
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
+        hide: {
+            display: 'none',
+        },
         grow: {
             flexGrow: 1,
         },
@@ -79,6 +85,14 @@ const useStyles = makeStyles((theme: Theme) =>
         },
     }),
 );
+
+const handleDrawerOpen = () => {
+    setOpen(true);
+};
+
+const handleDrawerClose = () => {
+    setOpen(false);
+};
 
 export default function PrimarySearchAppBar() {
     const classes = useStyles();
@@ -161,21 +175,23 @@ export default function PrimarySearchAppBar() {
             </MenuItem>
         </Menu>
     );
+    const [mobileOpen, setMobileOpen] = React.useState(false);
 
     return (
         <div className={classes.grow}>
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
-                        edge="start"
-                        className={classes.menuButton}
                         color="inherit"
                         aria-label="open drawer"
+                        onClick={handleDrawerOpen}
+                        edge="start"
+                        className={clsx(classes.menuButton, open && classes.hide)}
                     >
                         <MenuIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" noWrap>
-                        Material-UI
+                        AI Flow
           </Typography>
                     <div className={classes.search}>
                         <div className={classes.searchIcon}>
@@ -226,6 +242,7 @@ export default function PrimarySearchAppBar() {
                     </div>
                 </Toolbar>
             </AppBar>
+            <SideNav></SideNav>
             {renderMobileMenu}
             {renderMenu}
         </div>
