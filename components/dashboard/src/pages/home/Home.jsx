@@ -1,9 +1,10 @@
 import React from 'react';
 
+import Container from '../../components/container/Container'
 export default class Home extends React.Component {
     render() {
         return (
-            <p>123</p>
+            <Container></Container>
         )
     }
 }

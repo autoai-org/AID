@@ -18,6 +18,7 @@
     "@types/react-router-redux": "^5.0.18",
     "@types/redux-logger": "^3.0.7",
     "@types/webpack-env": "^1.14.1",
+    "clsx": "^1.0.4",
     "connected-react-router": "^6.6.1",
     "history": "^4.10.1",
     "react": "^16.12.0",
