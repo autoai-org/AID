@@ -21,6 +21,6 @@ jobs:
       run: |
         cd components/dashboard
         npm install
-        npm test:ci
+        npm run test:ci
       env:
         CI: true
