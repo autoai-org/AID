@@ -5,11 +5,12 @@ import (
 	"github.com/levigross/grequests"
 )
 
+// Client is the basic class for performing http requests
 type Client struct {
 	Endpoint string
 }
 
-func (c *Client) Get (endpoint string, params map[string]string) *grequests.Response {
+func (c *Client) get (endpoint string, params map[string]string) *grequests.Response {
 	url := c.Endpoint + endpoint
 	resp, err := grequests.Get(url, &grequests.RequestOptions{
 		Params:  params,
@@ -25,7 +26,7 @@ func (c *Client) Get (endpoint string, params map[string]string) *grequests.Resp
 	return resp
 }
 
-func (c *Client) Post (endpoint string, params map[string]string) *grequests.Response {
+func (c *Client) post (endpoint string, params map[string]string) *grequests.Response {
 	url := c.Endpoint + endpoint
 	resp, err := grequests.Post(url, &grequests.RequestOptions{
 		JSON:    params,

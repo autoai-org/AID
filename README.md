@@ -1,5 +1,7 @@
 # CVPM @ NEXT
 
+![](https://github.com/autoai-org/CVPM/workflows/Go/badge.svg)
+
 This is the development branch for the next version of cvpm.
 
 ## Roadmap
