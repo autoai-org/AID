@@ -1,22 +1,18 @@
-package requests_test
+package requests
 
 import (
 	"testing"
-	"github.com/autoai-org/aiflow/components/aipm/pkg/requests"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestGet(t *testing.T) {
-	c := requests.Client{Endpoint:""}
-	resp := c.Get("http://httpbin.org/get", nil)
-	if resp.String() == ""{
-		t.Errorf("GET cannot fetch content")
-	}
+	c := Client{Endpoint:""}
+	resp := c.get("http://httpbin.org/get", nil)
+	assert.NotEmpty(t, resp.String())
 }
 
 func TestPost(t *testing.T) {
-	c := requests.Client{Endpoint:""}
-	resp := c.Post("http://httpbin.org/post", map[string]string{"One": "Two"})
-	if resp.String() == ""{
-		t.Errorf("GET cannot fetch content")
-	}
+	c := Client{Endpoint:""}
+	resp := c.post("http://httpbin.org/post", map[string]string{"One": "Two"})
+	assert.NotEmpty(t, resp.String())
 }
