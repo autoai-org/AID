@@ -25,11 +25,20 @@ func main() {
 		Usage:   "The Package Manager for A.I. Models",
 		Commands: []*cli.Command{
 			{
+				Name:    "build",
+				Aliases: []string{"b"},
+				Usage:   "Build Image",
+				Action: func(c *cli.Context) error {
+					build()
+					return nil
+				},
+			},
+			{
 				Name:    "interactive",
 				Aliases: []string{"i"},
 				Usage:   "Interactive Mode",
 				Action: func(c *cli.Context) error {
-          interactiveMode()
+					interactiveMode()
 					return nil
 				},
 			},

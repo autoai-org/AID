@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/autoai-org/aiflow/components/aipm/pkg/utilities"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/jmoiron/sqlx"
 	"github.com/sirupsen/logrus"
 )
