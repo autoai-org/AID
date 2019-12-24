@@ -1,9 +1,14 @@
 package runtime
 
 import (
+	"io/ioutil"
+	"fmt"
 	"os"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"io"
+	"github.com/jhoonb/archivex"
+	"path/filepath"
+	"path"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/api/types"
 	"golang.org/x/net/context"
@@ -13,25 +18,22 @@ var logger = utilities.NewLogger()
 
 // DockerRuntime is the basic class for manage docker
 type DockerRuntime struct {
-	ctx context.Context
 	client *client.Client
 }
 
 // NewDockerRuntime returns a DockerRuntime Instance
 func NewDockerRuntime () (*DockerRuntime) {
-	ctx := context.Background()
-	cli, err := client.NewClientWithOpts(client.FromEnv)
+	cli, err := client.NewClientWithOpts(client.FromEnv,client.WithAPIVersionNegotiation())
 	if err != nil {
         logger.Error("Cannot Create New Docker Runtime")
     }
 	return &DockerRuntime{
-		ctx: ctx,
 		client: cli,
 	}
 }
 
 func (docker *DockerRuntime) pull (imageName string) {
-	reader, err := docker.client.ImagePull(docker.ctx, imageName, types.ImagePullOptions{})
+	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
 		logger.Error("Cannot pull image " + imageName)
 	}
@@ -40,11 +42,20 @@ func (docker *DockerRuntime) pull (imageName string) {
 
 // Build will build a new image from dockerfile
 func (docker *DockerRuntime) Build (imageName string, dockerfile string) {
-	_, err := docker.client.ImageBuild(docker.ctx, nil, types.ImageBuildOptions{Dockerfile: dockerfile})
+	tar := new(archivex.TarFile)
+	tar.Create(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
+	tar.AddAll(path.Dir(dockerfile), false)
+	tar.Close()
+	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
+	defer dockerBuildContext.Close()
+	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{})
 	if err != nil {
 		logger.Error(err.Error())
 		logger.Error("Cannot pull image " + imageName)
 	}
+	fmt.Printf("********* %s **********", buildResponse.OSType)
+    response, err := ioutil.ReadAll(buildResponse.Body)
+    fmt.Println(string(response))
 }
 
 // GenerateDockerFile returns a DockerFile String that could be used to build image.

@@ -10,6 +10,7 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-runewidth v0.0.7 // indirect
