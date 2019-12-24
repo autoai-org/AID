@@ -2,7 +2,6 @@ package runtime
 
 import (
 	"io/ioutil"
-	"fmt"
 	"os"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"io"
@@ -42,6 +41,7 @@ func (docker *DockerRuntime) pull (imageName string) {
 
 // Build will build a new image from dockerfile
 func (docker *DockerRuntime) Build (imageName string, dockerfile string) {
+	logger.Info("Starting Build Image...")
 	tar := new(archivex.TarFile)
 	tar.Create(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
 	tar.AddAll(path.Dir(dockerfile), false)
@@ -50,15 +50,35 @@ func (docker *DockerRuntime) Build (imageName string, dockerfile string) {
 	defer dockerBuildContext.Close()
 	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{})
 	if err != nil {
+		logger.Error("Cannot build image " + imageName)
 		logger.Error(err.Error())
-		logger.Error("Cannot pull image " + imageName)
 	}
-	fmt.Printf("********* %s **********", buildResponse.OSType)
     response, err := ioutil.ReadAll(buildResponse.Body)
-    fmt.Println(string(response))
+	logger.Info(string(response))
+	os.Remove(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
 }
 
 // GenerateDockerFile returns a DockerFile String that could be used to build image.
 func GenerateDockerFile (baseImageName string, setup string) {
 
+}
+
+// ListImages returns all images that have been installed on the host
+func (docker *DockerRuntime) ListImages() []types.ImageSummary {
+	images, err := docker.client.ImageList(context.Background(), types.ImageListOptions{})
+	if err != nil {
+		logger.Error("Cannot List Images")
+		logger.Error(err.Error())
+	}
+	return images
+}
+
+// ListContainers returns all containers that have been built.
+func (docker *DockerRuntime) ListContainers() []types.Container {
+	containers, err := docker.client.ContainerList(context.Background(), types.ContainerListOptions{})
+	if err != nil {
+		logger.Error("Cannot List Images")
+		logger.Error(err.Error())
+	}
+	return containers
 }

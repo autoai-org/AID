@@ -3,6 +3,7 @@ module github.com/autoai-org/aiflow/components/cmd
 go 1.13
 
 require (
+	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/containerd/containerd v1.3.2 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect

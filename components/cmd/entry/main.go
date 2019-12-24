@@ -34,6 +34,22 @@ func main() {
 				},
 			},
 			{
+				Name:  "images",
+				Usage: "List Image",
+				Action: func(c *cli.Context) error {
+					printImages()
+					return nil
+				},
+			},
+			{
+				Name:  "containers",
+				Usage: "List Containers",
+				Action: func(c *cli.Context) error {
+					printContainers()
+					return nil
+				},
+			},
+			{
 				Name:    "interactive",
 				Aliases: []string{"i"},
 				Usage:   "Interactive Mode",
