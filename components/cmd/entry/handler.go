@@ -1,20 +1,20 @@
 package main
 
 import (
-	"strconv"
-	"strings"
 	"github.com/alexeyco/simpletable"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
+	"strconv"
+	"strings"
 )
 
-func build () {
+func build() {
 	// Read Dockerfile
 	dockerClient := runtime.NewDockerRuntime()
 	// Read Base Image Name
 	dockerClient.Build("imagename", "./Dockerfile")
 }
 
-func printImages () {
+func printImages() {
 	dockerClient := runtime.NewDockerRuntime()
 	table := simpletable.New()
 	table.Header = &simpletable.Header{
@@ -36,7 +36,7 @@ func printImages () {
 	table.Println()
 }
 
-func printContainers () {
+func printContainers() {
 	dockerClient := runtime.NewDockerRuntime()
 	table := simpletable.New()
 	table.Header = &simpletable.Header{
