@@ -1,16 +1,16 @@
 package runtime
 
 import (
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"github.com/jhoonb/archivex"
+	"golang.org/x/net/context"
+	"io"
 	"io/ioutil"
 	"os"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"io"
-	"github.com/jhoonb/archivex"
-	"path/filepath"
 	"path"
-	"github.com/docker/docker/client"
-	"github.com/docker/docker/api/types"
-	"golang.org/x/net/context"
+	"path/filepath"
 )
 
 var logger = utilities.NewLogger()
@@ -21,18 +21,18 @@ type DockerRuntime struct {
 }
 
 // NewDockerRuntime returns a DockerRuntime Instance
-func NewDockerRuntime () (*DockerRuntime) {
-	cli, err := client.NewClientWithOpts(client.FromEnv,client.WithAPIVersionNegotiation())
+func NewDockerRuntime() *DockerRuntime {
+	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
-        logger.Error("Cannot Create New Docker Runtime")
-    }
+		logger.Error("Cannot Create New Docker Runtime")
+	}
 	return &DockerRuntime{
 		client: cli,
 	}
 }
 
 // Pull will pull an exisiting package
-func (docker *DockerRuntime) Pull (imageName string) {
+func (docker *DockerRuntime) Pull(imageName string) {
 	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
 		logger.Error("Cannot pull image " + imageName)
@@ -41,7 +41,7 @@ func (docker *DockerRuntime) Pull (imageName string) {
 }
 
 // Build will build a new image from dockerfile
-func (docker *DockerRuntime) Build (imageName string, dockerfile string) {
+func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
 	logger.Info("Starting Build Image...")
 	tar := new(archivex.TarFile)
 	tar.Create(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
@@ -54,13 +54,13 @@ func (docker *DockerRuntime) Build (imageName string, dockerfile string) {
 		logger.Error("Cannot build image " + imageName)
 		logger.Error(err.Error())
 	}
-    response, err := ioutil.ReadAll(buildResponse.Body)
+	response, err := ioutil.ReadAll(buildResponse.Body)
 	logger.Info(string(response))
 	os.Remove(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
 }
 
 // GenerateDockerFile returns a DockerFile String that could be used to build image.
-func GenerateDockerFile (baseImageName string, setup string) {
+func GenerateDockerFile(baseImageName string, setup string) {
 
 }
 

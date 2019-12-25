@@ -28,4 +28,3 @@ func WriteContentToFile(filepath string, content string) error {
 	}
 	return nil
 }
-

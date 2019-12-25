@@ -6,7 +6,7 @@ default:
 	@echo "\tmake build"
 
 format:
-	gofmt -l -s -w **/*.go
+	gofmt -l -s -w **/**/*.go
 
 test:
 	go test -race -coverprofile c.out -v ./...
