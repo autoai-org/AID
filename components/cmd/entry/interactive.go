@@ -16,7 +16,7 @@ func completer(d prompt.Document) []prompt.Suggest {
 }
 
 func interactiveMode() {
-	fmt.Println("Welcome to Interactive Mode! Version:"+Version)
+	fmt.Println("Welcome to Interactive Mode! Version: "+Version)
 	fmt.Println("Type exit to exit.")
 	for {
 		t := prompt.Input("> ", completer)
