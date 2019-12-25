@@ -59,6 +59,16 @@ func main() {
 				},
 			},
 			{
+				Name:     "generate",
+				Aliases:  []string{"gen"},
+				Usage:    "Generate Runners",
+				Category: "runtime",
+				Action: func(c *cli.Context) error {
+					generateRunners()
+					return nil
+				},
+			},
+			{
 				Name:     "containers",
 				Usage:    "List Containers",
 				Category: "runtime",

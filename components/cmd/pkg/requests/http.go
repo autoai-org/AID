@@ -10,7 +10,8 @@ type Client struct {
 	Endpoint string
 }
 
-func (c *Client) get(endpoint string, params map[string]string) *grequests.Response {
+// Get sends a simple Get requests to specific endpoint
+func (c *Client) Get(endpoint string, params map[string]string) *grequests.Response {
 	url := c.Endpoint + endpoint
 	resp, err := grequests.Get(url, &grequests.RequestOptions{
 		Params: params,
@@ -26,7 +27,8 @@ func (c *Client) get(endpoint string, params map[string]string) *grequests.Respo
 	return resp
 }
 
-func (c *Client) post(endpoint string, params map[string]string) *grequests.Response {
+// Post sends a simple Post requests to specific endpoint
+func (c *Client) Post(endpoint string, params map[string]string) *grequests.Response {
 	url := c.Endpoint + endpoint
 	resp, err := grequests.Post(url, &grequests.RequestOptions{
 		JSON:   params,

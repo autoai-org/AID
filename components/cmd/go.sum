@@ -1,4 +1,5 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
+github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811 h1:p/R0zhuuQdQe4YOkNnqxKnlOemTnXvvL2ytVtwiaB/g=
 github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811/go.mod h1:gx4+gp4N5VWqThMIidoUMBNUCT4Pan3J8ETR1ParWUU=
