@@ -3,6 +3,7 @@ module github.com/autoai-org/aiflow/components/cmd
 go 1.13
 
 require (
+	github.com/BurntSushi/toml v0.3.1
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/containerd/containerd v1.3.2 // indirect
@@ -10,7 +11,7 @@ require (
 	github.com/docker/docker v1.4.2-0.20191223123943-bbcabf69c81b
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
-	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4 // indirect
+	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/jhoonb/archivex v0.0.0-20180718040744-0488e4ce1681
 	github.com/jmoiron/sqlx v1.2.0

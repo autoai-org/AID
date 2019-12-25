@@ -2,9 +2,12 @@ package main
 
 import (
 	"github.com/alexeyco/simpletable"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"strconv"
 	"strings"
+	"path/filepath"
 )
 
 func build() {
@@ -56,4 +59,11 @@ func printContainers() {
 		table.Body.Cells = append(table.Body.Cells, r)
 	}
 	table.Println()
+}
+
+func generateRunners () {
+	tomlFilePath := filepath.Join("./", "cvpm.toml")
+	cvpmToml := utilities.ReadFileContent(tomlFilePath)
+	solvers := entities.LoadSolversFromConfig(cvpmToml)
+	runtime.RenderRunnerTpl("./", solvers)
 }
