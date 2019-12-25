@@ -6,7 +6,7 @@ import (
 )
 
 // NewLogger returns the Logger Object
-func NewLogger () *logrus.Logger {
+func NewLogger() *logrus.Logger {
 	var logger = logrus.New()
 	logger.Out = os.Stdout
 	return logger

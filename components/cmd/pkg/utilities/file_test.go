@@ -1,8 +1,8 @@
 package utilities
 
 import (
-	"os"
 	"github.com/stretchr/testify/assert"
+	"os"
 	"testing"
 )
 
