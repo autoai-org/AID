@@ -31,7 +31,8 @@ func NewDockerRuntime () (*DockerRuntime) {
 	}
 }
 
-func (docker *DockerRuntime) pull (imageName string) {
+// Pull will pull an exisiting package
+func (docker *DockerRuntime) Pull (imageName string) {
 	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
 		logger.Error("Cannot pull image " + imageName)

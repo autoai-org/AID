@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
+	"github.com/urfave/cli/v2"
 	"log"
 	"os"
 	"sort"
-	"github.com/urfave/cli/v2"
 )
 
 var (
@@ -24,8 +24,8 @@ func main() {
 	app := &cli.App{
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
-				Name:  "license",
-				Usage: "print the license",
+				Name:        "license",
+				Usage:       "print the license",
 				Destination: &license,
 			},
 		},
@@ -34,15 +34,15 @@ func main() {
 		Usage:   "The Package Manager for A.I. Models",
 		Action: func(c *cli.Context) error {
 			if license {
-			  printLicense()
+				printLicense()
 			}
 			return nil
-		  },
+		},
 		Commands: []*cli.Command{
 			{
-				Name:    "build",
-				Aliases: []string{"b"},
-				Usage:   "Build Image",
+				Name:     "build",
+				Aliases:  []string{"b"},
+				Usage:    "Build Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
 					build()
@@ -50,8 +50,8 @@ func main() {
 				},
 			},
 			{
-				Name:  "images",
-				Usage: "List Image",
+				Name:     "images",
+				Usage:    "List Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
 					printImages()
@@ -59,8 +59,8 @@ func main() {
 				},
 			},
 			{
-				Name:  "containers",
-				Usage: "List Containers",
+				Name:     "containers",
+				Usage:    "List Containers",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
 					printContainers()
