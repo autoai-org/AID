@@ -4,10 +4,11 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/client"
-	"github.com/jhoonb/archivex"
+	"github.com/docker/docker/pkg/jsonmessage"
+	"github.com/docker/docker/pkg/term"
+	"github.com/mholt/archiver/v3"
 	"golang.org/x/net/context"
 	"io"
-	"io/ioutil"
 	"os"
 	"path"
 	"path/filepath"
@@ -43,10 +44,7 @@ func (docker *DockerRuntime) Pull(imageName string) {
 // Build will build a new image from dockerfile
 func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
 	logger.Info("Starting Build Image...")
-	tar := new(archivex.TarFile)
-	tar.Create(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
-	tar.AddAll(path.Dir(dockerfile), false)
-	tar.Close()
+	err := archiver.Archive([]string{path.Dir(dockerfile)}, "archieve.tar")
 	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
 	defer dockerBuildContext.Close()
 	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{})
@@ -54,8 +52,12 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
 		logger.Error("Cannot build image " + imageName)
 		logger.Error(err.Error())
 	}
-	response, err := ioutil.ReadAll(buildResponse.Body)
-	logger.Info(string(response))
+	termFd, isTerm := term.GetFdInfo(os.Stderr)
+	err = jsonmessage.DisplayJSONMessagesStream(buildResponse.Body, os.Stderr, termFd, isTerm, nil)
+	if err != nil {
+		logger.Error("Cannot build image " + imageName)
+		logger.Error(err.Error())
+	}
 	os.Remove(filepath.Join(path.Dir(dockerfile), "archieve.tar"))
 }
 
