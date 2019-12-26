@@ -17,7 +17,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import SideNav from '../sidenav/Drawer'
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -87,11 +86,11 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 const handleDrawerOpen = () => {
-    setOpen(true);
+    // setOpen(true);
 };
 
 const handleDrawerClose = () => {
-    setOpen(false);
+    // setOpen(false);
 };
 
 export default function PrimarySearchAppBar() {
@@ -186,7 +185,7 @@ export default function PrimarySearchAppBar() {
                         aria-label="open drawer"
                         onClick={handleDrawerOpen}
                         edge="start"
-                        className={clsx(classes.menuButton, open && classes.hide)}
+                        className={clsx(classes.menuButton, classes.hide)}
                     >
                         <MenuIcon />
                     </IconButton>
@@ -242,7 +241,6 @@ export default function PrimarySearchAppBar() {
                     </div>
                 </Toolbar>
             </AppBar>
-            <SideNav></SideNav>
             {renderMobileMenu}
             {renderMenu}
         </div>
