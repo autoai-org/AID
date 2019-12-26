@@ -14,9 +14,12 @@ require (
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.4.0 // indirect
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
+	github.com/gin-contrib/static v0.0.0-20191128031702-f81c604d8ac2 // indirect
+	github.com/gin-gonic/gin v1.5.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/jmoiron/sqlx v1.2.0
+	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/mattn/go-tty v0.0.3 // indirect
