@@ -19,8 +19,9 @@ jobs:
         node-version: ${{ matrix.node-version }}
     - name: npm install, build, and test
       run: |
+        npm install yarn -g
         cd components/dashboard
-        npm install
-        npm run test:ci
+        yarn
+        yarn run test:ci
       env:
         CI: true
