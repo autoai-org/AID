@@ -18,12 +18,20 @@ func build(solverName string) {
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	if solverName == "*" {
 		for _, solver := range packageInfo.Solvers {
-			imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name +"-" + solver.Name
+			imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solver.Name
+			// Check if docker file exists
+			if utilities.ReadFileContent("./docker_"+solver.Name) == "Read "+"./docker_"+solver.Name+" Failed!" {
+				runtime.RenderDockerfile(solver.Name, "./docker_"+solver.Name)
+			}
 			dockerClient.Build(strings.ToLower(imageName), "./docker_"+solver.Name)
 		}
 	} else {
-		imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name +"-" + solverName
-		dockerClient.Build(strings.ToLower(imageName), "./docker_"+ solverName)
+		imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
+		// Check if docker file exists
+		if utilities.ReadFileContent("./docker_"+solverName) == "Read "+"./docker_"+solverName+" Failed!" {
+			runtime.RenderDockerfile(solverName, "./docker_"+solverName)
+		}
+		dockerClient.Build(strings.ToLower(imageName), "./docker_"+solverName)
 	}
 }
 
