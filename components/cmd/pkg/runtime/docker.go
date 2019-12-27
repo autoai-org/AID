@@ -4,6 +4,7 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/term"
@@ -34,21 +35,38 @@ func NewDockerRuntime() *DockerRuntime {
 }
 
 // Pull will pull an exisiting package
-func (docker *DockerRuntime) Pull(imageName string) {
+func (docker *DockerRuntime) Pull(imageName string) error {
 	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
 		logger.Error("Cannot pull image " + imageName)
+		logger.Error(err.Error())
+		return err
 	}
 	io.Copy(os.Stdout, reader)
+	return nil
 }
 
-// Start will pull an exisiting package
-func (docker *DockerRuntime) Start(imageName string) {
-	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
+// Create will create a container from an image
+func (docker *DockerRuntime) Create(imageName string) container.ContainerCreateCreatedBody {
+	resp, err := docker.client.ContainerCreate(context.Background(), &container.Config{
+		Image: imageName,
+		Tty:   true,
+	}, nil, nil, "")
 	if err != nil {
-		logger.Error("Cannot pull image " + imageName)
+		logger.Error("Cannot create container from image " + imageName)
+		logger.Error(err.Error())
 	}
-	io.Copy(os.Stdout, reader)
+	return resp
+}
+
+// Start will start a container
+func (docker *DockerRuntime) Start(containerID string) error {
+	if err := docker.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{}); err != nil {
+		logger.Error("Cannot start container " + containerID)
+		logger.Error(err.Error())
+		return err
+	}
+	return nil
 }
 
 // Build will build a new image from dockerfile
