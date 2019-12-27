@@ -86,6 +86,15 @@ func main() {
 					return nil
 				},
 			},
+			{
+				Name:     "up",
+				Usage:    "Server Up",
+				Category: "daemon",
+				Action: func(c *cli.Context) error {
+					startServer(c.Args().Get(0))
+					return nil
+				},
+			},
 		},
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
