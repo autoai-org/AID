@@ -1,5 +1,5 @@
 // Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -23,31 +23,22 @@ import (
 func getTpl(tplName string) string {
 	var runnerTpl = "https://raw.githubusercontent.com/autoai-org/CVPM/master/templates/" + tplName + ".tpl"
 	resp, err := http.Get(runnerTpl)
-	if err != nil {
-		logger.Fatal(err)
-	}
+	utilities.CheckError(err, "Cannot Fetch Template..., Please check your internet connection!")
 	body, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		logger.Fatal(err)
-	}
+	utilities.CheckError(err, "Cannot Read from Response..., Please check your internet connection!")
 	return string(body)
 }
 
 // RenderRunnerTpl returns the final runner file
 func RenderRunnerTpl(tempFilePath string, mySolvers entities.Solvers) {
 	tpl, err := pongo2.FromString(getTpl("runner"))
-	if err != nil {
-		logger.Fatal(err)
-	}
+	utilities.CheckError(err, "Cannot read template file")
 	for _, solver := range mySolvers.Solvers {
 		filename := "runner_" + solver.Name + ".py"
 		fileFullPath := filepath.Join(tempFilePath, filename)
 		tplContext := strings.Split(solver.Class, "/")
 		out, err := tpl.Execute(pongo2.Context{"Package": tplContext[0], "Filename": tplContext[1], "Classname": tplContext[2]})
-		if err != nil {
-			logger.Error("Failed to generate running file.")
-			logger.Error(err.Error())
-		}
+		utilities.CheckError(err, "Failed to generate running file.")
 		utilities.WriteContentToFile(fileFullPath, out)
 	}
 }
@@ -55,10 +46,7 @@ func RenderRunnerTpl(tempFilePath string, mySolvers entities.Solvers) {
 // RenderDockerfile returns the final dockerfile
 func RenderDockerfile(solvername string, targetFilePath string) {
 	tpl, err := pongo2.FromString(getTpl("dockerfile"))
-	if err != nil {
-		logger.Fatal("Cannot render dockerfile")
-		logger.Fatal(err)
-	}
+	utilities.CheckError(err, "Cannot render dockerfile")
 	filename := filepath.Join(targetFilePath, "docker_"+solvername)
 	setupFileContent := utilities.ReadFileContent(filepath.Join(targetFilePath, "setup.sh"))
 	var setupCommands string

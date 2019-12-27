@@ -1,5 +1,5 @@
 // Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -16,8 +16,5 @@ func RunServer(port string, sslcert string, sslkey string) {
 	logger.Info("Initiating Service...")
 	r := getRouter()
 	err := r.RunTLS("127.0.0.1:"+port, sslcert, sslkey)
-	if err != nil {
-		logger.Error("Cannot start server")
-		logger.Fatal(err.Error())
-	}
+	utilities.CheckError(err, "Cannot Start Server")
 }
