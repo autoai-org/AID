@@ -55,6 +55,14 @@ func RenderDockerfile(solvername string, targetFilePath string) {
 		logger.Fatal(err)
 	}
 	filename := filepath.Join(targetFilePath, "docker_"+solvername)
-	out, err := tpl.Execute(pongo2.Context{"Solvername": solvername})
+	setupFileContent := utilities.ReadFileContent(filepath.Join(targetFilePath, "setup.sh"))
+	var setupCommands string
+	if setupFileContent != "Read "+filepath.Join(targetFilePath, "setup.sh")+" Failed!" {
+		commands := strings.Split(strings.Replace(setupFileContent, "\r\n", "\n", -1), "\n")
+		setupCommands = strings.Join(commands, "&& \\")
+	} else {
+		setupCommands = "echo There is no command for extra installation"
+	}
+	out, err := tpl.Execute(pongo2.Context{"Solvername": solvername, "Setup": setupCommands})
 	utilities.WriteContentToFile(filename, out)
 }
