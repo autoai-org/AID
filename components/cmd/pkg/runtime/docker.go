@@ -53,7 +53,7 @@ func (docker *DockerRuntime) Start(imageName string) {
 
 // Build will build a new image from dockerfile
 func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
-	logger.Info("Starting Build Image...")
+	logger.Info("Starting Build Image: " + imageName + "...")
 	err := archiver.Archive([]string{path.Dir(dockerfile)}, "archive.tar")
 	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archive.tar"))
 	defer dockerBuildContext.Close()

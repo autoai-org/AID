@@ -13,8 +13,10 @@ RUN pip install --upgrade \
         pip \
         -r /app/requirements.txt
 
+RUN {{Setup}}
+
 WORKDIR /app
 
 ENTRYPOINT ["python3"]
 
-CMD ["runner_{{Solver_name}}.py", "8080"]
+CMD ["runner_{{Solvername}}.py", "8080"]
