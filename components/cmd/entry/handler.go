@@ -5,16 +5,19 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"path/filepath"
 	"strconv"
 	"strings"
-	"path/filepath"
 )
 
 func build() {
 	// Read Dockerfile
 	dockerClient := runtime.NewDockerRuntime()
 	// Read Base Image Name
-	dockerClient.Build("imagename", "./Dockerfile")
+	tomlString := utilities.ReadFileContent("./cvpm.toml")
+	packageInfo := entities.LoadPackageFromConfig(tomlString)
+	imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name
+	dockerClient.Build(strings.ToLower(imageName), "./Dockerfile")
 }
 
 func printImages() {
@@ -61,7 +64,7 @@ func printContainers() {
 	table.Println()
 }
 
-func generateRunners () {
+func generateRunners() {
 	tomlFilePath := filepath.Join("./", "cvpm.toml")
 	cvpmToml := utilities.ReadFileContent(tomlFilePath)
 	solvers := entities.LoadSolversFromConfig(cvpmToml)

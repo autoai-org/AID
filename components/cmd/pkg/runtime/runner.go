@@ -15,8 +15,8 @@ import (
 
 // getRunnerTpl fetches the template for running solver
 // This is for ensuring backward compatibility
-func getRunnerTpl() string {
-	var runnerTpl = "https://raw.githubusercontent.com/autoai-org/CVPM/master/templates/runner.tpl"
+func getTpl(tplName string) string {
+	var runnerTpl = "https://raw.githubusercontent.com/autoai-org/CVPM/master/templates/" + tplName + ".tpl"
 	resp, err := http.Get(runnerTpl)
 	if err != nil {
 		logger.Fatal(err)
@@ -30,7 +30,7 @@ func getRunnerTpl() string {
 
 // RenderRunnerTpl returns the final runner file
 func RenderRunnerTpl(tempFilePath string, mySolvers entities.Solvers) {
-	tpl, err := pongo2.FromString(getRunnerTpl())
+	tpl, err := pongo2.FromString(getTpl("runner"))
 	if err != nil {
 		logger.Fatal(err)
 	}
@@ -45,4 +45,16 @@ func RenderRunnerTpl(tempFilePath string, mySolvers entities.Solvers) {
 		}
 		utilities.WriteContentToFile(fileFullPath, out)
 	}
+}
+
+// RenderDockerfile returns the final dockerfile
+func RenderDockerfile(solvername string, targetFilePath string) {
+	tpl, err := pongo2.FromString(getTpl("dockerfile"))
+	if err != nil {
+		logger.Fatal("Cannot render dockerfile")
+		logger.Fatal(err)
+	}
+	filename := filepath.Join(targetFilePath, "docker_"+solvername)
+	out, err := tpl.Execute(pongo2.Context{"Solvername": solvername})
+	utilities.WriteContentToFile(filename, out)
 }
