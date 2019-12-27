@@ -7,8 +7,12 @@ import (
 var logger = utilities.NewLogger()
 
 // RunServer starts the http service
-func RunServer(port string) {
+func RunServer(port string, sslcert string, sslkey string) {
 	logger.Info("Initiating Service...")
 	r := getRouter()
-	r.Run("0.0.0.0:" + port)
+	err := r.RunTLS("127.0.0.1:"+port, sslcert, sslkey)
+	if err != nil {
+		logger.Error("Cannot start server")
+		logger.Fatal(err.Error())
+	}
 }

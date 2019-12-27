@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/alexeyco/simpletable"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/daemon"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
@@ -85,4 +86,8 @@ func generate() {
 	solvers := entities.LoadSolversFromConfig(cvpmToml)
 	runtime.RenderRunnerTpl("./", solvers)
 	runtime.GenerateDockerFiles("./")
+}
+
+func startServer(port string) {
+	daemon.RunServer(port, filepath.Join("./", "server.pem"), filepath.Join("./", "server.key"))
 }
