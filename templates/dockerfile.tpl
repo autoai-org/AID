@@ -13,7 +13,7 @@ RUN pip install --upgrade \
         pip \
         -r /app/requirements.txt
 
-RUN {{Setup}}
+RUN {{Setup|safe}}
 
 WORKDIR /app
 

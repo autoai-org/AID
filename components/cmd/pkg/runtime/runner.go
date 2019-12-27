@@ -59,7 +59,7 @@ func RenderDockerfile(solvername string, targetFilePath string) {
 	var setupCommands string
 	if setupFileContent != "Read "+filepath.Join(targetFilePath, "setup.sh")+" Failed!" {
 		commands := strings.Split(strings.Replace(setupFileContent, "\r\n", "\n", -1), "\n")
-		setupCommands = strings.Join(commands, "&& \\")
+		setupCommands = strings.Join(commands, "&& \\ \n")
 	} else {
 		setupCommands = "echo There is no command for extra installation"
 	}
