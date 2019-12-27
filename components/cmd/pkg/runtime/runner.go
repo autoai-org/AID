@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 // Package runtime defines the running environment for each solver
 // The runner defines the entrance in pre-1.0x version,
 // Now the entrance can also be defined by Dockerfile and thus is not necessary.
