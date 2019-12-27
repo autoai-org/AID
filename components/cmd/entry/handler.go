@@ -10,14 +10,21 @@ import (
 	"strings"
 )
 
-func build() {
+func build(solverName string) {
 	// Read Dockerfile
 	dockerClient := runtime.NewDockerRuntime()
 	// Read Base Image Name
 	tomlString := utilities.ReadFileContent("./cvpm.toml")
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
-	imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name
-	dockerClient.Build(strings.ToLower(imageName), "./Dockerfile")
+	if solverName == "*" {
+		for _, solver := range packageInfo.Solvers {
+			imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name +"-" + solver.Name
+			dockerClient.Build(strings.ToLower(imageName), "./docker_"+solver.Name)
+		}
+	} else {
+		imageName := packageInfo.Package.Vendor+"-"+packageInfo.Package.Name +"-" + solverName
+		dockerClient.Build(strings.ToLower(imageName), "./docker_"+ solverName)
+	}
 }
 
 func printImages() {
@@ -64,9 +71,10 @@ func printContainers() {
 	table.Println()
 }
 
-func generateRunners() {
+func generate() {
 	tomlFilePath := filepath.Join("./", "cvpm.toml")
 	cvpmToml := utilities.ReadFileContent(tomlFilePath)
 	solvers := entities.LoadSolversFromConfig(cvpmToml)
 	runtime.RenderRunnerTpl("./", solvers)
+	runtime.GenerateDockerFiles("./")
 }

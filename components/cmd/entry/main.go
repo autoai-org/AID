@@ -45,7 +45,7 @@ func main() {
 				Usage:    "Build Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
-					build()
+					build(c.Args().Get(0))
 					return nil
 				},
 			},
@@ -61,10 +61,10 @@ func main() {
 			{
 				Name:     "generate",
 				Aliases:  []string{"gen"},
-				Usage:    "Generate Runners",
+				Usage:    "Generate Runners and Dockerfile",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
-					generateRunners()
+					generate()
 					return nil
 				},
 			},
