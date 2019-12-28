@@ -21,7 +21,7 @@ import (
 	"path/filepath"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // DockerRuntime is the basic class for manage docker
 type DockerRuntime struct {

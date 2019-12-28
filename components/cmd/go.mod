@@ -20,6 +20,8 @@ require (
 	github.com/ilibs/gosql/v2 v2.0.1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/kardianos/service v1.0.0
+	github.com/lestrrat-go/file-rotatelogs v2.2.0+incompatible
+	github.com/lestrrat-go/strftime v1.0.0 // indirect
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/mattn/go-sqlite3 v1.9.0
@@ -31,6 +33,7 @@ require (
 	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/pkg/term v0.0.0-20190109203006-aa71e9d9e942 // indirect
+	github.com/rifflock/lfshook v0.0.0-20180920164130-b9218ef580f5
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
 	github.com/urfave/cli/v2 v2.0.0

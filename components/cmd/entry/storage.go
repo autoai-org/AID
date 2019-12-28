@@ -17,5 +17,6 @@ func save() {
 	db.Connect()
 	db.CreateTables()
 	packages := &entities.Package{}
+	gosql.Model(packages).Create()
 	gosql.Model(packages).Where("id=?",1).Get()
 }

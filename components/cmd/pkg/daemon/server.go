@@ -9,7 +9,7 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // RunServer starts the http service
 func RunServer(port string, sslcert string, sslkey string) {

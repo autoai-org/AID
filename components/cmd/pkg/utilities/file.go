@@ -6,11 +6,11 @@
 package utilities
 
 import (
-	"net/http"
 	"io/ioutil"
+	"net/http"
 )
 
-var logger = NewLogger()
+var logger = NewDefaultLogger("./logs/system.log")
 
 // ReadFileContent returns the content of filename
 func ReadFileContent(filename string) string {
@@ -36,7 +36,7 @@ func WriteContentToFile(filepath string, content string) error {
 }
 
 // GetRemoteFile returns a string that is included in a remote file
-func GetRemoteFile (url string) string {
+func GetRemoteFile(url string) string {
 	resp, err := http.Get(url)
 	CheckError(err, "Cannot fetch remote file..., Please check your internet connection!")
 	body, err := ioutil.ReadAll(resp.Body)

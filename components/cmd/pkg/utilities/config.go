@@ -22,8 +22,8 @@ type Config struct {
 	cache    *map[string]interface{}
 }
 
-// New creates a new Config object.
-func New(filename string) *Config {
+// NewConfig returns a new Config object.
+func NewConfig(filename string) *Config {
 	config := Config{filename, nil}
 	config.Reload()
 	go config.watch()

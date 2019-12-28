@@ -10,7 +10,7 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // Solver defines the struct of a solver, the minimal struct of a inference program
 type Solver struct {
