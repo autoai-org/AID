@@ -1,2 +1,0 @@
-{"level":"error","msg":"Cannot Load Solvers from toml string, please check its syntax!","time":"2019-12-28T14:02:52+01:00"}
-{"level":"fatal","msg":"Near line 1 (last key parsed 'Read'): expected key separator '=', but got '.' instead","time":"2019-12-28T14:02:52+01:00"}

@@ -6,10 +6,14 @@
 package main
 
 import (
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
-// PrepareConfig checks if all the required folder exists,
+// readConfig checks if all the required folder exists,
 // If not, it will create the folder
-func PrepareConfig() {
-	
+
+var config *utilities.Config
+
+func readConfig() {
+	config = utilities.NewConfig("./config.json")
 }

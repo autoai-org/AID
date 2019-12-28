@@ -22,7 +22,7 @@ var (
 
 func main() {
 	var license bool
-	PrepareConfig()
+	readConfig()
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("version=%s build=%s\n", c.App.Version, Build)
 	}
@@ -65,6 +65,16 @@ func main() {
 				},
 			},
 			{
+				Name:     "install",
+				Aliases:  []string{"i"},
+				Usage:    "Install Package",
+				Category: "packages",
+				Action: func(c *cli.Context) error {
+					installPackage(c.Args().Get(0))
+					return nil
+				},
+			},
+			{
 				Name:     "images",
 				Usage:    "List Image",
 				Category: "runtime",
@@ -94,7 +104,7 @@ func main() {
 			},
 			{
 				Name:    "interactive",
-				Aliases: []string{"i"},
+				Aliases: []string{"in"},
 				Usage:   "Interactive Mode",
 				Action: func(c *cli.Context) error {
 					interactiveMode()
