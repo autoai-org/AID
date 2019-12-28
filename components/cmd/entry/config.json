@@ -1,0 +1,6 @@
+{
+    "db_path": "../tests/db.db",
+    "db_driver": "sqlite3",
+    "logs_path": "../tests/logs",
+    "install_path": "../tests/packages"
+}

@@ -11,7 +11,7 @@ import (
 	"os"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // GitClient is the basic structure for performing git-based operations
 type GitClient struct {

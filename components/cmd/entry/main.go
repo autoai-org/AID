@@ -22,7 +22,7 @@ var (
 
 func main() {
 	var license bool
-
+	PrepareConfig()
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("version=%s build=%s\n", c.App.Version, Build)
 	}

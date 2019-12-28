@@ -10,7 +10,7 @@ import (
 	"github.com/ilibs/gosql/v2"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // Database is the primary class for persisting contents
 type Database struct {
@@ -34,9 +34,9 @@ func NewDB(driver string, uri string) Database {
 }
 
 // CreateTables Create all Tables
-func (db *Database) CreateTables () {
+func (db *Database) CreateTables() {
 	// Read SQL
-	var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/storage/db.sql")
+	var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
 	gosql.Exec(sqlString)
 }
 
