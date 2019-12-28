@@ -15,6 +15,7 @@ import (
 func save() {
 	db := storage.NewDB("sqlite3", "./db.db")
 	db.Connect()
+	db.CreateTables()
 	packages := &entities.Package{}
 	gosql.Model(packages).Where("id=?",1).Get()
 }

@@ -12,8 +12,6 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/flosch/pongo2"
-	"io/ioutil"
-	"net/http"
 	"path/filepath"
 	"strings"
 )
@@ -22,11 +20,7 @@ import (
 // This is for ensuring backward compatibility
 func getTpl(tplName string) string {
 	var runnerTpl = "https://raw.githubusercontent.com/autoai-org/CVPM/master/templates/" + tplName + ".tpl"
-	resp, err := http.Get(runnerTpl)
-	utilities.CheckError(err, "Cannot Fetch Template..., Please check your internet connection!")
-	body, err := ioutil.ReadAll(resp.Body)
-	utilities.CheckError(err, "Cannot Read from Response..., Please check your internet connection!")
-	return string(body)
+	return utilities.GetRemoteFile(runnerTpl)
 }
 
 // RenderRunnerTpl returns the final runner file

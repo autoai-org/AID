@@ -6,6 +6,7 @@
 package utilities
 
 import (
+	"net/http"
 	"io/ioutil"
 )
 
@@ -32,4 +33,13 @@ func WriteContentToFile(filepath string, content string) error {
 		return err
 	}
 	return nil
+}
+
+// GetRemoteFile returns a string that is included in a remote file
+func GetRemoteFile (url string) string {
+	resp, err := http.Get(url)
+	CheckError(err, "Cannot fetch remote file..., Please check your internet connection!")
+	body, err := ioutil.ReadAll(resp.Body)
+	CheckError(err, "Cannot read from response..., Please check your internet connection!")
+	return string(body)
 }

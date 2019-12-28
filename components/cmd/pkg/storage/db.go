@@ -33,6 +33,13 @@ func NewDB(driver string, uri string) Database {
 	}
 }
 
+// CreateTables Create all Tables
+func (db *Database) CreateTables () {
+	// Read SQL
+	var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/storage/db.sql")
+	gosql.Exec(sqlString)
+}
+
 // Connect tries to connect the database
 func (db *Database) Connect() {
 	gosql.Connect(db.configs)
