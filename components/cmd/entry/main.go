@@ -50,7 +50,6 @@ func main() {
 				Usage:    "database",
 				Category: "storage",
 				Action: func(c *cli.Context) error {
-					save()
 					return nil
 				},
 			},
