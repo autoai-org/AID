@@ -19,28 +19,22 @@ type Database struct {
 }
 
 // NewDB returns a new Database Instance
-func NewDB (driver string, uri string) Database {
+func NewDB(driver string, uri string) Database {
 	configs := make(map[string]*gosql.Config)
 	configs["default"] = &gosql.Config{
-        Enable:  true,
-        Driver:  driver,
-        Dsn:     uri,
-        ShowSql: true,
-    }
+		Enable:  true,
+		Driver:  driver,
+		Dsn:     uri,
+		ShowSql: true,
+	}
 	return Database{
-		configs:configs,
+		configs:     configs,
 		isConnected: false,
 	}
 }
 
-// connect should be run before any queries.
-func (db *Database) connect(dbType string,dbPath string) {
-	db.configs["default"] = &gosql.Config{
-		Enable:  true,
-		Driver:  "sqlite3",
-		Dsn:     dbPath,
-		ShowSql: true,
-	}
+// Connect tries to connect the database
+func (db *Database) Connect() {
 	gosql.Connect(db.configs)
 	db.isConnected = true
 }

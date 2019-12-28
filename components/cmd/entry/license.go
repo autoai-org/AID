@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package main
 
 import "fmt"
@@ -5,7 +10,6 @@ import "fmt"
 func printLicense() {
 	var personal = `
 	PERSONAL USE IS FREE AND GOVERNED BY THE FOLLOWING LICENSE
-	THIRD-PARTY PACKAGES MAY NOT BE FREE AND GOVERNED BY OTHER LICENSE
 
 	MIT License
 
@@ -28,7 +32,11 @@ func printLicense() {
 	LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 	OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 	SOFTWARE.
+	
+	NOTE:
 
+	THIRD-PARTY PACKAGES MAY NOT BE FREE AND GOVERNED BY OTHER LICENSES
+	
 	FOR COMMERCIAL USE, PLEASE SUBMIT YOUR INFORMATION AT 
 	https://forms.gle/YtavxQBbTidAXrFx7
 	`

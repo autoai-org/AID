@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package main
 
 import (
@@ -39,6 +44,16 @@ func main() {
 			return nil
 		},
 		Commands: []*cli.Command{
+			{
+				Name:     "db",
+				Aliases:  []string{"db"},
+				Usage:    "database",
+				Category: "storage",
+				Action: func(c *cli.Context) error {
+					save()
+					return nil
+				},
+			},
 			{
 				Name:     "build",
 				Aliases:  []string{"b"},

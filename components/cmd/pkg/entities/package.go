@@ -27,6 +27,11 @@ func (p *Package) TableName() string {
 	return "package"
 }
 
+// PK defines the primary key of Package
+func (p *Package) PK() string {
+	return "id"
+}
+
 // PackageConfig is the toml interface as in cvpm.toml
 type PackageConfig struct {
 	Solvers []Solver
