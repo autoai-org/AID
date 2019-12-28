@@ -7,42 +7,40 @@ package storage
 
 import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"github.com/jmoiron/sqlx"
-	"github.com/sirupsen/logrus"
+	"github.com/ilibs/gosql/v2"
 )
 
 var logger = utilities.NewLogger()
 
 // Database is the primary class for persisting contents
 type Database struct {
-	db     *sqlx.DB
-	dbPath string
+	configs     map[string]*gosql.Config
+	isConnected bool
 }
 
-// New returns a Database instance
-func New(schema string, dbPath string) *Database {
-	exists := utilities.IsExists(dbPath)
-	if !exists {
-		logger.WithFields(logrus.Fields{
-			"module": "storage",
-		}).Error("File Not Exists " + dbPath)
+// NewDB returns a new Database Instance
+func NewDB (driver string, uri string) Database {
+	configs := make(map[string]*gosql.Config)
+	configs["default"] = &gosql.Config{
+        Enable:  true,
+        Driver:  driver,
+        Dsn:     uri,
+        ShowSql: true,
+    }
+	return Database{
+		configs:configs,
+		isConnected: false,
 	}
-	database, err := sqlx.Open("sqlite3", dbPath)
-	if err != nil {
-		logger.WithFields(logrus.Fields{
-			"module": "storage",
-		}).Error("Cannot Open Database " + dbPath)
-	}
-	err = database.Ping()
-	if err != nil {
-		logger.WithFields(logrus.Fields{
-			"module": "storage",
-		}).Error("Cannot Connect to Database " + dbPath)
-	}
-	return &Database{db: database, dbPath: dbPath}
 }
 
 // connect should be run before any queries.
-func (db *Database) connect() {
-
+func (db *Database) connect(dbType string,dbPath string) {
+	db.configs["default"] = &gosql.Config{
+		Enable:  true,
+		Driver:  "sqlite3",
+		Dsn:     dbPath,
+		ShowSql: true,
+	}
+	gosql.Connect(db.configs)
+	db.isConnected = true
 }

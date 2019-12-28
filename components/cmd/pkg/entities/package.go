@@ -8,14 +8,23 @@ package entities
 import (
 	"github.com/BurntSushi/toml"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"time"
 )
 
 // Package defines basic package information
 type Package struct {
-	ID        string
-	Name      string
-	LocalPath string
-	Vendor    string
+	ID        string    `db:"id"`
+	Name      string    `db:"name"`
+	LocalPath string    `db:"localpath"`
+	Vendor    string    `db:"vendor"`
+	Status    string    `db:"status"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+}
+
+// TableName defines the tablename in database
+func (p *Package) TableName() string {
+	return "package"
 }
 
 // PackageConfig is the toml interface as in cvpm.toml

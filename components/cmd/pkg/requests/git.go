@@ -23,6 +23,7 @@ func (gitclient *GitClient) Clone(remoteURL string, targetFolder string) {
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
 		URL:      remoteURL,
 		Progress: os.Stdout,
+		Depth:    1,
 	})
 	utilities.CheckError(err, "Cannot Clone from "+remoteURL)
 }
