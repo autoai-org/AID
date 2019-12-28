@@ -12,3 +12,4 @@ dist
 !docs/dist/api.html
 cli/cvpm
 core/cmd/cmd
+components/cmd/entry/logs/system.log.201912230000

@@ -17,6 +17,11 @@ var logger = utilities.NewDefaultLogger("./logs/system.log")
 type GitClient struct {
 }
 
+// NewGitClient returns a new Git Client
+func NewGitClient() GitClient {
+	return GitClient{}
+}
+
 // Clone downloads remote contents from remoteURL to targetFolder
 func (gitclient *GitClient) Clone(remoteURL string, targetFolder string) {
 	logger.Info("Cloning from " + remoteURL + " into " + targetFolder)

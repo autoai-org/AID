@@ -96,3 +96,8 @@ func generate() {
 func startServer(port string) {
 	daemon.RunServer(port, filepath.Join("./", "server.pem"), filepath.Join("./", "server.key"))
 }
+
+func installPackage(remoteURL string) {
+	entities.InstallPackage(remoteURL, config.Read("install_path"))
+}
+

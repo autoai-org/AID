@@ -30,6 +30,12 @@ func NewConfig(filename string) *Config {
 	return &config
 }
 
+func (config *Config) Read(key string) string {
+	var v string
+	config.Get(key, &v)
+	return v
+}
+
 // Get retreives a Config option into a passed in pointer or returns an error.
 func (config *Config) Get(key string, v interface{}) error {
 	var val interface{}

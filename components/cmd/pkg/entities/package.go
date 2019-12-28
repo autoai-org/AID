@@ -7,9 +7,14 @@ package entities
 
 import (
 	"github.com/BurntSushi/toml"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"strings"
 	"time"
+	"path/filepath"
 )
+
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // Package defines basic package information
 type Package struct {
@@ -20,6 +25,7 @@ type Package struct {
 	Status    string    `db:"status"`
 	CreatedAt time.Time `db:"created_at"`
 	UpdatedAt time.Time `db:"updated_at"`
+	RemoteURL string    `db:"remote_url"`
 }
 
 // TableName defines the tablename in database
@@ -44,4 +50,30 @@ func LoadPackageFromConfig(tomlString string) PackageConfig {
 	_, err := toml.Decode(tomlString, &packageConfig)
 	utilities.CheckError(err, "Cannot Load Solvers from toml string, please check its syntax!")
 	return packageConfig
+}
+
+// InstallPackage fetches remote content to target folder
+func InstallPackage(remoteURL string, targetFolder string) {
+	// Check type of RemoteURL
+	var remoteType string
+	if strings.HasPrefix(remoteURL, "https://github.com") {
+		remoteType = "Git"
+	} else if strings.HasPrefix(remoteURL, "git://") {
+		remoteType = "Git"
+	} else {
+		remoteType = "Registry"
+	}
+	switch remoteType {
+	case "Git":
+		git := requests.NewGitClient()
+		localFolderName := strings.Split(remoteURL, "/")
+		vendorName := localFolderName[len(localFolderName)-2]
+		repoName := localFolderName[len(localFolderName)-1]
+		targetSubFolder := filepath.Join(targetFolder, vendorName, repoName)
+		git.Clone(remoteURL, targetSubFolder)
+	case "Registry":
+		logger.Error("Unsupported Remote Type.")
+	default:
+		logger.Error("Unsupported Remote Type.")
+	}
 }

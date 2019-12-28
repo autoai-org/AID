@@ -16,3 +16,4 @@ There will be a new package manager for not only computer vision models, but als
 
 ### Code Quality
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/CVPM)](https://goreportcard.com/report/github.com/autoai-org/CVPM)
+[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/cvpm/badge)](https://www.codefactor.io/repository/github/autoai-org/cvpm)
