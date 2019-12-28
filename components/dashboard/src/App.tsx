@@ -1,9 +1,8 @@
 import React from 'react'
-import { ConnectedRouter } from 'connected-react-router'
 import { History } from 'history'
-import routes from './services/routes'
 import { ThemeProvider } from '@material-ui/core/styles';
 import globalTheme from './services/theme'
+import Container from './components/container/Container'
 
 interface AppProps {
   history: History;
@@ -12,9 +11,7 @@ interface AppProps {
 const App = ({ history }: AppProps) => {
   return (
     <ThemeProvider theme={globalTheme}>
-    <ConnectedRouter history={history}>
-      { routes }
-    </ConnectedRouter>
+      <Container history={history}></Container>
     </ThemeProvider>
   )
 }
