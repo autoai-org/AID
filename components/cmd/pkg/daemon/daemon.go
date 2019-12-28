@@ -1,12 +1,17 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package daemon
 
 import (
+	"github.com/kardianos/service"
 	"log"
 	"os"
 	"os/user"
+	"path/filepath"
 	"runtime"
-
-	"github.com/kardianos/service"
 )
 
 // DaemonPort is the default port that the daemon will be listening at
@@ -16,7 +21,7 @@ type sol struct {
 }
 
 func (s *sol) Start(srv service.Service) error {
-	go RunServer(DaemonPort)
+	go RunServer(DaemonPort, filepath.Join("./", "../../entry/server.pem"), filepath.Join("./", "../../entry/server.key"))
 	return nil
 }
 

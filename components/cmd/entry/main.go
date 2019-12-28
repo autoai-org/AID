@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package main
 
 import (
@@ -17,7 +22,7 @@ var (
 
 func main() {
 	var license bool
-
+	readConfig()
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("version=%s build=%s\n", c.App.Version, Build)
 	}
@@ -40,12 +45,32 @@ func main() {
 		},
 		Commands: []*cli.Command{
 			{
+				Name:     "db",
+				Aliases:  []string{"db"},
+				Usage:    "database",
+				Category: "storage",
+				Action: func(c *cli.Context) error {
+					save()
+					return nil
+				},
+			},
+			{
 				Name:     "build",
 				Aliases:  []string{"b"},
 				Usage:    "Build Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
 					build(c.Args().Get(0))
+					return nil
+				},
+			},
+			{
+				Name:     "install",
+				Aliases:  []string{"i"},
+				Usage:    "Install Package",
+				Category: "packages",
+				Action: func(c *cli.Context) error {
+					installPackage(c.Args().Get(0))
 					return nil
 				},
 			},
@@ -79,10 +104,19 @@ func main() {
 			},
 			{
 				Name:    "interactive",
-				Aliases: []string{"i"},
+				Aliases: []string{"in"},
 				Usage:   "Interactive Mode",
 				Action: func(c *cli.Context) error {
 					interactiveMode()
+					return nil
+				},
+			},
+			{
+				Name:     "up",
+				Usage:    "Server Up",
+				Category: "daemon",
+				Action: func(c *cli.Context) error {
+					startServer(c.Args().Get(0))
 					return nil
 				},
 			},

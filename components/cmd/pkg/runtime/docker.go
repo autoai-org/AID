@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package runtime
 
 import (
@@ -16,7 +21,7 @@ import (
 	"path/filepath"
 )
 
-var logger = utilities.NewLogger()
+var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // DockerRuntime is the basic class for manage docker
 type DockerRuntime struct {

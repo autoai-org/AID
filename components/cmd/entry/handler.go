@@ -1,7 +1,13 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package main
 
 import (
 	"github.com/alexeyco/simpletable"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/daemon"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
@@ -86,3 +92,12 @@ func generate() {
 	runtime.RenderRunnerTpl("./", solvers)
 	runtime.GenerateDockerFiles("./")
 }
+
+func startServer(port string) {
+	daemon.RunServer(port, filepath.Join("./", "server.pem"), filepath.Join("./", "server.key"))
+}
+
+func installPackage(remoteURL string) {
+	entities.InstallPackage(remoteURL, config.Read("install_path"))
+}
+

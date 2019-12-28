@@ -20,5 +20,14 @@ jobs:
       run: |
         cd components/cmd && make test
         
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
+        file: ./components/cmd/c.out
+        flags: cmd-codecov
+        name: cmd-codecov
+        fail_ci_if_error: true
+        
     - name: Build
       run: cd components/cmd && make build
