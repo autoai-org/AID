@@ -1,5 +1,5 @@
 // Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -94,10 +94,9 @@ func generate() {
 }
 
 func startServer(port string) {
-	daemon.RunServer(port, filepath.Join("./", "server.pem"), filepath.Join("./", "server.key"))
+	daemon.RunServer(port, filepath.Join("./", "keys", "server.crt"), filepath.Join("./", "keys", "server.key"))
 }
 
 func installPackage(remoteURL string) {
 	entities.InstallPackage(remoteURL, config.Read("install_path"))
 }
-

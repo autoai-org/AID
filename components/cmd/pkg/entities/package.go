@@ -77,3 +77,5 @@ func InstallPackage(remoteURL string, targetFolder string) {
 		logger.Error("Unsupported Remote Type.")
 	}
 }
+
+
