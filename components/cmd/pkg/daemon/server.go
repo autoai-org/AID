@@ -6,12 +6,12 @@
 package daemon
 
 import (
-	"os"
-	"syscall"
-	"os/signal"
-	"net/http"
-	"github.com/gin-gonic/gin"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/gin-gonic/gin"
+	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 var logger = utilities.NewDefaultLogger("./logs/system.log")
@@ -37,8 +37,13 @@ func beforeResponse() gin.HandlerFunc {
 func RunServer(port string, sslcert string, sslkey string) {
 	logger.Info("Initiating Service...")
 	r := getRouter()
-	go func() { 
-		err := r.RunTLS("127.0.0.1:" + port, sslcert, sslkey)
+	var err error
+	go func() {
+		if utilities.IsExists(sslcert) && port == "443" {
+			err = r.RunTLS("127.0.0.1:"+port, sslcert, sslkey)
+		} else {
+			err = r.Run("127.0.0.1:" + port)
+		}
 		utilities.CheckError(err, "Cannot Start Server")
 	}()
 	quit := make(chan os.Signal)

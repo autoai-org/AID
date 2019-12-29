@@ -17,6 +17,7 @@ require (
 	github.com/gin-gonic/gin v1.5.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/gorilla/mux v1.7.3 // indirect
+	github.com/gorilla/websocket v1.4.1
 	github.com/ilibs/gosql/v2 v2.0.1
 	github.com/jmoiron/sqlx v1.2.0
 	github.com/kardianos/service v1.0.0

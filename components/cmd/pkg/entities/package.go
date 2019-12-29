@@ -107,6 +107,6 @@ func FetchPackages() []Package {
 	packages := make([]Package, len(packagesPointers))
 	for i := range packagesPointers {
 		packages[i] = *packagesPointers[i]
-	  }
+	}
 	return packages
 }
