@@ -1,13 +1,18 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import React from 'react'
 import { Route, Switch } from 'react-router'
 import Home from '../pages/home/Home'
-import Dashboard from '../pages/dashboard/Dashboard'
+import Packages from '../pages/packages/Packages'
 
 const routes = (
   <div>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route path="/dashboard" component={Dashboard} />
+      <Route path="/packages" component={Packages} />
     </Switch>
   </div>
 )

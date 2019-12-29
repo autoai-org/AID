@@ -70,3 +70,9 @@ func (db *Database) Insert(obj interface{}) (err error) {
 	_, err = gosql.Model(obj).Create()
 	return err
 }
+
+// Fetch returns all objects in the database
+func (db *Database) Fetch(obj interface{}) (err error) {
+	err = gosql.Model(obj).All()
+	return err
+}

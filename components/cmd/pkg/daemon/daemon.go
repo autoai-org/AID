@@ -40,9 +40,9 @@ func getRunUser() string {
 func getAIPMDConfig() *service.Config {
 	realUsername := getRunUser()
 	srvConf := &service.Config{
-		Name:        "aipmd",
-		DisplayName: "AIPM Daemon",
-		Description: "Artificial Intelligence Package Manager[Daemon]",
+		Name:        "aiflowd",
+		DisplayName: "AIFlow Daemon",
+		Description: "Artificial Intelligence Ops System[Daemon]",
 		Arguments:   []string{"daemon", "up"},
 		UserName:    realUsername,
 	}

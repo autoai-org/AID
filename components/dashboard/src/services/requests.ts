@@ -1,28 +1,36 @@
-import axios from 'axios'
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
 
-function _get(endpoint: string) {
-    return new Promise((resolve, reject) => {
-        axios.get(endpoint).then(function (res) {
-            resolve(res)
-        }).catch(function (err) {
-            reject(err)
-        }).finally(function () {
-        })
-    })
+import { API, FETCH_PACKAGES, LOAD_PACKAGES } from '../actions/types'
+
+
+function _get(endpoint: string, onSuccess: Function) {
+    return {
+        type: API,
+        payload: {
+            url: endpoint,
+            method: "GET",
+            data: null,
+            onSuccess: onSuccess,
+            onFailure: () => {
+                console.error("Cannot Load Content from " + endpoint)
+            },
+            label: FETCH_PACKAGES
+        }
+    }
 }
 
-function _post(endpoint: string, data: object) {
-    return new Promise((resolve, reject) => {
-        axios.post(endpoint, data).then(function (res) {
-            resolve(res)
-        }).catch(function (err) {
-            reject(err)
-        }).finally(function () {
-        })
+function GetAllPackages() {
+    return _get("https://localhost/packages", (data:object)=>{
+        return {
+            type: LOAD_PACKAGES,
+            payload: data
+        }
     })
 }
 
 export {
-    _get,
-    _post
+    GetAllPackages,
 }

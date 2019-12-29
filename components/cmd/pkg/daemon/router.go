@@ -11,5 +11,9 @@ import (
 
 func getRouter() *gin.Engine {
 	r := gin.Default()
+	r.Use(beforeResponse())
+	r.Use(gin.Recovery())
+	r.GET("/packages", getPackages)
+	r.GET("/v", getVersion)
 	return r
 }
