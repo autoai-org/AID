@@ -21,6 +21,12 @@ func NewDefaultLogger(logPath string) *logrus.Logger {
 	if DefaultLogger != nil {
 		return DefaultLogger
 	}
+	return NewLogger(logPath)
+}
+
+// NewLogger returns a new Logger
+func NewLogger(logPath string) *logrus.Logger {
+	var logger *logrus.Logger
 	CreateFolderIfNotExist(filepath.Dir(logPath))
 	writer, err := rotatelogs.New(
 		logPath+".%Y%m%d%H%M",
@@ -32,10 +38,10 @@ func NewDefaultLogger(logPath string) *logrus.Logger {
 		logrus.Error("Cannot Initialize Logger..")
 		logrus.Error(err.Error())
 	}
-	DefaultLogger = logrus.New()
-	DefaultLogger.Hooks.Add(lfshook.NewHook(
+	logger = logrus.New()
+	logger.Hooks.Add(lfshook.NewHook(
 		writer,
 		&logrus.JSONFormatter{},
 	))
-	return DefaultLogger
+	return logger
 }

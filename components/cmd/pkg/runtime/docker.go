@@ -18,6 +18,7 @@ import (
 	"io"
 	"os"
 	"path"
+	"bufio"
 	"path/filepath"
 )
 
@@ -124,5 +125,26 @@ func GenerateDockerFiles(baseFilePath string) {
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
 		RenderDockerfile(solver.Name, baseFilePath)
+	}
+}
+
+// FetchContainerLogs returns the logs in the container
+func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
+	var logPath = "./logs/containers/" + containerID
+	logger := utilities.NewLogger(logPath)
+    reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
+        ShowStderr: true,
+        ShowStdout: true,
+        Timestamps: false,
+        Follow:     true,
+        Tail:       "40",
+    })
+    if err != nil {
+        logger.Fatal(err)
+	}
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		logger.Info(scanner.Text())
 	}
 }

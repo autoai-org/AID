@@ -7,13 +7,15 @@ package main
 
 import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/config"
 )
 
 // readConfig checks if all the required folder exists,
 // If not, it will create the folder
 
-var config *utilities.Config
+var userConfig *utilities.Config
 
 func readConfig() {
-	config = utilities.NewConfig("./config.json")
+	userConfig = utilities.NewConfig("./config.json")
+	config.DefaultConfig = userConfig
 }

@@ -6,6 +6,8 @@
 package utilities
 
 import (
+	"os"
+	"time"
 	"io/ioutil"
 	"net/http"
 )
@@ -42,4 +44,22 @@ func GetRemoteFile(url string) string {
 	body, err := ioutil.ReadAll(resp.Body)
 	CheckError(err, "Cannot read from response..., Please check your internet connection!")
 	return string(body)
+}
+
+// ReadFileIfModified will return filecontent in byte mode if file has been modified
+func ReadFileIfModified(filename string, lastMod time.Time) ([]byte, time.Time, error){
+	fi, err := os.Stat(filename)
+	if err != nil {
+		return nil, lastMod, err
+	}
+	if !fi.ModTime().After(lastMod) {
+		return nil, lastMod, nil
+	}
+	p, err := ioutil.ReadFile(filename)
+	if err != nil {
+		return nil, fi.ModTime(), err
+	}
+	fileindicator := []byte(filename + "\n")
+	msg := append(fileindicator, p...)
+	return msg, fi.ModTime(), nil
 }

@@ -1,61 +1,96 @@
 <template>
-  <v-app>
-    <v-app-bar
-      app
-      color="primary"
-      dark
-    >
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
+  <v-app id="inspire">
+    <v-navigation-drawer :dark="dark" v-model="drawer" app clipped>
+      <v-list subheader>
+        <v-subheader>Overview</v-subheader>
+        <v-list-item v-for="item in menus[0]" :key="item.text" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider />
+        <v-subheader>System</v-subheader>
+        <v-list-item v-for="item in menus[1]" :key="item.text" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider />
+        <v-subheader>About</v-subheader>
+        <v-list-item v-for="item in menus[2]" :key="item.text" link>
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar :dark="dark" app clipped-left color="primary">
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
+      <v-toolbar-title class="mr-12 align-center">
+        <span class="title">AI Flow</span>
+      </v-toolbar-title>
+      <v-spacer />
+      <v-row align="center" style="max-width: 650px">
+        <v-text-field
+          :append-icon-cb="() => {}"
+          placeholder="Search..."
+          single-line
+          append-icon="mdi-magnify"
+          color="white"
+          hide-details
         />
-
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
-
-      <v-spacer></v-spacer>
-
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      </v-row>
     </v-app-bar>
-
+    <v-dialog v-model="isLoading" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
+        <v-card-text>
+          Please stand by...
+          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
     <v-content>
-      <HelloWorld/>
+      <v-container class="fill-height">
+        <router-view />
+      </v-container>
     </v-content>
   </v-app>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
-
-export default Vue.extend({
-  name: 'App',
-
-  components: {
-    HelloWorld,
+import { mapState } from "vuex";
+import { overview_menu, system_menu, about_menu } from "./router/menu";
+export default {
+  props: {
+    source: String
   },
-
   data: () => ({
-    //
+    dark: true,
+    drawer: null,
+    menus: [overview_menu, system_menu, about_menu]
   }),
-});
+  computed: {
+    ...mapState({
+      isLoading: "isLoading"
+    })
+  }
+};
 </script>
+
+<style scoped>
+.fill-height {
+  align-items: baseline!important;
+}
+</style>
