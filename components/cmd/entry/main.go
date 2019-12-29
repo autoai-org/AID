@@ -1,5 +1,5 @@
 // Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -34,9 +34,9 @@ func main() {
 				Destination: &license,
 			},
 		},
-		Name:    "AIPM",
+		Name:    "AIFlow",
 		Version: Version,
-		Usage:   "The Package Manager for A.I. Models",
+		Usage:   "One-Stop AIOps System.",
 		Action: func(c *cli.Context) error {
 			if license {
 				printLicense()
@@ -50,6 +50,15 @@ func main() {
 				Usage:    "database",
 				Category: "storage",
 				Action: func(c *cli.Context) error {
+					return nil
+				},
+			},
+			{
+				Name:     "init",
+				Usage:    "Initialize all configurations, database and web ui",
+				Category: "self",
+				Action: func(c *cli.Context) error {
+					initDatabase()
 					return nil
 				},
 			},
@@ -102,9 +111,10 @@ func main() {
 				},
 			},
 			{
-				Name:    "interactive",
-				Aliases: []string{"in"},
-				Usage:   "Interactive Mode",
+				Name:     "interactive",
+				Aliases:  []string{"in"},
+				Usage:    "Interactive Mode",
+				Category: "self",
 				Action: func(c *cli.Context) error {
 					interactiveMode()
 					return nil

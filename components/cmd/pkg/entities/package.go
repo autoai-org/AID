@@ -8,10 +8,11 @@ package entities
 import (
 	"github.com/BurntSushi/toml"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"path/filepath"
 	"strings"
 	"time"
-	"path/filepath"
 )
 
 var logger = utilities.NewDefaultLogger("./logs/system.log")
@@ -56,6 +57,7 @@ func LoadPackageFromConfig(tomlString string) PackageConfig {
 func InstallPackage(remoteURL string, targetFolder string) {
 	// Check type of RemoteURL
 	var remoteType string
+	var pack Package
 	if strings.HasPrefix(remoteURL, "https://github.com") {
 		remoteType = "Git"
 	} else if strings.HasPrefix(remoteURL, "git://") {
@@ -63,6 +65,7 @@ func InstallPackage(remoteURL string, targetFolder string) {
 	} else {
 		remoteType = "Registry"
 	}
+	// Fetch Remote Content
 	switch remoteType {
 	case "Git":
 		git := requests.NewGitClient()
@@ -70,12 +73,27 @@ func InstallPackage(remoteURL string, targetFolder string) {
 		vendorName := localFolderName[len(localFolderName)-2]
 		repoName := localFolderName[len(localFolderName)-1]
 		targetSubFolder := filepath.Join(targetFolder, vendorName, repoName)
+		pack = Package{Name: repoName,
+			LocalPath: targetSubFolder,
+			Vendor:    vendorName,
+			Status:    "installed",
+			RemoteURL: remoteURL}
 		git.Clone(remoteURL, targetSubFolder)
 	case "Registry":
 		logger.Error("Unsupported Remote Type.")
 	default:
 		logger.Error("Unsupported Remote Type.")
 	}
+	// Save package into database for future use
+	err := pack.Save()
+	utilities.CheckError(err, "Cannot save package into database!")
+	// All is well
+	logger.Info("Installation Finished!")
 }
 
-
+// Save stores package into database
+func (p *Package) Save() error {
+	db := storage.GetDefaultDB()
+	db.Connect()
+	return db.Insert(p)
+}

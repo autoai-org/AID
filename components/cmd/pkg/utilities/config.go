@@ -22,12 +22,23 @@ type Config struct {
 	cache    *map[string]interface{}
 }
 
+// DefaultConfig is the config object shared by all modules
+var DefaultConfig *Config
+
 // NewConfig returns a new Config object.
 func NewConfig(filename string) *Config {
 	config := Config{filename, nil}
 	config.Reload()
 	go config.watch()
 	return &config
+}
+
+// GetDefaultConfig returns the default config path file
+func GetDefaultConfig() *Config {
+	if DefaultConfig != nil {
+		return DefaultConfig
+	}
+	return NewConfig("./config.json")
 }
 
 func (config *Config) Read(key string) string {

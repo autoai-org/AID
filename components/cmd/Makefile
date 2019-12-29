@@ -10,6 +10,7 @@ format:
 
 test:
 	go test -race -coverprofile c.out -v ./...
+	rm -rf **/**/logs/
 	
 build:
 	bash ./build.sh
