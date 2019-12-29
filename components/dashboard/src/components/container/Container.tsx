@@ -1,3 +1,8 @@
+// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import ContainerMui from '@material-ui/core/Container';

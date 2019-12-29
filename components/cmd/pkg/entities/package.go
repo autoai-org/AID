@@ -19,7 +19,7 @@ var logger = utilities.NewDefaultLogger("./logs/system.log")
 
 // Package defines basic package information
 type Package struct {
-	ID        string    `db:"id"`
+	ID        int       `db:"id"`
 	Name      string    `db:"name"`
 	LocalPath string    `db:"localpath"`
 	Vendor    string    `db:"vendor"`
@@ -73,12 +73,13 @@ func InstallPackage(remoteURL string, targetFolder string) {
 		vendorName := localFolderName[len(localFolderName)-2]
 		repoName := localFolderName[len(localFolderName)-1]
 		targetSubFolder := filepath.Join(targetFolder, vendorName, repoName)
+		absTargetSubFolder, _ := filepath.Abs(targetSubFolder)
 		pack = Package{Name: repoName,
-			LocalPath: targetSubFolder,
+			LocalPath: absTargetSubFolder,
 			Vendor:    vendorName,
 			Status:    "installed",
 			RemoteURL: remoteURL}
-		git.Clone(remoteURL, targetSubFolder)
+		git.Clone(remoteURL, absTargetSubFolder)
 	case "Registry":
 		logger.Error("Unsupported Remote Type.")
 	default:
@@ -96,4 +97,16 @@ func (p *Package) Save() error {
 	db := storage.GetDefaultDB()
 	db.Connect()
 	return db.Insert(p)
+}
+
+// FetchPackages returns all packages
+func FetchPackages() []Package {
+	packagesPointers := make([]*Package, 0)
+	db := storage.GetDefaultDB()
+	db.Fetch(&packagesPointers)
+	packages := make([]Package, len(packagesPointers))
+	for i := range packagesPointers {
+		packages[i] = *packagesPointers[i]
+	  }
+	return packages
 }

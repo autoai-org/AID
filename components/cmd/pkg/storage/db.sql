@@ -4,7 +4,7 @@ CREATE TABLE IF NOT EXISTS package (
   localpath TEXT,
   vendor TEXT,
   status TEXT,
-  created_at datetime,
-  updated_at datetime,
+  created_at DATETIME,
+  updated_at DATETIME,
   remote_url TEXT
 )
