@@ -18,8 +18,11 @@ type Database struct {
 	isConnected bool
 }
 
+// DefaultDB is the shared Database Instance shared by all modules
+var DefaultDB *Database
+
 // NewDB returns a new Database Instance
-func NewDB(driver string, uri string) Database {
+func NewDB(driver string, uri string) *Database {
 	configs := make(map[string]*gosql.Config)
 	configs["default"] = &gosql.Config{
 		Enable:  true,
@@ -27,10 +30,22 @@ func NewDB(driver string, uri string) Database {
 		Dsn:     uri,
 		ShowSql: true,
 	}
-	return Database{
+	return &Database{
 		configs:     configs,
 		isConnected: false,
 	}
+}
+
+// GetDefaultDB returns the default DB instance
+func GetDefaultDB() *Database {
+	if DefaultDB != nil {
+		DefaultDB.Connect()
+		return DefaultDB
+	}
+	config := utilities.GetDefaultConfig()
+	db := NewDB(config.Read("db_driver"), config.Read("db_uri"))
+	db.Connect()
+	return db
 }
 
 // CreateTables Create all Tables
@@ -41,7 +56,17 @@ func (db *Database) CreateTables() {
 }
 
 // Connect tries to connect the database
-func (db *Database) Connect() {
-	gosql.Connect(db.configs)
-	db.isConnected = true
+func (db *Database) Connect() (err error) {
+	gosql.SetDefaultLink("default")
+	err = gosql.Connect(db.configs)
+	if err == nil {
+		db.isConnected = true
+	}
+	return err
+}
+
+// Insert saves object into database
+func (db *Database) Insert(obj interface{}) (err error) {
+	_, err = gosql.Model(obj).Create()
+	return err
 }
