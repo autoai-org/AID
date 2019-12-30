@@ -5,18 +5,19 @@
 
 const overview_menu = [
     { icon: "mdi-view-dashboard", text: "Dashboard" },
-    { icon: "mdi-inbox", text: "Packages" },
+    { icon: "mdi-inbox", text: "Packages", link: "/overview/packages" },
 ]
 
 const system_menu = [
     { icon: "mdi-poll-box", text: "System Status" },
+    { icon: "mdi-math-log", text: "System Logs", link: "/system/logs"},
     { icon: "mdi-puzzle", text: "Extensions" },
 ]
 
 const about_menu = [
-    { icon: "mdi-github-circle", text: "GitHub" },
+    { icon: "mdi-github-circle", text: "GitHub", link: "https://github.com/autoai-org/cvpm"},
     { icon: "mdi-database-search", text: "Registry" },
-    { icon: "mdi-help", text: "Docs" },
+    { icon: "mdi-help", text: "Docs", link: "https://aiflow.autoai.org"},
     { icon: "mdi-information-outline", text: "AIFlow Story" },
 ]
 

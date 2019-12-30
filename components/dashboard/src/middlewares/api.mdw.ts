@@ -5,7 +5,8 @@
 
 import axios from 'axios'
 import store from '@/store'
-
+import dayjs from 'dayjs'
+import { Package } from '@/entities/package'
 const endpoint: string = "http://localhost:10590/"
 
 function _apiRequest(url: string,
@@ -32,7 +33,21 @@ function _apiRequest(url: string,
 
 function fetchAllPackages() {
     _apiRequest(endpoint + "packages", "get", {}, {},
-        (res: object) => {
+        (res: Array<Package>) => {
+            res = res.map(function (each) {
+                each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                return each
+            })
+            store.commit('setPackages', res)
+        },
+        (err: object) => {
+            console.error(err)
+        })
+}
+
+function buildImage(packageName: string, solverName: string) {
+    _apiRequest(endpoint + "packages/" + packageName + "/solvers" + solverName + "/images", "put", {}, {},
+        (res: Array<Package>) => {
             store.commit('setPackages', res)
         },
         (err: object) => {
@@ -42,5 +57,6 @@ function fetchAllPackages() {
 
 export {
     _apiRequest,
-    fetchAllPackages
+    fetchAllPackages,
+    buildImage
 }

@@ -14,6 +14,9 @@ func getRouter() *gin.Engine {
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	r.GET("/packages", getPackages)
-	r.GET("/v", getVersion)
+	r.PUT("/packages/:packageName/solvers/:solverName/images", buildPackageImage)
+	r.GET("/socket/:channel", func(c *gin.Context) {
+		serveWs(c)
+	})
 	return r
 }
