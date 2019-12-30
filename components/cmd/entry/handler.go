@@ -98,5 +98,5 @@ func startServer(port string) {
 }
 
 func installPackage(remoteURL string) {
-	entities.InstallPackage(remoteURL, config.Read("install_path"))
+	runtime.InstallPackage(remoteURL, utilities.DefaultConfig.Read("install_path"))
 }

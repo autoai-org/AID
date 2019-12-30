@@ -6,6 +6,7 @@
 package runtime
 
 import (
+	"bufio"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/docker/docker/api/types"
@@ -18,7 +19,6 @@ import (
 	"io"
 	"os"
 	"path"
-	"bufio"
 	"path/filepath"
 )
 
@@ -76,18 +76,26 @@ func (docker *DockerRuntime) Start(containerID string) error {
 }
 
 // Build will build a new image from dockerfile
-func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
+func (docker *DockerRuntime) Build (imageName string, dockerfile string) error {
 	logger.Info("Starting Build Image: " + imageName + "...")
 	err := archiver.Archive([]string{path.Dir(dockerfile)}, "archive.tar")
 	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archive.tar"))
 	defer dockerBuildContext.Close()
 	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{
-		Tags:       []string{imageName},
+		Tags:       []string{"aiflow-"+imageName},
 		Dockerfile: dockerfile,
 	})
 	if err != nil {
 		logger.Error("Cannot build image " + imageName)
 		logger.Error(err.Error())
+	}
+	reader := buildResponse.Body
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	var logPath = "./logs/builds/" + imageName
+	buildLogger := utilities.NewLogger(logPath)
+	for scanner.Scan() {
+		buildLogger.Info(scanner.Text())
 	}
 	termFd, isTerm := term.GetFdInfo(os.Stderr)
 	err = jsonmessage.DisplayJSONMessagesStream(buildResponse.Body, os.Stderr, termFd, isTerm, nil)
@@ -96,6 +104,7 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) {
 		logger.Error(err.Error())
 	}
 	os.Remove(filepath.Join(path.Dir(dockerfile), "archive.tar"))
+	return err
 }
 
 // ListImages returns all images that have been installed on the host
@@ -132,15 +141,15 @@ func GenerateDockerFiles(baseFilePath string) {
 func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
 	var logPath = "./logs/containers/" + containerID
 	logger := utilities.NewLogger(logPath)
-    reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
-        ShowStderr: true,
-        ShowStdout: true,
-        Timestamps: false,
-        Follow:     true,
-        Tail:       "40",
-    })
-    if err != nil {
-        logger.Fatal(err)
+	reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
+		ShowStderr: true,
+		ShowStdout: true,
+		Timestamps: false,
+		Follow:     true,
+		Tail:       "40",
+	})
+	if err != nil {
+		logger.Fatal(err)
 	}
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)

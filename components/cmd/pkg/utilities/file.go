@@ -6,10 +6,10 @@
 package utilities
 
 import (
-	"os"
-	"time"
 	"io/ioutil"
 	"net/http"
+	"os"
+	"time"
 )
 
 var logger = NewDefaultLogger("./logs/system.log")
@@ -47,7 +47,7 @@ func GetRemoteFile(url string) string {
 }
 
 // ReadFileIfModified will return filecontent in byte mode if file has been modified
-func ReadFileIfModified(filename string, lastMod time.Time) ([]byte, time.Time, error){
+func ReadFileIfModified(filename string, lastMod time.Time) ([]byte, time.Time, error) {
 	fi, err := os.Stat(filename)
 	if err != nil {
 		return nil, lastMod, err
