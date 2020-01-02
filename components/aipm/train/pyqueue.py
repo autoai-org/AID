@@ -1,4 +1,4 @@
-# Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
+# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
