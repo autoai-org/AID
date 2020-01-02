@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD
+// Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
 // 
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
@@ -13,7 +13,7 @@ func printLicense() {
 
 	MIT License
 
-	Copyright (c) 2016-2019 Xiaozhe Yao & AICAMP.CO.,LTD & Other Contributors
+	Copyright (c) 2016-2020 Xiaozhe Yao & AICAMP.CO.,LTD & Other Contributors
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy
 	of this software and associated documentation files (the "Software"), to deal
