@@ -39,7 +39,7 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-For more examples, please refer to the [Documentation](https://cvflow.autoai.org).
+For more examples, please refer to the [Documentation](https://aiflow.autoai.org).
 
 <!-- ROADMAP -->
 ## Roadmap
