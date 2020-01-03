@@ -6,9 +6,7 @@
 
 * Intelligent Annotation Environment.
 * Quicly find, download and deploy ML services. 
-* Sell, Buy, Share deep learning models.
-
-[GitHub](https://github.com/autoai-org/aiflow/)
+* Share, Sell, and purchase ML models.
 
 [Get Started](/guide/quick-start)
 
