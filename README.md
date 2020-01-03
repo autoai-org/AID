@@ -1,27 +1,3 @@
-<!--
-*** Thanks for checking out this README Template. If you have a suggestion that would
-*** make this better, please fork the repo and create a pull request or simply open
-*** an issue with the tag "enhancement".
-*** Thanks again! Now go create something AMAZING! :D
-***
-***
-***
-*** To avoid retyping too much info. Do a search and replace for the following:
-*** github_username, repo, twitter_handle, email
--->
-
-
-
-
-
-<!-- PROJECT SHIELDS -->
-<!--
-*** I'm using markdown "reference style" links for readability.
-*** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
-*** See the bottom of this document for the declaration of the reference variables
-*** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
-*** https://www.markdownguide.org/basic-syntax/#reference-style-links
--->
 ![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/CVPM)](https://goreportcard.com/report/github.com/autoai-org/CVPM)
@@ -32,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/autoai-org/cvpm">
-    <img src="assets/logo_transparent.png" alt="Logo" width="80" height="80">
+    <img src="assets/logo_transparent.png" alt="Logo" width="240" height="240">
   </a>
 
   <h3 align="center">AIFlow</h3>
@@ -60,8 +36,6 @@
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
 
 <!-- USAGE EXAMPLES -->
 ## Usage
