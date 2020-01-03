@@ -8,7 +8,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/autoai-org/cvpm">
-    <img src="assets/logo_transparent.png" alt="Logo" width="240" height="240">
+    <img src="assets/logo_transparent.png" alt="Logo" width="240">
   </a>
 
   <h3 align="center">AIFlow</h3>
