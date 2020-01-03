@@ -1,25 +1,66 @@
-# Open Workflow for Computer Vision
+![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/cmd/badge.svg)
+![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/dashboard/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/CVPM)](https://goreportcard.com/report/github.com/autoai-org/CVPM)
+[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aiflow/badge)](https://www.codefactor.io/repository/github/autoai-org/aiflow)
 
-In recent years, the multimedia community has witnessed an emerging usage of deep learning in computer vision, such as image caption, object detection, instance segmentation and etc, and many companies are adopting deep learning into their commercial products. Developing and Deploying a fast and reliable deep learning system is complex and involves labour-intensive works, like image annotation, data and models versioning. To facilitate such a process, we proposed CVFlow, which is a suite of versatile computer vision libraries and toolkits for handling computer vision tasks, including intelligent annotation toolkit, deep learning package manager, models sharing platform and computer vision serving program. CVFlow was released on GitHub in 2018, Since then 2018 the proposed workflow has been adopted by online computer vision platforms, including training and annotating.
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/autoai-org/cvpm">
+    <img src="assets/logo_transparent.png" alt="Logo" width="240">
+  </a>
 
-This is the meta documentation for the CVFlow projects, including usage of CVFlow and its modules, lawsuits, news and other useful information. We provide developers guide in separate repositories and if you are interested in contributing to CVFlow, you are warmly welcomed to visit their documentations and code repositories.
+  <h3 align="center">AIFlow</h3>
 
-* CVPM [Code](https://github.com/unarxiv/cvpm)
-* IAE [Code](https://github.com/unarxiv/iae)
-* CVTron [code](https://github.com/unarxiv/cvtron)
+  <p align="center">
+    One-stop AIOps System.
+    <br />
+    <a href="https://aiflow.autoai.org"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.youtube.com/watch?v=0TU28hkx7KE&t=33s">Video Demo</a>
+    ·
+    <a href="https://github.com/autoai-org/cvpm/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/autoai-org/cvpm/issues">Request Feature</a>
+  </p>
+</p>
 
-## Project Status
 
-### CVPM
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/unarxiv/cvpm)](https://goreportcard.com/report/github.com/unarxiv/cvpm)
-[![Build Status](https://travis-ci.org/unarxiv/CVPM.svg?branch=master)](https://travis-ci.org/unarxiv/CVPM)
-[![GitHub issues](https://img.shields.io/github/issues/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/cvpm/issues)
-[![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
-[![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/unarxiv/cvpm)
-[![Maintainability](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/maintainability)](https://codeclimate.com/github/unarxiv/CVPM/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/d66183d5e7ed7d8f0ca2/test_coverage)](https://codeclimate.com/github/unarxiv/CVPM/test_coverage)
-[![Build Status](https://dev.azure.com/2013150080/CVPM/_apis/build/status/unarxiv.CVPM)](https://dev.azure.com/2013150080/CVPM/_build/latest?definitionId=1)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Contributing](#contributing)
+* [License](#license)
+* [Credit](#credit)
+<!-- USAGE EXAMPLES -->
+
+## Usage
+
+For more examples, please refer to the [Documentation](https://aiflow.autoai.org).
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/autoai-org/cvpm/issues) for a list of proposed features (and known issues).
+
+<!-- CONTRIBUTING -->
+## Contributing
+
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<!-- LICENSE -->
+## License
+
+Personal use are governed by the MIT License. See `LICENSE` for more information.
 
 ## Credit
 
