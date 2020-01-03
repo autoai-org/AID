@@ -1,8 +1,7 @@
 ![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/CVPM)](https://goreportcard.com/report/github.com/autoai-org/CVPM)
-[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/cvpm/badge)](https://www.codefactor.io/repository/github/autoai-org/cvpm)
-
+[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aiflow/badge)](https://www.codefactor.io/repository/github/autoai-org/aiflow)
 
 <!-- PROJECT LOGO -->
 <br />
