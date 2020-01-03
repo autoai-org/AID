@@ -1,3 +1,4 @@
+#!/bin/bash
 # This is for testing and local development purpose only! DONT use in production.
 
 echo "Generating RootCA"
