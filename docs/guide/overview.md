@@ -6,7 +6,7 @@ The growing development of frameworks and libraries has greatly reduced the effo
 
 To reduce the time and efforts for annotating datasets, versioning, deploying and sharing models, we proposed and developed CVFlow for Open Computer Vision Workflow. It is a suite of toolkits and libraries that currently provides 
 
-- Intelligent annotation that can help annotators improve efficiency by providing suggestions
+- Intelligent annotation that can help annotators improve efficiency by providing suggestions.
 
 - Package manager that manages models, datasets, services and serving environment.
 

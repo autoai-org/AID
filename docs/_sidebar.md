@@ -6,13 +6,13 @@
   - [Quick Start](guide/quick-start.md)
   - [Installation](guide/installation.md)
 
-- CVPM
+- AIPM
   - [Install Packages](guide/cvpm/install-packages.md)
   - [Publish Packages](guide/cvpm/publish-packages.md)
   - [Web UI](guide/cvpm/webui-usage.md)
   - [API Reference](guide/cvpm/api-reference.md)
 
-- Contribution
+- Contributing
 
   - [Code of Conduct](guide/contribution/code-of-conduct.md)
   - [Contributing](guide/contribution/contributing.md)
