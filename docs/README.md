@@ -1,7 +1,7 @@
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
-[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aid/badge)](https://www.codefactor.io/repository/github/autoai-org/aiflow)
+[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aid/badge)](https://www.codefactor.io/repository/github/autoai-org/aid)
 
 <!-- PROJECT LOGO -->
 <br />
