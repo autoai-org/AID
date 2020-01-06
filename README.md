@@ -1,3 +1,4 @@
+[![Board Status](https://dev.azure.com/407718364/deefe359-f679-485f-a5fa-61ccb4a80f43/ffeaeb63-a3eb-4b8c-9fea-1af102b18620/_apis/work/boardbadge/a9e11654-0372-47b2-bf99-72deec33c2cc)](https://dev.azure.com/407718364/deefe359-f679-485f-a5fa-61ccb4a80f43/_boards/board/t/ffeaeb63-a3eb-4b8c-9fea-1af102b18620/Microsoft.RequirementCategory)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
