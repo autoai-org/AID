@@ -1,28 +1,28 @@
-![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/cmd/badge.svg)
-![https://github.com/autoai-org/CVPM/actions](https://github.com/autoai-org/CVPM/workflows/dashboard/badge.svg)
-[![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/CVPM)](https://goreportcard.com/report/github.com/autoai-org/CVPM)
+![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
+![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
 [![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aiflow/badge)](https://www.codefactor.io/repository/github/autoai-org/aiflow)
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/autoai-org/cvpm">
+  <a href="https://github.com/autoai-org/aid">
     <img src="assets/logo_transparent.png" alt="Logo" width="240">
   </a>
 
-  <h3 align="center">AIFlow</h3>
+  <h3 align="center">A.I.D</h3>
 
   <p align="center">
-    One-stop AIOps System.
+    Aid your entire A.I activity.
     <br />
-    <a href="https://aiflow.autoai.org"><strong>Explore the docs »</strong></a>
+    <a href="https://aid.autoai.org"><strong>Explore the docs »</strong></a>
     <br />
     <br />
     <a href="https://www.youtube.com/watch?v=0TU28hkx7KE&t=33s">Video Demo</a>
     ·
-    <a href="https://github.com/autoai-org/cvpm/issues">Report Bug</a>
+    <a href="https://github.com/autoai-org/aid/issues">Report Bug</a>
     ·
-    <a href="https://github.com/autoai-org/cvpm/issues">Request Feature</a>
+    <a href="https://github.com/autoai-org/aid/issues">Request Feature</a>
   </p>
 </p>
 
@@ -39,12 +39,12 @@
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-For more examples, please refer to the [Documentation](https://aiflow.autoai.org).
+For more examples, please refer to the [Documentation](https://aid.autoai.org).
 
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/autoai-org/cvpm/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/autoai-org/aid/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 ## Contributing
