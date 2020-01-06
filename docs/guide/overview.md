@@ -1,6 +1,6 @@
 # Overview
 
-In the past few years, deep learning has played an important role in solving computer vision tasks, such as image caption, image generation, image classification and etc. Developing deep learning applications usually begins from collecting and annotating datasets, finding and optimizing neural networks to evaluating performance on test datasets, and deployments. There appeared many frameworks, such as Tensorflow, PyTorch, Chainer, MXNet and etc.
+In the past few years, deep learning has played an important role in solving computer vision tasks, such as image caption, image generation, image classification and etc. Developing deep learning applications usually begins from collecting and annotating datasets, finding and optimizing neural networks to evaluating performance on test datasets, and deployments. There appeared many frameworks, such as TensorFlow, PyTorch, Chainer, MXNet, etc.
 
 The growing development of frameworks and libraries has greatly reduced the effort of designing, implementing and evaluating neural networks. However, the bottleneck still exists in large-scale datasets annotation, model sharing and deployments. Creating and annotating large datasets is labour-intensive and involves significant time and costs, which makes it unaffordable for small companies. Besides, the main approach to sharing and redistribution of deep learning models and algorithms is redistributing the source code and weight file, which causes incompatibilities and conflicts and brings extra and prerequisites knowledge when deploying computer vision services.
 
@@ -18,4 +18,4 @@ CVPM is the abbreviation of computer vision package manager. It allows users to 
 
 Lots of big companies have realised that one of the biggest bottlenecks in modern machine learning applications is the growing need for large, labelled datasets. Creating and annotating the datasets requires significant cost and time. To facilitate such a need, we have included Integrated Annotation Environment (IAE) for intelligent visual objects annotation.
 
-CVFlow was released on [GitHub](https://github.com/unarxiv/cvflow) in 2018, Since then the proposed workflow has been adopted by several online computer vision platforms, including training and annotating platforms.
+CVFlow was released on [GitHub](https://github.com/autoai-org/aid) from 2018, Since then the proposed workflow has been adopted by several online computer vision platforms.

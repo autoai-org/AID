@@ -6,6 +6,10 @@
   - [Quick Start](guide/quick-start.md)
   - [Installation](guide/installation.md)
 
+- Concepts
+  - [Package](guide/concepts/package.md)
+  - [Runtime](guide/concepts/runtime.md)
+
 - AIPM
   - [Install Packages](guide/cvpm/install-packages.md)
   - [Publish Packages](guide/cvpm/publish-packages.md)
