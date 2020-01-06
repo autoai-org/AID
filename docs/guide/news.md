@@ -4,4 +4,4 @@
 
 * *17, December, 2018* Watch our CVPM introduction view on [YouTube](https://www.youtube.com/watch?v=0TU28hkx7KE).
 
-* *20, December, 2019* CVFlow, along with CVPM and all its components, will be renamed to AIFlow (temporary name), due to trademark reasons.
+* *20, December, 2019* CVFlow, along with CVPM and all its components, will be renamed to AID, due to trademark reasons.
