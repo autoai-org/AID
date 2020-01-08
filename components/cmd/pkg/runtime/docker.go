@@ -76,13 +76,13 @@ func (docker *DockerRuntime) Start(containerID string) error {
 }
 
 // Build will build a new image from dockerfile
-func (docker *DockerRuntime) Build (imageName string, dockerfile string) error {
+func (docker *DockerRuntime) Build(imageName string, dockerfile string) error {
 	logger.Info("Starting Build Image: " + imageName + "...")
 	err := archiver.Archive([]string{path.Dir(dockerfile)}, "archive.tar")
 	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archive.tar"))
 	defer dockerBuildContext.Close()
 	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{
-		Tags:       []string{"aiflow-"+imageName},
+		Tags:       []string{"aiflow-" + imageName},
 		Dockerfile: dockerfile,
 	})
 	if err != nil {
@@ -93,6 +93,7 @@ func (docker *DockerRuntime) Build (imageName string, dockerfile string) error {
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)
 	var logPath = "./logs/builds/" + imageName
+	entities.NewLogObject("build-"+imageName, logPath, "docker-build")
 	buildLogger := utilities.NewLogger(logPath)
 	for scanner.Scan() {
 		buildLogger.Info(scanner.Text())
@@ -140,6 +141,7 @@ func GenerateDockerFiles(baseFilePath string) {
 // FetchContainerLogs returns the logs in the container
 func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
 	var logPath = "./logs/containers/" + containerID
+	entities.NewLogObject("container-"+containerID, logPath, "container-log")
 	logger := utilities.NewLogger(logPath)
 	reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
 		ShowStderr: true,

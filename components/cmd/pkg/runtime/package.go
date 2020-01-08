@@ -1,11 +1,11 @@
 package runtime
 
 import (
+	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"path/filepath"
 	"strings"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
 // InstallPackage fetches remote content to target folder
