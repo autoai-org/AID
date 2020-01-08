@@ -59,6 +59,7 @@ func main() {
 				Category: "self",
 				Action: func(c *cli.Context) error {
 					initDatabase()
+					initFolder()
 					return nil
 				},
 			},
