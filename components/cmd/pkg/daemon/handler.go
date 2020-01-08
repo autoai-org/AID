@@ -6,8 +6,8 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strings"
 	"path/filepath"
+	"strings"
 )
 
 // getPackages : GET /packages -> return packages
@@ -46,6 +46,6 @@ func buildPackageImage(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, gin.H{
 		"build_total_num": buildSolvers,
-		"log_file_path": filepath.Join(utilities.DefaultConfig.Read("logs_path"), "builds", imageName),
+		"log_file_path":   filepath.Join(utilities.DefaultConfig.Read("logs_path"), "builds", imageName),
 	})
 }

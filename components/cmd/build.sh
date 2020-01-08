@@ -1,5 +1,5 @@
 #!/bin/bash
-package_name="aiflow"
+package_name="aid"
 platforms=("windows/amd64" "darwin/amd64" "linux/amd64" "linux/arm64")
 VERSION="$(git describe --tags)"
 BUILD="$(date +%FT%T%z)"
@@ -8,7 +8,7 @@ do
     platform_split=(${platform//\// })
     GOOS=${platform_split[0]}
     GOARCH=${platform_split[1]}
-    echo "Building AIFlow Command Line Utility for '$GOOS'/'$GOARCH'..."
+    echo "Building AID Command Line Utility for '$GOOS'/'$GOARCH'..."
     output_name=$package_name'-'$GOOS'-'$GOARCH
     if [ $GOOS = "windows" ]; then
         output_name+=".exe"
@@ -20,4 +20,4 @@ do
     fi
 done
 
-echo "Successfully built AIFlow Command Line Utility, please go to components/cmd/dist/"
+echo "Successfully built AID Command Line Utility, please go to components/cmd/dist/"

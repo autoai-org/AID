@@ -10,30 +10,36 @@ import (
 	"time"
 )
 
-// Event defines the basic structure of a spawned event
-type Event struct {
+// Log defines the struct of log file
+type Log struct {
 	ID        int       `db:"id"`
 	Title     string    `db:"title"`
-	Data      string    `db:"data"`
+	Filepath  string    `db:"filepath"`
 	CreatedAt time.Time `db:"created_at"`
 	UpdatedAt time.Time `db:"updated_at"`
-	Status    string    `db:"status"`
 	From      string    `db:"from"`
 }
 
 // TableName defines the tablename in database
-func (e *Event) TableName() string {
-	return "event"
+func (l *Log) TableName() string {
+	return "log"
 }
 
-// PK defines the primary key of Event
-func (e *Event) PK() string {
+// PK defines the primary key of Log
+func (l *Log) PK() string {
 	return "id"
 }
 
-// Save stores event into database
-func (e *Event) Save() error {
+// Save stores log into database
+func (l *Log) Save() error {
 	db := storage.GetDefaultDB()
 	db.Connect()
-	return db.Insert(e)
+	return db.Insert(l)
+}
+
+// NewLogObject creates a new log object and saves to database
+func NewLogObject(title string, filepath string, from string) Log {
+	log := Log{Title: title, Filepath: filepath, From: from}
+	log.Save()
+	return log
 }

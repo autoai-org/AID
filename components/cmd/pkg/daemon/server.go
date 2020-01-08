@@ -20,7 +20,7 @@ var logger = utilities.NewDefaultLogger("./logs/system.log")
 func beforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		origin := c.GetHeader("Origin")
-		c.Writer.Header().Set("aiflow-version", "1.0.0 @ alpha")
+		c.Writer.Header().Set("aid-version", "1.0.0 @ dev")
 		if c.Writer.Header().Get("Access-Control-Allow-Origin") == "" {
 			c.Writer.Header().Set("Access-Control-Allow-Origin", origin)
 		}

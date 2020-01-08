@@ -37,11 +37,11 @@ func getRunUser() string {
 	return currentUser.Username
 }
 
-func getAIPMDConfig() *service.Config {
+func getAIDConfig() *service.Config {
 	realUsername := getRunUser()
 	srvConf := &service.Config{
-		Name:        "aiflowd",
-		DisplayName: "AIFlow Daemon",
+		Name:        "aidaemon",
+		DisplayName: "AID Daemon",
 		Description: "Artificial Intelligence Ops System[Daemon]",
 		Arguments:   []string{"daemon", "up"},
 		UserName:    realUsername,
@@ -51,7 +51,7 @@ func getAIPMDConfig() *service.Config {
 
 // Install adds the server into the background service
 func Install() {
-	srvConfig := getAIPMDConfig()
+	srvConfig := getAIDConfig()
 	dae := &sol{}
 	s, err := service.New(dae, srvConfig)
 	if err != nil {
@@ -69,7 +69,7 @@ func Install() {
 
 // Uninstall removes the background daemon service
 func Uninstall() {
-	srvConfig := getAIPMDConfig()
+	srvConfig := getAIDConfig()
 	dae := &sol{}
 	s, err := service.New(dae, srvConfig)
 	if err != nil {
