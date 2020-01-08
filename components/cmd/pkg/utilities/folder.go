@@ -10,6 +10,7 @@ import (
 	"os"
 	"os/user"
 	"time"
+	"path/filepath"
 )
 
 const (
@@ -42,5 +43,17 @@ func CreateFolderIfNotExist(folderPath string) {
 		if err != nil {
 			log.Print("error when creating " + folderPath + ": " + err.Error())
 		}
+	}
+}
+
+// InitFolders create all required folders under ~/.autoai/.aid
+func InitFolders() {
+	vendorDir := filepath.Join(GetHomeDir(), ".autoai")
+	CreateFolderIfNotExist(vendorDir)
+	targetDir := filepath.Join(vendorDir, ".aid")
+	CreateFolderIfNotExist(targetDir)
+	requiredFolders := [3]string{"logs", "models", "plugins"}
+	for _, each := range requiredFolders {
+		CreateFolderIfNotExist(filepath.Join(targetDir,each))
 	}
 }
