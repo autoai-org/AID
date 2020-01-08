@@ -76,3 +76,10 @@ func (db *Database) Fetch(obj interface{}) (err error) {
 	err = gosql.Model(obj).All()
 	return err
 }
+
+// FetchOne returns the only object by requested obj
+// It should be used only when the requested column is unique
+func (db *Database) FetchOne(obj interface{}) (err error) {
+	err = gosql.Model(obj).Get()
+	return err
+}

@@ -151,7 +151,7 @@ func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
 		Tail:       "40",
 	})
 	if err != nil {
-		logger.Fatal(err)
+		utilities.CheckError(err, "Cannot establish error log reader")
 	}
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)

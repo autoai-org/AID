@@ -10,3 +10,8 @@ func initDatabase() {
 	db.Connect()
 	db.CreateTables()
 }
+
+// put everything (logs, packages, etc) under ~/.autoai/.aid
+func initFolder() {
+	
+}

@@ -29,7 +29,7 @@ func NewLogger(logPath string) *logrus.Logger {
 	var logger *logrus.Logger
 	CreateFolderIfNotExist(filepath.Dir(logPath))
 	writer, err := rotatelogs.New(
-		logPath+".%Y%m%d%H%M",
+		logPath,
 		rotatelogs.WithLinkName(logPath),
 		rotatelogs.WithMaxAge(time.Duration(86400)*time.Second),
 		rotatelogs.WithRotationTime(time.Duration(604800)*time.Second),
