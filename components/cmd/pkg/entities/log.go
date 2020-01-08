@@ -43,3 +43,27 @@ func NewLogObject(title string, filepath string, from string) Log {
 	log.Save()
 	return log
 }
+
+// FetchLogs returns all logs file
+func FetchLogs() []Log {
+	logsPointers := make([]*Log, 0)
+	db := storage.GetDefaultDB()
+	db.Fetch(&logsPointers)
+	logs := make([]Log, len(logsPointers))
+	for i := range logsPointers {
+		logs[i] = *logsPointers[i]
+	}
+	return logs
+}
+
+// GetLog returns the log object by log id
+func GetLog(id int) Log {
+	log := Log{ID:id}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(log)
+	if err != nil {
+		logger.Error("Cannot fetch object")
+		logger.Error(err.Error())
+	}
+	return log
+}

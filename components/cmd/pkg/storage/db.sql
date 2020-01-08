@@ -1,3 +1,4 @@
+/* Create required tables */
 CREATE TABLE IF NOT EXISTS package (
   id INTEGER PRIMARY KEY,
   name TEXT,
@@ -26,4 +27,11 @@ CREATE TABLE IF NOT EXISTS log (
   from TEXT,
   created_at DATETIME,
   updated_at DATETIME
+)
+
+/* Insert default values */
+INSERT INTO log (
+  title, filepath, from, created_at, updated_at
+) values (
+  'system', 
 )
