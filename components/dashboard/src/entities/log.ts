@@ -1,8 +1,14 @@
 interface Log {
-    Source: string
-    Title:string,
+    Source: string,
+    Title: string,
     ID: number,
     CreatedAt: string
 }
 
-export default Log
+interface LogContent {
+    level: string,
+    time: string,
+    msg: string,
+}
+
+export { Log, LogContent }
