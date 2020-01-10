@@ -1,8 +1,8 @@
 package daemon
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"net/http"
