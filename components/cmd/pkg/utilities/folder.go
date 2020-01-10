@@ -9,8 +9,8 @@ import (
 	"log"
 	"os"
 	"os/user"
-	"time"
 	"path/filepath"
+	"time"
 )
 
 const (
@@ -54,6 +54,14 @@ func InitFolders() {
 	CreateFolderIfNotExist(targetDir)
 	requiredFolders := [3]string{"logs", "models", "plugins"}
 	for _, each := range requiredFolders {
-		CreateFolderIfNotExist(filepath.Join(targetDir,each))
+		CreateFolderIfNotExist(filepath.Join(targetDir, each))
 	}
+}
+
+// GetBasePath returns the base filepath for aid
+func GetBasePath() string {
+	vendorDir := filepath.Join(GetHomeDir(), ".autoai")
+	CreateFolderIfNotExist(vendorDir)
+	targetDir := filepath.Join(vendorDir, ".aid")
+	return targetDir
 }

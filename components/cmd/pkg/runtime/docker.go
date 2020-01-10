@@ -22,7 +22,7 @@ import (
 	"path/filepath"
 )
 
-var logger = utilities.NewDefaultLogger("./logs/system.log")
+var logger = utilities.NewDefaultLogger()
 
 // DockerRuntime is the basic class for manage docker
 type DockerRuntime struct {
@@ -92,7 +92,7 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) error {
 	reader := buildResponse.Body
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)
-	var logPath = "./logs/builds/" + imageName
+	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "builds", imageName)
 	entities.NewLogObject("build-"+imageName, logPath, "docker-build")
 	buildLogger := utilities.NewLogger(logPath)
 	for scanner.Scan() {
@@ -140,7 +140,7 @@ func GenerateDockerFiles(baseFilePath string) {
 
 // FetchContainerLogs returns the logs in the container
 func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
-	var logPath = "./logs/containers/" + containerID
+	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "container", containerID)
 	entities.NewLogObject("container-"+containerID, logPath, "container-log")
 	logger := utilities.NewLogger(logPath)
 	reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{

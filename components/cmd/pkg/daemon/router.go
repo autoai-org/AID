@@ -16,7 +16,7 @@ func getRouter() *gin.Engine {
 	// All get requests
 	r.GET("/logs", getLogs)
 	r.GET("/packages", getPackages)
-	r.GET("/logs/:id")
+	r.GET("/logs/:logid", getLog)
 	// all post/put requests
 	r.PUT("/packages/:packageName/solvers/:solverName/images", buildPackageImage)
 

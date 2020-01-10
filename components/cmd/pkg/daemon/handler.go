@@ -7,8 +7,8 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"path/filepath"
-	"strings"
 	"strconv"
+	"strings"
 )
 
 // getPackages : GET /packages -> returns packages
@@ -23,7 +23,7 @@ func getLogs(c *gin.Context) {
 	c.JSON(http.StatusOK, logs)
 }
 
-// getlog : Get /logs/:id -> returns the specified log
+// getlog : Get /logs/:logid -> returns the specified log
 func getLog(c *gin.Context) {
 	requestedID, err := strconv.Atoi(c.Param("logid"))
 	if err != nil {

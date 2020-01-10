@@ -13,30 +13,23 @@ CREATE TABLE IF NOT EXISTS package (
   created_at DATETIME,
   updated_at DATETIME,
   remote_url TEXT
-)
+);
 
 CREATE TABLE IF NOT EXISTS event (
   id INTEGER PRIMARY KEY,
   title TEXT,
   data TEXT,
-  from TEXT,
+  source TEXT,
   status TEXT,
   created_at DATETIME,
   updated_at DATETIME
-)
+);
 
 CREATE TABLE IF NOT EXISTS log (
   id INTEGER PRIMARY KEY,
   title TEXT,
   filepath TEXT,
-  from TEXT,
+  source TEXT,
   created_at DATETIME,
   updated_at DATETIME
-)
-
-/* Insert default values */
-INSERT INTO log (
-  title, filepath, from, created_at, updated_at
-) values (
-  'system', 
-)
+);

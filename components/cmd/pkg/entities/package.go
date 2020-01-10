@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var logger = utilities.NewDefaultLogger("./logs/system.log")
+var logger = utilities.NewDefaultLogger()
 
 // Package defines basic package information
 type Package struct {

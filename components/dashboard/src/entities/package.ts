@@ -4,6 +4,4 @@ interface Package {
     Name: string
 }
 
-export {
-    Package
-}
+export default Package
