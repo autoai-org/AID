@@ -8,9 +8,12 @@ package storage
 import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/ilibs/gosql/v2"
+	// import sqlite3 as driver for database
+	_ "github.com/mattn/go-sqlite3"
+	"path/filepath"
 )
 
-var logger = utilities.NewDefaultLogger("./logs/system.log")
+var logger = utilities.NewDefaultLogger()
 
 // Database is the primary class for persisting contents
 type Database struct {
@@ -42,8 +45,10 @@ func GetDefaultDB() *Database {
 		DefaultDB.Connect()
 		return DefaultDB
 	}
-	config := utilities.GetDefaultConfig()
-	db := NewDB(config.Read("db_driver"), config.Read("db_uri"))
+	// TODO: the config should be from config.json
+	//db := NewDB(config.Read("db_driver"), config.Read("db_uri"))
+	dbURI := filepath.Join(utilities.GetBasePath(), "aid.db")
+	db := NewDB("sqlite3", dbURI)
 	db.Connect()
 	return db
 }
@@ -51,7 +56,39 @@ func GetDefaultDB() *Database {
 // CreateTables Create all Tables
 func (db *Database) CreateTables() {
 	// Read SQL
-	var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
+	//var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
+	var sqlString = `
+/* Create required tables */
+CREATE TABLE IF NOT EXISTS package (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  localpath TEXT,
+  vendor TEXT,
+  status TEXT,
+  created_at DATETIME,
+  updated_at DATETIME,
+  remote_url TEXT
+);
+
+CREATE TABLE IF NOT EXISTS event (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  data TEXT,
+  source TEXT,
+  status TEXT,
+  created_at DATETIME,
+  updated_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS log (
+  id INTEGER PRIMARY KEY,
+  title TEXT,
+  filepath TEXT,
+  source TEXT,
+  created_at DATETIME,
+  updated_at DATETIME
+);
+`
 	gosql.Exec(sqlString)
 }
 
@@ -74,5 +111,12 @@ func (db *Database) Insert(obj interface{}) (err error) {
 // Fetch returns all objects in the database
 func (db *Database) Fetch(obj interface{}) (err error) {
 	err = gosql.Model(obj).All()
+	return err
+}
+
+// FetchOne returns the only object by requested obj
+// It should be used only when the requested column is unique
+func (db *Database) FetchOne(obj interface{}) (err error) {
+	err = gosql.Model(obj).Get()
 	return err
 }

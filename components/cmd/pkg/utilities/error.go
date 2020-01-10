@@ -9,6 +9,6 @@ package utilities
 func CheckError(err error, errorMessage string) {
 	if err != nil {
 		logger.Error(errorMessage)
-		logger.Fatal(err.Error())
+		logger.Error(err.Error())
 	}
 }

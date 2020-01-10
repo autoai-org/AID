@@ -17,8 +17,8 @@ const system_menu = [
 const about_menu = [
     { icon: "mdi-github-circle", text: "GitHub", link: "https://github.com/autoai-org/cvpm"},
     { icon: "mdi-database-search", text: "Registry" },
-    { icon: "mdi-help", text: "Docs", link: "https://aiflow.autoai.org"},
-    { icon: "mdi-information-outline", text: "AIFlow Story" },
+    { icon: "mdi-help", text: "Docs", link: "https://aid.autoai.org"},
+    { icon: "mdi-information-outline", text: "AID Story" },
 ]
 
 export {

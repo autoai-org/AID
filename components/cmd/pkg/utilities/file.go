@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-var logger = NewDefaultLogger("./logs/system.log")
+var logger = NewDefaultLogger()
 
 // ReadFileContent returns the content of filename
 func ReadFileContent(filename string) string {

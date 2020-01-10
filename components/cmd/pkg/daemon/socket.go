@@ -1,6 +1,7 @@
 package daemon
 
 import (
+	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
@@ -101,7 +102,11 @@ func serveWs(c *gin.Context) {
 	if n, err := strconv.ParseInt(c.Request.FormValue("lastMod"), 16, 64); err == nil {
 		lastMod = time.Unix(0, n)
 	}
-	requestedFilename := c.Param("channel")
+	requestedID, err := strconv.Atoi(c.Param("logid"))
+	if err != nil {
+		utilities.CheckError(err, "cannot convert the string")
+	}
+	requestedFilename := entities.GetLog(requestedID).Filepath
 	requestedFilepath := filepath.Join("./", "logs", requestedFilename)
 	go writer(requestedFilepath, ws, lastMod)
 	reader(ws)

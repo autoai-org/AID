@@ -11,7 +11,7 @@
       style="position:absolute;top:0;left:0;right:0;overflow:auto;z-index:1;margin-top:30px;max-height:500px"
     >
       <div id="terminalWindow" class="terminal-window">
-        <pre v-html="message" />
+        <pre v-for="item in messages" :key="item.title" v-html="renderMsg(item)" />
       </div>
     </div>
   </div>
@@ -19,32 +19,49 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { LogContent } from "@/entities";
 export default Vue.extend({
   props: {
     title: {
       type: String,
       default: ""
     },
-    message: {
-      type: String,
+    messages: {
+      type: Array,
       default: function() {
-        return "";
+        return [];
       }
     }
   },
   data() {
     return {};
   },
+  updated() {
+    console.log(this.messages)
+  },
   methods: {
     navHelp() {
-      window.open("https://aiflow.autoai.org");
+      window.open("https://aid.autoai.org");
+    },
+    renderMsg(msgItem: LogContent) {
+      let msg = "";
+      msg =
+        msg +
+        "<span class=" +
+        msgItem.level +
+        ">[" +
+        msgItem.level +
+        "]</span>";
+      msg = msg + " " + msgItem.msg;
+      msg = msg + "\n";
+      msg = "<p>" + msg + "</p>";
+      return msg;
     }
   }
 });
 </script>
 
 <style lang="scss" scoped>
-
 .terminal {
   position: relative;
   width: 100%;

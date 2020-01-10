@@ -24,7 +24,7 @@ func main() {
 	var license bool
 	readConfig()
 	cli.VersionPrinter = func(c *cli.Context) {
-		fmt.Printf("version=%s build=%s\n", c.App.Version, Build)
+		fmt.Printf("version:%s build:%s\n", c.App.Version, Build)
 	}
 	app := &cli.App{
 		Flags: []cli.Flag{
@@ -58,7 +58,9 @@ func main() {
 				Usage:    "Initialize all configurations, database and web ui",
 				Category: "self",
 				Action: func(c *cli.Context) error {
+					initFolder()
 					initDatabase()
+					addDefaultToDB()
 					return nil
 				},
 			},

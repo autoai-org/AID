@@ -6,8 +6,6 @@
 package utilities
 
 import (
-	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
 	"path/filepath"
 	"time"
@@ -17,10 +15,11 @@ import (
 var DefaultLogger *logrus.Logger
 
 // NewDefaultLogger returns the Logger Object
-func NewDefaultLogger(logPath string) *logrus.Logger {
+func NewDefaultLogger() *logrus.Logger {
 	if DefaultLogger != nil {
 		return DefaultLogger
 	}
+	logPath := filepath.Join(GetBasePath(), "logs", "system")
 	return NewLogger(logPath)
 }
 
@@ -28,20 +27,21 @@ func NewDefaultLogger(logPath string) *logrus.Logger {
 func NewLogger(logPath string) *logrus.Logger {
 	var logger *logrus.Logger
 	CreateFolderIfNotExist(filepath.Dir(logPath))
-	writer, err := rotatelogs.New(
-		logPath+".%Y%m%d%H%M",
-		rotatelogs.WithLinkName(logPath),
-		rotatelogs.WithMaxAge(time.Duration(86400)*time.Second),
-		rotatelogs.WithRotationTime(time.Duration(604800)*time.Second),
-	)
+	rotateFileHook, err := NewRotateFileHook(RotateFileConfig{
+		Filename:   logPath,
+		MaxSize:    50, // megabytes
+		MaxBackups: 3,
+		MaxAge:     28, //days
+		Level:      logrus.InfoLevel,
+		Formatter: &logrus.JSONFormatter{
+			TimestampFormat: time.RFC822,
+		},
+	})
 	if err != nil {
 		logrus.Error("Cannot Initialize Logger..")
 		logrus.Error(err.Error())
 	}
 	logger = logrus.New()
-	logger.Hooks.Add(lfshook.NewHook(
-		writer,
-		&logrus.JSONFormatter{},
-	))
+	logger.AddHook(rotateFileHook)
 	return logger
 }

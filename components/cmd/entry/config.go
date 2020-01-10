@@ -9,6 +9,8 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
+var logger = utilities.NewDefaultLogger()
+
 // readConfig checks if all the required folder exists,
 // If not, it will create the folder
 

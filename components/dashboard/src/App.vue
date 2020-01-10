@@ -39,7 +39,7 @@
     <v-app-bar :dark="dark" app clipped-left color="primary">
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title class="mr-12 align-center">
-        <span class="title">AI Flow</span>
+        <span class="title">AID Studio</span>
       </v-toolbar-title>
       <v-spacer />
       <v-row align="center" style="max-width: 650px">

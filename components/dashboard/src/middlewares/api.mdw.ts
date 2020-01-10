@@ -6,7 +6,7 @@
 import axios from 'axios'
 import store from '@/store'
 import dayjs from 'dayjs'
-import { Package } from '@/entities/package'
+import { Package, Log } from '@/entities'
 const endpoint: string = "http://localhost:10590/"
 
 function _apiRequest(url: string,
@@ -55,8 +55,37 @@ function buildImage(packageName: string, solverName: string) {
         })
 }
 
+function fetchAllLogs() {
+    _apiRequest(endpoint + "logs", "get", {}, {},
+        (res: Array<Log>) => {
+            res = res.map(function (each) {
+                each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                return each
+            })
+            store.commit('setLogs', res)
+        },
+        (err: object) => {
+            console.error(err)
+        })
+}
+
+function fetchLog(id: number) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "logs/" + id, "get", {}, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+
+    })
+}
+
 export {
     _apiRequest,
     fetchAllPackages,
-    buildImage
+    buildImage,
+    fetchAllLogs,
+    fetchLog
 }

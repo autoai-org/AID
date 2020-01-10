@@ -7,6 +7,8 @@ package entities
 
 import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"path/filepath"
 	"time"
 )
 
@@ -17,7 +19,7 @@ type Log struct {
 	Filepath  string    `db:"filepath"`
 	CreatedAt time.Time `db:"created_at"`
 	UpdatedAt time.Time `db:"updated_at"`
-	From      string    `db:"from"`
+	Source    string    `db:"source"`
 }
 
 // TableName defines the tablename in database
@@ -38,8 +40,43 @@ func (l *Log) Save() error {
 }
 
 // NewLogObject creates a new log object and saves to database
-func NewLogObject(title string, filepath string, from string) Log {
-	log := Log{Title: title, Filepath: filepath, From: from}
+func NewLogObject(title string, filepath string, source string) Log {
+	log := Log{Title: title, Filepath: filepath, Source: source}
 	log.Save()
 	return log
+}
+
+// FetchLogs returns all logs file
+func FetchLogs() []Log {
+	logsPointers := make([]*Log, 0)
+	db := storage.GetDefaultDB()
+	db.Fetch(&logsPointers)
+	logs := make([]Log, len(logsPointers))
+	for i := range logsPointers {
+		logs[i] = *logsPointers[i]
+	}
+	return logs
+}
+
+// GetLog returns the log object by log id
+func GetLog(id int) Log {
+	log := Log{ID: id}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(&log)
+	if err != nil {
+		logger.Error("Cannot fetch object")
+		logger.Error(err.Error())
+	}
+	return log
+}
+
+// SaveInitLogObject saves the system logs into database
+// It should be called when use init to initialize the system
+func SaveInitLogObject() {
+	prelimaryLogs := [1]string{"system"}
+	for _, each := range prelimaryLogs {
+		requiredLogPath := filepath.Join(utilities.GetBasePath(), "logs", "system")
+		logObj := Log{Title: each, Filepath: requiredLogPath, Source: "Default"}
+		logObj.Save()
+	}
 }

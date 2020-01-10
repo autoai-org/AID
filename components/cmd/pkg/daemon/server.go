@@ -14,7 +14,7 @@ import (
 	"syscall"
 )
 
-var logger = utilities.NewDefaultLogger("./logs/system.log")
+var logger = utilities.NewDefaultLogger()
 
 // beforeResponse set global header to enable cors and set response header
 func beforeResponse() gin.HandlerFunc {

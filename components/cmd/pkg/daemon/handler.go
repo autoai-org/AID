@@ -7,13 +7,33 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"path/filepath"
+	"strconv"
 	"strings"
 )
 
-// getPackages : GET /packages -> return packages
+// getPackages : GET /packages -> returns packages
 func getPackages(c *gin.Context) {
 	packages := entities.FetchPackages()
 	c.JSON(http.StatusOK, packages)
+}
+
+// getLogs : Get /logs -> returns all logs
+func getLogs(c *gin.Context) {
+	logs := entities.FetchLogs()
+	c.JSON(http.StatusOK, logs)
+}
+
+// getlog : Get /logs/:logid -> returns the specified log
+func getLog(c *gin.Context) {
+	requestedID, err := strconv.Atoi(c.Param("logid"))
+	if err != nil {
+		utilities.CheckError(err, "cannot convert the string")
+	}
+	requestedFilename := entities.GetLog(requestedID).Filepath
+	fileContent := utilities.ReadFileContent(requestedFilename)
+	c.JSON(http.StatusOK, LogContent{
+		Content: fileContent,
+	})
 }
 
 // buildPackages : PUT /packages/:packageName/solvers/:solverName/images -> build a new image
