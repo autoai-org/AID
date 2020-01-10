@@ -1,7 +1,8 @@
-import Log from './log'
+import {Log, LogContent} from './log'
 import Package from './package'
 
 export {
     Log,
-    Package
+    Package,
+    LogContent
 }
