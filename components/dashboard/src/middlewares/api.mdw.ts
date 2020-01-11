@@ -22,7 +22,6 @@ function _apiRequest(url: string,
         data,
         headers
     }).then((res) => {
-        console.log(res.data)
         onSuccess(res.data)
     }).catch((err) => {
         onError(err)

@@ -3,7 +3,13 @@
   <v-btn class="ma-2" outlined color="indigo" @click="showNewPackageDialog=true">New Package</v-btn>
   <new-package-dialog :show="showNewPackageDialog" @closed="showNewPackageDialog=false"/>
   <v-card outlined min-width="100%">
-    <EnhancedTable :headers="headers" :items="packages" :actions="actions"/>
+    <v-card-title>Packages</v-card-title>
+    <EnhancedTable :headers="headers" :select="true" :items="packages" :actions="actions"/>
+  </v-card>
+  <v-spacer/>
+  <v-card outlined min-width="100%" class="solvers">
+    <v-card-title>Solvers</v-card-title>
+    <EnhancedTable :headers="solverHeaders" :select="false" :items="solvers" :actions="solverActions"/>
   </v-card>
   </v-container>
 </template>
@@ -29,19 +35,33 @@ export default Vue.extend({
       { text: "Created At", value: "CreatedAt" },
       { text: "Actions", value: "action", sortable: false }
     ],
-    actions: [{ text: "Build" }, { text: "Meta" }],
+    solverHeaders: [
+      { text: "Vendor", value: "Vendor" },
+      { text: "Package", value: "Package" },
+      { text: "Name", value: "Name" },
+      { text: "Status", value: "Status" },
+      { text: "Created At", value: "CreatedAt" },
+      { text: "Actions", value: "action", sortable: false }
+    ],
+    actions: [{ text: "View" }],
+    solverActions:[{text:"Build"}],
     showNewPackageDialog: false
   }),
   mounted() {
     fetchAllObjects("packages");
+    fetchAllObjects("solvers");
   },
   computed: {
     ...mapState({
-      packages: "packages"
+      packages: "packages",
+      solvers: "solvers"
     })
   }
 });
 </script>
 
 <style scoped>
+.solvers {
+  margin-top: 5%;
+}
 </style>

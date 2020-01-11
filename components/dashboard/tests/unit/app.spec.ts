@@ -9,6 +9,6 @@ describe('App.vue', () => {
       router,
       store,
     })
-    expect(wrapper.find('.title').text()).toMatch("AI Flow")
+    expect(wrapper.find('.title').text()).toMatch("AID Studio")
   })
 })

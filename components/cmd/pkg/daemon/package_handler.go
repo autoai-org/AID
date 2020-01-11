@@ -1,5 +1,5 @@
 // Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -45,7 +45,6 @@ func installPackage(c *gin.Context) {
 		Msg: "submitted success",
 	})
 }
-
 
 // buildPackages : PUT /packages/:packageName/solvers/:solverName/images -> build a new image
 func buildPackageImage(c *gin.Context) {

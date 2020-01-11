@@ -7,7 +7,6 @@ package daemon
 
 import (
 	"github.com/gin-gonic/gin"
-
 )
 
 func getRouter() *gin.Engine {
@@ -15,9 +14,10 @@ func getRouter() *gin.Engine {
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	// All get requests
-	r.GET("/logs", getLogs)
 	r.GET("/packages", getPackages)
+	r.GET("/logs", getLogs)
 	r.GET("/logs/:logid", getLog)
+	r.GET("/solvers", getSolvers)
 	// all post/put requests
 	r.PUT("/packages/:packageName/solvers/:solverName/images", buildPackageImage)
 	r.POST("/packages", installPackage)

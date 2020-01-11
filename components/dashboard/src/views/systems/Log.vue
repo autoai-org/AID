@@ -57,10 +57,10 @@ export default Vue.extend({
         });
       } else if (source === "docker-build") {
         content.forEach((element: any) => {
-          let msgContent = JSON.parse(element.msg).stream
+          let msgContent = JSON.parse(element.msg).stream;
           if (msgContent !== "\n" && msgContent) {
-            msgContent = msgContent.replace(/(\r\n|\n|\r)/gm, "")
-            msgContent = msgContent.trim()
+            msgContent = msgContent.replace(/(\r\n|\n|\r)/gm, "");
+            msgContent = msgContent.trim();
             messages.push({
               level: element.level,
               time: element.time,
@@ -74,11 +74,14 @@ export default Vue.extend({
   },
   watch: {
     current_title(value) {
-      this.title = value
+      this.title = value;
       let self = this;
       const found = this.logs.find((item: any) => item.Title === value);
       fetchLog(found.ID).then(function(res: any) {
         self.messages = self.renderMsg(res.content, found.Source);
+        watchLog(found.ID, (res: any) => {
+          self.messages = self.renderMsg(res, found.Source);
+        });
       });
     }
   },
@@ -86,6 +89,13 @@ export default Vue.extend({
     let self = this;
     fetchAllObjects("logs");
     fetchLog(0).then(function(res: any) {
+      console.log(res)
+      watchLog(0, (wsres: any) => {
+        let lines = wsres.split('\n')
+        lines.splice(0,1)
+        lines = lines.join('\n');
+        self.messages = self.renderMsg(lines, "Default");
+      });
       self.messages = self.renderMsg(res.content, "Default");
     });
   }

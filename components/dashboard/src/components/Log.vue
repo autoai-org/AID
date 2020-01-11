@@ -26,6 +26,10 @@ export default Vue.extend({
       type: String,
       default: ""
     },
+    showTimestamp: {
+      type: Boolean,
+      default: false
+    },
     messages: {
       type: Array,
       default: function() {
@@ -35,9 +39,6 @@ export default Vue.extend({
   },
   data() {
     return {};
-  },
-  updated() {
-    console.log(this.messages)
   },
   methods: {
     navHelp() {
@@ -52,6 +53,9 @@ export default Vue.extend({
         ">[" +
         msgItem.level +
         "]</span>";
+      if (this.showTimestamp) {
+        msg = msg + "<span class=time>[" + msgItem.time + "]</span>";
+      }
       msg = msg + " " + msgItem.msg;
       msg = msg + "\n";
       msg = "<p>" + msg + "</p>";
@@ -104,6 +108,10 @@ export default Vue.extend({
     .error {
       padding: 2px 3px;
       background: #c0392b;
+    }
+    .time {
+      padding: 2px 3px;
+      background: #119911;
     }
     .system {
       padding: 2px 3px;
