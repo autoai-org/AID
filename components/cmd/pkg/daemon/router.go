@@ -7,6 +7,7 @@ package daemon
 
 import (
 	"github.com/gin-gonic/gin"
+
 )
 
 func getRouter() *gin.Engine {
@@ -19,7 +20,7 @@ func getRouter() *gin.Engine {
 	r.GET("/logs/:logid", getLog)
 	// all post/put requests
 	r.PUT("/packages/:packageName/solvers/:solverName/images", buildPackageImage)
-
+	r.POST("/packages", installPackage)
 	// websocket
 	r.GET("/socket/:logid", func(c *gin.Context) {
 		serveWs(c)
