@@ -56,9 +56,70 @@ func GetDefaultDB() *Database {
 // CreateTables Create all Tables
 func (db *Database) CreateTables() {
 	// Read SQL
-	var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
+	//var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
+	var sqlString = `
+	CREATE TABLE IF NOT EXISTS package (
+		id INTEGER PRIMARY KEY,
+		name TEXT,
+		localpath TEXT,
+		vendor TEXT,
+		status TEXT,
+		created_at DATETIME,
+		updated_at DATETIME,
+		remote_url TEXT
+	  );
+	  
+	  CREATE TABLE IF NOT EXISTS event (
+		id INTEGER PRIMARY KEY,
+		title TEXT,
+		data TEXT,
+		source TEXT,
+		status TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	  );
+	  
+	  CREATE TABLE IF NOT EXISTS log (
+		id INTEGER PRIMARY KEY,
+		title TEXT,
+		filepath TEXT,
+		source TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	  );
+	  
+	  CREATE TABLE IF NOT EXISTS solver (
+		id INTEGER PRIMARY KEY,
+		package TEXT,
+		vendor TEXT,
+		name TEXT,
+		solverpath TEXT,
+		created_at DATETIME,
+		updated_at DATETIME,
+		status TEXT
+	  );
+	  
+	  CREATE TABLE IF NOT EXISTS hook (
+		id INTEGER PRIMARY KEY,
+		name TEXT,
+		local_url TEXT,
+		remote_url TEXT,
+		created_at DATETIME,
+		updated_at DATETIME,
+		status TEXT
+	  );
+	  
+	  CREATE TABLE IF NOT EXISTS apikey (
+		id INTEGER PRIMARY KEY,
+		aidkey TEXT,
+		created_at DATETIME,
+		updated_at DATETIME,
+		status TEXT
+	  );
+	`
 	gosql.Exec(sqlString)
 }
+
 // Connect tries to connect the database
 func (db *Database) Connect() (err error) {
 	gosql.SetDefaultLink("default")

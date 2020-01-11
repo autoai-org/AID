@@ -47,6 +47,10 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 	tomlString := utilities.ReadFileContent(configFile)
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
+		solver.Vendor = pack.Vendor
+		solver.Package = pack.Name
+		solver.Status = "Ready"
+		solver.Save()
 		RenderDockerfile(solver.Name, localFolder)
 	}
 	// Save package into database for future use

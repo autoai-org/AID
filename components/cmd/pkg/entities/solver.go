@@ -7,8 +7,8 @@ package entities
 
 import (
 	"github.com/BurntSushi/toml"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
 // Solver defines the struct of a solver, the minimal struct of a inference program
