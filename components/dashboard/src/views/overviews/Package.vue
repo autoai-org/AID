@@ -1,19 +1,24 @@
 <template>
+<v-container>
+  <v-btn class="ma-2" outlined color="indigo" @click="showNewPackageDialog=true">New Package</v-btn>
+  <new-package-dialog :show="showNewPackageDialog" @closed="showNewPackageDialog=false"/>
   <v-card outlined min-width="100%">
     <EnhancedTable :headers="headers" :items="packages" :actions="actions"/>
   </v-card>
+  </v-container>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import { mapState } from "vuex";
-
+import NewPackageDialog from '@/components/dialogs/NewPackageDialog.vue'
 import EnhancedTable from "@/components/EnhancedTable.vue";
-import { fetchAllPackages } from "@/middlewares/api.mdw";
+import { fetchAllObjects } from "@/middlewares/api.mdw";
 
 export default Vue.extend({
   components: {
-    EnhancedTable
+    EnhancedTable,
+    NewPackageDialog
   },
   data: () => ({
     headers: [
@@ -24,10 +29,11 @@ export default Vue.extend({
       { text: "Created At", value: "CreatedAt" },
       { text: "Actions", value: "action", sortable: false }
     ],
-    actions: [{ text: "Build" }, { text: "Meta" }]
+    actions: [{ text: "Build" }, { text: "Meta" }],
+    showNewPackageDialog: false
   }),
   mounted() {
-    fetchAllPackages();
+    fetchAllObjects("packages");
   },
   computed: {
     ...mapState({

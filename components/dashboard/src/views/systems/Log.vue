@@ -24,7 +24,7 @@ import Log from "@/components/Log.vue";
 import { LogContent } from "@/entities";
 import { mapState } from "vuex";
 import { watchLog } from "@/middlewares/ws.mdw";
-import { fetchAllLogs, fetchLog } from "@/middlewares/api.mdw";
+import { fetchAllObjects, fetchLog } from "@/middlewares/api.mdw";
 export default Vue.extend({
   data: () => ({
     title: "system",
@@ -84,7 +84,7 @@ export default Vue.extend({
   },
   mounted() {
     let self = this;
-    fetchAllLogs();
+    fetchAllObjects("logs");
     fetchLog(0).then(function(res: any) {
       self.messages = self.renderMsg(res.content, "Default");
     });

@@ -1,3 +1,8 @@
+// Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+// 
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package daemon
 
 import (
@@ -7,34 +12,40 @@ import (
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"path/filepath"
-	"strconv"
 	"strings"
 )
 
-// getPackages : GET /packages -> returns packages
+// getPackages returns all packages
+// GET /packages -> returns packages
 func getPackages(c *gin.Context) {
 	packages := entities.FetchPackages()
 	c.JSON(http.StatusOK, packages)
 }
 
-// getLogs : Get /logs -> returns all logs
-func getLogs(c *gin.Context) {
-	logs := entities.FetchLogs()
-	c.JSON(http.StatusOK, logs)
+// getSolvers returns all solvers
+// GET /solvers -> returns all solvers
+func getSolvers(c *gin.Context) {
+	solvers := entities.FetchSolvers()
+	c.JSON(http.StatusOK, solvers)
 }
 
-// getlog : Get /logs/:logid -> returns the specified log
-func getLog(c *gin.Context) {
-	requestedID, err := strconv.Atoi(c.Param("logid"))
+// installPackage performs installation
+// PUT /packages
+func installPackage(c *gin.Context) {
+	var request installPackageRequest
+	c.BindJSON(&request)
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	err := runtime.InstallPackage(request.RemoteURL, targetPath)
 	if err != nil {
-		utilities.CheckError(err, "cannot convert the string")
+		c.JSON(http.StatusInternalServerError, messageResponse{
+			Msg: err.Error(),
+		})
 	}
-	requestedFilename := entities.GetLog(requestedID).Filepath
-	fileContent := utilities.ReadFileContent(requestedFilename)
-	c.JSON(http.StatusOK, LogContent{
-		Content: fileContent,
+	c.JSON(http.StatusOK, messageResponse{
+		Msg: "submitted success",
 	})
 }
+
 
 // buildPackages : PUT /packages/:packageName/solvers/:solverName/images -> build a new image
 func buildPackageImage(c *gin.Context) {

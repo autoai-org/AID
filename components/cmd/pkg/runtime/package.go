@@ -9,7 +9,7 @@ import (
 )
 
 // InstallPackage fetches remote content to target folder
-func InstallPackage(remoteURL string, targetFolder string) {
+func InstallPackage(remoteURL string, targetFolder string) error {
 	// Check type of RemoteURL
 	var remoteType string
 	var pack entities.Package
@@ -54,4 +54,5 @@ func InstallPackage(remoteURL string, targetFolder string) {
 	utilities.CheckError(err, "Cannot save package into database!")
 	// All is well
 	logger.Info("Installation Finished!")
+	return err
 }

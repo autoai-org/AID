@@ -10,10 +10,10 @@ export default new Vuex.Store({
     isLoading: false,
   },
   mutations: {
-    setPackages(state, packages) {
+    setpackages(state, packages) {
       state.packages = packages
     },
-    setLogs(state, logs) {
+    setlogs(state, logs) {
       state.logs = logs
     },
     beginRequests(state) {

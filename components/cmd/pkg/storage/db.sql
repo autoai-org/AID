@@ -33,3 +33,32 @@ CREATE TABLE IF NOT EXISTS log (
   created_at DATETIME,
   updated_at DATETIME
 );
+
+CREATE TABLE IF NOT EXISTS solver (
+  id INTEGER PRIMARY KEY,
+  package TEXT,
+  vendor TEXT,
+  name TEXT,
+  solverpath TEXT,
+  created_at DATETIME,
+  updated_at DATETIME,
+  status TEXT
+);
+
+CREATE TABLE IF NOT EXISTS hook (
+  id INTEGER PRIMARY KEY,
+  name TEXT,
+  local_url TEXT,
+  remote_url TEXT,
+  created_at DATETIME,
+  updated_at DATETIME,
+  status TEXT
+);
+
+CREATE TABLE IF NOT EXISTS apikey (
+  id INTEGER PRIMARY KEY,
+  aidkey TEXT,
+  created_at DATETIME,
+  updated_at DATETIME,
+  status TEXT
+);

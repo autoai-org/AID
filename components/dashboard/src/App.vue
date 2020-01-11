@@ -53,14 +53,7 @@
         />
       </v-row>
     </v-app-bar>
-    <v-dialog v-model="isLoading" hide-overlay persistent width="300">
-      <v-card color="primary" dark>
-        <v-card-text>
-          Please stand by...
-          <v-progress-linear indeterminate color="white" class="mb-0"></v-progress-linear>
-        </v-card-text>
-      </v-card>
-    </v-dialog>
+    <loading-dialog :show="isLoading"></loading-dialog>
     <v-content>
       <v-container class="fill-height">
         <router-view />
@@ -77,6 +70,7 @@
 import { mapState } from "vuex";
 import { overview_menu, system_menu, about_menu } from "./router/menu";
 import router from '@/router'
+import LoadingDialog from '@/components/dialogs/LoadingDialog.vue'
 export default {
   props: {
     source: String
@@ -97,6 +91,9 @@ export default {
     ...mapState({
       isLoading: "isLoading"
     })
+  },
+  components:{
+    'loading-dialog': LoadingDialog
   }
 };
 </script>

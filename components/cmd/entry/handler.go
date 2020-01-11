@@ -98,5 +98,6 @@ func startServer(port string) {
 }
 
 func installPackage(remoteURL string) {
-	runtime.InstallPackage(remoteURL, utilities.DefaultConfig.Read("install_path"))
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	runtime.InstallPackage(remoteURL, targetPath)
 }
