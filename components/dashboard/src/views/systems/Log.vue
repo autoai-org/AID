@@ -7,7 +7,7 @@
         </v-col>
         <v-col class="d-flex" cols="12" sm="6">
           <v-select
-            :items="logs.filter(a => a.Source===current_source).map(a=>a.Title)"
+            :items="logs.filter(a => a.Source===current_source).map(a=>processLogItem(a))"
             label="Title"
             v-model="current_title"
           ></v-select>
@@ -41,6 +41,12 @@ export default Vue.extend({
     })
   },
   methods: {
+    processLogItem(item:any) {
+      return {
+        text: item.CreatedAt + " " + item.Title,
+        value: item.ID
+      }
+    },
     renderMsg(text: string, source: string) {
       text = text.replace(/(\r\n|\n|\r)/gm, "");
       text = "[" + text + "]";
@@ -72,7 +78,7 @@ export default Vue.extend({
       return messages;
     },
     getAndWatchLog(logid: string, source: string) {
-      let self = this
+      let self = this;
       fetchLog(logid).then(function(res: any) {
         self.messages = self.renderMsg(res.content, source);
         watchLog(logid, (wsres: any) => {
@@ -86,14 +92,17 @@ export default Vue.extend({
   },
   watch: {
     current_title(value) {
-      this.title = value;
+      console.log(value)
       let self = this;
-      const found = this.logs.find((item: any) => item.Title === value);
-      this.getAndWatchLog(found.ID, found.Source)
+      const found = this.logs.find((item: any) => item.ID === value);
+      if (found) {
+        this.title = found.CreatedAt + " " + found.Title;
+        this.getAndWatchLog(found.ID, found.Source);
+      }
     }
   },
   mounted() {
-    let logid = this.$route.query.logid || ""
+    let logid = this.$route.query.logid || "";
     let self = this;
     fetchAllObjects("logs").then(function(res: any) {
       self.current_source = res[0].Source;
@@ -102,7 +111,7 @@ export default Vue.extend({
     if (logid) {
       const found = this.logs.find((item: any) => item.ID === logid);
       if (found) {
-        this.getAndWatchLog(logid.toString(), found.source)
+        this.getAndWatchLog(logid.toString(), found.source);
       }
     }
   }
