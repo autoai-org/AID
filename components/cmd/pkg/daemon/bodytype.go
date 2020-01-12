@@ -15,5 +15,6 @@ type installPackageRequest struct {
 }
 
 type messageResponse struct {
-	Msg string `json:"msg"`
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
 }

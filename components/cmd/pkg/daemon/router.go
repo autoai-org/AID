@@ -19,7 +19,7 @@ func getRouter() *gin.Engine {
 	r.GET("/logs/:logid", getLog)
 	r.GET("/solvers", getSolvers)
 	// all post/put requests
-	r.PUT("/packages/:packageName/solvers/:solverName/images", buildPackageImage)
+	r.PUT("/vendors/:vendorName/packages/:packageName/solvers/:solverName/images", buildPackageImage)
 	r.POST("/packages", installPackage)
 	// websocket
 	r.GET("/socket/:logid", func(c *gin.Context) {

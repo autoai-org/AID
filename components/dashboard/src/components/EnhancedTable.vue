@@ -8,7 +8,7 @@
     v-model="selected"
   >
   <template v-slot:item.action="{ item }">
-      <v-chip v-for="action in actions" :key="action.text">{{action.text}}</v-chip>
+      <v-chip v-for="action in actions" :key="action.text" @click="onClick(action.text, item)">{{action.text}}</v-chip>
     </template>
   </v-data-table>
 </template>
@@ -20,6 +20,11 @@ export default Vue.extend({
       selected:[],
     }),
     props: ['headers', 'items', 'actions', 'select'],
+    methods:{
+      onClick(action:string, item:object) {
+        this.$emit('actionClicked', {action, item})
+      }
+    }
 })
 </script>
 

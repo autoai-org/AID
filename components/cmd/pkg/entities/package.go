@@ -16,7 +16,7 @@ var logger = utilities.NewDefaultLogger()
 
 // Package defines basic package information
 type Package struct {
-	ID        int       `db:"id"`
+	ID        string    `db:"id"`
 	Name      string    `db:"name"`
 	LocalPath string    `db:"localpath"`
 	Vendor    string    `db:"vendor"`
@@ -52,6 +52,7 @@ func LoadPackageFromConfig(tomlString string) PackageConfig {
 
 // Save stores package into database
 func (p *Package) Save() error {
+	p.ID = utilities.GenerateUUIDv4()
 	db := storage.GetDefaultDB()
 	db.Connect()
 	return db.Insert(p)

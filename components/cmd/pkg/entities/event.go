@@ -7,12 +7,13 @@ package entities
 
 import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"time"
 )
 
 // Event defines the basic structure of a spawned event
 type Event struct {
-	ID        int       `db:"id"`
+	ID        string    `db:"id"`
 	Title     string    `db:"title"`
 	Data      string    `db:"data"`
 	CreatedAt time.Time `db:"created_at"`
@@ -33,6 +34,7 @@ func (e *Event) PK() string {
 
 // Save stores event into database
 func (e *Event) Save() error {
+	e.ID = utilities.GenerateUUIDv4()
 	db := storage.GetDefaultDB()
 	db.Connect()
 	return db.Insert(e)

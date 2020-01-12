@@ -30,14 +30,17 @@ function _apiRequest(url: string,
     })
 }
 
-function buildImage(packageName: string, solverName: string) {
-    _apiRequest(endpoint + "packages/" + packageName + "/solvers" + solverName + "/images", "put", {}, {},
-        (res: Array<Package>) => {
-            store.commit('setPackages', res)
-        },
-        (err: object) => {
-            console.error(err)
-        })
+function buildImage(vendorName: string, packageName: string, solverName: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "vendors/" + vendorName + "/packages/" + packageName + "/solvers/" + solverName + "/images", "put", {}, {},
+            (res: any) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+
 }
 
 function installPackage(packageIdentifier: string) {
@@ -55,21 +58,24 @@ function installPackage(packageIdentifier: string) {
 }
 
 function fetchAllObjects(objectName: string) {
-    _apiRequest(endpoint + objectName, "get", {}, {},
+    return new Promise((resolve, reject)=>{
+        _apiRequest(endpoint + objectName, "get", {}, {},
         (res: Array<Log>) => {
             res = res.map(function (each) {
                 each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
                 return each
             })
+            resolve(res)
             store.commit('set' + objectName, res)
         },
         (err: object) => {
+            reject(err)
             console.error(err)
         })
-
+    })
 }
 
-function fetchLog(id: number) {
+function fetchLog(id: string) {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "logs/" + id, "get", {}, {},
             (res: Log) => {
