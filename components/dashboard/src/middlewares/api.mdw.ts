@@ -6,7 +6,7 @@
 import axios from 'axios'
 import store from '@/store'
 import dayjs from 'dayjs'
-import { Package, Log } from '@/entities'
+import { Log } from '@/entities'
 const endpoint: string = "http://localhost:10590/"
 
 function _apiRequest(url: string,
@@ -87,10 +87,23 @@ function fetchLog(id: string) {
     })
 }
 
+function deleteLog(id: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "logs/" + id, "delete", {}, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
 export {
     _apiRequest,
     buildImage,
     fetchLog,
     fetchAllObjects,
-    installPackage
+    installPackage,
+    deleteLog
 }

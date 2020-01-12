@@ -47,7 +47,8 @@ func installPackage(c *gin.Context) {
 	})
 }
 
-// buildPackages : PUT /vendor/:vendorName/packages/:packageName/solvers/:solverName/images -> build a new image
+// buildPackages build a new image
+// PUT /vendor/:vendorName/packages/:packageName/solvers/:solverName/images
 func buildPackageImage(c *gin.Context) {
 	dockerClient := runtime.NewDockerRuntime()
 	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))

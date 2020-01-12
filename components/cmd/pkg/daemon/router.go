@@ -21,6 +21,8 @@ func getRouter() *gin.Engine {
 	// all post/put requests
 	r.PUT("/vendors/:vendorName/packages/:packageName/solvers/:solverName/images", buildPackageImage)
 	r.POST("/packages", installPackage)
+	// all delete requests
+	r.DELETE("/logs/:logid", deleteLog)
 	// websocket
 	r.GET("/socket/:logid", func(c *gin.Context) {
 		serveWs(c)
