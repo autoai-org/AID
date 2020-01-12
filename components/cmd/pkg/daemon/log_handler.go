@@ -10,19 +10,41 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"os"
 )
 
-// getLogs : Get /logs -> returns all logs
+// getLogs returns all logs
+// Get /logs
 func getLogs(c *gin.Context) {
 	logs := entities.FetchLogs()
 	c.JSON(http.StatusOK, logs)
 }
 
-// getlog : Get /logs/:logid -> returns the specified log
+// getlog returns the specified log
+// Get /logs/:logid
 func getLog(c *gin.Context) {
 	requestedFilename := entities.GetLog(c.Param("logid")).Filepath
 	fileContent := utilities.ReadFileContent(requestedFilename)
 	c.JSON(http.StatusOK, logContent{
 		Content: fileContent,
 	})
+}
+
+// deleteLog deletes the specified log and its database entry, a real deletion is performed
+// DELETE /logs/:logid
+func deleteLog(c *gin.Context) {
+	requestedLog := entities.GetLog(c.Param("logid"))
+	os.Remove(requestedLog.Filepath)
+	err := entities.DeleteLog(requestedLog.ID)
+	if err != nil {
+		c.JSON(http.StatusBadRequest, messageResponse{
+			Code: 400,
+			Msg: err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 200,
+			Msg: requestedLog.ID,
+		})
+	}
 }

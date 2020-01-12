@@ -41,7 +41,6 @@ export default Vue.extend({
         }})
     },
     closeOutside() {
-      console.log("closed");
       this.$emit("closed", true);
     },
     finishBuild() {

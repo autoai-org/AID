@@ -14,7 +14,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <comp-log :title="title" :messages="messages" />
+    <comp-log :title="title" :messages="messages" :logid="id" />
   </v-card>
 </template>
 
@@ -29,6 +29,7 @@ export default Vue.extend({
   data: () => ({
     title: "system",
     messages: [],
+    id:"",
     current_source: "",
     current_title: ""
   }),
@@ -80,6 +81,7 @@ export default Vue.extend({
     getAndWatchLog(logid: string, source: string) {
       let self = this;
       fetchLog(logid).then(function(res: any) {
+        self.id = logid
         self.messages = self.renderMsg(res.content, source);
         watchLog(logid, (wsres: any) => {
           let lines = wsres.split("\n");
@@ -96,6 +98,7 @@ export default Vue.extend({
       let self = this;
       const found = this.logs.find((item: any) => item.ID === value);
       if (found) {
+        this.id = found.ID
         this.title = found.CreatedAt + " " + found.Title;
         this.getAndWatchLog(found.ID, found.Source);
       }
@@ -106,7 +109,8 @@ export default Vue.extend({
     let self = this;
     fetchAllObjects("logs").then(function(res: any) {
       self.current_source = res[0].Source;
-      self.current_title = res[0].Title;
+      self.current_title = res[0].ID;
+      self.id = res[0].ID
     });
     if (logid) {
       const found = this.logs.find((item: any) => item.ID === logid);

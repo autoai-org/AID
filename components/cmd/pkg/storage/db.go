@@ -133,7 +133,6 @@ func (db *Database) Connect() (err error) {
 // Insert saves object into database
 func (db *Database) Insert(obj interface{}) (err error) {
 	_, err = gosql.Model(obj).Create()
-
 	return err
 }
 
@@ -147,5 +146,11 @@ func (db *Database) Fetch(obj interface{}) (err error) {
 // It should be used only when the requested column is unique
 func (db *Database) FetchOne(obj interface{}) (err error) {
 	err = gosql.Model(obj).Get()
+	return err
+}
+
+// Delete removes object from database
+func (db *Database) Delete(obj interface{}) (err error) {
+	_, err = gosql.Model(obj).Delete()
 	return err
 }

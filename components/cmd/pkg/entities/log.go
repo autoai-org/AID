@@ -58,6 +58,18 @@ func FetchLogs() []Log {
 	return logs
 }
 
+// DeleteLog removes the log entry from database
+func DeleteLog(id string) error {
+	log := Log{ID: id}
+	db := storage.GetDefaultDB()
+	err := db.Delete(&log)
+	if err != nil {
+		logger.Error("Cannot fetch object")
+		logger.Error(err.Error())
+	}
+	return err
+}
+
 // GetLog returns the log object by log id
 func GetLog(id string) Log {
 	log := Log{ID: id}

@@ -1,10 +1,20 @@
 <template>
   <div class="terminal">
+    <confirm-dialog 
+      :show="showDeleteDialog"
+      @closed="showDeleteDialog=false"
+      @cancelled="showDeleteDialog=false"
+      @confirmed="performDeleteLog()"
+      :info="deleteInfo"
+      :title="'Are you sure?'" 
+      :message="'You are going to delete log ' + title +' (' +logid+')?'">
+    </confirm-dialog>
     <div class="header">
       <h4>{{ title }}</h4>
       <ul class="shell-dots">
         <v-icon color="blue darken-2" @click="navHelp()">mdi-help</v-icon>
         <v-icon color="blue darken-2" @click="showTime = !showTime">mdi-clock-outline</v-icon>
+        <v-icon color="blue darken-2" @click="showDeleteDialog = true">mdi-delete-outline</v-icon>
       </ul>
     </div>
     <div
@@ -21,9 +31,15 @@
 <script lang="ts">
 import Vue from "vue";
 import { LogContent } from "@/entities";
+import { deleteLog } from "@/middlewares/api.mdw"
+import ConfirmDialog from "@/components/dialogs/ConfirmDialog.vue"
 export default Vue.extend({
   props: {
     title: {
+      type: String,
+      default: ""
+    },
+    logid: {
       type: String,
       default: ""
     },
@@ -34,14 +50,30 @@ export default Vue.extend({
       }
     }
   },
+  components: {
+    ConfirmDialog
+  },
   data() {
     return {
-      showTime: false
+      showTime: false,
+      showDeleteDialog: false,
+      deleteInfo: ""
     };
   },
   methods: {
     navHelp() {
       window.open("https://aid.autoai.org");
+    },
+    performDeleteLog() {
+      let self = this
+      console.log('deleting '+this.logid)
+      deleteLog(this.logid).then(function(res:any) {
+        console.log(res)
+        if(res.code===200) {
+          console.log('-------')
+          self.deleteInfo = "Successfully deleted the log file"          
+        }
+      })
     },
     renderMsg(msgItem: LogContent) {
       let msg = "";

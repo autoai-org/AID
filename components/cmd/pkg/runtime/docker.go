@@ -7,15 +7,15 @@ package runtime
 
 import (
 	"bufio"
-	"github.com/sirupsen/logrus"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
+	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/term"
+	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 	"io"
 	"os"
@@ -82,7 +82,7 @@ func (docker *DockerRuntime) Start(containerID string) error {
 
 func getBuildCtx(solverPath string) io.Reader {
 	ctx, _ := archive.TarWithOptions(solverPath, &archive.TarOptions{})
-    return ctx
+	return ctx
 }
 
 func realBuild(docker *DockerRuntime, dockerfile string, imageName string, buildLogger *logrus.Logger) error {
