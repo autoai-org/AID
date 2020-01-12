@@ -7,14 +7,15 @@ package runtime
 
 import (
 	"bufio"
+	"github.com/sirupsen/logrus"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
 	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/term"
-	"github.com/mholt/archiver/v3"
 	"golang.org/x/net/context"
 	"io"
 	"os"
@@ -23,6 +24,7 @@ import (
 )
 
 var logger = utilities.NewDefaultLogger()
+var defaultDockerRuntime *DockerRuntime
 
 // DockerRuntime is the basic class for manage docker
 type DockerRuntime struct {
@@ -31,6 +33,9 @@ type DockerRuntime struct {
 
 // NewDockerRuntime returns a DockerRuntime Instance
 func NewDockerRuntime() *DockerRuntime {
+	if defaultDockerRuntime != nil {
+		return defaultDockerRuntime
+	}
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
 		logger.Error("Cannot Create New Docker Runtime")
@@ -75,37 +80,51 @@ func (docker *DockerRuntime) Start(containerID string) error {
 	return nil
 }
 
-// Build will build a new image from dockerfile
-func (docker *DockerRuntime) Build(imageName string, dockerfile string) error {
-	logger.Info("Starting Build Image: " + imageName + "...")
-	err := archiver.Archive([]string{path.Dir(dockerfile)}, "archive.tar")
-	dockerBuildContext, err := os.Open(filepath.Join(path.Dir(dockerfile), "archive.tar"))
-	defer dockerBuildContext.Close()
-	buildResponse, err := docker.client.ImageBuild(context.Background(), dockerBuildContext, types.ImageBuildOptions{
-		Tags:       []string{"aiflow-" + imageName},
-		Dockerfile: dockerfile,
+func getBuildCtx(solverPath string) io.Reader {
+	ctx, _ := archive.TarWithOptions(solverPath, &archive.TarOptions{})
+    return ctx
+}
+
+func realBuild(docker *DockerRuntime, dockerfile string, imageName string, buildLogger *logrus.Logger) error {
+	buildResponse, err := docker.client.ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
+		Tags:       []string{"aid-" + imageName},
+		Dockerfile: filepath.Base(dockerfile),
+		Remove:     true,
 	})
 	if err != nil {
-		logger.Error("Cannot build image " + imageName)
-		logger.Error(err.Error())
+		buildLogger.Error("Cannot build image " + imageName)
+		buildLogger.Error(err.Error())
 	}
+	// set logs to build logs
 	reader := buildResponse.Body
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)
-	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "builds", imageName)
-	entities.NewLogObject("build-"+imageName, logPath, "docker-build")
-	buildLogger := utilities.NewLogger(logPath)
 	for scanner.Scan() {
 		buildLogger.Info(scanner.Text())
 	}
 	termFd, isTerm := term.GetFdInfo(os.Stderr)
 	err = jsonmessage.DisplayJSONMessagesStream(buildResponse.Body, os.Stderr, termFd, isTerm, nil)
 	if err != nil {
-		logger.Error("Cannot build image " + imageName)
-		logger.Error(err.Error())
+		buildLogger.Error("Cannot show log from " + imageName)
+		buildLogger.Error(err.Error())
 	}
-	os.Remove(filepath.Join(path.Dir(dockerfile), "archive.tar"))
 	return err
+}
+
+// Build will build a new image from dockerfile
+func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entities.Log, error) {
+	var err error
+	logger.Info("Starting Build Image: " + imageName + "...")
+	logid := utilities.GenerateUUIDv4()
+	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "builds", imageName+"."+logid)
+	log := entities.NewLogObject("build-"+imageName, logPath, "docker-build")
+	log.ID = logid
+	log.Save()
+	buildLogger := utilities.NewLogger(logPath)
+	go func() {
+		err = realBuild(docker, dockerfile, imageName, buildLogger)
+	}()
+	return log, err
 }
 
 // ListImages returns all images that have been installed on the host
@@ -139,9 +158,10 @@ func GenerateDockerFiles(baseFilePath string) {
 }
 
 // FetchContainerLogs returns the logs in the container
-func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
+func (docker *DockerRuntime) FetchContainerLogs(containerID string) entities.Log {
 	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "container", containerID)
-	entities.NewLogObject("container-"+containerID, logPath, "container-log")
+	log := entities.NewLogObject("container-"+containerID, logPath, "container-log")
+	log.Save()
 	logger := utilities.NewLogger(logPath)
 	reader, err := docker.client.ContainerLogs(context.Background(), containerID, types.ContainerLogsOptions{
 		ShowStderr: true,
@@ -158,4 +178,5 @@ func (docker *DockerRuntime) FetchContainerLogs(containerID string) {
 	for scanner.Scan() {
 		logger.Info(scanner.Text())
 	}
+	return log
 }

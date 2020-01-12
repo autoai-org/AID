@@ -70,6 +70,18 @@ export default Vue.extend({
         });
       }
       return messages;
+    },
+    getAndWatchLog(logid: string, source: string) {
+      let self = this
+      fetchLog(logid).then(function(res: any) {
+        self.messages = self.renderMsg(res.content, source);
+        watchLog(logid, (wsres: any) => {
+          let lines = wsres.split("\n");
+          lines.splice(0, 1);
+          lines = lines.join("\n");
+          self.messages = self.renderMsg(lines, source);
+        });
+      });
     }
   },
   watch: {
@@ -77,27 +89,22 @@ export default Vue.extend({
       this.title = value;
       let self = this;
       const found = this.logs.find((item: any) => item.Title === value);
-      fetchLog(found.ID).then(function(res: any) {
-        self.messages = self.renderMsg(res.content, found.Source);
-        watchLog(found.ID, (res: any) => {
-          self.messages = self.renderMsg(res, found.Source);
-        });
-      });
+      this.getAndWatchLog(found.ID, found.Source)
     }
   },
   mounted() {
+    let logid = this.$route.query.logid || ""
     let self = this;
-    fetchAllObjects("logs");
-    fetchLog(0).then(function(res: any) {
-      console.log(res)
-      watchLog(0, (wsres: any) => {
-        let lines = wsres.split('\n')
-        lines.splice(0,1)
-        lines = lines.join('\n');
-        self.messages = self.renderMsg(lines, "Default");
-      });
-      self.messages = self.renderMsg(res.content, "Default");
+    fetchAllObjects("logs").then(function(res: any) {
+      self.current_source = res[0].Source;
+      self.current_title = res[0].Title;
     });
+    if (logid) {
+      const found = this.logs.find((item: any) => item.ID === logid);
+      if (found) {
+        this.getAndWatchLog(logid.toString(), found.source)
+      }
+    }
   }
 });
 </script>

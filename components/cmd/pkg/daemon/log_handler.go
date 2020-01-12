@@ -10,7 +10,6 @@ import (
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strconv"
 )
 
 // getLogs : Get /logs -> returns all logs
@@ -21,11 +20,7 @@ func getLogs(c *gin.Context) {
 
 // getlog : Get /logs/:logid -> returns the specified log
 func getLog(c *gin.Context) {
-	requestedID, err := strconv.Atoi(c.Param("logid"))
-	if err != nil {
-		utilities.CheckError(err, "cannot convert the string")
-	}
-	requestedFilename := entities.GetLog(requestedID).Filepath
+	requestedFilename := entities.GetLog(c.Param("logid")).Filepath
 	fileContent := utilities.ReadFileContent(requestedFilename)
 	c.JSON(http.StatusOK, logContent{
 		Content: fileContent,

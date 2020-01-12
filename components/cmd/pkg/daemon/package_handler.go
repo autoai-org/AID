@@ -42,40 +42,36 @@ func installPackage(c *gin.Context) {
 		})
 	}
 	c.JSON(http.StatusOK, messageResponse{
-		Msg: "submitted success",
+		Code: 200,
+		Msg:  "submitted success",
 	})
 }
 
-// buildPackages : PUT /packages/:packageName/solvers/:solverName/images -> build a new image
+// buildPackages : PUT /vendor/:vendorName/packages/:packageName/solvers/:solverName/images -> build a new image
 func buildPackageImage(c *gin.Context) {
 	dockerClient := runtime.NewDockerRuntime()
-	packageFolder := filepath.Join(utilities.DefaultConfig.Read("install_path"), c.Param("packageName"))
-	tomlString := utilities.ReadFileContent(filepath.Join(packageFolder, "./cvpm.toml"))
+	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
+	tomlString := utilities.ReadFileContent(filepath.Join(packageFolder, "cvpm.toml"))
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	solverName := c.Param("solverName")
-	buildSolvers := 1
 	var imageName string
-	if solverName == "*" {
-		// TODO handle multi builds return value
-		buildSolvers = len(packageInfo.Solvers)
-		for _, solver := range packageInfo.Solvers {
-			imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solver.Name
-			// Check if docker file exists
-			if utilities.ReadFileContent("./docker_"+solver.Name) == "Read "+"./docker_"+solver.Name+" Failed!" {
-				runtime.RenderDockerfile(solver.Name, "./docker_"+solver.Name)
-			}
-			dockerClient.Build(strings.ToLower(imageName), "./docker_"+solver.Name)
-		}
-	} else {
-		imageName = packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
-		// Check if docker file exists
-		if utilities.ReadFileContent("./docker_"+solverName) == "Read "+"./docker_"+solverName+" Failed!" {
-			runtime.RenderDockerfile(solverName, "./docker_"+solverName)
-		}
-		dockerClient.Build(strings.ToLower(imageName), "./docker_"+solverName)
+	var log entities.Log
+	var err error
+	imageName = packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
+	// Check if docker file exists
+	if !utilities.IsExists(filepath.Join(packageFolder, "docker_"+solverName)) {
+		runtime.RenderDockerfile(solverName, packageFolder)
 	}
-	c.JSON(http.StatusOK, gin.H{
-		"build_total_num": buildSolvers,
-		"log_file_path":   filepath.Join(utilities.DefaultConfig.Read("logs_path"), "builds", imageName),
-	})
+	log, err = dockerClient.Build(strings.ToLower(imageName), filepath.Join(packageFolder, "docker_"+solverName))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, messageResponse{
+			Code: 500,
+			Msg:  err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  200,
+			"logid": log.ID,
+		})
+	}
 }

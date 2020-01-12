@@ -13,6 +13,7 @@ import (
 
 // Solver defines the struct of a solver, the minimal struct of a inference program
 type Solver struct {
+	ID      string `db:"id"`
 	Name    string `db:"name"`
 	Class   string `db:"solverpath"`
 	Vendor  string `db:"vendor"`
@@ -37,6 +38,7 @@ func (s *Solver) PK() string {
 
 // Save stores package into database
 func (s *Solver) Save() error {
+	s.ID = utilities.GenerateUUIDv4()
 	db := storage.GetDefaultDB()
 	db.Connect()
 	return db.Insert(s)

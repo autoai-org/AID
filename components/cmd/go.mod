@@ -9,6 +9,7 @@ require (
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/containerd/containerd v1.3.2 // indirect
+	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.4.2-0.20191223123943-bbcabf69c81b
 	github.com/docker/go-connections v0.4.0 // indirect
@@ -16,6 +17,7 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/gin-gonic/gin v1.5.0
 	github.com/gogo/protobuf v1.3.1 // indirect
+	github.com/google/uuid v1.1.1
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.1
 	github.com/ilibs/gosql/v2 v2.0.1
@@ -28,8 +30,8 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
-	github.com/opencontainers/go-digest v1.0.0-rc1 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
+	github.com/opencontainers/runc v0.1.1 // indirect
 	github.com/pkg/term v0.0.0-20190109203006-aa71e9d9e942 // indirect
 	github.com/sirupsen/logrus v1.4.2
 	github.com/stretchr/testify v1.4.0
