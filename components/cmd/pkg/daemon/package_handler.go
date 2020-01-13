@@ -53,6 +53,8 @@ func buildPackageImage(c *gin.Context) {
 	dockerClient := runtime.NewDockerRuntime()
 	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
 	tomlString := utilities.ReadFileContent(filepath.Join(packageFolder, "cvpm.toml"))
+	solvers := entities.LoadSolversFromConfig(tomlString)
+	runtime.RenderRunnerTpl(packageFolder, solvers)
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	solverName := c.Param("solverName")
 	var imageName string
