@@ -10025,10 +10025,10 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-class-component@^7.0.2, vue-class-component@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.1.0.tgz#b33efcb10e17236d684f70b1e96f1946ec793e87"
-  integrity sha512-G9152NzUkz0i0xTfhk0Afc8vzdXxDR1pfN4dTwE72cskkgJtdXfrKBkMfGvDuxUh35U500g5Ve4xL8PEGdWeHg==
+vue-class-component@^7.1.0, vue-class-component@^7.2.1:
+  version "7.2.1"
+  resolved "https://registry.yarnpkg.com/vue-class-component/-/vue-class-component-7.2.1.tgz#5aa0d6aef4c42aec801c53feb2937a322d3270f9"
+  integrity sha512-ehfZKyeV7nQK3gFZ7hS/cNLNMJwBa0IjZ6v1VqAw8ZRT2J8VObW0RouVX/rC1/3iEjoTUstWf5FR7JiAx+/YSw==
 
 vue-cli-plugin-vuetify@^2.0.3:
   version "2.0.3"
