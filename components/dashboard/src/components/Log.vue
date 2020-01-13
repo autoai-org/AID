@@ -14,7 +14,7 @@
       <ul class="shell-dots">
         <v-icon color="blue darken-2" @click="navHelp()">mdi-help</v-icon>
         <v-icon color="blue darken-2" @click="showTime = !showTime">mdi-clock-outline</v-icon>
-        <v-icon color="blue darken-2" @click="showDeleteDialog = true">mdi-delete-outline</v-icon>
+        <v-icon color="blue darken-2" @click="openDelete()">mdi-delete-outline</v-icon>
       </ul>
     </div>
     <div
@@ -61,17 +61,18 @@ export default Vue.extend({
     };
   },
   methods: {
+    openDelete() {
+      this.deleteInfo=''
+      this.showDeleteDialog = true
+    },
     navHelp() {
       window.open("https://aid.autoai.org");
     },
     performDeleteLog() {
       let self = this
-      console.log('deleting '+this.logid)
       deleteLog(this.logid).then(function(res:any) {
-        console.log(res)
         if(res.code===200) {
-          console.log('-------')
-          self.deleteInfo = "Successfully deleted the log file"          
+          self.deleteInfo = "Successfully deleted the log file"      
         }
       })
     },

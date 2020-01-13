@@ -9,9 +9,11 @@
 package runtime
 
 import (
+	"bufio"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/flosch/pongo2"
+	"os"
 	"path/filepath"
 	"strings"
 )
@@ -42,11 +44,23 @@ func RenderDockerfile(solvername string, targetFilePath string) {
 	tpl, err := pongo2.FromString(getTpl("dockerfile"))
 	utilities.CheckError(err, "Cannot render dockerfile")
 	filename := filepath.Join(targetFilePath, "docker_"+solvername)
-	setupFileContent := utilities.ReadFileContent(filepath.Join(targetFilePath, "setup.sh"))
-	var setupCommands string
-	if setupFileContent != "Read "+filepath.Join(targetFilePath, "setup.sh")+" Failed!" {
-		commands := strings.Split(strings.Replace(setupFileContent, "\r\n", "\n", -1), "\n")
-		setupCommands = strings.Join(commands, "&& \\ \n")
+	setupFilePath := filepath.Join(targetFilePath, "setup.sh")
+	var setupCommands string = ""
+	if utilities.IsExists(setupFilePath) {
+		f, err := os.Open(setupFilePath)
+		defer f.Close()
+		if err != nil {
+			utilities.CheckError(err, "Cannot open file "+setupFilePath)
+			setupCommands = "echo An error occured in parsing setup file"
+		}
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			if setupCommands == "" {
+				setupCommands = scanner.Text()
+			} else {
+				setupCommands = setupCommands + " && " + scanner.Text()
+			}
+		}
 	} else {
 		setupCommands = "echo There is no command for extra installation"
 	}
