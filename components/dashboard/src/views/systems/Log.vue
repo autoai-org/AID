@@ -7,14 +7,14 @@
         </v-col>
         <v-col class="d-flex" cols="12" sm="6">
           <v-select
-            :items="logs.filter(a => a.Source===current_source).map(a=>a.Title)"
+            :items="logs.filter(a => a.Source===current_source).map(a=>processLogItem(a))"
             label="Title"
             v-model="current_title"
           ></v-select>
         </v-col>
       </v-row>
     </v-container>
-    <comp-log :title="title" :messages="messages" />
+    <comp-log :title="title" :messages="messages" :logid="id" />
   </v-card>
 </template>
 
@@ -24,11 +24,12 @@ import Log from "@/components/Log.vue";
 import { LogContent } from "@/entities";
 import { mapState } from "vuex";
 import { watchLog } from "@/middlewares/ws.mdw";
-import { fetchAllLogs, fetchLog } from "@/middlewares/api.mdw";
+import { fetchAllObjects, fetchLog } from "@/middlewares/api.mdw";
 export default Vue.extend({
   data: () => ({
     title: "system",
     messages: [],
+    id:"",
     current_source: "",
     current_title: ""
   }),
@@ -41,6 +42,12 @@ export default Vue.extend({
     })
   },
   methods: {
+    processLogItem(item:any) {
+      return {
+        text: item.CreatedAt + " " + item.Title,
+        value: item.ID
+      }
+    },
     renderMsg(text: string, source: string) {
       text = text.replace(/(\r\n|\n|\r)/gm, "");
       text = "[" + text + "]";
@@ -57,10 +64,10 @@ export default Vue.extend({
         });
       } else if (source === "docker-build") {
         content.forEach((element: any) => {
-          let msgContent = JSON.parse(element.msg).stream
+          let msgContent = JSON.parse(element.msg).stream;
           if (msgContent !== "\n" && msgContent) {
-            msgContent = msgContent.replace(/(\r\n|\n|\r)/gm, "")
-            msgContent = msgContent.trim()
+            msgContent = msgContent.replace(/(\r\n|\n|\r)/gm, "");
+            msgContent = msgContent.trim();
             messages.push({
               level: element.level,
               time: element.time,
@@ -70,24 +77,47 @@ export default Vue.extend({
         });
       }
       return messages;
+    },
+    getAndWatchLog(logid: string, source: string) {
+      let self = this;
+      fetchLog(logid).then(function(res: any) {
+        self.id = logid
+        self.messages = self.renderMsg(res.content, source);
+        watchLog(logid, (wsres: any) => {
+          let lines = wsres.split("\n");
+          lines.splice(0, 1);
+          lines = lines.join("\n");
+          self.messages = self.renderMsg(lines, source);
+        });
+      });
     }
   },
   watch: {
     current_title(value) {
-      this.title = value
+      console.log(value)
       let self = this;
-      const found = this.logs.find((item: any) => item.Title === value);
-      fetchLog(found.ID).then(function(res: any) {
-        self.messages = self.renderMsg(res.content, found.Source);
-      });
+      const found = this.logs.find((item: any) => item.ID === value);
+      if (found) {
+        this.id = found.ID
+        this.title = found.CreatedAt + " " + found.Title;
+        this.getAndWatchLog(found.ID, found.Source);
+      }
     }
   },
   mounted() {
+    let logid = this.$route.query.logid || "";
     let self = this;
-    fetchAllLogs();
-    fetchLog(0).then(function(res: any) {
-      self.messages = self.renderMsg(res.content, "Default");
+    fetchAllObjects("logs").then(function(res: any) {
+      self.current_source = res[0].Source;
+      self.current_title = res[0].ID;
+      self.id = res[0].ID
     });
+    if (logid) {
+      const found = this.logs.find((item: any) => item.ID === logid);
+      if (found) {
+        this.getAndWatchLog(logid.toString(), found.source);
+      }
+    }
   }
 });
 </script>

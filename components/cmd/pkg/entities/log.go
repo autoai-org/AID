@@ -14,7 +14,7 @@ import (
 
 // Log defines the struct of log file
 type Log struct {
-	ID        int       `db:"id"`
+	ID        string    `db:"id"`
 	Title     string    `db:"title"`
 	Filepath  string    `db:"filepath"`
 	CreatedAt time.Time `db:"created_at"`
@@ -34,6 +34,7 @@ func (l *Log) PK() string {
 
 // Save stores log into database
 func (l *Log) Save() error {
+	l.ID = utilities.GenerateUUIDv4()
 	db := storage.GetDefaultDB()
 	db.Connect()
 	return db.Insert(l)
@@ -42,7 +43,6 @@ func (l *Log) Save() error {
 // NewLogObject creates a new log object and saves to database
 func NewLogObject(title string, filepath string, source string) Log {
 	log := Log{Title: title, Filepath: filepath, Source: source}
-	log.Save()
 	return log
 }
 
@@ -58,8 +58,20 @@ func FetchLogs() []Log {
 	return logs
 }
 
+// DeleteLog removes the log entry from database
+func DeleteLog(id string) error {
+	log := Log{ID: id}
+	db := storage.GetDefaultDB()
+	err := db.Delete(&log)
+	if err != nil {
+		logger.Error("Cannot fetch object")
+		logger.Error(err.Error())
+	}
+	return err
+}
+
 // GetLog returns the log object by log id
-func GetLog(id int) Log {
+func GetLog(id string) Log {
 	log := Log{ID: id}
 	db := storage.GetDefaultDB()
 	err := db.FetchOne(&log)

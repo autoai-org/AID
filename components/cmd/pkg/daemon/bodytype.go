@@ -5,7 +5,16 @@
 
 package daemon
 
-// LogContent is used for the daemon to wrap log content as json format
-type LogContent struct {
+// logContent is used for the daemon to wrap log content as json format
+type logContent struct {
 	Content string `json:"content"`
+}
+
+type installPackageRequest struct {
+	RemoteURL string `json:"remote_url"`
+}
+
+type messageResponse struct {
+	Code int    `json:"code"`
+	Msg  string `json:"msg"`
 }

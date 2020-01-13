@@ -6,12 +6,12 @@
 import axios from 'axios'
 import store from '@/store'
 import dayjs from 'dayjs'
-import { Package, Log } from '@/entities'
+import { Log } from '@/entities'
 const endpoint: string = "http://localhost:10590/"
 
 function _apiRequest(url: string,
     method: "get" | "post" | "patch" | "delete" | "put",
-    params: object,
+    data: object,
     headers: object,
     onSuccess: Function,
     onError: Function) {
@@ -19,10 +19,9 @@ function _apiRequest(url: string,
     return axios.request({
         url,
         method,
-        params,
+        data,
         headers
     }).then((res) => {
-        console.log(res.data)
         onSuccess(res.data)
     }).catch((err) => {
         onError(err)
@@ -31,45 +30,52 @@ function _apiRequest(url: string,
     })
 }
 
-function fetchAllPackages() {
-    _apiRequest(endpoint + "packages", "get", {}, {},
-        (res: Array<Package>) => {
-            res = res.map(function (each) {
-                each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
-                return each
+function buildImage(vendorName: string, packageName: string, solverName: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "vendors/" + vendorName + "/packages/" + packageName + "/solvers/" + solverName + "/images", "put", {}, {},
+            (res: any) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
             })
-            store.commit('setPackages', res)
-        },
-        (err: object) => {
-            console.error(err)
-        })
+    })
+
 }
 
-function buildImage(packageName: string, solverName: string) {
-    _apiRequest(endpoint + "packages/" + packageName + "/solvers" + solverName + "/images", "put", {}, {},
-        (res: Array<Package>) => {
-            store.commit('setPackages', res)
-        },
-        (err: object) => {
-            console.error(err)
-        })
+function installPackage(packageIdentifier: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "packages", "post", {
+            'remote_url': packageIdentifier
+        }, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
 }
 
-function fetchAllLogs() {
-    _apiRequest(endpoint + "logs", "get", {}, {},
+function fetchAllObjects(objectName: string) {
+    return new Promise((resolve, reject)=>{
+        _apiRequest(endpoint + objectName, "get", {}, {},
         (res: Array<Log>) => {
             res = res.map(function (each) {
                 each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
                 return each
             })
-            store.commit('setLogs', res)
+            resolve(res)
+            store.commit('set' + objectName, res)
         },
         (err: object) => {
+            reject(err)
             console.error(err)
         })
+    })
 }
 
-function fetchLog(id: number) {
+function fetchLog(id: string) {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "logs/" + id, "get", {}, {},
             (res: Log) => {
@@ -78,14 +84,26 @@ function fetchLog(id: number) {
             (err: object) => {
                 reject(err)
             })
+    })
+}
 
+function deleteLog(id: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "logs/" + id, "delete", {}, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
     })
 }
 
 export {
     _apiRequest,
-    fetchAllPackages,
     buildImage,
-    fetchAllLogs,
-    fetchLog
+    fetchLog,
+    fetchAllObjects,
+    installPackage,
+    deleteLog
 }

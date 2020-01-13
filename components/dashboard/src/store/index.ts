@@ -7,14 +7,18 @@ export default new Vuex.Store({
   state: {
     packages: [],
     logs:[],
+    solvers:[],
     isLoading: false,
   },
   mutations: {
-    setPackages(state, packages) {
+    setpackages(state, packages) {
       state.packages = packages
     },
-    setLogs(state, logs) {
+    setlogs(state, logs) {
       state.logs = logs
+    },
+    setsolvers(state, solvers) {
+      state.solvers = solvers
     },
     beginRequests(state) {
       state.isLoading = true

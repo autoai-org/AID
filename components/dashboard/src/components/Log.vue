@@ -1,9 +1,20 @@
 <template>
   <div class="terminal">
+    <confirm-dialog 
+      :show="showDeleteDialog"
+      @closed="showDeleteDialog=false"
+      @cancelled="showDeleteDialog=false"
+      @confirmed="performDeleteLog()"
+      :info="deleteInfo"
+      :title="'Are you sure?'" 
+      :message="'You are going to delete log ' + title +' (' +logid+')?'">
+    </confirm-dialog>
     <div class="header">
       <h4>{{ title }}</h4>
       <ul class="shell-dots">
         <v-icon color="blue darken-2" @click="navHelp()">mdi-help</v-icon>
+        <v-icon color="blue darken-2" @click="showTime = !showTime">mdi-clock-outline</v-icon>
+        <v-icon color="blue darken-2" @click="openDelete()">mdi-delete-outline</v-icon>
       </ul>
     </div>
     <div
@@ -20,9 +31,15 @@
 <script lang="ts">
 import Vue from "vue";
 import { LogContent } from "@/entities";
+import { deleteLog } from "@/middlewares/api.mdw"
+import ConfirmDialog from "@/components/dialogs/ConfirmDialog.vue"
 export default Vue.extend({
   props: {
     title: {
+      type: String,
+      default: ""
+    },
+    logid: {
       type: String,
       default: ""
     },
@@ -33,15 +50,31 @@ export default Vue.extend({
       }
     }
   },
-  data() {
-    return {};
+  components: {
+    ConfirmDialog
   },
-  updated() {
-    console.log(this.messages)
+  data() {
+    return {
+      showTime: false,
+      showDeleteDialog: false,
+      deleteInfo: ""
+    };
   },
   methods: {
+    openDelete() {
+      this.deleteInfo=''
+      this.showDeleteDialog = true
+    },
     navHelp() {
       window.open("https://aid.autoai.org");
+    },
+    performDeleteLog() {
+      let self = this
+      deleteLog(this.logid).then(function(res:any) {
+        if(res.code===200) {
+          self.deleteInfo = "Successfully deleted the log file"      
+        }
+      })
     },
     renderMsg(msgItem: LogContent) {
       let msg = "";
@@ -52,6 +85,9 @@ export default Vue.extend({
         ">[" +
         msgItem.level +
         "]</span>";
+      if (this.showTime) {
+        msg = msg + "<span class=success>[" + msgItem.time + "]</span>";
+      }
       msg = msg + " " + msgItem.msg;
       msg = msg + "\n";
       msg = "<p>" + msg + "</p>";
@@ -88,26 +124,6 @@ export default Vue.extend({
     font-size: 13px;
     .cmd {
       line-height: 24px;
-    }
-    .info {
-      padding: 2px 3px;
-      background: #2980b9;
-    }
-    .warning {
-      padding: 2px 3px;
-      background: #f39c12; // https://github.com/Mayccoll/Gogh/blob/master/content/themes.md #Flat
-    }
-    .success {
-      padding: 2px 3px;
-      background: #27ae60;
-    }
-    .error {
-      padding: 2px 3px;
-      background: #c0392b;
-    }
-    .system {
-      padding: 2px 3px;
-      background: #bdc3c7;
     }
   }
   pre {

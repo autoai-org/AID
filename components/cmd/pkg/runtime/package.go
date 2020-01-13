@@ -9,7 +9,7 @@ import (
 )
 
 // InstallPackage fetches remote content to target folder
-func InstallPackage(remoteURL string, targetFolder string) {
+func InstallPackage(remoteURL string, targetFolder string) error {
 	// Check type of RemoteURL
 	var remoteType string
 	var pack entities.Package
@@ -47,6 +47,10 @@ func InstallPackage(remoteURL string, targetFolder string) {
 	tomlString := utilities.ReadFileContent(configFile)
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
+		solver.Vendor = pack.Vendor
+		solver.Package = pack.Name
+		solver.Status = "Ready"
+		solver.Save()
 		RenderDockerfile(solver.Name, localFolder)
 	}
 	// Save package into database for future use
@@ -54,4 +58,5 @@ func InstallPackage(remoteURL string, targetFolder string) {
 	utilities.CheckError(err, "Cannot save package into database!")
 	// All is well
 	logger.Info("Installation Finished!")
+	return err
 }

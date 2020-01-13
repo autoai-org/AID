@@ -6,7 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/gorilla/websocket"
 	"net/http"
-	"path/filepath"
 	"strconv"
 	"time"
 )
@@ -102,12 +101,7 @@ func serveWs(c *gin.Context) {
 	if n, err := strconv.ParseInt(c.Request.FormValue("lastMod"), 16, 64); err == nil {
 		lastMod = time.Unix(0, n)
 	}
-	requestedID, err := strconv.Atoi(c.Param("logid"))
-	if err != nil {
-		utilities.CheckError(err, "cannot convert the string")
-	}
-	requestedFilename := entities.GetLog(requestedID).Filepath
-	requestedFilepath := filepath.Join("./", "logs", requestedFilename)
-	go writer(requestedFilepath, ws, lastMod)
+	requestedFilename := entities.GetLog(c.Param("logid")).Filepath
+	go writer(requestedFilename, ws, lastMod)
 	reader(ws)
 }
