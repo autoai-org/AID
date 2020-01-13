@@ -18,8 +18,7 @@ import (
 	"strings"
 )
 
-// getRunnerTpl fetches the template for running solver
-// This is for ensuring backward compatibility
+// getTpl fetches the template for templates folder
 func getTpl(tplName string) string {
 	var runnerTpl = "https://raw.githubusercontent.com/autoai-org/CVPM/master/templates/" + tplName + ".tpl"
 	return utilities.GetRemoteFile(runnerTpl)

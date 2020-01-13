@@ -31,10 +31,19 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
+* [Intro](#intro)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
 * [Contributing](#contributing)
 * [License](#license)
+
+## Intro
+
+AID is a DevOps System that is dedicated to machine learning. It consists of the following components:
+
+* **M**achine **L**earning **P**ackage **M**anager that could search, download, and deploy machine learning models.
+* A dashboard to monitor the status of installed services, trigger build, test/evaluate services.
+* A registry that provides plugins for notifications, security checks, etc.
 
 <!-- USAGE EXAMPLES -->
 ## Usage
