@@ -39,12 +39,12 @@ func deleteLog(c *gin.Context) {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, messageResponse{
 			Code: 400,
-			Msg: err.Error(),
+			Msg:  err.Error(),
 		})
 	} else {
 		c.JSON(http.StatusOK, messageResponse{
 			Code: 200,
-			Msg: requestedLog.ID,
+			Msg:  requestedLog.ID,
 		})
 	}
 }
