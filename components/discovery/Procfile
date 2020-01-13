@@ -1,0 +1,2 @@
+release: npm install yarn -g && yarn && yarn run compile
+web: node index.js
