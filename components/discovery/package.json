@@ -10,7 +10,7 @@
     "mongodb": "^3.5.0",
     "mongoose": "^5.8.1",
     "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.5",
+    "type-graphql": "^0.17.6",
     "typegoose": "^5.9.1"
   },
   "devDependencies": {
