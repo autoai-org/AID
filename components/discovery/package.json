@@ -5,7 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/mongoose": "^5.5.41",
-    "apollo-server": "^2.9.13",
+    "apollo-server": "^2.9.16",
     "dotenv": "^8.2.0",
     "mongodb": "^3.5.0",
     "mongoose": "^5.8.1",
