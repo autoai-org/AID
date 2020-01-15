@@ -124,6 +124,10 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entitie
 	go func() {
 		err = realBuild(docker, dockerfile, imageName, buildLogger)
 	}()
+	if err == nil {
+		// no error occured, change solver status
+		
+	}
 	return log, err
 }
 
