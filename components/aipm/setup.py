@@ -1,17 +1,17 @@
 import setuptools
 
-long_description = "For full description, please go to [Our Documentation](https://cvpm.autoai.org)"
+long_description = "For full description, please go to [Documentation](https://aid.autoai.org)"
 
 setuptools.setup(
-    name="cvpm",
-    version="0.0.2.4",
+    name="aid",
+    version="1.0.0",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
-    description="Computer Vision Package Manager",
+    description="Machine Learning Package Manager",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://cvpm.autoai.org",
-    packages=setuptools.find_packages(),
+    url="https://aid.autoai.org",
+    packages=['mlpm'],
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",
@@ -35,8 +35,8 @@ setuptools.setup(
         "gevent",
     ],
     project_urls={
-        "Bug Tracker": "https://github.com/unarxiv/CVPM/issues",
-        "Documentation": "https://cvpm.autoai.org",
-        "Source Code": "https://github.com/unarxiv/CVPM/issues",
+        "Bug Tracker": "https://github.com/autoai-org/aid/issues",
+        "Documentation": "https://aid.autoai.org",
+        "Source Code": "https://github.com/autoai-org/aid",
     },
 )
