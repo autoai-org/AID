@@ -20,7 +20,7 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.1
-	github.com/ilibs/gosql/v2 v2.0.1
+	github.com/ilibs/gosql/v2 v2.0.2
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-runewidth v0.0.7 // indirect
