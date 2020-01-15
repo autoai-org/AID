@@ -13,12 +13,22 @@ import (
 
 // Solver defines the struct of a solver, the minimal struct of a inference program
 type Solver struct {
-	ID      string `db:"id"`
-	Name    string `db:"name"`
-	Class   string `db:"solverpath"`
-	Vendor  string `db:"vendor"`
-	Package string `db:"package"`
-	Status  string `db:"status"`
+	ID        string `db:"id"`
+	Name      string `db:"name"`
+	Class     string `db:"solverpath"`
+	Vendor    string `db:"vendor"`
+	Package   string `db:"package"`
+	Status    string `db:"status"`
+	ImageName string `db:"imagename"`
+}
+
+// RunningSolver wraps the docker container that runs as solver
+type RunningSolver struct {
+	ID string `db:"id"`
+	SolverID string `db:"solverid"`
+	Status string `db:"status"`
+	ImageName string `db:"imagename"`
+	EntryPoint string `db:"entrypoint"`
 }
 
 // Solvers defines a list of solvers

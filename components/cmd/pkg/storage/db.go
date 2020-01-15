@@ -154,3 +154,9 @@ func (db *Database) Delete(obj interface{}) (err error) {
 	_, err = gosql.Model(obj).Delete()
 	return err
 }
+
+// Update updates the object in the database
+func (db *Database) Update(obj interface{}) (err error) {
+	_, err = gosql.Model(obj).Update()
+	return err
+}

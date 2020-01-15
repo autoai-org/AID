@@ -1,20 +1,26 @@
 {
-  "name": "discovery",
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "@types/mongoose": "^5.5.41",
-    "apollo-server": "^2.9.13",
-    "dotenv": "^8.2.0",
-    "mongodb": "^3.5.0",
-    "mongoose": "^5.8.1",
-    "reflect-metadata": "^0.1.13",
-    "type-graphql": "^0.17.5",
-    "typegoose": "^5.9.1"
-  },
-  "devDependencies": {
-    "@types/node": "^13.1.6",
-    "typescript": "^3.7.3"
-  }
+    "name": "aid-discovery",
+    "version": "1.0.0",
+    "description": "AID Discovery Service",
+    "main": "index.js",
+    "scripts": {
+        "compile": "./node_modules/.bin/tsc"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "@types/http-status-codes": "^1.2.0",
+        "@types/koa": "^2.11.0",
+        "@types/koa-bodyparser": "^4.3.0",
+        "@types/koa-router": "^7.4.0",
+        "koa": "^2.11.0",
+        "koa-bodyparser": "^4.2.1",
+        "koa-json": "^2.0.2",
+        "koa-logger": "^3.2.1",
+        "koa-router": "^7.4.0",
+        "koa-swagger-decorator": "^1.6.0",
+        "typescript": "^3.7.4"
+    },
+    "devDependencies": {
+        "@types/node": "^13.1.6"
+    }
 }
