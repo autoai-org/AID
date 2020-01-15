@@ -7,7 +7,7 @@
     "@types/mongoose": "^5.5.41",
     "apollo-server": "^2.9.13",
     "dotenv": "^8.2.0",
-    "mongodb": "^3.4.0",
+    "mongodb": "^3.5.0",
     "mongoose": "^5.8.1",
     "reflect-metadata": "^0.1.13",
     "type-graphql": "^0.17.5",
