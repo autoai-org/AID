@@ -11,7 +11,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://aid.autoai.org",
-    packages=['mlpm'],
+    packages=['aid'],
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",

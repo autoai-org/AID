@@ -10,7 +10,7 @@
   - [Package](guide/concepts/package.md)
   - [Runtime](guide/concepts/runtime.md)
 
-- AIPM
+- Package
   - [Install Packages](guide/cvpm/install-packages.md)
   - [Publish Packages](guide/cvpm/publish-packages.md)
   - [Web UI](guide/cvpm/webui-usage.md)
