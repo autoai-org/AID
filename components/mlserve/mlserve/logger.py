@@ -1,23 +1,27 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
+# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-import os
 import json
+import os
+
+from mlserve.config import GetConfig
+
 
 class Logger(object):
-    def __init__(self, target):
+    def __init__(self, config, target):
         self.target = target
-    
-    def write(self, jsonObject):
+        self.remote_log = config['remote_log']
+
+    def write(self, logObject):
         with open(self.target, 'w+') as f:
-            json.dump([jsonObject], f)
+            json.dump(logObject, f)
     
-    def append(self, jsonObject):
+    def append(self, logObject):
         if os.stat(self.target).st_size == 0:
-            self.write(jsonObject)
+            self.write(logObject)
         else:
             with open(self.target, 'w+') as f:
                 data = json.load(f)
-                data.append(jsonObject)
+                data.append(logObject)
                 json.dump(data, f)

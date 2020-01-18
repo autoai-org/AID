@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "mlserve"
+version = "0.1.0"
+description = ""
+authors = ["Xiaozhe Yao <xiaozhe.yaoi@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = ">=3.6"
+sanic = "^19.12.2"
+toml = "^0.10.0"
+raven = "^6.10.0"
+yapf = "^0.29.0"
+isort = "^4.3.21"
+autoflake = "^1.3.1"
+werkzeug = "^0.16.0"
+
+[tool.poetry.dev-dependencies]
+pytest = "^4.6"
+
+[build-system]
+requires = ["poetry>=0.12"]
+build-backend = "poetry.masonry.api"
