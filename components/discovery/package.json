@@ -18,9 +18,9 @@
         "koa-logger": "^3.2.1",
         "koa-router": "^7.4.0",
         "koa-swagger-decorator": "^1.6.0",
-        "typescript": "^3.7.4"
+        "typescript": "^3.7.5"
     },
     "devDependencies": {
-        "@types/node": "^13.1.6"
+        "@types/node": "^13.1.7"
     }
 }
