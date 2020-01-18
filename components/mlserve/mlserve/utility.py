@@ -1,56 +1,27 @@
-import os
-from urllib.request import urlopen
-from pathlib import Path
-import numpy as np
-import PIL.Image
-import requests
-from tqdm import tqdm
+# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 
-def load_image_file(file, mode='RGB'):
-    im = PIL.Image.open(file)
-    if mode:
-        im = im.convert(mode)
-    return np.array(im)
+import socket
 
-def save_image(filename,target_name):
-    home = str(Path.home())
-    assets_path = os.path.join(home, 'cvpm', 'webui','results')
-    target_file = os.path.join(assets_path, target_name)
-    if not os.path.isdir(assets_path):
-        os.makedirs(assets_path)
-    os.rename(filename, target_file)
-    return target_name
+def str2bool(v):
+    return str(v).lower() in ("true", "false", "yes", "t", "1")
 
-class Downloader(object):
-    def __init__(self):
-        pass
+def _isPortOpen(port):
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    result = s.connect_ex(('127.0.0.1', port))
+    s.close()
+    if result == 0:
+        return True
+    else:
+        return False
 
-    def download(self, url, target):
-        # check if target folder exists
-        if not os.path.isdir(target):
-            os.makedirs(target)
-        filename = url.split('/')[-1]
-        file_size = int(urlopen(url).info().get('Content-Length', -1))
-        chunk_size = 1024
-        dest = os.path.join(target, filename)
-        if os.path.exists(dest):
-            first_byte = os.path.getsize(dest)
+def get_available_port(start=8080):
+    port = start
+    while True:
+        if _isPortOpen(port):
+            port = port + 1
         else:
-            first_byte = 0
-        if first_byte >= file_size:
-            return file_size
-        header = {"Range": "bytes=%s-%s" % (first_byte, file_size)}
-        pbar = tqdm(
-            total=file_size,
-            initial=first_byte,
-            unit='B',
-            unit_scale=True,
-            desc=filename)
-        req = requests.get(url, headers=header, stream=True)
-        with open(dest, 'ab') as f:
-            for chunk in req.iter_content(chunk_size=chunk_size):
-                if chunk:
-                    f.write(chunk)
-                    pbar.update(1024)
-        pbar.close()
-        return file_size
+            break
+    return port
