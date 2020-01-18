@@ -1,15 +1,9 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
+# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-# coding:utf-8
-import os
-import sys
-import uuid
-import threading
-from cvpm.config import getLogDir
-import logging
+#coding:utf-8
 
 class ThreadPrinter:
     def __init__(self, filename):
@@ -26,7 +20,6 @@ class ThreadPrinter:
             f.flush()
         except IOError as identifier:
             logging.warn(identifier)
-
 
 class TracedThread(threading.Thread):
     def __init__(self, *args, **keywords):
