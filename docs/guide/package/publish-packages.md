@@ -9,20 +9,19 @@ Your package is firstly a Python Package. Therefore, it will look like:
 ```
 - example_package
     - example_package
-        - solver.py
-        - bundle.py
-    - pretrained
-        - pretrained.toml
+        - solver.py // required
+        - bundle.py // optional
+    - pretrained.toml // optional, required if your package needs to download file
     - tests // optional
     - examples // optional
-    - cvpm.toml
-    - requirements.txt
+    - aid.toml // required
+    - requirements.txt // required
     - README.md
 ```
 
 ### Solvers
 
-Solver is a ```class``` extended from ```cvpm.Solver``` class. In this class, you need to implement 2 functions: ```__init__``` and ```infer```. As their literal meanings, in the ```init``` function, parameters that your infer functions use should be initiate, and in the ```infer``` function, a image file path will be passed in the parameter, and the ```infer``` function is supposed to return your result in a dict or list.
+Solver is a ```class``` extended from ```mlserve.Solver``` class. In this class, you need to implement 2 functions: ```__init__``` and ```infer```. As their literal meanings, in the ```init``` function, parameters in your package should be initiate, and in the ```infer``` function, a image file path will be passed in the parameter, and the ```infer``` function is supposed to return your result in a dict or list.
 
 For example, a simple solver frame will look like 
 
@@ -42,7 +41,7 @@ class SampleSolver(Solver):
         return result
 ```
 
-### cvpm.toml
+### aid.toml
 
 cvpm.toml is the entry file that tells the cvpm system which solver it should looking for. It uses [toml](https://github.com/toml-lang/toml) syntax and should looks like the following format:
 
