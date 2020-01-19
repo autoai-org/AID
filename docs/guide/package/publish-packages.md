@@ -1,5 +1,7 @@
 # Publish Packages
 
+**Note: This document is compatible with aid v1.0 and higher only.**
+
 ## Prepare Your Model Locally
 
 ### Project Structure
@@ -33,17 +35,17 @@ class SampleSolver(Solver):
         super().__init__(toml_file)
         # Do you Init Work here
         self.classifer = get_classifier()
-        self.set_ready()
-    def infer(self, image_file, config):
-        # Use your own load_image method, or from cvpm.utility import load_image_file
-        image = load_image(image_file)
+        self.ready()
+    def infer(self, data):
+        # if you need to get file uploaded, get the path from input_file_path in data
+        image = load_image(data['input_file_path'])
         result = self.classifier(image)
-        return result
+        return result # return a dict
 ```
 
 ### aid.toml
 
-cvpm.toml is the entry file that tells the cvpm system which solver it should looking for. It uses [toml](https://github.com/toml-lang/toml) syntax and should looks like the following format:
+aid.toml is the entry file where aid will look for your solvers. It uses [toml](https://github.com/toml-lang/toml) syntax and should looks like the following format:
 
 ``` toml
 [package]
@@ -62,32 +64,13 @@ name="Your_Solver_3_Name"
 class="path/to_your_folder/Solver_Class_Name"
 ```
 
-For example, the Face Utility that we provided as one of our official models have the [cvpm.toml](https://github.com/cvmodel/Face_Utility/blob/master/cvpm.toml) file as following:
-
-``` toml
-[package]
-name="Face_utility"
-
-[[solvers]]
-name="Face_Detection"
-class="face_utility/solver/FaceDetectionSolver"
-
-[[solvers]]
-name="Face_Landmark"
-class="face_utility/solver/FaceLandmarkSolver"
-
-[[solvers]]
-name="Face_Encoding"
-class="face_utility/solver/FaceEncodingSolver"
-```
-
 Make sure this file is located at the root path of your project.
 
 ### Pre-trained models
 
-In most occasions, your algorithms (or neural networks etc.) should be uploaded along with some pre-trained models. We encourage you to upload it with our CLI (Not Done yet. [#72](https://github.com/unarxiv/CVPM/issues/72)), but it is also allowed if you upload it another downloadable services.
+In most occasions, your algorithms (or neural networks etc.) should be uploaded along with some pre-trained models. We encourage you to upload it with our CLI (Not Done yet. [#72](https://github.com/unarxiv/CVPM/issues/72)), but it is also allowed if you want upload it another downloadable services, especially when it is extremely large.
 
-You need to define your pre-trained models in ```pretrained/pretrained.toml``` file as following using [toml syntax](https://github.com/toml-lang/toml):
+You need to define your pre-trained models in ```pretrained.toml``` file as following using [toml syntax](https://github.com/toml-lang/toml):
 
 ``` toml
 [[models]]
@@ -99,49 +82,8 @@ name = "model_file_name"
 url = "pretrained/name_of_your_modelfile" # Local File
 ```
 
-For example, the Face Utility that we provided as one of our official models have the [pretrained.toml](https://github.com/cvmodel/Face_Utility/blob/master/pretrained.toml) file as following:
-
-``` toml
-[[models]]
-name = "dlib_face_recognition_resnet_model_v1"
-url = "https://premium.file.cvtron.xyz/data/dlib_face_recognition_resnet_model_v1.dat"
-
-[[models]]
-name = "mmod_human_face_detector"
-url = "https://premium.file.cvtron.xyz/data/mmod_human_face_detector.dat"
-
-[[models]]
-name = "shape_predictor_5_face_landmarks"
-url = "https://premium.file.cvtron.xyz/data/shape_predictor_5_face_landmarks.dat"
-
-[[models]]
-name = "shape_predictor_68_face_landmarks"
-url = "https://premium.file.cvtron.xyz/data/shape_predictor_68_face_landmarks.dat"
-```
-
-Make sure this file is located at the ```pretrained``` subfolder of your project.
-
-### Pre/Post Install Scripts
-
-It is an ongoing plan and have not been implemented yet. ([#49](https://github.com/unarxiv/CVPM/issues/49))
-
-## Publish to Model Hub
-
+Make sure this file is located at the root path of your project. AID will automatically download the file when install packages.
 
 ## Publish to GitHub
 
-When publishing to GitHub, mention "CVPM Available" at the top of your README file, only if you want you model to be searchable by the Model Hub.
-
-Your README file should be look like the following:
-
-```
-## PROJECT NAME
-
-[CVPM-Available](https://hub.autoai.org)
-```
-
-You can look at [Face Utility](https://github.com/cvmodel/Face_Utility) for reference as an official repository.
-
-## Best Practice
-
-TBD
+We encourage you to upload your package to GitHub repositories, as long as you want it to be open sourced.
