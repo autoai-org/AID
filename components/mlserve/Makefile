@@ -23,8 +23,7 @@ package:
 	python3 setup.py sdist bdist_wheel
 
 test:
-	go test -race -coverprofile c.out -v ./...
-	rm -rf **/**/logs/
+	PYTHONPATH=./ python3 tests/server.py
 	
 build:
 	bash ./build.sh

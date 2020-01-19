@@ -5,7 +5,7 @@
 import json
 import os
 
-from mlserve.config import GetConfig
+from aid.config import GetConfig
 
 
 class Logger(object):

@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from mlserve.server import run_server
+from aid.server import run_server
 
 
 class Solver(object):
