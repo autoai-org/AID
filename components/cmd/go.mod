@@ -8,6 +8,7 @@ require (
 	github.com/Microsoft/go-winio v0.4.14 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
+	github.com/cavaliercoder/grab v2.0.0+incompatible
 	github.com/containerd/containerd v1.3.2 // indirect
 	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect

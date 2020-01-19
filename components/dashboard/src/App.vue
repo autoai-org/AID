@@ -54,6 +54,7 @@
       </v-row>
     </v-app-bar>
     <loading-dialog :show="isLoading"></loading-dialog>
+    <alert-dialog :info="alertInfo" :title="alertTitle"></alert-dialog>
     <v-content>
       <v-container class="fill-height">
         <router-view />
@@ -71,6 +72,7 @@ import { mapState } from "vuex";
 import { overview_menu, system_menu, about_menu } from "./router/menu";
 import router from '@/router'
 import LoadingDialog from '@/components/dialogs/LoadingDialog.vue'
+import AlertDialog from '@/components/dialogs/Alert.vue'
 export default {
   props: {
     source: String
@@ -89,11 +91,14 @@ export default {
   },
   computed: {
     ...mapState({
-      isLoading: "isLoading"
+      isLoading: "isLoading",
+      alertInfo: "alert_info",
+      alertTitle: "alert_title"
     })
   },
   components:{
-    'loading-dialog': LoadingDialog
+    'loading-dialog': LoadingDialog,
+    'alert-dialog': AlertDialog
   }
 };
 </script>

@@ -99,11 +99,39 @@ function deleteLog(id: string) {
     })
 }
 
+function fetchConfig() {
+    return new Promise((resolve, reject)=>{
+        _apiRequest(endpoint + "configs", "get", {}, {},
+        (res: object) => {
+            resolve(res)
+            store.commit('setconfig', res)
+        },
+        (err: object) => {
+            reject(err)
+            console.error(err)
+        })
+    })
+}
+
+function updateConfig(config: object) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "configs", "post", config, {},
+            (res: object) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
 export {
     _apiRequest,
     buildImage,
     fetchLog,
     fetchAllObjects,
     installPackage,
-    deleteLog
+    deleteLog,
+    fetchConfig,
+    updateConfig
 }

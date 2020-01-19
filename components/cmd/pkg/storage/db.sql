@@ -61,3 +61,16 @@ CREATE TABLE IF NOT EXISTS apikey (
 	updated_at DATETIME,
 	status TEXT
 );
+
+CREATE TABLE IF NOT EXISTS privateenvironment (
+	id TEXT PRIMARY KEY,
+	name TEXT PRIMARY KEY
+)
+
+CREATE TABLE IF NOT EXISTS environmentvariable (
+	id TEXT PRIMARY KEY,
+	envkey TEXT PRIMARY KEY,
+	envvalue TEXT PRIMARY KEY,
+	environment TEXT PRIMARY KEY,
+	PackageId TEXT PRIMARY KEY
+)
