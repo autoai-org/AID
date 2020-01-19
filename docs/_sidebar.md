@@ -11,10 +11,10 @@
   - [Runtime](guide/concepts/runtime.md)
 
 - Package
-  - [Install Packages](guide/cvpm/install-packages.md)
-  - [Publish Packages](guide/cvpm/publish-packages.md)
-  - [Web UI](guide/cvpm/webui-usage.md)
-  - [API Reference](guide/cvpm/api-reference.md)
+  - [Install Packages](guide/package/install-packages.md)
+  - [Publish Packages](guide/package/publish-packages.md)
+  - [Web UI](guide/package/webui-usage.md)
+  - [API Reference](guide/package/api-reference.md)
 
 - Contributing
 
