@@ -12,7 +12,7 @@ from sanic.response import json
 from sanic import response
 from sanic import request
 
-from mlserve.utility import get_available_port, str2bool
+from aid.utility import get_available_port, str2bool
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
@@ -22,6 +22,9 @@ UPLOAD_FOLDER = './temp'
 
 aidserver.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+@aidserver.route("/", methods=["GET"])
+async def ping(request):
+    return response.text('Hello world!', status=200)
 
 @aidserver.route("/infer", methods=["GET", "POST"])
 async def infer(request):

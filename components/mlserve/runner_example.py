@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from mlserve.solver import Solver
+from aid.solver import Solver
 
 
 class ExampleSolver(Solver):
