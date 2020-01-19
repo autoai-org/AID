@@ -11,12 +11,13 @@ import (
 
 var logger = utilities.NewDefaultLogger()
 
-// readConfig checks if all the required folder exists,
-// If not, it will create the folder
-
-var userConfig *utilities.Config
-
 func readConfig() {
-	userConfig = utilities.NewConfig("./config.json")
-	utilities.DefaultConfig = userConfig
+	utilities.DefaultConfig = utilities.NewDefaultConfig()
+}
+
+func resetConfig() {
+	config := utilities.SystemConfig{
+		RemoteReport: true,
+	}
+	utilities.SaveConfig(config)
 }

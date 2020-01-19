@@ -6,9 +6,12 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     packages: [],
-    logs:[],
-    solvers:[],
+    logs: [],
+    solvers: [],
     isLoading: false,
+    config: {},
+    alert_info:"",
+    alert_title:""
   },
   mutations: {
     setpackages(state, packages) {
@@ -20,10 +23,13 @@ export default new Vuex.Store({
     setsolvers(state, solvers) {
       state.solvers = solvers
     },
+    setconfig(state, config) {
+      state.config = config
+    },
     beginRequests(state) {
       state.isLoading = true
     },
-    endRequests (state) {
+    endRequests(state) {
       state.isLoading = false
     }
   },
