@@ -23,12 +23,12 @@ Your package is firstly a Python Package. Therefore, it will look like:
 
 ### Solvers
 
-Solver is a ```class``` extended from ```mlserve.Solver``` class. In this class, you need to implement 2 functions: ```__init__``` and ```infer```. As their literal meanings, in the ```init``` function, parameters in your package should be initiate, and in the ```infer``` function, a image file path will be passed in the parameter, and the ```infer``` function is supposed to return your result in a dict or list.
+Solver is a ```class``` extended from ```aid.Solver``` class. In this class, you need to implement 2 functions: ```__init__``` and ```infer```. As their literal meanings, in the ```init``` function, parameters in your package should be initiate, and in the ```infer``` function, a image file path will be passed in the parameter, and the ```infer``` function is supposed to return your result in a dict or list.
 
 For example, a simple solver frame will look like 
 
 ```python
-from cvpm.solver import Solver
+from aid.solver import Solver
 
 class SampleSolver(Solver):
     def __init__(self, toml_file=None):
