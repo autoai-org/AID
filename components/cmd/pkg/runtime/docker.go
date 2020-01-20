@@ -126,7 +126,7 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entitie
 	}()
 	if err == nil {
 		// no error occured, change solver status
-		
+
 	}
 	return log, err
 }

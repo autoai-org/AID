@@ -21,8 +21,8 @@ var (
 )
 
 func main() {
-	var license bool
 	readConfig()
+	var license bool
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("version:%s build:%s\n", c.App.Version, Build)
 	}
@@ -51,6 +51,34 @@ func main() {
 				Category: "storage",
 				Action: func(c *cli.Context) error {
 					return nil
+				},
+			},
+			{
+				Name:     "config",
+				Aliases:  []string{"conf"},
+				Usage:    "List/Set Configurations",
+				Category: "self",
+				Subcommands: []*cli.Command{
+					{
+						Name:     "list",
+						Aliases:  []string{"ls"},
+						Usage:    "List all configurations",
+						Category: "self",
+						Action: func(c *cli.Context) error {
+							printConfig()
+							return nil
+						},
+					},
+					{
+						Name:     "reset",
+						Aliases:  []string{"ls"},
+						Usage:    "Reset all configurations to default value",
+						Category: "self",
+						Action: func(c *cli.Context) error {
+							resetConfig()
+							return nil
+						},
+					},
 				},
 			},
 			{

@@ -18,9 +18,11 @@ func getRouter() *gin.Engine {
 	r.GET("/logs", getLogs)
 	r.GET("/logs/:logid", getLog)
 	r.GET("/solvers", getSolvers)
+	r.GET("/configs", getConfigs)
 	// all post/put requests
 	r.PUT("/vendors/:vendorName/packages/:packageName/solvers/:solverName/images", buildPackageImage)
 	r.POST("/packages", installPackage)
+	r.POST("/configs", updateConfigs)
 	// all delete requests
 	r.DELETE("/logs/:logid", deleteLog)
 	// websocket

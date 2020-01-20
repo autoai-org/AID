@@ -9,9 +9,10 @@ const overview_menu = [
 ]
 
 const system_menu = [
-    { icon: "mdi-poll-box", text: "System Status" },
-    { icon: "mdi-math-log", text: "System Logs", link: "/system/logs"},
+    { icon: "mdi-poll-box", text: "Status" },
+    { icon: "mdi-math-log", text: "Logs", link: "/system/logs"},
     { icon: "mdi-puzzle", text: "Extensions" },
+    { icon: "mdi-settings-outline", text: "Preferences",link: "/system/preferences" },
 ]
 
 const about_menu = [
