@@ -29,6 +29,27 @@ func getSolvers(c *gin.Context) {
 	c.JSON(http.StatusOK, solvers)
 }
 
+// getMetaInfo returns all meta information about the package
+// GET /:vendorName/:packageName/meta -> {readme, aid.toml, pretrained.toml}
+func getMetaInfo(c *gin.Context) {
+	var solvers entities.Solvers
+	var pretraineds entities.Pretraineds
+	var readmeContent string
+	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
+	aidtomlString, err := utilities.ReadFileContent(filepath.Join(packageFolder, "aid.toml"))
+	if err == nil {
+		solvers = entities.LoadSolversFromConfig(aidtomlString)
+	}
+	pretrainedtomlString, err := utilities.ReadFileContent(filepath.Join(packageFolder, "pretrained.toml"))
+	if err == nil {
+		pretraineds = entities.LoadPretrainedsFromConfig(pretrainedtomlString)
+	}
+	readmeContent, err = utilities.ReadFileContent(filepath.Join(packageFolder, "readme.md"))
+	c.JSON(http.StatusOK, metaResponse{
+		Solvers: solvers, Pretraineds: pretraineds, Readme: readmeContent,
+	})
+}
+
 // installPackage performs installation
 // PUT /packages
 func installPackage(c *gin.Context) {
@@ -48,18 +69,20 @@ func installPackage(c *gin.Context) {
 }
 
 // buildPackages build a new image
-// PUT /vendor/:vendorName/packages/:packageName/solvers/:solverName/images
+// PUT /:vendorName/:packageName/:solverName/images
 func buildPackageImage(c *gin.Context) {
 	dockerClient := runtime.NewDockerRuntime()
 	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
-	tomlString := utilities.ReadFileContent(filepath.Join(packageFolder, "cvpm.toml"))
+	tomlString, err := utilities.ReadFileContent(filepath.Join(packageFolder, "aid.toml"))
+	if err != nil {
+		utilities.CheckError(err, "Cannot open file "+filepath.Join(packageFolder, "aid.toml"))
+	}
 	solvers := entities.LoadSolversFromConfig(tomlString)
 	runtime.RenderRunnerTpl(packageFolder, solvers)
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	solverName := c.Param("solverName")
 	var imageName string
 	var log entities.Log
-	var err error
 	imageName = packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
 	// Check if docker file exists
 	if !utilities.IsExists(filepath.Join(packageFolder, "docker_"+solverName)) {

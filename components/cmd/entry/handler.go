@@ -18,13 +18,15 @@ func build(solverName string) {
 	// Read Dockerfile
 	dockerClient := runtime.NewDockerRuntime()
 	// Read Base Image Name
-	tomlString := utilities.ReadFileContent("./cvpm.toml")
+	tomlString, err := utilities.ReadFileContent("./aid.toml")
+	utilities.CheckError(err, "Cannot readfile "+ "./aid.toml")
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	if solverName == "*" {
 		for _, solver := range packageInfo.Solvers {
 			imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solver.Name
 			// Check if docker file exists
-			if utilities.ReadFileContent("./docker_"+solver.Name) == "Read "+"./docker_"+solver.Name+" Failed!" {
+			_, err = utilities.ReadFileContent("./docker_"+solver.Name)
+			if err != nil {
 				runtime.RenderDockerfile(solver.Name, "./docker_"+solver.Name)
 			}
 			dockerClient.Build(strings.ToLower(imageName), "./docker_"+solver.Name)
@@ -32,7 +34,8 @@ func build(solverName string) {
 	} else {
 		imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
 		// Check if docker file exists
-		if utilities.ReadFileContent("./docker_"+solverName) == "Read "+"./docker_"+solverName+" Failed!" {
+		_, err = utilities.ReadFileContent("./docker_"+solverName)
+		if err != nil {
 			runtime.RenderDockerfile(solverName, "./docker_"+solverName)
 		}
 		dockerClient.Build(strings.ToLower(imageName), "./docker_"+solverName)
@@ -40,8 +43,11 @@ func build(solverName string) {
 }
 
 func generate() {
-	tomlFilePath := filepath.Join("./", "cvpm.toml")
-	cvpmToml := utilities.ReadFileContent(tomlFilePath)
+	tomlFilePath := filepath.Join("./", "aid.toml")
+	cvpmToml,err := utilities.ReadFileContent(tomlFilePath)
+	if err != nil {
+		utilities.CheckError(err, "Cannot open file "+ tomlFilePath)
+	}
 	solvers := entities.LoadSolversFromConfig(cvpmToml)
 	runtime.RenderRunnerTpl("./", solvers)
 	runtime.GenerateDockerFiles("./")

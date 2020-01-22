@@ -153,8 +153,11 @@ func (docker *DockerRuntime) ListContainers() []types.Container {
 
 // GenerateDockerFiles returns a DockerFile string that could be used to build image.
 func GenerateDockerFiles(baseFilePath string) {
-	configFile := filepath.Join(baseFilePath, "cvpm.toml")
-	tomlString := utilities.ReadFileContent(configFile)
+	configFile := filepath.Join(baseFilePath, "aid.toml")
+	tomlString, err := utilities.ReadFileContent(configFile)
+	if err != nil {
+		utilities.CheckError(err, "cannot open file "+configFile)
+	}
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
 		RenderDockerfile(solver.Name, baseFilePath)

@@ -24,7 +24,7 @@ func getLogs(c *gin.Context) {
 // Get /logs/:logid
 func getLog(c *gin.Context) {
 	requestedFilename := entities.GetLog(c.Param("logid")).Filepath
-	fileContent := utilities.ReadFileContent(requestedFilename)
+	fileContent, _ := utilities.ReadFileContent(requestedFilename)
 	c.JSON(http.StatusOK, logContent{
 		Content: fileContent,
 	})

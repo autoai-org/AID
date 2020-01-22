@@ -43,8 +43,11 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 		logger.Error("Unsupported Remote Type.")
 	}
 	// Generate Dockerfile
-	configFile := filepath.Join(localFolder, "cvpm.toml")
-	tomlString := utilities.ReadFileContent(configFile)
+	configFile := filepath.Join(localFolder, "aid.toml")
+	tomlString, err := utilities.ReadFileContent(configFile)
+	if err != nil {
+		utilities.CheckError(err, "Cannot open file "+configFile)
+	}
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
 		solver.Vendor = pack.Vendor
@@ -54,7 +57,7 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 		RenderDockerfile(solver.Name, localFolder)
 	}
 	// Save package into database for future use
-	err := pack.Save()
+	err = pack.Save()
 	utilities.CheckError(err, "Cannot save package into database!")
 	// All is well
 	logger.Info("Installation Finished!")
