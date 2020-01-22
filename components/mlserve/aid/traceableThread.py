@@ -1,9 +1,10 @@
 # Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
-# 
+#
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
 #coding:utf-8
+
 
 class ThreadPrinter:
     def __init__(self, filename):
@@ -21,6 +22,7 @@ class ThreadPrinter:
         except IOError as identifier:
             logging.warn(identifier)
 
+
 class TracedThread(threading.Thread):
     def __init__(self, *args, **keywords):
         threading.Thread.__init__(self, *args, **keywords)
@@ -35,7 +37,7 @@ class TracedThread(threading.Thread):
     def start(self):
         if self.id is None:
             self.id = str(uuid.uuid4)
-        full_log_path= os.path.join(getLogDir(), self.id+".full.log")
+        full_log_path = os.path.join(getLogDir(), self.id + ".full.log")
         self.__run_backup = self.run
         self.run = self.__run
         sys.stdout = ThreadPrinter(full_log_path)
