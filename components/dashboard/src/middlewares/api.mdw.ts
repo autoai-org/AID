@@ -32,7 +32,7 @@ function _apiRequest(url: string,
 
 function buildImage(vendorName: string, packageName: string, solverName: string) {
     return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "vendors/" + vendorName + "/packages/" + packageName + "/solvers/" + solverName + "/images", "put", {}, {},
+        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images", "put", {}, {},
             (res: any) => {
                 resolve(res)
             },
@@ -58,20 +58,20 @@ function installPackage(packageIdentifier: string) {
 }
 
 function fetchAllObjects(objectName: string) {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         _apiRequest(endpoint + objectName, "get", {}, {},
-        (res: Array<Log>) => {
-            res = res.map(function (each) {
-                each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
-                return each
+            (res: Array<Log>) => {
+                res = res.map(function (each) {
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
+                resolve(res)
+                store.commit('set' + objectName, res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
             })
-            resolve(res)
-            store.commit('set' + objectName, res)
-        },
-        (err: object) => {
-            reject(err)
-            console.error(err)
-        })
     })
 }
 
@@ -100,16 +100,16 @@ function deleteLog(id: string) {
 }
 
 function fetchConfig() {
-    return new Promise((resolve, reject)=>{
+    return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "configs", "get", {}, {},
-        (res: object) => {
-            resolve(res)
-            store.commit('setconfig', res)
-        },
-        (err: object) => {
-            reject(err)
-            console.error(err)
-        })
+            (res: object) => {
+                resolve(res)
+                store.commit('setconfig', res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
     })
 }
 
@@ -125,6 +125,19 @@ function updateConfig(config: object) {
     })
 }
 
+function fetchMeta(vendorName: string, packageName: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName, "get", {}, {},
+            (res: object) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
 export {
     _apiRequest,
     buildImage,
@@ -133,5 +146,6 @@ export {
     installPackage,
     deleteLog,
     fetchConfig,
-    updateConfig
+    updateConfig,
+    fetchMeta
 }

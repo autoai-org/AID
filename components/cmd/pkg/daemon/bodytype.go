@@ -5,11 +5,16 @@
 
 package daemon
 
+import (
+	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+)
+
 // logContent is used for the daemon to wrap log content as json format
 type logContent struct {
 	Content string `json:"content"`
 }
 
+// installPackageRequest is used for client to form post requests
 type installPackageRequest struct {
 	RemoteURL string `json:"remote_url"`
 }
@@ -17,4 +22,11 @@ type installPackageRequest struct {
 type messageResponse struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`
+}
+
+// metaResponse is used to respond meta information to client
+type metaResponse struct {
+	Solvers     entities.Solvers     `json:"solvers"`
+	Pretraineds entities.Pretraineds `json:"pretraineds"`
+	Readme      string               `json:"readme"`
 }

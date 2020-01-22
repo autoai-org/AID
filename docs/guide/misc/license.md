@@ -1,6 +1,6 @@
 # License
 
-The personal use of AIFlow is governed by the MIT License, and the documentation is released under CC0 (Public Domain, No Rights Reserved).
+The personal use of AID is governed by the MIT License, and the documentation is released under CC0 (Public Domain, No Rights Reserved).
 
 NOTE:
 
