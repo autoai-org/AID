@@ -15,7 +15,7 @@ import (
 var logger = NewDefaultLogger()
 
 // ReadFileContent returns the content of filename
-func ReadFileContent(filename string) string {
+func ReadFileContent(filename string) (string, error) {
 	var content string
 	byteContent, err := ioutil.ReadFile(filename)
 	if err != nil {
@@ -23,7 +23,7 @@ func ReadFileContent(filename string) string {
 	} else {
 		content = string(byteContent)
 	}
-	return content
+	return content, err
 }
 
 // WriteContentToFile writes contents to file

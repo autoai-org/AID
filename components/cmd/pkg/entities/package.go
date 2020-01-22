@@ -26,6 +26,20 @@ type Package struct {
 	RemoteURL string    `db:"remote_url"`
 }
 
+// Pretrained defines the basic structure of pretrained file,
+// it do not need to be stored in database
+// and therefore has no `db` bindings.
+type Pretrained struct {
+	Name string `toml:"name"`
+	URL  string `toml:"url"`
+}
+
+// Pretraineds is the collection/list of pretrained files
+// this definition is used for toml parser
+type Pretraineds struct {
+	Model []Pretrained `toml:"model"`
+}
+
 // TableName defines the tablename in database
 func (p *Package) TableName() string {
 	return "package"
@@ -36,7 +50,7 @@ func (p *Package) PK() string {
 	return "id"
 }
 
-// PackageConfig is the toml interface as in cvpm.toml
+// PackageConfig is the toml interface as in aid.toml
 type PackageConfig struct {
 	Solvers []Solver
 	Package Package
@@ -68,4 +82,12 @@ func FetchPackages() []Package {
 		packages[i] = *packagesPointers[i]
 	}
 	return packages
+}
+
+// LoadPretrainedsFromConfig reads the config string and returns the objects
+func LoadPretrainedsFromConfig(tomlString string) Pretraineds {
+	var pretraineds Pretraineds
+	_, err := toml.Decode(tomlString, &pretraineds)
+	utilities.CheckError(err, "Cannot Load Solvers")
+	return pretraineds
 }

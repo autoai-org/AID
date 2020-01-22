@@ -43,7 +43,10 @@ func SaveConfig(config SystemConfig) {
 // ReadConfig always read the config file
 func ReadConfig() *SystemConfig {
 	configPath := filepath.Join(GetBasePath(), "config.toml")
-	tomlString := ReadFileContent(configPath)
+	tomlString, err := ReadFileContent(configPath)
+	if err != nil {
+		CheckError(err, "Cannot open file "+configPath)
+	}
 	if _, err := toml.Decode(tomlString, &DefaultConfig); err != nil {
 		CheckError(err, "Cannot load config file!")
 	}

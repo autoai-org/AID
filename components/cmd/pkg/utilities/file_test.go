@@ -22,7 +22,7 @@ func TestReadFileContent(t *testing.T) {
 	testString := "test"
 	err := WriteContentToFile("./test.test", testString)
 	assert.Nil(t, err)
-	content := ReadFileContent("./test.test")
+	content, _ := ReadFileContent("./test.test")
 	assert.Equal(t, content, testString)
 	os.Remove("./test.test")
 }
