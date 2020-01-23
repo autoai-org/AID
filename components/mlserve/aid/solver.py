@@ -24,10 +24,16 @@ class Solver(object):
     @property
     def hyperparamters(self):
         return self._hyperparameters
-    
+
     def ready(self):
         self._isReady = True
-    
+
     def start(self, port=None):
         print('Server will run on port: ' + str(port))
         run_server(self, port)
+
+    def infer(self, data):
+        raise NotImplementedError
+
+    def train(self, data):
+        raise NotImplementedError

@@ -44,7 +44,7 @@ func getMetaInfo(c *gin.Context) {
 	if err == nil {
 		pretraineds = entities.LoadPretrainedsFromConfig(pretrainedtomlString)
 	}
-	readmeContent, err = utilities.ReadFileContent(filepath.Join(packageFolder, "readme.md"))
+	readmeContent, err = utilities.ReadFileContent(filepath.Join(packageFolder, "README.md"))
 	c.JSON(http.StatusOK, metaResponse{
 		Solvers: solvers, Pretraineds: pretraineds, Readme: readmeContent,
 	})
