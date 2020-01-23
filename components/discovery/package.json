@@ -16,11 +16,11 @@
         "koa-bodyparser": "^4.2.1",
         "koa-json": "^2.0.2",
         "koa-logger": "^3.2.1",
-        "koa-router": "^7.4.0",
+        "koa-router": "^8.0.6",
         "koa-swagger-decorator": "^1.6.0",
         "typescript": "^3.7.5"
     },
     "devDependencies": {
-        "@types/node": "^13.1.7"
+        "@types/node": "^13.1.8"
     }
 }
