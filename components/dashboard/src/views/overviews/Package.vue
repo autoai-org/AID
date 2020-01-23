@@ -80,6 +80,7 @@ export default Vue.extend({
     }
   },
   mounted() {
+    let self = this
     fetchAllObjects("packages");
     fetchAllObjects("solvers");
   },
