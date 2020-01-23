@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 const overview_menu = [
-    { icon: "mdi-view-dashboard", text: "Dashboard" },
+    { icon: "mdi-view-dashboard", text: "Dashboard", link: "/"},
     { icon: "mdi-inbox", text: "Packages", link: "/overview/packages" },
 ]
 

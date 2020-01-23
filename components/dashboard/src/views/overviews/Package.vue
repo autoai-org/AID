@@ -2,10 +2,16 @@
   <v-container>
     <v-btn class="ma-2" outlined color="indigo" @click="showNewPackageDialog=true">New Package</v-btn>
     <new-package-dialog :show="showNewPackageDialog" @closed="showNewPackageDialog=false" />
-    <build-dialog :show="showBuildDialog" @closed="showBuildDialog=false" :vendor="selectedSolver.Vendor" :packageName="selectedSolver.Package" :solver="selectedSolver.Name"></build-dialog>
+    <build-dialog
+      :show="showBuildDialog"
+      @closed="showBuildDialog=false"
+      :vendor="selectedSolver.Vendor"
+      :packageName="selectedSolver.Package"
+      :solver="selectedSolver.Name"
+    ></build-dialog>
     <v-card outlined min-width="100%">
       <v-card-title>Packages</v-card-title>
-      <EnhancedTable :headers="headers" :select="true" :items="packages" :actions="actions" />
+      <EnhancedTable :headers="headers" :select="true" :items="packages" :actions="actions" @actionClicked="handleActions"/>
     </v-card>
     <v-spacer />
     <v-card outlined min-width="100%" class="solvers">
@@ -26,7 +32,7 @@ import Vue from "vue";
 import { mapState } from "vuex";
 import NewPackageDialog from "@/components/dialogs/NewPackageDialog.vue";
 import EnhancedTable from "@/components/EnhancedTable.vue";
-import BuildDialog from "@/components/dialogs/BuildDialog.vue"
+import BuildDialog from "@/components/dialogs/BuildDialog.vue";
 import { fetchAllObjects } from "@/middlewares/api.mdw";
 
 export default Vue.extend({
@@ -62,9 +68,14 @@ export default Vue.extend({
   },
   methods: {
     handleActions(action: any) {
-      if (action.action==="Build") {
-        this.selectedSolver = action.item
-        this.showBuildDialog = true
+      if (action.action === "Build") {
+        this.selectedSolver = action.item;
+        this.showBuildDialog = true;
+      } else if (action.action === "View") {
+        console.log(action.item);
+        this.$router.replace(
+          "/package/" + action.item.Vendor + "/" + action.item.Name
+        );
       }
     }
   },
