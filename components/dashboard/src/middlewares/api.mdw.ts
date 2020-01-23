@@ -127,7 +127,7 @@ function updateConfig(config: object) {
 
 function fetchMeta(vendorName: string, packageName: string) {
     return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName, "get", {}, {},
+        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName +"/meta", "get", {}, {},
             (res: object) => {
                 resolve(res)
             },

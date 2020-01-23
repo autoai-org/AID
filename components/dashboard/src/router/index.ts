@@ -1,13 +1,12 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home
+    component: () => import(/* webpackChunkName: "home" */ '../views/overviews/Dashboard.vue')
   },
   {
     path: '/overview/packages',
@@ -15,7 +14,15 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/overviews/Package.vue')
+    component: () => import(/* webpackChunkName: "packages" */ '../views/overviews/Package.vue')
+  },
+  {
+    path: '/package/:vendor/:package',
+    name: 'packageDetail',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "packages" */ '../views/packages/PackageDetail.vue')
   },
   {
     path: '/system/logs',
@@ -23,7 +30,7 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/systems/Log.vue')
+    component: () => import(/* webpackChunkName: "logs" */ '../views/systems/Log.vue')
   },
   {
     path: '/system/preferences',
@@ -31,7 +38,12 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/systems/Preference.vue')
+    component: () => import(/* webpackChunkName: "preferences" */ '../views/systems/Preference.vue')
+  },
+  {
+    path: "**",
+    name: "http404",
+    component: () => import(/* webpackChunkName: "http404" */ '../views/errors/NotFound.vue')
   }
 ]
 
