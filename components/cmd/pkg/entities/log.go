@@ -75,10 +75,7 @@ func GetLog(id string) Log {
 	log := Log{ID: id}
 	db := storage.GetDefaultDB()
 	err := db.FetchOne(&log)
-	if err != nil {
-		logger.Error("Cannot fetch object")
-		logger.Error(err.Error())
-	}
+	utilities.CheckError(err, "Cannot fetch log object with id"+id)
 	return log
 }
 

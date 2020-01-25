@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS solver (
 	vendor TEXT,
 	name TEXT,
 	solverpath TEXT,
+	imagename TEXT,
 	created_at DATETIME,
 	updated_at DATETIME,
 	status TEXT
@@ -64,13 +65,42 @@ CREATE TABLE IF NOT EXISTS apikey (
 
 CREATE TABLE IF NOT EXISTS privateenvironment (
 	id TEXT PRIMARY KEY,
-	name TEXT PRIMARY KEY
-)
+	name TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);
 
 CREATE TABLE IF NOT EXISTS environmentvariable (
 	id TEXT PRIMARY KEY,
-	envkey TEXT PRIMARY KEY,
-	envvalue TEXT PRIMARY KEY,
-	environment TEXT PRIMARY KEY,
-	PackageId TEXT PRIMARY KEY
-)
+	envkey TEXT,
+	envvalue TEXT,
+	environment TEXT,
+	PackageId TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS image (
+	id TEXT PRIMARY KEY,
+	name TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS container (
+	id TEXT PRIMARY KEY,
+	name TEXT,
+	imageid TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);
+
+CREATE TABLE IF NOT EXISTS runningsolver (
+	id TEXT PRIMARY KEY,
+	solverid TEXT,
+	status TEXT,
+	imagename TEXT,
+	entrypoint TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);

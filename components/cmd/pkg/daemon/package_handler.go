@@ -22,6 +22,13 @@ func getPackages(c *gin.Context) {
 	c.JSON(http.StatusOK, packages)
 }
 
+// getImages returns all images that has been built
+// GET /:images
+func getImages(c *gin.Context) {
+	images := entities.FetchImages()
+	c.JSON(http.StatusOK, images)
+}
+
 // getSolvers returns all solvers
 // GET /solvers -> returns all solvers
 func getSolvers(c *gin.Context) {

@@ -58,6 +58,11 @@ func (db *Database) CreateTables() {
 	// Read SQL
 	//var sqlString = utilities.GetRemoteFile("https://raw.githubusercontent.com/autoai-org/CVPM/master/components/cmd/pkg/storage/db.sql")
 	var sqlString = `
+	--- Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+	---
+	--- This software is released under the MIT License.
+	--- https://opensource.org/licenses/MIT
+	/* Create required tables */
 	CREATE TABLE IF NOT EXISTS package (
 		id TEXT PRIMARY KEY,
 		name TEXT,
@@ -94,6 +99,7 @@ func (db *Database) CreateTables() {
 		vendor TEXT,
 		name TEXT,
 		solverpath TEXT,
+		imagename TEXT,
 		created_at DATETIME,
 		updated_at DATETIME,
 		status TEXT
@@ -115,6 +121,48 @@ func (db *Database) CreateTables() {
 		created_at DATETIME,
 		updated_at DATETIME,
 		status TEXT
+	);
+	
+	CREATE TABLE IF NOT EXISTS privateenvironment (
+		id TEXT PRIMARY KEY,
+		name TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS environmentvariable (
+		id TEXT PRIMARY KEY,
+		envkey TEXT,
+		envvalue TEXT,
+		environment TEXT,
+		PackageId TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS image (
+		id TEXT PRIMARY KEY,
+		name TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS container (
+		id TEXT PRIMARY KEY,
+		name TEXT,
+		imageid TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS runningsolver (
+		id TEXT PRIMARY KEY,
+		solverid TEXT,
+		status TEXT,
+		imagename TEXT,
+		entrypoint TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
 	);
 	`
 	gosql.Exec(sqlString)
@@ -159,4 +207,10 @@ func (db *Database) Delete(obj interface{}) (err error) {
 func (db *Database) Update(obj interface{}) (err error) {
 	_, err = gosql.Model(obj).Update()
 	return err
+}
+
+// Count returns the count of the requested object
+func (db *Database) Count(obj interface{}) (count int64, err error) {
+	count, err = gosql.Model(obj).Count()
+	return count, err
 }

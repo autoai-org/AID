@@ -138,6 +138,18 @@ function fetchMeta(vendorName: string, packageName: string) {
     })
 }
 
+function fetchImages() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "images", "get", {}, {},
+            (res: object) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })}
+
 export {
     _apiRequest,
     buildImage,
@@ -147,5 +159,6 @@ export {
     deleteLog,
     fetchConfig,
     updateConfig,
-    fetchMeta
+    fetchMeta,
+    fetchImages
 }

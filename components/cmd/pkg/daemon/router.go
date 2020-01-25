@@ -6,12 +6,12 @@
 package daemon
 
 import (
-	"os"
 	"github.com/gin-gonic/gin"
+	"os"
 )
 
 func getRouter() *gin.Engine {
-	if (os.Getenv("AID_PROD")=="true") {
+	if os.Getenv("AID_PROD") == "true" {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
@@ -20,6 +20,7 @@ func getRouter() *gin.Engine {
 	// All get requests
 	r.GET("/packages", getPackages)
 	r.GET("/logs", getLogs)
+	r.GET("/images", getImages)
 	r.GET("/logs/:logid", getLog)
 	r.GET("/solvers", getSolvers)
 	r.GET("/configs", getConfigs)
