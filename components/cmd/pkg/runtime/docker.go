@@ -38,7 +38,7 @@ func NewDockerRuntime() *DockerRuntime {
 	}
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
-		logger.Error("Cannot Create New Docker Runtime")
+		utilities.CheckError(err, "Cannot Create New Docker Runtime")
 	}
 	return &DockerRuntime{
 		client: cli,
@@ -49,8 +49,7 @@ func NewDockerRuntime() *DockerRuntime {
 func (docker *DockerRuntime) Pull(imageName string) error {
 	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
-		logger.Error("Cannot pull image " + imageName)
-		logger.Error(err.Error())
+		utilities.CheckError(err, "Cannot pull image "+imageName)
 		return err
 	}
 	io.Copy(os.Stdout, reader)
@@ -58,23 +57,24 @@ func (docker *DockerRuntime) Pull(imageName string) error {
 }
 
 // Create will create a container from an image
-func (docker *DockerRuntime) Create(imageName string) container.ContainerCreateCreatedBody {
+func (docker *DockerRuntime) Create(imageID string) container.ContainerCreateCreatedBody {
+	image := entities.GetImage(imageID)
 	resp, err := docker.client.ContainerCreate(context.Background(), &container.Config{
-		Image: imageName,
+		Image: image.Name,
 		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
-		logger.Error("Cannot create container from image " + imageName)
-		logger.Error(err.Error())
+		utilities.CheckError(err, "Cannot create container from image "+imageID)
 	}
+	container := entities.Container{ID: resp.ID, ImageID: imageID}
+	container.Save()
 	return resp
 }
 
 // Start will start a container
 func (docker *DockerRuntime) Start(containerID string) error {
 	if err := docker.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{}); err != nil {
-		logger.Error("Cannot start container " + containerID)
-		logger.Error(err.Error())
+		utilities.CheckError(err, "Cannot start container "+containerID)
 		return err
 	}
 	return nil
@@ -86,12 +86,14 @@ func getBuildCtx(solverPath string) io.Reader {
 }
 
 func realBuild(docker *DockerRuntime, dockerfile string, imageName string, buildLogger *logrus.Logger) error {
+
 	buildResponse, err := docker.client.ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
-		Tags:       []string{"aid-" + imageName},
+		Tags:       []string{imageName},
 		Dockerfile: filepath.Base(dockerfile),
 		Remove:     true,
 	})
 	if err != nil {
+		utilities.CheckError(err, "Cannot build image "+imageName)
 		buildLogger.Error("Cannot build image " + imageName)
 		buildLogger.Error(err.Error())
 	}
@@ -114,19 +116,22 @@ func realBuild(docker *DockerRuntime, dockerfile string, imageName string, build
 // Build will build a new image from dockerfile
 func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entities.Log, error) {
 	var err error
-	logger.Info("Starting Build Image: " + imageName + "...")
+	nextCount := entities.GetNextImageNumber()
+	fullImageName := "aid-" + nextCount + "-" + imageName
+	logger.Info("Starting Build Image: " + fullImageName + "...")
 	logid := utilities.GenerateUUIDv4()
 	var logPath = filepath.Join(utilities.GetBasePath(), "logs", "builds", imageName+"."+logid)
-	log := entities.NewLogObject("build-"+imageName, logPath, "docker-build")
+	log := entities.NewLogObject("build-"+fullImageName, logPath, "docker-build")
 	log.ID = logid
 	log.Save()
 	buildLogger := utilities.NewLogger(logPath)
 	go func() {
-		err = realBuild(docker, dockerfile, imageName, buildLogger)
+		err = realBuild(docker, dockerfile, fullImageName, buildLogger)
 	}()
 	if err == nil {
-		// no error occured, change solver status
-
+		// no error occured, add image to database
+		image := entities.Image{Name: fullImageName}
+		image.Save()
 	}
 	return log, err
 }

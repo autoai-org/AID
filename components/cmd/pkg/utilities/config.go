@@ -8,6 +8,7 @@ package utilities
 import (
 	"bytes"
 	"github.com/BurntSushi/toml"
+	"github.com/getsentry/sentry-go"
 	"path/filepath"
 )
 
@@ -49,6 +50,11 @@ func ReadConfig() *SystemConfig {
 	}
 	if _, err := toml.Decode(tomlString, &DefaultConfig); err != nil {
 		CheckError(err, "Cannot load config file!")
+	}
+	if DefaultConfig.RemoteReport {
+		sentry.Init(sentry.ClientOptions{
+			Dsn: "https://e6770124b98e44cfafa9d0e67e2d3650@sentry.io/1919735",
+		})
 	}
 	return DefaultConfig
 }

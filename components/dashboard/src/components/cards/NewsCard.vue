@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto" max-width="344">
+  <v-card class="mx-auto" max-width="344" outlined>
     <v-card-title>What's New?</v-card-title>
     <v-card-actions>
         <v-btn color="primary" class="ak-trigger">Explore</v-btn>

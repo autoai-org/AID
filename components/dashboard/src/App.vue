@@ -56,7 +56,7 @@
     <loading-dialog :show="isLoading"></loading-dialog>
     <alert-dialog :info="alertInfo" :title="alertTitle"></alert-dialog>
     <v-content>
-      <v-container class="fill-height">
+      <v-container class="fill-height" style="min-width: 100%">
         <router-view />
       </v-container>
     </v-content>

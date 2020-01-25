@@ -22,11 +22,25 @@ func getPackages(c *gin.Context) {
 	c.JSON(http.StatusOK, packages)
 }
 
+// getImages returns all images that has been built
+// GET /images -> returns all containers
+func getImages(c *gin.Context) {
+	images := entities.FetchImages()
+	c.JSON(http.StatusOK, images)
+}
+
 // getSolvers returns all solvers
 // GET /solvers -> returns all solvers
 func getSolvers(c *gin.Context) {
 	solvers := entities.FetchSolvers()
 	c.JSON(http.StatusOK, solvers)
+}
+
+// getContainers returns all containers
+// GET /containers -> returns all containers
+func getContainers(c *gin.Context) {
+	containers := entities.FetchContainers()
+	c.JSON(http.StatusOK, containers)
 }
 
 // getMetaInfo returns all meta information about the package
@@ -68,9 +82,14 @@ func installPackage(c *gin.Context) {
 	})
 }
 
+// createContainers will create a container by using the given image
+func createSolverContainer() {
+
+}
+
 // buildPackages build a new image
 // PUT /:vendorName/:packageName/:solverName/images
-func buildPackageImage(c *gin.Context) {
+func buildSolverImage(c *gin.Context) {
 	dockerClient := runtime.NewDockerRuntime()
 	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
 	tomlString, err := utilities.ReadFileContent(filepath.Join(packageFolder, "aid.toml"))
