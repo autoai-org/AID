@@ -7,15 +7,24 @@
           <v-card-text>
             <v-list-item v-for="(item, index) in variables" :key="index" width="80%">
               <v-list-item-content>
-                <v-row class="mb-6">
-                  <v-col cols="2">
+                <v-row class="mb-12">
+                  <v-col cols="4">
                     <v-text-field v-model="variables[index]['key']" label="Key" required></v-text-field>
                   </v-col>
-                  <v-col cols="3">
-                    <v-text-field v-model="variables[index]['value']" label="Value" required></v-text-field>
+                  <v-col cols="6">
+                    <v-text-field
+                      @click:append="showValue[index] = !showValue[index]; update()"
+                      :type="showValue[index] ? 'text' : 'password'"
+                      :append-icon="showValue[index] ? 'mdi-eye' : 'mdi-eye-off'"
+                      v-model="variables[index]['value']"
+                      label="Value"
+                      required
+                    ></v-text-field>
                   </v-col>
-                  <v-col cols="1">
-                    <v-btn color="red" icon @click="remove(index)"><v-icon>mdi-delete-outline</v-icon></v-btn>
+                  <v-col cols="2">
+                    <v-btn color="red" icon @click="remove(index)">
+                      <v-icon>mdi-delete-outline</v-icon>
+                    </v-btn>
                   </v-col>
                 </v-row>
               </v-list-item-content>
@@ -36,7 +45,8 @@ import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
-      variables: [] as object[]
+      variables: [] as object[],
+      showValue: [] as Boolean[],
     };
   },
   methods: {
@@ -45,12 +55,16 @@ export default Vue.extend({
         key: "",
         value: ""
       });
+      this.showValue.push(false);
     },
     save() {},
-    remove(index:number) {
-        this.variables.splice(index,1)
+    remove(index: number) {
+      this.variables.splice(index, 1);
+    },
+    update() {
+      this.$forceUpdate()
     }
-  }
+  },
 });
 </script>
 <style scoped>

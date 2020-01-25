@@ -6,6 +6,7 @@
 package entities
 
 import (
+	"time"
 	"github.com/BurntSushi/toml"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
@@ -21,18 +22,26 @@ type Solver struct {
 	Package   string `db:"package"`
 	Status    string `db:"status"`
 	ImageName string `db:"imagename"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+
 }
 
 // Image saves the built images from docker client
 type Image struct {
 	ID   string `db:"id"`
 	Name string `db:"name"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+
 }
 
 // Container saves the containers that are created from images
 type Container struct {
 	ID      string `db:"id"`
 	ImageID string `db:"imageid"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
 }
 
 // RunningSolver wraps the docker container that runs as solver
@@ -42,6 +51,8 @@ type RunningSolver struct {
 	Status     string `db:"status"`
 	ImageName  string `db:"imagename"`
 	EntryPoint string `db:"entrypoint"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
 }
 
 // Solvers defines a list of solvers
@@ -153,6 +164,18 @@ func FetchImages() []Image {
 		images[i] = *imagesPointers[i]
 	}
 	return images
+}
+
+// FetchContainers returns all containers in a single call
+func FetchContainers() []Container {
+	containersPointers := make([]*Container, 0)
+	db := storage.GetDefaultDB()
+	db.Fetch(&containersPointers)
+	containers := make([]Container, len(containersPointers))
+	for i := range containersPointers {
+		containers[i] = *containersPointers[i]
+	}
+	return containers
 }
 
 // LoadSolversFromConfig reads the config string and returns the objects

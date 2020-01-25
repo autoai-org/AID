@@ -141,7 +141,11 @@ function fetchMeta(vendorName: string, packageName: string) {
 function fetchImages() {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "images", "get", {}, {},
-            (res: object) => {
+            (res: Array<any>) => {
+                res = res.map(function (each) {
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
                 resolve(res)
             },
             (err: object) => {

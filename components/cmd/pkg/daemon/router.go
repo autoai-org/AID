@@ -21,12 +21,15 @@ func getRouter() *gin.Engine {
 	r.GET("/packages", getPackages)
 	r.GET("/logs", getLogs)
 	r.GET("/images", getImages)
+	r.GET("/containers", getContainers)
 	r.GET("/logs/:logid", getLog)
 	r.GET("/solvers", getSolvers)
 	r.GET("/configs", getConfigs)
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
-	// all post/put requests
-	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildPackageImage)
+	// all put requests
+	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
+	r.PUT("/images/:imageId/containers")
+	// all post requests
 	r.POST("/packages", installPackage)
 	r.POST("/configs", updateConfigs)
 	// all delete requests

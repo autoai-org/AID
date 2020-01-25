@@ -49,7 +49,7 @@ func NewDockerRuntime() *DockerRuntime {
 func (docker *DockerRuntime) Pull(imageName string) error {
 	reader, err := docker.client.ImagePull(context.Background(), imageName, types.ImagePullOptions{})
 	if err != nil {
-		utilities.CheckError(err, "Cannot pull image " + imageName)
+		utilities.CheckError(err, "Cannot pull image "+imageName)
 		return err
 	}
 	io.Copy(os.Stdout, reader)
@@ -64,17 +64,17 @@ func (docker *DockerRuntime) Create(imageID string) container.ContainerCreateCre
 		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
-		utilities.CheckError(err, "Cannot create container from image " + imageID)
+		utilities.CheckError(err, "Cannot create container from image "+imageID)
 	}
 	container := entities.Container{ID: resp.ID, ImageID: imageID}
-	container.Save()	
+	container.Save()
 	return resp
 }
 
 // Start will start a container
 func (docker *DockerRuntime) Start(containerID string) error {
 	if err := docker.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{}); err != nil {
-		utilities.CheckError(err, "Cannot start container " + containerID)
+		utilities.CheckError(err, "Cannot start container "+containerID)
 		return err
 	}
 	return nil
@@ -86,14 +86,14 @@ func getBuildCtx(solverPath string) io.Reader {
 }
 
 func realBuild(docker *DockerRuntime, dockerfile string, imageName string, buildLogger *logrus.Logger) error {
-	
+
 	buildResponse, err := docker.client.ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
 		Tags:       []string{imageName},
 		Dockerfile: filepath.Base(dockerfile),
 		Remove:     true,
 	})
 	if err != nil {
-		utilities.CheckError(err, "Cannot build image " + imageName)
+		utilities.CheckError(err, "Cannot build image "+imageName)
 		buildLogger.Error("Cannot build image " + imageName)
 		buildLogger.Error(err.Error())
 	}
