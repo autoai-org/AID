@@ -5,13 +5,13 @@
         <stat-card :title="'Installed Packages'" :content="'1'" />
       </v-col>
       <v-col>
-        <stat-card :title="'Installed Packages'" :content="'1'" />
+        <stat-card :title="'Running Services'" :content="'1'" />
       </v-col>
       <v-col>
-        <stat-card :title="'Installed Packages'" :content="'1'" />
+        <stat-card :title="'Built Images'" :content="'1'" />
       </v-col>
       <v-col>
-        <stat-card :title="'Installed Packages'" :content="'1'" />
+        <stat-card :title="'Remote Reporting'" :content="'on'" />
       </v-col>
     </v-row>
     <v-row>

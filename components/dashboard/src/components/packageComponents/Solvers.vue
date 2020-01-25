@@ -8,9 +8,9 @@
             <v-stepper-header>
               <v-stepper-step editable :complete="e1 > 1" step="1">Build</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step editable :complete="e1 > 2" step="2">Create</v-stepper-step>
+              <v-stepper-step editable :complete="e1 > 2" step="2">Start</v-stepper-step>
               <v-divider></v-divider>
-              <v-stepper-step editable :complete="e1 > 3" step="3">Start</v-stepper-step>
+              <v-stepper-step editable :complete="e1 > 3" step="3">Test</v-stepper-step>
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
@@ -48,6 +48,7 @@ export default Vue.extend({
         self.images = res.map(function(each:any){
             console.log(each)
             each.solverName = each.Name.split("-").slice(-1)[0]
+            each.number = each.Name.split("-")[1]
             each.vendor = each.Name.split("-")[2]
             each.package = each.Name.split("-")[3]
             return each
