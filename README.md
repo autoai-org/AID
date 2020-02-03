@@ -1,4 +1,4 @@
-![https://www.notion.so/autoai/](https://img.shields.io/badge/-Roadmap-blue)
+[![Roadmap](https://img.shields.io/badge/-Roadmap-blue)](https://www.notion.so/autoai/)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
