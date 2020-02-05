@@ -14,7 +14,7 @@
     "chart.js": "^2.9.3",
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
-    "dayjs": "^1.8.19",
+    "dayjs": "^1.8.20",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.0",
     "vue-class-component": "^7.2.2",
