@@ -6,8 +6,9 @@
 package daemon
 
 import (
-	"github.com/gin-gonic/gin"
 	"os"
+
+	"github.com/gin-gonic/gin"
 )
 
 func getRouter() *gin.Engine {
@@ -25,11 +26,13 @@ func getRouter() *gin.Engine {
 	r.GET("/logs/:logid", getLog)
 	r.GET("/solvers", getSolvers)
 	r.GET("/configs", getConfigs)
+	r.GET("/solvers/:vendorName/:packageName/:solverName/dockerfile", getDockerfileContent)
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
 	// all put requests
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
-	r.PUT("/images/:imageId/containers")
+	r.PUT("/containers/:imageId/containers")
 	// all post requests
+	r.POST("/solvers/:vendorName/:packageName/:solverName/dockerfile", modifySolverDockerfile)
 	r.POST("/packages", installPackage)
 	r.POST("/configs", updateConfigs)
 	// all delete requests

@@ -11,13 +11,15 @@
     "lint": "vue-cli-service lint --fix"
   },
   "dependencies": {
-    "chart.js": "^2.9.3",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
+    "codemirror": "^5.51.0",
     "core-js": "^3.6.4",
     "dayjs": "^1.8.20",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.0",
     "vue-class-component": "^7.2.2",
+    "vue-codemirror": "^4.0.6",
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^8.4.0",
     "vue-router": "^3.1.5",
