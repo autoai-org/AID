@@ -6,11 +6,12 @@
 package entities
 
 import (
+	"strconv"
+	"time"
+
 	"github.com/BurntSushi/toml"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"strconv"
-	"time"
 )
 
 // Solver defines the struct of a solver, the minimal struct of a inference program

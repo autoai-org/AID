@@ -45,15 +45,14 @@ export default Vue.extend({
   props: ["solvers", "vendor", "package"],
   mounted() {
     let self = this
-    console.log(this.solvers);
     fetchImages().then(function(res:any){
         console.log(res)
         self.images = res.map(function(each:any){
-            console.log(each)
             each.solverName = each.Name.split("-").slice(-1)[0]
             each.number = each.Name.split("-")[1]
             each.vendor = each.Name.split("-")[2]
             each.package = each.Name.split("-")[3]
+            console.log(each)
             return each
         }).filter(function(each:any){
             if (each.vendor==self.vendor && each.package == self.package) {

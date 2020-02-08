@@ -10,7 +10,7 @@
             <v-btn color="secondary" outlined>Delete Container</v-btn> <br/>
         </v-col>
         <v-col cols="2" class="d-flex flex-column justify-center solver_image_box solver_image_create_box">
-          <v-icon size="64pt" @click="createContainer">mdi-plus</v-icon>
+          <v-icon size="64pt" @click="createNewContainer">mdi-plus</v-icon>
         </v-col>
       </v-row>
     </v-card-text>
@@ -18,20 +18,21 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
+import { createContainer } from "@/middlewares/api.mdw"
 export default Vue.extend({
   data:()=>({
     code:"",
     showCodeEditorDialog:false
   }),
-  props: ["containers", "solverName"],
+  props: ["containers", "solverName", "imageId"],
   methods:{
     showCodeEditor(vendorName:string, packageName:string) {
       let self = this
       console.log(this.solverName)
       this.showCodeEditorDialog = true
     },
-    createContainer () {
-        
+    createNewContainer () {
+        console.log(this.imageId)
     }
   }
 });

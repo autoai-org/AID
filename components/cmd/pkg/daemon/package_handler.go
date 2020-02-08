@@ -126,9 +126,21 @@ func installPackage(c *gin.Context) {
 }
 
 // createContainers will create a container by using the given image
-// PUT /containers/:imageId/containers
-func createSolverContainer() {
-
+// PUT /images/:imageId/containers
+func createSolverContainer(c *gin.Context) {
+	imageID := c.Param("imageId")
+	dockerClient := runtime.NewDockerRuntime()
+	_, err := dockerClient.Create(imageID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, messageResponse{
+			Msg: err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 200,
+			Msg:  "submitted success",
+		})
+	}
 }
 
 // buildPackages build a new image

@@ -40,7 +40,6 @@ function buildImage(vendorName: string, packageName: string, solverName: string)
                 reject(err)
             })
     })
-
 }
 
 function installPackage(packageIdentifier: string) {
@@ -181,11 +180,24 @@ function fetchContainers() {
     })
 }
 
+function createContainer(imageId: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "images/" + imageId + "/" + "containers", "put", {}, {},
+            (res: any) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
 export {
     _apiRequest,
     fetchSolverDockerfile,
     fetchContainers,
     buildImage,
+    createContainer,
     fetchLog,
     fetchAllObjects,
     installPackage,
