@@ -6,13 +6,14 @@
 package daemon
 
 import (
+	"net/http"
+	"path/filepath"
+	"strings"
+
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
-	"net/http"
-	"path/filepath"
-	"strings"
 )
 
 // getPackages returns all packages
@@ -41,6 +42,48 @@ func getSolvers(c *gin.Context) {
 func getContainers(c *gin.Context) {
 	containers := entities.FetchContainers()
 	c.JSON(http.StatusOK, containers)
+}
+
+// getSolverDockerfile returns current dockerfile of the solver
+// GET /packages/:vendorName/:packageName/:solverName/dockerfile
+func getDockerfileContent(c *gin.Context) {
+	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
+	dockerFilename := "docker_" + c.Param("solverName")
+	dockerFilePath := filepath.Join(packageFolder, dockerFilename)
+	fileContent, err := utilities.ReadFileContent(dockerFilePath)
+	if err != nil {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 404,
+			Msg:  err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 200,
+			Msg:  fileContent,
+		})
+	}
+}
+
+// modifySolverDockerfile modifies the content of the dockerfile
+// POST /packages/:vendorName/:packageName/:solverName/dockerfile
+func modifySolverDockerfile(c *gin.Context) {
+	var request modifySolverDockerfileRequest
+	c.BindJSON(&request)
+	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
+	dockerFilename := "docker_" + c.Param("solverName")
+	dockerFilePath := filepath.Join(packageFolder, dockerFilename)
+	err := utilities.WriteContentToFile(dockerFilePath, request.Content)
+	if err != nil {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 404,
+			Msg:  err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 200,
+			Msg:  "Successfully Changed",
+		})
+	}
 }
 
 // getMetaInfo returns all meta information about the package
@@ -83,6 +126,7 @@ func installPackage(c *gin.Context) {
 }
 
 // createContainers will create a container by using the given image
+// PUT /containers/:imageId/containers
 func createSolverContainer() {
 
 }

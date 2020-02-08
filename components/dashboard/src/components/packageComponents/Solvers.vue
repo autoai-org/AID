@@ -14,9 +14,10 @@
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
-                    <build-step :images="images"/>
+                    <build-step :images="images" :solverName="item.Name"/>
                 </v-stepper-content>
                 <v-stepper-content step="2">
+                  <start-step :containers="containers" :solverName="item.Name"></start-step>
                 </v-stepper-content>
                 <v-stepper-content step="3">
                 </v-stepper-content>
@@ -30,13 +31,15 @@
 
 <script lang="ts">
 import BuildStep from "@/components/packageComponents/BuildStep.vue"
-import { fetchImages } from '@/middlewares/api.mdw'
+import StartStep from "@/components/packageComponents/StartStep.vue"
+import { fetchImages, fetchContainers } from '@/middlewares/api.mdw'
 import Vue from "vue";
 export default Vue.extend({
   data() {
     return {
       e1: 1,
-      images:[]
+      images:[],
+      containers:[],
     };
   },
   props: ["solvers", "vendor", "package"],
@@ -61,9 +64,13 @@ export default Vue.extend({
         })
         console.log(self.images)
     })
+    fetchContainers().then(function(res:any){
+      self.containers = res
+    })
   },
   components:{
-      'build-step': BuildStep
+      'build-step': BuildStep,
+      'start-step': StartStep
   }
 });
 </script>

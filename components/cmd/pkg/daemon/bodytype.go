@@ -19,6 +19,11 @@ type installPackageRequest struct {
 	RemoteURL string `json:"remote_url"`
 }
 
+// modifySolverDockerfileRequest is used to modify the dockerfile
+type modifySolverDockerfileRequest struct {
+	Content string `json:"content"`
+}
+
 type messageResponse struct {
 	Code int    `json:"code"`
 	Msg  string `json:"msg"`

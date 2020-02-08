@@ -127,7 +127,7 @@ function updateConfig(config: object) {
 
 function fetchMeta(vendorName: string, packageName: string) {
     return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName +"/meta", "get", {}, {},
+        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName + "/meta", "get", {}, {},
             (res: object) => {
                 resolve(res)
             },
@@ -152,10 +152,39 @@ function fetchImages() {
                 reject(err)
                 console.error(err)
             })
-    })}
+    })
+}
+
+function fetchSolverDockerfile(vendorName:string, packageName:string, solverName: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "solvers/" + vendorName + "/" + packageName + "/"+solverName+"/dockerfile", "get", {}, {},
+            (res: object) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
+function fetchContainers() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "/containers", "get", {}, {},
+            (res: object) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
 
 export {
     _apiRequest,
+    fetchSolverDockerfile,
+    fetchContainers,
     buildImage,
     fetchLog,
     fetchAllObjects,

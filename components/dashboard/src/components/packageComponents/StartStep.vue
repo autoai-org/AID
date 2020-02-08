@@ -2,43 +2,36 @@
   <v-card>
     <v-card-text>
       <v-row class="mb-12">
-        <v-col cols="2" v-for="(item,index) in images" :key="index" class="d-flex flex-column justify-center solver_image_box">
+        <v-col cols="2" v-for="(item,index) in containers" :key="index" class="d-flex flex-column justify-center solver_image_box">
           <v-icon size="64pt">mdi-package-variant-closed</v-icon>
             {{item.number}}-{{item.solverName}} <br/>
             {{item.CreatedAt}}
-            <v-btn color="primary">Create Container</v-btn> <br/>
-            <v-btn color="secondary" outlined @click="showCodeEditor(item.vendor, item.package)">View Dockerfile</v-btn> <br/>
-            <v-btn color="secondary" outlined>Delete Image</v-btn>
+            <v-btn color="primary">Test Inference</v-btn> <br/>
+            <v-btn color="secondary" outlined>Delete Container</v-btn> <br/>
         </v-col>
         <v-col cols="2" class="d-flex flex-column justify-center solver_image_box solver_image_create_box">
-          <v-icon size="64pt">mdi-plus</v-icon>
+          <v-icon size="64pt" @click="createContainer">mdi-plus</v-icon>
         </v-col>
       </v-row>
     </v-card-text>
-    <code-editor-dialog :show="showCodeEditorDialog" :code="code" @closed="showCodeEditorDialog=false"></code-editor-dialog>
   </v-card>
 </template>
 <script lang="ts">
-import CodeEditorDialog from '@/components/dialogs/CodeEditorDialog.vue'
-import { fetchSolverDockerfile } from '@/middlewares/api.mdw'
 import Vue from "vue";
 export default Vue.extend({
   data:()=>({
     code:"",
     showCodeEditorDialog:false
   }),
-  props: ["images", "solverName"],
-  components:{
-    'code-editor-dialog': CodeEditorDialog
-  },
+  props: ["containers", "solverName"],
   methods:{
     showCodeEditor(vendorName:string, packageName:string) {
       let self = this
       console.log(this.solverName)
-      fetchSolverDockerfile(vendorName,packageName, this.solverName).then(function(res:any){
-        self.code = res.msg
-      })
       this.showCodeEditorDialog = true
+    },
+    createContainer () {
+        
     }
   }
 });
