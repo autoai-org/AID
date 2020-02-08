@@ -6,7 +6,7 @@
           <v-icon size="64pt">mdi-package-variant-closed</v-icon>
             {{item.number}}-{{item.solverName}} <br/>
             {{item.CreatedAt}}
-            <v-btn color="primary">Create Container</v-btn> <br/>
+            <v-btn color="primary" @click="newContainer(item.ID)">Create Container</v-btn> <br/>
             <v-btn color="secondary" outlined @click="showCodeEditor(item.vendor, item.package)">View Dockerfile</v-btn> <br/>
             <v-btn color="secondary" outlined>Delete Image</v-btn>
         </v-col>
@@ -20,7 +20,7 @@
 </template>
 <script lang="ts">
 import CodeEditorDialog from '@/components/dialogs/CodeEditorDialog.vue'
-import { fetchSolverDockerfile } from '@/middlewares/api.mdw'
+import { fetchSolverDockerfile, createContainer } from '@/middlewares/api.mdw'
 import Vue from "vue";
 export default Vue.extend({
   data:()=>({
@@ -39,6 +39,11 @@ export default Vue.extend({
         self.code = res.msg
       })
       this.showCodeEditorDialog = true
+    },
+    newContainer(imageId: string) {
+      createContainer(imageId).then(function(res){
+        console.log(res)
+      })
     }
   }
 });

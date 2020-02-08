@@ -30,7 +30,7 @@ func getRouter() *gin.Engine {
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
 	// all put requests
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
-	r.PUT("/containers/:imageId/containers")
+	r.PUT("/images/:imageId/containers", createSolverContainer)
 	// all post requests
 	r.POST("/solvers/:vendorName/:packageName/:solverName/dockerfile", modifySolverDockerfile)
 	r.POST("/packages", installPackage)

@@ -7,6 +7,11 @@ package runtime
 
 import (
 	"bufio"
+	"io"
+	"os"
+	"path"
+	"path/filepath"
+
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"github.com/docker/docker/api/types"
@@ -17,10 +22,6 @@ import (
 	"github.com/docker/docker/pkg/term"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
-	"io"
-	"os"
-	"path"
-	"path/filepath"
 )
 
 var logger = utilities.NewDefaultLogger()
@@ -57,18 +58,19 @@ func (docker *DockerRuntime) Pull(imageName string) error {
 }
 
 // Create will create a container from an image
-func (docker *DockerRuntime) Create(imageID string) container.ContainerCreateCreatedBody {
+func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCreatedBody, error) {
 	image := entities.GetImage(imageID)
 	resp, err := docker.client.ContainerCreate(context.Background(), &container.Config{
 		Image: image.Name,
 		Tty:   true,
 	}, nil, nil, "")
 	if err != nil {
-		utilities.CheckError(err, "Cannot create container from image "+imageID)
+		utilities.CheckError(err, "Cannot create container from image "+image.Name)
+		return resp, err
 	}
 	container := entities.Container{ID: resp.ID, ImageID: imageID}
 	container.Save()
-	return resp
+	return resp, err
 }
 
 // Start will start a container
