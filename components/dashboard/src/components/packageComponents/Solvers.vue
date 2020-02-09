@@ -14,12 +14,13 @@
             </v-stepper-header>
             <v-stepper-items>
                 <v-stepper-content step="1">
-                    <build-step :images="images" :solverName="item.Name"/>
+                    <build-step :images="images" :solverName="item.Name" :vendorName="vendor" :packageName="packageName" />
                 </v-stepper-content>
                 <v-stepper-content step="2">
                   <start-step :containers="containers" :solverName="item.Name"></start-step>
                 </v-stepper-content>
                 <v-stepper-content step="3">
+                  <test-step></test-step>
                 </v-stepper-content>
             </v-stepper-items>
           </v-stepper>
@@ -31,6 +32,7 @@
 
 <script lang="ts">
 import BuildStep from "@/components/packageComponents/BuildStep.vue"
+import TestStep from "@/components/packageComponents/TestStep.vue"
 import StartStep from "@/components/packageComponents/StartStep.vue"
 import { fetchImages, fetchContainers } from '@/middlewares/api.mdw'
 import Vue from "vue";
@@ -42,7 +44,7 @@ export default Vue.extend({
       containers:[],
     };
   },
-  props: ["solvers", "vendor", "package"],
+  props: ["solvers", "vendor", "packageName"],
   mounted() {
     let self = this
     fetchImages().then(function(res:any){
@@ -55,7 +57,7 @@ export default Vue.extend({
             console.log(each)
             return each
         }).filter(function(each:any){
-            if (each.vendor==self.vendor && each.package == self.package) {
+            if (each.vendor==self.vendor && each.package == self.packageName) {
                 return true
             } else {
                 return false
@@ -69,7 +71,8 @@ export default Vue.extend({
   },
   components:{
       'build-step': BuildStep,
-      'start-step': StartStep
+      'start-step': StartStep,
+      'test-step': TestStep
   }
 });
 </script>

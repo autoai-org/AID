@@ -14,16 +14,6 @@
       <EnhancedTable :headers="headers" :select="true" :items="packages" :actions="actions" @actionClicked="handleActions"/>
     </v-card>
     <v-spacer />
-    <v-card outlined min-width="100%" class="solvers">
-      <v-card-title>Solvers</v-card-title>
-      <EnhancedTable
-        :headers="solverHeaders"
-        :select="false"
-        :items="solvers"
-        :actions="solverActions"
-        @actionClicked="handleActions"
-      />
-    </v-card>
   </v-container>
 </template>
 

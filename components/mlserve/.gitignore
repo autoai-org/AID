@@ -1,2 +1,4 @@
 mlserve-old/
 *.pyc
+*.egg-info
+temp/**/*

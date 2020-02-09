@@ -46,7 +46,7 @@ type Container struct {
 // RunningSolver wraps the docker container that runs as solver
 type RunningSolver struct {
 	ID         string    `db:"id"`
-	SolverID   string    `db:"solverid"`
+	ImageID    string    `db:"imageId"`
 	Status     string    `db:"status"`
 	ImageName  string    `db:"imagename"`
 	EntryPoint string    `db:"entrypoint"`
@@ -115,6 +115,14 @@ func (i *Image) Save() error {
 	return db.Insert(i)
 }
 
+// Save runningSolver into database
+func (rs *RunningSolver) Save() error {
+	rs.ID = utilities.GenerateUUIDv4()
+	db := storage.GetDefaultDB()
+	db.Connect()
+	return db.Insert(rs)
+}
+
 // Save stores container into database
 func (c *Container) Save() error {
 	db := storage.GetDefaultDB()
@@ -127,8 +135,17 @@ func GetImage(id string) Image {
 	image := Image{ID: id}
 	db := storage.GetDefaultDB()
 	err := db.FetchOne(&image)
-	utilities.CheckError(err, "Cannot fetch image object with id"+id)
+	utilities.CheckError(err, "Cannot fetch image object with id "+id)
 	return image
+}
+
+// GetContainer returns the container object by container id
+func GetContainer(id string) Container {
+	container := Container{ID: id}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(&container)
+	utilities.CheckError(err, "Cannot fetch container object with id "+id)
+	return container
 }
 
 // GetNextImageNumber returns the count+1 of current images in string
@@ -201,7 +218,7 @@ func GetAllRunningSolvers(ID string) []RunningSolver {
 	db.Fetch(&runningSolverPointers)
 	var runningSolvers []RunningSolver
 	for i := range runningSolverPointers {
-		if runningSolverPointers[i].SolverID == ID {
+		if runningSolverPointers[i].ImageID == ID {
 			runningSolvers = append(runningSolvers, *runningSolverPointers[i])
 		}
 	}

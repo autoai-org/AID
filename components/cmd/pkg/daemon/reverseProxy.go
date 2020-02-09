@@ -7,33 +7,35 @@ package daemon
 
 import (
 	"bytes"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"github.com/gin-gonic/gin"
 	"io/ioutil"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
+
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/gin-gonic/gin"
 )
 
 func serveReverseProxy(c *gin.Context) {
-	runningSolverID := c.Param("runningId")
+	// runningSolverID := c.Param("runningId")
 	requestPath := c.Param("path")
-	runningSolver := entities.GetRunningSolver(runningSolverID)
+	//runningSolver := entities.GetRunningSolver(runningSolverID)
 	// if the solver is not found
-	if runningSolver.EntryPoint == "" {
-		c.JSON(http.StatusNotFound, gin.H{
-			"error": "404",
-			"msg":   "Target Not Found",
-			"help":  "https://aid.autoai.org",
-		})
-	}
+	/*
+		if runningSolver.EntryPoint == "" {
+			c.JSON(http.StatusNotFound, gin.H{
+				"error": "404",
+				"msg":   "Target Not Found",
+				"help":  "https://aid.autoai.org",
+			})
+		}
+	*/
 	// the solver is running
 	body, err := ioutil.ReadAll(c.Request.Body)
 	utilities.CheckError(err, "Cannot read the request")
 	target := url.URL{
 		Scheme: "http",
-		Host:   runningSolver.EntryPoint,
+		Host:   "127.0.0.1:8081",
 		Path:   "/" + requestPath,
 	}
 

@@ -89,6 +89,9 @@ func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCr
 
 // Start will start a container
 func (docker *DockerRuntime) Start(containerID string) error {
+	container := entities.GetContainer(containerID)
+	runningSolvers := entities.RunningSolver{ImageID: container.ImageID, Status: "Running"}
+	runningSolvers.Save()
 	if err := docker.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{}); err != nil {
 		utilities.CheckError(err, "Cannot start container "+containerID)
 		return err

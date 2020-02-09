@@ -11,6 +11,7 @@ class ExampleSolver(Solver):
         self.predictor = ''
         self.acc = Metrics()
     def infer(self, data):
+        print(data)
         return {'data': [0, 1, 2, 3]}
     def train(self, data):
         epochs = int(data['epochs'])
@@ -21,4 +22,4 @@ class ExampleSolver(Solver):
 
 sol = ExampleSolver()
 
-sol.start(8080)
+sol.start(8082)

@@ -36,6 +36,7 @@ func getRouter() *gin.Engine {
 	r.POST("/solvers/:vendorName/:packageName/:solverName/dockerfile", modifySolverDockerfile)
 	r.POST("/packages", installPackage)
 	r.POST("/configs", updateConfigs)
+	r.POST("/runnings/:runningId/:path", serveReverseProxy)
 	// all delete requests
 	r.DELETE("/logs/:logid", deleteLog)
 	// websocket

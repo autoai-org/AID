@@ -4,7 +4,7 @@ long_description = "For full description, please go to [Documentation](https://a
 
 setuptools.setup(
     name="mlpm",
-    version="1.0.0",
+    version="1.0.0.b",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
     description="Machine Learning Package Manager",
@@ -26,13 +26,10 @@ setuptools.setup(
         "Topic :: Software Development",
     ],
     install_requires=[
-        "flask",
-        "tqdm",
+        "sanic",
         "toml",
         "requests",
         "pillow",
-        "numpy",
-        "gevent",
     ],
     project_urls={
         "Bug Tracker": "https://github.com/autoai-org/aid/issues",
