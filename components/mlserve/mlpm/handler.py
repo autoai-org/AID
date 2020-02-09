@@ -11,19 +11,21 @@ from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
 from mlpm.app import aidserver
+from mlpm.utility import str2bool
 
 def handle_post_solver_train_or_infer(request, upload_folder, request_type):
     config = ImmutableMultiDict(request.form)
     data = config.to_dict()
     results = {}
     if 'file' in request.files:
-        file = request.files['file']
-        filename = secure_filename(file.filename)
+        filename = secure_filename(request.files["file"][0].name)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
         file_abs_path = os.path.join(upload_folder, filename)
-        file.save(file_abs_path)
+        with open(file_abs_path,"wb") as file:
+            file.write(request.files["file"][0].body)
+        file.close()
         data['input_file_path'] = file_abs_path
     try:
         if request_type == "infer":

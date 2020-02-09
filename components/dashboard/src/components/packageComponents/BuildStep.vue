@@ -11,25 +11,37 @@
             <v-btn color="secondary" outlined>Delete Image</v-btn>
         </v-col>
         <v-col cols="2" class="d-flex flex-column justify-center solver_image_box solver_image_create_box">
-          <v-icon size="64pt">mdi-plus</v-icon>
+          <v-btn icon @click="triggerBuild" large>
+            <v-icon size="64pt">mdi-plus</v-icon>
+          </v-btn>
         </v-col>
       </v-row>
     </v-card-text>
+    <build-dialog
+      :show="showBuildDialog"
+      @closed="showBuildDialog=false"
+      :vendor="vendorName"
+      :packageName="packageName"
+      :solver="solverName"
+    ></build-dialog>
     <code-editor-dialog :show="showCodeEditorDialog" :code="code" @closed="showCodeEditorDialog=false"></code-editor-dialog>
   </v-card>
 </template>
 <script lang="ts">
+import BuildDialog from '@/components/dialogs/BuildDialog.vue'
 import CodeEditorDialog from '@/components/dialogs/CodeEditorDialog.vue'
 import { fetchSolverDockerfile, createContainer } from '@/middlewares/api.mdw'
 import Vue from "vue";
 export default Vue.extend({
   data:()=>({
     code:"",
-    showCodeEditorDialog:false
+    showCodeEditorDialog:false,
+    showBuildDialog: false,
   }),
-  props: ["images", "solverName"],
+  props: ["images", "solverName", "packageName", "vendorName"],
   components:{
-    'code-editor-dialog': CodeEditorDialog
+    'code-editor-dialog': CodeEditorDialog,
+    'build-dialog': BuildDialog,
   },
   methods:{
     showCodeEditor(vendorName:string, packageName:string) {
@@ -44,6 +56,9 @@ export default Vue.extend({
       createContainer(imageId).then(function(res){
         console.log(res)
       })
+    },
+    triggerBuild() {
+      this.showBuildDialog = true;
     }
   }
 });
@@ -54,6 +69,7 @@ export default Vue.extend({
   color: black!important;
 }
 .solver_image_create_box {
+  align-items: center;
   border: 1px;
   border-style: dotted;
   border-color: gray;

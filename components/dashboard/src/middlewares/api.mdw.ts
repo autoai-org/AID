@@ -208,6 +208,20 @@ function startContainer(containerId: string) {
     })
 }
 
+function testContainer(file:Blob) {
+    const payload = new FormData()
+    payload.append('file', file)
+    return new Promise((resolve, reject)=>{
+        _apiRequest(endpoint+"runnings/1234/infer", "post", payload, {},
+            (res: any) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
 export {
     _apiRequest,
     fetchSolverDockerfile,
@@ -221,6 +235,7 @@ export {
     fetchConfig,
     updateConfig,
     fetchMeta,
+    testContainer,
     startContainer,
     fetchImages
 }

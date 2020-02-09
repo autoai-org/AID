@@ -6,10 +6,11 @@
 package entities
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	"path/filepath"
 	"time"
+
+	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 )
 
 // Log defines the struct of log file

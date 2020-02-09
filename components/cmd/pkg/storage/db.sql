@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS container (
 
 CREATE TABLE IF NOT EXISTS runningsolver (
 	id TEXT PRIMARY KEY,
-	solverid TEXT,
+	imageid TEXT,
 	status TEXT,
 	imagename TEXT,
 	entrypoint TEXT,

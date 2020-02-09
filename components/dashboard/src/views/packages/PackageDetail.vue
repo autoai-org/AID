@@ -18,7 +18,7 @@
         </v-card>
       </v-tab-item>
       <v-tab-item :key="'Solvers'">
-        <solvers-card v-if="isReady" :solvers="meta.solvers.Solvers" :vendor=$route.params.vendor :package=$route.params.package />
+        <solvers-card v-if="isReady" :solvers="meta.solvers.Solvers" :vendor=$route.params.vendor :packageName=$route.params.package />
       </v-tab-item>
       <v-tab-item :key="'Insight'"></v-tab-item>
       <v-tab-item :key="'Settings'">
