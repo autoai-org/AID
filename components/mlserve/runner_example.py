@@ -3,8 +3,8 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from aid.solver import Solver
-from aid.metrics import Metrics
+from mlpm.solver import Solver
+from mlpm.metrics import Metrics
 
 class ExampleSolver(Solver):
     def __init__(self):

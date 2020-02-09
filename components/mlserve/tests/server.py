@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-from aid.server import aidserver
+from mlpm.server import aidserver
 
 app = aidserver
 

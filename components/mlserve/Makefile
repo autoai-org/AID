@@ -17,7 +17,7 @@ format:
 clean:
 	rm -rf build
 	rm -rf dist
-	rm -rf cvpm.egg-info
+	rm -rf mlpm.egg-info
 
 package:
 	python3 setup.py sdist bdist_wheel
