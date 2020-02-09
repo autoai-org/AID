@@ -143,6 +143,24 @@ func createSolverContainer(c *gin.Context) {
 	}
 }
 
+// startContainers will start the container as daemon
+// PUT /containers/:containerId/run
+func startSolverContainer(c *gin.Context) {
+	containerID := c.Param("containerId")
+	dockerClient := runtime.NewDockerRuntime()
+	err := dockerClient.Start(containerID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, messageResponse{
+			Msg: err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, messageResponse{
+			Code: 200,
+			Msg:  "submitted success",
+		})
+	}
+}
+
 // buildPackages build a new image
 // PUT /:vendorName/:packageName/:solverName/images
 func buildSolverImage(c *gin.Context) {

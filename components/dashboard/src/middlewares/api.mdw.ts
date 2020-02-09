@@ -170,7 +170,11 @@ function fetchSolverDockerfile(vendorName:string, packageName:string, solverName
 function fetchContainers() {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "/containers", "get", {}, {},
-            (res: object) => {
+            (res: Array<any>) => {
+                res=res.map(function(each:any){
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
                 resolve(res)
             },
             (err: object) => {
@@ -183,6 +187,18 @@ function fetchContainers() {
 function createContainer(imageId: string) {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + "images/" + imageId + "/" + "containers", "put", {}, {},
+            (res: any) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
+function startContainer(containerId: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "containers/" + containerId + "/" + "run", "put", {}, {},
             (res: any) => {
                 resolve(res)
             },
@@ -205,5 +221,6 @@ export {
     fetchConfig,
     updateConfig,
     fetchMeta,
+    startContainer,
     fetchImages
 }

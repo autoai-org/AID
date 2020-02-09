@@ -31,6 +31,7 @@ func getRouter() *gin.Engine {
 	// all put requests
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
 	r.PUT("/images/:imageId/containers", createSolverContainer)
+	r.PUT("/containers/:containerId/run", startSolverContainer)
 	// all post requests
 	r.POST("/solvers/:vendorName/:packageName/:solverName/dockerfile", modifySolverDockerfile)
 	r.POST("/packages", installPackage)

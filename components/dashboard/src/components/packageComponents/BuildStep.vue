@@ -4,7 +4,7 @@
       <v-row class="mb-12">
         <v-col cols="2" v-for="(item,index) in images" :key="index" class="d-flex flex-column justify-center solver_image_box">
           <v-icon size="64pt">mdi-package-variant-closed</v-icon>
-            {{item.number}}-{{item.solverName}} <br/>
+            <B>{{item.number}}-{{item.solverName}}</B>
             {{item.CreatedAt}}
             <v-btn color="primary" @click="newContainer(item.ID)">Create Container</v-btn> <br/>
             <v-btn color="secondary" outlined @click="showCodeEditor(item.vendor, item.package)">View Dockerfile</v-btn> <br/>

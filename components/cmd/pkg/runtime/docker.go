@@ -20,6 +20,7 @@ import (
 	"github.com/docker/docker/pkg/archive"
 	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/term"
+	"github.com/docker/go-connections/nat"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 )
@@ -60,10 +61,23 @@ func (docker *DockerRuntime) Pull(imageName string) error {
 // Create will create a container from an image
 func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCreatedBody, error) {
 	image := entities.GetImage(imageID)
+	hostConfig := &container.HostConfig{
+		PortBindings: nat.PortMap{
+			"8080/tcp": []nat.PortBinding{
+				{
+					HostIP:   "0.0.0.0",
+					HostPort: "8081",
+				},
+			},
+		},
+	}
 	resp, err := docker.client.ContainerCreate(context.Background(), &container.Config{
 		Image: image.Name,
 		Tty:   true,
-	}, nil, nil, "")
+		ExposedPorts: nat.PortSet{
+			"8080/tcp": struct{}{},
+		},
+	}, hostConfig, nil, "")
 	if err != nil {
 		utilities.CheckError(err, "Cannot create container from image "+image.Name)
 		return resp, err

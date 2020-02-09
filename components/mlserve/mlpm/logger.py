@@ -5,7 +5,7 @@
 import json
 import os
 
-from aid.config import GetConfig
+from mlpm.config import GetConfig
 
 
 class Logger(object):

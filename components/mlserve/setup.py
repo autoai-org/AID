@@ -3,7 +3,7 @@ import setuptools
 long_description = "For full description, please go to [Documentation](https://aid.autoai.org)"
 
 setuptools.setup(
-    name="aid",
+    name="mlpm",
     version="1.0.0",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
@@ -11,7 +11,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://aid.autoai.org",
-    packages=['aid'],
+    packages=['mlpm'],
     license="MIT",
     classifiers=[
         "Programming Language :: Python :: 3",

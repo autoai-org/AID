@@ -3,10 +3,10 @@
     <v-card-text>
       <v-row class="mb-12">
         <v-col cols="2" v-for="(item,index) in containers" :key="index" class="d-flex flex-column justify-center solver_image_box">
-          <v-icon size="64pt">mdi-package-variant-closed</v-icon>
-            {{item.number}}-{{item.solverName}} <br/>
+          <v-icon size="64pt">mdi-package-variant</v-icon>
+            <B>{{item.ID}}</B>
             {{item.CreatedAt}}
-            <v-btn color="primary">Test Inference</v-btn> <br/>
+            <v-btn color="primary" @click="triggerStartContainer(item.ID)">Start</v-btn> <br/>
             <v-btn color="secondary" outlined>Delete Container</v-btn> <br/>
         </v-col>
         <v-col cols="2" class="d-flex flex-column justify-center solver_image_box solver_image_create_box">
@@ -18,9 +18,10 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { createContainer } from "@/middlewares/api.mdw"
+import { createContainer, startContainer } from "@/middlewares/api.mdw"
 export default Vue.extend({
   data:()=>({
+    parsedContainers: [],
     code:"",
     showCodeEditorDialog:false
   }),
@@ -33,7 +34,16 @@ export default Vue.extend({
     },
     createNewContainer () {
         console.log(this.imageId)
+    },
+    triggerStartContainer (containerId:string) {
+      startContainer(containerId)
     }
+  },
+  mounted () { 
+    this.parsedContainers = this.containers.map(function(each:any){
+        each.ID=each.ID.slice(0,6)
+        return each
+    })
   }
 });
 </script>
