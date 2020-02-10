@@ -1377,14 +1377,14 @@
     thread-loader "^2.1.3"
     webpack "^4.0.0"
 
-"@vue/cli-plugin-e2e-cypress@^4.1.0":
-  version "4.1.2"
-  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-e2e-cypress/-/cli-plugin-e2e-cypress-4.1.2.tgz#7bd7cf67d5b9c78b7af47360c7b83fea3a544934"
-  integrity sha512-F3vve5zAIp8FkMa7kRPCVwRSnubQDjEnD5EfJ1YuFXDkSJ4Y3lwDlA4TKRLZ+SZPbB/1IUMDwEUzBuogYgjCnQ==
+"@vue/cli-plugin-e2e-cypress@^4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@vue/cli-plugin-e2e-cypress/-/cli-plugin-e2e-cypress-4.2.2.tgz#e7459d25fca2caf7ee1d7c0db902bb14c46f14d7"
+  integrity sha512-5e6VRUUlSBtwtvJH9UhBaW4sMRdMIjwY+r8xw8YSOxuglBzRn0WOfl3Ex4lRSAFYFE3OuUj9c2c8/GF88SavWw==
   dependencies:
-    "@vue/cli-shared-utils" "^4.1.2"
-    cypress "^3.3.1"
-    eslint-plugin-cypress "^2.7.0"
+    "@vue/cli-shared-utils" "^4.2.2"
+    cypress "^3.8.3"
+    eslint-plugin-cypress "^2.8.1"
 
 "@vue/cli-plugin-eslint@^4.2.2":
   version "4.2.2"
@@ -3513,10 +3513,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha1-WW6WmP0MgOEgOMK4LW6xs1tiJNk=
 
-cypress@^3.3.1:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.8.1.tgz#7821084e0ead81d35ffa29f2141c977dfdfc2343"
-  integrity sha512-eLk5OpL/ZMDfQx9t7ZaDUAGVcvSOPTi7CG1tiUnu9BGk7caBiDhuFi3Tz/D5vWqH/Dl6Uh4X+Au4W+zh0xzbXw==
+cypress@^3.8.3:
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-3.8.3.tgz#e921f5482f1cbe5814891c878f26e704bbffd8f4"
+  integrity sha512-I9L/d+ilTPPA4vq3NC1OPKmw7jJIpMKNdyfR8t1EXYzYCjyqbc59migOm1YSse/VRbISLJ+QGb5k4Y3bz2lkYw==
   dependencies:
     "@cypress/listr-verbose-renderer" "0.4.1"
     "@cypress/xvfb" "1.2.4"
@@ -3529,6 +3529,7 @@ cypress@^3.3.1:
     commander "2.15.1"
     common-tags "1.8.0"
     debug "3.2.6"
+    eventemitter2 "4.1.2"
     execa "0.10.0"
     executable "4.1.1"
     extract-zip "1.6.7"
@@ -4086,10 +4087,10 @@ eslint-loader@^2.1.2:
     object-hash "^1.1.4"
     rimraf "^2.6.1"
 
-eslint-plugin-cypress@^2.7.0:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.8.1.tgz#981a0f3658b40de430bcf05cabc96b396487c91f"
-  integrity sha512-jDpcP+MmjmqQO/x3bwIXgp4cl7Q66RYS5/IsuOQP4Qo2sEqE3DI8tTxBQ1EhnV5qEDd2Z2TYHR+5vYI6oCN4uw==
+eslint-plugin-cypress@^2.8.1:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-cypress/-/eslint-plugin-cypress-2.9.0.tgz#7fa5c5247db8a691aa54661e29a67e5bae4b4a15"
+  integrity sha512-3x6EQYDB30VHyqFV6leBRf9Zo51FsPWXG+aLtpUSlRtcLGcrbmnfno02E318YYSmGbCJH6K5i+MLCFHBpcyreg==
   dependencies:
     globals "^11.12.0"
 
@@ -4224,6 +4225,11 @@ event-pubsub@4.3.0:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/event-pubsub/-/event-pubsub-4.3.0.tgz#f68d816bc29f1ec02c539dc58c8dd40ce72cb36e"
   integrity sha512-z7IyloorXvKbFx9Bpie2+vMJKKx1fH1EN5yiTfp8CiLOTptSYy1g8H4yDpGlEdshL1PBiFtBHepF2cNsqeEeFQ==
+
+eventemitter2@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/eventemitter2/-/eventemitter2-4.1.2.tgz#0e1a8477af821a6ef3995b311bf74c23a5247f15"
+  integrity sha1-DhqEd6+CGm7zmVsxG/dMI6UkfxU=
 
 eventemitter3@^4.0.0:
   version "4.0.0"
