@@ -92,6 +92,7 @@ func getMetaInfo(c *gin.Context) {
 	var solvers entities.Solvers
 	var pretraineds entities.Pretraineds
 	var readmeContent string
+	var requirements string
 	packageFolder := filepath.Join(utilities.GetBasePath(), "models", c.Param("vendorName"), c.Param("packageName"))
 	aidtomlString, err := utilities.ReadFileContent(filepath.Join(packageFolder, "aid.toml"))
 	if err == nil {
@@ -102,8 +103,9 @@ func getMetaInfo(c *gin.Context) {
 		pretraineds = entities.LoadPretrainedsFromConfig(pretrainedtomlString)
 	}
 	readmeContent, err = utilities.ReadFileContent(filepath.Join(packageFolder, "README.md"))
+	requirements, err = utilities.ReadFileContent(filepath.Join(packageFolder, "requirements.txt"))
 	c.JSON(http.StatusOK, metaResponse{
-		Solvers: solvers, Pretraineds: pretraineds, Readme: readmeContent,
+		Solvers: solvers, Pretraineds: pretraineds, Readme: readmeContent, Requirements: requirements,
 	})
 }
 

@@ -11,19 +11,26 @@
     ></build-dialog>
     <v-card outlined min-width="100%">
       <v-card-title>Packages</v-card-title>
-      <EnhancedTable :headers="headers" :select="true" :items="packages" :actions="actions" @actionClicked="handleActions"/>
+      <EnhancedTable
+        :headers="headers"
+        :select="true"
+        :items="packages"
+        :actions="actions"
+        @actionClicked="handleActions"
+      />
     </v-card>
     <v-spacer />
   </v-container>
 </template>
 
 <script lang="ts">
+
 import Vue from "vue";
 import { mapState } from "vuex";
 import NewPackageDialog from "@/components/dialogs/NewPackageDialog.vue";
 import EnhancedTable from "@/components/EnhancedTable.vue";
 import BuildDialog from "@/components/dialogs/BuildDialog.vue";
-import { fetchAllObjects } from "@/middlewares/api.mdw";
+import { fetchAllObjects, fetchMeta, fetchPackages } from "@/middlewares/api.mdw";
 
 export default Vue.extend({
   components: {
@@ -33,10 +40,12 @@ export default Vue.extend({
   },
   data() {
     return {
+      packages:[],
       headers: [
         { text: "ID", value: "ID" },
         { text: "Vendor", value: "Vendor" },
         { text: "Name", value: "Name" },
+        { text: "Frameworks", value: "Frameworks" },
         { text: "Status", value: "Status" },
         { text: "Created At", value: "CreatedAt" },
         { text: "Actions", value: "action", sortable: false }
@@ -70,13 +79,14 @@ export default Vue.extend({
     }
   },
   mounted() {
-    let self = this
-    fetchAllObjects("packages");
+    let self = this;
+    fetchPackages().then(function(res:any){
+      self.packages = res
+    });
     fetchAllObjects("solvers");
   },
   computed: {
     ...mapState({
-      packages: "packages",
       solvers: "solvers"
     })
   }

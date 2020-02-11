@@ -6,7 +6,7 @@
 import axios from 'axios'
 import store from '@/store'
 import dayjs from 'dayjs'
-import { Log } from '@/entities'
+import { Log, Package } from '@/entities'
 const endpoint: string = "http://localhost:10590/"
 
 function _apiRequest(url: string,
@@ -172,6 +172,40 @@ function deleteLog(id: string) {
     })
 }
 
+function fetchPackages() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "packages", "get", {}, {},
+            (res: Array<any>) => {
+                res = res.map(function (each) {
+                    each.Frameworks = []
+                    fetchMeta(each.Vendor, each.Name).then(function(res:any){
+                        if (res.requirements.includes("opencv")) {
+                            each.Frameworks.push("OpenCV")
+                        }
+                        if (res.requirements.includes("torch")) {
+                            each.Frameworks.push("pyTorch")
+                        }
+                        if (res.requirements.includes("tensorflow")) {
+                            each.Frameworks.push("TensorFlow")
+                        }
+                        if (res.requirements.includes("keras")) {
+                            each.Frameworks.push("Keras")
+                        }
+                    })
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
+                console.log(res)
+                resolve(res)
+                store.commit('set' + "packages", res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
 function fetchAllObjects(objectName: string) {
     return new Promise((resolve, reject) => {
         _apiRequest(endpoint + objectName, "get", {}, {},
@@ -207,5 +241,6 @@ export {
     startContainer,
     fetchImages,
     addWebhook,
-    getWebhooks
+    getWebhooks,
+    fetchPackages
 }
