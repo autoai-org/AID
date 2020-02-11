@@ -41,6 +41,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "preferences" */ '../views/systems/Preference.vue')
   },
   {
+    path: '/extensions/webhooks',
+    name: 'Webhooks',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "preferences" */ '../views/extensions/Webhooks.vue')
+  },
+  {
     path: "**",
     name: "http404",
     component: () => import(/* webpackChunkName: "http404" */ '../views/errors/NotFound.vue')

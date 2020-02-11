@@ -24,8 +24,19 @@
         </v-list-item>
 
         <v-divider />
-        <v-subheader>About</v-subheader>
+        <v-subheader>Extensions</v-subheader>
         <v-list-item v-for="item in menus[2]" :key="item.text" link @click="navTo(item.link)">
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider />
+        <v-subheader>About</v-subheader>
+        <v-list-item v-for="item in menus[3]" :key="item.text" link @click="navTo(item.link)">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -61,18 +72,20 @@
       </v-container>
     </v-content>
     <v-system-bar height="42px" color="primary">
-      <v-spacer/>
-      <v-btn color="primary" small fab icon tile><v-icon color="white">mdi-emoticon-happy-outline</v-icon></v-btn>
+      <v-spacer />
+      <v-btn color="primary" small fab icon tile>
+        <v-icon color="white">mdi-emoticon-happy-outline</v-icon>
+      </v-btn>
     </v-system-bar>
   </v-app>
 </template>
 
 <script lang="ts">
 import { mapState } from "vuex";
-import { overview_menu, system_menu, about_menu } from "./router/menu";
-import router from '@/router'
-import LoadingDialog from '@/components/dialogs/LoadingDialog.vue'
-import AlertDialog from '@/components/dialogs/Alert.vue'
+import { overview_menu, system_menu, about_menu, extension_menu } from "./router/menu";
+import router from "@/router";
+import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
+import AlertDialog from "@/components/dialogs/Alert.vue";
 export default {
   props: {
     source: String
@@ -80,14 +93,14 @@ export default {
   data: () => ({
     dark: true,
     drawer: null,
-    menus: [overview_menu, system_menu, about_menu]
+    menus: [overview_menu, system_menu, extension_menu, about_menu]
   }),
   methods: {
-    navTo(link:string) {
-      router.replace(link).catch(err=>{
+    navTo(link: string) {
+      router.replace(link).catch(err => {
         // ignore this err
-      })
-    }
+      });
+    },
   },
   computed: {
     ...mapState({
@@ -96,15 +109,15 @@ export default {
       alertTitle: "alert_title"
     })
   },
-  components:{
-    'loading-dialog': LoadingDialog,
-    'alert-dialog': AlertDialog
+  components: {
+    "loading-dialog": LoadingDialog,
+    "alert-dialog": AlertDialog
   }
 };
 </script>
 
 <style scoped>
 .fill-height {
-  align-items: baseline!important;
+  align-items: baseline !important;
 }
 </style>

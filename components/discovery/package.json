@@ -4,7 +4,8 @@
     "description": "AID Discovery Service",
     "main": "index.js",
     "scripts": {
-        "compile": "./node_modules/.bin/tsc"
+        "compile": "./node_modules/.bin/tsc",
+        "start":"./node_modules/.bin/tsc && node dist/index.js"
     },
     "license": "MIT",
     "dependencies": {

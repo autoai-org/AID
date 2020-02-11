@@ -80,7 +80,7 @@ func (db *Database) CreateTables() {
 		id TEXT PRIMARY KEY,
 		title TEXT,
 		data TEXT,
-		source TEXT,
+		from TEXT,
 		status TEXT,
 		created_at DATETIME,
 		updated_at DATETIME
@@ -107,14 +107,13 @@ func (db *Database) CreateTables() {
 		status TEXT
 	);
 	
-	CREATE TABLE IF NOT EXISTS hook (
+	CREATE TABLE IF NOT EXISTS webhook (
 		id TEXT PRIMARY KEY,
-		name TEXT,
-		local_url TEXT,
 		remote_url TEXT,
 		created_at DATETIME,
 		updated_at DATETIME,
-		status TEXT
+		status TEXT,
+		event TEXT
 	);
 	
 	CREATE TABLE IF NOT EXISTS apikey (

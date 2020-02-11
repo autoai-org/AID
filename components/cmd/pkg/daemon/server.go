@@ -6,12 +6,13 @@
 package daemon
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"github.com/gin-gonic/gin"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/gin-gonic/gin"
 )
 
 var logger = utilities.NewDefaultLogger()
@@ -33,7 +34,7 @@ func beforeResponse() gin.HandlerFunc {
 	}
 }
 
-// RunServer starts the https service
+// RunServer starts the http(s) service
 func RunServer(port string, sslcert string, sslkey string) {
 	logger.Info("Initiating Service...")
 	r := getRouter()

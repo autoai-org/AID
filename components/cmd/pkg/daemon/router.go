@@ -19,6 +19,7 @@ func getRouter() *gin.Engine {
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	// All get requests
+	r.GET("/webhooks", fetchAllWebhooks)
 	r.GET("/packages", getPackages)
 	r.GET("/logs", getLogs)
 	r.GET("/images", getImages)
@@ -29,6 +30,7 @@ func getRouter() *gin.Engine {
 	r.GET("/solvers/:vendorName/:packageName/:solverName/dockerfile", getDockerfileContent)
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
 	// all put requests
+	r.PUT("/webhooks", addWebhook)
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
 	r.PUT("/images/:imageId/containers", createSolverContainer)
 	r.PUT("/containers/:containerId/run", startSolverContainer)

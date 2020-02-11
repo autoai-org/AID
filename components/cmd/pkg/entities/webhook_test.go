@@ -4,10 +4,3 @@
 // https://opensource.org/licenses/MIT
 
 package entities
-
-import "testing"
-
-func TestIBE(t *testing.T) {
-	ibe := ImageBuiltEvent{ImageName: "test"}
-	Consume(ibe)
-}

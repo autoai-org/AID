@@ -1,7 +1,7 @@
-import * as Koa from "koa"
+import Koa from "koa"
 import router from "./services/router"
-import * as json from "koa-json"
-import * as logger from "koa-logger"
+import json from "koa-json"
+import logger from "koa-logger"
 
 const app = new Koa();
 
