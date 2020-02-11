@@ -35,3 +35,8 @@ type metaResponse struct {
 	Pretraineds entities.Pretraineds `json:"pretraineds"`
 	Readme      string               `json:"readme"`
 }
+
+type newWebhookRequest struct {
+	PayloadURL string `json:"payload"`
+	Status     string `json:"status"`
+}

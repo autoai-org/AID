@@ -151,6 +151,8 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entitie
 		// no error occured, add image to database
 		image := entities.Image{Name: fullImageName}
 		image.Save()
+		ibe := entities.ImageBuiltEvent{ImageName: fullImageName}
+		entities.Consume(ibe)
 	}
 	return log, err
 }

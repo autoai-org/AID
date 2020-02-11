@@ -6,13 +6,26 @@
 package requests
 
 import (
-	"github.com/levigross/grequests"
 	"log"
+
+	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/levigross/grequests"
 )
 
 // Client is the basic class for performing http requests
 type Client struct {
 	Endpoint string
+}
+
+var defaultClient *Client
+
+// NewClient returns a new empty client
+func NewClient() *Client {
+	if defaultClient != nil {
+		return defaultClient
+	}
+	defaultClient = &Client{}
+	return defaultClient
 }
 
 // Get sends a simple Get requests to specific endpoint
@@ -22,7 +35,7 @@ func (c *Client) Get(endpoint string, params map[string]string) *grequests.Respo
 		Params: params,
 	})
 	if err != nil {
-		log.Println("Unable to make request", resp.Error)
+		utilities.CheckError(resp.Error, "Unable to make requests")
 	}
 
 	if resp.Ok != true {
@@ -44,6 +57,7 @@ func (c *Client) Post(endpoint string, params map[string]string) *grequests.Resp
 	}
 
 	if resp.Ok != true {
+		log.Println(resp.String())
 		log.Println("Request did not return OK")
 	}
 	return resp

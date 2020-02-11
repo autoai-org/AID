@@ -30,9 +30,21 @@ function _apiRequest(url: string,
     })
 }
 
-function buildImage(vendorName: string, packageName: string, solverName: string) {
+function _get_plain(path: string) {
     return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images", "put", {}, {},
+        _apiRequest(path, "get", {}, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
+function _put_plain(path: string, payload?: object) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(path, "put", payload || {}, {},
             (res: any) => {
                 resolve(res)
             },
@@ -42,11 +54,115 @@ function buildImage(vendorName: string, packageName: string, solverName: string)
     })
 }
 
-function installPackage(packageIdentifier: string) {
+function _post_plain(path: string, data: object) {
     return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "packages", "post", {
-            'remote_url': packageIdentifier
-        }, {},
+        _apiRequest(path, "post", data, {},
+            (res: Log) => {
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+            })
+    })
+}
+
+function addWebhook(payload: string, status: string) {
+    return _put_plain(endpoint + "webhooks", { payload: payload, status: status })
+}
+
+function getWebhooks() {
+    return _get_plain(endpoint + "webhooks")
+}
+
+function buildImage(vendorName: string, packageName: string, solverName: string) {
+    return _put_plain(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images")
+}
+
+function installPackage(packageIdentifier: string) {
+    return _post_plain(endpoint + "packages", { 'remote_url': packageIdentifier })
+}
+
+function createContainer(imageId: string) {
+    return _put_plain(endpoint + "images/" + imageId + "/" + "containers")
+}
+
+function startContainer(containerId: string) {
+    return _put_plain(endpoint + "containers/" + containerId + "/" + "run")
+}
+
+function testContainer(file: Blob) {
+    const payload = new FormData()
+    payload.append('file', file)
+    return _post_plain(endpoint + "runnings/1234/infer", payload)
+}
+
+function fetchLog(id: string) {
+    return _get_plain(endpoint + "logs/" + id)
+}
+
+function updateConfig(config: object) {
+    return _post_plain(endpoint + "configs", config)
+}
+
+function fetchMeta(vendorName: string, packageName: string) {
+    return _get_plain(endpoint + "packages/" + vendorName + "/" + packageName + "/meta")
+}
+
+function fetchSolverDockerfile(vendorName: string, packageName: string, solverName: string) {
+    return _get_plain(endpoint + "solvers/" + vendorName + "/" + packageName + "/" + solverName + "/dockerfile")
+}
+
+function fetchContainers() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "/containers", "get", {}, {},
+            (res: Array<any>) => {
+                res = res.map(function (each: any) {
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
+function fetchImages() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "images", "get", {}, {},
+            (res: Array<any>) => {
+                res = res.map(function (each) {
+                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
+                    return each
+                })
+                resolve(res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
+function fetchConfig() {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "configs", "get", {}, {},
+            (res: object) => {
+                resolve(res)
+                store.commit('setconfig', res)
+            },
+            (err: object) => {
+                reject(err)
+                console.error(err)
+            })
+    })
+}
+
+function deleteLog(id: string) {
+    return new Promise((resolve, reject) => {
+        _apiRequest(endpoint + "logs/" + id, "delete", {}, {},
             (res: Log) => {
                 resolve(res)
             },
@@ -74,154 +190,6 @@ function fetchAllObjects(objectName: string) {
     })
 }
 
-function fetchLog(id: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "logs/" + id, "get", {}, {},
-            (res: Log) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
-function deleteLog(id: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "logs/" + id, "delete", {}, {},
-            (res: Log) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
-function fetchConfig() {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "configs", "get", {}, {},
-            (res: object) => {
-                resolve(res)
-                store.commit('setconfig', res)
-            },
-            (err: object) => {
-                reject(err)
-                console.error(err)
-            })
-    })
-}
-
-function updateConfig(config: object) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "configs", "post", config, {},
-            (res: object) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
-function fetchMeta(vendorName: string, packageName: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "packages/" + vendorName + "/" + packageName + "/meta", "get", {}, {},
-            (res: object) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-                console.error(err)
-            })
-    })
-}
-
-function fetchImages() {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "images", "get", {}, {},
-            (res: Array<any>) => {
-                res = res.map(function (each) {
-                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
-                    return each
-                })
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-                console.error(err)
-            })
-    })
-}
-
-function fetchSolverDockerfile(vendorName:string, packageName:string, solverName: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "solvers/" + vendorName + "/" + packageName + "/"+solverName+"/dockerfile", "get", {}, {},
-            (res: object) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-                console.error(err)
-            })
-    })
-}
-
-function fetchContainers() {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "/containers", "get", {}, {},
-            (res: Array<any>) => {
-                res=res.map(function(each:any){
-                    each.CreatedAt = dayjs(each.CreatedAt).format("DD/MM/YYYY HH:mm")
-                    return each
-                })
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-                console.error(err)
-            })
-    })
-}
-
-function createContainer(imageId: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "images/" + imageId + "/" + "containers", "put", {}, {},
-            (res: any) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
-function startContainer(containerId: string) {
-    return new Promise((resolve, reject) => {
-        _apiRequest(endpoint + "containers/" + containerId + "/" + "run", "put", {}, {},
-            (res: any) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
-function testContainer(file:Blob) {
-    const payload = new FormData()
-    payload.append('file', file)
-    return new Promise((resolve, reject)=>{
-        _apiRequest(endpoint+"runnings/1234/infer", "post", payload, {},
-            (res: any) => {
-                resolve(res)
-            },
-            (err: object) => {
-                reject(err)
-            })
-    })
-}
-
 export {
     _apiRequest,
     fetchSolverDockerfile,
@@ -237,5 +205,7 @@ export {
     fetchMeta,
     testContainer,
     startContainer,
-    fetchImages
+    fetchImages,
+    addWebhook,
+    getWebhooks
 }
