@@ -4,6 +4,12 @@
       <h1
         class="font-weight-bold display-1 basil--text"
       >{{$route.params.vendor}}/{{$route.params.package}}</h1>
+      <p>
+        <v-img width="32px" v-if="frameworks.includes('keras')" src="@/assets/framework-icons/keras.png"/>
+        <v-img width="32px" v-if="frameworks.includes('opencv')" src="@/assets/framework-icons/opencv.png"/>
+        <v-img width="32px" v-if="frameworks.includes('pytorch')" src="@/assets/framework-icons/pytorch.png"/>
+        <v-img width="32px" v-if="frameworks.includes('tensorflow')" src="@/assets/framework-icons/tensorflow.png"/>
+      </p>
     </v-card-title>
     <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
       <v-tab v-for="item in items" :key="item">{{ item }}</v-tab>
@@ -45,7 +51,8 @@ export default Vue.extend({
       isReady: false,
       tab: null,
       items: ["Readme", "Solvers", "Insight", "Settings", "Plugin"],
-      meta: {}
+      meta: {},
+      frameworks:""
     };
   },
   components: {
@@ -58,6 +65,7 @@ export default Vue.extend({
     fetchMeta(this.$route.params.vendor, this.$route.params.package).then(
       function(res: any) {
         self.meta = res;
+        self.frameworks = res.requirements
         self.isReady = true
       }
     );

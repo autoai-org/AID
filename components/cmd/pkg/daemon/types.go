@@ -31,9 +31,10 @@ type messageResponse struct {
 
 // metaResponse is used to respond meta information to client
 type metaResponse struct {
-	Solvers     entities.Solvers     `json:"solvers"`
-	Pretraineds entities.Pretraineds `json:"pretraineds"`
-	Readme      string               `json:"readme"`
+	Solvers      entities.Solvers     `json:"solvers"`
+	Pretraineds  entities.Pretraineds `json:"pretraineds"`
+	Readme       string               `json:"readme"`
+	Requirements string               `json:"requirements"`
 }
 
 type newWebhookRequest struct {
