@@ -14,3 +14,4 @@ cli/cvpm
 core/cmd/cmd
 components/cmd/entry/logs/system.log.201912230000
 components/cmd/test.jpg
+components/mlserve/tests/test.jpg
