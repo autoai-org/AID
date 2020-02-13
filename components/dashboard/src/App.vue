@@ -93,7 +93,13 @@
 
 <script lang="ts">
 import { mapState } from "vuex";
-import { overview_menu, system_menu, about_menu, experiment_menu, extension_menu } from "./router/menu";
+import {
+  overview_menu,
+  system_menu,
+  about_menu,
+  experiment_menu,
+  extension_menu
+} from "./router/menu";
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
@@ -104,14 +110,24 @@ export default {
   data: () => ({
     dark: true,
     drawer: null,
-    menus: [overview_menu, system_menu,experiment_menu, extension_menu, about_menu]
+    menus: [
+      overview_menu,
+      system_menu,
+      experiment_menu,
+      extension_menu,
+      about_menu
+    ]
   }),
   methods: {
     navTo(link: string) {
-      router.replace(link).catch(err => {
-        // ignore this err
-      });
-    },
+      if (link.startsWith("http")) {
+        window.open(link);
+      } else {
+        router.replace(link).catch(err => {
+          // ignore this err
+        });
+      }
+    }
   },
   computed: {
     ...mapState({
