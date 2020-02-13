@@ -1,36 +1,42 @@
 <template>
-  <v-container>
-    <v-btn class="ma-2" outlined color="indigo" @click="showNewPackageDialog=true">New Package</v-btn>
-    <new-package-dialog :show="showNewPackageDialog" @closed="showNewPackageDialog=false" />
-    <build-dialog
-      :show="showBuildDialog"
-      @closed="showBuildDialog=false"
-      :vendor="selectedSolver.Vendor"
-      :packageName="selectedSolver.Package"
-      :solver="selectedSolver.Name"
-    ></build-dialog>
-    <v-card outlined min-width="100%">
-      <v-card-title>Packages</v-card-title>
-      <EnhancedTable
-        :headers="headers"
-        :select="true"
-        :items="packages"
-        :actions="actions"
-        @actionClicked="handleActions"
-      />
-    </v-card>
-    <v-spacer />
-  </v-container>
+  <v-card outlined min-width="100%" min-height="100%">
+    <v-card-title>Packages</v-card-title>
+    <v-container width="100%">
+      <v-btn class="ma-2" outlined color="indigo" @click="showNewPackageDialog=true">New Package</v-btn>
+      <new-package-dialog :show="showNewPackageDialog" @closed="showNewPackageDialog=false" />
+      <build-dialog
+        :show="showBuildDialog"
+        @closed="showBuildDialog=false"
+        :vendor="selectedSolver.Vendor"
+        :packageName="selectedSolver.Package"
+        :solver="selectedSolver.Name"
+      ></build-dialog>
+      <v-card outlined min-width="100%">
+        <v-card-title>Packages</v-card-title>
+        <EnhancedTable
+          :headers="headers"
+          :select="true"
+          :items="packages"
+          :actions="actions"
+          @actionClicked="handleActions"
+        />
+      </v-card>
+      <v-spacer />
+    </v-container>
+  </v-card>
 </template>
 
 <script lang="ts">
-
 import Vue from "vue";
 import { mapState } from "vuex";
 import NewPackageDialog from "@/components/dialogs/NewPackageDialog.vue";
 import EnhancedTable from "@/components/EnhancedTable.vue";
 import BuildDialog from "@/components/dialogs/BuildDialog.vue";
-import { fetchAllObjects, fetchMeta, fetchPackages } from "@/middlewares/api.mdw";
+import {
+  fetchAllObjects,
+  fetchMeta,
+  fetchPackages
+} from "@/middlewares/api.mdw";
 
 export default Vue.extend({
   components: {
@@ -40,7 +46,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      packages:[],
+      packages: [],
       headers: [
         { text: "ID", value: "ID" },
         { text: "Vendor", value: "Vendor" },
@@ -80,8 +86,8 @@ export default Vue.extend({
   },
   mounted() {
     let self = this;
-    fetchPackages().then(function(res:any){
-      self.packages = res
+    fetchPackages().then(function(res: any) {
+      self.packages = res;
     });
     fetchAllObjects("solvers");
   },
