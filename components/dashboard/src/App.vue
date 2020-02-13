@@ -24,7 +24,7 @@
         </v-list-item>
 
         <v-divider />
-        <v-subheader>Extensions</v-subheader>
+        <v-subheader>Experiment</v-subheader>
         <v-list-item v-for="item in menus[2]" :key="item.text" link @click="navTo(item.link)">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -35,8 +35,19 @@
         </v-list-item>
 
         <v-divider />
-        <v-subheader>About</v-subheader>
+        <v-subheader>Extension</v-subheader>
         <v-list-item v-for="item in menus[3]" :key="item.text" link @click="navTo(item.link)">
+          <v-list-item-action>
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>{{ item.text }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-divider />
+        <v-subheader>About</v-subheader>
+        <v-list-item v-for="item in menus[4]" :key="item.text" link @click="navTo(item.link)">
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-action>
@@ -82,7 +93,7 @@
 
 <script lang="ts">
 import { mapState } from "vuex";
-import { overview_menu, system_menu, about_menu, extension_menu } from "./router/menu";
+import { overview_menu, system_menu, about_menu, experiment_menu, extension_menu } from "./router/menu";
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
@@ -93,7 +104,7 @@ export default {
   data: () => ({
     dark: true,
     drawer: null,
-    menus: [overview_menu, system_menu, extension_menu, about_menu]
+    menus: [overview_menu, system_menu,experiment_menu, extension_menu, about_menu]
   }),
   methods: {
     navTo(link: string) {

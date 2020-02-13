@@ -14,6 +14,16 @@ const system_menu = [
     { icon: "mdi-settings-outline", text: "Preferences", link: "/system/preferences" },
 ]
 
+const experiment_menu = [
+    { icon: "mdi-database", text: "Dataset", link:"/experiment/dataset" },
+    { icon: "mdi-jabber", text: "Experiment", link:"/experiment/experiment" }
+]
+
+const extension_menu = [
+    { icon: "mdi-webhook", text: "Webhooks", link:"/extensions/webhooks" },
+    { icon: "mdi-grain", text: "Apps", link:"/extensions/apps" }
+]
+
 const about_menu = [
     { icon: "mdi-github-circle", text: "GitHub", link: "https://github.com/autoai-org/cvpm" },
     { icon: "mdi-database-search", text: "Registry" },
@@ -21,14 +31,12 @@ const about_menu = [
     { icon: "mdi-information-outline", text: "AID Story", link: "https://yaonotes.org/blogs/why-aid.html" },
 ]
 
-const extension_menu = [
-    { icon: "mdi-webhook", text: "Webhooks", link:"/extensions/webhooks" },
-    { icon: "mdi-puzzle", text: "Apps", link:"/extensions/apps" }
-]
+
 
 export {
     overview_menu,
     system_menu,
     extension_menu,
+    experiment_menu,
     about_menu,
 }

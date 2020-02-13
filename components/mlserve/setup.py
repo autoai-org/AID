@@ -30,6 +30,7 @@ setuptools.setup(
         "toml",
         "requests",
         "pillow",
+        "numpy",
     ],
     project_urls={
         "Bug Tracker": "https://github.com/autoai-org/aid/issues",
