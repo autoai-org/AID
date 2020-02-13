@@ -49,6 +49,22 @@ const routes = [
     component: () => import(/* webpackChunkName: "preferences" */ '../views/extensions/Webhooks.vue')
   },
   {
+    path: '/experiment/dataset',
+    name: 'Dataset',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "preferences" */ '../views/experiment/Dataset.vue')
+  },
+  {
+    path: '/experiment/experiment',
+    name: 'Experiment',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "preferences" */ '../views/experiment/Experiment.vue')
+  },
+  {
     path: "**",
     name: "http404",
     component: () => import(/* webpackChunkName: "http404" */ '../views/errors/NotFound.vue')
