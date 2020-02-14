@@ -80,7 +80,7 @@ func (db *Database) CreateTables() {
 		id TEXT PRIMARY KEY,
 		title TEXT,
 		data TEXT,
-		from TEXT,
+		source TEXT,
 		status TEXT,
 		created_at DATETIME,
 		updated_at DATETIME
@@ -162,6 +162,15 @@ func (db *Database) CreateTables() {
 		status TEXT,
 		imagename TEXT,
 		entrypoint TEXT,
+		created_at DATETIME,
+		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS dataset (
+		id TEXT PRIMARY KEY,
+		name TEXT,
+		localpath TEXT,
+		status TEXT,
 		created_at DATETIME,
 		updated_at DATETIME
 	);

@@ -103,3 +103,12 @@ CREATE TABLE IF NOT EXISTS runningsolver (
 	created_at DATETIME,
 	updated_at DATETIME
 );
+
+CREATE TABLE IF NOT EXISTS dataset (
+	id TEXT PRIMARY KEY,
+	name TEXT,
+	localpath TEXT,
+	status TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);

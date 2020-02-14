@@ -74,6 +74,10 @@ function getWebhooks() {
     return _get_plain(endpoint + "webhooks")
 }
 
+function getDatasets() {
+    return _get_plain(endpoint +"experiments/dataset")
+}
+
 function buildImage(vendorName: string, packageName: string, solverName: string) {
     return _put_plain(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images")
 }
@@ -94,6 +98,20 @@ function testContainer(file: Blob) {
     const payload = new FormData()
     payload.append('file', file)
     return _post_plain(endpoint + "runnings/1234/infer", payload)
+}
+
+function uploadDataset(file: Blob) {
+    const payload = new FormData()
+    payload.append('file', file)
+    return _put_plain(endpoint +"experiments/dataset/file", payload)
+}
+
+function addDataset(datasetPath:string, uncompressNow: boolean, name: string) {
+    return _put_plain(endpoint+"experiments/dataset", {
+        "datasetPath":datasetPath,
+        "uncompress": uncompressNow,
+        "name": name
+    })
 }
 
 function fetchLog(id: string) {
@@ -230,11 +248,14 @@ export {
     fetchContainers,
     buildImage,
     createContainer,
+    uploadDataset,
+    getDatasets,
     fetchLog,
     fetchAllObjects,
     installPackage,
     deleteLog,
     fetchConfig,
+    addDataset,
     updateConfig,
     fetchMeta,
     testContainer,

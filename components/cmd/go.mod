@@ -9,6 +9,7 @@ require (
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/cavaliercoder/grab v2.0.0+incompatible
+	github.com/codeclysm/extract v2.2.0+incompatible
 	github.com/containerd/containerd v1.3.2 // indirect
 	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
@@ -22,6 +23,7 @@ require (
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.1
+	github.com/h2non/filetype v1.0.12 // indirect
 	github.com/ilibs/gosql/v2 v2.0.2
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a

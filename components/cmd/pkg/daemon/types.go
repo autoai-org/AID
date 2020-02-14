@@ -41,3 +41,9 @@ type newWebhookRequest struct {
 	PayloadURL string `json:"payload"`
 	Status     string `json:"status"`
 }
+
+type newDatasetRequest struct {
+	DatasetPath string `json:"datasetPath"`
+	Uncompress  bool   `json:"uncompress"`
+	Name        string `json:"name"`
+}
