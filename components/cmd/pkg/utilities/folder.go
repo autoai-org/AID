@@ -52,7 +52,7 @@ func InitFolders() {
 	CreateFolderIfNotExist(vendorDir)
 	targetDir := filepath.Join(vendorDir, ".aid")
 	CreateFolderIfNotExist(targetDir)
-	requiredFolders := [3]string{"logs", "models", "plugins"}
+	requiredFolders := [4]string{"logs", "models", "plugins", "datasets"}
 	for _, each := range requiredFolders {
 		CreateFolderIfNotExist(filepath.Join(targetDir, each))
 	}
@@ -64,4 +64,18 @@ func GetBasePath() string {
 	CreateFolderIfNotExist(vendorDir)
 	targetDir := filepath.Join(vendorDir, ".aid")
 	return targetDir
+}
+
+// GetDirSizeMB returns the size of path
+func GetDirSizeMB(path string) float64 {
+	var dirSize int64
+	readSize := func(path string, file os.FileInfo, err error) error {
+		if !file.IsDir() {
+			dirSize += file.Size()
+		}
+		return nil
+	}
+	filepath.Walk(path, readSize)
+	sizeMB := float64(dirSize) / 1024.0 / 1024.0
+	return sizeMB
 }

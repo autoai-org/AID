@@ -6,9 +6,10 @@
 package requests
 
 import (
+	"os"
+
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
 	git "gopkg.in/src-d/go-git.v4"
-	"os"
 )
 
 var logger = utilities.NewDefaultLogger()
