@@ -29,11 +29,14 @@ func getRouter() *gin.Engine {
 	r.GET("/configs", getConfigs)
 	r.GET("/solvers/:vendorName/:packageName/:solverName/dockerfile", getDockerfileContent)
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
+	r.GET("/experiments/dataset", getDatasets)
 	// all put requests
 	r.PUT("/webhooks", addWebhook)
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)
 	r.PUT("/images/:imageId/containers", createSolverContainer)
 	r.PUT("/containers/:containerId/run", startSolverContainer)
+	r.PUT("/experiments/dataset/file", uploadFile)
+	r.PUT("/experiments/dataset", addDataset)
 	// all post requests
 	r.POST("/solvers/:vendorName/:packageName/:solverName/dockerfile", modifySolverDockerfile)
 	r.POST("/packages", installPackage)
