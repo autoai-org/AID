@@ -11,12 +11,13 @@ const overview_menu = [
 const system_menu = [
     { icon: "mdi-poll-box", text: "Status" },
     { icon: "mdi-math-log", text: "Logs", link: "/system/logs" },
+    { icon: "mdi-history", text: "Activity", link: "/system/activities" },
     { icon: "mdi-settings-outline", text: "Preferences", link: "/system/preferences" },
 ]
 
 const experiment_menu = [
     { icon: "mdi-database", text: "Dataset", link:"/experiment/dataset" },
-    { icon: "mdi-jabber", text: "Experiment", link:"/experiment/experiment" }
+    { icon: "mdi-jabber", text: "Experiment", link:"/experiment/new" }
 ]
 
 const extension_menu = [
