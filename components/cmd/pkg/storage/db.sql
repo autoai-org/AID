@@ -112,3 +112,12 @@ CREATE TABLE IF NOT EXISTS dataset (
 	created_at DATETIME,
 	updated_at DATETIME
 );
+
+CREATE TABLE IF NOT EXISTS experiment (
+	id TEXT PRIMARY KEY,
+	datapath TEXT,
+	vendor TEXT,
+	package TEXT,
+	solver TEXT,
+	logid TEXT,
+)

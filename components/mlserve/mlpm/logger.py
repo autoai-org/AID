@@ -25,3 +25,16 @@ class Logger(object):
                 data = json.load(f)
                 data.append(logObject)
                 json.dump(data, f)
+
+class StepLogger(object):
+    def __init__(self, logFile):
+        self.logFile = logFile
+    
+    def append(self, logObject):
+        if os.stat(self.target).st_size == 0:
+            self.write(logObject)
+        else:
+            with open(self.target, 'w+') as f:
+                data = json.load(f)
+                data.append(logObject)
+                json.dump(data, f)

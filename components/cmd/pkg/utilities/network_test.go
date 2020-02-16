@@ -11,7 +11,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestGetUUIDv4(t *testing.T) {
-	uuid := GenerateUUIDv4()
-	assert.IsType(t, "string", uuid)
+func TestGetOutboundIP(t *testing.T) {
+	ip := GetOutboundIP().String()
+	assert.IsType(t, "string", ip)
 }

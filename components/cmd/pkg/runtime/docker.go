@@ -33,6 +33,13 @@ type DockerRuntime struct {
 	client *client.Client
 }
 
+// prepareEnvs returns a list of string
+func prepareEnvs() []string {
+	serverIP := utilities.GetOutboundIP().String()
+	envStrings := []string{"AID_SERVER", serverIP + ":10590"}
+	return envStrings
+}
+
 // NewDockerRuntime returns a DockerRuntime Instance
 func NewDockerRuntime() *DockerRuntime {
 	if defaultDockerRuntime != nil {
@@ -77,6 +84,7 @@ func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCr
 		ExposedPorts: nat.PortSet{
 			"8080/tcp": struct{}{},
 		},
+		Env: prepareEnvs(),
 	}, hostConfig, nil, "")
 	if err != nil {
 		utilities.CheckError(err, "Cannot create container from image "+image.Name)

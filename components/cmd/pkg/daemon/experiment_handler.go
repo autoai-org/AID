@@ -51,3 +51,7 @@ func addDataset(c *gin.Context) {
 		c.JSON(http.StatusOK, newDataset)
 	}
 }
+
+func addExperiment(c *gin.Context) {
+
+}

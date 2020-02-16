@@ -19,17 +19,14 @@ clean:
 	rm -rf dist
 	rm -rf mlpm.egg-info
 
-package:
+build:
 	python3 setup.py sdist bdist_wheel
 
 test:
 	PYTHONPATH=./ python3 tests/server.py
-	
-build:
-	bash ./build.sh
 
 publish-test:
 	twine upload --repository-url https://test.pypi.org/legacy/ dist/*
 
-publish-prod:
+publish:
 	twine upload dist/*

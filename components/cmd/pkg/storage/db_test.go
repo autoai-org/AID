@@ -4,3 +4,9 @@
 // https://opensource.org/licenses/MIT
 
 package storage
+
+import "testing"
+
+func TestGetDefaultDB(t *testing.T) {
+
+}

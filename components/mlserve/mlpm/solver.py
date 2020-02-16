@@ -3,8 +3,9 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
+import os
 from mlpm.server import run_server
-
+from mlpm.logger import StepLogger
 
 class Solver(object):
     def __init__(self, pretrained_toml=None):
@@ -12,6 +13,8 @@ class Solver(object):
         self.bundle = None
         self._hyperparameters = {}
         self._enable_train = False
+        if hasattr(self.__class__, 'train') and callable(getattr(self.__class__, 'train')):
+            self._enable_train = True
 
     @property
     def enable_train(self):
@@ -36,4 +39,4 @@ class Solver(object):
         raise NotImplementedError
 
     def train(self, data):
-        raise NotImplementedError
+        self.logger = StepLogger(os.environ('LOG_FILE'))
