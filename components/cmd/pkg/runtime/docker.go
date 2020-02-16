@@ -40,6 +40,12 @@ func prepareEnvs() []string {
 	return envStrings
 }
 
+// prepareVolumes returns a map of volume mappings
+func prepareVolumes(hostPath string) map[string]struct{} {
+	vol := map[string]struct{}{hostPath + ":/package": {}}
+	return vol
+}
+
 // NewDockerRuntime returns a DockerRuntime Instance
 func NewDockerRuntime() *DockerRuntime {
 	if defaultDockerRuntime != nil {

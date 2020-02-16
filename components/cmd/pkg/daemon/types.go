@@ -47,3 +47,10 @@ type newDatasetRequest struct {
 	Uncompress  bool   `json:"uncompress"`
 	Name        string `json:"name"`
 }
+
+type newExperimentRequest struct {
+	DatasetPath string `json:"datasetPath"`
+	Vendor      string `json:"vendor"`
+	Package     string `json:"package"`
+	Solver      string `json:"solver"`
+}

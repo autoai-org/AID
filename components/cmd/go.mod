@@ -31,6 +31,7 @@ require (
 	github.com/mattn/go-sqlite3 v1.13.0
 	github.com/mattn/go-tty v0.0.3 // indirect
 	github.com/mholt/archiver/v3 v3.3.0
+	github.com/moby/moby v1.13.1
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect

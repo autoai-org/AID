@@ -53,5 +53,7 @@ func addDataset(c *gin.Context) {
 }
 
 func addExperiment(c *gin.Context) {
+	var req newExperimentRequest
+	c.BindJSON(&req)
 
 }
