@@ -34,6 +34,7 @@
 * [Intro](#intro)
 * [Usage](#usage)
 * [Roadmap](#roadmap)
+* [Open Models](#models)
 * [Contributing](#contributing)
 * [License](#license)
 
@@ -54,6 +55,11 @@ For more examples, please refer to the [Documentation](https://aid.autoai.org).
 ## Roadmap
 
 See the [open issues](https://github.com/autoai-org/aid/issues) for a list of proposed features (and known issues).
+
+<!-- MODELS -->
+## Models
+
+We share our officially tested models with our github organization [aidmodels](https://github.com/aidmodels). We are also working on an open registry that could provide you with more features. Stay tuned!
 
 <!-- CONTRIBUTING -->
 ## Contributing
