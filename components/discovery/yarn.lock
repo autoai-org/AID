@@ -1005,10 +1005,10 @@ koa-router@^8.0.8:
     path-to-regexp "1.x"
     urijs "^1.19.2"
 
-koa-swagger-decorator@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/koa-swagger-decorator/-/koa-swagger-decorator-1.6.0.tgz#f35c56d56e05d1f1987b01acddd0a76b975276e7"
-  integrity sha512-ssQk+1mvatA+mt0B25TMv3QfJhhw0ENQd5nYD4ugMo8gPTPBceYsBoRS15UAlCCQjUMlyYL6+GHdw8dKJyKn7Q==
+koa-swagger-decorator@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/koa-swagger-decorator/-/koa-swagger-decorator-1.6.1.tgz#7000642fdec75a7baa06a0d8127a3ba0187951a7"
+  integrity sha512-P6xihEEdB8lH189ggXJQRaGqPsV48//vZSZwRxDkdVwyS408Zx2ef1wWc49EYb6pHKEgnv82UBcajzZ471cpvw==
   dependencies:
     "@types/globby" "^8.0.0"
     "@types/koa-router" "^7.0.31"
