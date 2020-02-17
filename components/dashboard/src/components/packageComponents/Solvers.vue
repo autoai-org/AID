@@ -45,7 +45,7 @@ export default Vue.extend({
     };
   },
   props: ["solvers", "vendor", "packageName"],
-  mounted() {
+  mounted () {
     let self = this
     fetchImages().then(function(res:any){
         console.log(res)

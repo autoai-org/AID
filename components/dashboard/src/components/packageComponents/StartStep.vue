@@ -36,7 +36,9 @@ export default Vue.extend({
         console.log(this.imageId)
     },
     triggerStartContainer (containerId:string) {
-      startContainer(containerId)
+      startContainer(containerId).then(function(res){
+        location.reload()
+      })
     }
   },
   mounted () { 
