@@ -17,7 +17,7 @@
         "koa-bodyparser": "^4.2.1",
         "koa-json": "^2.0.2",
         "koa-logger": "^3.2.1",
-        "koa-router": "^8.0.7",
+        "koa-router": "^8.0.8",
         "koa-swagger-decorator": "^1.6.0",
         "typescript": "^3.7.5"
     },
