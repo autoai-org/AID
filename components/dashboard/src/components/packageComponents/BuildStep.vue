@@ -53,8 +53,10 @@ export default Vue.extend({
       this.showCodeEditorDialog = true
     },
     newContainer(imageId: string) {
+      let self = this
       createContainer(imageId).then(function(res){
         console.log(res)
+        location.reload()
       })
     },
     triggerBuild() {

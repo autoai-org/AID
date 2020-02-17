@@ -15,6 +15,12 @@
             <div id="trainLineChartAcc" />
           </v-expansion-panel-content>
         </v-expansion-panel>
+        <v-expansion-panel>
+          <v-expansion-panel-header>Power Consumption</v-expansion-panel-header>
+          <v-expansion-panel-content eager>
+            <div id="powerConsumptionChart" />
+          </v-expansion-panel-content>
+        </v-expansion-panel>
       </v-expansion-panels>
     </v-card-text>
   </v-card>
@@ -36,6 +42,7 @@ export default Vue.extend({
       const plotData = [data];
       Plotly.newPlot("trainLineChartLoss", plotData);
       Plotly.newPlot("trainLineChartAcc", plotData);
+      Plotly.newPlot("powerConsumptionChart", plotData);
     }
   },
   mounted() {
