@@ -993,10 +993,10 @@ koa-router@^7.2.1:
     path-to-regexp "^1.1.1"
     urijs "^1.19.0"
 
-koa-router@^8.0.7:
-  version "8.0.7"
-  resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-8.0.7.tgz#40a6a7ca95f17e3809181d93f5d6d8f2ec39f206"
-  integrity sha512-g1nwr0nAQ/WgtY68IAx0bh2Z8eOX8dKypG55StMAYc0vs+1m87/fUrFKi0quJNAATzMhsQ5GFEC1XaAFvGB37g==
+koa-router@^8.0.8:
+  version "8.0.8"
+  resolved "https://registry.yarnpkg.com/koa-router/-/koa-router-8.0.8.tgz#f0b70f90dae275db8c71a41e1efb625581fb3b5a"
+  integrity sha512-2rNF2cgu/EWi/NV8GlBE5+H/QBoaof83X6Z0dULmalkbt7W610/lyP2EOLVqVrUUFfjsVWL/Ju5TVBcGJDY9XQ==
   dependencies:
     debug "^4.1.1"
     http-errors "^1.7.3"
@@ -1005,10 +1005,10 @@ koa-router@^8.0.7:
     path-to-regexp "1.x"
     urijs "^1.19.2"
 
-koa-swagger-decorator@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/koa-swagger-decorator/-/koa-swagger-decorator-1.6.0.tgz#f35c56d56e05d1f1987b01acddd0a76b975276e7"
-  integrity sha512-ssQk+1mvatA+mt0B25TMv3QfJhhw0ENQd5nYD4ugMo8gPTPBceYsBoRS15UAlCCQjUMlyYL6+GHdw8dKJyKn7Q==
+koa-swagger-decorator@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/koa-swagger-decorator/-/koa-swagger-decorator-1.6.1.tgz#7000642fdec75a7baa06a0d8127a3ba0187951a7"
+  integrity sha512-P6xihEEdB8lH189ggXJQRaGqPsV48//vZSZwRxDkdVwyS408Zx2ef1wWc49EYb6pHKEgnv82UBcajzZ471cpvw==
   dependencies:
     "@types/globby" "^8.0.0"
     "@types/koa-router" "^7.0.31"

@@ -26,7 +26,7 @@
   </p>
 </p>
 
-
+**AID is still under heavy development and APIs may change! Stay tuned. It won't be very long :)**
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
