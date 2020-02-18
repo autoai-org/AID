@@ -49,6 +49,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "preferences" */ '../views/extensions/Webhooks.vue')
   },
   {
+    path: '/extensions/apps',
+    name: 'Apps',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "preferences" */ '../views/extensions/Apps.vue')
+  },
+  {
     path: '/experiment/dataset',
     name: 'Dataset',
     // route level code-splitting

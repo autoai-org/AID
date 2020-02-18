@@ -74,6 +74,10 @@ function getWebhooks() {
     return _get_plain(endpoint + "webhooks")
 }
 
+function getExtLogs(extName: string, logId: string) {
+    return _get_plain(endpoint + "extensions/"+extName+"/logs/"+logId)
+}
+
 function getDatasets() {
     return _get_plain(endpoint +"experiments/dataset")
 }
@@ -243,7 +247,7 @@ function fetchAllObjects(objectName: string) {
 }
 
 export {
-    _apiRequest,
+    getExtLogs,
     fetchSolverDockerfile,
     fetchContainers,
     buildImage,

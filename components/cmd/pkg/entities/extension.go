@@ -22,6 +22,15 @@ type Webhook struct {
 	UpdatedAt time.Time `db:"updated_at"`
 }
 
+// Extension defines the basic structure for Extension (local)
+type Extension struct {
+	ID        string    `db:"id"`
+	Name      string    `db:"name"`
+	Status    string    `db:"status"`
+	CreatedAt time.Time `db:"created_at"`
+	UpdatedAt time.Time `db:"updated_at"`
+}
+
 // TableName defines the tablename for webhooks in database
 func (w *Webhook) TableName() string {
 	return "webhook"

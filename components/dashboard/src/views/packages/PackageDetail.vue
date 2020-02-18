@@ -34,7 +34,9 @@
           </v-card-text>
         </v-card>
       </v-tab-item>
-      <v-tab-item :key="'Plugin'"></v-tab-item>
+      <v-tab-item :key="'Plugin'">
+        <plugin-page></plugin-page>
+      </v-tab-item>
     </v-tabs-items>
   </v-card>
 </template>
@@ -42,6 +44,7 @@
 <script lang="ts">
 import PackageSettings from "@/components/packageComponents/Settings.vue";
 import SolversCard from "@/components/packageComponents/Solvers.vue"
+import PluginPage from "@/components/packageComponents/PluginPage.vue"
 import VueMarkdown from "vue-markdown";
 import { fetchMeta } from "@/middlewares/api.mdw";
 import Vue from "vue";
@@ -58,7 +61,8 @@ export default Vue.extend({
   components: {
     "package-settings": PackageSettings,
     "vue-markdown": VueMarkdown,
-    "solvers-card": SolversCard
+    "solvers-card": SolversCard,
+    "plugin-page": PluginPage,
   },
   mounted() {
     let self = this;

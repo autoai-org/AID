@@ -54,6 +54,14 @@ CREATE TABLE IF NOT EXISTS webhook (
 	event TEXT
 );
 
+CREATE TABLE IF NOT EXISTS extensions (
+	id TEXT PRIMARY KEY,
+	name TEXT,
+	status TEXT,
+	created_at DATETIME,
+	updated_at DATETIME
+);
+
 CREATE TABLE IF NOT EXISTS apikey (
 	id TEXT PRIMARY KEY,
 	aidkey TEXT,
