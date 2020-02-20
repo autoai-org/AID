@@ -1,5 +1,6 @@
 import i18n from '@/i18n'
 import map from '@/i18n/map'
+import vuetifyMap from '@/i18n/vuetify-map'
 
 function setLang (lang) {
   localStorage.setItem('lang', lang)
@@ -17,8 +18,13 @@ function getLang () {
   return localStorage.getItem('lang')
 }
 
+function getVuetifyLang (lang) {
+  return vuetifyMap[lang]
+}
+
 export {
   getLang,
   loadDefautlLang,
-  setLang
+  setLang,
+  getVuetifyLang
 }

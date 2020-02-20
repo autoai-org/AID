@@ -1,34 +1,43 @@
 <template>
   <v-card>
     <v-card-title>
-        <h2>Meta Info</h2>
+      <h2>{{ $t('Packages_detail.meat_info') }}</h2>
     </v-card-title>
     <v-expansion-panel class="cvpm-meta-detail">
       <v-expansion-panel-content v-if="config">
-        <div slot="header">cvpm.toml</div>
+        <div slot="header">
+          cvpm.toml
+        </div>
         <v-card class="cvpm-config-text">
           <pre>{{ config }}</pre>
         </v-card>
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="readme">
-        <div slot="header">Readme</div>
+        <div slot="header">
+          {{ $t('Packages_detail.readme') }}
+        </div>
         <v-card>
-          <vue-markdown class="cvpm-repo-readme">{{ readme }}</vue-markdown>
+          <vue-markdown class="cvpm-repo-readme">
+            {{ readme }}
+          </vue-markdown>
         </v-card>
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="dependency">
-        <div slot="header">Dependency</div>
+        <div slot="header">
+          {{ $t('Packages_detail.dependency') }}
+        </div>
         <v-card class="cvpm-config-text">
           <pre>{{ dependency }}</pre>
         </v-card>
       </v-expansion-panel-content>
       <v-expansion-panel-content v-if="diskSize">
-        <div slot="header">Disk Usage</div>
+        <div slot="header">
+          {{ $t('Packages_detail.disk_usage') }}
+        </div>
         <v-card class="cvpm-config-text">
-          <pre>{{ diskSize }} MB</pre> 
+          <pre>{{ diskSize }} MB</pre>
         </v-card>
       </v-expansion-panel-content>
-
     </v-expansion-panel>
   </v-card>
 </template>
@@ -37,9 +46,26 @@
 import VueMarkdown from 'vue-markdown'
 
 export default {
-  props: ['config', 'dependency', 'diskSize', 'readme'],
   components: {
     'vue-markdown': VueMarkdown
+  },
+  props: {
+    config: {
+      type: String,
+      default: ''
+    },
+    dependency: {
+      type: String,
+      default: ''
+    },
+    diskSize: {
+      type: String,
+      default: ''
+    },
+    readme: {
+      type: String,
+      default: ''
+    }
   }
 }
 </script>
@@ -49,14 +75,14 @@ export default {
   padding: 2em;
 }
 pre {
-    word-wrap: break-word;
-    white-space: pre-wrap;
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 .cvpm-repo-readme {
-    padding: 2em;
+  padding: 2em;
 }
 .cvpm-meta-detail {
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

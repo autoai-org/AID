@@ -6,10 +6,9 @@ default:
 	@echo "\tmake package"
 	@echo "\tmake clean"
 	@echo "\tmake publish"
-test:
 
-build-arm:
-	cd cli && env GOOS=linux GOARCH=arm go build cli/
+test-cli:
+	cd cli && go test -race -v ./... && go build 
 
 format-py:
 	autoflake -i cvpm/*.py
@@ -22,13 +21,13 @@ format-py:
 	# yapf -i cvpm/**/*.py
 
 format-go:
-	gofmt -l -s -w *.go
+	gofmt -l -s -w **/*.go
 
 docs:
 	cd docs && npm run docs:build
 
 package:
-	python setup.py sdist bdist_wheel
+	python3 setup.py sdist bdist_wheel
 
 clean:
 	rm -rf build
@@ -40,5 +39,11 @@ publish-test:
 
 publish-prod:
 	twine upload dist/*
+
+build-discovery:
+	cd discovery && yarn run build
+
+publish-discovery:
+	git subtree push --prefix discovery heroku master
 
 .PHONY: docs

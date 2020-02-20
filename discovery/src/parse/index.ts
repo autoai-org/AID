@@ -34,7 +34,6 @@ async function getCount(limit: number) {
         };
         result.push(each_result);
     }
-    console.log(result);
     return result;
 }
 

@@ -1,15 +1,30 @@
 <template>
   <v-card class="cvpm-news-card">
     <v-card-title primary-title>
-      <h2>Latest News</h2>
+      <h2>{{ $t(`Home.latest_news`) }}</h2>
     </v-card-title>
-    <v-list two-line dense>
+    <v-list
+      two-line
+      dense
+    >
       <template v-for="(item, index) in news">
-        <v-card-title primary-title v-if="item.title" :key="index">
-        <h4><a :href=item.url target="_blank">{{ item.title }} </a></h4>
+        <v-card-title
+          v-if="item.title"
+          :key="index"
+          primary-title
+        >
+          <h4>
+            <a
+              :href="item.url"
+              target="_blank"
+            >{{ item.title }} </a>
+          </h4>
         </v-card-title>
-        <v-list-tile-content :key="item.id" class="cvpm-news-content">
-          <vue-markdown>{{item.body}}</vue-markdown>
+        <v-list-tile-content
+          :key="item.id"
+          class="cvpm-news-content"
+        >
+          <vue-markdown>{{ item.body }}</vue-markdown>
         </v-list-tile-content>
       </template>
     </v-list>
@@ -20,9 +35,15 @@
 import { discovery } from '@/services/discovery'
 import VueMarkdown from 'vue-markdown'
 export default {
+  components: {
+    'vue-markdown': VueMarkdown
+  },
   data: () => ({
     news: []
   }),
+  created () {
+    this.getNews()
+  },
   methods: {
     getNews () {
       let self = this
@@ -37,12 +58,6 @@ export default {
         })
       })
     }
-  },
-  created () {
-    this.getNews()
-  },
-  components: {
-    'vue-markdown': VueMarkdown
   }
 }
 </script>

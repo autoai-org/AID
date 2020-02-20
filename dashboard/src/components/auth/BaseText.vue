@@ -18,17 +18,17 @@
 </template>
 
 <script>
-  export default {
-    inheritAttrs: false,
+export default {
+  inheritAttrs: false,
 
-    computed: {
-      component () {
-        return this.$attrs.to
-          ? 'router-link'
-          : this.$attrs.href ? 'a' : 'span'
-      }
+  computed: {
+    component () {
+      return this.$attrs.to
+        ? 'router-link'
+        : this.$attrs.href ? 'a' : 'span'
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

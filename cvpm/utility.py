@@ -1,6 +1,6 @@
 import os
 from urllib.request import urlopen
-
+from pathlib import Path
 import numpy as np
 import PIL.Image
 import requests
@@ -13,6 +13,14 @@ def load_image_file(file, mode='RGB'):
         im = im.convert(mode)
     return np.array(im)
 
+def save_image(filename,target_name):
+    home = str(Path.home())
+    assets_path = os.path.join(home, 'cvpm', 'webui','results')
+    target_file = os.path.join(assets_path, target_name)
+    if not os.path.isdir(assets_path):
+        os.makedirs(assets_path)
+    os.rename(filename, target_file)
+    return target_name
 
 class Downloader(object):
     def __init__(self):

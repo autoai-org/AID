@@ -3,7 +3,7 @@ import FlexSearch from 'flexsearch'
 class SearchService {
   constructor () {
     self.index = new FlexSearch({
-            // default values:
+      // default values:
       encode: 'balance',
       tokenize: 'forward',
       async: false,
@@ -20,7 +20,7 @@ class SearchService {
         query: kw,
         limit: 1000,
         threshold: 5, // >= initial threshold
-        depth: 3,     // <= initial depth
+        depth: 3, // <= initial depth
         callback: function (results) {
           resolve(results)
         }
@@ -32,5 +32,5 @@ class SearchService {
 const searchService = new SearchService()
 
 export {
-    searchService
+  searchService
 }

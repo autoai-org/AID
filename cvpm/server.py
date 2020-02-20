@@ -7,6 +7,7 @@ import gevent.pywsgi
 from flask import Flask, request
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
+import psutil
 
 # extensions
 
@@ -16,7 +17,7 @@ logger.setLevel("INFO")
 server = Flask(__name__)
 
 ALLOWED_EXTENSIONS_TRAIN = set(['zip'])
-ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png'])
+ALLOWED_EXTENSIONS_INFER = set(['jpg', 'jpeg', 'png', 'zip'])
 UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -56,6 +57,15 @@ def help():
     help_message = server.solver.help_message
     return help_message
 
+@server.route("/_status", methods=["GET"])
+def status():
+    process = psutil.Process(os.getpid())
+    result = {
+        'memory': process.memory_info(),
+        'cpu_percent': process.cpu_percent(),
+        'id': process.pid
+    }
+    return json.dumps(result)
 
 @server.route("/infer", methods=["GET", "POST"])
 def infer():

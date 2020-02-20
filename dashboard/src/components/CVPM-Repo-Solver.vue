@@ -1,59 +1,81 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>Solvers</h2>
+      <h2>{{ $t('Packages_detail.solvers') }}</h2>
     </v-card-title>
-    <cvpm-solver-selection 
-        :config=config
-        :vendor=vendor
-        :packageName=packageName
-        v-on:finishSelection="onFinishSelection"
-    >
-    </cvpm-solver-selection>
-    <v-flex class="cvpm-solver-run-btn">
-      <v-btn @click="run()" color="indigo" outline>Run</v-btn>
-    </v-flex>
-    <v-expansion-panel>
+    <v-expansion-panel popout>
       <v-expansion-panel-content>
-        <div slot="header">Running</div>
+        <div slot="header">
+          {{ $t('Packages_detail.running') }}
+        </div>
         <v-list>
-          <v-list-tile v-for="(solver, index) in runningSolvers" :key="index">
-            <v-list-tile-content>
-                {{solver.SolverName}}
-            </v-list-tile-content>
-            <v-list-tile-avatar>
-                {{solver.Port}}
-            </v-list-tile-avatar>
+          <v-list-tile
+            v-for="(solver, index) in runningSolvers"
+            :key="index"
+          >
+            <v-list-tile-content>{{ solver.SolverName }}</v-list-tile-content>
+            <v-list-tile-avatar>{{ solver.Port }}</v-list-tile-avatar>
           </v-list-tile>
         </v-list>
       </v-expansion-panel-content>
     </v-expansion-panel>
-    <v-dialog persistent v-model="runningConfirmDialog" width="60%">
+    <cvpm-solver-selection
+      :config="config"
+      :vendor="vendor"
+      :package-name="packageName"
+      @finishSelection="onFinishSelection"
+    />
+    <v-card-actions>
+    <v-spacer></v-spacer>
+      <v-btn
+        color="indigo"
+        outline
+        @click="run()"
+      >
+        {{ $t('Packages_detail.run') }}
+      </v-btn>
+    </v-card-actions>
+    <v-dialog
+      v-model="runningConfirmDialog"
+      persistent
+      width="60%"
+    >
       <v-card>
         <v-card-title>
           <span
             class="headline"
-          >Running Solver {{selectedVendor}}/{{selectedPackage}}/{{selectedSolver}}</span>
+          >Running Solver {{ selectedVendor }}/{{ selectedPackage }}/{{ selectedSolver }}</span>
         </v-card-title>
         <v-card-text>
           <v-text-field
-            label="Running Port"
             v-model="runningPort"
+            label="Running Port"
             :rules="[rules.validPort]"
             hint="Keep it empty if you want to run it on any one of open ports"
-          ></v-text-field>
-          <p v-if="responseRunningPort">This solver is running on {{responseRunningPort}}</p>
+          />
+          <p v-if="responseRunningPort">
+            This solver is running on {{ responseRunningPort }}
+          </p>
         </v-card-text>
         <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="indigo darken-1" flat @click="triggerDialog()" outline>Close</v-btn>
+          <v-spacer />
+          <v-btn
+            color="indigo darken-1"
+            flat
+            outline
+            @click="triggerDialog()"
+          >
+            Close
+          </v-btn>
           <v-btn
             color="indigo darken-1"
             :loading="isRequesting"
             flat
-            @click="confirmedRun()"
             outline
-          >Run!</v-btn>
+            @click="confirmedRun()"
+          >
+            Run!
+          </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -64,6 +86,29 @@
 import { systemService } from '@/services/system'
 import cvpmSolverSelection from '@/components/basic/CVPM-Solver-Selection'
 export default {
+  components: {
+    'cvpm-solver-selection': cvpmSolverSelection
+  },
+  props: {
+    config: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    vendor: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    packageName: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       selectedSolver: '',
@@ -93,10 +138,9 @@ export default {
       }
     }
   },
-  components: {
-    'cvpm-solver-selection': cvpmSolverSelection
+  created () {
+    this.fetchRunningSolver()
   },
-  props: ['config', 'vendor', 'packageName'],
   methods: {
     fetchRunningSolver () {
       let self = this
@@ -124,23 +168,28 @@ export default {
     confirmedRun () {
       this.isRequesting = true
       let self = this
-      systemService
-        .runRepoSolver(
-          this.selectedVendor,
-          this.selectedPackage,
-          this.selectedSolver,
-          this.runningPort
-        )
-        .then(function (res) {
-          self.isRequesting = false
-          self.runningConfirmDialog = false
-          self.responseRunningPort = res.data.port
-          self.fetchRunningSolver()
-        })
+      if (
+        this.selectedSolver === '' ||
+        this.selectedVendor === '' ||
+        this.selectedPackage === ''
+      ) {
+        alert('Select Solver/Vendor/Package First!')
+      } else {
+        systemService
+          .runRepoSolver(
+            this.selectedVendor,
+            this.selectedPackage,
+            this.selectedSolver,
+            this.runningPort
+          )
+          .then(function (res) {
+            self.isRequesting = false
+            self.runningConfirmDialog = false
+            self.responseRunningPort = res.data.port
+            self.fetchRunningSolver()
+          })
+      }
     }
-  },
-  created () {
-    this.fetchRunningSolver()
   }
 }
 </script>
@@ -152,6 +201,6 @@ export default {
   width: 95%;
 }
 .cvpm-solver-run-btn {
-  margin-right: 10%;
+  background-color: bisque;
 }
 </style>

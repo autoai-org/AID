@@ -33,5 +33,5 @@ class GithubService {
 }
 
 export {
-    GithubService
+  GithubService
 }

@@ -1,9 +1,9 @@
 import * as supertest from 'supertest';
 import { app } from '../src/server';
 
-const _server = app.listen();
+const server = app.listen();
 
-const request = supertest.agent(_server);
+const request = supertest.agent(server);
 
 describe('ROOT', () => {
     describe('GET /', () => {
@@ -16,5 +16,5 @@ describe('ROOT', () => {
             return request.get('/system/status').expect(200);
         });
     });
-    _server.close();
+    server.close();
 });

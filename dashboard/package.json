@@ -1,22 +1,23 @@
 {
   "name": "cvpm-dashboard",
   "version": "1.0.0",
-  "description": "A Vue.js project",
+  "description": "CVPM Dashboard",
   "author": "Xiaozhe Yao <xiaozhe.yaoi@gmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
-    "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs --fix",
-    "build": "node build/build.js"
+    "test": "jest --config test/jest.config.js --coverage",
+    "lint": "eslint --ext .js,.vue src --fix",
+    "build": "webpack --config build/webpack.prod.conf.js"
   },
   "dependencies": {
     "@vuetify/vuex-cognito-module": "0.4.0",
     "axios": "0.18.0",
-    "flexsearch": "0.6.2",
+    "dayjs": "1.8.12",
+    "eslint-plugin-html": "5.0.3",
+    "flexsearch": "0.6.22",
     "js-base64": "2.5.1",
     "toml": "2.3.6",
     "vue": "2.6.3",
@@ -24,9 +25,9 @@
     "vue-json-tree-view": "2.1.4",
     "vue-markdown": "2.2.4",
     "vue-router": "3.0.2",
-    "vue-socket.io": "3.0.5",
+    "vue-socket.io": "3.0.7",
     "vue-tour": "1.1.0",
-    "vuetify": "1.5.2",
+    "vuetify": "1.5.9",
     "vuex": "3.1.0"
   },
   "devDependencies": {

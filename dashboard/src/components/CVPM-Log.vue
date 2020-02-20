@@ -1,19 +1,33 @@
 <template>
   <div class="terminal">
     <div class="header">
-      <h4>{{title}}</h4>
-        <ul class="shell-dots">
-          <v-icon color="blue darken-2" @click="navHelp()">help_outline</v-icon>
-        </ul>
+      <h4>{{ title }}</h4>
+      <ul class="shell-dots">
+        <v-icon
+          color="blue darken-2"
+          @click="navHelp()"
+        >
+          help_outline
+        </v-icon>
+      </ul>
     </div>
     <div
-      style="position:absolute;top:0;left:0;right:0;overflow:auto;z-index:1;margin-top:30px;max-height:500px"
       ref="terminalWindow"
+      style="position:absolute;top:0;left:0;right:0;overflow:auto;z-index:1;margin-top:30px;max-height:500px"
     >
-      <div class="terminal-window" id="terminalWindow">
-        <p v-for="(item, index) in parsedMessageList" :key="index">
-          <span v-if="item.type" :class="item.type">{{item.type}}</span>
-          <span class="cmd">{{item.text}}</span>
+      <div
+        id="terminalWindow"
+        class="terminal-window"
+      >
+        <p
+          v-for="(item, index) in parsedMessageList"
+          :key="index"
+        >
+          <span
+            v-if="item.type"
+            :class="item.type"
+          >{{ item.type }}</span>
+          <span class="cmd">{{ item.text }}</span>
         </p>
       </div>
     </div>
@@ -22,6 +36,18 @@
 
 <script>
 export default {
+  props: {
+    title: {
+      type: String,
+      default: ''
+    },
+    messageList: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
   data () {
     return {
     }
@@ -30,14 +56,13 @@ export default {
     parsedMessageList: function () {
       return this.messageList.map(function (each) {
         if (each.indexOf('error') > -1) {
-          return {'type': 'error', 'text': each}
+          return { 'type': 'error', 'text': each }
         } else {
-          return {'text': each}
+          return { 'text': each }
         }
       })
     }
   },
-  props: ['title', 'messageList'],
   methods: {
     navHelp () {
       window.open('https://cvpm.autoai.org')

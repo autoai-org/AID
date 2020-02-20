@@ -1,17 +1,20 @@
 <template>
-  <cvpm-log :title="'System Log'" :messageList="messageList"></cvpm-log>
+  <cvpm-log
+    :title="$t(`Log.system_log`)"
+    :message-list="messageList"
+  />
 </template>
 
 <script>
 import Log from '@/components/CVPM-Log'
 export default {
+  components: {
+    'cvpm-log': Log
+  },
   data () {
     return {
       messageList: []
     }
-  },
-  components: {
-    'cvpm-log': Log
   },
   sockets: {
     system: function (data) {

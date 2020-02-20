@@ -1,0 +1,14 @@
+gevent
+flask
+toml
+psutil
+pillow
+requests
+numpy
+flask-cors
+tqdm
+# dev-packages
+# especially for linting
+isort
+yapf
+pylint

@@ -1,28 +1,41 @@
 <template>
   <v-card>
     <v-card-title>
-      <h2>Actions</h2>
+      <h2>{{ $t('Packages_detail.actions') }}</h2>
     </v-card-title>
     <v-card-actions>
-      <v-btn color="indigo darken-1" outline @click="triggerDialog('test')">Test</v-btn>
-      <v-btn color="indigo darken-1" outline @click="triggerDialog('ticket')">Ticket</v-btn>
+      <v-spacer />
+      <v-btn
+        color="indigo darken-1"
+        outline
+        @click="triggerDialog('test')"
+      >
+        {{ $t('Packages_detail.test') }}
+      </v-btn>
+      <v-btn
+        color="indigo darken-1"
+        outline
+        @click="triggerDialog('ticket')"
+      >
+        {{ $t('Packages_detail.ticket') }}
+      </v-btn>
     </v-card-actions>
     <v-dialog v-model="enableTest">
-      <cvpm-request 
-        v-if="enableTest" 
-        v-on:closeDialog="triggerDialog('test')"
+      <cvpm-request
+        v-if="enableTest"
         :config="config"
         :vendor="vendor"
-        :packageName="packageName"
-        ></cvpm-request>
+        :package-name="packageName"
+        @closeDialog="triggerDialog('test')"
+      />
     </v-dialog>
     <v-dialog v-model="enableTicket">
       <cvpm-create-ticket
         v-if="enableTicket"
         :vendor="vendor"
-        :packageName="packageName"
-        v-on:closeDialog="triggerDialog('ticket')"
-      ></cvpm-create-ticket>
+        :package-name="packageName"
+        @closeDialog="triggerDialog('ticket')"
+      />
     </v-dialog>
   </v-card>
 </template>
@@ -31,6 +44,30 @@
 import cvpmRequest from '@/components/CVPM-Request'
 import cvpmCreateTicket from '@/components/plugin/ticket/CVPM-Create-Ticket'
 export default {
+  components: {
+    'cvpm-request': cvpmRequest,
+    'cvpm-create-ticket': cvpmCreateTicket
+  },
+  props: {
+    config: {
+      type: Object,
+      default: function () {
+        return {}
+      }
+    },
+    vendor: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    },
+    packageName: {
+      type: Array,
+      default: function () {
+        return []
+      }
+    }
+  },
   data () {
     return {
       enableTest: false,
@@ -45,12 +82,7 @@ export default {
         this.enableTicket = !this.enableTicket
       }
     }
-  },
-  components: {
-    'cvpm-request': cvpmRequest,
-    'cvpm-create-ticket': cvpmCreateTicket
-  },
-  props: ['config', 'vendor', 'packageName']
+  }
 }
 </script>
 

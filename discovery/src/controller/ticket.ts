@@ -1,5 +1,5 @@
-import { BaseContext } from 'koa'
-import { freshdesk } from '../service/ticket'
+import { BaseContext } from 'koa';
+import { freshdesk } from '../service/ticket';
 
 export default class TicketController {
     public static async createTicket (ctx: BaseContext) {
@@ -11,17 +11,15 @@ export default class TicketController {
             description: body.description,
             status: 2,
             priority: body.priority
-        }).then(function (res:any) {
+        }).then(function (res: any) {
             ctx.status = 200;
-            console.log(res)
             ctx.body = {
                 'code': 200,
                 'results': res.data
-            }
-        }).catch(function (err:any) {
-            console.log(err)
+            };
+        }).catch(function (err: any) {
             ctx.status = 400;
             ctx.body = err.response.data;
-        })
+        });
     }
 }

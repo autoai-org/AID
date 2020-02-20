@@ -1,5 +1,7 @@
 # CVPM - Computer Vision Package Manager
 
+![logo.png](https://i.loli.net/2019/03/27/5c9b376710490.png)
+
 [简体中文](https://cvpm.autoai.org/zh-CN/guide/)
 
 [![Go Report Card](https://goreportcard.com/badge/github.com/unarxiv/cvpm)](https://goreportcard.com/report/github.com/unarxiv/cvpm)
@@ -12,7 +14,7 @@
 
 CVPM is a package manager for computer vision. It helps you to download, install and run a computer vision service.
 
-[![asciicast](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl.png)](https://asciinema.org/a/YRgOSy1a7WwdPyK77PEgE12Kl)
+[![CVPM-Video](https://img.youtube.com/vi/0TU28hkx7KE/0.jpg)](https://www.youtube.com/watch?v=0TU28hkx7KE)
 
 ## Documentation
 

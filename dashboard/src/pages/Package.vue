@@ -1,19 +1,53 @@
 <template>
-  <v-container fluid grid-list-xl>
-    <v-layout row wrap>
+  <v-container
+    fluid
+    grid-list-xl
+  >
+    <v-layout
+      row
+      wrap
+    >
       <v-flex xs12>
-      <v-btn outline color="indigo" @click="trigger_git_import" id="cvpm-tour-import-git">
-        <v-icon left dark>fab fa-github</v-icon>Import from Git
-      </v-btn>
-      <v-btn outline color="indigo" @click="trigger_hub_import">
-        <v-icon left dark>device_hub</v-icon>Import fron Hub
-      </v-btn>
+        <v-btn
+          id="cvpm-tour-import-git"
+          outline
+          color="indigo"
+          @click="trigger_git_import"
+        >
+          <v-icon
+            left
+            dark
+          >
+            fab fa-github
+          </v-icon>{{ $t('Packages.import_from_git') }}
+        </v-btn>
+        <v-btn
+          outline
+          color="indigo"
+          @click="trigger_hub_import"
+        >
+          <v-icon
+            left
+            dark
+          >
+            device_hub
+          </v-icon>{{ $t('Packages.import_from_hub') }}
+        </v-btn>
       </v-flex>
       <v-flex xs12>
-      <cvpm-table :items="packages" :loading="loading" :headers="headers" class="cvpm-package-table"></cvpm-table>
+        <cvpm-table
+          :items="packages"
+          :loading="loading"
+          :headers="headers"
+          class="cvpm-package-table"
+        />
       </v-flex>
-      <v-dialog persistent v-model="gitImport" width="60%">
-        <cvpm-git-import v-on:closeDialog="trigger_git_import()"></cvpm-git-import>
+      <v-dialog
+        v-model="gitImport"
+        persistent
+        width="60%"
+      >
+        <cvpm-git-import @closeDialog="trigger_git_import()" />
       </v-dialog>
     </v-layout>
   </v-container>
@@ -24,6 +58,10 @@ import cvpmTable from '@/components/CVPM-Table'
 import cvpmGitImport from '@/components/CVPM-Git-Import'
 import { systemService } from '@/services/system'
 export default {
+  components: {
+    'cvpm-git-import': cvpmGitImport,
+    'cvpm-table': cvpmTable
+  },
   data () {
     return {
       gitImport: false,
@@ -31,30 +69,33 @@ export default {
       loading: true,
       headers: [
         {
-          text: 'Vendor',
+          text: this.$t('Packages.vendor'),
           align: 'left',
           sortable: true,
           value: 'Vendor'
         },
         {
-          text: 'Name',
+          text: this.$t('Packages.name'),
           align: 'left',
           sortable: true,
           value: 'Name'
         },
         {
-          text: 'LocalFolder',
+          text: this.$t('Packages.local_folder'),
           align: 'left',
           sortable: true,
           value: 'LocalFolder'
         },
-        { text: 'Actions',
+        { text: this.$t('Packages.actions'),
           align: 'left',
           value: 'name',
           sortable: false
         }
       ]
     }
+  },
+  created () {
+    this.fetch_packages()
   },
   methods: {
     trigger_git_import () {
@@ -79,13 +120,6 @@ export default {
         self.loading = false
       })
     }
-  },
-  components: {
-    'cvpm-git-import': cvpmGitImport,
-    'cvpm-table': cvpmTable
-  },
-  created () {
-    this.fetch_packages()
   }
 }
 </script>

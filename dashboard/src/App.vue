@@ -1,9 +1,13 @@
 <template>
   <div>
     <transition mode="out-in">
-      <router-view v-if="isRouterAlive"></router-view>
+      <router-view v-if="isRouterAlive" />
     </transition>
-    <v-tour name="cvpm-tour" :steps="steps" :callbacks="tourCallbacks"></v-tour>
+    <v-tour
+      name="cvpm-tour"
+      :steps="steps"
+      :callbacks="tourCallbacks"
+    />
   </div>
 </template>
 
@@ -41,6 +45,12 @@ export default {
       }
     }
   },
+  mounted: function () {
+    let config = new ConfigService()
+    if (config.hintMode) {
+      this.$tours['cvpm-tour'].start()
+    }
+  },
   methods: {
     cvpmOnNextStep (currentStep) {
     },
@@ -61,12 +71,6 @@ export default {
     return {
       reload: this.reload
     }
-  },
-  mounted: function () {
-    let config = new ConfigService()
-    if (config.hintMode) {
-      this.$tours['cvpm-tour'].start()
-    }
   }
 }
 </script>
@@ -75,4 +79,3 @@ export default {
   z-index: 999;
 }
 </style>
-

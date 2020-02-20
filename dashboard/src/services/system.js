@@ -71,7 +71,7 @@ class SystemService {
       for (let i = 0; i < parameters.length; i++) {
         payload.append(parameters[i].key, parameters[i].value)
       }
-      axios.post(this.endpoint + '/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
+      axios.post(this.endpoint + '/engine/solvers/' + vendor + '/' + packageName + '/' + solver, payload).then(function (res) {
         resolve(res)
       }).catch(function (err) {
         reject(err)
@@ -92,6 +92,7 @@ class SystemService {
     })
   }
   // contrib
+  // datasets
   getAllDatasets () {
     return new Promise((resolve, reject) => {
       axios.get(this.endpoint + '/contrib/datasets', {
@@ -109,6 +110,16 @@ class SystemService {
       }).then(function (res) {
         resolve(res)
       }).then(function (err) {
+        reject(err)
+      })
+    })
+  }
+  // inspector
+  getInspectorInfo () {
+    return new Promise((resolve, reject) => {
+      axios.get(this.endpoint + '/_inspector').then(function (res) {
+        resolve(res)
+      }).catch(function (err) {
         reject(err)
       })
     })

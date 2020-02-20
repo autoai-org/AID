@@ -1,6 +1,8 @@
-import * as dotenv from 'dotenv';
+import * as dotenv from 'dotenv'
 
 dotenv.config({ path: '.env' });
+
+let isDev = true
 
 export interface IConfig {
     port: number;

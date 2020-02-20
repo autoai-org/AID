@@ -44,27 +44,27 @@
 </template>
 
 <script>
-  // Utilities
-  import {
-    mapMutations
-  } from 'vuex'
+// Utilities
+import {
+  mapMutations
+} from 'vuex'
 
-  export default {
-    name: 'Email',
+export default {
+  name: 'Email',
 
-    computed: {
-      internalValue: {
-        get () {
-          return this.$store.state.email
-        },
-        set (val) {
-          this.setEmail(val)
-        }
+  computed: {
+    internalValue: {
+      get () {
+        return this.$store.state.email
+      },
+      set (val) {
+        this.setEmail(val)
       }
-    },
-
-    methods: {
-      ...mapMutations(['setEmail'])
     }
+  },
+
+  methods: {
+    ...mapMutations(['setEmail'])
   }
+}
 </script>

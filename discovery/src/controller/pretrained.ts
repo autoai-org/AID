@@ -1,5 +1,5 @@
 import { BaseContext } from 'koa';
-import { putPretrained, getPretrained } from '../dynamo/action';
+import { getPretrained, putPretrained } from '../dynamo/action';
 export default class PackageController {
     public static async importPretrained (ctx: BaseContext) {
         putPretrained('yolo_tiny', 'https://premium.file.cvtron.xyz/data/yolo_tiny.ckpt');
