@@ -2,29 +2,25 @@
   "name": "discovery",
   "version": "1.0.0",
   "description": "discovery",
-  "keywords": [
-    "loopback-application",
-    "loopback"
-  ],
   "main": "index.js",
   "engines": {
     "node": ">=8.9"
   },
   "scripts": {
-    "build": "lb-tsc",
-    "build:watch": "lb-tsc --watch",
-    "clean": "lb-clean dist *.tsbuildinfo",
+    "build": "./node_modules/.bin/lb-tsc",
+    "build:watch": "./node_modules/.bin/lb-tsc --watch",
+    "clean": "./node_modules/.bin/lb-clean dist *.tsbuildinfo",
     "lint": "npm run prettier:check && npm run eslint",
     "lint:fix": "npm run eslint:fix && npm run prettier:fix",
-    "prettier:cli": "lb-prettier \"**/*.ts\" \"**/*.js\"",
+    "prettier:cli": "./node_modules/.bin/lb-prettier \"**/*.ts\" \"**/*.js\"",
     "prettier:check": "npm run prettier:cli -- -l",
     "prettier:fix": "npm run prettier:cli -- --write",
-    "eslint": "lb-eslint --report-unused-disable-directives .",
+    "eslint": "./node_modules/.bin/lb-eslint --report-unused-disable-directives .",
     "eslint:fix": "npm run eslint -- --fix",
     "pretest": "npm run clean && npm run build",
-    "test": "lb-mocha --allow-console-logs \"dist/__tests__\"",
+    "test": "./node_modules/.bin/lb-mocha --allow-console-logs \"dist/__tests__\"",
     "posttest": "npm run lint",
-    "test:dev": "lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
+    "test:dev": "./node_modules/.bin/lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
     "docker:build": "docker build -t discovery .",
     "docker:run": "docker run -p 3000:3000 -d discovery",
     "migrate": "node ./dist/migrate",
@@ -35,8 +31,8 @@
   "repository": {
     "type": "git"
   },
-  "author": "",
-  "license": "",
+  "author": "AutoAI.org",
+  "license": "MIT",
   "files": [
     "README.md",
     "index.js",
@@ -46,9 +42,12 @@
     "!*/__tests__"
   ],
   "dependencies": {
+    "@loopback/authentication-passport": "^1.1.3",
     "@loopback/boot": "^1.7.4",
+    "@loopback/cli": "^1.30.1",
     "@loopback/context": "^2.1.1",
     "@loopback/core": "^1.12.4",
+    "@loopback/extension-health": "^0.2.17",
     "@loopback/openapi-v3": "^2.0.0",
     "@loopback/repository": "^1.19.1",
     "@loopback/rest": "^2.0.0",
@@ -57,16 +56,16 @@
   },
   "devDependencies": {
     "@loopback/build": "^3.1.1",
-    "source-map-support": "^0.5.16",
+    "@loopback/eslint-config": "^5.0.3",
     "@loopback/testlab": "^1.10.3",
     "@types/node": "^10.17.14",
-    "@typescript-eslint/parser": "^2.19.0",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
-    "@loopback/eslint-config": "^5.0.3",
+    "@typescript-eslint/parser": "^2.19.0",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-eslint-plugin": "^2.2.1",
     "eslint-plugin-mocha": "^6.2.2",
+    "source-map-support": "^0.5.16",
     "typescript": "~3.7.5"
   }
 }

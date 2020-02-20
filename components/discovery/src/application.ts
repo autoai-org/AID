@@ -9,6 +9,7 @@ import {RestApplication} from '@loopback/rest';
 import {ServiceMixin} from '@loopback/service-proxy';
 import path from 'path';
 import {MySequence} from './sequence';
+import {HealthComponent} from '@loopback/extension-health';
 
 export class DiscoveryApplication extends BootMixin(
   ServiceMixin(RepositoryMixin(RestApplication)),
@@ -27,6 +28,7 @@ export class DiscoveryApplication extends BootMixin(
       path: '/explorer',
     });
     this.component(RestExplorerComponent);
+    this.component(HealthComponent);
 
     this.projectRoot = __dirname;
     // Customize @loopback/boot Booter Conventions here
