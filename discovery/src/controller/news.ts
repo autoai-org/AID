@@ -1,9 +1,9 @@
-import { Context } from 'koa'
+import { BaseContext } from 'koa'
 import axios from 'axios'
 import { config } from '../config';
 
 export default class NewsController {
-    public static async queryNews (ctx: Context) {
+    public static async queryNews (ctx: BaseContext) {
         console.log('quering news')
         await axios.get(config.blogURL + '/posts').then(function (res:any) {
             console.log(res)

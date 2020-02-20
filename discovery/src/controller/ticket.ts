@@ -1,8 +1,8 @@
-import { Context } from 'koa'
+import { BaseContext } from 'koa'
 import { freshdesk } from '../service/ticket'
 
 export default class TicketController {
-    public static async createTicket (ctx: Context) {
+    public static async createTicket (ctx: BaseContext) {
         const body = ctx.request.body;
         await freshdesk.createTicket({
             name: body.name,

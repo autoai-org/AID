@@ -94,7 +94,18 @@ class SystemService {
   // contrib
   getAllDatasets () {
     return new Promise((resolve, reject) => {
-      axios.get(this.endpoint + '/datasets', {
+      axios.get(this.endpoint + '/contrib/datasets', {
+      }).then(function (res) {
+        resolve(res)
+      }).then(function (err) {
+        reject(err)
+      })
+    })
+  }
+  SyncDatabase (datasetsUrl) {
+    return new Promise((resolve, reject) => {
+      axios.post(this.endpoint + '/contrib/datasets/registries', {
+        url: datasetsUrl
       }).then(function (res) {
         resolve(res)
       }).then(function (err) {

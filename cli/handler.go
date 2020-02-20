@@ -98,6 +98,12 @@ func DaemonHandler(c *cli.Context) {
 func RepoHandler(c *cli.Context) {
 	taskParams := c.Args().Get(0)
 	switch taskParams {
+	case "stop":
+		solverstring := c.Args().Get(1)
+		runParams := strings.Split(solverstring, "/")
+		color.Cyan("Stopping " + runParams[0] + "/" + runParams[1] + "/" + runParams[2])
+		url := "solvers/running/" + runParams[0] + "/" + runParams[1] + "/" + runParams[2]
+		ClientDelete(url)
 	case "run":
 		solverstring := c.Args().Get(1)
 		runningPort := c.Args().Get(2)

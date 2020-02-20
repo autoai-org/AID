@@ -19,7 +19,7 @@ export default class SystemController {
             'port': config.port
         };
     }
-    public static async getStatInfo (ctx: Context) {
+    public static async getStatInfo (ctx: BaseContext) {
         const body = ctx.request.query;
         ctx.status = 200;
         ctx.body = {
@@ -27,7 +27,7 @@ export default class SystemController {
             'results': await getCount(+body.limit)
         };
     }
-    public static async putStatInfo (ctx: Context) {
+    public static async putStatInfo (ctx: BaseContext) {
         const body = ctx.request.body;
         ctx.status = 200;
         ctx.body = {

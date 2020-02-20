@@ -1,7 +1,7 @@
-import { Context } from 'koa';
+import { BaseContext } from 'koa';
 import { putPretrained, getPretrained } from '../dynamo/action';
 export default class PackageController {
-    public static async importPretrained (ctx: Context) {
+    public static async importPretrained (ctx: BaseContext) {
         putPretrained('yolo_tiny', 'https://premium.file.cvtron.xyz/data/yolo_tiny.ckpt');
         ctx.status = 200;
         ctx.body = {
@@ -9,7 +9,7 @@ export default class PackageController {
             'desc': 'success'
         };
     }
-    public static async getAllPretrained (ctx: Context) {
+    public static async getAllPretrained (ctx: BaseContext) {
         ctx.status = 200;
         ctx.body = {
             'code': 200,

@@ -16,16 +16,17 @@
   "dependencies": {
     "@vuetify/vuex-cognito-module": "0.4.0",
     "axios": "0.18.0",
+    "flexsearch": "0.6.2",
     "js-base64": "2.5.1",
-    "toml": "2.3.5",
-    "vue": "2.5.22",
-    "vue-i18n": "8.7.0",
+    "toml": "2.3.6",
+    "vue": "2.6.3",
+    "vue-i18n": "8.8.2",
     "vue-json-tree-view": "2.1.4",
     "vue-markdown": "2.2.4",
     "vue-router": "3.0.2",
     "vue-socket.io": "3.0.5",
     "vue-tour": "1.1.0",
-    "vuetify": "1.4.3",
+    "vuetify": "1.5.2",
     "vuex": "3.1.0"
   },
   "devDependencies": {

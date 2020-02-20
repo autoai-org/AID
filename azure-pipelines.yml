@@ -1,6 +1,4 @@
-# Go
-# Build your Go project.
-# Add steps that test, save build artifacts, deploy, and more:
+# View Azure DevOps documentation for Go projects:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/go
 
 pool:
@@ -21,7 +19,7 @@ steps:
     mv !(gopath) '$(modulePath)'
     echo '##vso[task.prependpath]$(GOBIN)'
     echo '##vso[task.prependpath]$(GOROOT)/bin'
-  displayName: 'Set up the Go workspace'
+  displayName: 'Setup Go workspace'
 
 - script: |
     go version
@@ -30,6 +28,10 @@ steps:
         curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
         dep ensure
     fi
-    cd cli && go build -v
   workingDirectory: '$(modulePath)'
-  displayName: 'Get dependencies, then build'
+  displayName: 'Download dependencies'
+
+- script: |
+    go build -v
+  workingDirectory: '$(modulePath)/cli'
+  displayName: 'Build'
