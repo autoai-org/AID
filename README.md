@@ -1,33 +1,78 @@
-# CVPM - Computer Vision Package Manager
+[![Roadmap](https://img.shields.io/badge/-Roadmap-blue)](https://www.notion.so/autoai/)
+![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
+![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
+[![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
+[![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aid/badge)](https://www.codefactor.io/repository/github/autoai-org/aid)
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <a href="https://github.com/autoai-org/aid">
+    <img src="assets/logo_transparent.png" alt="Logo" width="240">
+  </a>
 
-![logo.png](https://i.loli.net/2019/03/27/5c9b376710490.png)
+  <h3 align="center">A.I.D</h3>
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/unarxiv/cvpm)](https://goreportcard.com/report/github.com/unarxiv/cvpm)
-[![Build Status](https://travis-ci.org/unarxiv/CVPM.svg?branch=master)](https://travis-ci.org/unarxiv/CVPM)
-[![GitHub issues](https://img.shields.io/github/issues/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/cvpm/issues)
-[![GitHub license](https://img.shields.io/github/license/unarxiv/cvpm.svg?style=flat-square)](https://github.com/unarxiv/CVPM/blob/master/LICENSE)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Funarxiv%2FCVPM.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Funarxiv%2FCVPM?ref=badge_shield)
+  <p align="center">
+    Aid your entire A.I activity.
+    <br />
+    <a href="https://aid.autoai.org"><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+    <a href="https://www.youtube.com/watch?v=0TU28hkx7KE&t=33s">Video Demo</a>
+    ·
+    <a href="https://github.com/autoai-org/aid/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/autoai-org/aid/issues">Request Feature</a>
+  </p>
+</p>
 
-## Introduction
+**AID is still under heavy development and APIs may change! Stay tuned. It won't be very long :)**
 
-CVPM is a package manager for computer vision. It helps you to download, install and run a computer vision service.
+<!-- TABLE OF CONTENTS -->
+## Table of Contents
 
-[![CVPM-Video](https://img.youtube.com/vi/0TU28hkx7KE/0.jpg)](https://www.youtube.com/watch?v=0TU28hkx7KE)
+* [Intro](#intro)
+* [Usage](#usage)
+* [Roadmap](#roadmap)
+* [Open Models](#models)
+* [Contributing](#contributing)
+* [License](#license)
 
-## Documentation
+## Intro
 
-Full documentation can be found [here](https://cvflow.autoai.org).
+AID is a DevOps System that is dedicated to machine learning. It consists of the following components:
 
+* **M**achine **L**earning **P**ackage **M**anager that could search, download, and deploy machine learning models.
+* A dashboard to monitor the status of installed services, trigger build, test/evaluate services.
+* A registry that provides plugins for notifications, security checks, etc.
+
+<!-- USAGE EXAMPLES -->
+## Usage
+
+For more examples, please refer to the [Documentation](https://aid.autoai.org).
+
+<!-- ROADMAP -->
+## Roadmap
+
+See the [open issues](https://github.com/autoai-org/aid/issues) for a list of proposed features (and known issues).
+
+<!-- MODELS -->
+## Models
+
+We share our officially tested models with our github organization [aidmodels](https://github.com/aidmodels). We are also working on an open registry that could provide you with more features. Stay tuned!
+
+<!-- CONTRIBUTING -->
 ## Contributing
 
-If you found a security bug, please do not post it in issues or any other public forum. You can send me [email](mailto:xiaozhe.yaoi@qq.com) directly.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-## Contributors
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/0)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/0)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/1)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/1)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/2)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/2)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/3)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/3)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/4)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/4)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/5)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/5)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/6)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/6)[![](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/images/7)](https://sourcerer.io/fame/xzyaoi/unarxiv/CVPM/links/7)
+<!-- LICENSE -->
+## License
 
-## FAQs
-
-Q: Where can I find useful models?
-
-A: There are three places. The first one, which we recommend most, is our [model hub](https://hub.autoai.org), where you can download, purchase, and search models. The second one is GitHub. On GitHub, you can search for CVPM_Available in readme files, which indicates that repository is compatible with CVPM. The third one is our [forum](https://forum.cvtron.xyz), where you can discuss performance of models, and ask for other models.
+Personal use are governed by the MIT License. See `LICENSE` for more information.

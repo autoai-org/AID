@@ -1,17 +1,9 @@
 {
-    "compilerOptions": {
-      "target": "es2016",
-      "module": "commonjs",
-      "lib": ["dom", "es2016", "esnext.asynciterable"],
-      "moduleResolution": "node",
-      "outDir": "./dist",
-      "strict": true,
-      "strictPropertyInitialization": false,
-      "sourceMap": true,
-      "emitDecoratorMetadata": true,
-      "experimentalDecorators": true
-    },
-    "include": [
-        "./src/**/*", "winston-logsene.d.ts", "../dashboard/src/services/mock.js"
-    ]
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "@loopback/build/config/tsconfig.common.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src"
+  },
+  "include": ["src"]
 }
