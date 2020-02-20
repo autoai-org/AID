@@ -1,15 +1,14 @@
-import Koa from "koa"
-import router from "./services/router"
-import json from "koa-json"
-import logger from "koa-logger"
+import {DiscoveryApplication} from './application';
+import {ApplicationConfig} from '@loopback/core';
 
-const app = new Koa();
+export {DiscoveryApplication};
 
-app.use(json())
-app.use(logger())
+export async function main(options: ApplicationConfig = {}) {
+  const app = new DiscoveryApplication(options);
+  await app.boot();
+  await app.start();
 
-app.use(router.routes()).use(router.allowedMethods());
-
-app.listen(3000, ()=> {
-    console.log("AID Discovery service is running on port 3000")
-})
+  const url = app.restServer.url;
+  console.log(`Server is running at ${url}`);
+  return app;
+}
