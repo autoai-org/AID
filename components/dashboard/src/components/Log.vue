@@ -32,6 +32,7 @@
 import Vue from "vue";
 import { LogContent } from "@/entities";
 import { deleteLog } from "@/middlewares/api.mdw"
+import { ansi2html } from "@/middlewares/logs.mdw"
 import ConfirmDialog from "@/components/dialogs/ConfirmDialog.vue"
 export default Vue.extend({
   props: {
@@ -88,7 +89,7 @@ export default Vue.extend({
       if (this.showTime) {
         msg = msg + "<span class=success>[" + msgItem.time + "]</span>";
       }
-      msg = msg + " " + msgItem.msg;
+      msg = msg + " " + ansi2html(msgItem.msg);
       msg = msg + "\n";
       msg = "<p>" + msg + "</p>";
       return msg;
