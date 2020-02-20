@@ -243,11 +243,13 @@ export default {
   },
   created () {
     this.fetchMenu()
+    if (this.$route.fullPath === '/') {
+      this.$router.replace('/home')
+    }
   },
   methods: {
     changeLocale (to) {
       setLang(to)
-      console.log(getVuetifyLang(to))
       this.$vuetify.lang.current = getVuetifyLang(to)
     },
     fetchMenu () {

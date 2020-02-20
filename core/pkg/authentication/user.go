@@ -12,6 +12,7 @@ import (
 )
 */
 
+// User defines the basic structure of User
 type User struct {
 	Username string `json:"username"`
 	Password string

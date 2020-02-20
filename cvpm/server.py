@@ -1,14 +1,24 @@
-import json
-import logging
+# Copyright (c) 2019 Xiaozhe Yao & AICAMP.CO.,LTD & AutoAI.org
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
+
+#coding:utf-8
 import os
+import sys
+import json
+import uuid
+import psutil
 import socket
+import logging
 import traceback
 import gevent.pywsgi
 from flask import Flask, request
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
-import psutil
-
+from cvpm.config import getLogDir
+from cvpm.train.pyqueue import TracedThread
+from cvpm.logger import Logger
 # extensions
 
 logger = logging.getLogger()
@@ -22,8 +32,10 @@ UPLOAD_FOLDER = './temp'
 
 server.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
+
 def str2bool(v):
-    return str(v).lower() in ("true", "false", "yes","t","1")
+    return str(v).lower() in ("true", "false", "yes", "t", "1")
+
 
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -33,6 +45,7 @@ def _isPortOpen(port):
         return True
     else:
         return False
+
 
 def get_available_port(start=8080):
     port = start
@@ -57,6 +70,7 @@ def help():
     help_message = server.solver.help_message
     return help_message
 
+
 @server.route("/_status", methods=["GET"])
 def status():
     process = psutil.Process(os.getpid())
@@ -66,6 +80,7 @@ def status():
         'id': process.pid
     }
     return json.dumps(result)
+
 
 @server.route("/infer", methods=["GET", "POST"])
 def infer():
@@ -102,14 +117,42 @@ def infer():
 @server.route("/train", methods=["GET", "POST"])
 def train():
     if server.solver.enable_train:
-        pass
+        if request.method == 'POST':
+            requested_data = json.loads(request.data)
+            train_id = str(uuid.uuid4())
+            less_log_filepath = os.path.join(
+                getLogDir(), train_id + '.less.log')
+            open(less_log_filepath, "x")
+            # launch a new thread to contain the train process
+            readDataPath, file_extension = os.path.splitext(
+                requested_data['datapath'])
+            train_thread = TracedThread(target=server.solver.train, args=(
+                train_id,
+                readDataPath,
+                requested_data['hyperparameters'],
+                requested_data['config'],
+                Logger(less_log_filepath)))
+            train_thread.id = train_id
+            train_thread.start()
+            result = {
+                "id": train_thread.uuid,
+                "result": True,
+                "code": "200",
+            }
+            return json.dumps(result), 200
+        else:
+            return json.dumps({
+                "hyperparamters": server.solver.hyperparamters
+            }), 200
     else:
-        return json.dumps({"error": "not supported!", "code": "404"}), 404
+        return json.dumps({"error": "Training not supported!", "code": "404"}), 404
+
 
 @server.route("/exit", methods=["GET"])
 def exit_server():
     # Exit under request
     exit()
+
 
 def run_server(solver, port=None):
     if port is None:

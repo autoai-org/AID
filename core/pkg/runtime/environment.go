@@ -21,7 +21,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/cvpm-contrib/database"
+	"github.com/unarxiv/cvpm/pkg/contrib"
 )
 
 // Constants
@@ -62,17 +62,18 @@ func (virtualenv VirtualEnv) triggerEnable() {
 
 func QueryVariables(Vendor string, PackageName string) []EnvironmentVariable {
 	var envs []EnvironmentVariable
-	sess := database.GetDBInstance()
+	sess := contrib.GetDBInstance()
 	envCollection := sess.Collection("environment")
 	res := envCollection.Find()
 	err := res.All(&envs)
 	if err != nil {
 		log.Fatalf("res.All(): %q\n", err)
 	}
-	database.CloseDB(sess)
+	contrib.CloseDB(sess)
 	return envs
 }
 
+// AddNewEnvToPackage stores the new environment var into database
 func AddNewEnvToPackage(Vendor string, PackageName string, Key string, Value string) {
 	envObject := EnvironmentVariable{
 		Vendor:      Vendor,
@@ -80,13 +81,13 @@ func AddNewEnvToPackage(Vendor string, PackageName string, Key string, Value str
 		Key:         Key,
 		Value:       Value,
 	}
-	sess := database.GetDBInstance()
+	sess := contrib.GetDBInstance()
 	envCollection := sess.Collection("environment")
 	err := envCollection.InsertReturning(&envObject)
 	if err != nil {
 		panic(err)
 	}
-	database.CloseDB(sess)
+	contrib.CloseDB(sess)
 }
 
 func parseEnvs(envs []EnvironmentVariable) string {

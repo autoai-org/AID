@@ -10,7 +10,7 @@ function getNews (num) {
   const news = []
   for (let i = 0; i < num; i++) {
     const item = {
-      'url': 'https://' + makeid() + '.com'
+      url: 'https://' + makeid() + '.com'
     }
     news.push(item)
   }
@@ -19,9 +19,9 @@ function getNews (num) {
 
 function getStatus () {
   const status = {
-    'status': 'running',
-    'installed': 5,
-    'running': 3
+    status: 'running',
+    installed: 5,
+    running: 3
   }
   return status
 }

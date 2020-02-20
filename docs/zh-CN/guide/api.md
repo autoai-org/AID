@@ -1,4 +1,0 @@
-# API Reference
-
-## RESTful API
-

@@ -8,12 +8,17 @@
       :steps="steps"
       :callbacks="tourCallbacks"
     />
+    <cvpm-loading />
   </div>
 </template>
 
 <script>
 import { ConfigService } from '@/services/config'
+import Loading from '@/components/global/Loading'
 export default {
+  components: {
+    'cvpm-loading': Loading
+  },
   data () {
     return {
       isRouterAlive: true,
@@ -46,7 +51,7 @@ export default {
     }
   },
   mounted: function () {
-    let config = new ConfigService()
+    const config = new ConfigService()
     if (config.hintMode) {
       this.$tours['cvpm-tour'].start()
     }
@@ -56,7 +61,7 @@ export default {
     },
     cvpmStopHintMode () {
       console.log('stop hint')
-      let config = new ConfigService()
+      const config = new ConfigService()
       config.hintMode = false
       config.write()
     },

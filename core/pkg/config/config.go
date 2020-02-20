@@ -86,21 +86,6 @@ func getDefaultConfig() CvpmConfig {
 	return defaultCVPMConfig
 }
 
-func createFolderIfNotExist(folderPath string) {
-	exist, err := utility.IsPathExists(folderPath)
-	if err != nil {
-		raven.CaptureErrorAndWait(err, nil)
-		log.Print("error when creating " + folderPath + ": " + err.Error())
-	}
-	if !exist {
-		err = os.Mkdir(folderPath, os.ModePerm)
-		if err != nil {
-			raven.CaptureErrorAndWait(err, nil)
-			log.Print("error when creating " + folderPath + ": " + err.Error())
-		}
-	}
-}
-
 func createFileIfNotExist(filePath string) {
 	exist, err := utility.IsPathExists(filePath)
 	if err != nil {
@@ -124,7 +109,7 @@ func Validate() {
 		// check if cvpm.toml file exists
 		cvpmConfigToml := filepath.Join(getDefaultConfig().Local.LocalFolder, "config.toml")
 		defaultCvpmPath := getDefaultConfig().Local.LocalFolder
-		createFolderIfNotExist(defaultCvpmPath)
+		utility.CreateFolderIfNotExist(defaultCvpmPath)
 		if _, err := os.Stat(cvpmConfigToml); os.IsNotExist(err) {
 			createFileIfNotExist(cvpmConfigToml)
 			// config file not exists, write default to it
@@ -132,19 +117,19 @@ func Validate() {
 		}
 		// Validate CVPM Path
 		cvpmPath := Read().Local.LocalFolder
-		createFolderIfNotExist(cvpmPath)
+		utility.CreateFolderIfNotExist(cvpmPath)
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
-		createFolderIfNotExist(logsFolder)
+		utility.CreateFolderIfNotExist(logsFolder)
 		// create webui folder
 		webuiFolder := filepath.Join(cvpmPath, "webui")
-		createFolderIfNotExist(webuiFolder)
+		utility.CreateFolderIfNotExist(webuiFolder)
 		// create database folder
 		databaseFolder := filepath.Join(cvpmPath, "database")
-		createFolderIfNotExist(databaseFolder)
+		utility.CreateFolderIfNotExist(databaseFolder)
 		// create data folder
 		dataTmpFolder := Read().Local.TmpFolder
-		createFolderIfNotExist(dataTmpFolder)
+		utility.CreateFolderIfNotExist(dataTmpFolder)
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
 		createFileIfNotExist(cvpmLogPath)

@@ -13,11 +13,12 @@ to get a detailed explanation.
 package main
 
 import (
+	"log"
+	"os"
+
 	"github.com/getsentry/raven-go"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/urfave/cli"
-	"log"
-	"os"
 )
 
 var (

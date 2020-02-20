@@ -21,16 +21,16 @@
 
 <script>
 export default {
+  data () {
+    return {
+    }
+  },
   methods: {
-    data () {
-      return {
-      }
-    },
     selectFile () {
       this.$refs.uploadInput.click()
     },
     uploadFile (e) {
-      let files = e.target.files
+      const files = e.target.files
       if (files.length) {
         this.$emit('fileSelected', files[0])
       } else {

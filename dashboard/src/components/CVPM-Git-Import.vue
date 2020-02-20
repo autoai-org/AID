@@ -86,7 +86,7 @@
 import { GithubService } from '@/services/github'
 import { systemService } from '@/services/system'
 import VueMarkdown from 'vue-markdown'
-let Base64 = require('js-base64').Base64
+const Base64 = require('js-base64').Base64
 export default {
   components: {
     'vue-markdown': VueMarkdown
@@ -112,9 +112,9 @@ export default {
       // For more info: https://github.com/unarxiv/CVPM/issues/282
       this.error = ''
       this.info = ''
-      let self = this
+      const self = this
       const pureRepo = this.repo.split('/')[3] + '/' + this.repo.split('/')[4]
-      let githubService = new GithubService(pureRepo)
+      const githubService = new GithubService(pureRepo)
       githubService
         .fetchCVPMConfig()
         .then(function (res) {
@@ -141,7 +141,7 @@ export default {
         })
     },
     save () {
-      let self = this
+      const self = this
       self.installing = true
       systemService
         .installRepo('git', this.repo)

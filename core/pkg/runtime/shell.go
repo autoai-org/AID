@@ -36,6 +36,7 @@ func Pip(args []string) {
 
 // Python calls the Python Program
 func Python(args []string, envs string) {
+	log.Println(args)
 	localConfig := config.Read()
 	localPython := localConfig.Local.Python
 	// handles environment variables

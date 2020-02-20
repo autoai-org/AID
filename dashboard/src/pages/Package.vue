@@ -105,7 +105,7 @@ export default {
       alert('coming soon')
     },
     fetch_packages () {
-      let self = this
+      const self = this
       systemService.getPackages().then(function (res) {
         if (res.data === null) {
           self.packages = []

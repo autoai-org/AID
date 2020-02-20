@@ -83,7 +83,7 @@ export default {
   }),
   methods: {
     submit () {
-      let self = this
+      const self = this
       self.requesting = true
       discovery
         .putTicket({

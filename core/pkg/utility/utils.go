@@ -7,6 +7,7 @@ package utility
 import (
 	"github.com/getsentry/raven-go"
 	"io/ioutil"
+	"log"
 	"net"
 	"os"
 	"os/user"
@@ -91,7 +92,7 @@ func ReadFileContent(filename string) string {
 	var content string
 	byteContent, err := ioutil.ReadFile(filename)
 	if err != nil {
-		content = "Read " + filename + "Failed!"
+		content = "Read " + filename + " Failed!"
 	} else {
 		content = string(byteContent)
 	}
@@ -119,4 +120,20 @@ func IsPathExists(path string) (bool, error) {
 		return false, nil
 	}
 	return true, err
+}
+
+// CreateFolderIfNotExist first checks if the @param folderPath exists, if not, it will create one
+func CreateFolderIfNotExist(folderPath string) {
+	exist, err := IsPathExists(folderPath)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		log.Print("error when creating " + folderPath + ": " + err.Error())
+	}
+	if !exist {
+		err = os.Mkdir(folderPath, os.ModePerm)
+		if err != nil {
+			raven.CaptureErrorAndWait(err, nil)
+			log.Print("error when creating " + folderPath + ": " + err.Error())
+		}
+	}
 }

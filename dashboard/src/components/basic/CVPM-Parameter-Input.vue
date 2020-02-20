@@ -112,7 +112,7 @@ export default {
       })
     },
     startTest () {
-      let self = this
+      const self = this
       self.loading = true
       const requestParams = this.systemRequiredParams.concat(
         this.solverDefinedParams

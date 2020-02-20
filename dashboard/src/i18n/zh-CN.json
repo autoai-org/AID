@@ -1,78 +1,88 @@
 {
-    "Dashboard":"仪表盘",
-    "Theme":{
-        "lighttheme":"日间",
-        "darktheme":"夜间",
-        "theme":"模式"
+    "Dashboard": "仪表盘",
+    "Theme": {
+        "lighttheme": "日间",
+        "darktheme": "夜间",
+        "theme": "模式"
     },
-    "Admin":"管理",
-    "Home":{
-        "title":"首页",
-        "latest_news":"最新消息",
-        "status":"系统状态",
-        "host":"主机地址",
-        "cpu":"处理器",
-        "memory":"内存",
-        "operating_system":"操作系统"
+    "Admin": "管理",
+    "Home": {
+        "title": "首页",
+        "latest_news": "最新消息",
+        "status": "系统状态",
+        "host": "主机地址",
+        "cpu": "处理器",
+        "memory": "内存",
+        "operating_system": "操作系统"
     },
-    "Packages":{
-        "title":"模型库",
-        "import_from_git":"从Git引入",
-        "import_from_hub":"从Hub引入",
-        "vendor":"发行者",
-        "name":"包名",
-        "local_folder":"本地目录",
-        "actions":"操作"
+    "Packages": {
+        "title": "模型库",
+        "import_from_git": "从Git引入",
+        "import_from_hub": "从Hub引入",
+        "vendor": "发行者",
+        "name": "包名",
+        "local_folder": "本地目录",
+        "actions": "操作"
     },
-    "System":"系统",
-    "Log":{
-        "title":"日志",
-        "system_log":"系统日志"
+    "System": "系统",
+    "Log": {
+        "title": "日志",
+        "system_log": "系统日志"
     },
-    "Settings":{
-        "title":"设置",
-        "developer_mode":"开发者模式",
-        "enable_hint":"提示",
-        "endpoint":"服务器地址",
-        "save":"保存"
+    "Settings": {
+        "title": "设置",
+        "developer_mode": "开发者模式",
+        "enable_hint": "提示",
+        "endpoint": "服务器地址",
+        "save": "保存"
     },
-    "Contrib":"第三方支持",
-    "Datasets":{
-        "title":"数据集",
-        "sync":"同步",
-        "starred":"收藏",
-        "search":"搜索",
-        "name":"名字",
-        "desc":"描述",
-        "tags":"标签",
-        "actions":"操作"
+    "Contrib": "第三方支持",
+    "Datasets": {
+        "uploadedAt": "上传时间",
+        "status": "文件状态",
+        "size": "文件大小",
+        "mine": "我的",
+        "upload": "上传",
+        "title": "数据集",
+        "sync": "同步",
+        "starred": "收藏",
+        "search": "搜索",
+        "name": "名字",
+        "desc": "描述",
+        "tags": "标签",
+        "actions": "操作"
     },
-    "Inspector":{
-        "title":"监测",
-        "client_ip":"客户端地址",
-        "target":"目标地址",
-        "result":"结果",
-        "time":"时间"
+    "Inspector": {
+        "title": "监测",
+        "client_ip": "客户端地址",
+        "target": "目标地址",
+        "result": "结果",
+        "time": "时间"
     },
-    "About":"关于",
-    "Hub":"Hub",
-    "Github":"Github",
-    "Blog":"博客",
-    "Packages_detail":{
-        "meat_info":"元信息",
-        "readme":"关于",
-        "dependency":"依赖",
-        "disk_usage":"磁盘使用",
-        "solvers":"推导器",
-        "solver":"推导器",
-        "vendor":"开发者",
-        "package":"包",
-        "run":"运行",
-        "running":"运行中",
-        "actions":"操作",
-        "test":"测试",
-        "ticket":"工单",
-        "package_log":"模型日志",
-        "environment":"环境变量"
+    "Train":{
+        "title":"训练",
+        "new":"新训练",
+        "status":"状态"
+    },
+    "About": "关于",
+    "Hub": "Hub",
+    "GitHub": "GitHub",
+    "Blog": "博客",
+    "Packages_detail": {
+        "meat_info": "元信息",
+        "readme": "关于",
+        "dependency": "依赖",
+        "disk_usage": "磁盘使用",
+        "solvers": "推导器",
+        "solver": "推导器",
+        "vendor": "开发者",
+        "package": "包",
+        "run": "运行",
+        "running": "运行中",
+        "actions": "操作",
+        "test": "测试",
+        "ticket": "工单",
+        "package_log": "模型日志",
+        "environment": "环境变量"
     }
 }

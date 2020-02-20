@@ -6,7 +6,6 @@ import PIL.Image
 import requests
 from tqdm import tqdm
 
-
 def load_image_file(file, mode='RGB'):
     im = PIL.Image.open(file)
     if mode:

@@ -11,9 +11,11 @@ class SearchService {
       cache: false
     })
   }
+
   addItem (id, item) {
     self.index.add(id, item.Desc)
   }
+
   searchItems (kw) {
     return new Promise((resolve, reject) => {
       self.index.search({

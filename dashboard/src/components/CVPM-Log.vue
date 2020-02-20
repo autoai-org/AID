@@ -19,53 +19,39 @@
         id="terminalWindow"
         class="terminal-window"
       >
-        <p
-          v-for="(item, index) in parsedMessageList"
-          :key="index"
-        >
-          <span
-            v-if="item.type"
-            :class="item.type"
-          >{{ item.type }}</span>
-          <span class="cmd">{{ item.text }}</span>
-        </p>
+        <pre v-html="parsedMessage" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { parseLogMessage } from '@/services/log'
+
 export default {
   props: {
     title: {
       type: String,
       default: ''
     },
-    messageList: {
-      type: Array,
+    message: {
+      type: String,
       default: function () {
-        return []
+        return ''
       }
     }
   },
   data () {
-    return {
-    }
+    return {}
   },
   computed: {
-    parsedMessageList: function () {
-      return this.messageList.map(function (each) {
-        if (each.indexOf('error') > -1) {
-          return { 'type': 'error', 'text': each }
-        } else {
-          return { 'text': each }
-        }
-      })
+    parsedMessage () {
+      return parseLogMessage(this.message)
     }
   },
   methods: {
     navHelp () {
-      window.open('https://cvpm.autoai.org')
+      window.open('https://cvflow.autoai.org')
     }
   }
 }

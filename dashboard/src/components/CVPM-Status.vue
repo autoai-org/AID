@@ -65,7 +65,7 @@ export default {
   },
   methods: {
     getStatus () {
-      let self = this
+      const self = this
       systemService.getStatus().then(function (res) {
         self.status = res.data
       })

@@ -10,7 +10,8 @@
         dark
       >
         fas fa-sync
-      </v-icon>{{ $t(`Datasets.sync`) }}
+      </v-icon>
+      {{ $t(`Datasets.sync`) }}
     </v-btn>
     <v-btn
       outline
@@ -22,7 +23,21 @@
         dark
       >
         fas fa-star
-      </v-icon>{{ $t(`Datasets.starred`) }}
+      </v-icon>
+      {{ $t(`Datasets.starred`) }}
+    </v-btn>
+    <v-btn
+      outline
+      color="indigo"
+      @click="turnToMine()"
+    >
+      <v-icon
+        left
+        dark
+      >
+        fas fa-user
+      </v-icon>
+      {{ $t(`Datasets.mine`) }}
     </v-btn>
     <v-text-field
       v-model="searchKW"
@@ -135,7 +150,6 @@
 </template>
 
 <script>
-
 import { systemService } from '@/services/system'
 import { searchService } from '@/services/search'
 export default {
@@ -148,7 +162,7 @@ export default {
       searchKW: '',
       datasetSyncDialog: false,
       databaseURL:
-        'https://premium.file.cvtron.xyz/cvpm/data/registry/dataset.toml',
+        'https://raw.githubusercontent.com/cvmodel/index/master/datasets.toml',
       detailInfo: {},
       searchTag: '',
       headers: [
@@ -174,14 +188,14 @@ export default {
           text: this.$t(`Datasets.actions`),
           align: 'left',
           sortable: false,
-          value: 'Tags'
+          value: 'Operation'
         }
       ]
     }
   },
   watch: {
     searchKW (val) {
-      let self = this
+      const self = this
       if (val === '') {
         self.datasets = self.allDatasets
       }
@@ -195,9 +209,12 @@ export default {
     }
   },
   created () {
-    this.fetchAllDatasets()
+    this.fetchOpenDatasets()
   },
   methods: {
+    turnToMine () {
+      this.$router.push('/datasets/my')
+    },
     alert (message) {
       alert(message)
     },
@@ -231,11 +248,11 @@ export default {
       this.detailInfo = item
     },
     search () {
-      this.fetchAllDatasets(this.searchName, this.searchTag)
+      this.fetchOpenDatasets(this.searchName, this.searchTag)
     },
-    fetchAllDatasets (name = '', tag = '') {
-      let self = this
-      systemService.getAllDatasets().then(function (res) {
+    fetchOpenDatasets (name = '', tag = '') {
+      const self = this
+      systemService.getOpenDatasets().then(function (res) {
         self.datasets = res.data.map(function (each) {
           if (each.Tags.search(tag) !== -1) {
             if (each.Name !== '' && each.Name.search(name) !== -1) {
