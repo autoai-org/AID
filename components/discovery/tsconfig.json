@@ -1,29 +1,15 @@
 {
-    "compileOnSave": false,
     "compilerOptions": {
-        "module": "commonjs",
-        "target": "es2017",
-        "noImplicitAny": true,
-        "outDir": "./dist",
-        "sourceMap": true,
-        "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "moduleResolution": "node",
-        "typeRoots": [
-            "node_modules/koa-bodyparser-ts",
-            "node_modules/**/*",
-            "node_modules/@types"
-        ],
-        "lib": [
-            "dom",
-            "es2017",
-            "es6",
-            "esnext.asynciterable"
-        ],
-        "types": [
-            "node", "jest", "koa-bodyparser-ts"
-        ],
-
+      "target": "es2016",
+      "module": "commonjs",
+      "lib": ["dom", "es2016", "esnext.asynciterable"],
+      "moduleResolution": "node",
+      "outDir": "./dist",
+      "strict": true,
+      "strictPropertyInitialization": false,
+      "sourceMap": true,
+      "emitDecoratorMetadata": true,
+      "experimentalDecorators": true
     },
     "include": [
         "./src/**/*", "winston-logsene.d.ts", "../dashboard/src/services/mock.js"
