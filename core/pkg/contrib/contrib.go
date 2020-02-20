@@ -39,3 +39,8 @@ func StreamCamera(c *gin.Context) {
 		return true
 	})
 }
+
+// UploadFile POST /files/upload
+func UploadFile(c *gin.Context) {
+	
+}

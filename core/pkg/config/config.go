@@ -18,22 +18,26 @@ import (
 	"log"
 	"os"
 	"path/filepath"
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/utility"
+
 	"github.com/BurntSushi/toml"
 	raven "github.com/getsentry/raven-go"
 	homedir "github.com/mitchellh/go-homedir"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/utility"
 )
 
+// CvpmConfig defines the global config for CVPM
 type CvpmConfig struct {
-	Local        Local        `toml:"local"`
+	Local        Local               `toml:"local"`
 	Repositories []entity.Repository `toml:"repository"`
 }
 
+// Local defines the local config for CVPM
 type Local struct {
 	LocalFolder string
 	Pip         string
 	Python      string
+	TmpFolder   string
 }
 
 // Read returns current config object stored in the config.toml
@@ -77,7 +81,7 @@ func Write(config CvpmConfig) {
 func getDefaultConfig() CvpmConfig {
 	homePath, _ := homedir.Dir()
 	cvpmPath := filepath.Join(homePath, "cvpm")
-	var defaultLocal = Local{LocalFolder: cvpmPath, Pip: "pip", Python: "python"}
+	var defaultLocal = Local{LocalFolder: cvpmPath, Pip: "pip", Python: "python", TmpFolder: filepath.Join(cvpmPath, "data")}
 	var defaultCVPMConfig = CvpmConfig{Local: defaultLocal, Repositories: []entity.Repository{}}
 	return defaultCVPMConfig
 }
@@ -86,13 +90,13 @@ func createFolderIfNotExist(folderPath string) {
 	exist, err := utility.IsPathExists(folderPath)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
-		log.Fatal(err)
+		log.Print("error when creating " + folderPath + ": " + err.Error())
 	}
 	if !exist {
 		err = os.Mkdir(folderPath, os.ModePerm)
 		if err != nil {
 			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
+			log.Print("error when creating " + folderPath + ": " + err.Error())
 		}
 	}
 }
@@ -101,13 +105,13 @@ func createFileIfNotExist(filePath string) {
 	exist, err := utility.IsPathExists(filePath)
 	if err != nil {
 		raven.CaptureErrorAndWait(err, nil)
-		log.Fatal(err)
+		log.Print("error when creating " + filePath + ": " + err.Error())
 	}
 	if !exist {
 		f, err := os.Create(filePath)
 		if err != nil {
 			raven.CaptureErrorAndWait(err, nil)
-			log.Fatal(err)
+			log.Print("error when creating " + filePath + ": " + err.Error())
 		}
 		defer f.Close()
 	}
@@ -116,17 +120,19 @@ func createFileIfNotExist(filePath string) {
 // Validate init all params in config file
 func Validate() {
 	if !utility.IsRoot() {
-		homepath := utility.GetHomeDir()
-		// Validate CVPM Path
-		cvpmPath := filepath.Join(homepath, "cvpm")
-		createFolderIfNotExist(cvpmPath)
+		// Check if config file exists, otherwise read default
 		// check if cvpm.toml file exists
-		cvpmConfigToml := filepath.Join(homepath, "cvpm", "config.toml")
+		cvpmConfigToml := filepath.Join(getDefaultConfig().Local.LocalFolder, "config.toml")
+		defaultCvpmPath := getDefaultConfig().Local.LocalFolder
+		createFolderIfNotExist(defaultCvpmPath)
 		if _, err := os.Stat(cvpmConfigToml); os.IsNotExist(err) {
 			createFileIfNotExist(cvpmConfigToml)
 			// config file not exists, write default to it
 			Write(getDefaultConfig())
 		}
+		// Validate CVPM Path
+		cvpmPath := Read().Local.LocalFolder
+		createFolderIfNotExist(cvpmPath)
 		// create logs folder
 		logsFolder := filepath.Join(cvpmPath, "logs")
 		createFolderIfNotExist(logsFolder)
@@ -136,7 +142,9 @@ func Validate() {
 		// create database folder
 		databaseFolder := filepath.Join(cvpmPath, "database")
 		createFolderIfNotExist(databaseFolder)
-		createFileIfNotExist(filepath.Join(databaseFolder, "cvpm-database.db"))
+		// create data folder
+		dataTmpFolder := Read().Local.TmpFolder
+		createFolderIfNotExist(dataTmpFolder)
 		// check if system log file exists
 		cvpmLogPath := filepath.Join(cvpmPath, "logs", "system.log")
 		createFileIfNotExist(cvpmLogPath)

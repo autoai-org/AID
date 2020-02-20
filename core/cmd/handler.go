@@ -14,6 +14,13 @@ import (
 	"bufio"
 	"errors"
 	"fmt"
+	"log"
+	"os"
+	"path/filepath"
+	"strconv"
+	"strings"
+	"syscall"
+
 	"github.com/unarxiv/cvpm/pkg/authentication"
 	"github.com/unarxiv/cvpm/pkg/config"
 	"github.com/unarxiv/cvpm/pkg/daemon"
@@ -21,12 +28,6 @@ import (
 	"github.com/unarxiv/cvpm/pkg/repository"
 	"github.com/unarxiv/cvpm/pkg/runtime"
 	"github.com/unarxiv/cvpm/pkg/utility"
-	"log"
-	"os"
-	"path/filepath"
-	"strconv"
-	"strings"
-	"syscall"
 
 	"github.com/fatih/color"
 	"github.com/manifoldco/promptui"
@@ -131,6 +132,8 @@ func RepoHandler(c *cli.Context) {
 		query.ClientGet("repos", requestParams)
 	case "init":
 		InitHandler(c)
+	case "verify":
+		repository.VerifyLocalRepository(".")
 	default:
 		color.Red("Command Not Supported!")
 	}
@@ -187,5 +190,6 @@ func ConfigHandler(c *cli.Context) {
 		newPipLocation = prevConfig.Local.Pip
 	}
 	nextConfig.Local.Pip = newPipLocation
+	config.Validate()
 	config.Write(nextConfig)
 }

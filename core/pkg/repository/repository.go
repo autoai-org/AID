@@ -5,22 +5,22 @@
 package repository
 
 import (
-	"github.com/unarxiv/cvpm/pkg/entity"
-	"github.com/unarxiv/cvpm/pkg/config"
-	"github.com/unarxiv/cvpm/pkg/runtime"
-	"github.com/unarxiv/cvpm/pkg/utility"
 	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
 
+	"github.com/unarxiv/cvpm/pkg/config"
+	"github.com/unarxiv/cvpm/pkg/entity"
+	"github.com/unarxiv/cvpm/pkg/runtime"
+	"github.com/unarxiv/cvpm/pkg/utility"
+
 	"github.com/BurntSushi/toml"
 	"github.com/fatih/color"
 	raven "github.com/getsentry/raven-go"
 	git "gopkg.in/src-d/go-git.v4"
 )
-
 
 func readRepos() []entity.Repository {
 	configs := config.Read()
@@ -129,7 +129,7 @@ func PostInstallation(repoFolder string) {
 // GetMetaInfo returns Repository Meta Info: Dependency, Config, Disk Size and Readme
 func GetMetaInfo(Vendor string, Name string) entity.RepositoryMetaInfo {
 	repos := readRepos()
-	repositoryMeta :=  entity.RepositoryMetaInfo{}
+	repositoryMeta := entity.RepositoryMetaInfo{}
 	for _, existed_repo := range repos {
 		if existed_repo.Name == Name && existed_repo.Vendor == Vendor {
 			// Read config file etc
@@ -179,4 +179,30 @@ func GetPretrained(vendorName string, packageName string) []os.FileInfo {
 	localPretrainedFolder := filepath.Join(localFolder, "pretrained")
 	files, _ := ioutil.ReadDir(localPretrainedFolder)
 	return files
+}
+
+// VerifyLocalRepository verifies if the local repository is well set
+// check if cvpm.toml exists [err]
+// check if the classes it refers to exists [err]
+// check if pretrained.toml exists [warn]
+// check if the files that pretrained.toml refers exists[err]
+func VerifyLocalRepository(path string) bool {
+	cvpmConfigFilePath := filepath.Join(path, "cvpm.toml")
+	pretrainedFilePath := filepath.Join(path, "pretrained.toml")
+	cvpmConfigFileExist, err := utility.IsPathExists(cvpmConfigFilePath)
+	pretrainedFileExist, err := utility.IsPathExists(pretrainedFilePath)
+	if err != nil {
+		raven.CaptureErrorAndWait(err, nil)
+		log.Fatal(err)
+	}
+	if !cvpmConfigFileExist {
+		log.Print("[Error] Cannot find cvpm.toml under " + path)
+	}
+	if !pretrainedFileExist {
+		log.Print(("[Warn] Cannot find pretrained.toml under " + path))
+	}
+	if cvpmConfigFileExist && pretrainedFileExist {
+		return true
+	}
+	return false
 }

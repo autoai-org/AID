@@ -1,3 +1,5 @@
-vendor/
-cli
 dist/
+cmd
+.vscode
+c.out
+cc-test-reporter

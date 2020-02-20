@@ -4,7 +4,8 @@
 
 package utility
 
-// Install Web UI -> Download Latest and Unzip
-func InstallWebUi() {
-
+// InstallWebUi -> Download Latest and Unzip
+func InstallWebUi() bool {
+	// Todo
+	return true
 }

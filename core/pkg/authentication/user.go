@@ -4,15 +4,17 @@
 
 package authentication
 
+/*
 import (
 	"fmt"
 	"github.com/fatih/color"
 	"github.com/levigross/grequests"
 )
+*/
 
 type User struct {
-	Username     string `json:"username"`
-	Password     string
+	Username string `json:"username"`
+	Password string
 }
 
 func (u *User) login() User {
