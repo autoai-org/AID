@@ -1,0 +1,40 @@
+language: go
+sudo: required
+git:
+  clone: quiet
+
+env:
+# needed for the snap pipe:
+  - GO111MODULE=on
+
+before_script:
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > $TRAVIS_BUILD_DIR/cc-test-reporter
+  - chmod +x $TRAVIS_BUILD_DIR/cc-test-reporter
+  - $TRAVIS_BUILD_DIR/cc-test-reporter before-build
+
+before_install:
+  - go get github.com/mattn/goveralls
+
+script:
+  - make test-cli
+  - cd core && goveralls -service=travis-ci
+  
+after_script:
+  - sed -i 's+github.com/unarxiv/cvpm/pkg+pkg+g' $TRAVIS_BUILD_DIR/core/c.out
+  - $TRAVIS_BUILD_DIR/cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
+go:
+  - master
+
+matrix:
+  allow_failures:
+    - go: tip
+
+install: true
+
+deploy:
+  - provider: script
+    skip_cleanup: true
+    script: curl -sL https://git.io/goreleaser | bash
+    on:
+      tags: true

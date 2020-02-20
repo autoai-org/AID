@@ -1,0 +1,5 @@
+dist/
+cmd
+.vscode
+c.out
+cc-test-reporter

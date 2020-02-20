@@ -1,0 +1,14 @@
+cvpm.egg-info/
+*.pyc
+.vscode/
+node_modules/
+build
+dist
+.env
+.idea/
+.DS_Store
+!discovery/hooks/build
+!dashboard/build
+!docs/dist/api.html
+cli/cvpm
+core/cmd/cmd
