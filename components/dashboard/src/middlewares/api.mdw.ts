@@ -30,7 +30,7 @@ function _apiRequest(url: string,
     })
 }
 
-function _get_plain(path: string) {
+function plain_get(path: string) {
     return new Promise((resolve, reject) => {
         _apiRequest(path, "get", {}, {},
             (res: Log) => {
@@ -42,7 +42,7 @@ function _get_plain(path: string) {
     })
 }
 
-function _put_plain(path: string, payload?: object) {
+function plain_put(path: string, payload?: object) {
     return new Promise((resolve, reject) => {
         _apiRequest(path, "put", payload || {}, {},
             (res: any) => {
@@ -54,7 +54,7 @@ function _put_plain(path: string, payload?: object) {
     })
 }
 
-function _post_plain(path: string, data: object) {
+function plain_post(path: string, data: object) {
     return new Promise((resolve, reject) => {
         _apiRequest(path, "post", data, {},
             (res: Log) => {
@@ -67,51 +67,51 @@ function _post_plain(path: string, data: object) {
 }
 
 function addWebhook(payload: string, status: string) {
-    return _put_plain(endpoint + "webhooks", { payload: payload, status: status })
+    return plain_put(endpoint + "webhooks", { payload: payload, status: status })
 }
 
 function getWebhooks() {
-    return _get_plain(endpoint + "webhooks")
+    return plain_get(endpoint + "webhooks")
 }
 
 function getExtLogs(extName: string, logId: string) {
-    return _get_plain(endpoint + "extensions/"+extName+"/logs/"+logId)
+    return plain_get(endpoint + "extensions/"+extName+"/logs/"+logId)
 }
 
 function getDatasets() {
-    return _get_plain(endpoint +"experiments/dataset")
+    return plain_get(endpoint +"experiments/dataset")
 }
 
 function buildImage(vendorName: string, packageName: string, solverName: string) {
-    return _put_plain(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images")
+    return plain_put(endpoint + "packages/" + vendorName + "/" + packageName + "/" + solverName + "/images")
 }
 
 function installPackage(packageIdentifier: string) {
-    return _post_plain(endpoint + "packages", { 'remote_url': packageIdentifier })
+    return plain_post(endpoint + "packages", { 'remote_url': packageIdentifier })
 }
 
 function createContainer(imageId: string) {
-    return _put_plain(endpoint + "images/" + imageId + "/" + "containers")
+    return plain_put(endpoint + "images/" + imageId + "/" + "containers")
 }
 
 function startContainer(containerId: string) {
-    return _put_plain(endpoint + "containers/" + containerId + "/" + "run")
+    return plain_put(endpoint + "containers/" + containerId + "/" + "run")
 }
 
 function testContainer(file: Blob) {
     const payload = new FormData()
     payload.append('file', file)
-    return _post_plain(endpoint + "runnings/1234/infer", payload)
+    return plain_post(endpoint + "runnings/1234/infer", payload)
 }
 
 function uploadDataset(file: Blob) {
     const payload = new FormData()
     payload.append('file', file)
-    return _put_plain(endpoint +"experiments/dataset/file", payload)
+    return plain_put(endpoint +"experiments/dataset/file", payload)
 }
 
 function addDataset(datasetPath:string, uncompressNow: boolean, name: string) {
-    return _put_plain(endpoint+"experiments/dataset", {
+    return plain_put(endpoint+"experiments/dataset", {
         "datasetPath":datasetPath,
         "uncompress": uncompressNow,
         "name": name
@@ -119,19 +119,19 @@ function addDataset(datasetPath:string, uncompressNow: boolean, name: string) {
 }
 
 function fetchLog(id: string) {
-    return _get_plain(endpoint + "logs/" + id)
+    return plain_get(endpoint + "logs/" + id)
 }
 
 function updateConfig(config: object) {
-    return _post_plain(endpoint + "configs", config)
+    return plain_post(endpoint + "configs", config)
 }
 
 function fetchMeta(vendorName: string, packageName: string) {
-    return _get_plain(endpoint + "packages/" + vendorName + "/" + packageName + "/meta")
+    return plain_get(endpoint + "packages/" + vendorName + "/" + packageName + "/meta")
 }
 
 function fetchSolverDockerfile(vendorName: string, packageName: string, solverName: string) {
-    return _get_plain(endpoint + "solvers/" + vendorName + "/" + packageName + "/" + solverName + "/dockerfile")
+    return plain_get(endpoint + "solvers/" + vendorName + "/" + packageName + "/" + solverName + "/dockerfile")
 }
 
 function fetchContainers() {
@@ -267,5 +267,8 @@ export {
     fetchImages,
     addWebhook,
     getWebhooks,
-    fetchPackages
+    fetchPackages,
+    plain_get,
+    plain_post,
+    plain_put
 }

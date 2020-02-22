@@ -82,12 +82,7 @@
         <router-view />
       </v-container>
     </v-content>
-    <v-system-bar height="42px" color="primary">
-      <v-spacer />
-      <v-btn color="primary" small fab icon tile>
-        <v-icon color="white">mdi-emoticon-happy-outline</v-icon>
-      </v-btn>
-    </v-system-bar>
+    <aid-footer/>
   </v-app>
 </template>
 
@@ -103,6 +98,7 @@ import {
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
+import AIDFooter from "@/components/layouts/Footer.vue"
 export default {
   props: {
     source: String
@@ -138,7 +134,8 @@ export default {
   },
   components: {
     "loading-dialog": LoadingDialog,
-    "alert-dialog": AlertDialog
+    "alert-dialog": AlertDialog,
+    "aid-footer": AIDFooter,
   }
 };
 </script>
