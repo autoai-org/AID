@@ -1,9 +1,19 @@
 <template>
   <v-system-bar height="42px" color="primary">
     <v-spacer />
+    
     <v-btn color="primary" small fab icon tile>
       <v-icon color="white">mdi-emoticon-happy-outline</v-icon>
     </v-btn>
+    <v-menu :close-on-content-click="false" top offset-y>
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" small fab icon tile>
+          <v-icon color="white" v-on="on">mdi-alert-circle-outline</v-icon>
+        </v-btn>
+      </template>
+      <error-card :errors="errors" />
+    </v-menu>
+
     <v-menu :close-on-content-click="false" top offset-y>
       <template v-slot:activator="{ on }">
         <v-btn color="primary" small fab icon tile>
@@ -11,45 +21,15 @@
           <v-icon color="white" v-else>mdi-cloud-off-outline</v-icon>
         </v-btn>
       </template>
-      <v-card width="300px">
-        <v-card-title class="aid-discovery-title">Discovery</v-card-title>
-        <v-card-text>
-          <v-text-field label="Username"></v-text-field>
-          <v-text-field label="Password"></v-text-field>
-          <v-btn style="width:100%;" color="primary">Login</v-btn> <br/><br/>
-          <v-btn style="width:100%;" color="secondary">Signup</v-btn>
-          <v-row class="md4">
-            <v-col>
-              <v-btn icon tile>
-                <v-icon>fab fa-github</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col>
-              <v-btn icon tile>
-                <v-icon>mdi-google</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col>
-              <v-btn icon tile>
-                <v-icon>mdi-gitlab</v-icon>
-              </v-btn>
-            </v-col>
-            <v-col>
-              <v-btn icon tile>
-                <v-icon>mdi-twitter</v-icon>
-              </v-btn>
-            </v-col>
-          </v-row>
-          <v-spacer></v-spacer>
-          <p class="aid-discovery-version">Version: {{discovery.version}}</p>
-        </v-card-text>
-      </v-card>
+      <login-card :discovery="discovery"/>
     </v-menu>
   </v-system-bar>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import LoginCard from "@/components/users/Login.vue";
+import ErrorCard from "@/components/cards/ErrorCard.vue";
 import { get_discovery_version } from "@/services/discovery";
 export default Vue.extend({
   data() {
@@ -57,8 +37,16 @@ export default Vue.extend({
       discovery: {
         connected: false,
         version: ""
-      }
+      },
+      errors:[{
+        "Msg":"Init Service Failed!",
+        "OccuredAt":"0000-0000"
+      }],
     };
+  },
+  components:{
+    "login-card": LoginCard,
+    "error-card": ErrorCard,
   },
   mounted() {
     let self = this;
@@ -75,11 +63,5 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-.aid-discovery-title {
-  justify-content: center;
-}
-.aid-discovery-version {
-  justify-content: center;
-  text-align: center;
-}
+
 </style>
