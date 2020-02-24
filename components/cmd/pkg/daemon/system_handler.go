@@ -54,3 +54,7 @@ func fetchAllWebhooks(c *gin.Context) {
 	webhooks := entities.FetchWebhooks()
 	c.JSON(http.StatusOK, webhooks)
 }
+
+func fetchRunningErrors(c *gin.Context) {
+	c.JSON(http.StatusOK, entities.RunningErrors)
+}
