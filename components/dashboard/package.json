@@ -43,7 +43,7 @@
     "@vue/test-utils": "1.0.0-beta.31",
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.1",
-    "sass": "^1.24.5",
+    "sass": "^1.26.0",
     "sass-loader": "^8.0.2",
     "typescript": "~3.8.2",
     "vue-cli-plugin-vuetify": "^2.0.5",
