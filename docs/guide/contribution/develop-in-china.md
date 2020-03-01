@@ -1,6 +1,6 @@
 # Develop in China
 
-Some important build tools are difficult to access in some contries. To help them participate in the development, we provide some documents to aid them.
+Some important build tools are difficult to access in some contries. To help them participate in the development, we provide some documents.
 
 ## Golang
 
