@@ -1450,7 +1450,7 @@
     webpack "^4.0.0"
     yorkie "^2.0.0"
 
-"@vue/cli-plugin-router@^4.2.2", "@vue/cli-plugin-router@^4.2.3":
+"@vue/cli-plugin-router@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@vue/cli-plugin-router/-/cli-plugin-router-4.2.3.tgz#c64594e7e7e20ba76c71262f283b6199f5afd463"
   integrity sha512-RGtgFQCTMS1X1wtFt752RMgr/LlF9cfpH37MkwjhF2wpnyTp+hkKl/09QORAKW91I8iFpZFH7xZKMBS3r1WbCw==
@@ -1557,7 +1557,7 @@
     webpack-dev-server "^3.10.2"
     webpack-merge "^4.2.2"
 
-"@vue/cli-shared-utils@^4.2.2", "@vue/cli-shared-utils@^4.2.3":
+"@vue/cli-shared-utils@^4.2.3":
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/@vue/cli-shared-utils/-/cli-shared-utils-4.2.3.tgz#13646452cc25b0ab68a57cb52cac27983cee39a4"
   integrity sha512-GCoTB6vMZsi9z/Bmn8/C9IlnUw8eeHONOGE+48TJkZyulftVFhlwVWjTFp5GuDAlwpTWarHchW9IoVu3pIIGfA==
@@ -10303,10 +10303,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@~3.8.2:
-  version "3.8.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.2.tgz#91d6868aaead7da74f493c553aeff76c0c0b1d5a"
-  integrity sha512-EgOVgL/4xfVrCMbhYKUQTdF37SQn4Iw73H5BgCrF1Abdun7Kwy/QZsE/ssAy0y4LxBbvua3PIbFsbRczWWnDdQ==
+typescript@~3.8.3:
+  version "3.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.8.3.tgz#409eb8544ea0335711205869ec458ab109ee1061"
+  integrity sha512-MYlEfn5VrLNsgudQTVJeNaQFUAI7DkhnOjdpAp4T+ku1TfQClewlbSuTVHiA+8skNBgaf02TL/kLOvig4y3G8w==
 
 uc.micro@^1.0.1:
   version "1.0.6"
