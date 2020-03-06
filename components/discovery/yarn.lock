@@ -4057,10 +4057,10 @@ loopback-datasource-juggler@^3.0.0, loopback-datasource-juggler@^3.28.0:
     traverse "^0.6.6"
     uuid "^3.0.1"
 
-loopback-datasource-juggler@^4.18.1:
-  version "4.18.1"
-  resolved "https://registry.yarnpkg.com/loopback-datasource-juggler/-/loopback-datasource-juggler-4.18.1.tgz#8d006770749634865e99fe2a44a987bae546d8ef"
-  integrity sha512-vIRCY3MIOvusPFrssP1VqOrigvR5TowGTiP2k/TodMrQn8xNsDRkVINvVDw8nrtWAqUZn0r1vLOMJ8pwY+VT9w==
+loopback-datasource-juggler@^4.18.1, loopback-datasource-juggler@^4.19.2:
+  version "4.19.2"
+  resolved "https://registry.yarnpkg.com/loopback-datasource-juggler/-/loopback-datasource-juggler-4.19.2.tgz#a9bc9cfb039eea9d6929adf73e0e498b31324354"
+  integrity sha512-nt6xyCQ99HDhY6KkcFax8AY7DBqVZcedgowb0jEPpVfuuGodK7o8AI6sZcor4RyKn05CValxt15J8gllLbNlbw==
   dependencies:
     async "^3.1.0"
     change-case "^4.1.1"
