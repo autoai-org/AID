@@ -232,21 +232,20 @@
     lodash "^4.17.15"
     tslib "^1.11.1"
 
-"@loopback/boot@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@loopback/boot/-/boot-2.0.0.tgz#321ba7a0ec6f9342bf159a38dd96a8fd5042da83"
-  integrity sha512-Q2ZRWRAdbyUqA+NW7+AZak0VVLx7rgVwLkMws6OGoGt03ZPw932FhXfjg/pNJt3qtCRndqn4TVgh7DV/adpLCQ==
+"@loopback/boot@^1.7.4":
+  version "1.7.4"
+  resolved "https://registry.yarnpkg.com/@loopback/boot/-/boot-1.7.4.tgz#d77a4da7e540c2b1229e8ac12bf0f6719cfa3c67"
+  integrity sha512-31mgqBCM5aEe/P+fSPh07S2PR0WNVoHl3kIoHMn6VNVXHz8BsCD249m09E3wGFP8QgqDOnuMKdYeJi99cHNzkg==
   dependencies:
-    "@loopback/context" "^3.0.0"
-    "@loopback/core" "^2.0.0"
-    "@loopback/model-api-builder" "^2.0.0"
-    "@loopback/repository" "^2.0.0"
-    "@loopback/service-proxy" "^2.0.0"
+    "@loopback/context" "^2.1.1"
+    "@loopback/core" "^1.12.4"
+    "@loopback/model-api-builder" "^1.1.4"
+    "@loopback/repository" "^1.19.1"
+    "@loopback/service-proxy" "^1.3.17"
     "@types/debug" "^4.1.5"
     "@types/glob" "^7.1.1"
     debug "^4.1.1"
     glob "^7.1.6"
-    tslib "^1.11.1"
 
 "@loopback/build@^4.0.0":
   version "4.0.0"
@@ -402,12 +401,10 @@
     reflect-metadata "^0.1.13"
     tslib "^1.11.1"
 
-"@loopback/model-api-builder@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@loopback/model-api-builder/-/model-api-builder-2.0.0.tgz#563060e7a1760cf429a58d9f339373713aae9a78"
-  integrity sha512-BYPB6msps8U/c2wuQOHy9Amh9QW05v0t3DllWABJ7yInAAF/zIpmBGefuK88n2JFf+pfp8N1fmrMW9cYANntTg==
-  dependencies:
-    tslib "^1.11.1"
+"@loopback/model-api-builder@^1.1.4":
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/@loopback/model-api-builder/-/model-api-builder-1.1.4.tgz#7a3dc3396335a8b457b83edb492dce30efabb5ff"
+  integrity sha512-jul5/r8XpihB0qjFP1ie8dn68gxM2GfXewTSfl/cirualGBOuZL8fNno7HpAmQkebNMB3dQLAOFZApz/1PjGcA==
 
 "@loopback/openapi-v3@^2.0.0":
   version "2.0.0"
@@ -483,16 +480,17 @@
     loopback-datasource-juggler "^4.19.2"
     tslib "^1.11.1"
 
-"@loopback/rest-explorer@^1.4.10":
-  version "1.4.10"
-  resolved "https://registry.yarnpkg.com/@loopback/rest-explorer/-/rest-explorer-1.4.10.tgz#a69121b8b3a33ab5ede76d72fb104570aa9c53b4"
-  integrity sha512-2Rp0oU6WJoZ+3mrOv3qktC2Z9XhPQJcGe/zddRc1rxahwbIV2J2/B2C++ahV4OLkExU6W84WK3yUnExlGCLxFw==
+"@loopback/rest-explorer@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@loopback/rest-explorer/-/rest-explorer-2.0.0.tgz#ce4f36a5f00271253afb2e192d8cc9585eb98324"
+  integrity sha512-1BQNhNEylQ/AYRqQrLcZcpRB3IiS78vnxRaMeHfHWda3bSsgDTkwU5M3mmzW64JUwYNEX2uJGkhkCdBRVC4kMw==
   dependencies:
-    "@loopback/context" "^2.1.1"
-    "@loopback/core" "^1.12.4"
-    "@loopback/rest" "^2.0.0"
+    "@loopback/context" "^3.0.0"
+    "@loopback/core" "^2.0.0"
+    "@loopback/rest" "^3.0.0"
     ejs "^3.0.1"
     swagger-ui-dist "^3.25.0"
+    tslib "^1.11.1"
 
 "@loopback/rest@^2.0.0":
   version "2.0.0"
@@ -582,16 +580,6 @@
     "@loopback/context" "^2.1.1"
     "@loopback/core" "^1.12.4"
     loopback-datasource-juggler "^4.18.1"
-
-"@loopback/service-proxy@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@loopback/service-proxy/-/service-proxy-2.0.0.tgz#13b6ef1b3fef77d1258eaa625d31b73adfc5a816"
-  integrity sha512-F7PHkcVsDNCjmkc23GEIPemmvjYFI8PIP8z8nJUodmMfIkjsZj9z8zDOCi/fu9VyALsTXMlMbpSxEVDDDuiTYg==
-  dependencies:
-    "@loopback/context" "^3.0.0"
-    "@loopback/core" "^2.0.0"
-    loopback-datasource-juggler "^4.19.2"
-    tslib "^1.11.1"
 
 "@loopback/testlab@^2.0.0":
   version "2.0.0"
