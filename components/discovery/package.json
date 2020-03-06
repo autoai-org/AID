@@ -48,7 +48,7 @@
     "@loopback/context": "^3.0.0",
     "@loopback/core": "^2.0.0",
     "@loopback/extension-health": "^0.2.17",
-    "@loopback/openapi-v3": "^2.0.0",
+    "@loopback/openapi-v3": "^3.0.0",
     "@loopback/repository": "^2.0.0",
     "@loopback/rest": "^2.0.0",
     "@loopback/rest-explorer": "^1.4.10",
