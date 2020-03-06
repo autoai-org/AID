@@ -48,7 +48,7 @@
     "@loopback/context": "^3.0.0",
     "@loopback/core": "^2.0.0",
     "@loopback/extension-health": "^0.2.17",
-    "@loopback/openapi-v3": "^2.0.0",
+    "@loopback/openapi-v3": "^3.0.0",
     "@loopback/repository": "^2.0.0",
     "@loopback/rest": "^2.0.0",
     "@loopback/rest-explorer": "^2.0.0",
@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "@loopback/build": "^4.0.0",
-    "@loopback/eslint-config": "^5.0.3",
+    "@loopback/eslint-config": "^6.0.0",
     "@loopback/testlab": "^2.0.0",
     "@types/node": "^13.7.4",
     "@typescript-eslint/eslint-plugin": "^2.19.0",
