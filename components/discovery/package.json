@@ -42,6 +42,7 @@
     "!*/__tests__"
   ],
   "dependencies": {
+    "@loopback/boot": "^2.0.0",
     "@loopback/authentication-passport": "^2.0.0",
     "@loopback/boot": "^1.7.4",
     "@loopback/cli": "^2.0.1",
