@@ -47,7 +47,7 @@
     "@loopback/cli": "^2.0.1",
     "@loopback/context": "^3.0.0",
     "@loopback/core": "^2.0.0",
-    "@loopback/extension-health": "^0.2.17",
+    "@loopback/extension-health": "^0.3.0",
     "@loopback/openapi-v3": "^3.0.0",
     "@loopback/repository": "^2.0.0",
     "@loopback/rest": "^2.0.0",

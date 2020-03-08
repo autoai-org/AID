@@ -355,15 +355,16 @@
   resolved "https://registry.yarnpkg.com/@loopback/eslint-config/-/eslint-config-6.0.0.tgz#a4f8c8281dad8433b09c074aba15dc9ac40b48d2"
   integrity sha512-YE3DbpJHVe6mRThRWOERB9M30TMwsDj40Rr6b1SnbczwcU09vZs6b3Otn2578wHD1kHWX0RmwSiUNFUFwaAmtA==
 
-"@loopback/extension-health@^0.2.17":
-  version "0.2.17"
-  resolved "https://registry.yarnpkg.com/@loopback/extension-health/-/extension-health-0.2.17.tgz#afe83638cd752f6a34a8db70d89409bf5ee9805c"
-  integrity sha512-phKiA3tBTot7Eu4geOSEvTYc6SZibVPUTmgDAw1MpXtHQfBY5TVhMLojtmHbOZ1xeVe59JJfkokq62TR3Q3iJw==
+"@loopback/extension-health@^0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@loopback/extension-health/-/extension-health-0.3.0.tgz#6be1bc6ce60bd0941ba3da4111d4a6b14a5a0b58"
+  integrity sha512-o4R42DFt24urwnkTSeN8Sk8s5vc82xnjpYMQKazfFeF5PeqQnRF+vj73KcW69MYawfny41YleDhNMS0bLbFI+w==
   dependencies:
     "@cloudnative/health" "^2.1.2"
-    "@loopback/core" "^1.12.4"
-    "@loopback/rest" "^2.0.0"
+    "@loopback/core" "^2.0.0"
+    "@loopback/rest" "^3.0.0"
     p-event "^4.1.0"
+    tslib "^1.11.1"
 
 "@loopback/http-server@^1.5.4":
   version "1.5.4"
