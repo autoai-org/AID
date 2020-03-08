@@ -581,6 +581,16 @@
     "@loopback/core" "^1.12.4"
     loopback-datasource-juggler "^4.18.1"
 
+"@loopback/service-proxy@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@loopback/service-proxy/-/service-proxy-2.0.0.tgz#13b6ef1b3fef77d1258eaa625d31b73adfc5a816"
+  integrity sha512-F7PHkcVsDNCjmkc23GEIPemmvjYFI8PIP8z8nJUodmMfIkjsZj9z8zDOCi/fu9VyALsTXMlMbpSxEVDDDuiTYg==
+  dependencies:
+    "@loopback/context" "^3.0.0"
+    "@loopback/core" "^2.0.0"
+    loopback-datasource-juggler "^4.19.2"
+    tslib "^1.11.1"
+
 "@loopback/testlab@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@loopback/testlab/-/testlab-2.0.0.tgz#1801c0486b832b7368a6dc1157c44136b87bee57"
