@@ -1,14 +1,13 @@
-import {DiscoveryApplication} from './application';
-import {ApplicationConfig} from '@loopback/core';
+import logger from './logger';
+import app from './app';
 
-export {DiscoveryApplication};
+const port = app.get('port');
+const server = app.listen(port);
 
-export async function main(options: ApplicationConfig = {}) {
-  const app = new DiscoveryApplication(options);
-  await app.boot();
-  await app.start();
+process.on('unhandledRejection', (reason, p) =>
+  logger.error('Unhandled Rejection at: Promise ', p, reason)
+);
 
-  const url = app.restServer.url;
-  console.log(`Server is running at ${url}`);
-  return app;
-}
+server.on('listening', () =>
+  logger.info('Feathers application started on http://%s:%d', app.get('host'), port)
+);

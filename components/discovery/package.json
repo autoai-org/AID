@@ -1,71 +1,78 @@
 {
   "name": "discovery",
-  "version": "1.0.0",
-  "description": "discovery",
-  "main": "index.js",
+  "description": "",
+  "version": "0.0.0",
+  "homepage": "",
+  "private": true,
+  "main": "src",
+  "keywords": [
+    "feathers"
+  ],
+  "author": {
+    "name": "Xiaozhe Yao",
+    "email": "xiaozhe.yaoi@gmail.com"
+  },
+  "contributors": [],
+  "bugs": {},
+  "directories": {
+    "lib": "src",
+    "test": "test/",
+    "config": "config/"
+  },
   "engines": {
-    "node": ">=8.9"
+    "node": "^13.0.0",
+    "yarn": ">= 0.18.0"
   },
   "scripts": {
-    "build": "./node_modules/.bin/lb-tsc",
-    "build:watch": "./node_modules/.bin/lb-tsc --watch",
-    "clean": "./node_modules/.bin/lb-clean dist *.tsbuildinfo",
-    "lint": "npm run prettier:check && npm run eslint",
-    "lint:fix": "npm run eslint:fix && npm run prettier:fix",
-    "prettier:cli": "./node_modules/.bin/lb-prettier \"**/*.ts\" \"**/*.js\"",
-    "prettier:check": "npm run prettier:cli -- -l",
-    "prettier:fix": "npm run prettier:cli -- --write",
-    "eslint": "./node_modules/.bin/lb-eslint --report-unused-disable-directives .",
-    "eslint:fix": "npm run eslint -- --fix",
-    "pretest": "npm run clean && npm run build",
-    "test": "./node_modules/.bin/lb-mocha --allow-console-logs \"dist/__tests__\"",
-    "posttest": "npm run lint",
-    "test:dev": "./node_modules/.bin/lb-mocha --allow-console-logs dist/__tests__/**/*.js && npm run posttest",
-    "docker:build": "docker build -t discovery .",
-    "docker:run": "docker run -p 3000:3000 -d discovery",
-    "migrate": "node ./dist/migrate",
-    "prestart": "npm run build",
-    "start": "node -r source-map-support/register .",
-    "prepublishOnly": "npm run test"
+    "test": "yarn run compile && yarn run mocha",
+    "dev": "ts-node-dev --no-notify src/",
+    "start": "yarn run compile && node lib/",
+    "mocha": "ts-mocha \"test/**/*.ts\" --recursive --exit",
+    "compile": "shx rm -rf lib/ && tsc"
   },
-  "repository": {
-    "type": "git"
+  "standard": {
+    "env": [
+      "mocha"
+    ],
+    "ignore": []
   },
-  "author": "AutoAI.org",
-  "license": "MIT",
-  "files": [
-    "README.md",
-    "index.js",
-    "index.d.ts",
-    "dist",
-    "src",
-    "!*/__tests__"
-  ],
+  "types": "lib/",
   "dependencies": {
-    "@loopback/authentication-passport": "^2.0.0",
-    "@loopback/boot": "^1.7.4",
-    "@loopback/cli": "^2.0.1",
-    "@loopback/context": "^3.0.0",
-    "@loopback/core": "^2.0.0",
-    "@loopback/extension-health": "^0.2.17",
-    "@loopback/openapi-v3": "^3.0.0",
-    "@loopback/repository": "^2.0.0",
-    "@loopback/rest": "^2.0.0",
-    "@loopback/rest-explorer": "^2.0.0",
-    "@loopback/service-proxy": "^1.3.17"
+    "@feathersjs/authentication": "^4.5.2",
+    "@feathersjs/authentication-local": "^4.5.2",
+    "@feathersjs/authentication-oauth": "^4.5.2",
+    "@feathersjs/configuration": "^4.5.1",
+    "@feathersjs/errors": "^4.5.1",
+    "@feathersjs/express": "^4.5.1",
+    "@feathersjs/feathers": "^4.5.1",
+    "@feathersjs/transport-commons": "^4.5.2",
+    "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "feathers-mongodb": "^6.1.0",
+    "feathers-mongoose": "^8.3.0",
+    "helmet": "^3.21.2",
+    "mongodb": "^3.5.3",
+    "mongodb-core": "^3.2.7",
+    "mongoose": "^5.8.13",
+    "serve-favicon": "^2.5.0",
+    "winston": "^3.0.0"
   },
   "devDependencies": {
-    "@loopback/build": "^4.0.0",
-    "@loopback/eslint-config": "^6.0.0",
-    "@loopback/testlab": "^2.0.0",
-    "@types/node": "^13.7.4",
-    "@typescript-eslint/eslint-plugin": "^2.19.0",
-    "@typescript-eslint/parser": "^2.19.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-eslint-plugin": "^2.2.1",
-    "eslint-plugin-mocha": "^6.2.2",
-    "source-map-support": "^0.5.16",
-    "typescript": "~3.8.2"
+    "@types/compression": "^1.7.0",
+    "@types/cors": "^2.8.6",
+    "@types/helmet": "^0.0.45",
+    "@types/jsonwebtoken": "^8.3.8",
+    "@types/mocha": "^7.0.2",
+    "@types/mongodb": "^3.5.2",
+    "@types/mongoose": "^5.7.3",
+    "@types/serve-favicon": "^2.5.0",
+    "axios": "^0.19.2",
+    "mocha": "^7.0.1",
+    "nodemon": "^2.0.2",
+    "shx": "^0.3.2",
+    "ts-mocha": "^6.0.0",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "tslint": "^6.0.0",
+    "typescript": "^3.7.5"
   }
 }
