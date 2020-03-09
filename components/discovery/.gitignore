@@ -110,6 +110,3 @@ $RECYCLE.BIN/
 # Others
 lib/
 data/
-
-# Secrets
-config/

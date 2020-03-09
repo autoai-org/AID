@@ -1,0 +1,56 @@
+{
+  "host": "discovery-app.feathersjs.com",
+  "port": "PORT",
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "entity": "user",
+    "service": "users",
+    "secret": "AUTH_SECRET",
+    "authStrategies": [
+      "jwt",
+      "local"
+    ],
+    "jwtOptions": {
+      "header": {
+        "typ": "access"
+      },
+      "audience": "https://discovery.aid.autoai.org",
+      "issuer": "aid-discovery",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "local": {
+      "usernameField": "email",
+      "passwordField": "password"
+    },
+    "oauth": {
+      "redirect": "/",
+      "google": {
+        "key": "GOOGLE_OAUTH_KEY",
+        "secret": "GOOGLE_OAUTH_SECRET",
+        "scope": [
+          "email",
+          "profile",
+          "openid"
+        ]
+      },
+      "facebook": {
+        "key": "FACEBOOK_OAUTH_KEY",
+        "secret": "FACEBOOK_OAUTH_SECRET"
+      },
+      "twitter": {
+        "key": "TWITTER_OAUTH_KEY",
+        "secret": "TWITTER_OAUTH_SECRET"
+      },
+      "github": {
+        "key": "GITHUB_OAUTH_KEY",
+        "secret": "GITHUB_OAUTH_SECRET"
+      }
+    }
+  },
+  "mongodb": "MONGO_URI"
+}
