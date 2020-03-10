@@ -51,7 +51,7 @@
     "feathers-mongodb": "^6.1.0",
     "feathers-mongoose": "^8.3.0",
     "helmet": "^3.21.2",
-    "mongodb": "^3.5.3",
+    "mongodb": "^3.5.5",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.9.4",
     "serve-favicon": "^2.5.0",
@@ -64,7 +64,7 @@
     "@types/jsonwebtoken": "^8.3.8",
     "@types/mocha": "^7.0.2",
     "@types/mongodb": "^3.5.2",
-    "@types/mongoose": "^5.7.3",
+    "@types/mongoose": "^5.7.6",
     "@types/serve-favicon": "^2.5.0",
     "axios": "^0.19.2",
     "mocha": "^7.0.1",
@@ -72,7 +72,7 @@
     "shx": "^0.3.2",
     "ts-mocha": "^6.0.0",
     "ts-node-dev": "^1.0.0-pre.44",
-    "tslint": "^6.0.0",
+    "tslint": "^6.1.0",
     "typescript": "^3.7.5"
   }
 }
