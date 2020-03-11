@@ -64,7 +64,7 @@
     "@types/jsonwebtoken": "^8.3.8",
     "@types/mocha": "^7.0.2",
     "@types/mongodb": "^3.5.2",
-    "@types/mongoose": "^5.7.4",
+    "@types/mongoose": "^5.7.5",
     "@types/serve-favicon": "^2.5.0",
     "axios": "^0.19.2",
     "mocha": "^7.0.1",
