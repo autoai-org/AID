@@ -51,7 +51,7 @@
     "feathers-mongodb": "^6.1.0",
     "feathers-mongoose": "^8.3.0",
     "helmet": "^3.21.2",
-    "mongodb": "^3.5.3",
+    "mongodb": "^3.5.5",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.9.4",
     "serve-favicon": "^2.5.0",
