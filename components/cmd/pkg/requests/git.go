@@ -14,13 +14,18 @@ import (
 
 var logger = utilities.NewDefaultLogger()
 
+var defaultGitClient GitClient
+
 // GitClient is the basic structure for performing git-based operations
 type GitClient struct {
 }
 
 // NewGitClient returns a new Git Client
 func NewGitClient() GitClient {
-	return GitClient{}
+	if defaultClient == nil {
+		defaultGitClient = GitClient{}
+	}
+	return defaultGitClient
 }
 
 // Clone downloads remote contents from remoteURL to targetFolder

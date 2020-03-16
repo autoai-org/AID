@@ -6,9 +6,10 @@
 package utilities
 
 import (
-	"github.com/sirupsen/logrus"
 	"path/filepath"
 	"time"
+
+	"github.com/sirupsen/logrus"
 )
 
 // DefaultLogger is the instance shared by all modules
@@ -20,7 +21,8 @@ func NewDefaultLogger() *logrus.Logger {
 		return DefaultLogger
 	}
 	logPath := filepath.Join(GetBasePath(), "logs", "system")
-	return NewLogger(logPath)
+	DefaultLogger = NewLogger(logPath)
+	return DefaultLogger
 }
 
 // NewLogger returns a new Logger

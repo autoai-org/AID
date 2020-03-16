@@ -27,6 +27,7 @@ require (
 	github.com/ilibs/gosql/v2 v2.0.2
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
+	github.com/manifoldco/promptui v0.7.0
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/mattn/go-sqlite3 v1.13.0
 	github.com/mattn/go-tty v0.0.3 // indirect
