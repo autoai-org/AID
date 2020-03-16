@@ -114,6 +114,15 @@ func main() {
 				},
 			},
 			{
+				Name:     "init",
+				Usage:    "Initialize a new package",
+				Category: "packages",
+				Action: func(c *cli.Context) error {
+					initRepository()
+					return nil
+				},
+			},
+			{
 				Name:     "images",
 				Usage:    "List Image",
 				Category: "runtime",
