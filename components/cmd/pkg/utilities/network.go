@@ -16,8 +16,6 @@ func GetOutboundIP() net.IP {
 		CheckError(err, "Cannot make net.Dial")
 	}
 	defer conn.Close()
-
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
-
 	return localAddr.IP
 }

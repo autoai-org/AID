@@ -98,13 +98,16 @@ func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCr
 	}
 	container := entities.Container{ID: resp.ID, ImageID: imageID}
 	container.Save()
+	port := "8081"
+	runningSolver := entities.RunningSolver{ContainerID: resp.ID, Status: "Ready", EntryPoint: "127.0.0.1:" + port}
+	runningSolver.Save()
 	return resp, err
 }
 
 // Start will start a container
 func (docker *DockerRuntime) Start(containerID string) error {
 	container := entities.GetContainer(containerID)
-	runningSolvers := entities.RunningSolver{ImageID: container.ImageID, Status: "Running"}
+	runningSolvers := entities.RunningSolver{ContainerID: container.ID, Status: "Running"}
 	runningSolvers.Save()
 	if err := docker.client.ContainerStart(context.Background(), containerID, types.ContainerStartOptions{}); err != nil {
 		utilities.CheckError(err, "Cannot start container "+containerID)
@@ -158,9 +161,7 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entitie
 	log.ID = logid
 	log.Save()
 	buildLogger := utilities.NewLogger(logPath)
-	go func() {
-		err = realBuild(docker, dockerfile, fullImageName, buildLogger)
-	}()
+	err = realBuild(docker, dockerfile, fullImageName, buildLogger)
 	if err == nil {
 		// no error occured, add image to database
 		image := entities.Image{Name: fullImageName}
