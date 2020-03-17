@@ -21,6 +21,8 @@ Your package is firstly a Python Package. Therefore, it will look like:
     - README.md
 ```
 
+You can create the following structure by running the command ```aid init ```. It will promopt you to enter your package name.
+
 ### Solvers
 
 Solver is a ```class``` extended from ```aid.Solver``` class. In this class, you need to implement 2 functions: ```__init__``` and ```infer```. As their literal meanings, in the ```init``` function, parameters in your package should be initiate, and in the ```infer``` function, a image file path will be passed in the parameter, and the ```infer``` function is supposed to return your result in a dict or list.
