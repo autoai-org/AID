@@ -4,8 +4,10 @@
 # https://opensource.org/licenses/MIT
 
 import os
-from mlpm.server import run_server
+
 from mlpm.logger import StepLogger
+from mlpm.server import run_server
+
 
 class Solver(object):
     def __init__(self, pretrained_toml=None):

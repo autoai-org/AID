@@ -5,15 +5,13 @@
 
 #coding:utf-8
 
+from mlpm.app import aidserver
+from mlpm.handler import handle_post_solver_train_or_infer
+from mlpm.utility import get_available_port, str2bool
 from sanic import request, response
 from sanic.response import json
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
-
-from mlpm.handler import handle_post_solver_train_or_infer
-from mlpm.utility import get_available_port, str2bool
-
-from mlpm.app import aidserver
 
 UPLOAD_INFER_FOLDER = './temp/infer'
 UPLOAD_TRAIN_FOLDER = './temp/train'

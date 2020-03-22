@@ -23,6 +23,10 @@ type Log struct {
 	Source    string    `db:"source"`
 }
 
+type BuildLog struct {
+	Stream string `json:"stream"`
+}
+
 // TableName defines the tablename in database
 func (l *Log) TableName() string {
 	return "log"

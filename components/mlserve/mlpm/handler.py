@@ -5,13 +5,14 @@
 # coding:utf-8
 import os
 import traceback
+
+from mlpm.app import aidserver
+from mlpm.utility import str2bool
 from sanic import Sanic, request, response
 from sanic.response import json
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
-from mlpm.app import aidserver
-from mlpm.utility import str2bool
 
 def handle_post_solver_train_or_infer(request, upload_folder, request_type):
     config = ImmutableMultiDict(request.form)

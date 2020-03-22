@@ -6,12 +6,13 @@
 package main
 
 import (
+	"path/filepath"
+	"strings"
+
 	"github.com/autoai-org/aiflow/components/cmd/pkg/daemon"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
-	"path/filepath"
-	"strings"
 )
 
 func build(solverName string) {
@@ -19,13 +20,13 @@ func build(solverName string) {
 	dockerClient := runtime.NewDockerRuntime()
 	// Read Base Image Name
 	tomlString, err := utilities.ReadFileContent("./aid.toml")
-	utilities.CheckError(err, "Cannot readfile "+ "./aid.toml")
+	utilities.CheckError(err, "Cannot readfile "+"./aid.toml")
 	packageInfo := entities.LoadPackageFromConfig(tomlString)
 	if solverName == "*" {
 		for _, solver := range packageInfo.Solvers {
 			imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solver.Name
 			// Check if docker file exists
-			_, err = utilities.ReadFileContent("./docker_"+solver.Name)
+			_, err = utilities.ReadFileContent("./docker_" + solver.Name)
 			if err != nil {
 				runtime.RenderDockerfile(solver.Name, "./docker_"+solver.Name)
 			}
@@ -34,7 +35,7 @@ func build(solverName string) {
 	} else {
 		imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
 		// Check if docker file exists
-		_, err = utilities.ReadFileContent("./docker_"+solverName)
+		_, err = utilities.ReadFileContent("./docker_" + solverName)
 		if err != nil {
 			runtime.RenderDockerfile(solverName, "./docker_"+solverName)
 		}
@@ -44,9 +45,9 @@ func build(solverName string) {
 
 func generate() {
 	tomlFilePath := filepath.Join("./", "aid.toml")
-	cvpmToml,err := utilities.ReadFileContent(tomlFilePath)
+	cvpmToml, err := utilities.ReadFileContent(tomlFilePath)
 	if err != nil {
-		utilities.CheckError(err, "Cannot open file "+ tomlFilePath)
+		utilities.CheckError(err, "Cannot open file "+tomlFilePath)
 	}
 	solvers := entities.LoadSolversFromConfig(cvpmToml)
 	runtime.RenderRunnerTpl("./", solvers)
@@ -60,4 +61,15 @@ func startServer(port string) {
 func installPackage(remoteURL string) {
 	targetPath := filepath.Join(utilities.GetBasePath(), "models")
 	runtime.InstallPackage(remoteURL, targetPath)
+}
+
+func createSolverContainer(imageName string, hostPort string) {
+	dockerClient := runtime.NewDockerRuntime()
+	image := entities.GetImagebyName(imageName)
+	resp, err := dockerClient.Create(image.ID, hostPort)
+	if err != nil {
+		logger.Error(err.Error())
+	} else {
+		logger.Info("Created successfully with the id " + resp.ID)
+	}
 }

@@ -7,6 +7,7 @@ package runtime
 
 import (
 	"bufio"
+	"encoding/json"
 	"io"
 	"os"
 	"path"
@@ -72,14 +73,14 @@ func (docker *DockerRuntime) Pull(imageName string) error {
 }
 
 // Create will create a container from an image
-func (docker *DockerRuntime) Create(imageID string) (container.ContainerCreateCreatedBody, error) {
+func (docker *DockerRuntime) Create(imageID string, hostPort string) (container.ContainerCreateCreatedBody, error) {
 	image := entities.GetImage(imageID)
 	hostConfig := &container.HostConfig{
 		PortBindings: nat.PortMap{
 			"8080/tcp": []nat.PortBinding{
 				{
 					HostIP:   "0.0.0.0",
-					HostPort: "8081",
+					HostPort: hostPort,
 				},
 			},
 		},
@@ -135,7 +136,9 @@ func realBuild(docker *DockerRuntime, dockerfile string, imageName string, build
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)
 	for scanner.Scan() {
-		buildLogger.Info(scanner.Text())
+		var buildLog entities.BuildLog
+		json.Unmarshal(scanner.Bytes(), &buildLog)
+		buildLogger.Info(buildLog.Stream)
 	}
 	termFd, isTerm := term.GetFdInfo(os.Stderr)
 	err = jsonmessage.DisplayJSONMessagesStream(buildResponse.Body, os.Stderr, termFd, isTerm, nil)
@@ -158,9 +161,7 @@ func (docker *DockerRuntime) Build(imageName string, dockerfile string) (entitie
 	log.ID = logid
 	log.Save()
 	buildLogger := utilities.NewLogger(logPath)
-	go func() {
-		err = realBuild(docker, dockerfile, fullImageName, buildLogger)
-	}()
+	err = realBuild(docker, dockerfile, fullImageName, buildLogger)
 	if err == nil {
 		// no error occured, add image to database
 		image := entities.Image{Name: fullImageName}

@@ -104,6 +104,16 @@ func main() {
 				},
 			},
 			{
+				Name:     "create",
+				Aliases:  []string{"cc"},
+				Usage:    "Create Container",
+				Category: "runtime",
+				Action: func(c *cli.Context) error {
+					createSolverContainer(c.Args().Get(0), c.Args().Get(1))
+					return nil
+				},
+			},
+			{
 				Name:     "install",
 				Aliases:  []string{"i"},
 				Usage:    "Install Package",

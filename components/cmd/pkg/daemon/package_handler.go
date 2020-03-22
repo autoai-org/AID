@@ -132,7 +132,7 @@ func installPackage(c *gin.Context) {
 func createSolverContainer(c *gin.Context) {
 	imageID := c.Param("imageId")
 	dockerClient := runtime.NewDockerRuntime()
-	_, err := dockerClient.Create(imageID)
+	_, err := dockerClient.Create(imageID, "8081")
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, messageResponse{
 			Msg: err.Error(),

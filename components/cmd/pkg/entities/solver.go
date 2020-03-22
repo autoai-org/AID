@@ -139,6 +139,15 @@ func GetImage(id string) Image {
 	return image
 }
 
+// GetImagebyName returns the image object by image name
+func GetImagebyName(name string) Image {
+	image := Image{Name: name}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(&image)
+	utilities.CheckError(err, "Cannot fetch image object with name "+name)
+	return image
+}
+
 // GetContainer returns the container object by container id
 func GetContainer(id string) Container {
 	container := Container{ID: id}
