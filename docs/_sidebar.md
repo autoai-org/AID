@@ -6,6 +6,10 @@
   - [Quick Start](guide/quick-start.md)
   - [Installation](guide/installation.md)
 
+- Examples
+
+  - [Chatbot](guide/examples/chatbot.md)
+
 - Concepts
   - [Package](guide/concepts/package.md)
   - [Runtime](guide/concepts/runtime.md)

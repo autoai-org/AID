@@ -1,14 +1,14 @@
 # Installation
 
+## Prerequisite
+
 ## Command Line Utility
 
-### Prerequisite
+### Build from Source
 
 The command line utility is written in Golang. In order to build the utility, you will need to have ```Golang > 1.12```.
 
 We use ```go mod``` to manage third-party dependencies, so you will need to have it enabled.
-
-### Build from Source
 
 To install cutting-edge version of AID, we recommend you to build it from source.
 
@@ -19,3 +19,7 @@ To install cutting-edge version of AID, we recommend you to build it from source
 5. You will have to binary ready inside entry for testing or in ```aid/components/cmd/dist``` for production.
 
 Note that building from source is not promised to be stable and may incur unknown issues, bugs. Use it with CAUTION!
+
+### Post-Installation
+
+After installation the cli program, please run ```aid init``` to create the required folder, and database structure.
