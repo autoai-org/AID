@@ -35,7 +35,7 @@ func main() {
 				Destination: &license,
 			},
 		},
-		Name:    "AIFlow",
+		Name:    "AID",
 		Version: Version,
 		Usage:   "One-Stop AIOps System.",
 		Action: func(c *cli.Context) error {
@@ -124,7 +124,7 @@ func main() {
 				},
 			},
 			{
-				Name:     "init",
+				Name:     "new",
 				Usage:    "Initialize a new package",
 				Category: "packages",
 				Action: func(c *cli.Context) error {

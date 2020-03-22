@@ -21,7 +21,7 @@ Your package is firstly a Python Package. Therefore, it will look like:
     - README.md
 ```
 
-You can create the following structure by running the command ```aid init ```. It will promopt you to enter your package name.
+You can create the following structure by running the command ```aid new ```. It will promopt you to enter your package name.
 
 ### Solvers
 

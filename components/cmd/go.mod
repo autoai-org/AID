@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
 	github.com/BurntSushi/toml v0.3.1
-	github.com/Microsoft/go-winio v0.4.14 // indirect
+	github.com/Microsoft/hcsshim v0.8.7 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
 	github.com/cavaliercoder/grab v2.0.0+incompatible
@@ -15,7 +15,6 @@ require (
 	github.com/docker/distribution v2.7.1+incompatible // indirect
 	github.com/docker/docker v1.4.2-0.20191223123943-bbcabf69c81b
 	github.com/docker/go-connections v0.4.0
-	github.com/docker/go-units v0.4.0 // indirect
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.5.1
 	github.com/gin-gonic/gin v1.5.0
@@ -27,6 +26,7 @@ require (
 	github.com/ilibs/gosql/v2 v2.0.2
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
+	github.com/manifoldco/promptui v0.7.0 // indirect
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/mattn/go-sqlite3 v1.13.0
 	github.com/mattn/go-tty v0.0.3 // indirect
@@ -44,5 +44,4 @@ require (
 	google.golang.org/grpc v1.26.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
-	gotest.tools v2.2.0+incompatible // indirect
 )
