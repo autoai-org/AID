@@ -45,13 +45,13 @@ type Container struct {
 
 // RunningSolver wraps the docker container that runs as solver
 type RunningSolver struct {
-	ID         string    `db:"id"`
-	ImageID    string    `db:"imageId"`
-	Status     string    `db:"status"`
-	ImageName  string    `db:"imagename"`
-	EntryPoint string    `db:"entrypoint"`
-	CreatedAt  time.Time `db:"created_at"`
-	UpdatedAt  time.Time `db:"updated_at"`
+	ID          string    `db:"id"`
+	ContainerID string    `db:"containerID"`
+	Status      string    `db:"status"`
+	ImageName   string    `db:"imagename"`
+	EntryPoint  string    `db:"entrypoint"`
+	CreatedAt   time.Time `db:"created_at"`
+	UpdatedAt   time.Time `db:"updated_at"`
 }
 
 // Solvers defines a list of solvers
@@ -221,14 +221,14 @@ func GetRunningSolver(ID string) RunningSolver {
 
 // GetAllRunningSolvers returns the array of all running solvers
 // which belongs the a single solver.
-func GetAllRunningSolvers(ID string) []RunningSolver {
+func GetAllRunningSolvers(ID string) RunningSolver {
 	runningSolverPointers := make([]*RunningSolver, 0)
 	db := storage.GetDefaultDB()
 	db.Fetch(&runningSolverPointers)
-	var runningSolvers []RunningSolver
+	var runningSolvers RunningSolver
 	for i := range runningSolverPointers {
-		if runningSolverPointers[i].ImageID == ID {
-			runningSolvers = append(runningSolvers, *runningSolverPointers[i])
+		if runningSolverPointers[i].ContainerID == ID {
+			runningSolvers = *runningSolverPointers[i]
 		}
 	}
 	return runningSolvers

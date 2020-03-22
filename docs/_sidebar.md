@@ -20,6 +20,7 @@
 
   - [Code of Conduct](guide/contribution/code-of-conduct.md)
   - [Contributing](guide/contribution/contributing.md)
+  - [Develop in China](guide/contribution/develop-in-china.md)
 
 - Specs
   - [Data Formats](guide/specs/data-format.md)
@@ -28,3 +29,4 @@
   - [Privacy](guide/misc/privacy.md)
   - [Reviewer](guide/misc/reviewer.md)
   - [License](guide/misc/license.md)
+  - [Troubleshooting](guide/misc/troubleshooting.md)
