@@ -50,7 +50,7 @@
     "cors": "^2.8.5",
     "feathers-mongodb": "^6.1.0",
     "feathers-mongoose": "^8.3.0",
-    "helmet": "^3.21.2",
+    "helmet": "^3.22.0",
     "mongodb": "^3.5.5",
     "mongodb-core": "^3.2.7",
     "mongoose": "^5.9.6",
