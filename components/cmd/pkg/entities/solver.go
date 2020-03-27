@@ -10,8 +10,8 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 // Solver defines the struct of a solver, the minimal struct of a inference program
@@ -221,6 +221,8 @@ func GetRunningSolver(ID string) RunningSolver {
 
 // GetAllRunningSolvers returns the array of all running solvers
 // which belongs the a single solver.
+// TODO This can be improved in a future version, currently the db layer does
+// TODO not support query all items with conditions.
 func GetAllRunningSolvers(ID string) RunningSolver {
 	runningSolverPointers := make([]*RunningSolver, 0)
 	db := storage.GetDefaultDB()

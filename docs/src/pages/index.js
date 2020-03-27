@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import OpenSource from '../components/Landing/OpenSource';
 
 const features = [
   {
@@ -34,7 +35,7 @@ const features = [
   },
 ];
 
-function Feature({imageUrl, title, description}) {
+function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
     <div className={classnames('col col--4', styles.feature)}>
@@ -51,28 +52,44 @@ function Feature({imageUrl, title, description}) {
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
-      <header className={classnames('hero hero--primary', styles.heroBanner)}>
+      <header className={classnames('hero', styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <h1 className={classnames('hero__title', styles.title)}>
+            {
+              'A.I.D was born to help developers '
+            }
+              <b>Share</b>
+            {' + '}
+              <b>Deploy</b>
+            {' + '}
+              <b>Optimize</b>
+            {' Machine Learning Models.'}
+          </h1>
+          <p className={classnames('hero__subtitle', styles.subTitle)}>
+            {siteConfig.tagline}
+          </p>
           <div className={styles.buttons}>
             <Link
               className={classnames(
                 'button button--outline button--secondary button--lg',
                 styles.getStarted,
               )}
-              to={useBaseUrl('docs/quickstart')}>
+              to={useBaseUrl('docs/quickstart')}
+            >
               Get Started
             </Link>
           </div>
         </div>
       </header>
       <main>
+        <div className="container">
+          <OpenSource></OpenSource>
+        </div>
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">

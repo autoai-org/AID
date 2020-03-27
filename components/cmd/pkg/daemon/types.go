@@ -6,7 +6,7 @@
 package daemon
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
 )
 
 // logContent is used for the daemon to wrap log content as json format
@@ -53,4 +53,13 @@ type newExperimentRequest struct {
 	Vendor      string `json:"vendor"`
 	Package     string `json:"package"`
 	Solver      string `json:"solver"`
+}
+
+type queryEnvironmentVariablesRequest struct {
+	Env string `json:"env"`
+}
+
+type newEnvironmentVariableRequest struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
 }

@@ -5,7 +5,7 @@
 
 package runtime
 
-import "github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+import "github.com/autoai-org/aid/components/cmd/pkg/entities"
 
 // RunExtensionCmd starts a new process, fill the command with args, and save outputs
 func RunExtensionCmd(ext entities.Extension, args map[string]string) {

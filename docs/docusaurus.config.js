@@ -1,17 +1,17 @@
 module.exports = {
   title: 'A.I.D',
-  tagline: 'AIOps Platform',
+  tagline: 'Open Source MLOps Platform',
   url: 'https://aid.autoai.org',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
-  organizationName: 'autoai', // Usually your GitHub org/user name.
+  organizationName: 'autoai-org', // Usually your GitHub org/user name.
   projectName: 'aid', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'AID',
       logo: {
         alt: 'AID',
-        src: 'img/logo_white.png',
+        src: 'img/logo.png',
       },
       links: [
         {
@@ -21,8 +21,10 @@ module.exports = {
           position: 'left',
         },
         {to: 'blog', label: 'Blog', position: 'left'},
+        {to: 'docs/examples/showroom', label: 'Showroom', position: 'left'},
+        {to: '/changelog', label: 'Changelog', position: 'left'},
         {
-          href: 'https://github.com/autoai/aid',
+          href: 'https://github.com/autoai-org/aid',
           label: 'GitHub',
           position: 'right',
         },
@@ -41,6 +43,10 @@ module.exports = {
             {
               label: 'Full Docs',
               to: 'docs/overview',
+            },
+            {
+              label: 'Videos',
+              to: 'https://www.youtube.com/playlist?list=PL2BhlRIBzYXIkKBOTjU4nzYvxpXqemb2n',
             },
           ],
         },
@@ -66,11 +72,15 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/autoai/aid',
+              href: 'https://github.com/autoai-org/aid',
             },
             {
               label: 'Twitter',
               href: 'https://twitter.com/aid_aiops',
+            },
+            {
+              label: 'News',
+              href: '/docs/news',
             },
           ],
         },

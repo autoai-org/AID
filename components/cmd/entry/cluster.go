@@ -3,4 +3,16 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-package runtime
+package main
+
+func runAgent() {
+
+}
+
+func pushImage() {
+
+}
+
+func addNode() {
+
+}

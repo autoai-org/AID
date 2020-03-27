@@ -6,7 +6,7 @@
 package storage
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/ilibs/gosql/v2"
 
 	// import sqlite3 as driver for database
@@ -47,7 +47,6 @@ func GetDefaultDB() *Database {
 		DefaultDB.Connect()
 		return DefaultDB
 	}
-	// TODO: the config should be from config.json
 	//db := NewDB(config.Read("db_driver"), config.Read("db_uri"))
 	dbURI := filepath.Join(utilities.GetBasePath(), "aid.db")
 	db := NewDB("sqlite3", dbURI)

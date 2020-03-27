@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 // Log defines the struct of log file
@@ -23,6 +23,7 @@ type Log struct {
 	Source    string    `db:"source"`
 }
 
+// BuildLog defines the stream of logs when building docker images
 type BuildLog struct {
 	Stream string `json:"stream"`
 }

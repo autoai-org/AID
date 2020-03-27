@@ -13,8 +13,8 @@ import (
 	"path"
 	"path/filepath"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/docker/docker/api/types"
 	"github.com/docker/docker/api/types/container"
 	"github.com/docker/docker/client"
@@ -35,9 +35,13 @@ type DockerRuntime struct {
 }
 
 // prepareEnvs returns a list of string
-func prepareEnvs() []string {
+func prepareEnvs(imageID string) []string {
+	reqPackage := entities.GetPackageByImageID(imageID)
+	envs := entities.GetEnvironmentVariablesbyPackageID(reqPackage.ID, "all")
+	envStrings := entities.MergeEnvironmentVariables(envs)
 	serverIP := utilities.GetOutboundIP().String()
-	envStrings := []string{"AID_SERVER", serverIP + ":10590"}
+	systemenv := []string{"AID_SERVER", serverIP + ":10590"}
+	envStrings = append(envStrings, systemenv...)
 	return envStrings
 }
 
@@ -91,7 +95,7 @@ func (docker *DockerRuntime) Create(imageID string, hostPort string) (container.
 		ExposedPorts: nat.PortSet{
 			"8080/tcp": struct{}{},
 		},
-		Env: prepareEnvs(),
+		Env: prepareEnvs(image.ID),
 	}, hostConfig, nil, "")
 	if err != nil {
 		utilities.CheckError(err, "Cannot create container from image "+image.Name)

@@ -1,4 +1,4 @@
-module github.com/autoai-org/aiflow/components/cmd
+module github.com/autoai-org/aid/components/cmd
 
 go 1.13
 
@@ -8,7 +8,6 @@ require (
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20191023080658-fe3ac9971811
 	github.com/c-bata/go-prompt v0.2.3
-	github.com/cavaliercoder/grab v2.0.0+incompatible
 	github.com/codeclysm/extract v2.2.0+incompatible
 	github.com/containerd/containerd v1.3.2 // indirect
 	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
@@ -26,12 +25,11 @@ require (
 	github.com/ilibs/gosql/v2 v2.0.3
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
-	github.com/manifoldco/promptui v0.7.0 // indirect
+	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
+	github.com/manifoldco/promptui v0.7.0
 	github.com/mattn/go-runewidth v0.0.7 // indirect
 	github.com/mattn/go-sqlite3 v1.13.0
 	github.com/mattn/go-tty v0.0.3 // indirect
-	github.com/mholt/archiver/v3 v3.3.0
-	github.com/moby/moby v1.13.1
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
 	github.com/opencontainers/runc v0.1.1 // indirect

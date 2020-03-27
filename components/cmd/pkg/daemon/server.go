@@ -11,7 +11,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 )
 

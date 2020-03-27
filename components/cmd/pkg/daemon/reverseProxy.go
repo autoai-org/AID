@@ -12,8 +12,8 @@ import (
 	"net/http/httputil"
 	"net/url"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 )
 

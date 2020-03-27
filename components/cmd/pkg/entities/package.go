@@ -6,11 +6,12 @@
 package entities
 
 import (
+	"strings"
 	"time"
 
 	"github.com/BurntSushi/toml"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 var logger = utilities.NewDefaultLogger()
@@ -85,10 +86,34 @@ func FetchPackages() []Package {
 	return packages
 }
 
+// GetPackage returns a single package by given vendorName and packageName
+func GetPackage(vendorName string, packageName string) Package {
+	reqPackage := Package{Vendor: vendorName, Name: packageName}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(&reqPackage)
+	utilities.CheckError(err, "Cannot fetch package object "+vendorName+":"+packageName)
+	return reqPackage
+}
+
 // LoadPretrainedsFromConfig reads the config string and returns the objects
 func LoadPretrainedsFromConfig(tomlString string) Pretraineds {
 	var pretraineds Pretraineds
 	_, err := toml.Decode(tomlString, &pretraineds)
 	utilities.CheckError(err, "Cannot Load Solvers")
 	return pretraineds
+}
+
+// GetPackageByImageID returns the package object by given image id
+func GetPackageByImageID(ImageID string) Package {
+	var reqPackage Package
+	image := GetImage(ImageID)
+	imageinfo := strings.Split(image.Name, "-")
+	vendor, packageName := imageinfo[2], imageinfo[3]
+	packages := FetchPackages()
+	for i := range packages {
+		if packages[i].Vendor == vendor && packages[i].Name == packageName {
+			reqPackage = packages[i]
+		}
+	}
+	return reqPackage
 }

@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/urfave/cli/v2"
 )
@@ -52,6 +53,44 @@ func main() {
 				Category: "storage",
 				Action: func(c *cli.Context) error {
 					return nil
+				},
+			},
+			{
+				Name:     "cluster",
+				Aliases:  []string{"cl"},
+				Usage:    "Cluster Management -  Add Node/Upload Image/etc",
+				Category: "cluster",
+				Subcommands: []*cli.Command{
+					{
+						Name:     "agent",
+						Aliases:  []string{"ag"},
+						Usage:    "Run a daemon process to receive requests from master",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							runAgent()
+							return nil
+						},
+					},
+					{
+						Name:     "push",
+						Aliases:  []string{"ps"},
+						Usage:    "Push Image to target host",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							pushImage()
+							return nil
+						},
+					},
+					{
+						Name:     "add",
+						Aliases:  []string{"ad"},
+						Usage:    "Add a new node",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							pushImage()
+							return nil
+						},
+					},
 				},
 			},
 			{
@@ -99,7 +138,13 @@ func main() {
 				Usage:    "Build Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
-					build(c.Args().Get(0))
+					buildContext := c.Args().Get(0)
+					if strings.Contains(buildContext, "/") {
+						buildInfo := strings.Split(buildContext, "/")
+						absoluteBuild(buildInfo[0], buildInfo[1], buildInfo[2])
+					} else {
+						build(buildContext)
+					}
 					return nil
 				},
 			},
