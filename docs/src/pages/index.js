@@ -5,6 +5,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import useBaseUrl from '@docusaurus/useBaseUrl';
 import styles from './styles.module.css';
+import OpenSource from '../components/Landing/OpenSource';
 
 const features = [
   {
@@ -73,6 +74,9 @@ function Home() {
         </div>
       </header>
       <main>
+        <div className="container">
+          <OpenSource></OpenSource>
+        </div>
         {features && features.length && (
           <section className={styles.features}>
             <div className="container">
