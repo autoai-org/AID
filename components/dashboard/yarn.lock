@@ -3030,10 +3030,10 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-codemirror@^5.41.0, codemirror@^5.52.0:
-  version "5.52.0"
-  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.52.0.tgz#4dbd6aef7f0e63db826b9a23922f0c03ac75c0a7"
-  integrity sha512-K2UB6zjscrfME03HeRe/IuOmCeqNpw7PLKGHThYpLbZEuKf+ZoujJPhxZN4hHJS1O7QyzEsV7JJZGxuQWVaFCg==
+codemirror@^5.41.0, codemirror@^5.52.2:
+  version "5.52.2"
+  resolved "https://registry.yarnpkg.com/codemirror/-/codemirror-5.52.2.tgz#c29e1f7179f85eb0dd17c0586fa810e4838ff584"
+  integrity sha512-WCGCixNUck2HGvY8/ZNI1jYfxPG5cRHv0VjmWuNzbtCLz8qYA5d+je4QhSSCtCaagyeOwMi/HmmPTjBgiTm2lQ==
 
 collection-visit@^1.0.0:
   version "1.0.0"
@@ -10616,10 +10616,10 @@ vue-jest@^3.0.5:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-json-viewer@^2.2.8:
-  version "2.2.8"
-  resolved "https://registry.yarnpkg.com/vue-json-viewer/-/vue-json-viewer-2.2.8.tgz#251b9cfe6b1c6b69937af4ecc6f10d75ae1d6857"
-  integrity sha512-3+66v959vtAUKbs2PxWv8hMp6ZpK0lisBtj2b4fZCEM60ShY+IG01udlYjAx7k6c+3b+2H5whUzczYt8OSaxmg==
+vue-json-viewer@^2.2.10:
+  version "2.2.10"
+  resolved "https://registry.yarnpkg.com/vue-json-viewer/-/vue-json-viewer-2.2.10.tgz#84ac2c59bc9f0752f8f4b87c4698988483e58989"
+  integrity sha512-TVMb1Rcdsfg19DJajJcOnyivHxTAwrJS1L7ueEZ76xE7NcYkUcgz9cr0Gok/8mP8vmU/IFQIze0pCNr0mdWNzA==
   dependencies:
     clipboard "^2.0.4"
     vue "^2.6.9"
@@ -10699,10 +10699,10 @@ vuetify-loader@^1.3.0:
   dependencies:
     loader-utils "^1.2.0"
 
-vuetify@^2.2.18:
-  version "2.2.18"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.18.tgz#5a43beaf7c8fc66dcfb5876e1619f7e44c7881da"
-  integrity sha512-RXN065xh5xKmTnEH6+1YFZWp67soOJPTIqqPNliSp9eE72Q7a5fmaV1xQsEVVaVA12+5Hvroo7NW7MP/APucGw==
+vuetify@^2.2.19:
+  version "2.2.19"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-2.2.19.tgz#826f6899267a0f867aff56aff0cf000d07a421e7"
+  integrity sha512-6o+wdB77FBTkZsFlF8g3W5paG6CsFWtxv6gjkovOQ1P0nggTX8AbIGYIX7xHiOqG+PvBsoIfOEt2E/x6U/d45g==
 
 vuex@^3.1.3:
   version "3.1.3"
