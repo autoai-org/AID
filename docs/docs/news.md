@@ -9,3 +9,5 @@ title: News
 * *20, December, 2019* CVFlow, along with CVPM and all its components, will be renamed to AID, due to trademark reasons.
 
 * *20, Jan, 2020* AID now has official Twitter account! It will be used to announce our latest updates/releases, and share more papers on MLOps. Follow us at [aid_aiops](https://twitter.com/aid_aiops).
+
+* *1, Feb, 2020* MLPM was accepted at Workshops of MLOps System at MLSys 2020!

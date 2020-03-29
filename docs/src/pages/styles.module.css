@@ -4,8 +4,10 @@
  * and scoped locally.
  */
 
-.heroBanner {
-  padding: 4rem 0;
+ .heroBanner {
+  background-color: #1f1e29;
+  color: #eeeeee;
+  padding: 128px;
   text-align: center;
   position: relative;
   overflow: hidden;
@@ -33,4 +35,86 @@
 .featureImage {
   height: 200px;
   width: 200px;
+}
+
+.title {
+  font-weight: 100;
+}
+
+.subTitle {
+  padding: 24px;
+}
+
+.getStarted {
+  color: var(--neutron-color-lighter) !important;
+  font-size: 24px;
+  padding: 16px 36px;
+}
+
+.getStarted:hover {
+  color: var(--neutron-color-dark) !important;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.content {
+  align-items: center;
+  display: flex;
+  padding: 36px 0;
+  width: 100%;
+}
+
+.neutronInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.neutronLogoWhite {
+  width: 56%;
+  max-width: 256px;
+  display: none;
+}
+html[data-theme="dark"] .neutronLogoWhite {
+  display: inherit;
+}
+
+.neutronLogoBlack {
+  width: 56%;
+  max-width: 256px;
+  display: inherit;
+}
+html[data-theme="dark"] .neutronLogoBlack {
+  display: none;
+}
+
+.neutronInstallInformation {
+  font-size: 20px;
+  margin: 16px 0 12px 0;
+}
+.neutronInstallCommand {
+  font-size: 14px;
+  text-align: left;
+  padding: 6px 12px;
+  margin: 6px 0;
+}
+
+@media screen and (max-width: 1154px) {
+  .neutronInstallCommand {
+    font-size: 13px !important;
+  }
+}
+
+@media screen and (max-width: 966px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+
+  .title {
+    font-size: 2.5rem !important;
+  }
 }

@@ -1,6 +1,6 @@
 module.exports = {
   title: 'A.I.D',
-  tagline: 'AIOps Platform',
+  tagline: 'Open Source MLOps Platform',
   url: 'https://aid.autoai.org',
   baseUrl: '/',
   favicon: 'img/favicon.ico',
@@ -75,6 +75,10 @@ module.exports = {
             {
               label: 'Twitter',
               href: 'https://twitter.com/aid_aiops',
+            },
+            {
+              label: 'News',
+              href: 'docs/news',
             },
           ],
         },
