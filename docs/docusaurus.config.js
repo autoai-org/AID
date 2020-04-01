@@ -11,7 +11,7 @@ module.exports = {
       title: 'AID',
       logo: {
         alt: 'AID',
-        src: 'img/logo_white.png',
+        src: 'img/logo.png',
       },
       links: [
         {
@@ -78,7 +78,7 @@ module.exports = {
             },
             {
               label: 'News',
-              href: 'docs/news',
+              href: '/docs/news',
             },
           ],
         },
