@@ -22,7 +22,7 @@
     "vue-chartjs": "^3.5.0",
     "vue-class-component": "^7.2.3",
     "vue-codemirror": "^4.0.6",
-    "vue-json-viewer": "^2.2.10",
+    "vue-json-viewer": "^2.2.11",
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^8.4.1",
     "vue-router": "^3.1.6",
