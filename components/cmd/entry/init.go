@@ -7,10 +7,10 @@ import (
 
 	"github.com/manifoldco/promptui"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/requests"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	_ "github.com/mattn/go-sqlite3"
 )
 

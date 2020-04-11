@@ -9,8 +9,8 @@ import (
 	"time"
 
 	"github.com/BurntSushi/toml"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 var logger = utilities.NewDefaultLogger()

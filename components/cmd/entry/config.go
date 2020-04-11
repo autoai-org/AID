@@ -6,7 +6,7 @@
 package main
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 var logger = utilities.NewDefaultLogger()

@@ -1,16 +1,17 @@
 // Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
 package main
 
 import (
-	"github.com/alexeyco/simpletable"
 	"strconv"
 	"strings"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/runtime"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+
+	"github.com/alexeyco/simpletable"
+	"github.com/autoai-org/aid/components/cmd/pkg/runtime"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
 
 func printImages() {

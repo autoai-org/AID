@@ -8,7 +8,7 @@ package requests
 import (
 	"os"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	git "gopkg.in/src-d/go-git.v4"
 )
 

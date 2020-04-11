@@ -6,7 +6,7 @@
 package daemon
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
 )
 
 // logContent is used for the daemon to wrap log content as json format

@@ -8,8 +8,8 @@ package entities
 import (
 	"time"
 
-	"github.com/autoai-org/aiflow/components/cmd/pkg/requests"
-	"github.com/autoai-org/aiflow/components/cmd/pkg/storage"
+	"github.com/autoai-org/aid/components/cmd/pkg/requests"
+	"github.com/autoai-org/aid/components/cmd/pkg/storage"
 )
 
 // Webhook defines the basic structure for Webhook

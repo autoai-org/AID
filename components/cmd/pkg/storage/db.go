@@ -6,7 +6,7 @@
 package storage
 
 import (
-	"github.com/autoai-org/aiflow/components/cmd/pkg/utilities"
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/ilibs/gosql/v2"
 
 	// import sqlite3 as driver for database
