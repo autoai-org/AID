@@ -23,7 +23,7 @@ require (
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/h2non/filetype v1.0.12 // indirect
-	github.com/ilibs/gosql/v2 v2.0.2
+	github.com/ilibs/gosql/v2 v2.0.3
 	github.com/kardianos/service v1.0.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/manifoldco/promptui v0.7.0 // indirect
