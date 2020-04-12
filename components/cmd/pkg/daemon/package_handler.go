@@ -81,7 +81,7 @@ func modifySolverDockerfile(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, messageResponse{
 			Code: 200,
-			Msg:  "Successfully Changed",
+			Msg:  "Successfully Modified",
 		})
 	}
 }
@@ -184,6 +184,40 @@ func buildSolverImage(c *gin.Context) {
 		runtime.RenderDockerfile(solverName, packageFolder)
 	}
 	log, err = dockerClient.Build(strings.ToLower(imageName), filepath.Join(packageFolder, "docker_"+solverName))
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, messageResponse{
+			Code: 500,
+			Msg:  err.Error(),
+		})
+	} else {
+		c.JSON(http.StatusOK, gin.H{
+			"code":  200,
+			"logid": log.ID,
+		})
+	}
+}
+
+// getEnvironmentVariables will return requested environment variables
+// GET /:vendorName/:packageName/envs?env={all, dev, test, prod}
+func getEnvironmentVariables(c *gin.Context) {
+	var req queryEnvironmentVariablesRequest
+	c.Bind(&req)
+	reqPackage := entities.GetPackage(c.Param("vendorName"), c.Param("packageName"))
+	envs := GetEnvironmentVariablesbyPackageID(reqPackage.ID, req.Env)
+	c.JSON(http.StatusOK, gin.H{
+		"code":    200,
+		"results": envs,
+	})
+}
+
+// setEnvironmentVariables will set a new environment variable
+// PUT /:vendorName/:packageName/envs/:envName
+func setEnvironmentVariables(c *gin.Context) {
+	reqPackage := entities.GetPackage(c.Param("vendorName"), c.Param("packageName"))
+	var req newEnvironmentVariableRequest
+	c.BindJSON(&req)
+	env := entities.EnvironmentVariable{Environment: c.Param("envName"), PackageID: reqPackage.ID, Key: req.Key, Value: req.Value}
+	err := env.Save()
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, messageResponse{
 			Code: 500,

@@ -22,6 +22,7 @@ module.exports = {
         },
         {to: 'blog', label: 'Blog', position: 'left'},
         {to: 'docs/examples/showroom', label: 'Showroom', position: 'left'},
+        {to: '/changelog', label: 'Changelog', position: 'left'},
         {
           href: 'https://github.com/autoai-org/aid',
           label: 'GitHub',

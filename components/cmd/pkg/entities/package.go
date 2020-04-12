@@ -85,6 +85,15 @@ func FetchPackages() []Package {
 	return packages
 }
 
+// GetPackage returns a single package by given vendorName and packageName
+func GetPackage(vendorName string, packageName string) Package {
+	reqPackage := Package{Vendor: vendorName, Name: packageName}
+	db := storage.GetDefaultDB()
+	err := db.FetchOne(&reqPackage)
+	utilities.CheckError(err, "Cannot fetch package object with id"+id)
+	return reqPackage
+}
+
 // LoadPretrainedsFromConfig reads the config string and returns the objects
 func LoadPretrainedsFromConfig(tomlString string) Pretraineds {
 	var pretraineds Pretraineds

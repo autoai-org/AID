@@ -23,6 +23,7 @@ type Log struct {
 	Source    string    `db:"source"`
 }
 
+// BuildLog defines the stream of logs when building docker images
 type BuildLog struct {
 	Stream string `json:"stream"`
 }

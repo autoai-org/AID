@@ -54,3 +54,12 @@ type newExperimentRequest struct {
 	Package     string `json:"package"`
 	Solver      string `json:"solver"`
 }
+
+type queryEnvironmentVariablesRequest struct {
+	Env string `json:"env"`
+}
+
+type newEnvironmentVariableRequest struct {
+	Key   string `json:"key"`
+	Value string `json:"value"`
+}
