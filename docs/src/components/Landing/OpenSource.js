@@ -121,7 +121,7 @@ export default function OpenSource() {
       </Heading>
       <div className={classNames('row', styles.badges)}>
         <Badge
-          to="https://github.com/vazco/uniforms/stargazers"
+          to="https://github.com/autoai-org/aid/stargazers"
           text="Stars"
           border={1}
           number={stars}
@@ -129,7 +129,7 @@ export default function OpenSource() {
           color="#723CFF"
         />
         <Badge
-          to="https://github.com/vazco/uniforms/network/members"
+          to="https://github.com/autoai-org/aid/network/members"
           text="Forks"
           border={2}
           number={forks}
