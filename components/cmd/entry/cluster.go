@@ -4,3 +4,15 @@
 // https://opensource.org/licenses/MIT
 
 package main
+
+func runAgent() {
+
+}
+
+func pushImage() {
+
+}
+
+func addNode() {
+
+}

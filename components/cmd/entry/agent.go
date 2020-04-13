@@ -3,4 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-package runtime
+// AgentDaemon is a lightweight daemon server that only handles limited tasks
+// It is separated from the
+package main

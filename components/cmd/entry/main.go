@@ -55,6 +55,44 @@ func main() {
 				},
 			},
 			{
+				Name:     "cluster",
+				Aliases:  []string{"cl"},
+				Usage:    "Cluster Management -  Add Node/Upload Image/etc",
+				Category: "cluster",
+				Subcommands: []*cli.Command{
+					{
+						Name:     "agent",
+						Aliases:  []string{"ag"},
+						Usage:    "Run a daemon process to receive requests from master",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							runAgent()
+							return nil
+						},
+					},
+					{
+						Name:     "push",
+						Aliases:  []string{"ps"},
+						Usage:    "Push Image to target host",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							pushImage()
+							return nil
+						},
+					},
+					{
+						Name:     "add",
+						Aliases:  []string{"ad"},
+						Usage:    "Add a new node",
+						Category: "cluster",
+						Action: func(c *cli.Context) error {
+							pushImage()
+							return nil
+						},
+					},
+				},
+			},
+			{
 				Name:     "config",
 				Aliases:  []string{"conf"},
 				Usage:    "List/Set Configurations",

@@ -47,7 +47,6 @@ func GetDefaultDB() *Database {
 		DefaultDB.Connect()
 		return DefaultDB
 	}
-	// TODO: the config should be from config.json
 	//db := NewDB(config.Read("db_driver"), config.Read("db_uri"))
 	dbURI := filepath.Join(utilities.GetBasePath(), "aid.db")
 	db := NewDB("sqlite3", dbURI)

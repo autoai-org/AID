@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"path"
 	"path/filepath"
 
 	"github.com/manifoldco/promptui"
@@ -11,6 +12,7 @@ import (
 	"github.com/autoai-org/aid/components/cmd/pkg/requests"
 	"github.com/autoai-org/aid/components/cmd/pkg/storage"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
+	. "github.com/logrusorgru/aurora"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -35,17 +37,40 @@ func addDefaultToDB() {
 
 func initRepository() {
 	prompt := promptui.Prompt{
-		Label: "Your Package Name",
+		Label: "Your Vendor Name, it can be your name/company name, etc.",
 	}
-	result, err := prompt.Run()
+	vendorName, err := prompt.Run()
+	prompt = promptui.Prompt{
+		Label: "Your Package Name, it should be unique inside your vendor scope",
+	}
+	packageName, err := prompt.Run()
+	prompt = promptui.Prompt{
+		Label: "Description of your package",
+	}
+	description, err := prompt.Run()
 	if err != nil {
 		fmt.Println(err)
 	}
 	gitClient := requests.NewGitClient()
-	gitClient.Clone("https://github.com/aidmodels/bolierplate", result)
+	gitClient.Clone("https://github.com/aidmodels/bolierplate", packageName)
 	// rename {package_name} to real package name
-	pyFolderName := filepath.Join(result, "{package_name}")
-	err = os.Rename(pyFolderName, filepath.Join(result, result))
+	pyFolderName := filepath.Join(packageName, "{package_name}")
+	err = os.Rename(pyFolderName, filepath.Join(packageName, packageName))
+	// remove .git folder
+	os.Remove(path.Join(packageName, ".git"))
+	// render readme file, and aid.toml
+	renderContext := map[string]interface{}{"vendorName": vendorName, "packageName": packageName, "description": description}
+	renderFile(path.Join(packageName, "README.md"), renderContext)
+	renderFile(path.Join(packageName, "aid.toml"), renderContext)
+	// hint what's next
+	fmt.Println(Green("Successfully created your package " + vendorName + "/" + packageName))
+	fmt.Println(Green("To make it work, please follow the instructions:"))
+	fmt.Printf("\t 1. Modify your solver inside %s \n", Cyan(packageName+"/"+packageName+"/solver.py"))
+	fmt.Printf("\t 2. Modify your aid.toml file with your new solver name\n")
+	fmt.Printf("\t 3. Modify your README.md file with your new solvers and its description\n")
+	fmt.Printf("\t 4. You are ready to go! You can now upload your package to GitHub or our Model Hub\n")
+	fmt.Println(Green("For more information, please visit https://aid.autoai.org/docs/package/publish-packages"))
+	fmt.Println(Green("If you met problems/issues, feel free to post it to https://github.com/autaoi-org/aid"))
 	if err != nil {
 		fmt.Println(err)
 	}
