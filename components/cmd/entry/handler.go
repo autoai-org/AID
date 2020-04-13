@@ -6,6 +6,7 @@
 package main
 
 import (
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -14,6 +15,22 @@ import (
 	"github.com/autoai-org/aid/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 )
+
+// absoluteBuild builds the docker image without the current context information
+// unlike "build", it relies on vendor/package/solver names
+func absoluteBuild(vendorName string, packageName string, solverName string) {
+	dockerClient := runtime.NewDockerRuntime()
+	basePath := path.Join(utilities.GetBasePath(), "models", vendorName, packageName)
+	tomlString, err := utilities.ReadFileContent(path.Join(basePath, "./aid.toml"))
+	utilities.CheckError(err, path.Join(basePath, "./aid.toml"))
+	packageInfo := entities.LoadPackageFromConfig(tomlString)
+	imageName := packageInfo.Package.Vendor + "-" + packageInfo.Package.Name + "-" + solverName
+	_, err = utilities.ReadFileContent(path.Join(basePath, "./docker_"+solverName))
+	if err != nil {
+		runtime.RenderDockerfile(solverName, path.Join(basePath, "./docker_"+solverName))
+	}
+	dockerClient.Build(strings.ToLower(imageName), path.Join(basePath, "./docker_"+solverName))
+}
 
 func build(solverName string) {
 	// Read Dockerfile

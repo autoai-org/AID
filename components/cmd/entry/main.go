@@ -10,6 +10,7 @@ import (
 	"log"
 	"os"
 	"sort"
+	"strings"
 
 	"github.com/urfave/cli/v2"
 )
@@ -137,7 +138,13 @@ func main() {
 				Usage:    "Build Image",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
-					build(c.Args().Get(0))
+					buildContext := c.Args().Get(0)
+					if strings.Contains(buildContext, "/") {
+						buildInfo := strings.Split(buildContext, "/")
+						absoluteBuild(buildInfo[0], buildInfo[1], buildInfo[2])
+					} else {
+						build(buildContext)
+					}
 					return nil
 				},
 			},
