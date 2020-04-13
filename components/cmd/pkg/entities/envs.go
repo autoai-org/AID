@@ -76,12 +76,21 @@ func GetEnvironmentVariablesbyPackageID(packageID string, environment string) []
 			if environmentvariablesPointers[i].PackageID == packageID {
 				environmentVariables = append(environmentVariables, *environmentvariablesPointers[i])
 			}
-		}
-		else {
+		} else {
 			if environmentvariablesPointers[i].PackageID == packageID && environmentvariablesPointers[i].Environment == environment {
 				environmentVariables = append(environmentVariables, *environmentvariablesPointers[i])
 			}
 		}
 	}
 	return environmentVariables
+}
+
+// MergeEnvironmentVariables merge all env vars into an array of strings
+func MergeEnvironmentVariables(envs []EnvironmentVariable) []string {
+	var envsStrings []string
+	for i := range envs {
+		envsStrings = append(envsStrings, envs[i].Key)
+		envsStrings = append(envsStrings, envs[i].Value)
+	}
+	return envsStrings
 }

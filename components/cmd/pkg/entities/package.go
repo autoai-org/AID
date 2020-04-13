@@ -6,6 +6,7 @@
 package entities
 
 import (
+	"strings"
 	"time"
 
 	"github.com/BurntSushi/toml"
@@ -90,7 +91,7 @@ func GetPackage(vendorName string, packageName string) Package {
 	reqPackage := Package{Vendor: vendorName, Name: packageName}
 	db := storage.GetDefaultDB()
 	err := db.FetchOne(&reqPackage)
-	utilities.CheckError(err, "Cannot fetch package object with id"+id)
+	utilities.CheckError(err, "Cannot fetch package object "+vendorName+":"+packageName)
 	return reqPackage
 }
 
@@ -100,4 +101,19 @@ func LoadPretrainedsFromConfig(tomlString string) Pretraineds {
 	_, err := toml.Decode(tomlString, &pretraineds)
 	utilities.CheckError(err, "Cannot Load Solvers")
 	return pretraineds
+}
+
+// GetPackageByImageID returns the package object by given image id
+func GetPackageByImageID(ImageID string) Package {
+	var reqPackage Package
+	image := GetImage(ImageID)
+	imageinfo := strings.Split(image.Name, "-")
+	vendor, packageName := imageinfo[2], imageinfo[3]
+	packages := FetchPackages()
+	for i := range packages {
+		if packages[i].Vendor == vendor && packages[i].Name == packageName {
+			reqPackage = packages[i]
+		}
+	}
+	return reqPackage
 }

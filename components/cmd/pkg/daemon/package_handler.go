@@ -203,7 +203,7 @@ func getEnvironmentVariables(c *gin.Context) {
 	var req queryEnvironmentVariablesRequest
 	c.Bind(&req)
 	reqPackage := entities.GetPackage(c.Param("vendorName"), c.Param("packageName"))
-	envs := GetEnvironmentVariablesbyPackageID(reqPackage.ID, req.Env)
+	envs := entities.GetEnvironmentVariablesbyPackageID(reqPackage.ID, req.Env)
 	c.JSON(http.StatusOK, gin.H{
 		"code":    200,
 		"results": envs,
@@ -226,7 +226,7 @@ func setEnvironmentVariables(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, gin.H{
 			"code":  200,
-			"logid": log.ID,
+			"envid": env.ID,
 		})
 	}
 }
