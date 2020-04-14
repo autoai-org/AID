@@ -36,7 +36,7 @@ jobs:
       uses: crazy-max/ghaction-xgo@v1
       with:
         xgo_version: latest
-        go_version: 1.13
+        go_version: latest
         dest: dist
         pkg: ./components/cmd/entry
         prefix: aid
