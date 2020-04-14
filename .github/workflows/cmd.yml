@@ -44,6 +44,7 @@ jobs:
       - name: Setup env
         run: |
           echo "::set-env name=GOPATH::${{ github.workspace }}"
+          echo "::add-path::$GITHUB_WORKSPACE/bin"
           echo PWD is $pwd
           ls -l
 
@@ -51,7 +52,10 @@ jobs:
         run: docker pull karalabe/xgo-latest
       
       - name: Setup xgo
-        run: go get github.com/karalabe/xgo
+        run: |
+          export PATH=${PATH}:`go env GOPATH`/bin
+          go get github.com/karalabe/xgo
+          xgo
       
       - name: Actual Build
         run: |
