@@ -55,7 +55,6 @@ jobs:
         run: |
           export PATH=${PATH}:`go env GOPATH`/bin
           go get github.com/karalabe/xgo
-          xgo
       
       - name: Actual Build
         run: |
