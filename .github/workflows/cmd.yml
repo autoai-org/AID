@@ -67,14 +67,12 @@ jobs:
           file: dist/aid-darwin-10.6-386
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
 
       - name: Upload darwin/amd64 binaries to Bintray
         uses: bpicode/github-action-upload-bintray@master
@@ -82,14 +80,12 @@ jobs:
           file: dist/aid-darwin-10.6-amd64
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
 
       - name: Upload linux/386 binaries to Bintray
         uses: bpicode/github-action-upload-bintray@master
@@ -97,14 +93,12 @@ jobs:
           file: dist/aid-linux-386
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
 
       - name: Upload linux/amd64 binaries to Bintray
         uses: bpicode/github-action-upload-bintray@master
@@ -112,14 +106,12 @@ jobs:
           file: dist/aid-linux-amd64
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
       
       - name: Upload windows/386 binaries to Bintray
         uses: bpicode/github-action-upload-bintray@master
@@ -127,14 +119,12 @@ jobs:
           file: dist/aid-windows-4.0-386.exe
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
             
       - name: Upload windows/amd64 binaries to Bintray
         uses: bpicode/github-action-upload-bintray@master
@@ -142,11 +132,9 @@ jobs:
           file: dist/aid-windows-4.0-amd64.exe
           api_user: autoai
           api_key: ${{ secrets.BINTRAY_API_KEY }}
-          gpg_passphrase: ${{ secrets.BINTRAY_GPG_PASSPHRASE }} # Optional, for this to work Bintray requires a GPG public/private keypair configured for the repository owner (individual or organization).
           repository_user: autoai
           repository: AID
           package: Command-Line-Utility
           version: 'edge'
           upload_path: cmd/edge # Typical for debian repository layout
           publish: 1
-          calculate_metadata: true # Schedule metadata calcuation after upload
