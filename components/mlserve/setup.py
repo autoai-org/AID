@@ -26,7 +26,7 @@ setuptools.setup(
         "Topic :: Software Development",
     ],
     install_requires=[
-        "sanic",
+        "flask",
         "toml",
         "requests",
         "numpy",

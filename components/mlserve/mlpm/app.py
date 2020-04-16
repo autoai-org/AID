@@ -4,6 +4,6 @@
 # https://opensource.org/licenses/MIT
 #coding:utf-8
 
-from sanic import Sanic
+from flask import Flask
 
-aidserver = Sanic()
+aidserver = Flask(__name__)

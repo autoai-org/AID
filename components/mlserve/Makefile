@@ -9,6 +9,9 @@ default:
 	@echo "\tmake publish-test"
 	@echo "\tmake publish-prod"
 
+freeze:
+	poetry run pip freeze > requirements.txt
+
 format:
 	autoflake -i **/*.py
 	isort -i **/*.py

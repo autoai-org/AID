@@ -8,8 +8,7 @@ import traceback
 
 from mlpm.app import aidserver
 from mlpm.utility import str2bool
-from sanic import Sanic, request, response
-from sanic.response import json
+from mlpm.response import json_resp
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 
@@ -31,15 +30,13 @@ def handle_post_solver_train_or_infer(request, upload_folder, request_type):
     try:
         if request_type == "infer":
             results = aidserver.solver.infer(data)
-        elif request_type == "train":
-            results = aidserver.solver.train(data)
         else:
             raise NotImplementedError
         if 'delete_after_process' in data:
             if str2bool(data['delete_after_process']):
                 os.remove(file_abs_path)
         print(results)
-        return response.json(results, status=200)
+        return json_resp(results, status=200)
     except Exception as e:
         traceback.print_exc()
-        return response.json({"error": str(e), "code": "500"}, status=500)
+        return json_resp({"error": str(e), "code": "500"}, status=500)
