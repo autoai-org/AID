@@ -45,7 +45,7 @@
     "@feathersjs/errors": "^4.5.1",
     "@feathersjs/express": "^4.5.1",
     "@feathersjs/feathers": "^4.5.1",
-    "@feathersjs/transport-commons": "^4.5.2",
+    "@feathersjs/transport-commons": "^4.5.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "feathers-mongodb": "^6.1.0",

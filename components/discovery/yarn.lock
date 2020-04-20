@@ -69,12 +69,7 @@
     long-timeout "^0.1.1"
     uuid "^7.0.3"
 
-"@feathersjs/commons@^4.3.0", "@feathersjs/commons@^4.4.1", "@feathersjs/commons@^4.5.2":
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.2.tgz#86321aa7b6294bddbab550ffcce79633039940be"
-  integrity sha512-nlgDnM4wxjJdernzNjDMn592H6YKKOhnwFOAkM7rJvFU/qfagBJtbFh1Q4ylRhMd+zK0u/Dg2nV3D5GxJNyDBA==
-
-"@feathersjs/commons@^4.5.3":
+"@feathersjs/commons@^4.3.0", "@feathersjs/commons@^4.4.1", "@feathersjs/commons@^4.5.2", "@feathersjs/commons@^4.5.3":
   version "4.5.3"
   resolved "https://registry.yarnpkg.com/@feathersjs/commons/-/commons-4.5.3.tgz#72ea846c80b74e3251448486b7800e7550cb0fa1"
   integrity sha512-LsiZ0jxh13TT6SOrDq5VYtdBCv0Vdvu4a5Wei/Dvd/daZHX6ERuH6iQtfh2f5hFwuydtd+Ch/2GlYld8XziwhA==
@@ -117,17 +112,6 @@
     debug "^4.1.1"
     events "^3.1.0"
     uberproto "^2.0.6"
-
-"@feathersjs/transport-commons@^4.5.2":
-  version "4.5.2"
-  resolved "https://registry.yarnpkg.com/@feathersjs/transport-commons/-/transport-commons-4.5.2.tgz#3acbaf56cdd5519a671dc36082edd8360ffd3aed"
-  integrity sha512-H+9RYXaO0Lgz8EN0v1iY4IOf5XPq1jXA+qaCE1Gw1/6iOha8cCLUOFc30fNbnZNmZ3JLBTna8Y8Z9Fx5nSRZrQ==
-  dependencies:
-    "@feathersjs/commons" "^4.5.2"
-    "@feathersjs/errors" "^4.5.2"
-    debug "^4.1.1"
-    lodash "^4.17.15"
-    radix-router "^3.0.1"
 
 "@feathersjs/transport-commons@^4.5.3":
   version "4.5.3"
