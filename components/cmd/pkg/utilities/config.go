@@ -7,9 +7,11 @@ package utilities
 
 import (
 	"bytes"
+	"os"
+	"path/filepath"
+
 	"github.com/BurntSushi/toml"
 	"github.com/getsentry/sentry-go"
-	"path/filepath"
 )
 
 // SystemConfig stores system level configuration, will be stored under $aid/config.toml
@@ -42,8 +44,13 @@ func SaveConfig(config SystemConfig) {
 }
 
 // ReadConfig always read the config file
+// If the file does not exist, it will return a default config
 func ReadConfig() *SystemConfig {
 	configPath := filepath.Join(GetBasePath(), "config.toml")
+	_, err := os.Stat(configPath)
+	if os.IsNotExist(err) {
+		return &SystemConfig{RemoteReport: true}
+	}
 	tomlString, err := ReadFileContent(configPath)
 	if err != nil {
 		CheckError(err, "Cannot open file "+configPath)

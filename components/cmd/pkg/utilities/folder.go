@@ -56,6 +56,8 @@ func InitFolders() {
 	for _, each := range requiredFolders {
 		CreateFolderIfNotExist(filepath.Join(targetDir, each))
 	}
+	initConfig := SystemConfig{RemoteReport: true}
+	SaveConfig(initConfig)
 }
 
 // GetBasePath returns the base filepath for aid

@@ -26,10 +26,17 @@ func ReadFileContent(filename string) (string, error) {
 	return content, err
 }
 
-// WriteContentToFile writes contents to file
+// WriteContentToFile writes contents to file, it will create new file if not exists
 func WriteContentToFile(filepath string, content string) error {
+	_, err := os.Stat(filepath)
+	if os.IsNotExist(err) {
+		_, err = os.Create(filepath)
+		if err != nil {
+			return err
+		}
+	}
 	contentInByte := []byte(content)
-	err := ioutil.WriteFile(filepath, contentInByte, 0644)
+	err = ioutil.WriteFile(filepath, contentInByte, 0644)
 	if err != nil {
 		logger.Error("Cannot write to file " + filepath)
 		return err

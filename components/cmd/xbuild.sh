@@ -1,1 +1,1 @@
-gox -cgo=true -osarch="linux/amd64" -output="dist/aid" -verbose ./entry/ 
+gox -cgo=true -osarch="linux/amd64" -output="dist/aid" -verbose ./entry/ß
