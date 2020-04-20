@@ -52,7 +52,7 @@ func InitFolders() {
 	CreateFolderIfNotExist(vendorDir)
 	targetDir := filepath.Join(vendorDir, ".aid")
 	CreateFolderIfNotExist(targetDir)
-	requiredFolders := [4]string{"logs", "models", "plugins", "datasets"}
+	requiredFolders := [5]string{"logs", "models", "plugins", "datasets", "temp"}
 	for _, each := range requiredFolders {
 		CreateFolderIfNotExist(filepath.Join(targetDir, each))
 	}

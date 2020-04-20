@@ -10,6 +10,7 @@ import (
 	"strings"
 
 	"github.com/alexeyco/simpletable"
+	"github.com/autoai-org/aid/components/cmd/pkg/entities"
 	"github.com/autoai-org/aid/components/cmd/pkg/runtime"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/flosch/pongo2"
@@ -87,4 +88,25 @@ func renderFile(templateFile string, context map[string]interface{}) error {
 	utilities.CheckError(err, "Failed to generate file.")
 	utilities.WriteContentToFile(templateFile, out)
 	return err
+}
+
+func printNodes() {
+	nodes := entities.FetchNodes()
+	table := simpletable.New()
+	table.Header = &simpletable.Header{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "Node ID"},
+			{Align: simpletable.AlignCenter, Text: "Node Name"},
+			{Align: simpletable.AlignCenter, Text: "Node Address"},
+		},
+	}
+	for _, node := range nodes {
+		r := []*simpletable.Cell{
+			{Text: node.ID},
+			{Text: node.Name},
+			{Text: node.Address},
+		}
+		table.Body.Cells = append(table.Body.Cells, r)
+	}
+	table.Println()
 }

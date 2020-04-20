@@ -8,6 +8,7 @@ package runtime
 import (
 	"bufio"
 	"encoding/json"
+	"fmt"
 	"io"
 	"os"
 	"path"
@@ -22,6 +23,7 @@ import (
 	"github.com/docker/docker/pkg/jsonmessage"
 	"github.com/docker/docker/pkg/term"
 	"github.com/docker/go-connections/nat"
+	"github.com/logrusorgru/aurora"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/net/context"
 )
@@ -234,4 +236,20 @@ func (docker *DockerRuntime) FetchContainerLogs(containerID string) entities.Log
 		logger.Info(scanner.Text())
 	}
 	return log
+}
+
+// ExportImage save image into dest, for uploading to other nodes, etc.
+func (docker *DockerRuntime) ExportImage(imageName string) {
+	targetFile := filepath.Join(utilities.GetBasePath(), "temp", imageName+".aidimg")
+	file, err := os.Create(targetFile)
+	if err != nil {
+		utilities.CheckError(err, "Cannot create new image file at "+targetFile)
+	}
+	defer file.Close()
+	resBody, err := docker.client.ImageSave(context.Background(), []string{imageName})
+	_, err = io.Copy(file, resBody)
+	if err != nil {
+		utilities.CheckError(err, "Cannot write to the file: "+targetFile)
+	}
+	fmt.Printf("%s Exported your image to %s\n", aurora.Green("success"), targetFile)
 }

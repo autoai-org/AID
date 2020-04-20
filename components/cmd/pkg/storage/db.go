@@ -9,9 +9,8 @@ import (
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/ilibs/gosql/v2"
 
-	// import sqlite3 as driver for database
 	"path/filepath"
-
+	// import sqlite3 as driver for database
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -122,7 +121,7 @@ func (db *Database) CreateTables() {
 		created_at DATETIME,
 		updated_at DATETIME
 	);
-
+	
 	CREATE TABLE IF NOT EXISTS apikey (
 		id TEXT PRIMARY KEY,
 		aidkey TEXT,
@@ -180,6 +179,25 @@ func (db *Database) CreateTables() {
 		status TEXT,
 		created_at DATETIME,
 		updated_at DATETIME
+	);
+	
+	CREATE TABLE IF NOT EXISTS experiment (
+		id TEXT PRIMARY KEY,
+		datapath TEXT,
+		vendor TEXT,
+		package TEXT,
+		solver TEXT,
+		logid TEXT
+	);
+	
+	CREATE TABLE IF NOT EXISTS node (
+		id TEXT PRIMARY KEY,
+		name TEXT,
+		address TEXT,
+		status TEXT,
+		created_at DATETIME,
+		updated_at DATETIME,
+		token TEXT
 	);
 	`
 	gosql.Exec(sqlString)

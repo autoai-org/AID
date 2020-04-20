@@ -90,3 +90,8 @@ func createSolverContainer(imageName string, hostPort string) {
 		logger.Info("Created successfully with the id " + resp.ID)
 	}
 }
+
+func exportImage(imageName string) {
+	dockerClient := runtime.NewDockerRuntime()
+	dockerClient.ExportImage(imageName)
+}

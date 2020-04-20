@@ -12,7 +12,7 @@ import (
 	"github.com/autoai-org/aid/components/cmd/pkg/requests"
 	"github.com/autoai-org/aid/components/cmd/pkg/storage"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
-	. "github.com/logrusorgru/aurora"
+	aurora "github.com/logrusorgru/aurora"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -36,18 +36,18 @@ func addDefaultToDB() {
 }
 
 func initRepository() {
-	prompt := promptui.Prompt{
+	promptVendor := promptui.Prompt{
 		Label: "Your Vendor Name, it can be your name/company name, etc.",
 	}
-	vendorName, err := prompt.Run()
-	prompt = promptui.Prompt{
+	vendorName, err := promptVendor.Run()
+	promptPackage := promptui.Prompt{
 		Label: "Your Package Name, it should be unique inside your vendor scope",
 	}
-	packageName, err := prompt.Run()
-	prompt = promptui.Prompt{
+	packageName, err := promptPackage.Run()
+	promptDesc := promptui.Prompt{
 		Label: "Description of your package",
 	}
-	description, err := prompt.Run()
+	description, err := promptDesc.Run()
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -63,14 +63,14 @@ func initRepository() {
 	renderFile(path.Join(packageName, "README.md"), renderContext)
 	renderFile(path.Join(packageName, "aid.toml"), renderContext)
 	// hint what's next
-	fmt.Println(Green("Successfully created your package " + vendorName + "/" + packageName))
-	fmt.Println(Green("To make it work, please follow the instructions:"))
-	fmt.Printf("\t 1. Modify your solver inside %s \n", Cyan(packageName+"/"+packageName+"/solver.py"))
+	fmt.Println(aurora.Green("Successfully created your package " + vendorName + "/" + packageName))
+	fmt.Println(aurora.Green("To make it work, please follow the instructions:"))
+	fmt.Printf("\t 1. Modify your solver inside %s \n", aurora.Cyan(packageName+"/"+packageName+"/solver.py"))
 	fmt.Printf("\t 2. Modify your aid.toml file with your new solver name\n")
 	fmt.Printf("\t 3. Modify your README.md file with your new solvers and its description\n")
 	fmt.Printf("\t 4. You are ready to go! You can now upload your package to GitHub or our Model Hub\n")
-	fmt.Println(Green("For more information, please visit https://aid.autoai.org/docs/package/publish-packages"))
-	fmt.Println(Green("If you met problems/issues, feel free to post it to https://github.com/autaoi-org/aid"))
+	fmt.Println(aurora.Green("For more information, please visit https://aid.autoai.org/docs/package/publish-packages"))
+	fmt.Println(aurora.Green("If you met problems/issues, feel free to post it to https://github.com/autaoi-org/aid"))
 	if err != nil {
 		fmt.Println(err)
 	}

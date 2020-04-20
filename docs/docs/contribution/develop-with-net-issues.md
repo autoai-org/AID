@@ -8,7 +8,7 @@ Some important build tools are difficult to access in some contries. To help the
 
 ## Golang
 
-The package management of golang, is hard to access, i.e. ```go get``` and related commands may run into problems. To handle this issue, please try (GOPROXY)[https://goproxy.io/] and follow their instructions.
+The package management of golang, is hard to access. As a result ```go get``` and related commands may run into problems. To handle this issue, please try [goproxy](https://goproxy.io/) and follow their instructions.
 
 ## Docker
 

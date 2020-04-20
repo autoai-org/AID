@@ -56,6 +56,24 @@ func main() {
 				},
 			},
 			{
+				Name:     "image",
+				Aliases:  []string{"img"},
+				Usage:    "Manage images - Export/Import/List prebuilt images",
+				Category: "image",
+				Subcommands: []*cli.Command{
+					{
+						Name:     "export",
+						Aliases:  []string{"ex"},
+						Usage:    "Export image into a tarfile",
+						Category: "image",
+						Action: func(c *cli.Context) error {
+							exportImage(c.Args().Get(0))
+							return nil
+						},
+					},
+				},
+			},
+			{
 				Name:     "cluster",
 				Aliases:  []string{"cl"},
 				Usage:    "Cluster Management -  Add Node/Upload Image/etc",
@@ -72,22 +90,33 @@ func main() {
 						},
 					},
 					{
+						Name:     "node",
+						Usage:    "List/Add Nodes",
+						Category: "cluster",
+						Subcommands: []*cli.Command{
+							{
+								Name: "add",
+								Action: func(c *cli.Context) error {
+									addNode()
+									return nil
+								},
+							},
+							{
+								Name: "list",
+								Action: func(c *cli.Context) error {
+									printNodes()
+									return nil
+								},
+							},
+						},
+					},
+					{
 						Name:     "push",
 						Aliases:  []string{"ps"},
 						Usage:    "Push Image to target host",
 						Category: "cluster",
 						Action: func(c *cli.Context) error {
-							pushImage()
-							return nil
-						},
-					},
-					{
-						Name:     "add",
-						Aliases:  []string{"ad"},
-						Usage:    "Add a new node",
-						Category: "cluster",
-						Action: func(c *cli.Context) error {
-							pushImage()
+							pushImage(c.Args().Get(0), c.Args().Get(1))
 							return nil
 						},
 					},

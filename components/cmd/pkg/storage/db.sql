@@ -127,5 +127,15 @@ CREATE TABLE IF NOT EXISTS experiment (
 	vendor TEXT,
 	package TEXT,
 	solver TEXT,
-	logid TEXT,
-)
+	logid TEXT
+);
+
+CREATE TABLE IF NOT EXISTS node (
+	id TEXT PRIMARY KEY,
+	name TEXT,
+	address TEXT,
+	status TEXT,
+	created_at DATETIME,
+	updated_at DATETIME,
+	token TEXT
+);
