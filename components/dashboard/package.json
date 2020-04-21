@@ -14,7 +14,7 @@
     "ansi-to-html": "^0.6.14",
     "axios": "^0.19.2",
     "chart.js": "^2.9.3",
-    "codemirror": "^5.52.2",
+    "codemirror": "^5.53.0",
     "core-js": "^3.6.5",
     "dayjs": "^1.8.25",
     "plotly.js-dist": "^1.53.0",
