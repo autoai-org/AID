@@ -32,7 +32,7 @@ func NewDB(driver string, uri string) *Database {
 		Enable:  true,
 		Driver:  driver,
 		Dsn:     uri,
-		ShowSql: true,
+		ShowSql: false,
 	}
 	return &Database{
 		configs:     configs,

@@ -63,11 +63,21 @@ func main() {
 				Subcommands: []*cli.Command{
 					{
 						Name:     "export",
-						Aliases:  []string{"ex"},
+						Aliases:  []string{"exp"},
 						Usage:    "Export image into a tarfile",
 						Category: "image",
 						Action: func(c *cli.Context) error {
 							exportImage(c.Args().Get(0))
+							return nil
+						},
+					},
+					{
+						Name:     "import",
+						Aliases:  []string{"imp"},
+						Usage:    "Export image into a tarfile",
+						Category: "image",
+						Action: func(c *cli.Context) error {
+							importImage(c.Args().Get(0), false)
 							return nil
 						},
 					},

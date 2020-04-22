@@ -95,3 +95,8 @@ func exportImage(imageName string) {
 	dockerClient := runtime.NewDockerRuntime()
 	dockerClient.ExportImage(imageName)
 }
+
+func importImage(imageName string, quiet bool) {
+	dockerClient := runtime.NewDockerRuntime()
+	dockerClient.ImportImage(imageName, quiet)
+}

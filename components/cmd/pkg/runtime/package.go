@@ -1,6 +1,13 @@
+// Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+//
+// This software is released under the MIT License.
+// https://opensource.org/licenses/MIT
+
 package runtime
 
 import (
+	"fmt"
+	"os"
 	"path/filepath"
 	"strings"
 
@@ -22,7 +29,7 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 	} else {
 		remoteType = "Registry"
 	}
-	// Fetch Remote Content
+	// Fetch Remote Content (Source Code)
 	switch remoteType {
 	case "Git":
 		git := requests.NewGitClient()
@@ -38,10 +45,26 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 			Status:    "installed",
 			RemoteURL: remoteURL}
 		git.Clone(remoteURL, absTargetSubFolder)
+		os.Remove(filepath.Join(localFolder, ".git"))
 	case "Registry":
 		logger.Error("Unsupported Remote Type.")
 	default:
 		logger.Error("Unsupported Remote Type.")
+	}
+	// Fetch Remote Content (Model File)
+	// If pretrained.toml exists, then load the pretrained file
+	pretrainedFile := filepath.Join(localFolder, "pretrained.toml")
+	if utilities.IsExists(pretrainedFile) {
+		pretrainedTomlString, err := utilities.ReadFileContent(pretrainedFile)
+		fmt.Println(pretrainedTomlString)
+		utilities.CheckError(err, "Cannot open file"+pretrainedFile)
+		pretrainedInfo := entities.LoadPretrainedsFromConfig(pretrainedTomlString)
+		utilities.Formatter.Progress("Downloading pretrained models...")
+		for _, pretrained := range pretrainedInfo.Models {
+			utilities.Formatter.Progress("Downloading " + pretrained.Name + "...")
+			utilities.Download(pretrained.URL, filepath.Join(localFolder, "pretrained"))
+		}
+		utilities.Formatter.Success("Finished downloading pretrained files")
 	}
 	// Generate Dockerfile
 	configFile := filepath.Join(localFolder, "aid.toml")

@@ -239,17 +239,50 @@ func (docker *DockerRuntime) FetchContainerLogs(containerID string) entities.Log
 }
 
 // ExportImage save image into dest, for uploading to other nodes, etc.
-func (docker *DockerRuntime) ExportImage(imageName string) {
+// Before calling export, we should ask users if they want to overwrite existing file.
+func (docker *DockerRuntime) ExportImage(imageName string) error {
 	targetFile := filepath.Join(utilities.GetBasePath(), "temp", imageName+".aidimg")
+	fmt.Printf("%s Exporting your image to %s\n", aurora.Cyan("progress"), targetFile)
+	// Delete existing file
+	if utilities.IsExists(targetFile) {
+		err := os.Remove(targetFile)
+		utilities.CheckError(err, "Cannot remove existing file "+targetFile)
+	}
 	file, err := os.Create(targetFile)
 	if err != nil {
 		utilities.CheckError(err, "Cannot create new image file at "+targetFile)
+		return err
 	}
 	defer file.Close()
 	resBody, err := docker.client.ImageSave(context.Background(), []string{imageName})
 	_, err = io.Copy(file, resBody)
 	if err != nil {
 		utilities.CheckError(err, "Cannot write to the file: "+targetFile)
+		return err
 	}
-	fmt.Printf("%s Exported your image to %s\n", aurora.Green("success"), targetFile)
+	utilities.Formatter.Success("%s Exported your image to %s\n", aurora.Green("success"), targetFile)
+	return nil
+}
+
+// ImportImage reads images into docker runtime
+func (docker *DockerRuntime) ImportImage(imageName string, quiet bool) error {
+	targetFile := filepath.Join(utilities.GetBasePath(), "temp", imageName+".aidimg")
+	fmt.Printf("%s Importing your image from %s\n", aurora.Cyan("progress"), targetFile)
+	_, err := os.Stat(targetFile)
+	if os.IsNotExist(err) {
+		utilities.CheckError(err, "Cannot read the file: "+targetFile)
+		return err
+	}
+	file, err := os.Open(targetFile)
+	if err != nil {
+		utilities.CheckError(err, "Cannot open the file: "+targetFile)
+	}
+	reader := bufio.NewReader(file)
+	_, err = docker.client.ImageLoad(context.Background(), reader, quiet)
+	if err != nil {
+		utilities.CheckError(err, "Cannot import image from "+targetFile)
+		return err
+	}
+	fmt.Printf("%s Imported your image from %s\n", aurora.Green("success"), targetFile)
+	return nil
 }

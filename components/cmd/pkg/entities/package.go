@@ -39,7 +39,7 @@ type Pretrained struct {
 // Pretraineds is the collection/list of pretrained files
 // this definition is used for toml parser
 type Pretraineds struct {
-	Model []Pretrained `toml:"model"`
+	Models []Pretrained `toml:"models"`
 }
 
 // TableName defines the tablename in database

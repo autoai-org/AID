@@ -29,6 +29,7 @@ func startImageReceiver() {
 		file, _ := c.FormFile("file")
 		targetPath := filepath.Join(utilities.GetBasePath(), "temp", file.Filename+".aidimg")
 		c.SaveUploadedFile(file, targetPath)
+		importImage(file.Filename, true)
 		c.JSON(http.StatusOK, gin.H{
 			"code": 200,
 			"msg":  "Successfully Uploaded",
