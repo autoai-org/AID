@@ -238,10 +238,10 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-7.0.2.tgz#b17f16cf933597e10d6d78eae3251e692ce8b0ce"
   integrity sha512-ZvO2tAcjmMi8V/5Z3JsyofMe3hasRcaw88cto5etSVMwVQfeivGAlEYmaQgceUSVYFofVjT+ioHsATjdWcFt1w==
 
-"@types/mongodb@*", "@types/mongodb@^3.5.9":
-  version "3.5.9"
-  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.9.tgz#a14fda0d757e0430eebc171b3a9cedad118b1884"
-  integrity sha512-YEs/yBGkxpp9QxSB6gZInV7+S74pryqdfxEUJnlXDsFTtLmnDJA9iHnGEsxgrWm9gl2f4BDTwKe6lzTNB25oHg==
+"@types/mongodb@*", "@types/mongodb@^3.5.10":
+  version "3.5.10"
+  resolved "https://registry.yarnpkg.com/@types/mongodb/-/mongodb-3.5.10.tgz#b54c143b5e641c5363848e227b17c2df7f144b15"
+  integrity sha512-6NkJNfFdFa/njBvN/9eAfq78bWUnapkdR3JbWGGpd7U71PjgKweA4Tlag8psi2mqm973vBYVTD1oc1u0lzRcig==
   dependencies:
     "@types/bson" "*"
     "@types/node" "*"
