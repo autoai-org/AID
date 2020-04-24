@@ -284,7 +284,7 @@ description = "A formatter for Python code."
 name = "yapf"
 optional = false
 python-versions = "*"
-version = "0.29.0"
+version = "0.30.0"
 
 [[package]]
 category = "dev"
@@ -303,7 +303,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "contextlib2", "unittest2"]
 
 [metadata]
-content-hash = "eb149c47a8364597541b6daaa30f9ba5b5dd4bd84974b2c92a30b0731f157fc3"
+content-hash = "051527daa091fcefb825f0559b0156caecc215a8d77e4ed5cdff97dddf787459"
 python-versions = ">=3.6"
 
 [metadata.files]
@@ -479,8 +479,8 @@ werkzeug = [
     {file = "Werkzeug-1.0.1.tar.gz", hash = "sha256:6c80b1e5ad3665290ea39320b91e1be1e0d5f60652b964a3070216de83d2e47c"},
 ]
 yapf = [
-    {file = "yapf-0.29.0-py2.py3-none-any.whl", hash = "sha256:cad8a272c6001b3401de3278238fdc54997b6c2e56baa751788915f879a52fca"},
-    {file = "yapf-0.29.0.tar.gz", hash = "sha256:712e23c468506bf12cadd10169f852572ecc61b266258422d45aaf4ad7ef43de"},
+    {file = "yapf-0.30.0-py2.py3-none-any.whl", hash = "sha256:3abf61ba67cf603069710d30acbc88cfe565d907e16ad81429ae90ce9651e0c9"},
+    {file = "yapf-0.30.0.tar.gz", hash = "sha256:3000abee4c28daebad55da6c85f3cd07b8062ce48e2e9943c8da1b9667d48427"},
 ]
 zipp = [
     {file = "zipp-1.0.0-py2.py3-none-any.whl", hash = "sha256:8dda78f06bd1674bd8720df8a50bb47b6e1233c503a4eed8e7810686bde37656"},
