@@ -63,7 +63,7 @@
     "@types/helmet": "^0.0.46",
     "@types/jsonwebtoken": "^8.3.9",
     "@types/mocha": "^7.0.2",
-    "@types/mongodb": "^3.5.10",
+    "@types/mongodb": "^3.5.14",
     "@types/mongoose": "^5.7.14",
     "@types/serve-favicon": "^2.5.0",
     "axios": "^0.19.2",
