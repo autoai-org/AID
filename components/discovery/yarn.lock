@@ -39,14 +39,14 @@
     debug "^4.1.1"
     lodash "^4.17.15"
 
-"@feathersjs/authentication-oauth@^4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-oauth/-/authentication-oauth-4.5.3.tgz#db488e9747bf07a5da90d8c8cb950d678eba1814"
-  integrity sha512-PxOL43bxK+ygUd2Z1p10TQvDElofTjuGSglbN97JsHn57fP1zDabVjIyksPDRd2iyvASOiZme8+JhGZ1AthfvA==
+"@feathersjs/authentication-oauth@^4.5.4":
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-oauth/-/authentication-oauth-4.5.4.tgz#a7c806294d466190369643965145a655fd1d4b34"
+  integrity sha512-yH5Ktbp2wDgi6I0g8gcQkqIOtprdJa9XCzAShB1klXdgHs67dz8UnWgf9o4jmz1ApkUAxre7PEVYSs3HnwG9Pw==
   dependencies:
     "@feathersjs/authentication" "^4.5.3"
     "@feathersjs/errors" "^4.5.3"
-    "@feathersjs/express" "^4.5.3"
+    "@feathersjs/express" "^4.5.4"
     "@feathersjs/feathers" "^4.5.3"
     debug "^4.1.1"
     express-session "^1.17.0"
@@ -95,10 +95,10 @@
   dependencies:
     debug "^4.1.1"
 
-"@feathersjs/express@^4.5.1", "@feathersjs/express@^4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@feathersjs/express/-/express-4.5.3.tgz#4a7ee196fe539d3437c77b7c4301fbd3bfe47637"
-  integrity sha512-d+5OqCwV/Ev+O5AtY6kSryIGMbIWSZUPSvQWyTlU9Qu6bCJDgJFrciO74WtNZoY8HrRWvwjsc4M0QIiqtNXyqw==
+"@feathersjs/express@^4.5.1", "@feathersjs/express@^4.5.4":
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/@feathersjs/express/-/express-4.5.4.tgz#06d2e02d24bb5954a799a5a6516b0c9a23900dcf"
+  integrity sha512-C+TayIQLc040e6ysUoveDbTlyDSFWaNwoNYU2UN/mhwN8++9hzjN5r2d4uNCUCNXLeREkj5vkyXoRHSgzn22MA==
   dependencies:
     "@feathersjs/commons" "^4.5.3"
     "@feathersjs/errors" "^4.5.3"
