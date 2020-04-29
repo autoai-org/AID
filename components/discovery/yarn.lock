@@ -27,10 +27,10 @@
     "@feathersjs/errors" "^4.5.2"
     "@feathersjs/feathers" "^4.5.2"
 
-"@feathersjs/authentication-local@^4.5.3":
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-local/-/authentication-local-4.5.3.tgz#22b74e9e718b9e5eed9ec9bd1a7702d41ba3cff3"
-  integrity sha512-T47/edIGMlutknaCaXW91R+31h3IDNWE+jl+/iuT2dr+MZeGiA1qxOGcI8QSAkoRpjiKz6ccw90kL53g9h73Jw==
+"@feathersjs/authentication-local@^4.5.4":
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/@feathersjs/authentication-local/-/authentication-local-4.5.4.tgz#95d04b04134b8f7eb10eaf2d6257c86a6492bfc2"
+  integrity sha512-ji+Ai33rMT7xsS7mEsFZe/ICb8mR6YYnr0vz7bEGDoyWbGt/K/A+UeLKKMfcAyF+37RgiZ3386pIboR+IHlqfw==
   dependencies:
     "@feathersjs/authentication" "^4.5.3"
     "@feathersjs/errors" "^4.5.3"
