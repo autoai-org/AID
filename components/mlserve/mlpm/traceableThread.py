@@ -3,7 +3,14 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-#coding:utf-8
+# coding:utf-8
+
+import threading
+import uuid
+import logging
+import sys
+import os
+from mlpm.config import GetLogDir
 
 
 class ThreadPrinter:
@@ -37,7 +44,7 @@ class TracedThread(threading.Thread):
     def start(self):
         if self.id is None:
             self.id = str(uuid.uuid4)
-        full_log_path = os.path.join(getLogDir(), self.id + ".full.log")
+        full_log_path = os.path.join(GetLogDir(), self.id + ".full.log")
         self.__run_backup = self.run
         self.run = self.__run
         sys.stdout = ThreadPrinter(full_log_path)

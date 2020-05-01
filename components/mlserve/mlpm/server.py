@@ -3,7 +3,7 @@
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
 
-#coding:utf-8
+# coding:utf-8
 
 from mlpm.app import aidserver
 from mlpm.response import json_resp
@@ -16,23 +16,24 @@ from flask import request
 UPLOAD_INFER_FOLDER = './temp/infer'
 UPLOAD_TRAIN_FOLDER = './temp/train'
 
+
 @aidserver.route("/", methods=["GET"])
 def ping():
-    return json_resp({"status":"OK"}, status=200)
+    return json_resp({"status": "OK"}, status=200)
 
 
 @aidserver.route("/infer", methods=["GET", "POST"])
 def infer():
     if request.method == 'POST':
         return handle_post_solver_train_or_infer(request, UPLOAD_INFER_FOLDER,
-                                          "infer")
+                                                 "infer")
 
 
 @aidserver.route("/train", methods=["GET", "POST"])
 def train():
     if request.method == "POST":
         return handle_post_solver_train_or_infer(request, UPLOAD_TRAIN_FOLDER,
-                                          "train")
+                                                 "train")
 
 
 def run_server(solver, port=None):

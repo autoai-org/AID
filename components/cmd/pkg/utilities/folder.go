@@ -55,6 +55,7 @@ func InitFolders() {
 	requiredFolders := [5]string{"logs", "models", "plugins", "datasets", "temp"}
 	for _, each := range requiredFolders {
 		CreateFolderIfNotExist(filepath.Join(targetDir, each))
+		Formatter.Success("created " + each + " folder")
 	}
 	initConfig := SystemConfig{RemoteReport: true}
 	SaveConfig(initConfig)

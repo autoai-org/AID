@@ -17,8 +17,6 @@ more-itertools==8.1.0
 numpy==1.18.2
 packaging==20.0
 Pillow==7.1.1
-pkg-resources==0.0.0
-pkginfo==1.5.0.1
 pluggy==0.13.1
 py==1.8.1
 pycparser==2.20

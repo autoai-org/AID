@@ -20,19 +20,19 @@ func initDatabase() {
 	db := storage.GetDefaultDB()
 	db.Connect()
 	db.CreateTables()
-	logger.Info("Successfully initialized database")
+	utilities.Formatter.Success("initialized database")
 }
 
 // put everything (logs, packages, etc) under ~/.autoai/.aid
 func initFolder() {
 	utilities.InitFolders()
-	logger.Info("Successfully created required folders")
+	utilities.Formatter.Success("created required folders")
 }
 
 // insert default values to the db
 func addDefaultToDB() {
 	entities.SaveInitLogObject()
-	logger.Info("Successfully add required objects into database")
+	utilities.Formatter.Success("add required objects into database")
 }
 
 func initRepository() {

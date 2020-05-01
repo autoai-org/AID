@@ -6,7 +6,6 @@
 package runtime
 
 import (
-	"fmt"
 	"os"
 	"path/filepath"
 	"strings"
@@ -56,7 +55,6 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 	pretrainedFile := filepath.Join(localFolder, "pretrained.toml")
 	if utilities.IsExists(pretrainedFile) {
 		pretrainedTomlString, err := utilities.ReadFileContent(pretrainedFile)
-		fmt.Println(pretrainedTomlString)
 		utilities.CheckError(err, "Cannot open file"+pretrainedFile)
 		pretrainedInfo := entities.LoadPretrainedsFromConfig(pretrainedTomlString)
 		utilities.Formatter.Progress("Downloading pretrained models...")

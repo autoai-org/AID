@@ -26,7 +26,7 @@ func main() {
 	readConfig()
 	var license bool
 	cli.VersionPrinter = func(c *cli.Context) {
-		fmt.Printf("version:%s build:%s\n", c.App.Version, Build)
+		fmt.Printf("VERSION:%s\nBUILD:%s\n", c.App.Version, Build)
 	}
 	app := &cli.App{
 		Flags: []cli.Flag{

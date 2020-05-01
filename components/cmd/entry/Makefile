@@ -5,4 +5,6 @@ default:
 	@echo "\tmake build  \t Build for local arch"
 
 build:
-	go build -ldflags "-s -w -X main.Version="Dev" -X main.Build=$(BUILDTIME)"  -o aid
+	go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
+	rm /usr/local/bin/aid
+	cp ./aid /usr/local/bin/aid

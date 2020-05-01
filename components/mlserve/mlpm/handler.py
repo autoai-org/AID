@@ -18,14 +18,13 @@ def handle_post_solver_train_or_infer(request, upload_folder, request_type):
     data = config.to_dict()
     results = {}
     if 'file' in request.files:
-        filename = secure_filename(request.files["file"][0].name)
+        uploaded_file = request.files['file']
+        filename = secure_filename(uploaded_file.filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
         file_abs_path = os.path.join(upload_folder, filename)
-        with open(file_abs_path,"wb") as file:
-            file.write(request.files["file"][0].body)
-        file.close()
+        uploaded_file.save(file_abs_path)
         data['input_file_path'] = file_abs_path
     try:
         if request_type == "infer":

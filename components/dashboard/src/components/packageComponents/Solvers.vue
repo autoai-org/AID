@@ -54,10 +54,9 @@ export default Vue.extend({
             each.number = each.Name.split("-")[1]
             each.vendor = each.Name.split("-")[2]
             each.package = each.Name.split("-")[3]
-            console.log(each)
             return each
         }).filter(function(each:any){
-            if (each.vendor==self.vendor && each.package == self.packageName) {
+            if (each.package == self.packageName) {
                 return true
             } else {
                 return false

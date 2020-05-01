@@ -6,14 +6,14 @@
 #coding:utf-8
 import os
 from pathlib import Path
-
+import toml
 
 def GetHomeDir():
     return os.path.join(str(Path.home()), '.autoai', '.aid')
 
 
 def GetLogDir():
-    return os.path.join(GetHomDir(), 'logs')
+    return os.path.join(GetHomeDir(), 'logs')
 
 
 def GetConfig():
