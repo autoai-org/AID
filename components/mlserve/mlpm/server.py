@@ -4,18 +4,20 @@
 # https://opensource.org/licenses/MIT
 
 # coding:utf-8
-
-from mlpm.app import aidserver
-from mlpm.response import json_resp
-from mlpm.handler import handle_post_solver_train_or_infer
-from mlpm.utility import get_available_port, str2bool
+import os
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
 from flask import request
+from flask import send_from_directory
+from mlpm.app import aidserver
+from mlpm.response import json_resp
+from mlpm.handler import handle_post_solver_train_or_infer, handle_batch_infer_request
+from mlpm.utility import get_available_port, str2bool
 
-UPLOAD_INFER_FOLDER = './temp/infer'
-UPLOAD_TRAIN_FOLDER = './temp/train'
 
+UPLOAD_INFER_FOLDER = os.path.join("./", "temp", "infer")
+UPLOAD_TRAIN_FOLDER = os.path.join("./", "temp", "train")
+PUBLIC_FOLDER = os.path.join("./", "temp", "public")
 
 @aidserver.route("/", methods=["GET"])
 def ping():
@@ -26,15 +28,22 @@ def ping():
 def infer():
     if request.method == 'POST':
         return handle_post_solver_train_or_infer(request, UPLOAD_INFER_FOLDER,
-                                                 "infer")
-
+                                                 "infer", PUBLIC_FOLDER)
 
 @aidserver.route("/train", methods=["GET", "POST"])
 def train():
     if request.method == "POST":
         return handle_post_solver_train_or_infer(request, UPLOAD_TRAIN_FOLDER,
-                                                 "train")
+                                                 "train", PUBLIC_FOLDER)
 
+@aidserver.route("/batch", methods=["POST"])
+def batch_infer():
+    if request.method == 'POST':
+        return handle_batch_infer_request(request, UPLOAD_INFER_FOLDER, PUBLIC_FOLDER)
+
+@aidserver.route("/static/<filename>")
+def send_static(filename):
+    return send_from_directory(os.path.abspath(PUBLIC_FOLDER), filename)
 
 def run_server(solver, port=None):
     if port is None:

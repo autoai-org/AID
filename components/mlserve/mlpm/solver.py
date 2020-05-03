@@ -5,7 +5,6 @@
 
 import os
 
-from mlpm.logger import StepLogger
 from mlpm.server import run_server
 
 
@@ -39,6 +38,3 @@ class Solver(object):
 
     def infer(self, data):
         raise NotImplementedError
-
-    def train(self, data):
-        self.logger = StepLogger(os.environ('LOG_FILE'))

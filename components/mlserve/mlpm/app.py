@@ -7,3 +7,5 @@
 from flask import Flask
 
 aidserver = Flask(__name__)
+# Explicitly declare solver in the aidserver
+aidserver.solver = None
