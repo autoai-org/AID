@@ -11,7 +11,7 @@ isort==4.3.21
 itsdangerous==1.1.0
 jeepney==0.4.3
 Jinja2==2.11.2
-keyring==21.2.0
+keyring==21.2.1
 MarkupSafe==1.1.1
 more-itertools==8.1.0
 numpy==1.18.2
@@ -31,7 +31,7 @@ requests-toolbelt==0.9.1
 SecretStorage==3.1.2
 six==1.14.0
 toml==0.10.0
-tqdm==4.45.0
+tqdm==4.46.0
 twine==3.1.1
 urllib3==1.25.9
 wcwidth==0.1.8
