@@ -27,3 +27,18 @@ jobs:
     - run: cd components/discovery && npm install && npm run test
       env:
         CI: true
+
+  deploy:
+
+      runs-on: ubuntu-latest
+
+      steps:
+        - uses: actions/checkout@v2
+        - uses: akhileshns/heroku-deploy@v3.0.4 # This is the action
+          with:
+            heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+            heroku_app_name: "aid-discovery" #Must be unique in Heroku
+            heroku_email: "ad@askfermi.me"
+            dontuseforce: false #OPTIONAL and DEFAULT - false
+            usedocker: false #OPTIONAL and DEFAULT - false
+            appdir: "components/discovery" #OPTIONAL and DEFAULT - "". This is useful if the api you're deploying is in a subfolder
