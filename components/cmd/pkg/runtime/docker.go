@@ -105,8 +105,7 @@ func (docker *DockerRuntime) Create(imageID string, hostPort string) (container.
 	}
 	container := entities.Container{ID: resp.ID, ImageID: imageID}
 	container.Save()
-	port := "8081"
-	runningSolver := entities.RunningSolver{ContainerID: resp.ID, Status: "Ready", EntryPoint: "127.0.0.1:" + port}
+	runningSolver := entities.RunningSolver{ContainerID: resp.ID, Status: "Ready", EntryPoint: "127.0.0.1:" + hostPort}
 	runningSolver.Save()
 	return resp, err
 }
@@ -260,7 +259,7 @@ func (docker *DockerRuntime) ExportImage(imageName string) error {
 		utilities.CheckError(err, "Cannot write to the file: "+targetFile)
 		return err
 	}
-	utilities.Formatter.Success("%s Exported your image to %s\n", aurora.Green("success"), targetFile)
+	utilities.Formatter.Success("exported your image to " + targetFile)
 	return nil
 }
 
@@ -283,6 +282,6 @@ func (docker *DockerRuntime) ImportImage(imageName string, quiet bool) error {
 		utilities.CheckError(err, "Cannot import image from "+targetFile)
 		return err
 	}
-	fmt.Printf("%s Imported your image from %s\n", aurora.Green("success"), targetFile)
+	fmt.Printf("imported your image from " + targetFile)
 	return nil
 }

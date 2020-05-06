@@ -8,10 +8,14 @@ package daemon
 import (
 	"bytes"
 	"io/ioutil"
+	"log"
+	"net"
 	"net/http"
 	"net/http/httputil"
 	"net/url"
 	"sync"
+	"sync/atomic"
+	"time"
 
 	"github.com/autoai-org/aid/components/cmd/pkg/entities"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
@@ -54,6 +58,67 @@ func (b *Backend) IsAlive() (alive bool) {
 type ServerPool struct {
 	backends []*Backend
 	current  uint64
+}
+
+// AddBackend adds a new node into the serverpool
+func (s *ServerPool) AddBackend(backend *Backend) {
+	s.backends = append(s.backends, backend)
+}
+
+// NextIndex atomically increase the count and return an index
+func (s *ServerPool) NextIndex() int {
+	return int(atomic.AddUint64(&s.current, uint64(1)) % uint64(len(s.backends)))
+}
+
+// SetBackendStatus changes the status of a certain backend
+func (s *ServerPool) SetBackendStatus(backendURL *url.URL, alive bool) {
+	for _, b := range s.backends {
+		if b.URL.String() == backendURL.String() {
+			b.SetAlive(alive)
+			break
+		}
+	}
+}
+
+// GetNextNode returns next active node to connect
+func (s *ServerPool) GetNextNode() *Backend {
+	next := s.NextIndex()
+	l := len(s.backends) + next
+	for i := next; i < l; i++ {
+		idx := i % len(s.backends)
+		if s.backends[idx].IsAlive() {
+			if i != next {
+				atomic.StoreUint64(&s.current, uint64(idx))
+			}
+			return s.backends[idx]
+		}
+	}
+	return nil
+}
+
+// IsBackendAlive checks if the given url is alive
+func IsBackendAlive(u *url.URL) bool {
+	timeout := 5 * time.Second
+	conn, err := net.DialTimeout("tcp", u.Host, timeout)
+	if err != nil {
+		utilities.Formatter.Error("cannot access " + u.String())
+		return false
+	}
+	conn.Close()
+	return true
+}
+
+// HealthCheck pings the remote node and update the status of the node
+func (s *ServerPool) HealthCheck() {
+	for _, b := range s.backends {
+		status := "up"
+		alive := IsBackendAlive(b.URL)
+		b.SetAlive(alive)
+		if !alive {
+			status = "down"
+		}
+		log.Printf("%s [%s]\n", b.URL, status)
+	}
 }
 
 func serveReverseProxy(c *gin.Context) {
