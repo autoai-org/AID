@@ -14,12 +14,12 @@ from mlpm.utility import str2bool
 from mlpm.response import json_resp
 
 
-def handle_post_solver_train_or_infer(request, upload_folder, request_type, target_folder):
-    config = ImmutableMultiDict(request.form)
+async def handle_post_solver_train_or_infer(request, upload_folder, request_type, target_folder):
+    config = ImmutableMultiDict(await request.form)
     data = config.to_dict()
     results = {}
-    if 'file' in request.files:
-        uploaded_file = request.files['file']
+    if 'file' in await request.files:
+        uploaded_file = await request.files['file']
         filename = secure_filename(uploaded_file.filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
@@ -42,9 +42,9 @@ def handle_post_solver_train_or_infer(request, upload_folder, request_type, targ
         return json_resp({"error": str(e), "code": "500"}, status=500)
 
 
-def handle_batch_infer_request(request, upload_folder, target_folder):
-    if 'file' in request.files:
-        uploaded_file = request.files['file']
+async def handle_batch_infer_request(request, upload_folder, target_folder):
+    if 'file' in await request.files:
+        uploaded_file = await request.files['file']
         filename = secure_filename(uploaded_file.filename)
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)

@@ -4,7 +4,6 @@
 # https://opensource.org/licenses/MIT
 
 import os
-from flask import Flask
 from mlpm.server import run_server
 from mlpm.server import aidserver
 
