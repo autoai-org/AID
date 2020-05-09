@@ -1,4 +1,5 @@
-from quart import jsonify, Response
+from quart import Response, jsonify
+
 
 def json_resp(data, status):
     return jsonify(data), status
