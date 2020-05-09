@@ -62,11 +62,11 @@ func build(solverName string) {
 
 func generate() {
 	tomlFilePath := filepath.Join("./", "aid.toml")
-	cvpmToml, err := utilities.ReadFileContent(tomlFilePath)
+	aidToml, err := utilities.ReadFileContent(tomlFilePath)
 	if err != nil {
 		utilities.CheckError(err, "Cannot open file "+tomlFilePath)
 	}
-	solvers := entities.LoadSolversFromConfig(cvpmToml)
+	solvers := entities.LoadSolversFromConfig(aidToml)
 	runtime.RenderRunnerTpl("./", solvers)
 	runtime.GenerateDockerFiles("./")
 }
