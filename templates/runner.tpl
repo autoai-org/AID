@@ -2,6 +2,8 @@
 import os
 import argparse
 import sys
+from mlpm.server import aidserver
+
 os.chdir(sys.path[0])
 
 parser = argparse.ArgumentParser(description='CVPM Runner')
@@ -13,4 +15,4 @@ from {{Package}}.{{Filename}} import {{Classname}}
 
 solver = {{Classname}}()
 
-solver.start(args.port)
+aidserver.solver = solver
