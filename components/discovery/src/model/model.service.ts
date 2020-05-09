@@ -15,7 +15,7 @@ export class ModelsService {
   async findAll(): Promise<AIDModel[]> {
     return this.aidModelModel.find().exec();
   }
-  async findByKeyword(keyword: string): Promise<AIDModel> {
-      return this.aidModelModel.findOne({name: new RegExp('^'+keyword+'$', "i")}).exec();
+  async findByKeyword(keyword: string): Promise<AIDModel[]> {
+      return this.aidModelModel.find({name: new RegExp('^'+keyword+'$', "i")}).exec();
   }
 }

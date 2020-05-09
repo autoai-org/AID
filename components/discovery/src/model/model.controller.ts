@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common'
+import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { AIDModel, CreateModelDto } from './model.schema'
 import { ModelsService } from './model.service';
 import { ApiTags } from '@nestjs/swagger';
+
 @ApiTags('Model')
 @Controller('model')
 export class ModelController {
@@ -11,8 +12,8 @@ export class ModelController {
     async findAll(): Promise<AIDModel[]>{
         return this.modelsService.findAll()
     }
-    @Get(':keyword')
-    async findByKeyword(@Param('keyword') keyword:string): Promise<AIDModel> {
+    @Get("/keyword/:keyword")
+    async findByKeyword(@Param("keyword") keyword:string): Promise<AIDModel[]> {
         return this.modelsService.findByKeyword(keyword)
     }
     @Post()
