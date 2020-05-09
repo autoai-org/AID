@@ -2,6 +2,7 @@
 
 ## Install AID
 
+See [Releases](/releases)
 
 ## Install a package
 

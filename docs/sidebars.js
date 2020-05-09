@@ -1,6 +1,6 @@
 module.exports = {
   someSidebar: {
-    "Getting Started": ['overview', 'installation', 'news'],
+    "Getting Started": ['overview', 'releases', 'installation', 'news'],
     "Examples": ['examples/chatbot', 'examples/object-detection',  "examples/showroom"],
     "Concepts": ['concepts/event', 'concepts/package', 'concepts/runtime'],
     "Packages": ['package/install-packages', 'package/publish-packages'],
