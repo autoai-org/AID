@@ -5,14 +5,18 @@
 
 from mlpm.solver import Solver
 from mlpm.metrics import Metrics
+from mlpm.server import aidserver
 
 class ExampleSolver(Solver):
-    def __init__(self):
+    def __init__(self,toml_file=None):
+        super().__init__(toml_file)
         self.predictor = ''
         self.acc = Metrics()
+
     def infer(self, data):
         print(data)
         return {'data': [0, 1, 2, 3]}
+
     def train(self, data):
         epochs = int(data['epochs'])
         for i in range(epochs):
@@ -20,6 +24,5 @@ class ExampleSolver(Solver):
         print(data)
         return data
 
-sol = ExampleSolver()
-
-sol.start(8082)
+solver = ExampleSolver()
+aidserver.solver = solver

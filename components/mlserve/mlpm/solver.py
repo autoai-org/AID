@@ -4,9 +4,9 @@
 # https://opensource.org/licenses/MIT
 
 import os
-
+from flask import Flask
 from mlpm.server import run_server
-
+from mlpm.server import aidserver
 
 class Solver(object):
     def __init__(self, pretrained_toml=None):
@@ -14,6 +14,7 @@ class Solver(object):
         self.bundle = None
         self._hyperparameters = {}
         self._enable_train = False
+        self.server = aidserver
         if hasattr(self.__class__, 'train') and callable(getattr(self.__class__, 'train')):
             self._enable_train = True
 
