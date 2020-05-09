@@ -2,7 +2,7 @@
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-
+# coding:utf-8
 from mlpm.solver import Solver
 from mlpm.metrics import Metrics
 from mlpm.server import aidserver

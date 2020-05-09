@@ -21,8 +21,9 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
     config = ImmutableMultiDict(await request.form)
     data = config.to_dict()
     results = {}
-    if 'file' in await request.files:
-        uploaded_file = await request.files['file']
+    req_files = await request.files
+    if 'file' in req_files:
+        uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
@@ -46,8 +47,9 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
 
 
 async def handle_batch_infer_request(request, upload_folder, target_folder):
-    if 'file' in await request.files:
-        uploaded_file = await request.files['file']
+    req_files = await request.files
+    if 'file' in req_files:
+        uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
