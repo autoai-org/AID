@@ -202,7 +202,9 @@ func (docker *DockerRuntime) ListImages() []types.ImageSummary {
 
 // ListContainers returns all containers that have been built.
 func (docker *DockerRuntime) ListContainers() []types.Container {
-	containers, err := docker.client.ContainerList(context.Background(), types.ContainerListOptions{})
+	containers, err := docker.client.ContainerList(context.Background(), types.ContainerListOptions{
+		All: true,
+	})
 	if err != nil {
 		logger.Error("Cannot List Images")
 		logger.Error(err.Error())

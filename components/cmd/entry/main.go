@@ -56,6 +56,16 @@ func main() {
 				},
 			},
 			{
+				Name:     "list",
+				Aliases:  []string{"ls"},
+				Usage:    "aid list [image|container|config]",
+				Category: "utility",
+				Action: func(c *cli.Context) error {
+					listItem(c.Args().Get(0))
+					return nil
+				},
+			},
+			{
 				Name:     "image",
 				Aliases:  []string{"img"},
 				Usage:    "Manage images - Export/Import/List prebuilt images",
@@ -135,19 +145,9 @@ func main() {
 			{
 				Name:     "config",
 				Aliases:  []string{"conf"},
-				Usage:    "List/Set Configurations",
+				Usage:    "Reset Configurations to default value",
 				Category: "self",
 				Subcommands: []*cli.Command{
-					{
-						Name:     "list",
-						Aliases:  []string{"ls"},
-						Usage:    "List all configurations",
-						Category: "self",
-						Action: func(c *cli.Context) error {
-							printConfig()
-							return nil
-						},
-					},
 					{
 						Name:     "reset",
 						Aliases:  []string{"ls"},
@@ -217,30 +217,12 @@ func main() {
 				},
 			},
 			{
-				Name:     "images",
-				Usage:    "List Image",
-				Category: "runtime",
-				Action: func(c *cli.Context) error {
-					printImages()
-					return nil
-				},
-			},
-			{
 				Name:     "generate",
 				Aliases:  []string{"gen"},
 				Usage:    "Generate Runners and Dockerfile",
 				Category: "runtime",
 				Action: func(c *cli.Context) error {
 					generate()
-					return nil
-				},
-			},
-			{
-				Name:     "containers",
-				Usage:    "List Containers",
-				Category: "runtime",
-				Action: func(c *cli.Context) error {
-					printContainers()
 					return nil
 				},
 			},
