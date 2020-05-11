@@ -121,13 +121,6 @@ func main() {
 									return nil
 								},
 							},
-							{
-								Name: "list",
-								Action: func(c *cli.Context) error {
-									printNodes()
-									return nil
-								},
-							},
 						},
 					},
 					{
