@@ -20,9 +20,15 @@ module.exports = {
           label: 'Docs',
           position: 'left',
         },
-        {to: 'blog', label: 'Blog', position: 'left'},
-        {to: 'docs/examples/showroom', label: 'Showroom', position: 'left'},
+        {to: '/blog', label: 'Blog', position: 'left'},
+        {to: '/docs/examples/showroom', label: 'Showroom', position: 'left'},
         {to: '/changelog', label: 'Changelog', position: 'left'},
+        {to: '/docs/releases', label: 'Releases', position: 'left'},
+        {
+          href: 'https://hub.autoai.org',
+          label: 'AIDHub',
+          position: 'right',
+        },
         {
           href: 'https://github.com/autoai-org/aid',
           label: 'GitHub',

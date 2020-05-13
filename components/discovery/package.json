@@ -1,78 +1,72 @@
 {
   "name": "discovery",
+  "version": "0.0.1",
   "description": "",
-  "version": "0.0.0",
-  "homepage": "",
+  "author": "",
   "private": true,
-  "main": "src",
-  "keywords": [
-    "feathers"
-  ],
-  "author": {
-    "name": "Xiaozhe Yao",
-    "email": "xiaozhe.yaoi@gmail.com"
-  },
-  "contributors": [],
-  "bugs": {},
-  "directories": {
-    "lib": "src",
-    "test": "test/",
-    "config": "config/"
-  },
-  "engines": {
-    "node": "^13.0.0",
-    "yarn": ">= 0.18.0"
-  },
+  "license": "UNLICENSED",
   "scripts": {
-    "test": "yarn run compile && yarn run mocha",
-    "dev": "ts-node-dev --no-notify src/",
-    "start": "yarn run compile && node lib/",
-    "mocha": "ts-mocha \"test/**/*.ts\" --recursive --exit",
-    "compile": "shx rm -rf lib/ && tsc"
+    "prebuild": "rimraf dist",
+    "build": "nest build",
+    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
+    "serve": "nest start",
+    "serve:dev": "nest start --watch",
+    "serve:debug": "nest start --debug --watch",
+    "serve:prod": "node dist/main",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --config ./test/jest-e2e.json"
   },
-  "standard": {
-    "env": [
-      "mocha"
-    ],
-    "ignore": []
-  },
-  "types": "lib/",
   "dependencies": {
-    "@feathersjs/authentication": "^4.5.3",
-    "@feathersjs/authentication-local": "^4.5.4",
-    "@feathersjs/authentication-oauth": "^4.5.4",
-    "@feathersjs/configuration": "^4.5.3",
-    "@feathersjs/errors": "^4.5.1",
-    "@feathersjs/express": "^4.5.1",
-    "@feathersjs/feathers": "^4.5.1",
-    "@feathersjs/transport-commons": "^4.5.2",
-    "compression": "^1.7.4",
-    "cors": "^2.8.5",
-    "feathers-mongodb": "^6.1.0",
-    "feathers-mongoose": "^8.3.0",
-    "helmet": "^3.22.0",
-    "mongodb": "^3.5.7",
-    "mongodb-core": "^3.2.7",
-    "mongoose": "^5.9.13",
-    "serve-favicon": "^2.5.0",
-    "winston": "^3.0.0"
+    "@nestjs/common": "^7.0.0",
+    "@nestjs/core": "^7.0.0",
+    "@nestjs/mongoose": "^6.4.0",
+    "@nestjs/platform-express": "^7.0.0",
+    "@nestjs/swagger": "^4.5.4",
+    "@types/mongoose": "^5.7.15",
+    "mongoose": "^5.9.12",
+    "reflect-metadata": "^0.1.13",
+    "rimraf": "^3.0.2",
+    "rxjs": "^6.5.4",
+    "swagger-ui-express": "^4.1.4"
   },
   "devDependencies": {
-    "@types/compression": "^1.7.0",
-    "@types/cors": "^2.8.6",
-    "@types/helmet": "^0.0.47",
-    "@types/jsonwebtoken": "^8.3.9",
-    "@types/mocha": "^7.0.2",
-    "@types/mongodb": "^3.5.16",
-    "@types/mongoose": "^5.7.18",
-    "@types/serve-favicon": "^2.5.0",
-    "axios": "^0.19.2",
-    "mocha": "^7.1.2",
-    "nodemon": "^2.0.3",
-    "shx": "^0.3.2",
-    "ts-mocha": "^7.0.0",
-    "ts-node-dev": "^1.0.0-pre.44",
-    "tslint": "^6.1.2",
-    "typescript": "^3.9.2"
+    "@nestjs/cli": "^7.0.0",
+    "@nestjs/schematics": "^7.0.0",
+    "@nestjs/testing": "^7.0.0",
+    "@types/express": "^4.17.3",
+    "@types/jest": "25.1.4",
+    "@types/node": "^13.9.1",
+    "@types/supertest": "^2.0.8",
+    "@typescript-eslint/eslint-plugin": "^2.23.0",
+    "@typescript-eslint/parser": "^2.23.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "jest": "^25.1.0",
+    "prettier": "^1.19.1",
+    "supertest": "^4.0.2",
+    "ts-jest": "25.2.1",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.6.2",
+    "tsconfig-paths": "^3.9.0",
+    "typescript": "^3.7.4"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": "src",
+    "testRegex": ".spec.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "coverageDirectory": "../coverage",
+    "testEnvironment": "node"
   }
 }

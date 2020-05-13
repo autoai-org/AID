@@ -10,8 +10,8 @@ function Changelog() {
   const { siteConfig = {} } = context;
   return (
     <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
+      title={`Changelog ${siteConfig.title}`}
+      description="The AID Project Changelog">
       <header className={classnames('hero', styles.heroBanner)}>
       <h1 className={classnames('hero__title', styles.title)}>AID Changelog</h1>
       </header>

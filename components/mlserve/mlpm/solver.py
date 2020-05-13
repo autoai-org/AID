@@ -2,10 +2,8 @@
 #
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-
-import os
-
-from mlpm.server import run_server
+# coding:utf-8
+from mlpm.server import aidserver, run_server
 
 
 class Solver(object):
@@ -14,7 +12,9 @@ class Solver(object):
         self.bundle = None
         self._hyperparameters = {}
         self._enable_train = False
-        if hasattr(self.__class__, 'train') and callable(getattr(self.__class__, 'train')):
+        self.server = aidserver
+        if hasattr(self.__class__, 'train') and callable(
+                getattr(self.__class__, 'train')):
             self._enable_train = True
 
     @property

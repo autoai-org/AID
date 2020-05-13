@@ -5,11 +5,12 @@
 
 # coding:utf-8
 
+import logging
+import os
+import sys
 import threading
 import uuid
-import logging
-import sys
-import os
+
 from mlpm.config import GetLogDir
 
 

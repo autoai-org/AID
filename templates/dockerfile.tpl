@@ -15,6 +15,6 @@ RUN {{Setup|safe}}
 
 WORKDIR /app
 
-ENTRYPOINT ["python3"]
+ENTRYPOINT ["gunicorn"]
 
-CMD ["runner_{{Solvername}}.py", "8080"]
+CMD ["runner_{{Solvername}}:aidserver","-b", "0.0.0.0:8080","-k","uvicorn.workers.UvicornWorker"]

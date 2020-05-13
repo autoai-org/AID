@@ -8,3 +8,6 @@ build:
 	go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
 	rm /usr/local/bin/aid
 	cp ./aid /usr/local/bin/aid
+
+format:
+	gofmt -l -s -w *.go

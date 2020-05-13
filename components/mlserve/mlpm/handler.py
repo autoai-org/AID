@@ -4,22 +4,26 @@
 # https://opensource.org/licenses/MIT
 # coding:utf-8
 import os
-import uuid
 import traceback
+import uuid
 from csv import DictReader, DictWriter
+
 from werkzeug.datastructures import ImmutableMultiDict
 from werkzeug.utils import secure_filename
+
 from mlpm.app import aidserver
-from mlpm.utility import str2bool
 from mlpm.response import json_resp
+from mlpm.utility import str2bool
 
 
-def handle_post_solver_train_or_infer(request, upload_folder, request_type, target_folder):
-    config = ImmutableMultiDict(request.form)
+async def handle_post_solver_train_or_infer(request, upload_folder,
+                                            request_type, target_folder):
+    config = ImmutableMultiDict(await request.form)
     data = config.to_dict()
     results = {}
-    if 'file' in request.files:
-        uploaded_file = request.files['file']
+    req_files = await request.files
+    if 'file' in req_files:
+        uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
@@ -42,9 +46,10 @@ def handle_post_solver_train_or_infer(request, upload_folder, request_type, targ
         return json_resp({"error": str(e), "code": "500"}, status=500)
 
 
-def handle_batch_infer_request(request, upload_folder, target_folder):
-    if 'file' in request.files:
-        uploaded_file = request.files['file']
+async def handle_batch_infer_request(request, upload_folder, target_folder):
+    req_files = await request.files
+    if 'file' in req_files:
+        uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
@@ -62,15 +67,15 @@ def handle_batch_infer_request(request, upload_folder, target_folder):
         if not os.path.isdir(target_folder):
             os.makedirs(target_folder)
         file_identifier = str(uuid.uuid4())
-        output_file_path = os.path.join(
-            target_folder, file_identifier+".csv")
+        output_file_path = os.path.join(target_folder,
+                                        file_identifier + ".csv")
         head = output[0].keys()
         with open(output_file_path, 'w') as file_obj:
             writer = DictWriter(file_obj, fieldnames=head)
             writer.writeheader()
             for each in output:
                 writer.writerow(each)
-        return json_resp({'filename': file_identifier+".csv"}, status=200)
+        return json_resp({'filename': file_identifier + ".csv"}, status=200)
     except Exception as e:
         traceback.print_exc()
         return json_resp({"error": str(e), "code": "500"}, status=500)

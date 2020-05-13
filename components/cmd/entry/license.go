@@ -1,5 +1,5 @@
 // Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
-// 
+//
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
@@ -43,8 +43,8 @@ func printLicense() {
 	/*
 		var commercial = `
 
-		THIS SOFTWARE IS LICENSED TO 'YOUR COMPANY' FOR COMMERCIAL USE
-		THE LICENSE WILL END AT 'ENDTIME'
+		THIS SOFTWARE IS LICENSED TO 'YOUR_COMPANY' FOR COMMERCIAL USE
+		THE LICENSE WILL END AT 'END_TIME'
 		`
 	*/
 	fmt.Println(personal)

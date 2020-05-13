@@ -72,6 +72,8 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+If you'd like to become a backer for the project, we are fiscally hosted by Open Source Collective 501(c)(6). Please consider donating [here](https://opencollective.com/autoai-org)
+
 <!-- LICENSE -->
 ## License
 

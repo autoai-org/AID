@@ -128,7 +128,17 @@ func getBuildCtx(solverPath string) io.Reader {
 }
 
 func realBuild(docker *DockerRuntime, dockerfile string, imageName string, buildLogger *logrus.Logger) error {
-
+	if !utilities.IsFileExists(dockerfile) {
+		utilities.Formatter.Warning("Dockerfile Not Found, AID will generate it for you.")
+		GenerateDockerFiles(filepath.Dir(dockerfile))
+		tomlFilePath := filepath.Join(filepath.Dir(dockerfile), "aid.toml")
+		aidToml, err := utilities.ReadFileContent(tomlFilePath)
+		if err != nil {
+			utilities.CheckError(err, "Cannot open file "+tomlFilePath)
+		}
+		solvers := entities.LoadSolversFromConfig(aidToml)
+		RenderRunnerTpl(filepath.Dir(dockerfile), solvers)
+	}
 	buildResponse, err := docker.client.ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
 		Tags:       []string{imageName},
 		Dockerfile: filepath.Base(dockerfile),
@@ -192,7 +202,9 @@ func (docker *DockerRuntime) ListImages() []types.ImageSummary {
 
 // ListContainers returns all containers that have been built.
 func (docker *DockerRuntime) ListContainers() []types.Container {
-	containers, err := docker.client.ContainerList(context.Background(), types.ContainerListOptions{})
+	containers, err := docker.client.ContainerList(context.Background(), types.ContainerListOptions{
+		All: true,
+	})
 	if err != nil {
 		logger.Error("Cannot List Images")
 		logger.Error(err.Error())

@@ -1,1 +1,0 @@
-docker stack deploy -c docker/mongo_stack.yml mongo
