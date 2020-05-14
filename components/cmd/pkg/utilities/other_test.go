@@ -31,7 +31,7 @@ func TestStringInSlice(t *testing.T) {
 				a:    "test",
 				list: []string{"ttt", "others"},
 			},
-			want: true,
+			want: false,
 		},
 	}
 	for _, tt := range tests {
