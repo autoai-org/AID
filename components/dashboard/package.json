@@ -16,7 +16,7 @@
     "chart.js": "^2.9.3",
     "codemirror": "^5.53.2",
     "core-js": "^3.6.5",
-    "dayjs": "^1.8.26",
+    "dayjs": "^1.8.27",
     "plotly.js-dist": "^1.54.1",
     "vue": "^2.6.10",
     "vue-chartjs": "^3.5.0",
