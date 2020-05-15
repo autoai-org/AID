@@ -54,6 +54,7 @@ func InstallPackage(remoteURL string, targetFolder string) error {
 	// If pretrained.toml exists, then load the pretrained file
 	pretrainedFile := filepath.Join(localFolder, "pretrained.toml")
 	if utilities.IsExists(pretrainedFile) {
+		utilities.CreateFolderIfNotExist(filepath.Join(localFolder, "pretrained"))
 		pretrainedTomlString, err := utilities.ReadFileContent(pretrainedFile)
 		utilities.CheckError(err, "Cannot open file"+pretrainedFile)
 		pretrainedInfo := entities.LoadPretrainedsFromConfig(pretrainedTomlString)
