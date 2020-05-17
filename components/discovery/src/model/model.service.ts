@@ -5,7 +5,7 @@ import { CreateModelDto, AIDModel } from './model.schema';
 
 @Injectable()
 export class ModelsService {
-  constructor(@InjectModel('AIDModel') private aidModelModel: Model<AIDModel>) {}
+  constructor(@InjectModel('AIDModel') private aidModelModel: Model<AIDModel>) { }
 
   async create(createModelDto: CreateModelDto): Promise<AIDModel> {
     const createdModel = new this.aidModelModel(createModelDto);
@@ -16,6 +16,9 @@ export class ModelsService {
     return this.aidModelModel.find().exec();
   }
   async findByKeyword(keyword: string): Promise<AIDModel[]> {
-      return this.aidModelModel.find({name: new RegExp('^'+keyword+'$', "i")}).exec();
+    return this.aidModelModel.find({ name: new RegExp(keyword, 'i') }).exec();
+  }
+  async findById(id: string): Promise<AIDModel> {
+    return this.aidModelModel.findById(id).exec();
   }
 }
