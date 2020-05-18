@@ -28,9 +28,6 @@ jobs:
         name: cmd-codecov
         fail_ci_if_error: true
         
-    - name: Build
-      run: cd components/cmd && make build
-
   cross-build:
     name: Cross Platform build
     runs-on: ubuntu-latest
