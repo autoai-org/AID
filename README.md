@@ -1,4 +1,6 @@
-[![Roadmap](https://img.shields.io/badge/-Roadmap-blue)](https://www.notion.so/autoai/)
+[![Feature Requests](https://feathub.com/autoai-org/AID?format=svg)](https://feathub.com/autoai-org/AID)
+
+[![Build status](https://ci.appveyor.com/api/projects/status/591jgg8ffuy4v52i?svg=true)](https://ci.appveyor.com/project/xzyaoi/aid)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
@@ -31,12 +33,13 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [Intro](#intro)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Open Models](#models)
-* [Contributing](#contributing)
-* [License](#license)
+- [Table of Contents](#table-of-contents)
+- [Intro](#intro)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Models](#models)
+- [Contributing](#contributing)
+- [License](#license)
 
 ## Intro
 

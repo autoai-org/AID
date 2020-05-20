@@ -2,7 +2,6 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { AIDModel, CreateModelDto } from './model.schema'
 import { ModelsService } from './model.service';
 import { ApiTags } from '@nestjs/swagger';
-import axios from 'axios'
 import { fetch_github_summary } from '../services/github'
 
 @ApiTags('Model')
