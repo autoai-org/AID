@@ -1,5 +1,3 @@
-[![Feature Requests](https://feathub.com/autoai-org/AID?format=svg)](https://feathub.com/autoai-org/AID)
-
 [![Build status](https://ci.appveyor.com/api/projects/status/591jgg8ffuy4v52i?svg=true)](https://ci.appveyor.com/project/xzyaoi/aid)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/cmd/badge.svg)
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
