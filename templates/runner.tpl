@@ -13,4 +13,4 @@ solver = {{Classname}}()
 aidserver.solver = solver
 
 if __name__=="__main__":
-    aidserver.start("0.0.0.0", port=8080)
+    aidserver.run("0.0.0.0", port=8080)
