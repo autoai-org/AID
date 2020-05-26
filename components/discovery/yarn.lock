@@ -553,10 +553,10 @@
     tslib "2.0.0"
     uuid "8.0.0"
 
-"@nestjs/mapped-types@0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.0.4.tgz#a55d3e78905a019abb42c69763d04b976e6a8a92"
-  integrity sha512-+LER9UCm/BHPRm0qk3Uv0KLywedru4cr211oaGYA7bIDrHlQZeeqGAfGhVXBiVgZ6w5JWJkBwzsPEFtt5Zw78Q==
+"@nestjs/mapped-types@0.0.5":
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.0.5.tgz#0c3462de4125eea0e85e3a520f0de4e7e8dcfa40"
+  integrity sha512-QjZCSMHHy8IW4UUTS49QJQ0NrA8MHv6XevNrPLJwh4n3lN7wY9aSRwd1+cBIUDBXEHRKngcYdPtC4oG0fimw+A==
 
 "@nestjs/mongoose@^7.0.1":
   version "7.0.1"
@@ -583,12 +583,12 @@
     "@angular-devkit/schematics" "9.0.6"
     fs-extra "8.1.0"
 
-"@nestjs/swagger@^4.5.7":
-  version "4.5.7"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.5.7.tgz#f38d73c984af70f95655b2828c539fab5482129b"
-  integrity sha512-EOQ0UE+//kGbTb5N3wLBcA4lOzihgKNco0tkJy8Pn2EXS8Q23wD7TbsVxchPkQqjGkbhI7ijZdosnEnuj4wyeA==
+"@nestjs/swagger@^4.5.8":
+  version "4.5.8"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.5.8.tgz#3e39e96d3ead470b984f62d7a562372d7543d29b"
+  integrity sha512-LUDzLoIQ+MgwNFzeJiysr2MA3g76RzoxpQifVLhx6vug/Oh8kNd185G2jhLU66T2H4Y9N2qocWxkEdbavnrMfw==
   dependencies:
-    "@nestjs/mapped-types" "0.0.4"
+    "@nestjs/mapped-types" "0.0.5"
     lodash "4.17.15"
     path-to-regexp "3.2.0"
 
