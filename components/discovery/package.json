@@ -27,7 +27,7 @@
     "@nestjs/platform-express": "^7.1.0",
     "@nestjs/swagger": "^4.5.7",
     "@types/mongoose": "^5.7.20",
-    "mongoose": "^5.9.15",
+    "mongoose": "^5.9.16",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.5.4",
