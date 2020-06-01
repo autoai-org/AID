@@ -583,10 +583,10 @@
     "@angular-devkit/schematics" "9.0.6"
     fs-extra "8.1.0"
 
-"@nestjs/swagger@^4.5.8":
-  version "4.5.8"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.5.8.tgz#3e39e96d3ead470b984f62d7a562372d7543d29b"
-  integrity sha512-LUDzLoIQ+MgwNFzeJiysr2MA3g76RzoxpQifVLhx6vug/Oh8kNd185G2jhLU66T2H4Y9N2qocWxkEdbavnrMfw==
+"@nestjs/swagger@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.5.9.tgz#b837dc1321d10d3e47ee45955c8158033b0bd4ee"
+  integrity sha512-pozVi8ClZdjbxAISlvSq3X2KPTawsgxd46XN2GrtEe1PIImRs0WBYEHxL9IBo+7KjipazJjFI4mt/xwVj/895A==
   dependencies:
     "@nestjs/mapped-types" "0.0.5"
     lodash "4.17.15"
