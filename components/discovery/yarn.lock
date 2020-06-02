@@ -592,10 +592,10 @@
     lodash "4.17.15"
     path-to-regexp "3.2.0"
 
-"@nestjs/testing@^7.1.1":
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-7.1.1.tgz#6286568724a5f567ae824c5592e63c029ce7e0c6"
-  integrity sha512-J/cdpmUUikYoIwat2LY5eE6ebKDHfcOJXyzDN+7BU8pTINik3Tu6UlguR2C/OnmE6nRCw63yOSuTuFeAWuVa4w==
+"@nestjs/testing@^7.1.2":
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-7.1.2.tgz#0f253bbbcbe664285b511bc76a6e1c4563c32894"
+  integrity sha512-S/ruJRKIyO71naguaXxBsTcac94qnDv2wqagGv9Q3HDjH/Z2wLIHBB5zSdZg0p+rFN2U1/dFkTw5Ok3lp8kixA==
   dependencies:
     optional "0.1.4"
     tslib "2.0.0"
