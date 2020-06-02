@@ -9,6 +9,8 @@ RUN apt-get update && \
 
 COPY ./ /app
 
+RUN {{PrePIP|safe}}
+
 RUN pip install -r /app/requirements.txt
 
 RUN {{Setup|safe}}

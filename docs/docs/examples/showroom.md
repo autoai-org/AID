@@ -22,4 +22,6 @@ title: Showroom
 
 ## Applications
 
-TBD
+* [COVID-19 Sentiment Trend Analysis](https://covid19.yaonotes.org)
+
+> In this project, we use 

@@ -64,6 +64,26 @@ func RenderDockerfile(solvername string, targetFilePath string) {
 	} else {
 		setupCommands = "echo There is no command for extra installation"
 	}
-	out, err := tpl.Execute(pongo2.Context{"Solvername": solvername, "Setup": setupCommands})
+	prepipFilePath := filepath.Join(targetFilePath, "prepip.sh")
+	var prepipCommands string = ""
+	if utilities.IsExists(prepipFilePath) {
+		f, err := os.Open(prepipFilePath)
+		defer f.Close()
+		if err != nil {
+			utilities.CheckError(err, "Cannot open file "+prepipFilePath)
+			prepipCommands = "echo An error occured in parsing setup file"
+		}
+		scanner := bufio.NewScanner(f)
+		for scanner.Scan() {
+			if prepipCommands == "" {
+				prepipCommands = scanner.Text()
+			} else {
+				prepipCommands = prepipCommands + " && " + scanner.Text()
+			}
+		}
+	} else {
+		prepipCommands = "echo There is no command for extra installation"
+	}
+	out, err := tpl.Execute(pongo2.Context{"Solvername": solvername, "Setup": setupCommands, "PrePIP": prepipCommands})
 	utilities.WriteContentToFile(filename, out)
 }
