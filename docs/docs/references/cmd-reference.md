@@ -55,3 +55,6 @@ You can find all commands, their description and examples below:
 | `install {link}`                    | Install third pre-built models from GitHub or AIDHub.                    | `aid install https://github.com/aidmodels/sentiment-analysis`    |
 | `build {vendor}/{package}/{solver}` | Build docker images with certain vendor/package/solver triplet.          | `aid build aidmodels/sentiment-analysis/sentimentSolver`         |
 | `create {image} {port}`             | Create docker containers with the image, and make it listen on the port. | `aid create aid-1-cyy-sentiment_prediction-sentimentsolver 8081` |
+| `image export {image}`             | Export AID image into a self-contained docker image. | `aid image export aid-1-cyy-sentiment_prediction-sentimentsolver` |
+| `image import {filename}`             | Import an AID image file into a docker image. | `aid image import test.aidimg` |
+

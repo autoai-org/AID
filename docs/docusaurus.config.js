@@ -67,6 +67,10 @@ module.exports = {
               label: 'Slack',
               href: 'https://join.slack.com/t/autoaiworkspace/shared_invite/zt-d0ibh5gj-_AIRcj1CedTBiXeqJsMwwQ',
             },
+            {
+              label: 'Telegram Group',
+              href: 'https://t.me/autoai_org',
+            },
           ],
         },
         {
