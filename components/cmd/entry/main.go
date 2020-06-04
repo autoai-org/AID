@@ -84,7 +84,7 @@ func main() {
 					{
 						Name:     "import",
 						Aliases:  []string{"imp"},
-						Usage:    "Export image into a tarfile",
+						Usage:    "Import image from a tarfile",
 						Category: "image",
 						Action: func(c *cli.Context) error {
 							importImage(c.Args().Get(0), false)

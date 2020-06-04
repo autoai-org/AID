@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { AIDModel, CreateModelDto } from './model.schema'
 import { ModelsService } from './model.service';
 import { ApiTags } from '@nestjs/swagger';
-import { fetch_github_summary } from '../services/github'
+import { fetchGithubSummary } from '../services/github'
 
 @ApiTags('Model')
 @Controller('model')
@@ -19,10 +19,10 @@ export class ModelController {
     }
     @Get("/meta/:packageId")
     async fetchMetaInformation(@Param("packageId") packageId: string): Promise<any> {
-        let model = await this.modelsService.findById(packageId)
+        const model = await this.modelsService.findById(packageId)
         if (model.githubURL!=="") {
-            let infos = model.githubURL.split("/")
-            return fetch_github_summary(infos[infos.length-2], infos[infos.length-1])
+            const infos = model.githubURL.split("/")
+            return fetchGithubSummary(infos[infos.length-2], infos[infos.length-1])
         } else {
             return {}
         }
