@@ -26,13 +26,13 @@ pyparsing==2.4.6
 pytest==5.4.1
 raven==6.10.0
 readme-renderer==26.0
-requests==2.23.0
+requests==2.24.0
 requests-toolbelt==0.9.1
 SecretStorage==3.1.2
 six==1.14.0
 toml==0.10.0
-tqdm==4.46.1
-twine==3.1.1
+tqdm==4.47.0
+twine==3.2.0
 urllib3==1.25.9
 wcwidth==0.1.8
 webencodings==0.5.1
