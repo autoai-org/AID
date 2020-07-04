@@ -26,11 +26,11 @@
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^9.0.0",
     "vue-router": "^3.3.4",
-    "vuetify": "^2.3.1",
+    "vuetify": "^2.3.3",
     "vuex": "^3.4.0"
   },
   "devDependencies": {
-    "@types/jest": "^26.0.0",
+    "@types/jest": "^26.0.3",
     "@vue/cli-plugin-babel": "^4.4.6",
     "@vue/cli-plugin-e2e-cypress": "^4.4.6",
     "@vue/cli-plugin-eslint": "^4.4.6",
@@ -44,7 +44,7 @@
     "eslint": "^6.8.0",
     "eslint-plugin-vue": "^6.2.2",
     "sass": "^1.26.9",
-    "sass-loader": "^8.0.2",
+    "sass-loader": "^9.0.1",
     "typescript": "~3.9.2",
     "vue-cli-plugin-vuetify": "^2.0.6",
     "vue-template-compiler": "^2.6.10",
