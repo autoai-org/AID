@@ -530,16 +530,16 @@
     webpack "4.43.0"
     webpack-node-externals "1.7.2"
 
-"@nestjs/common@^7.2.0":
-  version "7.2.0"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-7.2.0.tgz#f191c79dca5939188544975e624c1ab0fcb2f4db"
-  integrity sha512-R9oU/uni80/a/oDV3/T7ZtoJ9GMcLj5bOQrmaanAKAe50+xIueAR4R7hwYun3wSL/uvbAT1N9g4EXI3zkboCHw==
+"@nestjs/common@^7.3.1":
+  version "7.3.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-7.3.1.tgz#9ed4ccf0086c308985c785fb9ac0c9265596d7e6"
+  integrity sha512-zrd/C+g2QVg2ebVN22Bs8U2Je9aHDWcysNfZFSGpqc+rLRjqDr0ixr1GL3WEhQSyxAm4YRa0yvZiiFicbVAV7Q==
   dependencies:
     axios "0.19.2"
     cli-color "2.0.0"
     iterare "1.2.1"
     tslib "2.0.0"
-    uuid "8.1.0"
+    uuid "8.2.0"
 
 "@nestjs/core@^7.3.1":
   version "7.3.1"
@@ -7368,11 +7368,6 @@ utils-merge@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
-
-uuid@8.1.0:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.1.0.tgz#6f1536eb43249f473abc6bd58ff983da1ca30d8d"
-  integrity sha512-CI18flHDznR0lq54xBycOVmphdCYnQLKn8abKn7PXUiKUGdEd+/l9LWNJmugXel4hXq7S+RMNl34ecyC9TntWg==
 
 uuid@8.2.0:
   version "8.2.0"
