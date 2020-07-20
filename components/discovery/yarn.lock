@@ -5005,10 +5005,10 @@ mongoose-legacy-pluralize@1.0.2:
   resolved "https://registry.yarnpkg.com/mongoose-legacy-pluralize/-/mongoose-legacy-pluralize-1.0.2.tgz#3ba9f91fa507b5186d399fb40854bff18fb563e4"
   integrity sha512-Yo/7qQU4/EyIS8YDFSeenIvXxZN+ld7YdV9LqFVQJzTLye8unujAWPZ4NWKfFA+RNjh+wvTWKY9Z3E5XM6ZZiQ==
 
-mongoose@^5.9.22:
-  version "5.9.22"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.9.22.tgz#4f1542f037a552b43f547ebfc72ddaf9f88c5ecf"
-  integrity sha512-nwH2LwrGN/jR0Qi8TqSog0MWZRtxdpQxVFcPNjs+CUyCMaxKqFJYrkPILTPKPMMzwrAv1cCQqrvoLl+ggklvbg==
+mongoose@^5.9.25:
+  version "5.9.25"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-5.9.25.tgz#620da737ec9a667f84404ad4f35bb60338dd0b4b"
+  integrity sha512-vz/DqJ3mrHqEIlfRbKmDZ9TzQ1a0hCtSQpjHScIxr4rEtLs0tjsXDeEWcJ/vEEc3oLfP6vRx9V+uYSprXDUvFQ==
   dependencies:
     bson "^1.1.4"
     kareem "2.3.1"
