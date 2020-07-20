@@ -31,7 +31,7 @@ requests-toolbelt==0.9.1
 SecretStorage==3.1.2
 six==1.14.0
 toml==0.10.0
-tqdm==4.47.0
+tqdm==4.48.0
 twine==3.2.0
 urllib3==1.25.9
 wcwidth==0.1.8
@@ -41,4 +41,4 @@ yapf==0.29.0
 yapt==1.1
 zipp==1.0.0
 gunicorn==20.0.4
-uvicorn==0.11.5
+uvicorn==0.11.6
