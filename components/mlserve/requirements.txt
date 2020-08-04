@@ -34,7 +34,7 @@ toml==0.10.0
 tqdm==4.48.1
 twine==3.2.0
 urllib3==1.25.10
-wcwidth==0.1.8
+wcwidth==0.2.5
 webencodings==0.5.1
 Werkzeug==1.0.1
 yapf==0.29.0
