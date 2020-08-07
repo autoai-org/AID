@@ -170,6 +170,8 @@ github.com/hashicorp/hcl v1.0.0/go.mod h1:E5yfLk+7swimpb2L/Alb/PJmXilQ/rhwaUYs4T
 github.com/hpcloud/tail v1.0.0/go.mod h1:ab1qPbhIpdTxEkNHXyeSf5vhxWSCs/tWer42PpOxQnU=
 github.com/ilibs/gosql/v2 v2.0.3 h1:+eVvjJM2NN6WH/13S8OorjLm8oi///Jz7UauI5TwJGg=
 github.com/ilibs/gosql/v2 v2.0.3/go.mod h1:kU5sf2paHLCtYaM446ZHYBxwlFo4Kuk/BGrKEJfb7x4=
+github.com/ilibs/gosql/v2 v2.0.5 h1:tn8qCGG4/7YFP5ZctfftcJ9ghJ2oJI5Poehxx039Ct0=
+github.com/ilibs/gosql/v2 v2.0.5/go.mod h1:kU5sf2paHLCtYaM446ZHYBxwlFo4Kuk/BGrKEJfb7x4=
 github.com/imkira/go-interpol v1.1.0/go.mod h1:z0h2/2T3XF8kyEPpRgJ3kmNv+C43p+I/CoI+jC3w2iA=
 github.com/inconshreveable/mousetrap v1.0.0/go.mod h1:PxqpIevigyE2G7u3NXJIT2ANytuPF1OarO4DADm73n8=
 github.com/iris-contrib/blackfriday v2.0.0+incompatible/go.mod h1:UzZ2bDEoaSGPbkg6SAB4att1aAwTmVIx/5gCVqeyUdI=
