@@ -16,14 +16,14 @@ require (
 	github.com/docker/go-connections v0.4.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
-	github.com/getsentry/sentry-go v0.6.1
+	github.com/getsentry/sentry-go v0.7.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.1.1
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/h2non/filetype v1.0.12 // indirect
-	github.com/ilibs/gosql/v2 v2.0.3
+	github.com/ilibs/gosql/v2 v2.0.5
 	github.com/kardianos/service v1.1.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
