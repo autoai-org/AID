@@ -562,10 +562,10 @@
     "@types/jsonwebtoken" "8.5.0"
     jsonwebtoken "8.5.1"
 
-"@nestjs/mapped-types@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.0.5.tgz#0c3462de4125eea0e85e3a520f0de4e7e8dcfa40"
-  integrity sha512-QjZCSMHHy8IW4UUTS49QJQ0NrA8MHv6XevNrPLJwh4n3lN7wY9aSRwd1+cBIUDBXEHRKngcYdPtC4oG0fimw+A==
+"@nestjs/mapped-types@0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/mapped-types/-/mapped-types-0.1.0.tgz#248435b4af4305bf6d1214d228c84926be56125a"
+  integrity sha512-FfQsZK5K1OvvGqjPHCJtrNTLlKLg7bLuphtCRTFb5K2P98JTfslauMbT7bS8huOoK/86HMNmNoHR/EVLAd4FzA==
 
 "@nestjs/mongoose@^7.0.2":
   version "7.0.2"
@@ -597,13 +597,13 @@
     "@angular-devkit/schematics" "9.1.7"
     fs-extra "9.0.0"
 
-"@nestjs/swagger@^4.5.12":
-  version "4.5.12"
-  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.5.12.tgz#e8aa65fbb0033007ece1d494b002f47ff472c20b"
-  integrity sha512-MVJ9JbCiIo5g6V3tjDPNHjoCjVO1J351dHkMj7/yjIHQi5CCB3AzZoA/BQEipUSjsX34ungfZIxRXt2Im4FF7A==
+"@nestjs/swagger@^4.6.0":
+  version "4.6.0"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-4.6.0.tgz#42db9e5199bb67be7d09f85c87fb7593915f426b"
+  integrity sha512-B7DBMm+MTBfttGvtdb9quEbP9lgi5w3OFs30v/if0ZHE0Fl1B+t1FP8rnmR0xk5wfp7Wd/9LVl9ll/hvIheJ4w==
   dependencies:
-    "@nestjs/mapped-types" "0.0.5"
-    lodash "4.17.15"
+    "@nestjs/mapped-types" "0.1.0"
+    lodash "4.17.20"
     path-to-regexp "3.2.0"
 
 "@nestjs/testing@^7.4.2":
@@ -4628,10 +4628,10 @@ lodash.toarray@^4.4.0:
   resolved "https://registry.yarnpkg.com/lodash.toarray/-/lodash.toarray-4.4.0.tgz#24c4bfcd6b2fba38bfd0594db1179d8e9b656561"
   integrity sha1-JMS/zWsvuji/0FlNsRedjptlZWE=
 
-lodash@4.17.15, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
-  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
+lodash@4.17.20, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15:
+  version "4.17.20"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
+  integrity sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA==
 
 log-symbols@^3.0.0:
   version "3.0.0"
