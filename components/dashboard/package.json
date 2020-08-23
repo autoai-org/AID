@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "ansi-to-html": "^0.6.14",
-    "axios": "^0.19.2",
+    "axios": "^0.20.0",
     "chart.js": "^2.9.3",
     "codemirror": "^5.57.0",
     "core-js": "^3.6.5",
