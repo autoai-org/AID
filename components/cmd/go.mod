@@ -19,7 +19,7 @@ require (
 	github.com/getsentry/sentry-go v0.7.0
 	github.com/gin-gonic/gin v1.6.3
 	github.com/gogo/protobuf v1.3.1 // indirect
-	github.com/google/uuid v1.1.1
+	github.com/google/uuid v1.1.2
 	github.com/gorilla/mux v1.7.3 // indirect
 	github.com/gorilla/websocket v1.4.2
 	github.com/h2non/filetype v1.0.12 // indirect
