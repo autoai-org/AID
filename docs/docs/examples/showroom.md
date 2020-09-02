@@ -25,3 +25,5 @@ title: Showroom
 * [COVID-19 Sentiment Trend Analysis](https://covid19.yaonotes.org)
 
 > In this project, we use the sentiment analysis package from AID to extract the emotion of tweets per day. It is efficient, fast and stable to help us analyse nearly one million tweets per day.
+
+If you are interested in listing your applications here, please [let us know](mailto://enquiry@autoai.org?subject=Sharing Applications using AID").

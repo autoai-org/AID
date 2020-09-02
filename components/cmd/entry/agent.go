@@ -21,8 +21,6 @@ func runAgentServer() {
 }
 
 // An HTTP Server that supports receiving large size files
-// Its not included in RPC Server because http outperformed RPC in receiving files,
-// as there is no encode/decode overhead.
 func startImageReceiver() {
 	router := gin.Default()
 	router.POST("/upload", func(c *gin.Context) {
