@@ -9,6 +9,7 @@ export default new Vuex.Store({
     logs: [],
     solvers: [],
     isLoading: false,
+    isConnected: false,
     config: {},
     alert_info:"",
     alert_title:""
@@ -31,6 +32,9 @@ export default new Vuex.Store({
     },
     endRequests(state) {
       state.isLoading = false
+    },
+    setConnected(state, new_status) {
+      state.isConnected = new_status
     }
   },
   actions: {

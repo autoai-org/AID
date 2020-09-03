@@ -1,6 +1,8 @@
 <template>
-  <v-app id="inspire">
-    <v-navigation-drawer :dark="dark" v-model="drawer" app clipped>
+<div>
+  <landing v-if="!isConnected"/>
+  <v-app id="inspire" v-if="isConnected">
+    <v-navigation-drawer :dark="dark" v-model="drawer" app clipped >
       <v-list subheader>
         <v-subheader>Overview</v-subheader>
         <v-list-item v-for="item in menus[0]" :key="item.text" link @click="navTo(item.link)">
@@ -77,13 +79,14 @@
     </v-app-bar>
     <loading-dialog :show="isLoading"></loading-dialog>
     <alert-dialog :info="alertInfo" :title="alertTitle"></alert-dialog>
-    <v-content>
+    <v-main>
       <v-container class="fill-height" style="min-width: 100%">
         <router-view />
       </v-container>
-    </v-content>
+    </v-main>
     <aid-footer/>
   </v-app>
+</div>
 </template>
 
 <script lang="ts">
@@ -95,10 +98,12 @@ import {
   experiment_menu,
   extension_menu
 } from "./router/menu";
+
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
-import AIDFooter from "@/components/layouts/Footer.vue"
+import AIDFooter from "@/components/layouts/Footer.vue";
+import Landing from "@/views/systems/Landing.vue";
 export default {
   props: {
     source: String
@@ -121,6 +126,7 @@ export default {
       } else {
         router.replace(link).catch(err => {
           // ignore this err
+          console.error(err)
         });
       }
     }
@@ -129,13 +135,15 @@ export default {
     ...mapState({
       isLoading: "isLoading",
       alertInfo: "alert_info",
-      alertTitle: "alert_title"
+      alertTitle: "alert_title",
+      isConnected:"isConnected",
     })
   },
   components: {
     "loading-dialog": LoadingDialog,
     "alert-dialog": AlertDialog,
     "aid-footer": AIDFooter,
+    "landing": Landing,
   }
 };
 </script>

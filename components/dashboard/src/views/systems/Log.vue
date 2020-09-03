@@ -22,7 +22,6 @@
 <script lang="ts">
 import Vue from "vue";
 import Log from "@/components/Log.vue";
-import { LogContent } from "@/entities";
 import { mapState } from "vuex";
 import { watchLog } from "@/middlewares/ws.mdw";
 import { fetchAllObjects, fetchLog } from "@/middlewares/api.mdw";
@@ -96,7 +95,6 @@ export default Vue.extend({
   watch: {
     current_title(value) {
       console.log(value)
-      let self = this;
       const found = this.logs.find((item: any) => item.ID === value);
       if (found) {
         this.id = found.ID

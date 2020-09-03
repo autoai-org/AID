@@ -34,7 +34,6 @@ import EnhancedTable from "@/components/EnhancedTable.vue";
 import BuildDialog from "@/components/dialogs/BuildDialog.vue";
 import {
   fetchAllObjects,
-  fetchMeta,
   fetchPackages
 } from "@/middlewares/api.mdw";
 

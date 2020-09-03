@@ -30,9 +30,9 @@ export default Vue.extend({
   },
   methods: {
       submit() {
-          let self: Vue = this
           updateConfig(this.config).then(function(res) {
               alert("Your preference has been updated! ","Successfully")
+              console.log(res)
           }).catch(function(err){
               alert("Your preference cannot be updated! " + err,"Failed!")
           })

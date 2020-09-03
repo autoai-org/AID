@@ -21,7 +21,7 @@ export default Vue.extend({
   props: ["info", "title"],
   watch: {
       info (newVal) {
-          this.dialog= true
+          this.dialog= newVal
       }
   }
 });

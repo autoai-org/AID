@@ -4,7 +4,7 @@
 // https://opensource.org/licenses/MIT
 
 import * as Converter from 'ansi-to-html'
-let converter = new Converter();
+const converter = new Converter();
 
 function ansi2html(ansiLogs: string){
     return converter.toHtml(ansiLogs)

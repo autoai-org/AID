@@ -68,6 +68,7 @@ export default Vue.extend({
       addWebhook(this.payload_url, status)
         .then(function(res) {
           alert("Your webhook have been created!", "success");
+          console.log(res)
         })
         .catch(function(err) {
           alert("Failed to create webhooks: " + err, "error");

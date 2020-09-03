@@ -56,6 +56,7 @@ export default Vue.extend({
         self.discovery.version = res;
       })
       .catch(function(err) {
+        console.error(err)
         self.discovery.connected = false;
       });
   }

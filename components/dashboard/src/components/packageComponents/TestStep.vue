@@ -21,7 +21,6 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { drawBBox } from "@/middlewares/drawer/bbox";
 import { testContainer } from "@/middlewares/api.mdw";
 import JsonViewer from 'vue-json-viewer'
 export default Vue.extend({

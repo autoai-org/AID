@@ -18,7 +18,7 @@
 </template>
 <script lang="ts">
 import Vue from "vue";
-import { createContainer, startContainer } from "@/middlewares/api.mdw"
+import { startContainer } from "@/middlewares/api.mdw"
 export default Vue.extend({
   data:()=>({
     parsedContainers: [],
@@ -27,8 +27,7 @@ export default Vue.extend({
   }),
   props: ["containers", "solverName", "imageId"],
   methods:{
-    showCodeEditor(vendorName:string, packageName:string) {
-      let self = this
+    showCodeEditor() {
       console.log(this.solverName)
       this.showCodeEditorDialog = true
     },
@@ -37,6 +36,7 @@ export default Vue.extend({
     },
     triggerStartContainer (containerId:string) {
       startContainer(containerId).then(function(res){
+        console.log(res)
         location.reload()
       })
     }
