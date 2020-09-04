@@ -19,9 +19,7 @@
       </div>
 
       <div class="right">
-        <div class="local_button">
-          <v-btn outlined x-large color="#fff">Connect To Localhost</v-btn>
-        </div>
+        <v-btn outlined x-large color="#fff">Connect To Localhost</v-btn>
         <div class="version_text">Client Version: 1.0</div>
         <v-footer color="#174e55" padless class="landing_footer">
           <v-row justify="center" no-gutters>
@@ -71,25 +69,22 @@ export default {
 }
 
 .hosts_list {
-  width: 61.8%;
+  width: 100%;
 }
 
 .right {
   display: flex;
-  width: 65%;
+  flex: auto;
   background-color: #174e55;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
-}
-
-.local_button {
-  margin-top: 13%;
 }
 
 .version_text {
   color: white;
   margin-top: 10px;
+  margin-bottom: 20%;
 }
 
 .landing_footer {
@@ -100,5 +95,8 @@ export default {
 .parent {
   display: flex;
   height: 100vh;
+}
+#inspire {
+  overflow-y: hidden;
 }
 </style>

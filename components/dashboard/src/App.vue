@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="app-container">
   <landing v-if="!isConnected"/>
   <v-app id="inspire" v-if="isConnected">
     <v-navigation-drawer :dark="dark" v-model="drawer" app clipped >
@@ -151,5 +151,8 @@ export default {
 <style scoped>
 .fill-height {
   align-items: baseline !important;
+}
+.app-container {
+  overflow-y:hidden;
 }
 </style>
