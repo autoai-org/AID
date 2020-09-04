@@ -7,7 +7,12 @@ import axios from 'axios'
 import store from '@/store'
 import dayjs from 'dayjs'
 import { Log, Package } from '@/entities'
-const endpoint: string = "http://localhost:10590/"
+
+let endpoint: string = "http://localhost:10590/"
+
+function setEndpoint(target:string) {
+    endpoint = target
+}
 
 function _apiRequest(url: string,
     method: "get" | "post" | "patch" | "delete" | "put",
@@ -247,6 +252,7 @@ function fetchAllObjects(objectName: string) {
 }
 
 export {
+    setEndpoint,
     getExtLogs,
     fetchSolverDockerfile,
     fetchContainers,

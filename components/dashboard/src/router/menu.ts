@@ -12,7 +12,7 @@ const system_menu = [
     { icon: "mdi-poll-box", text: "Status" },
     { icon: "mdi-math-log", text: "Logs", link: "/system/logs" },
     { icon: "mdi-history", text: "Activity", link: "/system/activities" },
-    { icon: "mdi-settings-outline", text: "Preferences", link: "/system/preferences" },
+    { icon: "mdi-cog", text: "Preferences", link: "/system/preferences" },
 ]
 
 const experiment_menu = [
@@ -26,7 +26,7 @@ const extension_menu = [
 ]
 
 const about_menu = [
-    { icon: "mdi-github-circle", text: "GitHub", link: "https://github.com/autoai-org/cvpm" },
+    { icon: "mdi-github", text: "GitHub", link: "https://github.com/autoai-org/cvpm" },
     { icon: "mdi-database-search", text: "Registry" },
     { icon: "mdi-help", text: "Docs", link: "https://aid.autoai.org" },
     { icon: "mdi-information-outline", text: "AID Story", link: "https://yaonotes.org/blogs/why-aid.html" },

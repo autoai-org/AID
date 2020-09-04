@@ -19,7 +19,12 @@
       </div>
 
       <div class="right">
-        <v-btn outlined x-large color="#fff">Connect To Localhost</v-btn>
+        <v-btn
+          outlined
+          x-large
+          color="#fff"
+          @click="connect('http://localhost:10590/')"
+        >Connect To Localhost</v-btn>
         <div class="version_text">Client Version: 1.0</div>
         <v-footer color="#174e55" padless class="landing_footer">
           <v-row justify="center" no-gutters>
@@ -42,6 +47,8 @@
   </v-app>
 </template>
 <script>
+import store from "@/store";
+import { setEndpoint } from "@/middlewares/api.mdw";
 export default {
   data: () => ({
     item: 1,
@@ -52,6 +59,12 @@ export default {
     ],
     links: ["Docs", "License", "Source"],
   }),
+  methods: {
+    connect(target) {
+      setEndpoint(target);
+      store.commit("setConnected", true);
+    },
+  },
 };
 </script>
 <style scoped>
@@ -88,8 +101,7 @@ export default {
 }
 
 .landing_footer {
-    
-    justify-self: flex-end;
+  justify-self: flex-end;
 }
 
 .parent {

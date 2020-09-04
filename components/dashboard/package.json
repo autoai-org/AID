@@ -1,6 +1,7 @@
 {
   "name": "dashboard",
   "version": "0.1.0",
+  "productName": "AID Studio",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
