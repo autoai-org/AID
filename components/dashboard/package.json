@@ -18,7 +18,7 @@
   "main": "background.js",
   "dependencies": {
     "@types/electron-devtools-installer": "^2.2.0",
-    "@types/node": "12",
+    "@types/node": "14",
     "@typescript-eslint/parser": "^4.0.1",
     "ansi-to-html": "^0.6.14",
     "axios": "^0.20.0",
