@@ -1,8 +1,10 @@
-# Getting Started
+---
+title: Getting Started
+---
 
 ## Install AID
 
-See [Releases](/releases)
+See [Releases](/docs/releases)
 
 ## Install a package
 

@@ -3,6 +3,7 @@ module github.com/autoai-org/aid/components/cmd
 go 1.13
 
 require (
+	firebase.google.com/go/v4 v4.0.0 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20170929234023-d6e3b3328b78 // indirect
 	github.com/BurntSushi/toml v0.3.1
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
@@ -40,7 +41,6 @@ require (
 	github.com/urfave/cli/v2 v2.2.0
 	golang.org/x/net v0.0.0-20200324143707-d3edc9973b7e
 	golang.org/x/time v0.0.0-20191024005414-555d28b269f0 // indirect
-	google.golang.org/grpc v1.26.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
