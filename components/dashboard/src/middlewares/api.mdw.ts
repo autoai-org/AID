@@ -35,9 +35,9 @@ function _apiRequest(url: string,
     })
 }
 
-function plain_get(path: string) {
+function plain_get(path: string, header: object={}) {
     return new Promise((resolve, reject) => {
-        _apiRequest(path, "get", {}, {},
+        _apiRequest(path, "get", {}, header,
             (res: Log) => {
                 resolve(res)
             },
