@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "productName": "AID Studio",
   "private": true,
+  "author": "Xiaozhe Yao & AICAMP.CO.,LTD & Others",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -13,9 +14,21 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "test:ci": "yarn run test:unit"
+    "test:ci": "yarn run test:unit",
+    "build:mac": "electron-builder --mac"
   },
   "main": "background.js",
+  "build": {
+    "extends": null,
+    "appId": "org.autoai.aid",
+    "directories":{
+      "buildResources": "../../assets"
+    },
+    "files": ["**/*", "../../assets/icon.icns", "src/**/*", "dist_electron/**/*"],
+    "extraMetadata": {
+      "main": "dist_electron/bundled/background.js"
+    }
+  },
   "dependencies": {
     "@types/electron-devtools-installer": "^2.2.0",
     "@types/node": "14",

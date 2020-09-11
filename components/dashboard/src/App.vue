@@ -98,7 +98,7 @@ import {
   experiment_menu,
   extension_menu
 } from "./router/menu";
-
+import { isElectron, init_ipc_hooks } from './electron/events'
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
@@ -144,6 +144,12 @@ export default {
     "alert-dialog": AlertDialog,
     "aid-footer": AIDFooter,
     "landing": Landing,
+  },
+  mounted () {
+    if (isElectron()) {
+      console.log('running in electron')
+      init_ipc_hooks()
+    }
   }
 };
 </script>

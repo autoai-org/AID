@@ -1,6 +1,16 @@
-import {Menu, app} from 'electron'
-
-const template:Array<any> = [
+import { Menu, app, BrowserWindow, shell } from 'electron'
+const template: Array<any> = [
+    {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Open Hosts',
+                click() {
+                    BrowserWindow.getAllWindows()[0].webContents.send('disconnected')
+                }
+            }
+        ],
+    },
     {
         label: 'Edit App',
         submenu: [
@@ -13,14 +23,23 @@ const template:Array<any> = [
         ]
     },
     {
-        label: 'View App',
+        label: 'About',
         submenu: [
             {
                 label: 'Reload'
             },
             {
-                label: 'Toggle Full Screen'
-            }
+                label: 'Documents',
+                click: () => { shell.openExternal('https://aid.autoai.org') }
+            },
+            {
+                label: 'Source Code',
+                click: () => { shell.openExternal('https://github.com/autoai-org/aid') }
+            },
+            {
+                label: 'Donate',
+                click: () => { shell.openExternal('https://github.com/sponsors/xzyaoi/') }
+            },
         ]
     }
 ];

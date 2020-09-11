@@ -1,10 +1,13 @@
 'use strict'
+const isDevelopment = process.env.NODE_ENV !== 'production'
 
-import { app, protocol, BrowserWindow, Menu } from 'electron'
+import { app, protocol, BrowserWindow, Menu, Tray, nativeImage } from 'electron'
 import { createProtocol } from 'vue-cli-plugin-electron-builder/lib'
 import installExtension, { VUEJS_DEVTOOLS } from 'electron-devtools-installer'
-const isDevelopment = process.env.NODE_ENV !== 'production'
 import appMenu from './electron/menu'
+import path from 'path'
+import { isConditionalExpression } from 'typescript'
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win: BrowserWindow | null
@@ -26,8 +29,17 @@ function createWindow() {
       // See nklayman.github.io/vue-cli-plugin-electron-builder/guide/security.html#node-integration for more info
       nodeIntegration: (process.env
           .ELECTRON_NODE_INTEGRATION as unknown) as boolean
-    }
-  })
+    },
+    icon: path.join(__dirname, '../../../assets/logo.png')
+  });
+  console.log(__dirname)
+  win.setIcon(
+		nativeImage.createFromPath(path.join(__dirname, '../../../assets/logo.png'))
+	);
+
+  if (process.platform === 'darwin') {
+    app.dock.setIcon(nativeImage.createFromPath(path.join(__dirname, '../../../assets/logo.png')));
+  }
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {
     // Load the url of the dev server if in development mode
@@ -73,6 +85,8 @@ app.on('ready', async () => {
       console.error('Vue Devtools failed to install:', e.toString())
     }
   }
+  // let tray = new Tray('../../../assets/icon.png')
+  // tray.setToolTip('AID Studio')
   Menu.setApplicationMenu(appMenu);
   createWindow()
 })

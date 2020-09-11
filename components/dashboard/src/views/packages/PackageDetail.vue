@@ -5,10 +5,10 @@
         class="font-weight-bold display-1 basil--text"
       >{{$route.params.vendor}}/{{$route.params.package}}</h1>
       <p>
-        <v-img width="32px" v-if="frameworks.includes('keras')" src="@/assets/framework-icons/keras.png"/>
-        <v-img width="32px" v-if="frameworks.includes('opencv')" src="@/assets/framework-icons/opencv.png"/>
-        <v-img width="32px" v-if="frameworks.includes('pytorch')" src="@/assets/framework-icons/pytorch.png"/>
-        <v-img width="32px" v-if="frameworks.includes('tensorflow')" src="@/assets/framework-icons/tensorflow.png"/>
+        <v-img width="32px" v-if="frameworks.includes('keras')" src="../../assets/framework-icons/keras.png"/>
+        <v-img width="32px" v-if="frameworks.includes('opencv')" src="../../assets/framework-icons/opencv.png"/>
+        <v-img width="32px" v-if="frameworks.includes('pytorch')" src="../../assets/framework-icons/pytorch.png"/>
+        <v-img width="32px" v-if="frameworks.includes('tensorflow')" src="../../assets/framework-icons/tensorflow.png"/>
       </p>
     </v-card-title>
     <v-tabs v-model="tab" background-color="transparent" color="basil" grow>
@@ -46,7 +46,7 @@ import PackageSettings from "@/components/packageComponents/Settings.vue";
 import SolversCard from "@/components/packageComponents/Solvers.vue"
 import PluginPage from "@/components/packageComponents/PluginPage.vue"
 import VueMarkdown from "vue-markdown";
-import { fetchMeta } from "@/middlewares/api.mdw";
+import { fetchMeta } from "../../middlewares/api.mdw";
 import Vue from "vue";
 export default Vue.extend({
   data() {
