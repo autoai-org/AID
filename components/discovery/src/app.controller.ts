@@ -19,4 +19,8 @@ export class AppController {
   async login(@Request() req) {
     return this.authService.login(req.user);
   }
+  @Get("version")
+  getVersion(): string {
+    return "0.0.1"
+  }
 }

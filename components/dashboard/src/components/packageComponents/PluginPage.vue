@@ -12,8 +12,8 @@
 </template>
 <script lang="ts">
 import Vue from 'vue'
-import { getExtLogs } from '@/middlewares/api.mdw'
-import { ansi2html } from '@/middlewares/logs.mdw'
+import { getExtLogs } from '../../middlewares/api.mdw'
+import { ansi2html } from '../../middlewares/logs.mdw'
 export default Vue.extend({
     data() {
         return {

@@ -63,7 +63,7 @@ function Home() {
             {
               'A.I.D was born to help developers '
             }
-              <b>Share</b>
+              <b>Discover</b>
             {' + '}
               <b>Deploy</b>
             {' + '}
