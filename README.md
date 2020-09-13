@@ -7,7 +7,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/autoai-org/aid">
-    <img src="assets/logo_transparent.png" alt="Logo" width="240">
+    <img src="assets/logo_transparent.png" alt="Logo" width="540">
   </a>
 
   <h3 align="center">A.I.D</h3>
