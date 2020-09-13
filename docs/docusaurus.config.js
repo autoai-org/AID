@@ -11,7 +11,7 @@ module.exports = {
       title: 'AID',
       logo: {
         alt: 'AID',
-        src: 'img/logo.png',
+        src: 'img/icon.png',
       },
       links: [
         {
