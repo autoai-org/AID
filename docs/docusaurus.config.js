@@ -13,7 +13,7 @@ module.exports = {
         alt: 'AID',
         src: 'img/icon.png',
       },
-      links: [
+      items: [
         {
           to: 'docs/overview',
           activeBasePath: 'docs',
@@ -61,15 +61,15 @@ module.exports = {
           items: [
             {
               label: 'Google Group',
-              href: 'https://groups.google.com/forum/#!newtopic/autoai',
+              to: 'https://groups.google.com/forum/#!newtopic/autoai',
             },
             {
               label: 'Slack',
-              href: 'https://join.slack.com/t/autoaiworkspace/shared_invite/zt-d0ibh5gj-_AIRcj1CedTBiXeqJsMwwQ',
+              to: 'https://join.slack.com/t/autoaiworkspace/shared_invite/zt-d0ibh5gj-_AIRcj1CedTBiXeqJsMwwQ',
             },
             {
               label: 'Telegram Group',
-              href: 'https://t.me/autoai_org',
+              to: 'https://t.me/autoai_org',
             },
           ],
         },
@@ -82,20 +82,19 @@ module.exports = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/autoai-org/aid',
+              to: 'https://github.com/autoai-org/aid',
             },
             {
               label: 'Twitter',
-              href: 'https://twitter.com/aid_aiops',
+              to: 'https://twitter.com/aid_aiops',
             },
             {
               label: 'News',
-              href: '/docs/news',
+              to: '/docs/news',
             },
           ],
         },
       ],
-      copyright: ``,
     },
   },
   presets: [
