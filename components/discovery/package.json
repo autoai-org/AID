@@ -29,7 +29,7 @@
     "@nestjs/platform-express": "^7.4.4",
     "@nestjs/swagger": "^4.6.0",
     "@types/mongoose": "^5.7.36",
-    "@types/passport-google-oauth20": "^2.0.3",
+    "@types/passport-google-oauth20": "^2.0.4",
     "bcrypt": "^5.0.0",
     "express-rate-limit": "^5.1.3",
     "hbs": "^4.1.1",
