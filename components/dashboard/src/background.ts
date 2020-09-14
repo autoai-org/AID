@@ -30,15 +30,15 @@ function createWindow() {
       nodeIntegration: (process.env
           .ELECTRON_NODE_INTEGRATION as unknown) as boolean
     },
-    icon: path.join(__dirname, '../../../assets/logo.png')
+    icon: path.join(__dirname, '../../../assets/icon.png')
   });
   console.log(__dirname)
   win.setIcon(
-		nativeImage.createFromPath(path.join(__dirname, '../../../assets/logo.png'))
+		nativeImage.createFromPath(path.join(__dirname, '../../../assets/icon.png'))
 	);
 
   if (process.platform === 'darwin') {
-    app.dock.setIcon(nativeImage.createFromPath(path.join(__dirname, '../../../assets/logo.png')));
+    app.dock.setIcon(nativeImage.createFromPath(path.join(__dirname, '../../../assets/icon.png')));
   }
 
   if (process.env.WEBPACK_DEV_SERVER_URL) {

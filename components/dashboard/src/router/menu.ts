@@ -30,6 +30,7 @@ const about_menu = [
     { icon: "mdi-database-search", text: "Registry" },
     { icon: "mdi-help", text: "Docs", link: "https://aid.autoai.org" },
     { icon: "mdi-information-outline", text: "AID Story", link: "https://yaonotes.org/blogs/why-aid.html" },
+    { icon: "mdi-gift-outline", text: "Sponsors", link:"https://github.com/sponsors/xzyaoi"},
 ]
 
 
