@@ -13,7 +13,7 @@
               <img v-if="item.img_url" :src="item.img_url"/>
             <span v-else class="white--text headline">{{getInitials(item.name)}}</span>
           </v-avatar>
-          {{item.name}}
+          <div class="item_name">{{item.name}}</div>
           <v-btn color="secondary" outlined>Running History</v-btn> <br/>
           <v-btn color="primary">View Configuration</v-btn>
         </v-col>
@@ -49,5 +49,11 @@ export default Vue.extend({
 .app_image_box{
   text-align: center;
   color: black!important;
+  margin-left: 40px;
+  min-width: 200px;
+}
+
+.item_name{
+  min-width: 64px;
 }
 </style>
