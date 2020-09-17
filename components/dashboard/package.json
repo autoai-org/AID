@@ -21,10 +21,15 @@
   "build": {
     "extends": null,
     "appId": "org.autoai.aid",
-    "directories":{
+    "directories": {
       "buildResources": "../../assets"
     },
-    "files": ["**/*", "../../assets/icon.icns", "src/**/*", "dist_electron/**/*"],
+    "files": [
+      "**/*",
+      "../../assets/icon.icns",
+      "src/**/*",
+      "dist_electron/**/*"
+    ],
     "extraMetadata": {
       "main": "dist_electron/bundled/background.js"
     }
