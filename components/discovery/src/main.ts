@@ -35,7 +35,6 @@ async function bootstrap() {
     console.info("[discovery]: will listen on port " + config.PORT)
     app.enableCors();
     await app.listen(config.PORT);  
-
   }
 }
 bootstrap();

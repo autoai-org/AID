@@ -17,6 +17,10 @@ export class UserService {
     return this.aidUserModel.findOne({username: username}).exec();
   }
 
+  async count(): Promise<number> {
+    return this.aidUserModel.estimatedDocumentCount().exec()
+  }
+
   googleLogin(req) {
     if (!req.user) {
       return {
