@@ -23,7 +23,9 @@ export class ModelService {
   async findById(id: string): Promise<AIDModel> {
     return this.aidModelModel.findById(id).exec();
   }
+  
   async count(): Promise<number> {
     return this.aidModelModel.estimatedDocumentCount().exec()
   }
+
 }

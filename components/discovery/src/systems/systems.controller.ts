@@ -26,6 +26,7 @@ export class SystemController {
             'model_count': await this.modelService.count()
         }
     }
+    
     @Get('health')
     @HealthCheck()
     check() {
