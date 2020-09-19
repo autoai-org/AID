@@ -42,7 +42,7 @@
     "plotly.js-dist": "^1.55.2",
     "vue": "^2.6.12",
     "vue-chartjs": "^3.5.1",
-    "vue-class-component": "^7.2.5",
+    "vue-class-component": "^7.2.6",
     "vue-codemirror": "^4.0.6",
     "vue-json-viewer": "^2.2.14",
     "vue-markdown": "^2.2.4",
