@@ -1,17 +1,20 @@
-import { ipcRenderer } from "electron";
 import store from '../store'
-function isElectron() {
-    const userAgent = navigator.userAgent.toLowerCase();
-    return userAgent.indexOf(' electron/') > -1
-}
+import { isElectron } from './index';
 
 function init_ipc_hooks() {
-    ipcRenderer.on('disconnected', (event, args)=>{
-        store.commit('setConnected', false)
-    })
+    /**
+     * Everytime importing electron modules, please check if this application is running in electron environment. When it is runnning in browser, it cannot import the electron module.
+     * More specifically, do not use global import electron from 'electron'.
+     * Use: if (isElectron) { const electronModule = require("electron") }
+     */
+    if (isElectron()) {
+        const electronModule = require("electron")
+        electronModule.ipcRenderer.on('disconnected', () => {
+            store.commit('setConnected', false)
+        })
+    }
 }
 
 export {
     init_ipc_hooks,
-    isElectron
 }

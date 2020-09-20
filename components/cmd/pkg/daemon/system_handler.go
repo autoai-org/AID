@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/autoai-org/aid/components/cmd/pkg/entities"
+	"github.com/autoai-org/aid/components/cmd/pkg/requests"
 	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 )
@@ -57,4 +58,19 @@ func fetchAllWebhooks(c *gin.Context) {
 
 func fetchRunningErrors(c *gin.Context) {
 	c.JSON(http.StatusOK, entities.RunningErrors)
+}
+
+func metricHandler(c *gin.Context) {
+	client := requests.NewClient()
+	metricsResponse := client.Get("http://127.0.0.1:10590/_metrics", map[string]string{})
+	metricString := metricsResponse.String()
+	if c.Request.Header.Get("Content-Type") == "text/plain" {
+		c.String(http.StatusOK, metricString)
+	} else {
+		jsonByte, err := queryJSON(metricString)
+		if err != nil {
+			utilities.CheckError(err, "Cannot parse metrics into json format!")
+		}
+		c.JSON(http.StatusOK, jsonByte)
+	}
 }

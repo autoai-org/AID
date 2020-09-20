@@ -14,15 +14,19 @@ import (
 	"net/http"
 	"os"
 	"strconv"
+	"strings"
 	"time"
 
+	"github.com/autoai-org/aid/components/cmd/pkg/utilities"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
+	dto "github.com/prometheus/client_model/go"
+	prom2json "github.com/prometheus/prom2json"
 	log "github.com/sirupsen/logrus"
 )
 
-var defaultMetricPath = "/metrics"
+var defaultMetricPath = "/_metrics"
 
 // Standard default metrics
 //	counter, counter_vec, gauge, gauge_vec,
@@ -146,7 +150,8 @@ func NewPrometheus(subsystem string, customMetricsList ...[]*Metric) *Prometheus
 		MetricsList: metricsList,
 		MetricsPath: defaultMetricPath,
 		ReqCntURLLabelMappingFn: func(c *gin.Context) string {
-			return c.Request.URL.Path // i.e. by default do nothing, i.e. return URL as is
+			return c.Request.URL.Path
+			// i.e. by default do nothing, i.e. return URL as is
 		},
 	}
 
@@ -395,6 +400,13 @@ func (p *Prometheus) HandlerFunc() gin.HandlerFunc {
 func prometheusHandler() gin.HandlerFunc {
 	h := promhttp.Handler()
 	return func(c *gin.Context) {
+		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
+		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+		c.Writer.Header().Set("Access-Control-Allow-Headers", "Origin, Content-Type")
+
+		if c.Request.Method == "OPTIONS" {
+			return
+		}
 		h.ServeHTTP(c.Writer, c.Request)
 	}
 }
@@ -422,4 +434,17 @@ func computeApproximateRequestSize(r *http.Request) int {
 		s += int(r.ContentLength)
 	}
 	return s
+}
+
+func queryJSON(metricString string) ([]*prom2json.Family, error) {
+	mfChan := make(chan *dto.MetricFamily, 1024)
+	err := prom2json.ParseReader(strings.NewReader(metricString), mfChan)
+	if err != nil {
+		utilities.CheckError(err, "Cannot retrieve metrics from source.")
+	}
+	result := []*prom2json.Family{}
+	for mf := range mfChan {
+		result = append(result, prom2json.NewFamily(mf))
+	}
+	return result, err
 }

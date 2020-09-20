@@ -41,6 +41,14 @@ const routes = [
     component: () => import(/* webpackChunkName: "preferences" */ '../views/systems/Preference.vue')
   },
   {
+    path: '/system/monitor',
+    name: 'monitor',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import(/* webpackChunkName: "logs" */ '../views/systems/Monitor.vue')
+  },
+  {
     path: '/extensions/webhooks',
     name: 'Webhooks',
     // route level code-splitting

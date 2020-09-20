@@ -13,6 +13,7 @@ const system_menu = [
     { icon: "mdi-math-log", text: "Logs", link: "/system/logs" },
     { icon: "mdi-history", text: "Activity", link: "/system/activities" },
     { icon: "mdi-cog", text: "Preferences", link: "/system/preferences" },
+    { icon: "mdi-monitor", text: "Monitor", link: "/system/monitor" },
 ]
 
 const experiment_menu = [

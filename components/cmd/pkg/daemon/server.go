@@ -50,5 +50,5 @@ func RunServer(port string, sslcert string, sslkey string) {
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
 	<-quit
-	logger.Info("Shutdown Server...")
+	logger.Info("AID Server is shutting down gracefully...")
 }

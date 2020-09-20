@@ -66,7 +66,7 @@
         <span class="title">AID Studio</span>
       </v-toolbar-title>
       <v-spacer />
-      <v-row align="center" style="max-width: 650px">
+      <v-row align="center" style="max-width: 600px;margin-right:20px">
         <v-text-field
           :append-icon-cb="() => {}"
           placeholder="Search..."
@@ -98,12 +98,14 @@ import {
   experiment_menu,
   extension_menu
 } from "./router/menu";
-import { isElectron, init_ipc_hooks } from './electron/events'
+import { isElectron } from './electron'
+import { init_ipc_hooks } from './electron/events'
 import router from "@/router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
 import AIDFooter from "@/components/layouts/Footer.vue";
 import Landing from "@/views/systems/Landing.vue";
+
 export default {
   props: {
     source: String
