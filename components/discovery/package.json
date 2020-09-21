@@ -27,7 +27,7 @@
     "@nestjs/mongoose": "^7.0.2",
     "@nestjs/passport": "^7.1.0",
     "@nestjs/platform-express": "^7.4.4",
-    "@nestjs/swagger": "^4.6.0",
+    "@nestjs/swagger": "^4.6.1",
     "@types/mongoose": "^5.7.36",
     "@types/passport-google-oauth20": "^2.0.4",
     "bcrypt": "^5.0.0",
