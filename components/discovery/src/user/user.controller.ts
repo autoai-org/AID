@@ -32,8 +32,7 @@ export class UserController {
     @UseGuards(AuthGuard('google'))
     @Render('social_login')
     googleAuthRedirect(@Req() req) {
-      let user = this.userService.googleLogin(req)
-      console.log(user)
-      return { access_token: user.user.accessToken, username: user.user.firstName};
+      const user = this.userService.googleLogin(req)
+      return { accessToken: user.user.accessToken, username: user.user.firstName};
     }
 }

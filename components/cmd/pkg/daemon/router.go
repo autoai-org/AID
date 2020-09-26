@@ -16,6 +16,8 @@ func getRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
+	p := NewPrometheus("gin")
+	p.Use(r)
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	// All get requests
@@ -31,6 +33,7 @@ func getRouter() *gin.Engine {
 	r.GET("/packages/:vendorName/:packageName/meta", getMetaInfo)
 	r.GET("/experiments/dataset", getDatasets)
 	r.GET("/extensions/:extName/logs/:logsId", getExtensionResult)
+	r.GET("/system/metrics", metricHandler)
 	// all put requests
 	r.PUT("/webhooks", addWebhook)
 	r.PUT("/packages/:vendorName/:packageName/:solverName/images", buildSolverImage)

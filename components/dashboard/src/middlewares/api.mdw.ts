@@ -251,7 +251,12 @@ function fetchAllObjects(objectName: string) {
     })
 }
 
+function fetchPrometheus() {
+    return plain_get(endpoint+"system/metrics")
+}
+
 export {
+    fetchPrometheus,
     setEndpoint,
     getExtLogs,
     fetchSolverDockerfile,
