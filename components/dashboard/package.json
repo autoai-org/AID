@@ -52,7 +52,7 @@
     "vue-json-viewer": "^2.2.14",
     "vue-markdown": "^2.2.4",
     "vue-property-decorator": "^9.0.0",
-    "vue-router": "^3.4.4",
+    "vue-router": "^3.4.5",
     "vuetify": "^2.3.10",
     "vuex": "^3.4.0"
   },
