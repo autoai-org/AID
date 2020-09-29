@@ -26,7 +26,7 @@ require (
 	github.com/kardianos/service v1.1.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
-	github.com/manifoldco/promptui v0.7.0
+	github.com/manifoldco/promptui v0.8.0
 	github.com/mattn/go-sqlite3 v1.14.3
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
