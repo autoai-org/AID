@@ -31,7 +31,7 @@ requests-toolbelt==0.9.1
 SecretStorage==3.1.2
 six==1.14.0
 toml==0.10.0
-tqdm==4.50.0
+tqdm==4.50.1
 twine==3.2.0
 urllib3==1.25.10
 wcwidth==0.2.5
