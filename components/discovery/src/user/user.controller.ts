@@ -20,6 +20,8 @@ export class UserController {
         }
       } else{
         createDto.password = await bcrypt.hash(createDto.password, 10);
+        // disable create new users as admin. 
+        createDto.admin = false
         return this.userService.create(createDto)  
       }
     }
