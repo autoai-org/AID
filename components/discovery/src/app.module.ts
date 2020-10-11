@@ -9,7 +9,11 @@ import { SystemsModule } from './systems/systems.module'
 import config from './config';
 
 @Module({
-  imports: [MongooseModule.forRoot(config.MONGO_URI),
+  imports: [MongooseModule.forRootAsync({
+    useFactory: async () => ({
+      uri: config.MONGO_URI
+    })
+  }),
     ModelModule,
     AuthModule,
     UserModule,
@@ -18,4 +22,4 @@ import config from './config';
   providers: [AppService],
 })
 
-export class AppModule {}
+export class AppModule { }

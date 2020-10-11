@@ -1,14 +1,13 @@
 import { Module } from '@nestjs/common';
-import { MongooseModule } from '@nestjs/mongoose';
 import { ModelController } from './model.controller';
 import { ModelService } from './model.service';
-import { ModelSchema } from './model.schema';
+import { DatabaseModule } from '../database/database.module';
+import { ModelProvider } from './model.provider'
 
 @Module({
-  imports: [
-    MongooseModule.forFeature([{ name: 'AIDModel', schema: ModelSchema }])
-  ],
+  imports: [DatabaseModule],
   controllers: [ModelController],
-  providers: [ModelService],
+  exports: [ModelService],
+  providers: [ModelService, ...ModelProvider,],
 })
 export class ModelModule {}

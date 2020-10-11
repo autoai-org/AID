@@ -100,7 +100,7 @@ import {
 } from "./router/menu";
 import { isElectron } from './electron'
 import { init_ipc_hooks } from './electron/events'
-import router from "@/router";
+import router from "./router";
 import LoadingDialog from "@/components/dialogs/LoadingDialog.vue";
 import AlertDialog from "@/components/dialogs/Alert.vue";
 import AIDFooter from "@/components/layouts/Footer.vue";

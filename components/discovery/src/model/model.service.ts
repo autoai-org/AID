@@ -1,11 +1,10 @@
 import { Model } from 'mongoose';
-import { Injectable } from '@nestjs/common';
-import { InjectModel } from '@nestjs/mongoose';
+import { Injectable, Inject} from '@nestjs/common';
 import { CreateModelDto, AIDModel } from './model.schema';
 
 @Injectable()
 export class ModelService {
-  constructor(@InjectModel('AIDModel') private aidModelModel: Model<AIDModel>) { }
+  constructor(@Inject('AID_Model') private aidModelModel: Model<AIDModel>) { }
 
   async create(createModelDto: CreateModelDto): Promise<AIDModel> {
     const createdModel = new this.aidModelModel(createModelDto);

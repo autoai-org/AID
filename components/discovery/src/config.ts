@@ -1,5 +1,5 @@
 const config = {
-    MONGO_URI: process.env.MONGO_URI,
+    MONGO_URI: process.env.MONGO_URI || "mongodb://localhost:27017/aid",
     PORT: process.env.PORT || 3000,
     GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     JWT_SECRET: process.env.JWT_SECRET || "autoai-aid",
