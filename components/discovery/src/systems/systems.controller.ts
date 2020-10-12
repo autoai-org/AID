@@ -5,6 +5,7 @@ import { UserService } from '../user/user.service'
 import { ModelService } from '../model/model.service'
 import { HealthCheckService, DNSHealthIndicator, HealthCheck, MongooseHealthIndicator } from '@nestjs/terminus'
 import config from '../config'
+
 @ApiTags('Model')
 @Controller('System')
 export class SystemController {

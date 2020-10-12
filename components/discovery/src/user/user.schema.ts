@@ -8,6 +8,7 @@ interface AIDUser extends mongoose.Document {
     homepage?: string,
     sponsorLink?: string
     avatar: string,
+    admin: boolean,
 }
 
 class CreateUserDTO {
@@ -18,6 +19,7 @@ class CreateUserDTO {
     avatar: string;
     sponsorLink?: string;
     homepage?: string;
+    admin: boolean
 }
 
 const UserSchema = new mongoose.Schema({

@@ -2,10 +2,11 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import config from './config'
-import * as helmet from 'helmet'
-import * as rateLimit from 'express-rate-limit';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
 import { join } from 'path';
 import { NestExpressApplication } from '@nestjs/platform-express';
+import { setupAdminPanel } from './plugins/admin.plugin';
 
 async function bootstrap() {
   if (config.MONGO_URI==="") {
@@ -13,6 +14,7 @@ async function bootstrap() {
   } else {
     console.info("[db]:connecting to " + config.MONGO_URI)
     const app = await NestFactory.create<NestExpressApplication>(AppModule);
+    await setupAdminPanel(app);
     app.use(helmet());
     app.use(
       rateLimit({
