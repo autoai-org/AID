@@ -12550,10 +12550,10 @@ vue-jest@^3.0.5:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-json-viewer@^2.2.14:
-  version "2.2.14"
-  resolved "https://registry.yarnpkg.com/vue-json-viewer/-/vue-json-viewer-2.2.14.tgz#24954736761b05eb5cbaf6cc2df8ef6f4bf978f0"
-  integrity sha512-FvMHs83ZCnvRDryLUDlrb4wiAQUb82x7kxShWykZXUd60sgCunsY0VnTthmVRC/ZFzjVr9/OxRTwcc85cOWonQ==
+vue-json-viewer@^2.2.15:
+  version "2.2.15"
+  resolved "https://registry.yarnpkg.com/vue-json-viewer/-/vue-json-viewer-2.2.15.tgz#856bd50d23c84471b2445bfda3e746a018c33dd2"
+  integrity sha512-Trn4iyX9TUOmHSq9BAT+MXErl9jXwqP/72+HokqBXByHfHMKPEeKAvcv91oL4zR5xzL92O72W2J+aMBE7ly64w==
   dependencies:
     clipboard "^2.0.4"
     vue "^2.6.9"
