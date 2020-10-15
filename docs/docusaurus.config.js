@@ -7,6 +7,11 @@ module.exports = {
   organizationName: 'autoai-org', // Usually your GitHub org/user name.
   projectName: 'aid', // Usually your repo name.
   themeConfig: {
+    algolia: {
+      apiKey: '1cbcb76e9629ebcbee045b360838e212',
+      indexName: 'autoai',
+      searchParameters: {}, // Optional (if provided by Algolia)
+    },
     navbar: {
       title: 'AID',
       logo: {
