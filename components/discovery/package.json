@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@admin-bro/express": "^3.0.1",
-    "@admin-bro/mongoose": "^1.0.0",
+    "@admin-bro/mongoose": "^1.0.2",
     "@admin-bro/nestjs": "^1.0.0",
     "@nestjs/common": "^7.4.4",
     "@nestjs/core": "^7.4.4",
@@ -72,7 +72,7 @@
     "prettier": "^2.1.2",
     "supertest": "^5.0.0",
     "ts-jest": "25.5.1",
-    "ts-loader": "^8.0.4",
+    "ts-loader": "^8.0.5",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
