@@ -9578,10 +9578,10 @@ pkg-dir@^4.1.0, pkg-dir@^4.2.0:
   dependencies:
     find-up "^4.0.0"
 
-plotly.js-dist@^1.56.0:
-  version "1.56.0"
-  resolved "https://registry.yarnpkg.com/plotly.js-dist/-/plotly.js-dist-1.56.0.tgz#0b3ecef8fd48a128d5b58e4d70afa9af217d0325"
-  integrity sha512-vkNePImh00Ka8zm8/2bkhL5XyIf9vjNKojSQqHd45UIgrvv1k9io31SFK+gUgz+KLYki8/QN4Qz6abifKVcu9Q==
+plotly.js-dist@^1.57.0:
+  version "1.57.0"
+  resolved "https://registry.yarnpkg.com/plotly.js-dist/-/plotly.js-dist-1.57.0.tgz#572df6acc645b344aab193bfac876fbdee03c76f"
+  integrity sha512-PE9uO+cORryPgDhfyoEhb150wuJYpl/mZFPuWhKvSV8zRLmlQkBeetTU9JW3dwzblUElSHQ7A5GiyulwWPlDZQ==
 
 pn@^1.1.0:
   version "1.1.0"
