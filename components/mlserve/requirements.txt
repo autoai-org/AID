@@ -21,7 +21,7 @@ pluggy==0.13.1
 py==1.8.1
 pycparser==2.20
 pyflakes==2.1.1
-Pygments==2.7.1
+Pygments==2.7.2
 pyparsing==2.4.6
 pytest==5.4.1
 raven==6.10.0
