@@ -72,7 +72,7 @@
     "prettier": "^2.1.2",
     "supertest": "^5.0.0",
     "ts-jest": "25.5.1",
-    "ts-loader": "^8.0.6",
+    "ts-loader": "^8.0.9",
     "ts-node": "^9.0.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^3.9.7"
