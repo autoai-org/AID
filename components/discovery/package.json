@@ -32,7 +32,7 @@
     "@nestjs/platform-express": "^7.4.4",
     "@nestjs/swagger": "^4.6.1",
     "@nestjs/terminus": "^7.0.1",
-    "@types/mongoose": "^5.7.36",
+    "@types/mongoose": "^5.10.0",
     "@types/passport-google-oauth20": "^2.0.4",
     "admin-bro": "^3.2.5",
     "admin-bro-expressjs": "^2.1.1",
