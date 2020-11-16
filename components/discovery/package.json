@@ -24,7 +24,7 @@
     "@admin-bro/express": "^3.0.1",
     "@admin-bro/mongoose": "^1.0.2",
     "@admin-bro/nestjs": "^1.0.0",
-    "@nestjs/common": "^7.4.4",
+    "@nestjs/common": "^7.5.2",
     "@nestjs/core": "^7.4.4",
     "@nestjs/jwt": "^7.1.0",
     "@nestjs/mongoose": "^7.0.2",
