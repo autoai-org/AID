@@ -26,7 +26,7 @@
   </p>
 </p>
 
-**AID is still under heavy development and APIs may change! Stay tuned. It won't be very long :)**
+**AID is still under heavy development and APIs may change! Stay tuned. The next major revision will be released Q1,2021.**
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
