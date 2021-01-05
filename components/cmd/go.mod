@@ -22,14 +22,14 @@ require (
 	github.com/google/uuid v1.1.2
 	github.com/gorilla/websocket v1.4.2
 	github.com/h2non/filetype v1.0.12 // indirect
-	github.com/ilibs/gosql/v2 v2.0.5
+	github.com/ilibs/gosql/v2 v2.1.0
 	github.com/kardianos/service v1.1.0
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
 	github.com/manifoldco/promptui v0.8.0
-	github.com/mattn/go-sqlite3 v1.14.4
 	github.com/mattn/go-colorable v0.1.7 // indirect
 	github.com/mattn/go-runewidth v0.0.9 // indirect
+	github.com/mattn/go-sqlite3 v1.14.4
 	github.com/mattn/go-tty v0.0.3 // indirect
 	github.com/morikuni/aec v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.1 // indirect
