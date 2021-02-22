@@ -1,23 +1,30 @@
+# Copyright (c) 2021 Xiaozhe Yao et al.
+# 
+# This software is released under the MIT License.
+# https://opensource.org/licenses/MIT
 default:
-	@echo "Make sure you are inside components/cmd. This Makefile is ONLY for CMD"
+	@echo "==========================================="
+	@echo "==== This Makefile is for AID TUI Only ===="
+	@echo "==========================================="
 	@echo "Usage:"
-	@echo "\tmake format\t Format all go code"
-	@echo "\tmake test\t Run Go Test"
-	@echo "\tmake build  \t Build for local arch"
-	@echo "\tmake xbuild \t Build for different platforms"
+	@echo "\tmake format\t\t Format all go code"
+	@echo "\tmake generate-bins\t Ensemble binary assets"
+	@echo "\tmake generate-ent\t Generate entities"
+	@echo "\tmake build-cli\t\t Build binary executable"
 
+BUILDTIME := $(shell date +%FT%T%Z)
 format:
 	gofmt -l -s -w **/**/*.go
 
-test:
-	go test -race -coverprofile c.out -v ./...
-	rm -rf **/**/logs/
-	
-build:
-	bash ./build.sh
+generate-bins:
+	go-bindata -pkg docker -o internal/runtime/docker/blob.go internal/assets/
 
-xbuild:
-	bash ./xbuild.sh
+generate-ent:
+	rm -rf ./ent/generated
+	mkdir ./ent/generated
+	entc generate ./ent/schema --target ./ent/generated 
 
-upload-edge:
-	bash ./scripts/upload-edge.sh
+build-cli:
+	# make generate-bins
+	cd tui && go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
+	cd tui && mv aid ../

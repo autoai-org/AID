@@ -1,0 +1,39 @@
+{
+    "docs": [
+        {
+            "label": "Getting Started",
+            "type":"category",
+            "items": [
+                "getting-started/intro",
+                "getting-started/installation"
+            ]
+        },
+        {
+            "label": "Usage",
+            "type":"category",
+            "items": [
+                "usage/concepts/package",
+                "usage/concepts/event"
+            ]
+        },
+        {
+            "label": "Specification",
+            "type":"category",
+            "items": [
+                "specs/configurations",
+                "specs/data-format",
+                "specs/error-code"
+            ]
+        }
+    ],
+    "about": [
+        {
+          "label": "About AID",
+          "type": "category",
+          "items": [
+            "about/intro",
+            "about/news"
+          ]
+        }
+      ]
+}

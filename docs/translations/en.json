@@ -1,0 +1,37 @@
+{
+    "navbar": {
+        "about": "About",
+        "docs": "Docs",
+        "api": "API",
+        "community": "Community",
+        "partners": "Partners",
+        "showcase": "Showcase",
+        "usage": "Usage",
+        "gettingStarted": "Getting started",
+        "contact": "Contact",
+        "mail": "Mail",
+        "network": "Network"
+    },
+    "navigation": {
+        "pagination": {
+            "next": "Next",
+            "previous": "Previous"
+        }
+    },
+    "pages": {
+        "partners": {
+            "partnersLabel": "Partners",
+            "founders": [
+                {
+                    "description": "Cyberport is an incubator based in Hong Kong."
+                }
+            ],
+            "collaboratorsLabel": "Collaborators",
+            "collaborators": [],
+            "patronsLabel": "Patrons"
+        }
+    },
+    "global": {
+        "discover": "Discover"
+    }
+}

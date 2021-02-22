@@ -1,3 +1,7 @@
-dist/
-c.out
-tests/
+.env
+.idea/
+aid
+tui/blob.go
+ent/generated
+.vscode/
+internal/runtime/docker/blob.go
