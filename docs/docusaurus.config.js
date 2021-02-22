@@ -10,7 +10,7 @@ module.exports = {
     title: 'A.I.D',
     tagline: 'Open Source MLOps Platform',
     url: 'https://aid.autoai.org',
-    baseUrl: `/${language}/`,
+    baseUrl: `/`,
     favicon: 'img/favicon.ico',
     organizationName: 'autoai-org',
     projectName: 'aid',
