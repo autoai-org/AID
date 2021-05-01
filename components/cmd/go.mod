@@ -5,7 +5,6 @@ go 1.15
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/MichaelMure/go-term-markdown v0.1.3
-	github.com/Microsoft/go-winio v0.4.15 // indirect
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20200730140406-5bb24159ccfb
 	github.com/containerd/containerd v1.4.2 // indirect
@@ -18,7 +17,7 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.8.0
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-git/go-git/v5 v5.2.0
+	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.1.2
 	github.com/gookit/color v1.3.2
@@ -38,8 +37,6 @@ require (
 	github.com/sirupsen/logrus v1.7.0
 	github.com/sosedoff/gitkit v0.2.1-0.20201122214739-7ce080db3c4e
 	github.com/urfave/cli/v2 v2.3.0
-	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
-	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	google.golang.org/genproto v0.0.0-20191206224255-0243a4be9c8f // indirect
 	google.golang.org/grpc v1.27.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
