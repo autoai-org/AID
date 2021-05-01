@@ -21,7 +21,7 @@ require (
 	github.com/go-git/go-git/v5 v5.2.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.1.2
-	github.com/gookit/color v1.3.2
+	github.com/gookit/color v1.4.2
 	github.com/jochasinga/requests v0.0.0-20160909035013-af9bbdb4ab2c // indirect
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-sqlite3 v1.14.5
@@ -39,7 +39,6 @@ require (
 	github.com/sosedoff/gitkit v0.2.1-0.20201122214739-7ce080db3c4e
 	github.com/urfave/cli/v2 v2.3.0
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777 // indirect
-	golang.org/x/sys v0.0.0-20210124154548-22da62e12c0c // indirect
 	google.golang.org/genproto v0.0.0-20191206224255-0243a4be9c8f // indirect
 	google.golang.org/grpc v1.27.0 // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
