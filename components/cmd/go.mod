@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/BurntSushi/toml v0.3.1
-	github.com/MichaelMure/go-term-markdown v0.1.3
+	github.com/MichaelMure/go-term-markdown v0.1.4
 	github.com/Microsoft/go-winio v0.4.15 // indirect
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20200730140406-5bb24159ccfb
