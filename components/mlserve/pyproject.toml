@@ -17,7 +17,7 @@ numpy = "^1.19.2"
 flask = "^1.1.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^6.1"
+pytest = "^6.2"
 
 [build-system]
 requires = ["poetry>=0.12"]
