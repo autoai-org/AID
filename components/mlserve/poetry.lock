@@ -227,6 +227,7 @@ py = ">=1.8.2"
 toml = "*"
 
 [package.extras]
+checkqa_mypy = ["mypy (==0.780)"]
 testing = ["argcomplete", "hypothesis (>=3.56)", "mock", "nose", "requests", "xmlschema"]
 
 [[package]]
