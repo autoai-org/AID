@@ -32,7 +32,7 @@ SecretStorage==3.1.2
 six==1.14.0
 toml==0.10.0
 tqdm==4.50.2
-twine==3.2.0
+twine==3.4.1
 urllib3==1.26.4
 wcwidth==0.2.5
 webencodings==0.5.1
