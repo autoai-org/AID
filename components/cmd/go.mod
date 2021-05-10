@@ -10,7 +10,7 @@ require (
 	github.com/containerd/containerd v1.4.2 // indirect
 	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
-	github.com/docker/docker v20.10.3+incompatible
+	github.com/docker/docker v20.10.6+incompatible
 	github.com/docker/go-connections v0.4.0
 	github.com/dustin/go-humanize v1.0.0
 	github.com/facebook/ent v0.5.0
