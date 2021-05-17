@@ -19,9 +19,9 @@ import (
 
 //getTpl returns the template string
 func getTpl(filename string) string {
-	data, err := Asset("internal/assets/" + filename + ".sql")
-	utilities.ReportError(err, "canno read file "+filename)
-	return string(data)
+	asset := utilities.Asset{Filepath: "internal/assets/" + filename + ".tpl"}
+	asset.Read()
+	return asset.Data
 }
 
 // GenerateDockerFiles returns a DockerFile string that could be used to build image.

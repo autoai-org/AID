@@ -21,7 +21,6 @@ require (
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.1.2
 	github.com/gookit/color v1.3.2
-	github.com/jochasinga/requests v0.0.0-20160909035013-af9bbdb4ab2c // indirect
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-sqlite3 v1.14.7
 	github.com/moby/sys/mount v0.2.0 // indirect
