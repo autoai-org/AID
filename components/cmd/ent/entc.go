@@ -12,6 +12,7 @@ import (
 func main() {
 	err := entc.Generate("./schema", &gen.Config{
 		Templates: entgql.AllTemplates,
+		Target:    "./generated",
 	})
 	if err != nil {
 		log.Fatalf("running ent codegen: %v", err)

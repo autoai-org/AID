@@ -8,9 +8,10 @@ package schema
 import (
 	"time"
 
-	"github.com/facebook/ent"
-	"github.com/facebook/ent/schema/edge"
-	"github.com/facebook/ent/schema/field"
+	"entgo.io/contrib/entgql"
+	"entgo.io/ent"
+	"entgo.io/ent/schema/edge"
+	"entgo.io/ent/schema/field"
 )
 
 // Image schema
@@ -46,7 +47,9 @@ func (Container) Fields() []ent.Field {
 		field.String("uid"),
 		field.String("port"),
 		field.Bool("running").Default(false),
-		field.Time("created_at").Default(time.Now),
+		field.Time("created_at").Default(time.Now).Annotations(
+			entgql.OrderField("CREATED_AT"),
+		),
 	}
 }
 
