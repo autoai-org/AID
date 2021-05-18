@@ -1,0 +1,16 @@
+schema:
+  - ent/gql/base.graphql
+  - ent/gql/image.graphql
+
+resolver:
+  layout: follow-schema
+  dir: ent/gql-resolvers
+
+autobind:
+  - github.com/autoai-org/aid/ent
+
+models:
+  # Defines the ID field as Go 'int'.
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.IntID

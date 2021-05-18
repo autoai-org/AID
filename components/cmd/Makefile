@@ -17,9 +17,10 @@ format:
 	gofmt -l -s -w **/**/*.go
 
 generate-ent:
-	rm -rf ./ent/generated
-	mkdir ./ent/generated
 	cd ent && go generate
+
+describe-ent:
+	cd ent && go run entgo.io/ent/cmd/ent describe ./schema
 
 build-cli:
 	cd tui && go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
