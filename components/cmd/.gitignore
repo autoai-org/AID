@@ -5,3 +5,4 @@ tui/blob.go
 ent/generated
 .vscode/
 generated.go
+models_gen.go

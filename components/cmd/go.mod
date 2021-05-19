@@ -3,8 +3,8 @@ module github.com/autoai-org/aid
 go 1.16
 
 require (
-	entgo.io/contrib v0.0.0-20210514144311-481fd0d9bc11 // indirect
-	entgo.io/ent v0.8.0 // indirect
+	entgo.io/contrib v0.0.0-20210514144311-481fd0d9bc11
+	entgo.io/ent v0.8.0
 	github.com/99designs/gqlgen v0.13.0
 	github.com/BurntSushi/toml v0.3.1
 	github.com/MichaelMure/go-term-markdown v0.1.3
@@ -21,12 +21,10 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect
-	github.com/golang/protobuf v1.5.1 // indirect
 	github.com/google/uuid v1.2.0
 	github.com/gookit/color v1.3.2
-	github.com/hashicorp/go-multierror v1.1.1 // indirect
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
-	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-sqlite3 v1.14.7
 	github.com/moby/sys/mount v0.2.0 // indirect
 	github.com/moby/term v0.0.0-20201110203204-bea5bbe245bf
@@ -40,17 +38,10 @@ require (
 	github.com/satori/go.uuid v1.2.0 // indirect
 	github.com/sirupsen/logrus v1.8.1
 	github.com/sosedoff/gitkit v0.2.1-0.20201122214739-7ce080db3c4e
-	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/urfave/cli/v2 v2.3.0
-	github.com/vektah/gqlparser/v2 v2.2.0
-	github.com/vmihailenco/msgpack/v5 v5.0.0-beta.9 // indirect
-	go.opencensus.io v0.23.0 // indirect
-	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9 // indirect
-	golang.org/x/text v0.3.5 // indirect
-	google.golang.org/genproto v0.0.0-20210303154014-9728d6b83eeb // indirect
-	google.golang.org/grpc v1.36.0 // indirect
+	github.com/vektah/gqlparser/v2 v2.1.0
+	github.com/vmihailenco/msgpack/v5 v5.0.0-beta.9
+	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
-	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gopkg.in/yaml.v3 v3.0.0-20200615113413-eeeca48fe776 // indirect
 	gotest.tools/v3 v3.0.3 // indirect
 )

@@ -1,10 +1,13 @@
 schema:
-  - ent/gql/base.graphql
-  - ent/gql/image.graphql
+  - ent/gql/schema.graphql
+
+exec:
+  filename: internal/daemon/generated/generated.go
+  package: generated
 
 resolver:
   layout: follow-schema
-  dir: ent/gql-resolvers
+  dir: internal/daemon/resolvers
 
 autobind:
   - github.com/autoai-org/aid/ent
@@ -14,3 +17,9 @@ models:
   ID:
     model:
       - github.com/99designs/gqlgen/graphql.IntID
+  Node:
+    model:
+      - github.com/autoai-org/aid/ent/generated.Noder
+  Image:
+    model:
+      - github.com/autoai-org/aid/ent/generated.Image

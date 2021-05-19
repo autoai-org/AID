@@ -1,3 +1,0 @@
-type Image implements Node {
-    id: ID!
-}

@@ -6,6 +6,7 @@
 package schema
 
 import (
+	"entgo.io/contrib/entgql"
 	"entgo.io/ent"
 	"entgo.io/ent/schema/edge"
 	"entgo.io/ent/schema/field"
@@ -19,6 +20,9 @@ type Solver struct {
 // Fields of the solver
 func (Solver) Fields() []ent.Field {
 	return []ent.Field{
+		field.String("uid").Annotations(
+			entgql.OrderField("UID"),
+		),
 		field.String("name"),
 		field.String("class"),
 		field.String("status"),
@@ -31,6 +35,6 @@ func (Solver) Edges() []ent.Edge {
 		edge.From("repository", Repository.Type).
 			Ref("solvers").
 			Unique(),
-		edge.From("image", Image.Type).Unique().Ref("solver"),
+		edge.From("image", Image.Type).Unique().Ref("solver").Annotations(entgql.Bind()),
 	}
 }

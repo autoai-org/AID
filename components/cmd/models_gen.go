@@ -6,11 +6,9 @@ import (
 	"fmt"
 	"io"
 	"strconv"
-)
 
-type Node interface {
-	IsNode()
-}
+	"github.com/autoai-org/aid/ent/generated"
+)
 
 type Connection struct {
 	Count    int       `json:"Count"`
@@ -19,15 +17,25 @@ type Connection struct {
 }
 
 type Edge struct {
-	Node   Node   `json:"node"`
-	Cursor string `json:"cursor"`
+	Node   generated.Noder `json:"node"`
+	Cursor string          `json:"cursor"`
 }
 
-type Image struct {
-	ID int `json:"id"`
+type ImageConnection struct {
+	TotalCount int          `json:"totalCount"`
+	PageInfo   *PageInfo    `json:"pageInfo"`
+	Edges      []*ImageEdge `json:"edges"`
 }
 
-func (Image) IsNode() {}
+type ImageEdge struct {
+	Node   *generated.Image `json:"node"`
+	Cursor string           `json:"cursor"`
+}
+
+type ImageOrder struct {
+	Direction OrderDirection   `json:"direction"`
+	Field     *ImageOrderField `json:"field"`
+}
 
 type PageInfo struct {
 	HasNextPage bool    `json:"hasNextPage"`
@@ -36,43 +44,84 @@ type PageInfo struct {
 	EndCursor   *string `json:"endCursor"`
 }
 
-type Status string
+type ImageOrderField string
 
 const (
-	StatusInProgress Status = "IN_PROGRESS"
-	StatusCompleted  Status = "COMPLETED"
+	ImageOrderFieldCreatedAt ImageOrderField = "CREATED_AT"
+	ImageOrderFieldTitle     ImageOrderField = "TITLE"
 )
 
-var AllStatus = []Status{
-	StatusInProgress,
-	StatusCompleted,
+var AllImageOrderField = []ImageOrderField{
+	ImageOrderFieldCreatedAt,
+	ImageOrderFieldTitle,
 }
 
-func (e Status) IsValid() bool {
+func (e ImageOrderField) IsValid() bool {
 	switch e {
-	case StatusInProgress, StatusCompleted:
+	case ImageOrderFieldCreatedAt, ImageOrderFieldTitle:
 		return true
 	}
 	return false
 }
 
-func (e Status) String() string {
+func (e ImageOrderField) String() string {
 	return string(e)
 }
 
-func (e *Status) UnmarshalGQL(v interface{}) error {
+func (e *ImageOrderField) UnmarshalGQL(v interface{}) error {
 	str, ok := v.(string)
 	if !ok {
 		return fmt.Errorf("enums must be strings")
 	}
 
-	*e = Status(str)
+	*e = ImageOrderField(str)
 	if !e.IsValid() {
-		return fmt.Errorf("%s is not a valid Status", str)
+		return fmt.Errorf("%s is not a valid ImageOrderField", str)
 	}
 	return nil
 }
 
-func (e Status) MarshalGQL(w io.Writer) {
+func (e ImageOrderField) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
+}
+
+type OrderDirection string
+
+const (
+	OrderDirectionAsc  OrderDirection = "ASC"
+	OrderDirectionDesc OrderDirection = "DESC"
+)
+
+var AllOrderDirection = []OrderDirection{
+	OrderDirectionAsc,
+	OrderDirectionDesc,
+}
+
+func (e OrderDirection) IsValid() bool {
+	switch e {
+	case OrderDirectionAsc, OrderDirectionDesc:
+		return true
+	}
+	return false
+}
+
+func (e OrderDirection) String() string {
+	return string(e)
+}
+
+func (e *OrderDirection) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = OrderDirection(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid OrderDirection", str)
+	}
+	return nil
+}
+
+func (e OrderDirection) MarshalGQL(w io.Writer) {
 	fmt.Fprint(w, strconv.Quote(e.String()))
 }

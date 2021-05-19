@@ -15,18 +15,28 @@ default:
 
 BUILDTIME := $(shell date +%FT%T%Z)
 format:
-	gofmt -l -s -w **/**/*.go
+	@gofmt -l -s -w **/**/*.go
 
 generate-ent:
-	cd ent && go generate
+	@echo "Generating entities..."
+	@cd ent && go generate
+
+generate-gql:
+	@echo "Generating graphql bindings..."
+	@go generate
+
+generate-all:
+	@make generate-ent
+	@go generate
 
 describe-ent:
-	cd ent && go run entgo.io/ent/cmd/ent describe ./schema
+	@cd ent && go run entgo.io/ent/cmd/ent describe ./schema
 
 build-cli:
-	cd tui && go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
-	cd tui && mv aid ../
+	@echo "Building CLI utilities..."
+	@cd tui && go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
+	@cd tui && mv aid ../
 
 build-all-cli:
-	make generate-ent
-	make build-cli
+	@make generate-all
+	@make build-cli

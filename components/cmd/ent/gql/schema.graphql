@@ -1,0 +1,69 @@
+interface Node {
+    id: ID!
+}
+
+scalar Time
+
+scalar Cursor
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPrevPage: Boolean!
+    startCursor: Cursor
+    endCursor: Cursor
+}
+
+type Connection {
+    Count: Int!
+    pageInfo: PageInfo!
+    edges: [Edge]
+}
+
+type Edge {
+    node: Node
+    cursor: Cursor!
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}
+
+enum ImageOrderField {
+    CREATED_AT
+    TITLE
+}
+
+type Image implements Node {
+    id: ID!
+    title: String
+    createdAt: Time
+}
+
+input ImageOrder {
+    direction: OrderDirection!
+    field: ImageOrderField
+}
+
+type ImageConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [ImageEdge]
+}
+
+type ImageEdge {
+    node: Image
+    cursor: Cursor!
+}
+
+type Query {
+    node(id: ID!): Node
+    nodes(ids: [ID!]!): [Node]!
+    images(
+        after: Cursor
+        first: Int
+        before: Cursor
+        last: Int
+        oorderBy: ImageOrder
+    ): ImageConnection
+}

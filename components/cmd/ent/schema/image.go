@@ -22,17 +22,25 @@ type Image struct {
 // Fields of Image.
 func (Image) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("uid"),
-		field.String("title"),
+		field.String("uid").Annotations(
+			entgql.OrderField("UID"),
+		),
+		field.String("title").Annotations(
+			entgql.OrderField("TITLE"),
+		),
 		field.Time("created_at").
-			Default(time.Now),
+			Default(time.Now).
+			Immutable().
+			Annotations(
+				entgql.OrderField("CREATED_AT"),
+			),
 	}
 }
 
 // Edges of Image.
 func (Image) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("solver", Solver.Type).Unique(),
+		edge.To("solver", Solver.Type).Unique().Annotations(entgql.Bind()),
 	}
 }
 
@@ -44,11 +52,15 @@ type Container struct {
 // Fields of Container
 func (Container) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("uid"),
-		field.String("port"),
-		field.Bool("running").Default(false),
+		field.String("uid").Annotations(
+			entgql.OrderField("UID"),
+		),
+		field.String("port").Annotations(
+			entgql.OrderField("port"),
+		),
+		field.Bool("running").Default(false).Annotations(entgql.OrderField("running")),
 		field.Time("created_at").Default(time.Now).Annotations(
-			entgql.OrderField("CREATED_AT"),
+			entgql.OrderField("created_at"),
 		),
 	}
 }
@@ -56,6 +68,6 @@ func (Container) Fields() []ent.Field {
 // Edges of Container.
 func (Container) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("image", Image.Type),
+		edge.To("image", Image.Type).Annotations(entgql.Bind()),
 	}
 }
