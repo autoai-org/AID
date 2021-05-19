@@ -53,7 +53,7 @@ func PullPackageSource(remoteURL string) {
 	utilities.ReportError(err, "cannot parse aid.toml file")
 	packageConfig := configuration.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageConfig.Solvers {
-		_, err = database.NewDefaultDB().Solver.Create().SetName(solver.Name).SetRepository(installedRepository).SetClass(solver.Class).SetStatus("Code Installed").Save(context.Background())
+		_, err = database.NewDefaultDB().Solver.Create().SetUID(utilities.GenerateUUIDv4()).SetName(solver.Name).SetRepository(installedRepository).SetClass(solver.Class).SetStatus("Code Installed").Save(context.Background())
 		utilities.ReportError(err, "cannot save new solver to database")
 	}
 	pretrainedTomlString, err := utilities.ReadFileContent(filepath.Join(installedRepository.Localpath, "pretrained.toml"))

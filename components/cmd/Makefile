@@ -27,7 +27,7 @@ generate-gql:
 
 generate-all:
 	@make generate-ent
-	@go generate
+	@make generate-gql
 
 describe-ent:
 	@cd ent && go run entgo.io/ent/cmd/ent describe ./schema

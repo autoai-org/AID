@@ -39,7 +39,7 @@ func (Repository) Fields() []ent.Field {
 		),
 		field.Time("created_at").
 			Default(time.Now).Annotations(
-			entgql.OrderField("CREATEDAT"),
+			entgql.OrderField("CREATED_AT"),
 		),
 	}
 }

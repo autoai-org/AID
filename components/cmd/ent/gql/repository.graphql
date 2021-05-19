@@ -1,0 +1,35 @@
+type Repository implements Node {
+    id: ID!
+    vendor: String,
+    name: String,
+    status: String,
+    remote_url: String,
+    localpath: String,
+    createdAt: Time
+}
+
+enum RepositoryOrderField {
+    UID
+    VENDOR
+    NAME
+    STATUS
+    REMOTE_URL
+    LOCALPATH
+    CREATEDAT
+}
+
+input RepositoryOrder {
+    direction: OrderDirection
+    field: RepositoryOrderField
+}
+
+type RepositoryEdge {
+    node: Repository
+    cursor: Cursor!
+}
+
+type RepositoryConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [RepositoryEdge]
+}
