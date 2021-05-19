@@ -5,22 +5,21 @@ package resolvers
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/autoai-org/aid/ent/generated"
 	generated1 "github.com/autoai-org/aid/internal/daemon/generated"
 )
 
 func (r *edgeResolver) Node(ctx context.Context, obj *generated.Edge) (generated.Noder, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic("no support!")
 }
 
 func (r *edgeResolver) Cursor(ctx context.Context, obj *generated.Edge) (*generated.Cursor, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic("no support!")
 }
 
 func (r *pageInfoResolver) HasPrevPage(ctx context.Context, obj *generated.PageInfo) (bool, error) {
-	panic(fmt.Errorf("not implemented"))
+	panic("no support!")
 }
 
 // Edge returns generated1.EdgeResolver implementation.

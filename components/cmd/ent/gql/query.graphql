@@ -1,18 +1,6 @@
 type Query {
     node(id: ID!): Node
     nodes(ids: [ID!]!): [Node]!
-    images(
-        after: Cursor
-        first: Int
-        before: Cursor
-        last: Int
-        orderBy: ImageOrder
-    ): ImageConnection
-    repositories(
-        after: Cursor
-        first: Int
-        before: Cursor
-        last: Int
-        orderBy: RepositoryOrder
-    ): RepositoryConnection
+    images: [Image]!
+    repositories: [Repository]!
 }

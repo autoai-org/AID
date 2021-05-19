@@ -95,7 +95,29 @@ func listContainers() {
 	}
 	baseList(headers, rows)
 }
-
+func listRepositores() {
+	repositories, err := database.NewDefaultDB().Repository.Query().All(context.Background())
+	utilities.ReportError(err, "cannot fetch content: containers")
+	headers := simpletable.Header{
+		Cells: []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: "#"},
+			{Align: simpletable.AlignCenter, Text: "Unique ID"},
+			{Align: simpletable.AlignCenter, Text: "Vendor"},
+			{Align: simpletable.AlignCenter, Text: "Name"},
+		},
+	}
+	var rows [][]*simpletable.Cell
+	for idx, repo := range repositories {
+		r := []*simpletable.Cell{
+			{Align: simpletable.AlignCenter, Text: fmt.Sprint(idx + 1)},
+			{Text: repo.UID},
+			{Text: repo.Vendor},
+			{Text: fmt.Sprint(repo.Name)},
+		}
+		rows = append(rows, r)
+	}
+	baseList(headers, rows)
+}
 func listEntity(entityName string) {
 	switch entityName {
 	case "packages":
@@ -104,6 +126,8 @@ func listEntity(entityName string) {
 		listImages()
 	case "containers":
 		listContainers()
+	case "repositories":
+		listRepositores()
 	default:
 		utilities.Formatter.Error("Unsupported Entity Name")
 	}

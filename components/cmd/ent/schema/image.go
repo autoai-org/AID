@@ -22,10 +22,10 @@ type Image struct {
 // Fields of Image.
 func (Image) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("uid").Annotations(
+		field.Text("uid").Annotations(
 			entgql.OrderField("UID"),
 		),
-		field.String("title").Annotations(
+		field.Text("title").Annotations(
 			entgql.OrderField("TITLE"),
 		),
 		field.Time("created_at").
@@ -40,7 +40,7 @@ func (Image) Fields() []ent.Field {
 // Edges of Image.
 func (Image) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("solver", Solver.Type).Unique().Annotations(entgql.Bind()),
+		edge.To("solver", Solver.Type).Unique(),
 	}
 }
 

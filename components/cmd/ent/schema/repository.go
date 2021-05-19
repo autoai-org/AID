@@ -17,23 +17,23 @@ type Repository struct {
 // Fields of the user.
 func (Repository) Fields() []ent.Field {
 	return []ent.Field{
-		field.String("uid").Annotations(
+		field.Text("uid").Annotations(
 			entgql.OrderField("UID"),
 		),
-		field.String("vendor").Annotations(
+		field.Text("vendor").Annotations(
 			entgql.OrderField("VENDOR"),
 		),
-		field.String("name").Annotations(
+		field.Text("name").Annotations(
 			entgql.OrderField("NAME"),
 		),
-		field.String("status").Annotations(
+		field.Text("status").Annotations(
 			entgql.OrderField("STATUS"),
 		),
-		field.String("remote_url").
+		field.Text("remote_url").
 			Unique().Annotations(
 			entgql.OrderField("REMOTE_URL"),
 		),
-		field.String("localpath").
+		field.Text("localpath").
 			Unique().Annotations(
 			entgql.OrderField("LOCALPATH"),
 		),

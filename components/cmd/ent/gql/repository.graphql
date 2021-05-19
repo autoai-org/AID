@@ -1,11 +1,12 @@
 type Repository implements Node {
     id: ID!
+    uid: String,
     vendor: String,
     name: String,
     status: String,
     remote_url: String,
     localpath: String,
-    createdAt: Time
+    created_at: Time
 }
 
 enum RepositoryOrderField {
@@ -15,7 +16,7 @@ enum RepositoryOrderField {
     STATUS
     REMOTE_URL
     LOCALPATH
-    CREATEDAT
+    CREATED_AT
 }
 
 input RepositoryOrder {

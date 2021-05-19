@@ -7,32 +7,32 @@ import (
 	"context"
 
 	aid "github.com/autoai-org/aid/ent/generated"
-	generated1 "github.com/autoai-org/aid/internal/daemon/generated"
+	"github.com/autoai-org/aid/internal/daemon/generated"
 )
 
 func (r *queryResolver) Node(ctx context.Context, id int) (aid.Noder, error) {
-	return r.client.Noder(ctx, id)
+	return r.Client.Noder(ctx, id)
 }
 
 func (r *queryResolver) Nodes(ctx context.Context, ids []int) ([]aid.Noder, error) {
-	return r.client.Noders(ctx, ids)
+	return r.Client.Noders(ctx, ids)
 }
 
-func (r *queryResolver) Images(ctx context.Context, after *aid.Cursor, first *int, before *aid.Cursor, last *int, orderBy *aid.ImageOrder) (*aid.ImageConnection, error) {
-	return r.client.Image.Query().
-		Paginate(ctx, after, first, before, last,
-			aid.WithImageOrder(orderBy),
-		)
+func (r *queryResolver) Images(ctx context.Context) ([]*aid.Image, error) {
+	return r.Client.Image.Query().All(ctx)
 }
 
-func (r *queryResolver) Repositories(ctx context.Context, after *aid.Cursor, first *int, before *aid.Cursor, last *int, orderBy *aid.RepositoryOrder) (*aid.RepositoryConnection, error) {
-	return r.client.Repository.Query().Paginate(ctx, after, first, before, last,
-		aid.WithRepositoryOrder(orderBy),
-	)
+func (r *queryResolver) Repositories(ctx context.Context) ([]*aid.Repository, error) {
+	repos, err := r.Client.Repository.Query().All(ctx)
+	if err != nil {
+		println("Error")
+	}
+	println(repos[0].Name)
+	return r.Client.Repository.Query().All(ctx)
 }
 
-// Query returns generated1.QueryResolver implementation.
-func (r *Resolver) Query() generated1.QueryResolver { return &queryResolver{r} }
+// Query returns generated.QueryResolver implementation.
+func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 
 type queryResolver struct{ *Resolver }
 
