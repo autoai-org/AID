@@ -1,15 +1,33 @@
 import React from 'react';
 import MainLayout from './layouts/main'
+import ConnectPage from './pages/Connect'
 import './App.css';
 
-class Application extends React.Component {
-  constructor(props:any) {
-    super(props)
+type AppProps = {
+}
+
+type AppState  = {
+  connected: boolean,
+}
+
+class Application extends React.Component<AppProps, AppState> {
+  constructor(props:AppProps) {
+    super(props);
+    this.state = {
+      connected: false,
+    }
   }
   render() {
-    return (
-      <MainLayout></MainLayout>
-    );
+    if (this.state.connected) {
+      return (
+        <MainLayout></MainLayout>
+      );
+    }
+    else {
+      return (
+        <ConnectPage></ConnectPage>
+      );
+    }
   }
 }
 
