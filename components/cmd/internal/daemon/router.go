@@ -11,8 +11,6 @@ func getRouter() *gin.Engine {
 		gin.SetMode(gin.ReleaseMode)
 	}
 	r := gin.Default()
-	p := NewPrometheus("gin")
-	p.Use(r)
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	r.POST("/query", graphqlHandler())

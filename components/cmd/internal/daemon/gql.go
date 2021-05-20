@@ -9,6 +9,7 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 	generated "github.com/autoai-org/aid/internal/daemon/generated"
 	resolver "github.com/autoai-org/aid/internal/daemon/resolvers"
+	"github.com/autoai-org/aid/internal/database"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +17,8 @@ import (
 func graphqlHandler() gin.HandlerFunc {
 	// NewExecutableSchema and Config are in the generated.go file
 	// Resolver is in the resolver.go file
-	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolver.Resolver{}}))
+	client := database.NewDefaultDB()
+	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &resolver.Resolver{Client: client}}))
 
 	return func(c *gin.Context) {
 		h.ServeHTTP(c.Writer, c.Request)
