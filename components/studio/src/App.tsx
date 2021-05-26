@@ -14,7 +14,7 @@ class Application extends React.Component<AppProps, AppState> {
   constructor(props:AppProps) {
     super(props);
     this.state = {
-      connected: false,
+      connected: true,
     }
   }
   render() {

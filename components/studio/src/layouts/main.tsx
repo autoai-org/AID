@@ -19,13 +19,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Divider from '@material-ui/core/Divider';
+import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
 
-const drawerWidth = 240;
+import Basecard from '../components/Cards/BaseCard'
+
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            flexGrow: 1,
+            display: 'flex',
         },
         appBar: {
             zIndex: theme.zIndex.drawer + 1,
@@ -63,7 +67,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: drawerWidth,
         },
         drawerContainer: {
-            overflow: 'auto',
+            
         },
         drawerClose: {
             transition: theme.transitions.create('width', {
@@ -77,6 +81,9 @@ const useStyles = makeStyles((theme: Theme) =>
             },
         },
         toolbar: {
+            paddingRight: 24, // keep right padding when drawer closed
+          },
+        toolbarIcon: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'flex-end',
@@ -86,9 +93,17 @@ const useStyles = makeStyles((theme: Theme) =>
         hide: {
             display: 'none',
         },
+        appBarSpacer: theme.mixins.toolbar,
         content: {
             flexGrow: 1,
-            padding: theme.spacing(3),
+            height: '100vh',
+            overflow: 'auto',
+        },
+        container: {
+            paddingTop: theme.spacing(4),
+            paddingBottom: theme.spacing(4),
+            display: 'flex',
+            flexWrap: 'wrap',
         },
     }),
 );
@@ -104,7 +119,7 @@ export default function MenuAppBar() {
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
-                <Toolbar>
+                <Toolbar className={classes.toolbar}>
                     <IconButton
                         color="inherit"
                         aria-label="open drawer"
@@ -154,6 +169,27 @@ export default function MenuAppBar() {
                     </List>
                 </div>
             </Drawer>
+            <main className={classes.content}>
+                <div className={classes.appBarSpacer} />
+                <Container maxWidth="lg" className={classes.container}>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Basecard status={2} ></Basecard>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Basecard status={3} ></Basecard>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Basecard status={3} ></Basecard>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Basecard status={3} ></Basecard>
+                    </Grid>
+                    <Grid item xs={12} md={4} lg={3}>
+                        <Basecard status={3} ></Basecard>
+                    </Grid>
+                </Container>
+                
+            </main>
 
         </div>
     );

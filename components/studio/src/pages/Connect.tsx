@@ -33,8 +33,8 @@ const useStyles = ({ palette, spacing }: Theme) => createStyles({
     },
   });
   
-type ConnectState = {
-  isConnected: boolean,
+interface ConnectState {
+  isConnected: boolean;
 }
 class ConnectPage extends React.Component<WithStyles<typeof useStyles>, ConnectState>{
     constructor(props: any) {
