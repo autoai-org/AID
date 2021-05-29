@@ -23,11 +23,6 @@ func (r *queryResolver) Images(ctx context.Context) ([]*aid.Image, error) {
 }
 
 func (r *queryResolver) Repositories(ctx context.Context) ([]*aid.Repository, error) {
-	repos, err := r.Client.Repository.Query().All(ctx)
-	if err != nil {
-		println("Error")
-	}
-	println(repos[0].Name)
 	return r.Client.Repository.Query().All(ctx)
 }
 

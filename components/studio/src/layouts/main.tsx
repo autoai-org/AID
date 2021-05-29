@@ -5,7 +5,7 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { createStyles, makeStyles, Theme, useTheme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -19,10 +19,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
 import Divider from '@material-ui/core/Divider';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-
-import Basecard from '../components/Cards/BaseCard'
+import HomePage from '../pages/Home'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+} from "react-router-dom";
 
 const drawerWidth = 200;
 
@@ -67,7 +69,7 @@ const useStyles = makeStyles((theme: Theme) =>
             width: drawerWidth,
         },
         drawerContainer: {
-            
+
         },
         drawerClose: {
             transition: theme.transitions.create('width', {
@@ -82,7 +84,7 @@ const useStyles = makeStyles((theme: Theme) =>
         },
         toolbar: {
             paddingRight: 24, // keep right padding when drawer closed
-          },
+        },
         toolbarIcon: {
             display: 'flex',
             alignItems: 'center',
@@ -115,7 +117,6 @@ export default function MenuAppBar() {
     const handleDrawerOpen = () => {
         setOpen(!open);
     };
-
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
@@ -149,7 +150,7 @@ export default function MenuAppBar() {
             >
                 <Divider />
                 <div className={classes.drawerContainer}>
-                    <Toolbar/>
+                    <Toolbar />
                     <List>
                         {['Home', 'Starred', '', 'Drafts'].map((text, index) => (
                             <ListItem button key={text}>
@@ -171,24 +172,15 @@ export default function MenuAppBar() {
             </Drawer>
             <main className={classes.content}>
                 <div className={classes.appBarSpacer} />
-                <Container maxWidth="lg" className={classes.container}>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Basecard status={2} ></Basecard>
-                    </Grid>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Basecard status={3} ></Basecard>
-                    </Grid>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Basecard status={3} ></Basecard>
-                    </Grid>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Basecard status={3} ></Basecard>
-                    </Grid>
-                    <Grid item xs={12} md={4} lg={3}>
-                        <Basecard status={3} ></Basecard>
-                    </Grid>
-                </Container>
-                
+                <Router>
+                    <Switch>
+                        <Route path="/">
+                            <HomePage />
+                        </Route>
+                    </Switch>
+                </Router>
+
+
             </main>
 
         </div>
