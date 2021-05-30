@@ -14,8 +14,14 @@ class Application extends React.Component<AppProps, AppState> {
   constructor(props:AppProps) {
     super(props);
     this.state = {
-      connected: true,
+      connected: false,
     }
+    this.handler = this.handler.bind(this)
+  }
+  handler() {
+    this.setState({
+      connected: true
+    })
   }
   render() {
     if (this.state.connected) {
@@ -25,7 +31,7 @@ class Application extends React.Component<AppProps, AppState> {
     }
     else {
       return (
-        <ConnectPage></ConnectPage>
+        <ConnectPage handler={this.handler}></ConnectPage>
       );
     }
   }

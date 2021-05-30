@@ -4,12 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client/react';
-import client from './services/apis'
+import { gqlclient } from './services/apis'
 
 ReactDOM.render(
 
   <React.StrictMode>
-    <ApolloProvider client={client}>
+    <ApolloProvider client={gqlclient}>
       <App />
     </ApolloProvider>
   </React.StrictMode>,

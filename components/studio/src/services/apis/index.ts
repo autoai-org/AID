@@ -1,8 +1,14 @@
 import {ApolloClient, InMemoryCache} from '@apollo/client';
+import axios from 'axios'
 
-let client = new ApolloClient ({
+let gqlclient = new ApolloClient ({
     uri:"http://127.0.0.1:10590/query",
     cache: new InMemoryCache()
 })
 
-export default client;
+let restclient = axios
+
+export { 
+    restclient,
+    gqlclient
+};
