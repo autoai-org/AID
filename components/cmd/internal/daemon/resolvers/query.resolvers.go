@@ -26,6 +26,10 @@ func (r *queryResolver) Repositories(ctx context.Context) ([]*aid.Repository, er
 	return r.Client.Repository.Query().All(ctx)
 }
 
+func (r *queryResolver) Solvers(ctx context.Context) ([]*aid.Solver, error) {
+	return r.Client.Solver.Query().All(ctx)
+}
+
 // Query returns generated.QueryResolver implementation.
 func (r *Resolver) Query() generated.QueryResolver { return &queryResolver{r} }
 

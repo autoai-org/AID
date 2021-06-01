@@ -9,7 +9,8 @@ import LinkIcon from '@material-ui/icons/Link';
 import Typography from '@material-ui/core/Typography';
 import { createStyles, Theme, withStyles, WithStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { connect } from '../services/apis/system.query'
+import { connect } from '../services/apis/system.query';
+
 const useStyles = ({ palette, spacing }: Theme) => createStyles({
   paper: {
     marginTop: spacing(8),
@@ -117,6 +118,8 @@ class ConnectPage extends React.Component<any, ConnectState>{
           {this.state.isConnected &&
             <div>
             <p>Hostname: {this.state.sysInfo.hostname}</p>
+            <p>Memory: {this.state.sysInfo.memory}</p>
+            <p>Architecture: {this.state.sysInfo.architecture}</p>
             <Button
               fullWidth
               variant="contained"
@@ -137,6 +140,5 @@ class ConnectPage extends React.Component<any, ConnectState>{
   }
 
 }
-
 
 export default withStyles(useStyles)(ConnectPage);

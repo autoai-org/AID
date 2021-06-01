@@ -3,4 +3,5 @@ type Query {
     nodes(ids: [ID!]!): [Node]!
     images: [Image]!
     repositories: [Repository]!
+    solvers: [Solver]!
 }

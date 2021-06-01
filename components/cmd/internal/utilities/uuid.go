@@ -14,6 +14,6 @@ import (
 // GenerateUUIDv4 returns uuidv4
 func GenerateUUIDv4() string {
 	id := guuid.New().String()
-	firstBlock := strings.Split(id, "-")
-	return firstBlock[0]
+	firstBlock := strings.Split(id, "-")[0]
+	return firstBlock
 }

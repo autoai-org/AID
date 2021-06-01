@@ -67,8 +67,9 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger) 
 func prepareBuild(solver ent.Solver) (*ent.SystemLog, error) {
 	utilities.Formatter.Info("Building Image for " + solver.Name + " ...")
 	logUID := utilities.GenerateUUIDv4()
-	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID[0:10])
-	log, err := database.NewDefaultDB().SystemLog.Create().SetFilepath(logPath).SetTitle(logUID[0:10]).SetSource("build").Save(context.Background())
+	fmt.Println(logUID)
+	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID[0:8])
+	log, err := database.NewDefaultDB().SystemLog.Create().SetFilepath(logPath).SetUID(logUID[0:8]).SetTitle(logUID[0:8]).SetSource("build").Save(context.Background())
 	utilities.ReportError(err, "Cannot save to database")
 	utilities.Formatter.Info("Building in progress, view full log at " + logPath)
 	if utilities.Verbose {
@@ -93,9 +94,9 @@ func prepareBuild(solver ent.Solver) (*ent.SystemLog, error) {
 	utilities.ReportError(err, "Cannot build image")
 	if err == nil {
 		utilities.Formatter.Info("Finishing building" + solver.Name + " ...")
-		_, err = database.NewDefaultDB().Image.Create().SetUID(inspect.ID[7:17]).SetTitle(title).SetSolver(&solver).Save(context.Background())
+		_, err = database.NewDefaultDB().Image.Create().SetUID(inspect.ID[7:15]).SetTitle(title).SetSolver(&solver).Save(context.Background())
 		utilities.ReportError(err, "cannot save image to db")
-		utilities.Formatter.Info("Please use " + inspect.ID[7:17] + " as the reference of the image.")
+		utilities.Formatter.Info("Please use " + inspect.ID[7:15] + " as the reference of the image.")
 	}
 	return log, err
 }

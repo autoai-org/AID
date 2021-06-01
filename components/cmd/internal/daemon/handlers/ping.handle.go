@@ -34,7 +34,7 @@ func PingHandler(c *gin.Context) {
 	}
 	c.JSON(http.StatusOK, HostInfoResponse{
 		OS:           os.Name + "@" + os.Build,
-		Memory:       fmt.Sprint(memoryInfo.Available) + "/" + fmt.Sprint(memoryInfo.Total),
+		Memory:       fmt.Sprint(memoryInfo.Available/(1024*1024*1024)) + "GB/" + fmt.Sprint(memoryInfo.Total/(1024*1024*1024)) + "GB",
 		CPUTime:      cpuInfo.System.String(),
 		Architecture: architecture,
 		HostName:     hostName,

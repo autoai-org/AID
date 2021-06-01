@@ -30,14 +30,18 @@ const useStyles = (theme: Theme) => createStyles({
 
 
 interface IProps extends WithStyles<typeof useStyles> {
-    status: number;
+    status: string;
+    title: string;
+    package: string;
 }
 
 class Basecard extends React.Component<IProps> {
     constructor(props: any){
         super(props);
         props = {
-            status: 1,
+            status: "",
+            title: "",
+            package: "",
         }
     }
   
@@ -46,13 +50,13 @@ class Basecard extends React.Component<IProps> {
             <Card className={this.props.classes.root}>
             <CardContent>
                 <Typography className={this.props.classes.title} color="textSecondary" gutterBottom>
-                Word of the Day
+                {this.props.package}
                 </Typography>
                 <Typography variant="h5" component="h2">
-                benevolent
+                {this.props.title}
                 </Typography>
                 <Typography className={this.props.classes.pos} color="textSecondary">
-                adjective
+                {this.props.status}
                 </Typography>
                 <Typography variant="body2" component="p">
                 well meaning and kindly.

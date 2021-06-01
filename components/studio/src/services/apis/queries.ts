@@ -17,6 +17,24 @@ repositories {
 }
 `
 
+const ALL_SOLVERS = gql`
+query AllSolvers {
+    solvers {
+        uid,
+      	name,
+      	status,
+      	repository {
+          uid,
+          name,
+        }
+      	image {
+          id,
+        }
+    }
+}
+`
+
 export {
-    ALL_REPOSITORIES
+    ALL_REPOSITORIES,
+    ALL_SOLVERS
 }

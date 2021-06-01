@@ -34,7 +34,7 @@ func (Solver) Edges() []ent.Edge {
 	return []ent.Edge{
 		edge.From("repository", Repository.Type).
 			Ref("solvers").
-			Unique(),
-		edge.From("image", Image.Type).Unique().Ref("solver"),
+			Unique().Annotations(entgql.MapsTo("repository")),
+		edge.From("image", Image.Type).Unique().Ref("solver").Annotations(entgql.MapsTo("image")),
 	}
 }
