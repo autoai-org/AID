@@ -15,6 +15,8 @@ default:
 	@echo -e "\tmake xbuild\t\t Build binary executable for linux/macOS"
 
 BUILDTIME := $(shell date +%FT%T%Z)
+BUILDVERSION := $(shell git rev-parse --short HEAD)
+
 format:
 	@gofmt -l -s -w **/**/*.go
 
@@ -35,7 +37,7 @@ describe-ent:
 
 build-cli:
 	@echo -e ">>> Building CLI utilities..."
-	@cd tui && go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid
+	@cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid
 	@cd tui && mv aid ../
 
 build-all-cli:
@@ -49,6 +51,6 @@ xbuild:
 	@go mod download
 	@go mod verify
 	@make generate-all
-	@cd tui && env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid-macOS
-	@cd tui && env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid-linux
-	@cd tui && env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid-windows
+	@cd tui && env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-macOS
+	@cd tui && env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-linux
+	@cd tui && env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-windows
