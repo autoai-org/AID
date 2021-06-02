@@ -38,7 +38,7 @@ module.exports = {
                     position: 'left',
                 },
                 {
-                    to: 'releases',
+                    to: 'docs/pages/releases',
                     label: 'Releases',
                     position: 'left',
                 },
