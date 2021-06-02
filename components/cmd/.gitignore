@@ -6,3 +6,5 @@ ent/generated
 .vscode/
 generated.go
 models_gen.go
+tui/aid-linux
+tui/aid-macOS

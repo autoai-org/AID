@@ -40,3 +40,13 @@ build-cli:
 build-all-cli:
 	@make generate-all
 	@make build-cli
+
+xbuild:
+	@echo "Starting cross-platform building..."
+	@echo "This command is supposed to be running on CI Server"
+	@echo "Make sure you know what you are doing:)"
+	@go mod download
+	@go mod verify
+	@make generate-all
+	@cd tui && env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid-macOS
+	@cd tui && env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version="dev" -X main.Build=$(BUILDTIME)"  -o aid-linux
