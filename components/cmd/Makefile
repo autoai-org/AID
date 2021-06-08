@@ -57,7 +57,7 @@ ci-build:
 	@go mod download
 	@go mod verify
 	@make generate-all 
-	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid"$(OSFLAG)"
+	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(OSFLAG)"
 
 
 xbuild:
