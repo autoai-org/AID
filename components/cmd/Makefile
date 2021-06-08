@@ -19,10 +19,10 @@ BUILDVERSION := $(shell git rev-parse --short HEAD)
 OSFLAG 				:=
 UNAME_S := $(shell uname -s)
 ifeq ($(UNAME_S),Linux)
-	OSFLAG += -linux
+	OSFLAG +=-linux
 endif
 ifeq ($(UNAME_S),Darwin)
-	OSFLAG += -macOS
+	OSFLAG +=-macOS
 endif
 
 format:
