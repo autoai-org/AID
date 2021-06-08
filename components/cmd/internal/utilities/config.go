@@ -3,163 +3,65 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-// Adapted from https://github.com/joshbetz/config/blob/master/config.go
 package utilities
 
 import (
-	"encoding/json"
-	"errors"
-	"io/ioutil"
-	"log"
+	"bytes"
 	"os"
-	"os/signal"
-	"strconv"
-	"syscall"
+	"path/filepath"
+
+	"github.com/BurntSushi/toml"
+	"github.com/getsentry/sentry-go"
 )
 
-// Config represents a configuration file.
-type Config struct {
-	filename string
-	cache    *map[string]interface{}
+// SystemConfig stores system level configuration, will be stored under $aid/config.toml
+type SystemConfig struct {
+	RemoteReport bool
 }
 
-// New creates a new Config object.
-func New(filename string) *Config {
-	config := Config{filename, nil}
-	config.Reload()
-	go config.watch()
-	return &config
-}
+// DefaultConfig is the instance shared by all modules
+var DefaultConfig *SystemConfig
 
-// Get retreives a Config option into a passed in pointer or returns an error.
-func (config *Config) Get(key string, v interface{}) error {
-	var val interface{}
-
-	env, set := os.LookupEnv(key)
-
-	if set {
-		switch v.(type) {
-		case *float64:
-			val, err := strconv.ParseFloat(env, 64)
-
-			if err != nil {
-				return err
-			}
-
-			*v.(*float64) = val
-			return nil
-		case *int:
-			val, err := strconv.ParseInt(env, 10, 64)
-
-			if err != nil {
-				return err
-			}
-
-			*v.(*int) = int(val)
-			return nil
-		default:
-			val = env
-		}
-	} else if config.cache != nil {
-		val = (*config.cache)[key]
+// NewDefaultConfig returns the config object
+func NewDefaultConfig() *SystemConfig {
+	if DefaultConfig != nil {
+		return DefaultConfig
 	}
-
-	// Cast JSON values
-	switch v.(type) {
-	case *string:
-		if val == nil {
-			val = ""
-		}
-
-		if b, ok := val.(bool); ok {
-			*v.(*string) = strconv.FormatBool(b)
-		} else if f, ok := val.(float64); ok {
-			*v.(*string) = strconv.FormatFloat(f, 'f', -1, 64)
-		} else {
-			*v.(*string) = val.(string)
-		}
-	case *bool:
-		switch val {
-		case nil, 0, false, "", "0", "false":
-			// falsey
-			val = false
-		default:
-			// truthy
-			val = true
-		}
-
-		*v.(*bool) = val.(bool)
-	case *float64:
-		if val == nil {
-			val = float64(0)
-		}
-
-		if s, ok := val.(string); ok {
-			pf, err := strconv.ParseFloat(s, 64)
-			if err != nil {
-				return err
-			}
-
-			*v.(*float64) = pf
-		} else {
-			*v.(*float64) = val.(float64)
-		}
-	case *int:
-		if val == nil {
-			val = float64(0)
-		}
-
-		*v.(*int) = int(val.(float64))
-	default:
-		return errors.New("Type not supported")
-	}
-
-	return nil
+	DefaultConfig := ReadConfig()
+	return DefaultConfig
 }
 
-// Reload clears the config cache.
-func (config *Config) Reload() error {
-	cache, err := primeCacheFromFile(config.filename)
-	config.cache = cache
+// SaveConfig writes config to its required file path
+func SaveConfig(config SystemConfig) {
+	buf := new(bytes.Buffer)
+	if err := toml.NewEncoder(buf).Encode(config); err != nil {
+		ReportError(err, "Cannot encode config object")
+	}
+	configPath := filepath.Join(GetBasePath(), "config.toml")
+	if err := WriteContentToFile(configPath, buf.String()); err != nil {
+		ReportError(err, "Cannot write config object to "+configPath)
+	}
+}
 
+// ReadConfig always read the config file
+// If the file does not exist, it will return a default config
+func ReadConfig() *SystemConfig {
+	configPath := filepath.Join(GetBasePath(), "config.toml")
+	_, err := os.Stat(configPath)
+	if os.IsNotExist(err) {
+		return &SystemConfig{RemoteReport: true}
+	}
+	tomlString, err := ReadFileContent(configPath)
 	if err != nil {
-		return err
+		ReportError(err, "Cannot open file "+configPath)
 	}
-
-	return nil
-}
-
-func (config *Config) watch() {
-	l := log.New(os.Stderr, "", 0)
-
-	// Catch SIGHUP to automatically reload cache
-	sighup := make(chan os.Signal, 1)
-	signal.Notify(sighup, syscall.SIGHUP)
-
-	for {
-		<-sighup
-		l.Println("Caught SIGHUP, reloading config...")
-		config.Reload()
+	if _, err := toml.Decode(tomlString, &DefaultConfig); err != nil {
+		ReportError(err, "Cannot load config file!")
 	}
-}
-
-func primeCacheFromFile(file string) (*map[string]interface{}, error) {
-	// File exists?
-	if _, err := os.Stat(file); os.IsNotExist(err) {
-		return nil, err
+	if DefaultConfig.RemoteReport {
+		sentry.Init(sentry.ClientOptions{
+			Dsn: "https://e6770124b98e44cfafa9d0e67e2d3650@sentry.io/1919735",
+		})
 	}
-
-	// Read file
-	raw, err := ioutil.ReadFile(file)
-	if err != nil {
-		return nil, err
-	}
-
-	// Unmarshal
-	var config map[string]interface{}
-	if err := json.Unmarshal(raw, &config); err != nil {
-		return nil, err
-	}
-
-	return &config, nil
+	return DefaultConfig
 }

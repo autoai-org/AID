@@ -114,10 +114,7 @@ func ReadFileIfModified(filename string, lastMod time.Time) ([]byte, time.Time, 
 // IsFileExists is a shortcut to check if file exists
 func IsFileExists(filename string) bool {
 	_, err := os.Stat(filename)
-	if os.IsNotExist(err) {
-		return false
-	}
-	return true
+	return !os.IsNotExist(err)
 }
 
 // ReadFileContent returns the content of filename

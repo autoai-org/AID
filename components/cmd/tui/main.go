@@ -10,21 +10,26 @@ import (
 	"os"
 	"sort"
 
-	"github.com/autoai-org/aid/internal/runtime/docker"
-	"github.com/autoai-org/aid/internal/system"
 	"github.com/autoai-org/aid/internal/utilities"
+
+	"github.com/autoai-org/aid/internal/system"
+
+	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/urfave/cli/v2"
 )
 
 var (
-	// Version will be automatically inserted when using build.sh
+	// Version will be automatically inserted when building with Makefile
 	Version string
-	// Build will be automatically inserted when using build.sh
+	// Build will be automatically inserted when building with Makefile
 	Build string
 )
 
 func main() {
-	system.InitializeSystem()
+	utilities.InitFolders()
+	system.Init()
+	fmt.Println("Something should happen!")
+	utilities.Formatter.Info("hhhh")
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("Version: %s Build: %s\n", c.App.Version, Build)
 	}
