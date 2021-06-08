@@ -17,11 +17,10 @@ default:
 BUILDTIME := $(shell date +%FT%T%Z)
 BUILDVERSION := $(shell git rev-parse --short HEAD)
 OSFLAG 				:=
-UNAME_S := $(shell uname -s)
-ifeq ($(UNAME_S),Linux)
+ifeq ($(shell uname -s),Linux)
 	OSFLAG +=-linux
 endif
-ifeq ($(UNAME_S),Darwin)
+ifeq ($(shell uname -s),Darwin)
 	OSFLAG +=-macOS
 endif
 
@@ -57,7 +56,7 @@ ci-build:
 	@go mod download
 	@go mod verify
 	@make generate-all 
-	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(OSFLAG)"
+	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(strip $(OSFLAG))"
 
 
 xbuild:
