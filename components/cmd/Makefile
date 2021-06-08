@@ -16,6 +16,14 @@ default:
 
 BUILDTIME := $(shell date +%FT%T%Z)
 BUILDVERSION := $(shell git rev-parse --short HEAD)
+OSFLAG 				:=
+UNAME_S := $(shell uname -s)
+ifeq ($(UNAME_S),Linux)
+	OSFLAG += -linux
+endif
+ifeq ($(UNAME_S),Darwin)
+	OSFLAG += -macOS
+endif
 
 format:
 	@gofmt -l -s -w **/**/*.go
@@ -43,6 +51,13 @@ build-cli:
 build-all-cli:
 	@make generate-all
 	@make build-cli
+
+ci-build:
+	@go mod download
+	@go mod verify
+	@make generate-all 
+	@cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid"$(OSFLAG)"
+
 
 xbuild:
 	@echo -e ">>> Starting cross-platform building..."
