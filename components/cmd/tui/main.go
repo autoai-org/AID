@@ -10,9 +10,8 @@ import (
 	"os"
 	"sort"
 
+	_ "github.com/autoai-org/aid/internal/initialization"
 	"github.com/autoai-org/aid/internal/utilities"
-
-	"github.com/autoai-org/aid/internal/system"
 
 	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/urfave/cli/v2"
@@ -26,10 +25,6 @@ var (
 )
 
 func main() {
-	utilities.InitFolders()
-	system.Init()
-	fmt.Println("Something should happen!")
-	utilities.Formatter.Info("hhhh")
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("Version: %s Build: %s\n", c.App.Version, Build)
 	}

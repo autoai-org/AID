@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"os"
 
+	_ "github.com/autoai-org/aid/internal/initialization"
+
 	"github.com/alexeyco/simpletable"
 	"github.com/autoai-org/aid/internal/database"
 	"github.com/autoai-org/aid/internal/utilities"

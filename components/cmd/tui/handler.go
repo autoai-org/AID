@@ -8,10 +8,13 @@ import (
 	"path/filepath"
 	"strings"
 
+	_ "github.com/autoai-org/aid/internal/initialization"
+
 	markdown "github.com/MichaelMure/go-term-markdown"
 	entRepository "github.com/autoai-org/aid/ent/generated/repository"
 	"github.com/autoai-org/aid/internal/daemon"
 	"github.com/autoai-org/aid/internal/database"
+
 	"github.com/autoai-org/aid/internal/runtime/cargo"
 	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/autoai-org/aid/internal/runtime/requests"
