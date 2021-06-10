@@ -56,7 +56,7 @@ func main() {
 			},
 			{
 				Name:     "build",
-				Usage:    "aid build [vendor]/[package]/[solver]",
+				Usage:    "aid build [vendor]/[package]/[solver] or aid build -p [path]",
 				Category: "packages",
 				Action: func(c *cli.Context) error {
 					buildImage(c.Args().Get(0))

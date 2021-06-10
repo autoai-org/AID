@@ -58,7 +58,6 @@ ci-build:
 	@make generate-all 
 	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(strip $(OSFLAG))"
 
-
 xbuild:
 	@echo -e ">>> Starting cross-platform building..."
 	@echo -e ">>> This command is supposed to be running on CI Server"
