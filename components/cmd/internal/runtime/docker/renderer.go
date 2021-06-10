@@ -7,6 +7,7 @@ package docker
 
 import (
 	"bufio"
+	_ "embed"
 	"os"
 	"path/filepath"
 	"strings"
@@ -17,11 +18,22 @@ import (
 	"github.com/flosch/pongo2"
 )
 
+//go:embed assets/dockerfile.tpl
+var dockerTpl string
+
+//go:embed assets/runner.tpl
+var runnerTpl string
+
 //getTpl returns the template string
 func getTpl(filename string) string {
-	asset := utilities.Asset{Filepath: "internal/assets/" + filename + ".tpl"}
-	asset.Read()
-	return asset.Data
+	if filename == "dockerfile" {
+		return dockerTpl
+	}
+	if filename == "runner" {
+		return runnerTpl
+	}
+	utilities.Formatter.Error("Unspecified template filename " + filename)
+	return ""
 }
 
 // GenerateDockerFiles returns a DockerFile string that could be used to build image.
