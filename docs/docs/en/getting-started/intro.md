@@ -32,7 +32,7 @@ After installing the packages, you need to build it into an image which consists
 
 Now, you can start to create a corresponding container that bind the local IP to this image. Use ```aid create [image ID] [port number]``` to create a container. A container ID will be given if succeeded. You can also check the ID by ```aid list containers``` command.
 
-## Deplo to HTTP Service
+## Deploy to HTTP Service
 
 To start the container, ```aid start [container ID]``` will help to deploy HTTP service to the specified port number. Now you can check if the contianer run on the port successfully by using ```aid list containers```. If running properly, the status of Running will be TRUE.
 
