@@ -2,6 +2,14 @@
 title: Clients
 ---
 
+## cURL
+
+You probably already have curl installed. You can try to interact with AID as below:
+
+```sh
+curl -X POST -F file=@test.jpg http://127.0.0.1:8080/infer
+```
+
 ## Python Client
 
 You can install the Python client by using ```pip install mlpm_client```.
