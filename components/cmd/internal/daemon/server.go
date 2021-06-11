@@ -30,7 +30,7 @@ func beforeResponse() gin.HandlerFunc {
 // RunServer starts the http(s) service
 func RunServer(port string) {
 	if port == "" {
-		port = "10590"
+		port = "17415"
 		utilities.Formatter.Warn("Port not specified, using the default " + port)
 	}
 	utilities.Formatter.Info("Starting the server...")

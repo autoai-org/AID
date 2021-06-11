@@ -15,6 +15,7 @@ func getRouter() *gin.Engine {
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	r.GET("/ping", handlers.PingHandler)
+	r.POST("/preflight", handlers.PreflightHandler)
 	r.POST("/query", graphqlHandler())
 	r.GET("/", playgroundHandler())
 	return r
