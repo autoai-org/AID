@@ -62,6 +62,14 @@ func main() {
 					buildImage(c.Args().Get(0))
 					return nil
 				},
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:    "Path",
+						Aliases: []string{"p"},
+						Value:   "Path to the build file, default null",
+						Usage:   "Path to the solver folder",
+					},
+				},
 			},
 			{
 				Name:     "create",
