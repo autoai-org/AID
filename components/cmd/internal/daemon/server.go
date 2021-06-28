@@ -8,7 +8,10 @@ import (
 
 	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/gin-gonic/gin"
+	"go.opentelemetry.io/otel"
 )
+
+var tracer = otel.Tracer("gin-server")
 
 // beforeResponse set global header to enable cors and set response header
 func beforeResponse() gin.HandlerFunc {

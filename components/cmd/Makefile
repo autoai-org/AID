@@ -52,7 +52,7 @@ build-all-cli:
 	@make build-cli
 
 ci-build:
-	@ echo "Building on "$(OSFLAG)
+	@echo "Building on "$(OSFLAG)
 	@go mod download
 	@go mod verify
 	@make generate-all 
