@@ -40,3 +40,7 @@ func PingHandler(c *gin.Context) {
 		HostName:     hostName,
 	})
 }
+
+func HelloHandler(c *gin.Context) {
+	c.String(http.StatusOK, "It works!")
+}

@@ -42,6 +42,10 @@ func buildImage(buildContext string) {
 	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2])
 }
 
+func buildImageByPath(path string, solver string, autoRemove bool) {
+	workflow.BuildDockerImageWithPath(path, solver, autoRemove)
+}
+
 func createContainer(imageID string, hostPort string) {
 	if hostPort == "" {
 		utilities.Formatter.Error("Hostport is not given... Aborted")

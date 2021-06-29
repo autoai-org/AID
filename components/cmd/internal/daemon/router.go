@@ -27,6 +27,7 @@ func getRouter() *gin.Engine {
 	r.GET("/ping", handlers.PingHandler)
 	r.POST("/preflight", handlers.PreflightHandler)
 	r.POST("/query", graphqlHandler())
-	r.GET("/", playgroundHandler())
+	r.GET("/playground", playgroundHandler())
+	r.GET("/", handlers.HelloHandler)
 	return r
 }

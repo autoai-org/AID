@@ -58,17 +58,34 @@ func main() {
 				Name:     "build",
 				Usage:    "aid build [vendor]/[package]/[solver] or aid build -p [path]",
 				Category: "packages",
-				Action: func(c *cli.Context) error {
-					buildImage(c.Args().Get(0))
-					return nil
-				},
+
 				Flags: []cli.Flag{
 					&cli.StringFlag{
-						Name:    "Path",
+						Name:    "path",
 						Aliases: []string{"p"},
-						Value:   "Path to the build file, default null",
+						Value:   "null",
 						Usage:   "Path to the solver folder",
 					},
+					&cli.StringFlag{
+						Name:    "solver",
+						Aliases: []string{"sol"},
+						Value:   "all",
+						Usage:   "Name of the target solver",
+					},
+					&cli.BoolFlag{
+						Name:  "remove",
+						Value: false,
+						Usage: "Remove the images after building",
+					},
+				},
+				Action: func(c *cli.Context) error {
+					if c.String("path") == "null" {
+						buildImage(c.Args().Get(0))
+					} else {
+						buildImageByPath(c.String("path"), c.String("solver"), c.Bool("remove"))
+					}
+					//
+					return nil
 				},
 			},
 			{

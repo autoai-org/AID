@@ -134,3 +134,74 @@ func RemoveImage(imageUID string) error {
 	utilities.Formatter.Info("Image " + imageEnt.Title + "(" + imageUID + ") removed from database.")
 	return err
 }
+
+// BuildWithPath builds the image with a path parameter.
+// It should be used for testing, especially for ci-purpose.
+// At this time, no database entries have been added.
+// Hence the log will be printed to the console, rather than a file.
+// If the solver in parameter is "all", the all solvers will be built.
+func BuildWithPath(path string, solver string, removeAfterBuild bool) error {
+	// first determine the docker file
+	utilities.Formatter.Info("Building " + path + " in progess...")
+	utilities.Formatter.Warn("Building with path mode, no log file will be created.")
+	tomlFilePath := filepath.Join(path, "aid.toml")
+	aidToml, err := utilities.ReadFileContent(tomlFilePath)
+	if err != nil {
+		utilities.Formatter.Error("Cannot read the toml file " + tomlFilePath + ": " + err.Error())
+
+	}
+	solvers := configuration.LoadSolversFromConfig(aidToml)
+	if solver == "all" {
+		utilities.Formatter.Warn("No solver name specified, will build all solvers under this folder")
+	}
+	var existingSolver []string
+	for _, sol := range solvers.Solvers {
+		existingSolver = append(existingSolver, sol.Name)
+	}
+	if solver != "all" {
+		if !utilities.StringInArray(solver, existingSolver) {
+			utilities.Formatter.Error("Cannot find the solver " + solver)
+			os.Exit(4)
+		}
+		dockerFilepath := filepath.Join(path, "docker_"+solver)
+		buildWithDockerfile(dockerFilepath, solver)
+	} else {
+		for _, sol := range existingSolver {
+			dockerFilepath := filepath.Join(path, "docker_"+sol)
+			buildWithDockerfile(dockerFilepath, sol)
+		}
+	}
+	return err
+}
+
+func buildWithDockerfile(dockerfile string, solName string) {
+	utilities.Formatter.Info(dockerfile)
+	utilities.Formatter.Info(solName)
+	if !utilities.IsFileExists(dockerfile) {
+		utilities.Formatter.Warn("Dockerfile not found, AID will generate a default version.")
+		GenerateDockerFiles(filepath.Dir(dockerfile))
+		tomlFilePath := filepath.Join(filepath.Dir(dockerfile), "aid.toml")
+		aidToml, err := utilities.ReadFileContent(tomlFilePath)
+		utilities.ReportError(err, "Cannot open file "+tomlFilePath)
+		solvers := configuration.LoadSolversFromConfig(aidToml)
+		RenderRunnerTpl(filepath.Dir(dockerfile), solvers.Solvers)
+	}
+	imageName := "aid-standalone-" + solName
+	buildResponse, err := NewDockerRuntime().ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
+		Tags:       []string{strings.ToLower(imageName)},
+		Dockerfile: filepath.Base(dockerfile),
+		Remove:     true,
+	})
+	reader := buildResponse.Body
+	defer reader.Close()
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		var buildLog BuildLog
+		json.Unmarshal(scanner.Bytes(), &buildLog)
+		fmt.Printf(buildLog.Stream)
+	}
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+		os.Exit(5)
+	}
+}
