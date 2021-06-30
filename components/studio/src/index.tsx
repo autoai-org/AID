@@ -4,14 +4,17 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { ApolloProvider } from '@apollo/client/react';
-import { gqlclient } from './services/apis'
-
+import { gqlclient } from './services/apis';
+import { store } from './services/store/store';
+import { Provider } from 'react-redux';
 ReactDOM.render(
 
   <React.StrictMode>
-    <ApolloProvider client={gqlclient}>
-      <App />
-    </ApolloProvider>
+    <Provider store={store}>
+      <ApolloProvider client={gqlclient}>
+        <App />
+      </ApolloProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

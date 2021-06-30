@@ -5,10 +5,10 @@
 
 import {restclient} from './index'
 
-function connect(url:string) {
+function connectServer(url:string) {
     return restclient.get(url)
 }
 
 export {
-    connect
+    connectServer
 }

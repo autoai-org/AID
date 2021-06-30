@@ -43,8 +43,8 @@
     },
     "window": {
       "title": "AID Studio",
-      "width": 800,
-      "height": 600,
+      "width": 1440,
+      "height": 900,
       "resizable": true,
       "fullscreen": false
     },

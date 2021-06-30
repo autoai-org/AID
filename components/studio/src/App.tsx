@@ -1,6 +1,5 @@
 import React from 'react';
-import MainLayout from './layouts/main'
-import ConnectPage from './pages/Connect'
+import Landing from './pages/Landing'
 import './App.css';
 
 type AppProps = {
@@ -24,17 +23,10 @@ class Application extends React.Component<AppProps, AppState> {
     })
   }
   render() {
-    if (this.state.connected) {
       return (
-        <MainLayout></MainLayout>
+        <Landing></Landing>
       );
     }
-    else {
-      return (
-        <ConnectPage handler={this.handler}></ConnectPage>
-      );
-    }
-  }
 }
 
 export default Application;
