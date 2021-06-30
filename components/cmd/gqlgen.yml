@@ -1,0 +1,34 @@
+schema:
+  - ent/gql/schema.graphql
+  - ent/gql/image.graphql
+  - ent/gql/repository.graphql
+  - ent/gql/solver.graphql
+  - ent/gql/query.graphql
+
+model:
+  filename: internal/daemon/generated/models_gen.go
+  package: generated
+
+exec:
+  filename: internal/daemon/generated/generated.go
+  package: generated
+
+resolver:
+  layout: follow-schema
+  dir: internal/daemon/resolvers
+  filename_template: "{name}.resolvers.go"
+
+autobind:
+  - github.com/autoai-org/aid/ent/generated
+
+models:
+  # Defines the ID field as Go 'int'.
+  ID:
+    model:
+      - github.com/99designs/gqlgen/graphql.IntID
+  String:
+    model:
+      - github.com/99designs/gqlgen/graphql.String
+  Node:
+    model:
+      - github.com/autoai-org/aid/ent/generated.Noder

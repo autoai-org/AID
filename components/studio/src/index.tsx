@@ -3,15 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
+import { ApolloProvider } from '@apollo/client/react';
+import { gqlclient } from './services/apis';
+import { store, persistor } from './services/store/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+import Loading from './components/Loading'
 ReactDOM.render(
+
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+    <PersistGate loading={Loading} persistor={persistor}>
+      <ApolloProvider client={gqlclient}>
+        <App />
+      </ApolloProvider>
+      </PersistGate>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+reportWebVitals(console.log);

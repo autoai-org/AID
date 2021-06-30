@@ -5,6 +5,7 @@ import (
 	"path/filepath"
 
 	ent "github.com/autoai-org/aid/ent/generated"
+	"github.com/autoai-org/aid/ent/generated/migrate"
 	"github.com/autoai-org/aid/internal/utilities"
 
 	// import sqlite3
@@ -22,7 +23,11 @@ func NewDefaultDB() *ent.Client {
 	client, err := ent.Open("sqlite3", filepath.Join(utilities.GetBasePath(), "aid.db?_fk=1"))
 	DefaultDB = client
 	utilities.ReportError(err, "cannot open database")
-	if err := client.Schema.Create(context.Background()); err != nil {
+	if err := client.Schema.Create(context.Background(),
+		migrate.WithGlobalUniqueID(true),
+		migrate.WithDropColumn(true),
+		migrate.WithDropIndex(true),
+	); err != nil {
 		utilities.ReportError(err, "Failed updating database schema")
 	}
 	return DefaultDB

@@ -4,7 +4,7 @@
 # https://opensource.org/licenses/MIT
 # coding:utf-8
 import socket
-
+from mlpm.response import json_resp
 
 def str2bool(v):
     return str(v).lower() in ("true", "false", "yes", "t", "1")
@@ -28,3 +28,7 @@ def get_available_port(start=8080):
         else:
             break
     return port
+
+def process_unready_requests(solver):
+    if not solver.is_ready:
+        return json_resp({"error": "Solver is not ready yet, please wait patiently...", "code": "500"}, status=500)

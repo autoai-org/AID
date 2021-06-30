@@ -10,21 +10,21 @@ import (
 	"os"
 	"sort"
 
-	"github.com/autoai-org/aid/internal/runtime/docker"
-	"github.com/autoai-org/aid/internal/system"
+	_ "github.com/autoai-org/aid/internal/initialization"
 	"github.com/autoai-org/aid/internal/utilities"
+
+	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/urfave/cli/v2"
 )
 
 var (
-	// Version will be automatically inserted when using build.sh
+	// Version will be automatically inserted when building with Makefile
 	Version string
-	// Build will be automatically inserted when using build.sh
+	// Build will be automatically inserted when building with Makefile
 	Build string
 )
 
 func main() {
-	system.InitializeSystem()
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("Version: %s Build: %s\n", c.App.Version, Build)
 	}
@@ -56,10 +56,35 @@ func main() {
 			},
 			{
 				Name:     "build",
-				Usage:    "aid build [vendor]/[package]/[solver]",
+				Usage:    "aid build [vendor]/[package]/[solver] or aid build -p [path]",
 				Category: "packages",
+
+				Flags: []cli.Flag{
+					&cli.StringFlag{
+						Name:    "path",
+						Aliases: []string{"p"},
+						Value:   "null",
+						Usage:   "Path to the solver folder",
+					},
+					&cli.StringFlag{
+						Name:    "solver",
+						Aliases: []string{"sol"},
+						Value:   "all",
+						Usage:   "Name of the target solver",
+					},
+					&cli.BoolFlag{
+						Name:  "remove",
+						Value: false,
+						Usage: "Remove the images after building",
+					},
+				},
 				Action: func(c *cli.Context) error {
-					buildImage(c.Args().Get(0))
+					if c.String("path") == "null" {
+						buildImage(c.Args().Get(0))
+					} else {
+						buildImageByPath(c.String("path"), c.String("solver"), c.Bool("remove"))
+					}
+					//
 					return nil
 				},
 			},

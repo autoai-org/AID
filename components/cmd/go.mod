@@ -1,8 +1,11 @@
 module github.com/autoai-org/aid
 
-go 1.15
+go 1.16
 
 require (
+	entgo.io/contrib v0.0.0-20210514144311-481fd0d9bc11
+	entgo.io/ent v0.8.0
+	github.com/99designs/gqlgen v0.13.0
 	github.com/BurntSushi/toml v0.3.1
 	github.com/MichaelMure/go-term-markdown v0.1.3
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
@@ -13,15 +16,15 @@ require (
 	github.com/docker/docker v20.10.6+incompatible
 	github.com/docker/go-connections v0.4.0
 	github.com/dustin/go-humanize v1.0.0
-	github.com/facebook/ent v0.5.0
+	github.com/elastic/go-sysinfo v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.8.0
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-gonic/gin v1.7.2
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect
-	github.com/google/uuid v1.1.2
+	github.com/google/uuid v1.2.0
 	github.com/gookit/color v1.3.2
-	github.com/jochasinga/requests v0.0.0-20160909035013-af9bbdb4ab2c // indirect
+	github.com/hashicorp/go-multierror v1.1.1
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/mattn/go-sqlite3 v1.14.7
 	github.com/moby/sys/mount v0.2.0 // indirect
@@ -37,8 +40,14 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/sosedoff/gitkit v0.2.1-0.20201122214739-7ce080db3c4e
 	github.com/urfave/cli/v2 v2.3.0
-	google.golang.org/genproto v0.0.0-20191206224255-0243a4be9c8f // indirect
-	google.golang.org/grpc v1.27.0 // indirect
+	github.com/vektah/gqlparser/v2 v2.1.0
+	github.com/vmihailenco/msgpack/v5 v5.0.0-beta.9
+	go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin v0.21.0
+	go.opentelemetry.io/otel v1.0.0-RC1
+	go.opentelemetry.io/otel/exporters/stdout/stdouttrace v1.0.0-RC1
+	go.opentelemetry.io/otel/sdk v1.0.0-RC1
+	go.opentelemetry.io/otel/trace v1.0.0-RC1
+	golang.org/x/sync v0.0.0-20201020160332-67f06af15bc9
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0
 	gotest.tools/v3 v3.0.3 // indirect
 )

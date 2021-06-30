@@ -12,5 +12,6 @@ Each solver has several different status.
 * (Partial) Installed. The docker image of the solver is installed, but AID cannot find its corresponding code.
 
 - ***Package***. The package is a set of solvers. This is because several solvers can share something in common when performing machine learning tasks. For example, when performing face recognition, in some cases we will have a face embedding model. With the model, we can calculate the distances between two faces, but also the distance between the new face to the faces space. The latter can be used for face detection tasks. Conceptually, the package is such a set of solvers that have similar tasks, like face recognition and face detection, and in our implementation, they will share same environment variables, enabled extensions, dependencies, etc. The required file for a package can be seen as below:
+
 ![0bf58c41e81106ac7387f6bde1af0662767378ab.PNG](https://i.loli.net/2020/05/06/7T3OuXoeCxS5Hsp.png)
 

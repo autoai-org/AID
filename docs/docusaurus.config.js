@@ -38,7 +38,7 @@ module.exports = {
                     position: 'left',
                 },
                 {
-                    to: 'releases',
+                    to: 'docs/pages/releases',
                     label: 'Releases',
                     position: 'left',
                 },
@@ -74,10 +74,6 @@ module.exports = {
                             label: t.navbar.gettingStarted,
                             to: 'docs/getting-started/intro',
                         },
-                        {
-                            to: 'release-notes',
-                            label: 'Release notes',
-                        },
                     ],
                 },
                 {
@@ -88,8 +84,8 @@ module.exports = {
                             to: 'mailto:enquiry@autoai.org',
                         },
                         {
-                            label: 'Google Group',
-                            to: 'https://groups.google.com/forum/#!newtopic/autoai',
+                            label: 'Partners',
+                            to: '/partners',
                         },
                         {
                             label: 'Discord',

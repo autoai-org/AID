@@ -9,11 +9,20 @@
             ]
         },
         {
-            "label": "Usage",
+            "label": "Concepts",
             "type":"category",
             "items": [
                 "usage/concepts/package",
                 "usage/concepts/event"
+            ]
+        },
+        {
+            "label": "Manual",
+            "type":"category",
+            "items": [
+                "usage/manual/install_package",
+                "usage/manual/upload_package",
+                "usage/manual/clients"
             ]
         },
         {

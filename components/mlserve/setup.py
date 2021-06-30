@@ -4,7 +4,7 @@ long_description = "For full description, please go to [Documentation](https://a
 
 setuptools.setup(
     name="mlpm",
-    version="1.0.0.8",
+    version="1.0.0.9",
     author="Xiaozhe Yao",
     author_email="xiaozhe.yaoi@gmail.com",
     description="Machine Learning Package Manager",

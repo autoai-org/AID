@@ -15,7 +15,7 @@ import (
 type ColorPrinter struct {
 }
 
-// Formatter is the extern object that we should use for color printing
+// Formatter is the object that we should use for color printing
 var Formatter *ColorPrinter
 
 // Info is the shortcut for basePrint(info,...)

@@ -1,0 +1,9 @@
+{
+  "name": "mlpm_client",
+  "version": "1.0.0",
+  "description": "MLPM Client for Node.JS",
+  "main": "index.js",
+  "author": "Xiaozhe Yao",
+  "license": "MIT",
+  "private": false
+}

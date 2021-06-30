@@ -1,0 +1,34 @@
+type Solver implements Node {
+    id: ID!
+    uid: String,
+    name: String,
+    class: String,
+    status: String,
+    repository: Repository,
+    image: Image
+}
+
+enum SolverOrderField {
+    UID
+    NAME
+    CLASS
+    STATUS
+}
+
+input SolverOrder {
+    direction: OrderDirection
+    field: SolverOrderField
+}
+
+type SolverEdge {
+    node: Solver
+    cursor: Cursor!
+    repository: Repository!
+    image: Image
+}
+
+type SolverConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [SolverEdge]
+}

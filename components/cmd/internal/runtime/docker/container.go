@@ -46,10 +46,10 @@ func Create(imageUID string, hostPort string) (container.ContainerCreateCreatedB
 		utilities.ReportError(err, "Cannot create container from image "+image.UID)
 		return resp, err
 	}
-	_, err = database.NewDefaultDB().Container.Create().SetUID(resp.ID[0:10]).SetPort(hostPort).AddImage(image).Save(context.Background())
+	_, err = database.NewDefaultDB().Container.Create().SetUID(resp.ID[0:8]).SetPort(hostPort).AddImage(image).Save(context.Background())
 	utilities.ReportError(err, "Cannot save "+resp.ID)
 	utilities.Formatter.Info("Successfully created container for " + image.Title)
-	utilities.Formatter.Info("The reference for the created container is " + resp.ID[0:10])
+	utilities.Formatter.Info("The reference for the created container is " + resp.ID[0:8])
 	return resp, err
 }
 

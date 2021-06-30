@@ -4,4 +4,8 @@ aid
 tui/blob.go
 ent/generated
 .vscode/
-internal/runtime/docker/blob.go
+generated.go
+models_gen.go
+tui/aid-linux
+tui/aid-macOS
+tui/aid-windows

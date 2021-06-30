@@ -1,0 +1,30 @@
+interface Node {
+    id: ID!
+}
+
+scalar Time
+
+scalar Cursor
+
+type PageInfo {
+    hasNextPage: Boolean!
+    hasPrevPage: Boolean!
+    startCursor: Cursor
+    endCursor: Cursor
+}
+
+type Connection {
+    Count: Int!
+    pageInfo: PageInfo!
+    edges: [Edge]
+}
+
+type Edge {
+    node: Node
+    cursor: Cursor!
+}
+
+enum OrderDirection {
+  ASC
+  DESC
+}

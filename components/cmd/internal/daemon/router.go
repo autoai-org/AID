@@ -1,22 +1,33 @@
 package daemon
 
 import (
+	"context"
+	"log"
 	"os"
 
-	"github.com/autoai-org/aid/internal/runtime/git"
+	"github.com/autoai-org/aid/internal/daemon/handlers"
 	"github.com/gin-gonic/gin"
+	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 )
 
 func getRouter() *gin.Engine {
 	if os.Getenv("AID_PROD") == "true" {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	gitService := git.GetService()
+	tp := initTracer()
+	defer func() {
+		if err := tp.Shutdown(context.Background()); err != nil {
+			log.Printf("Error shutting down tracer provider: %v", err)
+		}
+	}()
 	r := gin.Default()
-	p := NewPrometheus("gin")
-	p.Use(r)
-	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
-	r.Any("/git", gin.WrapH(gitService))
+	r.Use(otelgin.Middleware("aid-server"))
+	r.Use(beforeResponse())
+	r.GET("/ping", handlers.PingHandler)
+	r.POST("/preflight", handlers.PreflightHandler)
+	r.POST("/query", graphqlHandler())
+	r.GET("/playground", playgroundHandler())
+	r.GET("/", handlers.HelloHandler)
 	return r
 }

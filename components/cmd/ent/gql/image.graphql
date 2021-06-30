@@ -1,0 +1,26 @@
+type Image implements Node {
+    id: ID!
+    title: String
+    createdAt: Time
+}
+
+enum ImageOrderField {
+    CREATED_AT
+    TITLE
+}
+
+input ImageOrder {
+    direction: OrderDirection!
+    field: ImageOrderField
+}
+
+type ImageEdge {
+    node: Image
+    cursor: Cursor!
+}
+
+type ImageConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [ImageEdge]
+}

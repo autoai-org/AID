@@ -25,11 +25,12 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
     if 'file' in req_files:
         uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
+        print(filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
         file_abs_path = os.path.join(upload_folder, filename)
-        uploaded_file.save(file_abs_path)
+        await uploaded_file.save(file_abs_path)
         data['input_file_path'] = file_abs_path
     try:
         if request_type == "infer":

@@ -76,6 +76,14 @@ function Partners() {
       link: 'https://www.cyberport.hk/en',
       tags: ['Incubator'],
       image: imgPath + 'cyberport.jpg',
+      description:""
+    },
+    {
+      name: <>ETH Library Lab</>,
+      link: 'https://www.librarylab.ethz.ch/',
+      tags: ['Higher Education Institute'],
+      image: imgPath + 'eth-library-lab.svg',
+      description:""
     },
   ]
 
