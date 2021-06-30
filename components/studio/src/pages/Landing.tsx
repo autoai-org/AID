@@ -13,7 +13,6 @@ import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
 
 import Connection from '../components/Connection'
 import { useAppSelector, useAppDispatch } from '../services/store/hooks'
-import { setServer } from '../services/store/connectivity/server'
 
 
 const navigation = [

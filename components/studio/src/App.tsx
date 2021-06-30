@@ -1,5 +1,5 @@
 import React from 'react';
-import Landing from './pages/Landing'
+import MainLayout from './layouts/MainLayout'
 import './App.css';
 
 type AppProps = {
@@ -24,7 +24,7 @@ class Application extends React.Component<AppProps, AppState> {
   }
   render() {
       return (
-        <Landing></Landing>
+        <MainLayout/>
       );
     }
 }

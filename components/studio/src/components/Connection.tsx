@@ -45,12 +45,12 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ url: e.target.value })
     }
     handleCompleteConnection = () => {
-        this.setState({open: false})
+        this.setState({ open: false })
         this.props.handler(setServer(this.state.url))
     }
     handleCancel = () => {
         if (this.state.isConnected) {
-            this.setState({isConnected: false})
+            this.setState({ isConnected: false })
         }
     }
     render() {
@@ -113,46 +113,49 @@ class ConnectPage extends React.Component<any, ConnectState>{
                                             </Dialog.Title>
                                         }
                                         <div className="mt-2">
-                                        {!this.state.isConnected &&
-                                            <p className="text-sm text-gray-500">
-                                                You must connect to a server to proceed.
-                                            </p>
-                                        }
-                                        {this.state.isConnected &&
-                                            <p className="text-sm text-gray-500">
-                                                Hostname: {this.state.sysInfo.hostname} <br/>
-                                                Architecture: {this.state.sysInfo.architecture} <br/>
-                                                Available Memory: {this.state.sysInfo.memory} <br/>
-                                                OS: {this.state.sysInfo.os}
-                                            </p>
-                                        }
+                                            {!this.state.isConnected &&
+                                                <p className="text-sm text-gray-500">
+                                                    You must connect to a server to proceed.
+                                                </p>
+                                            }
+                                            {this.state.isConnected &&
+                                                <p className="text-sm text-gray-500">
+                                                    Hostname: {this.state.sysInfo.hostname} <br />
+                                                    Architecture: {this.state.sysInfo.architecture} <br />
+                                                    Available Memory: {this.state.sysInfo.memory} <br />
+                                                    OS: {this.state.sysInfo.os}
+                                                </p>
+                                            }
                                         </div>
                                     </div>
                                 </div>
-                                <div>
-                                    <label htmlFor="email" className="block text-sm font-medium text-gray-700">
-                                        Server URL
-                                    </label>
-                                    <div className="mt-1 relative rounded-md shadow-sm">
-                                        <input
-                                            ref={this.initFocus}
-                                            type="text"
-                                            name="email"
-                                            id="email"
-                                            value={this.state.url}
-                                            className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                                            placeholder="http://127.0.0.1:17415"
-                                            onChange={this.handleUrlChange}
-                                        />
-                                        <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                            <ServerIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
-                                        </div>
-                                    </div>
-                                    <p className="mt-2 text-sm text-gray-500" id="email-description">
-                                        Your server address will never be uploaded nor analysed by AID.
-                                    </p>
-                                </div>
+                                {!this.state.isConnected &&
+                                    <div>
 
+                                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                                            Server URL
+                                        </label>
+                                        <div className="mt-1 relative rounded-md shadow-sm">
+                                            <input
+                                                ref={this.initFocus}
+                                                type="text"
+                                                name="email"
+                                                id="email"
+                                                value={this.state.url}
+                                                className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                                placeholder="http://127.0.0.1:17415"
+                                                onChange={this.handleUrlChange}
+                                            />
+                                            <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
+                                                <ServerIcon className="h-5 w-5 text-green-500" aria-hidden="true" />
+                                            </div>
+                                        </div>
+                                        <p className="mt-2 text-sm text-gray-500" id="email-description">
+                                            Your server address will never be uploaded nor analysed by AID.
+                                        </p>
+
+                                    </div>
+                                }
                                 {!this.state.isConnected &&
                                     <div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
                                         <button
