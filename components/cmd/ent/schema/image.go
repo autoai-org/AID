@@ -40,34 +40,7 @@ func (Image) Fields() []ent.Field {
 // Edges of Image.
 func (Image) Edges() []ent.Edge {
 	return []ent.Edge{
-		edge.To("solver", Solver.Type).Unique(),
-	}
-}
-
-// Container schema
-type Container struct {
-	ent.Schema
-}
-
-// Fields of Container
-func (Container) Fields() []ent.Field {
-	return []ent.Field{
-		field.String("uid").Annotations(
-			entgql.OrderField("UID"),
-		),
-		field.String("port").Annotations(
-			entgql.OrderField("port"),
-		),
-		field.Bool("running").Default(false).Annotations(entgql.OrderField("running")),
-		field.Time("created_at").Default(time.Now).Annotations(
-			entgql.OrderField("created_at"),
-		),
-	}
-}
-
-// Edges of Container.
-func (Container) Edges() []ent.Edge {
-	return []ent.Edge{
-		edge.To("image", Image.Type).Annotations(entgql.Bind()),
+		edge.To("solver", Solver.Type).Unique().Annotations(entgql.MapsTo("solver")),
+		edge.To("container", Container.Type).Unique().Annotations(entgql.MapsTo("container")),
 	}
 }

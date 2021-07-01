@@ -13,7 +13,7 @@ ReactDOM.render(
 
   <React.StrictMode>
     <Provider store={store}>
-    <PersistGate loading={Loading} persistor={persistor}>
+    <PersistGate loading={<Loading/>} persistor={persistor}>
       <ApolloProvider client={gqlclient}>
         <App />
       </ApolloProvider>

@@ -22,6 +22,10 @@ func (r *queryResolver) Images(ctx context.Context) ([]*aid.Image, error) {
 	return r.Client.Image.Query().All(ctx)
 }
 
+func (r *queryResolver) Containers(ctx context.Context) ([]*aid.Container, error) {
+	return r.Client.Container.Query().All(ctx)
+}
+
 func (r *queryResolver) Repositories(ctx context.Context) ([]*aid.Repository, error) {
 	return r.Client.Repository.Query().All(ctx)
 }

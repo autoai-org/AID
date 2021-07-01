@@ -1,6 +1,7 @@
 schema:
   - ent/gql/schema.graphql
   - ent/gql/image.graphql
+  - ent/gql/container.graphql
   - ent/gql/repository.graphql
   - ent/gql/solver.graphql
   - ent/gql/query.graphql

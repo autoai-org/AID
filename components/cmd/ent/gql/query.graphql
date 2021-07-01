@@ -2,6 +2,7 @@ type Query {
     node(id: ID!): Node
     nodes(ids: [ID!]!): [Node]!
     images: [Image]!
+    containers: [Container]!
     repositories: [Repository]!
     solvers: [Solver]!
 }

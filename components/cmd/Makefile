@@ -60,7 +60,7 @@ ci-build:
 
 xbuild:
 	@echo -e ">>> Starting cross-platform building..."
-	@echo -e ">>> This command is supposed to be running on CI Server"
+	@echo -e ">>> This command is supposed to be running on CI Server with cross-platform toolkits"
 	@echo -e ">>> Make sure you know what you are doing:)"
 	@go mod download
 	@go mod verify
