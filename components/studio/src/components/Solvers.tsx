@@ -1,4 +1,4 @@
-import {  Menu } from '@headlessui/react'
+import { Menu } from '@headlessui/react'
 import { useQuery } from '@apollo/client'
 import { ALL_SOLVERS } from '../services/apis/queries'
 import {
@@ -7,8 +7,8 @@ import {
     SortAscendingIcon,
     StarIcon,
 } from '@heroicons/react/solid'
-import React from 'react';
 import Moment from 'react-moment';
+import { Link } from 'react-router-dom'
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -65,7 +65,7 @@ export default function SolverColumn() {
                 </div>
             </div>
             <ul className="relative z-0 divide-y divide-gray-200 border-b border-gray-200">
-                {solvers.map((solver:any) => (
+                {solvers.map((solver: any) => (
                     <li
                         key={solver.name}
                         className="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
@@ -88,7 +88,6 @@ export default function SolverColumn() {
                                             )}
                                         />
                                     </span>
-
                                     <span className="block">
                                         <h2 className="text-sm font-medium">
                                             <a href={solver.repository.name}>
@@ -115,7 +114,7 @@ export default function SolverColumn() {
                                         />
                                     </svg>
                                     <span className="text-sm text-gray-500 group-hover:text-gray-900 font-medium truncate">
-                                    {solver.repository.name}
+                                        {solver.repository.name}
                                     </span>
                                 </a>
                             </div>
@@ -125,12 +124,14 @@ export default function SolverColumn() {
                             {/* Repo meta info */}
                             <div className="hidden sm:flex flex-col flex-shrink-0 items-end space-y-3">
                                 <p className="flex items-center space-x-4">
+
                                     <a
-                                        href={solver.repository.name}
+                                        href="/details"
                                         className="relative text-sm text-gray-500 hover:text-gray-900 font-medium"
                                     >
                                         Details
                                     </a>
+
                                     <button
                                         className="relative bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         type="button"
@@ -152,7 +153,7 @@ export default function SolverColumn() {
                                 <p className="flex text-gray-500 text-sm space-x-2">
                                     <span>By {solver.repository.vendor}</span>
                                     <span aria-hidden="true">&middot;</span>
-                                    <span>Installed at <Moment fromNow>{solver.repository.created_at}</Moment></span>
+                                    <span>Installed <Moment fromNow>{solver.repository.created_at}</Moment></span>
                                 </p>
                             </div>
                         </div>

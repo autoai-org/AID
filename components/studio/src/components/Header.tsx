@@ -6,13 +6,13 @@ import {
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
 
 const navigation = [
-    { name: 'Dashboard', href: '#', current: true },
-    { name: 'Domains', href: '#', current: false },
+    { name: 'Model Hub', href: '#', current: true },
+    { name: 'Servers', href: '#', current: false },
 ]
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },
-    { name: 'Sign out', href: '#' },
+    { name: 'Disconnect', href: '#' },
 ]
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -29,8 +29,8 @@ export default function Header() {
                                 <div className="flex-shrink-0">
                                     <img
                                         className="h-8 w-auto"
-                                        src="logo.png"
-                                        alt="Workflow"
+                                        src="/logo.png"
+                                        alt="AID Project"
                                     />
                                 </div>
                             </div>
@@ -90,7 +90,7 @@ export default function Header() {
                                                         <span className="sr-only">Open user menu</span>
                                                         <img
                                                             className="h-8 w-8 rounded-full"
-                                                            src="https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=256&h=256&q=80"
+                                                            src="https://xzyaoi.github.io/avatar.jpg"
                                                             alt=""
                                                         />
                                                     </Menu.Button>
