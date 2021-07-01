@@ -18,7 +18,7 @@
     <a href="https://aid.autoai.org"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://www.youtube.com/watch?v=0TU28hkx7KE&t=33s">Video Demo</a>
+    <a href="https://www.youtube.com/watch?v=B7K3tQE2RcM">Video Demo</a>
     ·
     <a href="https://github.com/autoai-org/aid/issues">Report Bug</a>
     ·
