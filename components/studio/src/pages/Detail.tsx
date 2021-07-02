@@ -1,5 +1,5 @@
 import ReactMarkdown from 'react-markdown'
-
+import { Link } from 'react-router-dom'
 import {
   ArrowNarrowLeftIcon,
   CheckIcon,
@@ -9,6 +9,7 @@ import {
   ThumbUpIcon,
   UserIcon,
 } from '@heroicons/react/solid'
+import BackToHomepage from '../components/BacktoHompage'
 
 const user = {
   name: 'Whitney Francis',
@@ -69,39 +70,7 @@ function classNames(...classes: any) {
 export default function Example() {
   return (
     <div className="min-h-screen bg-gray-100">
-      <header className="bg-white shadow">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="border-t border-gray-200 py-3">
-            <nav className="flex" aria-label="Breadcrumb">
-              <div className="flex sm:hidden">
-                <a
-                  href="/"
-                  className="group inline-flex space-x-3 text-sm font-medium text-gray-500 hover:text-gray-700"
-                >
-                  <ArrowNarrowLeftIcon
-                    className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-600"
-                    aria-hidden="true"
-                  />
-                  <span>Back to Homepage</span>
-                </a>
-              </div>
-              <div className="hidden sm:block">
-                <ol className="flex items-center space-x-4">
-                  <li>
-                    <div>
-                      <a href="/" className="text-gray-400 hover:text-gray-500">
-                        <HomeIcon className="flex-shrink-0 h-5 w-5" aria-hidden="true" />
-                        <span className="sr-only">Home</span>
-                      </a>
-                    </div>
-                  </li>
-
-                </ol>
-              </div>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <BackToHomepage />
 
       <main className="py-10">
         {/* Page header */}
@@ -134,12 +103,14 @@ export default function Example() {
             >
               Author's Homepage
             </button>
+            <Link to="/inference">
             <button
               type="button"
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
             >
               Inference
             </button>
+            </Link>
           </div>
         </div>
 

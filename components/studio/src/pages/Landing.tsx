@@ -4,8 +4,6 @@ import SolversColumn from '../components/Solvers'
 import Account from '../components/Account'
 import Activity from '../components/Activity'
 
-
-
 export default function Landing() {
   const server = useAppSelector((state) => state.connectivity.server)
   const dispatch = useAppDispatch()

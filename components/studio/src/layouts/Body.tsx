@@ -7,6 +7,7 @@ import {
 import AIDHeader from '../components/Header'
 import Landing from '../pages/Landing'
 import Detail from '../pages/Detail'
+import Inference from '../pages/Inference'
 
 export default function MainBody() {
     return (
@@ -21,6 +22,9 @@ export default function MainBody() {
                     <Switch>
                         <Route path="/details">
                             <Detail />
+                        </Route>
+                        <Route path="/inference">
+                            <Inference />
                         </Route>
                         <Route path="/">
                             <Landing />
