@@ -67,7 +67,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Details() {
   return (
     <div className="min-h-screen bg-gray-100">
       <BackToHomepage />
