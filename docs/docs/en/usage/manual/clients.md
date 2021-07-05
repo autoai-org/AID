@@ -25,3 +25,13 @@ with open('test.jpg', 'rb') as file:
     result = r.do()
     print(result.text)
 ```
+
+## NodeJS/JavaScript Client
+
+```javascript title="Example of Javascript Client"
+let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/38a64faa/infer")
+httpc.addPayload("text", this.state.textValue)
+httpc.send().then(function (res) {
+    // do something
+})
+```
