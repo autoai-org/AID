@@ -41,7 +41,8 @@
           "type": "category",
           "items": [
             "about/intro",
-            "about/news"
+            "about/news",
+            "community/examples/showroom"
           ]
         }
       ]

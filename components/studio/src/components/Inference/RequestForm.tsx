@@ -8,24 +8,24 @@ import HTTPClient from "../../services/apis/solver"
 
 interface RequestFormState {
     textValue: string;
-  }
+}
 
 class RequestForm extends React.Component<any, RequestFormState> {
     constructor(props: any) {
         super(props);
-        this.state ={
+        this.state = {
             textValue: ''
         };
     }
     sendRequest = () => {
-        let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/aa49d6c1/infer")
+        let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/38a64faa/infer")
         let self = this
         httpc.addPayload("text", this.state.textValue)
         httpc.send().then(function (res) {
             self.props.onReceivedResponse(JSON.parse(res))
         })
     }
-    handleChange = (event:any) => {
+    handleChange = (event: any) => {
         this.setState({ textValue: event.target.value });
         console.log(this.state.textValue)
     }

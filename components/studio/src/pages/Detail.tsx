@@ -39,15 +39,15 @@ const timeline = [
 const comments = [
   {
     id: 1,
-    name: 'Leslie Alexander',
+    name: 'Xiaozhe Yao',
     date: '4d ago',
     imageId: '1494790108377-be9c29b29330',
     body:
-      'Ducimus quas delectus ad maxime totam doloribus reiciendis ex. Tempore dolorem maiores. Similique voluptatibus tempore non ut.',
+    'An awesome model!',
   },
   {
     id: 2,
-    name: 'Michael Foster',
+    name: 'Second User',
     date: '4d ago',
     imageId: '1519244703995-f4e0f30006d5',
     body:
@@ -55,7 +55,7 @@ const comments = [
   },
   {
     id: 3,
-    name: 'Dries Vincent',
+    name: 'Da Vinci',
     date: '4d ago',
     imageId: '1506794778202-cad84cf45f1d',
     body:

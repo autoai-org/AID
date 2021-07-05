@@ -52,7 +52,7 @@ module.exports = {
                         },
                         {
                             label: t.navbar.showcase,
-                            to: 'showcase',
+                            to: 'docs/community/examples/showroom',
                         },
                     ],
                 },
@@ -111,7 +111,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} AID Contributors. CC-BY / MIT`,
+            copyright: `Copyright © ${new Date().getFullYear()} AID Contributors.`,
         },
     },
     presets: [
