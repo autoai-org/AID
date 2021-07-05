@@ -12,7 +12,7 @@ class RequestForm extends React.Component<any, any> {
         super(props)
     }
     sendRequest = () => {
-        let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/d4110970/infer")
+        let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/aa49d6c1/infer")
         let self = this
         httpc.addPayload("text", "Hello World")
         httpc.send().then(function (res) {
