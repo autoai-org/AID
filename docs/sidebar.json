@@ -17,12 +17,21 @@
             ]
         },
         {
-            "label": "Manual",
+            "label": "Install Models",
             "type":"category",
             "items": [
-                "usage/manual/install_package",
-                "usage/manual/upload_package",
-                "usage/manual/clients"
+                "usage/manual/installation/search",
+                "usage/manual/installation/download",
+                "usage/manual/installation/run"
+            ]
+        },
+        {
+            "label": "Publish Models",
+            "type":"category",
+            "items": [
+                "usage/manual/publish/prepare_locally",
+                "usage/manual/publish/build_locally",
+                "usage/manual/publish/upload"
             ]
         },
         {
