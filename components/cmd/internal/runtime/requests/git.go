@@ -30,8 +30,7 @@ func NewGitClient() *GitClient {
 func (gitclient *GitClient) Clone(remoteURL string, targetFolder string) error {
 	utilities.Formatter.Info("Cloning from " + remoteURL + " into " + targetFolder)
 	_, err := git.PlainClone(targetFolder, false, &git.CloneOptions{
-		URL:   remoteURL,
-		Depth: 1,
+		URL: remoteURL,
 	})
 	utilities.ReportError(err, "Cannot Clone from "+remoteURL)
 	return err

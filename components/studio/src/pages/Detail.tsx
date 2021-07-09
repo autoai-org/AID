@@ -1,16 +1,18 @@
+import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
 import { Link } from 'react-router-dom'
 import {
-  ArrowNarrowLeftIcon,
   CheckIcon,
-  HomeIcon,
   PaperClipIcon,
   QuestionMarkCircleIcon,
   ThumbUpIcon,
   UserIcon,
 } from '@heroicons/react/solid'
 import BackToHomepage from '../components/BacktoHompage'
-
+import { setIsLoading } from '../services/store/connectivity/server'
+import { useDispatch } from 'react-redux'
+import HTTPClient from "../services/apis/solver"
+import Moment from 'react-moment';
 const user = {
   name: 'Whitney Francis',
   email: 'whitney@example.com',
@@ -21,21 +23,6 @@ const attachments = [
   { name: 'pretrained_1.pt', href: '#' },
   { name: 'pretrained_2.pt', href: '#' },
 ]
-const eventTypes = {
-  applied: { icon: UserIcon, bgColorClass: 'bg-gray-400' },
-  advanced: { icon: ThumbUpIcon, bgColorClass: 'bg-blue-500' },
-  completed: { icon: CheckIcon, bgColorClass: 'bg-green-500' },
-}
-const timeline = [
-  {
-    id: 1,
-    type: eventTypes.applied,
-    content: 'xzyaoi Uploaded to',
-    target: 'GitHub',
-    date: 'Sep 20',
-    datetime: '2020-09-20',
-  },
-]
 const comments = [
   {
     id: 1,
@@ -43,7 +30,7 @@ const comments = [
     date: '4d ago',
     imageId: '1494790108377-be9c29b29330',
     body:
-    'An awesome model!',
+      'An awesome model!',
   },
   {
     id: 2,
@@ -67,7 +54,47 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Details() {
+interface commit {
+  author: string,
+  message: string,
+  when: string
+}
+
+interface SolverInfo {
+  solvername: string;
+  description: string;
+  vendorname: string;
+  remoteURL: string;
+  commits: commit[];
+}
+
+
+
+export default function Details(props: any) {
+  console.log(props)
+  let defaultSolverInfoInfo: SolverInfo = {
+    solvername: "An Awesome Solver!",
+    description: "Awesome Description",
+    vendorname: "Awesome Company",
+    remoteURL: "",
+    commits:[]
+  }
+  const [solverInfo, setSolverInfo] = useState(defaultSolverInfoInfo);
+  const [loaded, setLoaded] = useState(false);
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(setIsLoading(true))
+    let httpc = new HTTPClient("http://127.0.0.1:17415/solver/"+props.match.params.solverID)
+    httpc.get().then(function (res: any) {
+      setSolverInfo(JSON.parse(res))
+      console.log(solverInfo)
+    }).catch(function (err) {
+    }).finally(function () {
+      dispatch(setIsLoading(false))
+      setLoaded(true)
+    })
+  }, [])
   return (
     <div className="min-h-screen bg-gray-100">
       <BackToHomepage />
@@ -86,30 +113,32 @@ export default function Details() {
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-900">Image Encoding</h1>
+              <h1 className="text-2xl font-bold text-gray-900">{solverInfo.solvername}</h1>
               <p className="text-sm font-medium text-gray-500">
                 Uploaded by{' '}
                 <a href="#" className="text-gray-900">
-                  aidmodels
+                  {solverInfo.vendorname}
                 </a>{' '}
                 on <time dateTime="2020-08-25">August 25, 2020</time>
               </p>
             </div>
           </div>
           <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
+            <a target="_blank" href={solverInfo.remoteURL}>
             <button
               type="button"
               className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
             >
-              Author's Homepage
+              Repo's Homepage
             </button>
+            </a>
             <Link to="/inference">
-            <button
-              type="button"
-              className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
-            >
-              Inference
-            </button>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+              >
+                Inference
+              </button>
             </Link>
           </div>
         </div>
@@ -149,11 +178,9 @@ export default function Details() {
                         <img src="https://github.com/aidmodels/image_encoding/actions/workflows/aid-ci.yml/badge.svg"></img>
                       </dd>
                     </div>
-                    <div className="sm:col-span-2">
+                    <div className="sm:col-span-2 prose">
                       <dt className="text-sm font-medium text-gray-500">About</dt>
-                      <dd className="mt-1 text-sm text-gray-900">
-                      <ReactMarkdown># aidmodels/image_encoding</ReactMarkdown>
-                      </dd>
+                        <ReactMarkdown>{solverInfo.description}</ReactMarkdown>
                     </div>
                     <div className="sm:col-span-2">
                       <dt className="text-sm font-medium text-gray-500">Attachments</dt>
@@ -290,34 +317,33 @@ export default function Details() {
               {/* Activity Feed */}
               <div className="mt-6 flow-root">
                 <ul className="-mb-8">
-                  {timeline.map((item, itemIdx) => (
-                    <li key={item.id}>
+                  {solverInfo.commits.map((item, itemIdx) => (
+                    <li key={itemIdx}>
                       <div className="relative pb-8">
-                        {itemIdx !== timeline.length - 1 ? (
+                        {itemIdx !== solverInfo.commits.length - 1 ? (
                           <span className="absolute top-4 left-4 -ml-px h-full w-0.5 bg-gray-200" aria-hidden="true" />
                         ) : null}
                         <div className="relative flex space-x-3">
                           <div>
                             <span
                               className={classNames(
-                                item.type.bgColorClass,
-                                'h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
+                                'bg-gray-400 h-8 w-8 rounded-full flex items-center justify-center ring-8 ring-white'
                               )}
                             >
-                              <item.type.icon className="w-5 h-5 text-white" aria-hidden="true" />
+                              <UserIcon className="w-5 h-5 text-white" aria-hidden="true" />
                             </span>
                           </div>
                           <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                             <div>
                               <p className="text-sm text-gray-500">
-                                {item.content}{' '}
-                                <a href="#" className="font-medium text-gray-900">
-                                  {item.target}
-                                </a>
+                                {item.author}{' '}
+                                <p className="font-medium text-gray-900">
+                                  {item.message}
+                                </p>
                               </p>
                             </div>
                             <div className="text-right text-sm whitespace-nowrap text-gray-500">
-                              <time dateTime={item.datetime}>{item.date}</time>
+                              <time dateTime={item.when}><Moment fromNow>{item.when}</Moment></time>
                             </div>
                           </div>
                         </div>

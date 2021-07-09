@@ -8,7 +8,6 @@ import {
     StarIcon,
 } from '@heroicons/react/solid'
 import Moment from 'react-moment';
-import { Link } from 'react-router-dom'
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -19,7 +18,6 @@ export default function SolverColumn() {
     if (loading) return (<p>Loaindg</p>);
     if (error) return (<p>Error :(</p>);
     const solvers = data.solvers
-    console.log(solvers)
     return (
         <div className="bg-white lg:min-w-0 lg:flex-1">
             <div className="pl-4 pr-6 pt-4 pb-4 border-b border-t border-gray-200 sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-6 xl:border-t-0">
@@ -126,7 +124,7 @@ export default function SolverColumn() {
                                 <p className="flex items-center space-x-4">
 
                                     <a
-                                        href="/details"
+                                        href={"/details/"+solver.uid}
                                         className="relative text-sm text-gray-500 hover:text-gray-900 font-medium"
                                     >
                                         Details
