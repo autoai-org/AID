@@ -3,8 +3,8 @@ package workflow
 import "github.com/autoai-org/aid/internal/runtime/docker"
 
 // BuildDockerImage builds the docker image
-func BuildDockerImage(vendorName string, packageName string, solverName string) {
-	docker.BuildImage(vendorName, packageName, solverName)
+func BuildDockerImage(vendorName string, packageName string, solverName string, gpu bool) {
+	docker.BuildImage(vendorName, packageName, solverName, gpu)
 }
 
 func BuildDockerImageWithPath(path string, solverName string, autoRemove bool) {

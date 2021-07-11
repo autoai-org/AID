@@ -37,21 +37,21 @@ func startServer(port string) {
 	daemon.RunServer(port)
 }
 
-func buildImage(buildContext string) {
+func buildImage(buildContext string, gpu bool) {
 	buildInfo := strings.Split(buildContext, "/")
-	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2])
+	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2], gpu)
 }
 
 func buildImageByPath(path string, solver string, autoRemove bool) {
 	workflow.BuildDockerImageWithPath(path, solver, autoRemove)
 }
 
-func createContainer(imageID string, hostPort string) {
+func createContainer(imageID string, hostPort string, gpu bool) {
 	if hostPort == "" {
 		utilities.Formatter.Error("Hostport is not given... Aborted")
 		os.Exit(4)
 	}
-	workflow.CreateContainer(imageID, hostPort)
+	workflow.CreateContainer(imageID, hostPort, gpu)
 }
 
 func startContainer(containerID string) {

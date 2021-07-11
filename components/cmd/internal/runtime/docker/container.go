@@ -18,8 +18,12 @@ import (
 	"github.com/docker/go-connections/nat"
 )
 
+type GPURequest struct {
+	NeedGPU bool
+}
+
 // Create creates a docker container
-func Create(imageUID string, hostPort string) (container.ContainerCreateCreatedBody, error) {
+func Create(imageUID string, hostPort string, gpu GPURequest) (container.ContainerCreateCreatedBody, error) {
 	image, err := database.NewDefaultDB().Image.Query().Where(entImage.UID(imageUID)).First(context.Background())
 	if err != nil {
 		utilities.Formatter.Error("Cannot fetch image " + imageUID + ", Aborted")
@@ -35,7 +39,27 @@ func Create(imageUID string, hostPort string) (container.ContainerCreateCreatedB
 			},
 		},
 	}
+	var env []string
+	if gpu.NeedGPU {
+		utilities.Formatter.Info("GPU Enabled")
+		hostConfig.Resources = container.Resources{
+			DeviceRequests: []container.DeviceRequest{
+				{
+					Capabilities: [][]string{{"gpu"}},
+				},
+			},
+		}
+		env = append(env, "LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64")
+		env = append(env, "CUDA_VERSION=11.2.1")
+		env = append(env, "NVIDIA_VISIBLE_DEVICES=all")
+		env = append(env, "NVIDIA_DRIVER_CAPABILITIES=all")
+		env = append(env, "NVIDIA_REQUIRE_CUDA=cuda>=11.2 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 driver>=450")
+		hostConfig.Privileged = true
+	} else {
+		utilities.Formatter.Info("GPU Disabled")
+	}
 	resp, err := NewDockerRuntime().ContainerCreate(context.Background(), &container.Config{
+		Env:   env,
 		Image: image.UID,
 		Tty:   true,
 		ExposedPorts: nat.PortSet{

@@ -1,8 +1,10 @@
-FROM python:3.9-slim-buster
+FROM nvidia/cuda:11.4.0-runtime-ubuntu20.04
+
+ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y \
-        zlib1g-dev gcc cmake build-essential && \
+        software-properties-common zlib1g-dev gcc cmake build-essential python3 python3-pip && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
