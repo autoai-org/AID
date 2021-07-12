@@ -2,11 +2,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Landing from './pages/Landing'
+import SearchResult from './pages/SearchResult';
 import reportWebVitals from './reportWebVitals';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <Landing />
+    <Router>
+    <Switch>
+        <Route path="/search">
+          <SearchResult />
+        </Route>
+        <Route path="/">
+          <Landing />
+        </Route>
+        </Switch>
+    </Router>
+
   </React.StrictMode>,
   document.getElementById('root')
 );

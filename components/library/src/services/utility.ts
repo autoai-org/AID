@@ -6,3 +6,8 @@
 export function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
+
+export function parseQuery(keyword: string): string {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(keyword) || ""
+}

@@ -11,7 +11,13 @@ export default function MainLayout(props: any) {
         <div className="bg-white">
             <div className="relative overflow-hidden">
                 <AIDHeader />
-                {props.children}
+                <div className="bg-white">
+                    <div className="relative overflow-hidden">
+                        <main>
+                            {props.children}
+                        </main>
+                    </div>
+                </div>
                 <AIDFooter />
             </div>
         </div>

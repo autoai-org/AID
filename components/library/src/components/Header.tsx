@@ -16,18 +16,18 @@ export default function AIDFooter() {
   return (<Popover as="header" className="relative">
   {({ open }) => (
       <>
-          <div className="bg-gray-900 pt-6">
+          <div className="bg-gray-900 pt-4 pb-4">
               <nav
                   className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6"
                   aria-label="Global"
               >
                   <div className="flex items-center flex-1">
                       <div className="flex items-center justify-between w-full md:w-auto">
-                          <a href="#">
+                          <a href="/">
                               <span className="sr-only">Workflow</span>
                               <img
                                   className="h-8 w-auto sm:h-10"
-                                  src="../logo_transparent.png"
+                                  src="../logo.png"
                                   alt=""
                               />
                           </a>
@@ -51,11 +51,11 @@ export default function AIDFooter() {
                       </div>
                   </div>
                   <div className="hidden md:flex md:items-center md:space-x-6">
-                      <a href="#" className="text-base font-medium text-white hover:text-gray-300">
+                      <a href="/" className="text-base font-medium text-white hover:text-gray-300">
                           Log in
                       </a>
                       <a
-                          href="#"
+                          href="/"
                           className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
                       >
                           Sign up
@@ -109,7 +109,7 @@ export default function AIDFooter() {
                           </div>
                           <div className="mt-6 px-5">
                               <a
-                                  href="#"
+                                  href="/"
                                   className="block text-center w-full py-3 px-4 rounded-md shadow bg-gradient-to-r from-teal-500 to-cyan-600 text-white font-medium hover:from-teal-600 hover:to-cyan-700"
                               >
                                   Search for Models
@@ -118,7 +118,7 @@ export default function AIDFooter() {
                           <div className="mt-6 px-5">
                               <p className="text-center text-base font-medium text-gray-500">
                                   Existing customer?{' '}
-                                  <a href="#" className="text-gray-900 hover:underline">
+                                  <a href="/" className="text-gray-900 hover:underline">
                                       Login
                                   </a>
                               </p>

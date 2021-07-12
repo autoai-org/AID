@@ -5,7 +5,8 @@
 
 import axios from 'axios'
 import { analyseGithubRepo } from './github'
-const serverEndpoint = 'https://discovery.autoai.org/'
+
+export const serverEndpoint = 'https://discovery.autoai.org/'
 
 function _get(endpoint:string) {
     return new Promise((resolve, reject)=>{
@@ -17,14 +18,14 @@ function _get(endpoint:string) {
     })
 }
 
-function findModelsByKeyword(keyword:string) {
+export function findModelsByKeyword(keyword:string) {
     if (keyword==="") {
         return _get(serverEndpoint+"model/")
     }
     return _get(serverEndpoint+"model/keyword/"+keyword)
 }
 
-async function analyseRepos(repos:any) {
+export async function analyseRepos(repos:any) {
     for (let i=0;i<repos.length;i++) {
         console.log(repos[i])
         if (repos[i].githubURL !== "" && repos[i].githubURL) {
@@ -35,10 +36,4 @@ async function analyseRepos(repos:any) {
         }
     }
     return repos
-}
-
-export {
-    serverEndpoint,
-    analyseRepos,
-    findModelsByKeyword
 }

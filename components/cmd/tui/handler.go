@@ -120,7 +120,6 @@ func initRepo(c *cli.Context) {
 	if err != nil {
 		utilities.Formatter.Error(err.Error())
 	}
-
 	prompt = promptui.Prompt{
 		Label: "Your Package Name",
 	}
@@ -128,7 +127,6 @@ func initRepo(c *cli.Context) {
 	if err != nil {
 		utilities.Formatter.Error(err.Error())
 	}
-
 	prompt = promptui.Prompt{
 		Label: "One-line Description (You can change it in README.md file later as well)",
 	}
