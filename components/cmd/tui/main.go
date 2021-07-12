@@ -55,6 +55,15 @@ func main() {
 				},
 			},
 			{
+				Name:     "new",
+				Usage:    "aid new",
+				Category: "packages",
+				Action: func(c *cli.Context) error {
+					initRepo(c)
+					return nil
+				},
+			},
+			{
 				Name:     "build",
 				Usage:    "aid build [vendor]/[package]/[solver] or aid build -p [path]",
 				Category: "packages",

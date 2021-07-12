@@ -68,3 +68,6 @@ xbuild:
 	@cd tui && env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-macOS
 	@cd tui && env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-linux
 	@cd tui && env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-windows
+
+install:
+	cp ./aid /usr/local/bin

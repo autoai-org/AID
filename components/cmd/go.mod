@@ -26,6 +26,7 @@ require (
 	github.com/gookit/color v1.3.2
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
+	github.com/manifoldco/promptui v0.8.0 // indirect
 	github.com/mattn/go-sqlite3 v1.14.7
 	github.com/moby/sys/mount v0.2.0 // indirect
 	github.com/moby/term v0.0.0-20201110203204-bea5bbe245bf
