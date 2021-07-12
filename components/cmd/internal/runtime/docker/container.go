@@ -50,7 +50,6 @@ func Create(imageUID string, hostPort string, gpu GPURequest) (container.Contain
 			},
 		}
 		env = append(env, "LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:/usr/local/cuda/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64")
-		env = append(env, "CUDA_VERSION=11.2.1")
 		env = append(env, "NVIDIA_VISIBLE_DEVICES=all")
 		env = append(env, "NVIDIA_DRIVER_CAPABILITIES=all")
 		env = append(env, "NVIDIA_REQUIRE_CUDA=cuda>=11.2 brand=tesla,driver>=418,driver<419 brand=tesla,driver>=440,driver<441 driver>=450")
