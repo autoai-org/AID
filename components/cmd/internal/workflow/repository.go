@@ -10,7 +10,7 @@ import (
 	"github.com/autoai-org/aid/internal/utilities"
 )
 
-// InitNewRepo
+// InitNewRepo creates a new repository from the template
 func InitNewRepo(vendorName string, repoName string, description string) {
 	bolierplateURL := "https://github.com/aidmodels/bolierplate.git"
 	git := requests.NewGitClient()

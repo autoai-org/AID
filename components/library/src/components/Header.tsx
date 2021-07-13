@@ -60,7 +60,7 @@ export default function AIDFooter() {
                                 if (isSignedIn === true) {
                                     return (
                                         <div className="hidden md:flex md:items-center md:space-x-6">
-                                            <a href="#" className="flex-shrink-0 group block">
+                                            <a href="/" className="flex-shrink-0 group block">
                                                 <div className="flex items-center">
                                                     <div>
                                                         <img
@@ -74,14 +74,14 @@ export default function AIDFooter() {
                                                     </div>
                                                 </div>
                                             </a>
-                                            <a
+                                            <div
                                                 onClick={()=>firebase.auth().signOut().then(function(res){
                                                     history.replace("/");
                                                 })}
                                                 className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700"
                                             >
                                                 Sign out
-                                            </a>
+                                            </div>
                                         </div>);
                                 } else {
                                     return (

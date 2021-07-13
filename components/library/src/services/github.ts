@@ -13,6 +13,7 @@ async function fetch_requirements(vendor: string, name: string) {
         if (isNaN(each) && each !== "" && !each.includes(".")) {
             return true
         }
+        return false
     })
 }
 
