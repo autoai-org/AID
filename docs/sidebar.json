@@ -40,7 +40,8 @@
             "items": [
                 "specs/configurations",
                 "specs/data-format",
-                "specs/error-code"
+                "specs/error-code",
+                "specs/cli"
             ]
         }
     ],
