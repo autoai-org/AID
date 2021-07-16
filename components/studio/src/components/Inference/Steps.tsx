@@ -20,8 +20,15 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function StepIndicator() {
-    return (
+export default function StepIndicator(props:any) {
+    const currentStep = props.currentStep
+    const currentStepIndex = steps.findIndex((s => s.name == currentStep))
+    if(currentStepIndex != 0) {
+        steps[currentStepIndex - 1].status = 'complete'
+        steps[currentStepIndex].status = 'current'
+    }
+    
+    return ( 
         <nav aria-label="Progress">
             <ol className="overflow-hidden">
                 {steps.map((step, stepIdx) => (

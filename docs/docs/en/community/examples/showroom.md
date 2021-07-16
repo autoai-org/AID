@@ -12,13 +12,13 @@ title: Showroom
 * [Face Utility](https://github.com/aidmodels/Face_Utility)
 * [Style Transfer](https://github.com/aidmodels/style_transfer)
 * [Image Stitiching](https://github.com/aidmodels/image-stitching)
+* [Image Encoding](https://github.com/aidmodels/image_encoding) ![CI-status](https://github.com/aidmodels/image_encoding/actions/workflows/aid-ci.yml/badge.svg)
 * [Optical Character Recognition(OCR) with Tesseract](https://github.com/aidmodels/tesseract-ocr)
 
 ### NLP
 
-* [Chatbot](https://github.com/aidmodels/Chatbot)
+* [Simple Chatbot](https://github.com/aidmodels/Chatbot)
 * [Sentiment and Emotion Recognition](https://github.com/aidmodels/sentiment-analysis)
-* [Knowledge Embedding with OpenKE](https://github.com/aidmodels/openke)
 
 ## Applications
 
@@ -26,4 +26,4 @@ title: Showroom
 
 > In this project, we use the sentiment analysis package from AID to extract the emotion of tweets per day. It is efficient, fast and stable to help us analyse nearly one million tweets per day.
 
-If you are interested in listing your applications here, please [let us know](mailto://enquiry@autoai.org?subject=Sharing Applications using AID").
+If you are interested in listing your applications here, please [let us know](https://discord.gg/3BD3RzK2K2).

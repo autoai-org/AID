@@ -1,6 +1,5 @@
 const activityItems = [
-    { project: 'Workcation', commit: '2d89f0c8', environment: 'production', time: '1h' },
-    // More items...
+    { project: 'encodingSolver', commit: '2d89f0c8', environment: 'localhost', time: '1h' },
 ]
 export default function Activity() {
     return (

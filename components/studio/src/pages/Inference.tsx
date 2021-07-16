@@ -10,6 +10,7 @@ import Result from '../components/Inference/Result'
 interface InferenceState {
   result: object;
   finished: boolean;
+  currentStep: string;
 }
 
 export default class Inference extends React.Component<any, InferenceState> {
@@ -18,11 +19,13 @@ export default class Inference extends React.Component<any, InferenceState> {
     this.state = {
       result: {},
       finished: false,
+      currentStep: 'Form Request',
     }
   }
   handleResponse=(res: any) => {
     this.setState({ result: res })
     this.setState({ finished: true })
+    this.setState({ currentStep: 'View Results' })
   }
   render() {
     return (
@@ -30,10 +33,10 @@ export default class Inference extends React.Component<any, InferenceState> {
         <BackToHomepage />
         <main className="py-10">
           {!this.state.finished &&
-            <ThreeColumnLayout left={<StepsIndicator />} middle={<RequestForm onReceivedResponse={this.handleResponse} />} right={<AboutRepository />} />
+            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep}/>} middle={<RequestForm onReceivedResponse={this.handleResponse} />} right={<AboutRepository />} />
           }
           {this.state.finished &&
-            <ThreeColumnLayout left={<StepsIndicator />} middle={<Result src={this.state.result} />} right={<AboutRepository />} />
+            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep}/>} middle={<Result src={this.state.result} />} right={<AboutRepository />} />
           }
         </main>
       </div>

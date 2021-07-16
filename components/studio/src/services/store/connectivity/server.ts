@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from '../store'
-
+import {connect, ConnectedProps} from 'react-redux';
 interface ConnectivityState {
     isLoading: boolean,
     server: string
@@ -24,8 +24,21 @@ export const connectivitySlice = createSlice({
     }
 })
 
-export const { setServer } = connectivitySlice.actions
+const mapState = (state: RootState) => ({
+    isLoading: state.connectivity.isLoading
+})
+
+const mapDispatch = {
+    toggleLoading: () => ({type: "TOGGLE_IS_LOADING"})
+}
+export const connector = connect(mapState, mapDispatch)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+
+export const { setServer, setIsLoading } = connectivitySlice.actions
 
 export const getServer = (state:RootState) => state.connectivity.server
+
+export type { PropsFromRedux }
 
 export default connectivitySlice.reducer

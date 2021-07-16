@@ -9,8 +9,8 @@ import "github.com/autoai-org/aid/internal/runtime/docker"
 
 // CreateContainer creates a stopped container
 // The container can be then started by ```aid start```
-func CreateContainer(imageUID string, hostPort string) {
-	docker.Create(imageUID, hostPort)
+func CreateContainer(imageUID string, hostPort string, gpu bool) {
+	docker.Create(imageUID, hostPort, docker.GPURequest{NeedGPU: gpu})
 }
 
 // StartContainer starts a stopped container

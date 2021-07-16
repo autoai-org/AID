@@ -6,18 +6,28 @@ import React from 'react'
 import HTTPClient from "../../services/apis/solver"
 
 
+interface RequestFormState {
+    textValue: string;
+}
 
-class RequestForm extends React.Component<any, any> {
+class RequestForm extends React.Component<any, RequestFormState> {
     constructor(props: any) {
-        super(props)
+        super(props);
+        this.state = {
+            textValue: ''
+        };
     }
     sendRequest = () => {
-        let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/d4110970/infer")
+        let httpc = new HTTPClient("http://127.0.0.1:17415/running/38a64faa/infer")
         let self = this
-        httpc.addPayload("text", "Hello World")
+        httpc.addPayload("text", this.state.textValue)
         httpc.send().then(function (res) {
             self.props.onReceivedResponse(JSON.parse(res))
         })
+    }
+    handleChange = (event: any) => {
+        this.setState({ textValue: event.target.value });
+        console.log(this.state.textValue)
     }
     render() {
         return (
@@ -42,7 +52,8 @@ class RequestForm extends React.Component<any, any> {
                                         name="about"
                                         rows={3}
                                         className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
-                                        defaultValue={''}
+                                        value={this.state.textValue}
+                                        onChange={this.handleChange}
                                     />
                                 </div>
                             </div>

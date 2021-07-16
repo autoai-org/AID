@@ -24,7 +24,13 @@ type HostInfoResponse struct {
 
 func PingHandler(c *gin.Context) {
 	hostInfo, err := sysinfo.Host()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, HostInfoResponse{Error: err.Error()})
+	}
 	memoryInfo, err := hostInfo.Memory()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, HostInfoResponse{Error: err.Error()})
+	}
 	cpuInfo, err := hostInfo.CPUTime()
 	architecture := hostInfo.Info().Architecture
 	os := hostInfo.Info().OS

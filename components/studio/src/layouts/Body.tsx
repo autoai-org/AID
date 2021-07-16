@@ -20,9 +20,7 @@ export default function MainBody() {
                 <AIDHeader />
                 <Router>
                     <Switch>
-                        <Route path="/details">
-                            <Detail />
-                        </Route>
+                        <Route path="/details/:solverID" component={Detail}/>
                         <Route path="/inference">
                             <Inference />
                         </Route>

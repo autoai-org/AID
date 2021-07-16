@@ -28,7 +28,6 @@ func ForwardHandler(c *gin.Context) {
 	}
 	if !runningContainer.Running {
 		c.JSON(http.StatusInternalServerError, ErrorResponse{Error: "The container " + runningContainerID + " is not running."})
-
 	}
 	body, err := ioutil.ReadAll(c.Request.Body)
 	if err != nil {
