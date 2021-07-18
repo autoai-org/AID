@@ -2,29 +2,30 @@
   all(not(debug_assertions), target_os = "windows"),
   windows_subsystem = "windows"
 )]
+#![allow(
+    // Clippy bug: https://github.com/rust-lang/rust-clippy/issues/7422
+    clippy::nonstandard_macro_braces,
+)]
 
-mod cmd;
+use tauri::{
+  api::process::{Command},
+  Manager,
+};
 
 fn main() {
-  tauri::AppBuilder::new()
-    .invoke_handler(|_webview, arg| {
-      use cmd::Cmd::*;
-      match serde_json::from_str(arg) {
-        Err(e) => {
-          Err(e.to_string())
-        }
-        Ok(command) => {
-          match command {
-            // definitions for your custom commands from Cmd here
-            MyCustomCommand { argument } => {
-              //  your command code
-              println!("{}", argument);
-            }
-          }
-          Ok(())
-        }
-      }
+  tauri::Builder::default()
+    .setup(|app| {
+      let _window = app.get_window("main").unwrap();
+
+      tauri::async_runtime::spawn(async move {
+        let (mut _rx, mut _child) = Command::new("aid")
+          .args(vec!["up"])
+          .spawn()
+          .expect("failed to setup `aid up` sidecar");
+      });
+      Ok(())
     })
-    .build()
-    .run();
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
+    
 }
