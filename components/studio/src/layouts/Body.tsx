@@ -21,9 +21,7 @@ export default function MainBody() {
                 <Router>
                     <Switch>
                         <Route path="/details/:solverID" component={Detail}/>
-                        <Route path="/inference">
-                            <Inference />
-                        </Route>
+                        <Route path="/inference/:containerID" component={Inference}/>
                         <Route path="/">
                             <Landing />
                         </Route>

@@ -4,30 +4,45 @@
 // https://opensource.org/licenses/MIT
 import React from 'react'
 import client from '../../services/apis/solver'
-
+import {Link} from 'react-router-dom'
 
 interface RequestFormState {
     textValue: string;
+    file?: FileList
 }
 
 class RequestForm extends React.Component<any, RequestFormState> {
     constructor(props: any) {
         super(props);
         this.state = {
-            textValue: ''
+            textValue: '',
         };
     }
     sendRequest = () => {
-        let httpc = new HTTPClient("http://127.0.0.1:17415/running/38a64faa/infer")
+        let httpc = client;
         let self = this
-        httpc.addPayload("text", this.state.textValue)
-        httpc.send().then(function (res) {
-            self.props.onReceivedResponse(JSON.parse(res))
+        let payload = new FormData()
+        if (this.state.file) {
+            if (this.state.file[0]) {
+                payload.append("file", this.state.file[0])
+            }
+        }
+        if (this.state.textValue) {
+            payload.append("text", this.state.textValue)
+        }
+        let beginTime = new Date().getTime()
+        httpc.request("POST", "running/" + window.location.href.split("/")[4] + "/infer", payload).then(function (res) {
+            let endTime = new Date().getTime()
+            Object.assign(res, {startTime: beginTime, endTime: endTime})
+            self.props.onReceivedResponse(res)
         })
     }
+
     handleChange = (event: any) => {
         this.setState({ textValue: event.target.value });
-        console.log(this.state.textValue)
+    }
+    onFileChange = (event: any) => {
+        this.setState({ file: event.target.files })
     }
     render() {
         return (
@@ -78,16 +93,21 @@ class RequestForm extends React.Component<any, RequestFormState> {
                                                 strokeLinejoin="round"
                                             />
                                         </svg>
+                                        {this.state.file &&
+                                            <p>{this.state.file[0].name}</p>
+                                        }
                                         <div className="flex text-sm text-gray-600">
+
                                             <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                             >
                                                 <span>Upload a file</span>
-                                                <input id="file-upload" name="file-upload" type="file" className="sr-only" />
+                                                <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={this.onFileChange} />
                                             </label>
                                             <p className="pl-1">or drag and drop</p>
                                         </div>
+                                        <p className="pl-1 text-gray-600 text-sm">Please only upload one file.</p>
                                     </div>
                                 </div>
                             </div>
@@ -96,12 +116,14 @@ class RequestForm extends React.Component<any, RequestFormState> {
                 </div>
                 <div className="pt-5">
                     <div className="flex justify-end">
+                    <Link to="/">
                         <button
                             type="button"
                             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                         >
                             Cancel
                         </button>
+                        </Link>
                         <button
                             onClick={this.sendRequest}
                             type="button"

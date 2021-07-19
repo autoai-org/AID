@@ -6,14 +6,14 @@
 import { CheckIcon } from '@heroicons/react/solid'
 
 const steps = [
-    { name: 'Form Request', description: 'Vitae sed mi luctus laoreet.', href: '#', status: 'current' },
+    { name: 'Form Request', description: 'Compose the requests.', href: '#', status: 'current' },
     {
         name: 'View Results',
-        description: 'Cursus semper viverra facilisis et et some more.',
+        description: 'View the results from the solver.',
         href: '#',
         status: 'upcoming',
     },
-    { name: 'Detailed Analysis', description: 'Penatibus eu quis ante.', href: '#', status: 'upcoming' },
+    { name: 'Detailed Analysis', description: 'View detailed analysis of the request.', href: '#', status: 'upcoming' },
 ]
 
 function classNames(...classes: any) {

@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"path/filepath"
 
+	"github.com/autoai-org/aid/ent/generated"
 	entSolver "github.com/autoai-org/aid/ent/generated/solver"
 	"github.com/autoai-org/aid/internal/database"
 	"github.com/autoai-org/aid/internal/runtime/vcs"
@@ -15,12 +16,13 @@ import (
 )
 
 type SolverInfoResponse struct {
-	Solvername  string         `json:"solvername"`
-	Reponame    string         `json:"reponame"`
-	Vendorname  string         `json:"vendorname"`
-	RemoteURL   string         `json:"remoteURL"`
-	Description string         `json:"description"`
-	GitCommits  vcs.GitCommits `json:"commits"`
+	Solvername  string                 `json:"solvername"`
+	Reponame    string                 `json:"reponame"`
+	Vendorname  string                 `json:"vendorname"`
+	RemoteURL   string                 `json:"remoteURL"`
+	Description string                 `json:"description"`
+	Containers  []*generated.Container `json:"containers"`
+	GitCommits  vcs.GitCommits         `json:"commits"`
 }
 
 func SolverInformationHandler(c *gin.Context) {
@@ -59,8 +61,17 @@ func SolverInformationHandler(c *gin.Context) {
 		})
 		return nil
 	})
+	image, err := solver.QueryImage().First(context.Background())
+	if err != nil {
+		description = err.Error()
+	}
+	containers, err := image.QueryContainer().All(context.Background())
+	if err != nil {
+		description = err.Error()
+	}
 	c.JSON(http.StatusOK, SolverInfoResponse{
 		Solvername:  solver.Name,
+		Containers:  containers,
 		Reponame:    repo.Name,
 		Vendorname:  repo.Vendor,
 		RemoteURL:   repo.RemoteURL,

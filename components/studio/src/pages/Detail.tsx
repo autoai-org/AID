@@ -1,54 +1,23 @@
 import { useState, useEffect } from 'react';
 import ReactMarkdown from 'react-markdown'
-import { Link } from 'react-router-dom'
 import {
-  CheckIcon,
   PaperClipIcon,
-  QuestionMarkCircleIcon,
-  ThumbUpIcon,
   UserIcon,
 } from '@heroicons/react/solid'
+import { Fragment } from 'react'
+import { Popover, Transition } from '@headlessui/react'
 import BackToHomepage from '../components/BacktoHompage'
 import { setIsLoading } from '../services/store/connectivity/server'
 import { useDispatch } from 'react-redux'
-import HTTPClient from "../services/apis/solver"
+import { restclient } from '../services/apis';
 import Moment from 'react-moment';
-const user = {
-  name: 'Whitney Francis',
-  email: 'whitney@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1517365830460-955ce3ccd263?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-}
+import { getInitials } from '../services/utilities/initials'
+
 const attachments = [
   { name: 'pretrained_1.pt', href: '#' },
   { name: 'pretrained_2.pt', href: '#' },
 ]
-const comments = [
-  {
-    id: 1,
-    name: 'Xiaozhe Yao',
-    date: '4d ago',
-    imageId: '1494790108377-be9c29b29330',
-    body:
-      'An awesome model!',
-  },
-  {
-    id: 2,
-    name: 'Second User',
-    date: '4d ago',
-    imageId: '1519244703995-f4e0f30006d5',
-    body:
-      'Et ut autem. Voluptatem eum dolores sint necessitatibus quos. Quis eum qui dolorem accusantium voluptas voluptatem ipsum. Quo facere iusto quia accusamus veniam id explicabo et aut.',
-  },
-  {
-    id: 3,
-    name: 'Da Vinci',
-    date: '4d ago',
-    imageId: '1506794778202-cad84cf45f1d',
-    body:
-      'Expedita consequatur sit ea voluptas quo ipsam recusandae. Ab sint et voluptatem repudiandae voluptatem et eveniet. Nihil quas consequatur autem. Perferendis rerum et.',
-  },
-]
+
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -60,24 +29,29 @@ interface commit {
   when: string
 }
 
+interface container {
+  uid: string,
+  running: boolean,
+  created_at: string,
+}
+
 interface SolverInfo {
   solvername: string;
   description: string;
   vendorname: string;
   remoteURL: string;
   commits: commit[];
+  containers: container[];
 }
 
-
-
 export default function Details(props: any) {
-  console.log(props)
   let defaultSolverInfoInfo: SolverInfo = {
     solvername: "An Awesome Solver!",
     description: "Awesome Description",
     vendorname: "Awesome Company",
     remoteURL: "",
-    commits:[]
+    commits: [],
+    containers: [],
   }
   const [solverInfo, setSolverInfo] = useState(defaultSolverInfoInfo);
   const [loaded, setLoaded] = useState(false);
@@ -85,10 +59,9 @@ export default function Details(props: any) {
 
   useEffect(() => {
     dispatch(setIsLoading(true))
-    let httpc = new HTTPClient("http://127.0.0.1:17415/solver/"+props.match.params.solverID)
-    httpc.get().then(function (res: any) {
-      setSolverInfo(JSON.parse(res))
-      console.log(solverInfo)
+    restclient.get("http://127.0.0.1:17415/solver/" + props.match.params.solverID).then(function (res: any) {
+      setSolverInfo(res.data)
+      console.log(res.data)
     }).catch(function (err) {
     }).finally(function () {
       dispatch(setIsLoading(false))
@@ -106,7 +79,7 @@ export default function Details(props: any) {
             <div className="flex-shrink-0">
               <div className="relative">
                 <span className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-gray-500">
-                  <span className="text-xl font-medium leading-none text-white">IE</span>
+                  <span className="text-xl font-medium leading-none text-white">{getInitials(solverInfo.solvername)}</span>
                 </span>
 
                 <span className="absolute inset-0 shadow-inner rounded-full" aria-hidden="true" />
@@ -125,21 +98,63 @@ export default function Details(props: any) {
           </div>
           <div className="mt-6 flex flex-col-reverse justify-stretch space-y-4 space-y-reverse sm:flex-row-reverse sm:justify-end sm:space-x-reverse sm:space-y-0 sm:space-x-3 md:mt-0 md:flex-row md:space-x-3">
             <a target="_blank" href={solverInfo.remoteURL}>
-            <button
-              type="button"
-              className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
-            >
-              Repo's Homepage
-            </button>
-            </a>
-            <Link to="/inference">
               <button
                 type="button"
-                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
               >
-                Inference
+                Repo's Homepage
               </button>
-            </Link>
+            </a>
+            <Popover className="relative">
+              {({ open }) => (
+                <>
+                  <Popover.Button
+                    className={classNames(
+                      open ? 'text-gray-900' : 'text-gray-500',
+                      'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
+                    )}
+                  >
+                    <button
+                      type="button"
+                      className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
+                    >
+                      Inference
+                    </button>
+                  </Popover.Button>
+                  <Transition
+                    show={open}
+                    as={Fragment}
+                    enter="transition ease-out duration-200"
+                    enterFrom="opacity-0 translate-y-1"
+                    enterTo="opacity-100 translate-y-0"
+                    leave="transition ease-in duration-150"
+                    leaveFrom="opacity-100 translate-y-0"
+                    leaveTo="opacity-0 translate-y-1"
+                  >
+                    <Popover.Panel
+                      static
+                      className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-md sm:px-0"
+                    >
+                      <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
+                        <div className="relative grid gap-6 bg-white px-5 py-6 sm:gap-8 sm:p-8">
+                          {solverInfo.containers.map((item) => (
+                            <a
+                              key={item.uid}
+                              href={"/inference/"+item.uid}
+                              className="-m-3 p-3 flex items-start rounded-lg hover:bg-gray-50 transition ease-in-out duration-150"
+                            >
+                              {item.uid}
+                            </a>
+                          ))}
+                        </div>
+                        <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
+                            Above are the running solvers.
+                        </div>
+                      </div>
+                    </Popover.Panel>
+                  </Transition>
+                </>)}
+            </Popover>
           </div>
         </div>
 
@@ -180,7 +195,7 @@ export default function Details(props: any) {
                     </div>
                     <div className="sm:col-span-2 prose">
                       <dt className="text-sm font-medium text-gray-500">About</dt>
-                        <ReactMarkdown>{solverInfo.description}</ReactMarkdown>
+                      <ReactMarkdown>{solverInfo.description}</ReactMarkdown>
                     </div>
                     <div className="sm:col-span-2">
                       <dt className="text-sm font-medium text-gray-500">Attachments</dt>
@@ -218,94 +233,7 @@ export default function Details(props: any) {
               </div>
             </section>
 
-            {/* Comments*/}
-            <section aria-labelledby="notes-title">
-              <div className="bg-white shadow sm:rounded-lg sm:overflow-hidden">
-                <div className="divide-y divide-gray-200">
-                  <div className="px-4 py-5 sm:px-6">
-                    <h2 id="notes-title" className="text-lg font-medium text-gray-900">
-                      Notes
-                    </h2>
-                  </div>
-                  <div className="px-4 py-6 sm:px-6">
-                    <ul className="space-y-8">
-                      {comments.map((comment) => (
-                        <li key={comment.id}>
-                          <div className="flex space-x-3">
-                            <div className="flex-shrink-0">
-                              <img
-                                className="h-10 w-10 rounded-full"
-                                src={`https://images.unsplash.com/photo-${comment.imageId}?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80`}
-                                alt=""
-                              />
-                            </div>
-                            <div>
-                              <div className="text-sm">
-                                <a href="#" className="font-medium text-gray-900">
-                                  {comment.name}
-                                </a>
-                              </div>
-                              <div className="mt-1 text-sm text-gray-700">
-                                <p>{comment.body}</p>
-                              </div>
-                              <div className="mt-2 text-sm space-x-2">
-                                <span className="text-gray-500 font-medium">{comment.date}</span>{' '}
-                                <span className="text-gray-500 font-medium">&middot;</span>{' '}
-                                <button type="button" className="text-gray-900 font-medium">
-                                  Reply
-                                </button>
-                              </div>
-                            </div>
-                          </div>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-                <div className="bg-gray-50 px-4 py-6 sm:px-6">
-                  <div className="flex space-x-3">
-                    <div className="flex-shrink-0">
-                      <img className="h-10 w-10 rounded-full" src={user.imageUrl} alt="" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <form action="#">
-                        <div>
-                          <label htmlFor="comment" className="sr-only">
-                            About
-                          </label>
-                          <textarea
-                            id="comment"
-                            name="comment"
-                            rows={3}
-                            className="shadow-sm block w-full focus:ring-blue-500 focus:border-blue-500 sm:text-sm border border-gray-300 rounded-md"
-                            placeholder="Add a note"
-                            defaultValue={''}
-                          />
-                        </div>
-                        <div className="mt-3 flex items-center justify-between">
-                          <a
-                            href="#"
-                            className="group inline-flex items-start text-sm space-x-2 text-gray-500 hover:text-gray-900"
-                          >
-                            <QuestionMarkCircleIcon
-                              className="flex-shrink-0 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-                              aria-hidden="true"
-                            />
-                            <span>Some HTML is okay.</span>
-                          </a>
-                          <button
-                            type="submit"
-                            className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-                          >
-                            Comment
-                          </button>
-                        </div>
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
+
           </div>
 
           <section aria-labelledby="timeline-title" className="lg:col-start-3 lg:col-span-1">
@@ -337,10 +265,11 @@ export default function Details(props: any) {
                             <div>
                               <p className="text-sm text-gray-500">
                                 {item.author}{' '}
-                                <p className="font-medium text-gray-900">
-                                  {item.message}
-                                </p>
                               </p>
+                              <p className="font-sm text-gray-900">
+                                {item.message}
+                              </p>
+
                             </div>
                             <div className="text-right text-sm whitespace-nowrap text-gray-500">
                               <time dateTime={item.when}><Moment fromNow>{item.when}</Moment></time>

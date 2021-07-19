@@ -18,6 +18,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// ForwardHandler handles the requests with a runningId and a path
 func ForwardHandler(c *gin.Context) {
 	runningContainerID := c.Param("runningId")
 	requestPath := c.Param("path")

@@ -33,6 +33,10 @@ query AllSolvers {
       	image {
           id,
           createdAt,
+          container {
+              uid,
+              running
+          }
         }
     }
 }

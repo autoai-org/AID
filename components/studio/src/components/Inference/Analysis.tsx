@@ -2,24 +2,27 @@
 // 
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
-import ReactJson from 'react-json-view'
-import { Link } from 'react-router-dom'
-export default function InferenceResult(props: any) {
+import Moment from "react-moment"
+import { Link } from "react-router-dom"
+export default function Analysis(props: any) {
+    console.log(props.src)
     return (
         <form className="space-y-8 divide-y divide-gray-200">
             <div className="space-y-8 divide-y divide-gray-200">
                 <div>
                     <div>
-                        <h3 className="text-lg leading-6 font-medium text-gray-900">Result</h3>
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">Analysis</h3>
                         <p className="mt-1 text-sm text-gray-500">
-                            The solver returned the following result.
+                            Here's a simple analysis of the request, more detailed analysis are on the way.
                         </p>
                     </div>
-                    <ReactJson src={props.src} />
+                    Your request start at <Moment unix>{props.src.startTime.toString().slice(0, -3)}</Moment>, 
+                    and the response returned at <Moment unix>{props.src.endTime.toString().slice(0, -3)}</Moment>. 
+                    The overall processing time is {props.src.endTime-props.src.startTime} milliseconds.
                 </div>
                 <div className="pt-5">
                     <div className="flex justify-end">
-                    <Link to="/">
+                        <Link to="/">
                         <button
                             type="button"
                             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -27,13 +30,6 @@ export default function InferenceResult(props: any) {
                             Close
                         </button>
                         </Link>
-                        <button
-                            onClick={props.onNextStep}
-                            type="button"
-                            className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                        >
-                            Next
-                        </button>
                     </div>
                 </div>
             </div></form>

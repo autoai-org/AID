@@ -3,15 +3,6 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { SearchIcon } from '@heroicons/react/solid'
-import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
-
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
-
 export default function ThreeColumnsLayout(props: any) {
     return (
         <>
