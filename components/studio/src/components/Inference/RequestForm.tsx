@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import React from 'react'
-import HTTPClient from "../../services/apis/solver"
+import client from '../../services/apis/solver'
 
 
 interface RequestFormState {
