@@ -5,7 +5,9 @@ import Landing from './pages/Landing'
 import SearchResult from './pages/SearchResult'
 import Login from './pages/Authentication/Login'
 import Signup from './pages/Authentication/Register'
+import Profile from './pages/Profile'
 import reportWebVitals from './reportWebVitals'
+
 import { FirebaseAuthProvider } from '@react-firebase/auth'
 import firebase from "firebase/app"
 import "firebase/auth"
@@ -30,6 +32,9 @@ ReactDOM.render(
           </Route>
           <Route path="/search">
             <SearchResult />
+          </Route>
+          <Route path="/profile">
+            <Profile />
           </Route>
           <Route path="/">
             <Landing />
