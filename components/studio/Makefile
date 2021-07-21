@@ -12,3 +12,8 @@ build-osx:
 	yarn run build
 	cp build/index.html build/200.html
 	yarn tauri build
+
+prepare-binaries:
+	mkdir src-tauri/binaries
+	mv ../cmd/aid src-tauri/binaries/aid
+	node scripts/append.js
