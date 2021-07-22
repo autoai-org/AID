@@ -54,6 +54,7 @@
     "windows": [
       {
         "title": "AID Studio",
+        "center": true,
         "width": 1440,
         "height": 900,
         "resizable": true,
@@ -62,10 +63,12 @@
       },
       {
         "label": "splashscreen",
-        "width": 400,
-        "height": 200,
+        "center": true,
+        "width": 800,
+        "height": 600,
         "decorations": false,
-        "resizable": false,
+        "resizable": true,
+        "fullscreen": false,
         "url": "splashscreen.html"
       }
     ],

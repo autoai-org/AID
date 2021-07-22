@@ -10,6 +10,7 @@
 #[cfg(not(feature = "ui"))]
 mod rust {
   use tauri::{api::process::Command, Manager};
+  use std::{thread::sleep, time::Duration};
 
   #[tauri::command]
   fn close_splashscreen() {}
@@ -24,6 +25,7 @@ mod rust {
             .args(vec!["up"])
             .spawn()
             .expect("failed to setup `aid up` sidecar");
+          sleep(Duration::from_secs(2));
           splashscreen_window.close().unwrap();
           _window.show().unwrap()
         });
@@ -31,7 +33,7 @@ mod rust {
       })
       .invoke_handler(tauri::generate_handler![close_splashscreen])
       .run(tauri::generate_context!())
-      .expect("error while running tauri application");
+      .expect("error while running aid desktop");
   }
 }
 
