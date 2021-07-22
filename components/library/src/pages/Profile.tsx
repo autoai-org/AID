@@ -9,7 +9,9 @@ export default function SearchResult() {
 
     return (
         <MainLayout>
-            <Profile />
+            <div className="max-w-screen-xl mx-auto pb-6 px-4 sm:px-6 lg:pb-16 lg:px-8 pt-4">
+                <Profile />
+            </div>
         </MainLayout>
     )
 }

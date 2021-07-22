@@ -14,7 +14,7 @@ const navigation = [
     { name: 'About', href: 'https://aid.autoai.org/docs/about/intro' },
 ]
 
-export default function AIDFooter() {
+export default function AIDHeader() {
     const history = useHistory();
     return (<Popover as="header" className="relative">
         {({ open }) => (

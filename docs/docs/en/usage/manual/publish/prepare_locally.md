@@ -47,13 +47,24 @@ You can now modify the constructor ```__init__``` function and the ```infer``` f
 * The constructor is supposed to load the pretrained models, and initialise all parameters that needs to be loaded.
 * The ```infer``` function is supposed to read the input parameter ```data```, perform the inference process and return the results.
 
-:::note
-Currently the solver can only receive one file at a time, with the request parameter ```file```. AID will automatically handle the uploading process and save the file to a temporary folder. 
-:::
+You can also change the name of the class, but make sure to update it in your ```aid.toml``` file.
 
 :::note
-Please describe in the ```README.md``` file what input is needed by the solver and how to interpret the results.
+* Currently the solver can only receive one file at a time, with the request parameter ```file```. AID will automatically handle the uploading process and save the file to a temporary folder. 
+* Please describe in the ```README.md``` file what input is needed by the solver and how to interpret the results.
+* If the solver relies on some pretrained weights, you can specify them in the ```pretrained.toml``` file. For more information you can take a look at the specification [here](/docs/specs/configurations#pretrainedtoml).
 :::
 
-## Step 3: Verify Consistency
+## Step 3: Checklist
 
+After modifying everything, you can quickly check if the following requirements are met:
+
+* The solver class in your ```aid.toml``` file should be readable by Python program, i.e. it should has the following format ```{packageName}/solver/{className}``` where ```packageName``` should be replaced by the package name that you have speicified before and ```{className}``` is the name of the class that you modified in step 2.
+
+* If the pretrained weights are needed, the weights should be uploaded to somewhere accessbile to users.
+
+* All requirements should be noted in ```requirements.txt```.
+
+* If additional software is needed, they should be noted in ```setup.sh```. In this file you can write commands like ```apt-get install xxx``` to install additional dependencies that cannot be installed by ```pip```.
+
+* Required request parameters and the meaning of output should be written in the ```README.md``` file.
