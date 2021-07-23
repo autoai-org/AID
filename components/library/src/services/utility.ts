@@ -11,3 +11,10 @@ export function parseQuery(keyword: string): string {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get(keyword) || ""
 }
+
+export function getInitials(text: string):string {
+    if (text==null) {
+        return ""
+    }
+    return text.match(/(^\S\S?|\b\S)?/g)!.join("").match(/(^\S|\S$)?/g)!.join("").toUpperCase()
+}

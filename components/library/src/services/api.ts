@@ -7,7 +7,7 @@ import axios from 'axios'
 import { analyseGithubRepo } from './github'
 
 export const serverEndpoint = 'https://discovery.autoai.org/'
-
+// export const serverEndpoint = 'http://127.0.0.1:3001/'
 function _get(endpoint:string) {
     return new Promise((resolve, reject)=>{
         axios.get(endpoint).then((res)=>{
@@ -17,7 +17,15 @@ function _get(endpoint:string) {
         })
     })
 }
-
+function _post(endpoint:string, payload:object) {
+    return new Promise((resolve, reject)=>{
+        axios.post(endpoint, payload).then((res)=>{
+            resolve(res)
+        }).catch((err)=>{
+            reject(err)
+        })
+    })
+}
 export function findModelsByKeyword(keyword:string) {
     if (keyword==="") {
         return _get(serverEndpoint+"model/")
@@ -36,4 +44,12 @@ export async function analyseRepos(repos:any) {
         }
     }
     return repos
+}
+
+export function getModelInfo(vendor:string, name:string) {
+    return _get(serverEndpoint+"model/info/"+vendor+"/"+name)
+}
+
+export function postNewRepo(repo:any) {
+    return _post(serverEndpoint+"model/", repo)
 }

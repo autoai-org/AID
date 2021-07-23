@@ -3,10 +3,15 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import { Octokit } from "@octokit/rest";
 import ReactMarkdown from 'react-markdown'
+import toml from 'toml'
+import { postNewRepo } from '../../services/api'
+import { CheckCircleIcon } from '@heroicons/react/solid'
 
 let octokit = new Octokit();
 export default function PublishForm() {
+
     const githubAuthProvider = new firebase.auth.GithubAuthProvider();
+    
     const [loggedInFromGithub, setLoggedInFromGitHub] = useState(false);
     const [repositories, setRepositories] = useState<object[]>([]);
     const [logins, setLogins] = useState<string[]>([])
@@ -14,6 +19,9 @@ export default function PublishForm() {
     const [selectedRepo, setSelectedRepo] = useState("")
     const [repoConfirmed, setRepoConfirmed] = useState(false)
     const [readme, setReadme] = useState("")
+    const [aidTOML, setAIDToml] = useState<any>({})
+    const [added, setAdded] = useState(false)
+
     function GitHubImport() {
         let usernames: string[] = []
         let repositories: object[] = []
@@ -47,7 +55,6 @@ export default function PublishForm() {
                             setLogins(usernames)
                             setSelectedLogin(usernames[0])
                             setRepositories(repositories)
-                            console.log(repositories)
                             setLoggedInFromGitHub(true)
                         })
                     })
@@ -61,16 +68,49 @@ export default function PublishForm() {
         octokit.rest.repos.getReadme({
             owner: selectedLogin,
             repo: selectedRepo,
-        }).then(function(res:any) {
-            console.log(res)
-            setRepoConfirmed(true)
+        }).then(function (res: any) {
             setReadme(atob(res.data.content))
-            
+            octokit.rest.repos.getContent({
+                owner: selectedLogin,
+                repo: selectedRepo,
+                path: 'aid.toml',
+            }).then(function (res: any) {
+
+                setAIDToml(toml.parse(atob(res.data.content)))
+                console.log(toml.parse(atob(res.data.content)))
+                setRepoConfirmed(true)
+            })
+        })
+    }
+    function submit() {
+        postNewRepo({
+            'name': selectedRepo,
+            'vendor': selectedLogin,
+            'description': aidTOML.package.tagline,
+            'githubURL': "https://github.com/" + selectedLogin + "/" + selectedRepo
+        }).then(function (res) {
+            console.log(res)
+            setAdded(true)
         })
     }
     return (
         <form className="space-y-8 divide-y divide-gray-200">
             <div className="space-y-8 divide-y divide-gray-200">
+                {added &&
+                    <div className="rounded-md bg-green-50 p-4">
+                        <div className="flex">
+                            <div className="flex-shrink-0">
+                                <CheckCircleIcon className="h-5 w-5 text-green-400" aria-hidden="true" />
+                            </div>
+                            <div className="ml-3">
+                                <h3 className="text-sm font-medium text-green-800">Submission Completed</h3>
+                                <div className="mt-2 text-sm text-green-700">
+                                    <p>Your model have been added!</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div>
                     <div>
                         <h3 className="text-lg leading-6 font-medium text-gray-900">Publish New Models</h3>
@@ -144,21 +184,34 @@ export default function PublishForm() {
                                         className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">Confirm</button>
                                 </div>
                             </div>
-                            {repoConfirmed &&
+                        </div>}
 
-                                <div className="sm:col-span-6">
-                                    <label htmlFor="about" className="block text-sm font-medium text-gray-700">
-                                        About
-                                    </label>
-                                    <div className="mt-1 prose">
+                    {repoConfirmed &&
+                        <div className="mt-6 grid grid-cols-4 gap-y-6 gap-x-4 sm:grid-cols-6">
+                            <div className="sm:col-span-6">
+                                <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                                    Tagline
+                                </label>
+                                <input
+                                    type="text"
+                                    name="tagline"
+                                    id="tagline"
+                                    disabled
+                                    className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
+                                    value={aidTOML.package.tagline}
+                                />
+
+                            </div>
+                            <div className="sm:col-span-6">
+                                <label htmlFor="about" className="block text-sm font-medium text-gray-700">
+                                    About
+                                </label>
+                                <div className="mt-1 prose">
                                     <ReactMarkdown>{readme}</ReactMarkdown>
-                                    </div>
-
                                 </div>
-                            }
 
+                            </div>
                         </div>
-
                     }
 
                 </div>
@@ -174,6 +227,7 @@ export default function PublishForm() {
                         Cancel
                     </button>
                     <button
+                        onClick={submit}
                         type="button"
                         className="ml-3 inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     >

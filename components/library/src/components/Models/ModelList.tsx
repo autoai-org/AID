@@ -15,7 +15,7 @@ export default function ModelList(props: any) {
         <ul className="mt-5 border-t border-gray-200 divide-y divide-gray-200 sm:mt-0 sm:border-t-0">
             {props.models.map((model: any, index: number) => (
                 <li key={index}>
-                    <a href="/" className="group block">
+                    <a href={"/model/"+model.vendor+"/"+model.name} className="group block">
                         <div className="flex items-center py-5 px-4 sm:py-6 sm:px-0">
                             <div className="min-w-0 flex-1 flex items-center">
                                 <div className="flex-shrink-0">

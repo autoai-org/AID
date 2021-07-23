@@ -9,7 +9,7 @@ import Publish from './pages/Publish'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 import reportWebVitals from './reportWebVitals'
-
+import ModelDetail from './components/Models/ModelDetail'
 import { FirebaseAuthProvider } from '@react-firebase/auth'
 import firebase from "firebase/app"
 import "firebase/auth"
@@ -40,6 +40,9 @@ ReactDOM.render(
           </Route>
           <Route path="/publish">
             <Publish />
+          </Route>
+          <Route path="/model/:vendor/:name">
+            <ModelDetail />
           </Route>
           <Route exact path="/">
             <Landing />

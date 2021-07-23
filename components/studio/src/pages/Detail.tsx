@@ -91,8 +91,7 @@ export default function Details(props: any) {
                 Uploaded by{' '}
                 <a href="#" className="text-gray-900">
                   {solverInfo.vendorname}
-                </a>{' '}
-                on <time dateTime="2020-08-25">August 25, 2020</time>
+                </a>
               </p>
             </div>
           </div>

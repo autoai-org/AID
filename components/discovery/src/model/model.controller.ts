@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Param } from '@nestjs/common'
 import { AIDModel, CreateModelDto } from './model.schema'
 import { ModelService } from './model.service';
 import { ApiTags } from '@nestjs/swagger';
-import { fetchGithubSummary } from '../services/github'
+import { fetchGithubSummary, getGitHubDetails} from '../services/github'
 
 @ApiTags('Model')
 @Controller('model')
@@ -26,6 +26,10 @@ export class ModelController {
         } else {
             return {}
         }
+    }
+    @Get("/info/:vendor/:name")
+    async fetchInformation(@Param("vendor") vendor: string, @Param("name") name: string): Promise<any> {
+        return getGitHubDetails(vendor, name)
     }
     @Post()
     async create(@Body() createDto: CreateModelDto) {
