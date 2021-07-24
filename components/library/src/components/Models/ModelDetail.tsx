@@ -15,18 +15,18 @@ function classNames(...classes: any) {
 export default function ModelDetail(props: any) {
     let { vendor } = useParams<{ vendor: string }>();
     let { name } = useParams<{ name: string }>();
+
     const [detailedInfo, setDetailedInfo] = useState<any>({})
     const [loaded, setLoaded] = useState(false)
     
     useEffect(() => {
         getModelInfo(vendor, name).then(function (res: any) {
-            console.log(res)
             setDetailedInfo(res.data)
             setLoaded(true)
         }).catch(function (err: any) {
             console.log(err)
         })
-    }, [])
+    }, [vendor, name])
     return (
 
         <MainLayout>
@@ -93,7 +93,7 @@ export default function ModelDetail(props: any) {
                                         <div className="sm:col-span-1">
                                             <dt className="text-sm font-medium text-gray-500">CI Status</dt>
                                             <dd className="mt-1 text-sm text-gray-900">
-                                                <img src={"https://github.com/" + vendor + "/" + name + "/actions/workflows/aid-ci.yml/badge.svg"}></img>
+                                                <img alt="CI_STATUS_UNKNOWN" src={"https://github.com/" + vendor + "/" + name + "/actions/workflows/aid-ci.yml/badge.svg"}></img>
                                             </dd>
                                         </div>
                                         <div className="sm:col-span-2 prose">
