@@ -1,16 +1,19 @@
 import React from 'react';
 import MainLayout from './layouts/MainLayout'
 import './App.css';
-
+import { initServerEndpoint } from './services/apis'
 type AppProps = {
 }
 
-type AppState  = {
+type AppState = {
   connected: boolean,
 }
 
 class Application extends React.Component<AppProps, AppState> {
-  constructor(props:AppProps) {
+  componentDidMount() {
+    initServerEndpoint()
+  }
+  constructor(props: AppProps) {
     super(props);
     this.state = {
       connected: false,
@@ -23,10 +26,11 @@ class Application extends React.Component<AppProps, AppState> {
     })
   }
   render() {
-      return (
-        <MainLayout/>
-      );
-    }
+    
+    return (
+      <MainLayout />
+    );
+  }
 }
 
 export default Application;

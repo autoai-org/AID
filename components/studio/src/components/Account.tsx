@@ -45,13 +45,13 @@ export default function Account() {
                                     type="button"
                                     className="inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:w-full"
                                 >
-                                    New Project
+                                    Install Packages
                                 </button>
                                 <button
                                     type="button"
                                     className="mt-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"
                                 >
-                                    Invite Team
+                                    Build Solvers
                                 </button>
                             </div>
                         </div>
@@ -59,12 +59,13 @@ export default function Account() {
                         <div className="flex flex-col space-y-6 sm:flex-row sm:space-y-0 sm:space-x-8 xl:flex-col xl:space-x-0 xl:space-y-6">
                             <div className="flex items-center space-x-2">
                                 <BadgeCheckIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                <span className="text-sm text-gray-500 font-medium">Pro Member</span>
+                                <span className="text-sm text-gray-500 font-medium">Early Adopter</span>
                             </div>
                             <div className="flex items-center space-x-2">
                                 <CollectionIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
-                                <span className="text-sm text-gray-500 font-medium">8 Projects</span>
+                                <span className="text-sm text-gray-500 font-medium">8 Packages Installed</span>
                             </div>
+                            
                         </div>
                     </div>
                 </div>

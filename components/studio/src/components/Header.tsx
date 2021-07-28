@@ -4,20 +4,21 @@ import {
     SearchIcon,
 } from '@heroicons/react/solid'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
-
-const navigation = [
-    { name: 'Model Hub', href: '#', current: true },
-    { name: 'Servers', href: '#', current: false },
-]
+import { serverEndpoint, setServerEndpoint, getServerEndpoint } from '../services/apis'
+import { store } from '../services/store/store'
 const userNavigation = [
     { name: 'Your Profile', href: '#' },
     { name: 'Settings', href: '#' },
-    { name: 'Disconnect', href: '#' },
+    { name: 'Log Out', href: '#' },
 ]
+
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 export default function Header() {
+    function disconnect() {
+        setServerEndpoint("")
+    }
     return (
         <Disclosure as="nav" className="flex-shrink-0 bg-indigo-600">
             {({ open }) => (
@@ -70,16 +71,50 @@ export default function Header() {
                             <div className="hidden lg:block lg:w-80">
                                 <div className="flex items-center justify-end">
                                     <div className="flex">
-                                        {navigation.map((item) => (
-                                            <a
-                                                key={item.name}
-                                                href={item.href}
-                                                className="px-3 py-2 rounded-md text-sm font-medium text-indigo-200 hover:text-white"
-                                                aria-current={item.current ? 'page' : undefined}
-                                            >
-                                                {item.name}
-                                            </a>
-                                        ))}
+
+                                        <Menu as="div" className="ml-4 relative flex-shrink-0">
+                                            {({ open }) => (
+                                                <>
+                                                    <div>
+                                                        <Menu.Button className="flex text-sm rounded-full hover:text-white text-indigo-200">
+                                                            Connnected
+                                                        </Menu.Button>
+                                                    </div>
+                                                    <Transition
+                                                        show={open}
+                                                        as={Fragment}
+                                                        enter="transition ease-out duration-100"
+                                                        enterFrom="transform opacity-0 scale-95"
+                                                        enterTo="transform opacity-100 scale-100"
+                                                        leave="transition ease-in duration-75"
+                                                        leaveFrom="transform opacity-100 scale-100"
+                                                        leaveTo="transform opacity-0 scale-95"
+                                                    >
+                                                        <Menu.Items
+                                                            static
+                                                            className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                                        >
+                                                            <div>
+                                                                <Menu.Item>
+                                                                    {({ active }) => (
+                                                                        <button
+                                                                            onClick={disconnect}
+                                                                            className={classNames(
+                                                                                'text-gray-700 flex justify-between px-4 py-2 text-sm'
+                                                                            )}
+                                                                        >
+                                                                            <span>Disconnect</span>
+                                                                        </button>
+                                                                    )}
+                                                                </Menu.Item>
+                                                            </div>
+
+                                                        </Menu.Items>
+                                                    </Transition>
+                                                </>
+                                            )}
+                                        </Menu>
+
                                     </div>
                                     {/* Profile dropdown */}
                                     <Menu as="div" className="ml-4 relative flex-shrink-0">
@@ -119,6 +154,7 @@ export default function Header() {
                                                                             'block px-4 py-2 text-sm text-gray-700'
                                                                         )}
                                                                     >
+
                                                                         {item.name}
                                                                     </a>
                                                                 )}
@@ -133,39 +169,6 @@ export default function Header() {
                             </div>
                         </div>
                     </div>
-
-                    <Disclosure.Panel className="lg:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1">
-                            {navigation.map((item) => (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    className={classNames(
-                                        item.current
-                                            ? 'text-white bg-indigo-800'
-                                            : 'text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600',
-                                        'block px-3 py-2 rounded-md text-base font-medium'
-                                    )}
-                                    aria-current={item.current ? 'page' : undefined}
-                                >
-                                    {item.name}
-                                </a>
-                            ))}
-                        </div>
-                        <div className="pt-4 pb-3 border-t border-indigo-800">
-                            <div className="px-2 space-y-1">
-                                {userNavigation.map((item) => (
-                                    <a
-                                        key={item.name}
-                                        href={item.href}
-                                        className="block px-3 py-2 rounded-md text-base font-medium text-indigo-200 hover:text-indigo-100 hover:bg-indigo-600"
-                                    >
-                                        {item.name}
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
-                    </Disclosure.Panel>
                 </>
             )}
         </Disclosure>

@@ -4,7 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ServerIcon, CheckIcon } from '@heroicons/react/outline'
 import { connectServer } from '../services/apis/system.query';
 import { setServer } from '../services/store/connectivity/server'
-
+import { serverEndpoint, setServerEndpoint } from '../services/apis'
 interface ConnectState {
     url: string;
     isConnected: boolean;
@@ -23,7 +23,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
             handler: props.handler,
         };
         this.state = {
-            url: "http://127.0.0.1:17415",
+            url: serverEndpoint,
             isConnected: false,
             error: "",
             sysInfo: {},
@@ -40,7 +40,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ connecting: true })
         connectServer(this.state.url + "/ping").then(function (res) {
             self.setState({ sysInfo: res.data })
-            self.setState({ isConnected: true })
+            self.setState({ isConnected: true })  
         })
     }
 
@@ -48,8 +48,8 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ url: e.target.value })
     }
     handleCompleteConnection = () => {
+        setServerEndpoint(this.state.url)
         this.setState({ open: false })
-        this.props.handler(setServer(this.state.url))
     }
     handleCancel = () => {
         if (this.state.isConnected) {

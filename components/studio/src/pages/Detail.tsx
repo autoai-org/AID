@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux'
 import { restclient } from '../services/apis';
 import Moment from 'react-moment';
 import { getInitials } from '../services/utilities/initials'
-
+import { serverEndpoint } from '../services/apis'
 const attachments = [
   { name: 'pretrained_1.pt', href: '#' },
   { name: 'pretrained_2.pt', href: '#' },
@@ -59,7 +59,7 @@ export default function Details(props: any) {
 
   useEffect(() => {
     dispatch(setIsLoading(true))
-    restclient.get("http://127.0.0.1:17415/solver/" + props.match.params.solverID).then(function (res: any) {
+    restclient.get(serverEndpoint+ "/solver/" + props.match.params.solverID).then(function (res: any) {
       setSolverInfo(res.data)
       console.log(res.data)
     }).catch(function (err) {
@@ -81,7 +81,6 @@ export default function Details(props: any) {
                 <span className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-gray-500">
                   <span className="text-xl font-medium leading-none text-white">{getInitials(solverInfo.solvername)}</span>
                 </span>
-
                 <span className="absolute inset-0 shadow-inner rounded-full" aria-hidden="true" />
               </div>
             </div>
@@ -101,7 +100,7 @@ export default function Details(props: any) {
                 type="button"
                 className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
               >
-                Repo's Homepage
+                Homepage
               </button>
             </a>
             <Popover className="relative">

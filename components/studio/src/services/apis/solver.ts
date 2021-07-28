@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import axios, { Method } from "axios"
-
+import { serverEndpoint } from ".";
 class HTTPClient {
     host: string;
     constructor(host: string) {
@@ -19,6 +19,6 @@ class HTTPClient {
     }
 }
 
-const client = new HTTPClient("http://127.0.0.1:17415/")
+const client = new HTTPClient(serverEndpoint)
 
 export default client;

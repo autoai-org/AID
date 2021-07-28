@@ -38,7 +38,7 @@ func RunServer(port string) {
 	}
 	utilities.Formatter.Info("Starting the server...")
 	r := getRouter()
-	err := r.Run("127.0.0.1:" + port)
+	err := r.Run("0.0.0.0:" + port)
 	utilities.ReportError(err, "Cannot start server")
 	quit := make(chan os.Signal)
 	signal.Notify(quit, syscall.SIGINT, syscall.SIGTERM)
