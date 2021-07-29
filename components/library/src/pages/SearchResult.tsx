@@ -8,7 +8,7 @@ import DoubleColumn from '../Layouts/DoubleColumn'
 import MainLayout from "../Layouts/MainLayout";
 import { parseQuery } from "../services/utility";
 import { findModelsByKeyword, analyseRepos } from "../services/api"
-import ModelList from "../components/Models/ModelList";
+import ModelList from "../components/Models/NewModelListCards";
 
 export default function SearchResult() {
     const [packages, setPackages] = useState([])

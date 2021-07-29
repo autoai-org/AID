@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import FeatureGrid from '../components/Landing/FeatureGrid'
 import Screenshots from '../components/Landing/Screenshots'
-
+import LogoCloud from '../components/Landing/LogoCloud'
 export default function Landing() {
 
     const [keyword, setKeyword] = useState("");
@@ -78,6 +78,7 @@ export default function Landing() {
                     </div>
                     <Screenshots/>
                     <FeatureGrid/>
+                    <LogoCloud/>
         </MainLayout>
     )
 }

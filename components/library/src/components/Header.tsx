@@ -68,7 +68,7 @@ export default function AIDHeader() {
                                                         />
                                                     </div>
                                                     <div className="ml-3">
-                                                        <p className="text-sm font-medium text-white group-hover:text-gray-900">{user.displayName}</p>
+                                                        <p className="text-sm font-medium text-white ">{user.displayName}</p>
                                                     </div>
                                                 </div>
                                             </a>
