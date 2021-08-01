@@ -24,7 +24,6 @@ export default function ModelDetail(props: any) {
             setDetailedInfo(res.data)
             setLoaded(true)
         }).catch(function (err: any) {
-            console.log(err)
         })
     }, [vendor, name])
     return (
