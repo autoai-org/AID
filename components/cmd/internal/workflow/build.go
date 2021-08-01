@@ -11,3 +11,8 @@ func BuildDockerImageWithPath(path string, solverName string, autoRemove bool) {
 	// todo: now force images to be removed after building
 	docker.BuildWithPath(path, solverName, autoRemove)
 }
+
+func BuildDockerImageWithPath(path string, solverName string, autoRemove bool) {
+	// todo: now force images to be removed after building
+	docker.BuildWithPath(path, solverName, autoRemove)
+}

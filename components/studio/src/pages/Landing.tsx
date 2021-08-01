@@ -23,5 +23,4 @@ export default function Landing() {
       <Connection handler={dispatch}></Connection>
     )
   }
-
 }

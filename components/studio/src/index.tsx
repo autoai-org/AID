@@ -9,8 +9,8 @@ import { store, persistor } from './services/store/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
 import Loading from './components/Loading'
-
 ReactDOM.render(
+
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={<Loading />} persistor={persistor}>
