@@ -7,11 +7,7 @@ func BuildDockerImage(vendorName string, packageName string, solverName string, 
 	docker.BuildImage(vendorName, packageName, solverName, gpu)
 }
 
-func BuildDockerImageWithPath(path string, solverName string, autoRemove bool) {
-	// todo: now force images to be removed after building
-	docker.BuildWithPath(path, solverName, autoRemove)
-}
-
+// BuildDockerImageWithPath builds the docker image in standalone mode
 func BuildDockerImageWithPath(path string, solverName string, autoRemove bool) {
 	// todo: now force images to be removed after building
 	docker.BuildWithPath(path, solverName, autoRemove)

@@ -21,9 +21,9 @@ func getRouter() *gin.Engine {
 		}
 	}()
 	r := gin.Default()
+	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	r.Use(otelgin.Middleware("aid-server"))
-	r.Use(beforeResponse())
 	r.GET("/ping", handlers.PingHandler)
 	r.POST("/preflight", handlers.PreflightHandler)
 	r.POST("/query", graphqlHandler())

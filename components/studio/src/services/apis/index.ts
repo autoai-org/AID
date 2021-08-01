@@ -3,7 +3,7 @@ import axios from 'axios'
 import { setServer } from '../store/connectivity/server'
 import {store} from '../store/store'
 
-let serverEndpoint = "http://127.0.0.1:17415"
+let serverEndpoint = "http://localhost:17416"
 
 function setServerEndpoint(endpoint:string) {
     serverEndpoint = endpoint
