@@ -4,7 +4,7 @@
   "description": "",
   "author": "",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
@@ -32,10 +32,12 @@
     "@nestjs/platform-express": "^7.4.4",
     "@nestjs/swagger": "^4.6.1",
     "@nestjs/terminus": "^7.0.1",
+    "@octokit/rest": "^18.7.0",
     "@types/mongoose": "^5.7.36",
     "@types/passport-google-oauth20": "^2.0.4",
     "admin-bro": "^3.4.0",
     "admin-bro-expressjs": "^2.1.1",
+    "base-64": "^1.0.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
     "express": "^4.17.1",
@@ -52,7 +54,8 @@
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.3",
-    "swagger-ui-express": "^4.1.6"
+    "swagger-ui-express": "^4.1.6",
+    "toml": "^3.0.0"
   },
   "devDependencies": {
     "@nestjs/cli": "^7.5.1",

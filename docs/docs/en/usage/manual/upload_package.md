@@ -87,6 +87,8 @@ url = "pretrained/name_of_your_modelfile" # Local File
 
 Make sure this file is located at the root path of your project. AID will automatically download the file when install packages.
 
+## Build Locally
+
 ## Publish to GitHub
 
 We encourage you to upload your package to GitHub repositories, as long as you want it to be open sourced.

@@ -2,6 +2,7 @@ type Image implements Node {
     id: ID!
     title: String
     createdAt: Time
+    container: Container
 }
 
 enum ImageOrderField {
@@ -17,6 +18,7 @@ input ImageOrder {
 type ImageEdge {
     node: Image
     cursor: Cursor!
+    container: Container!
 }
 
 type ImageConnection {

@@ -55,6 +55,15 @@ func main() {
 				},
 			},
 			{
+				Name:     "new",
+				Usage:    "aid new",
+				Category: "packages",
+				Action: func(c *cli.Context) error {
+					initRepo(c)
+					return nil
+				},
+			},
+			{
 				Name:     "build",
 				Usage:    "aid build [vendor]/[package]/[solver] or aid build -p [path]",
 				Category: "packages",
@@ -77,10 +86,16 @@ func main() {
 						Value: false,
 						Usage: "Remove the images after building",
 					},
+					&cli.BoolFlag{
+						Name:    "gpu",
+						Aliases: []string{"g"},
+						Value:   false,
+						Usage:   "GPU Required",
+					},
 				},
 				Action: func(c *cli.Context) error {
 					if c.String("path") == "null" {
-						buildImage(c.Args().Get(0))
+						buildImage(c.Args().Get(0), c.Bool("gpu"))
 					} else {
 						buildImageByPath(c.String("path"), c.String("solver"), c.Bool("remove"))
 					}
@@ -92,8 +107,16 @@ func main() {
 				Name:     "create",
 				Usage:    "aid create [Image Unique ID] [Host Port]",
 				Category: "packages",
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name:    "gpu",
+						Aliases: []string{"g"},
+						Value:   false,
+						Usage:   "GPU Required",
+					},
+				},
 				Action: func(c *cli.Context) error {
-					createContainer(c.Args().Get(0), c.Args().Get(1))
+					createContainer(c.Args().Get(0), c.Args().Get(1), c.Bool("gpu"))
 					return nil
 				},
 			},

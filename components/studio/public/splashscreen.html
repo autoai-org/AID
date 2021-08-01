@@ -1,0 +1,145 @@
+<html>
+
+<head>
+
+</head>
+
+<body>
+  <div class="splash">
+    <div class='block'>
+      <div class='item'></div>
+      <div class='itm'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+      <div class='item'></div>
+    </div>
+  </div>
+  <div class="tagline">
+    AID is loading...
+  </div>
+</body>
+<footer>
+  <style>
+    body {
+      background: #618f4f;
+    }
+
+    .splash {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      height: 2rem;
+      width: 2rem;
+      transform: translateX(-50%) translateY(-50%);
+    }
+    .tagline {
+      position: fixed;
+      top: 60%;
+      height: 1rem;
+      width: 100%;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    .block {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 2rem;
+      width: 2rem;
+    }
+
+    .block>.item {
+      position: absolute;
+      height: 2rem;
+      width: 2rem;
+      background: #fff;
+      animation: move 2s linear infinite;
+    }
+
+    .block>.item:nth-of-type(1) {
+      top: -2rem;
+      left: -2rem;
+      animation-delay: -1.75s;
+    }
+
+    .block>.item:nth-of-type(2) {
+      top: -2rem;
+      left: 0;
+      animation-delay: -1.5s;
+    }
+
+    .block>.item:nth-of-type(3) {
+      top: -2rem;
+      left: 2rem;
+      animation-delay: -1.25s;
+    }
+
+    .block>.item:nth-of-type(4) {
+      top: 0;
+      left: 2rem;
+      animation-delay: -1s;
+    }
+
+    .block>.item:nth-of-type(5) {
+      top: 2rem;
+      left: 2rem;
+      animation-delay: -0.75s;
+    }
+
+    .block>.item:nth-of-type(6) {
+      top: 2rem;
+      left: 0;
+      animation-delay: -0.5s;
+    }
+
+    .block>.item:nth-of-type(7) {
+      top: 2rem;
+      left: -2rem;
+      animation-delay: -0.25s;
+    }
+
+    .block>.item:nth-of-type(8) {
+      top: 0;
+      left: -2rem;
+      animation-delay: 0s;
+    }
+
+    @keyframes move {
+      0% {
+        transform: rotate(0) scale(1);
+        animation-timing-function: ease-in;
+      }
+
+      10% {
+        transform: rotate(90deg) scale(0);
+      }
+
+      50% {
+        transform: rotate(90deg) scale(0);
+        animation-timing-function: ease-out;
+      }
+
+      60% {
+        transform: rotate(180deg) scale(1);
+      }
+
+      100% {
+        transform: rotate(180deg) scale(1);
+      }
+    }
+  </style>
+</footer>
+
+</html>

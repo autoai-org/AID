@@ -1,19 +1,19 @@
 {
+  "package": {
+    "productName": "AID Studio",
+    "version": "0.1.0"
+  },
   "build": {
-    "distDir": "../dist",
+    "distDir": "../build",
     "devPath": "http://localhost:3000",
     "beforeDevCommand": "",
     "beforeBuildCommand": ""
   },
-  "ctx": {},
   "tauri": {
-    "embeddedServer": {
-      "active": true
-    },
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "com.tauri.dev",
+      "identifier": "org.autoai.aid",
       "icon": [
         "icons/32x32.png",
         "icons/128x128.png",
@@ -21,8 +21,8 @@
         "icons/icon.icns",
         "icons/icon.ico"
       ],
+      "externalBin": ["binaries/aid"],
       "resources": [],
-      "externalBin": [],
       "copyright": "",
       "category": "DeveloperTool",
       "shortDescription": "",
@@ -31,28 +31,49 @@
         "depends": [],
         "useBootstrapper": false
       },
-      "osx": {
+      "macOS": {
         "frameworks": [],
         "minimumSystemVersion": "",
-        "useBootstrapper": false
+        "useBootstrapper": false,
+        "exceptionDomain": "",
+        "signingIdentity": null,
+        "entitlements": null
       },
-      "exceptionDomain": ""
+      "windows": {
+        "certificateThumbprint": null,
+        "digestAlgorithm": "sha256",
+        "timestampUrl": ""
+      }
+    },
+    "updater": {
+      "active": false
     },
     "allowlist": {
       "all": true
     },
-    "window": {
-      "title": "AID Studio",
-      "width": 1440,
-      "height": 900,
-      "resizable": true,
-      "fullscreen": false
-    },
+    "windows": [
+      {
+        "title": "AID Studio",
+        "center": true,
+        "width": 1440,
+        "height": 900,
+        "resizable": true,
+        "fullscreen": false,
+        "visible": false
+      },
+      {
+        "label": "splashscreen",
+        "center": true,
+        "width": 800,
+        "height": 600,
+        "decorations": false,
+        "resizable": true,
+        "fullscreen": false,
+        "url": "splashscreen.html"
+      }
+    ],
     "security": {
-      "csp": "default-src blob: data: filesystem: ws: http: https: 'unsafe-eval' 'unsafe-inline'"
-    },
-    "inliner": {
-      "active": true
+      "csp": "default-src blob: data: filesystem: ws: wss: http: https: tauri: 'unsafe-eval' 'unsafe-inline' 'self' img-src: 'self'"
     }
   }
 }

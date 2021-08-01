@@ -64,7 +64,7 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger) 
 }
 
 // prepareBuild will prepare everything for the building process.
-func prepareBuild(solver ent.Solver) (*ent.SystemLog, error) {
+func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
 	utilities.Formatter.Info("Building Image for " + solver.Name + " ...")
 	logUID := utilities.GenerateUUIDv4()
 	fmt.Println(logUID)
@@ -78,7 +78,14 @@ func prepareBuild(solver ent.Solver) (*ent.SystemLog, error) {
 	buildLogger := utilities.NewLogger(logPath)
 	repo, err := solver.QueryRepository().First(context.Background())
 	utilities.ReportError(err, "Cannot query repository of "+solver.Name)
-	dockerfile := filepath.Join(repo.Localpath, "docker_"+solver.Name)
+	var dockerfile string
+	if gpu {
+		utilities.Formatter.Info("Building with GPU Enabled")
+		dockerfile = filepath.Join(repo.Localpath, "docker_gpu_"+solver.Name)
+	} else {
+		utilities.Formatter.Info("Building with GPU Disabled")
+		dockerfile = filepath.Join(repo.Localpath, "docker_"+solver.Name)
+	}
 	// if dockerfile does not exists, generate a default one.
 	if !utilities.IsFileExists(dockerfile) {
 		utilities.Formatter.Warn("Dockerfile not found, AID will generate a default version.")
@@ -102,14 +109,14 @@ func prepareBuild(solver ent.Solver) (*ent.SystemLog, error) {
 }
 
 // BuildImage builds the image
-func BuildImage(vendor string, packageName string, solverName string) {
+func BuildImage(vendor string, packageName string, solverName string, gpu bool) {
 	repos, err := database.NewDefaultDB().Repository.Query().Where(repository.And(repository.Name(packageName), repository.Vendor(vendor))).First(context.Background())
 	utilities.ReportError(err, "cannot find repos "+packageName)
 	solvers, err := repos.QuerySolvers().All(context.Background())
 	utilities.ReportError(err, "cannot find solvers of "+packageName)
 	for _, solver := range solvers {
 		if solver.Name == solverName {
-			prepareBuild(*solver)
+			prepareBuild(*solver, gpu)
 		}
 	}
 }

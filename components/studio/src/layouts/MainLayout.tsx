@@ -1,8 +1,12 @@
-import Landing from '../pages/Landing'
+import Body from './Body'
+import Loading from '../components/Common/Loading'
 export default function MainLayout() {
     return (
         <div className="mx-auto">
-            <main><Landing/></main>
+            <main>
+                <Loading />
+                <Body/>
+            </main>
         </div>
     )
 }

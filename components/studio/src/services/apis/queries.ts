@@ -26,9 +26,17 @@ query AllSolvers {
       	repository {
           uid,
           name,
+          created_at,
+          remote_url,
+          vendor
         }
       	image {
           id,
+          createdAt,
+          container {
+              uid,
+              running
+          }
         }
     }
 }

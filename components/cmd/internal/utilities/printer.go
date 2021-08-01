@@ -7,6 +7,7 @@ package utilities
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/gookit/color"
 )
@@ -26,6 +27,7 @@ func (cp *ColorPrinter) Info(msg string) {
 // Error is the shorcut for basePrint(error,...)
 func (cp *ColorPrinter) Error(msg string) {
 	cp.basePrint("ERROR", msg)
+	os.Exit(1)
 }
 
 // Warn is the shorcut for basePrint(warn,...)

@@ -60,7 +60,7 @@ ci-build:
 
 xbuild:
 	@echo -e ">>> Starting cross-platform building..."
-	@echo -e ">>> This command is supposed to be running on CI Server"
+	@echo -e ">>> This command is supposed to be running on CI Server with cross-platform toolkits"
 	@echo -e ">>> Make sure you know what you are doing:)"
 	@go mod download
 	@go mod verify
@@ -68,3 +68,6 @@ xbuild:
 	@cd tui && env GOOS=darwin GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-macOS
 	@cd tui && env GOOS=linux GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-linux
 	@cd tui && env GOOS=windows GOARCH=amd64 go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid-windows
+
+install:
+	cp ./aid /usr/local/bin

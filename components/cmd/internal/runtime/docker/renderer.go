@@ -24,6 +24,9 @@ var dockerTpl string
 //go:embed assets/runner.tpl
 var runnerTpl string
 
+//go:embed assets/dockerfile_gpu.tpl
+var dockerGPUTpl string
+
 //getTpl returns the template string
 func getTpl(filename string) string {
 	if filename == "dockerfile" {
@@ -31,6 +34,9 @@ func getTpl(filename string) string {
 	}
 	if filename == "runner" {
 		return runnerTpl
+	}
+	if filename == "dockerfile_gpu" {
+		return dockerGPUTpl
 	}
 	utilities.Formatter.Error("Unspecified template filename " + filename)
 	return ""
@@ -45,15 +51,28 @@ func GenerateDockerFiles(baseFilePath string) {
 	}
 	packageInfo := configuration.LoadPackageFromConfig(tomlString)
 	for _, solver := range packageInfo.Solvers {
-		RenderDockerfile(solver.Name, baseFilePath)
+		RenderDockerfile(solver.Name, baseFilePath, true)
+		RenderDockerfile(solver.Name, baseFilePath, false)
 	}
 }
 
 // RenderDockerfile returns the final dockerfile
-func RenderDockerfile(solvername string, targetFilePath string) {
-	tpl, err := pongo2.FromString(getTpl("dockerfile"))
+func RenderDockerfile(solvername string, targetFilePath string, gpu bool) {
+	var templateName string
+	if gpu {
+		templateName = "dockerfile_gpu"
+	} else {
+		templateName = "dockerfile"
+	}
+	tpl, err := pongo2.FromString(getTpl(templateName))
 	utilities.ReportError(err, "Cannot render dockerfile")
-	filename := filepath.Join(targetFilePath, "docker_"+solvername)
+	var filename string
+	if gpu {
+		filename = filepath.Join(targetFilePath, "docker_gpu_"+solvername)
+	} else {
+		filename = filepath.Join(targetFilePath, "docker_"+solvername)
+	}
+
 	setupFilePath := filepath.Join(targetFilePath, "setup.sh")
 	var setupCommands string = ""
 	if utilities.IsExists(setupFilePath) {

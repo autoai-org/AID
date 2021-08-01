@@ -43,6 +43,11 @@ module.exports = {
                     position: 'left',
                 },
                 {
+                    to: 'blog',
+                    label: 'Blogs',
+                    position: 'left',
+                },
+                {
                     label: t.navbar.community,
                     position: 'left',
                     items: [
@@ -52,7 +57,7 @@ module.exports = {
                         },
                         {
                             label: t.navbar.showcase,
-                            to: 'showcase',
+                            to: 'docs/community/examples/showroom',
                         },
                     ],
                 },
@@ -111,7 +116,7 @@ module.exports = {
                     ],
                 },
             ],
-            copyright: `Copyright © ${new Date().getFullYear()} AID Contributors. CC-BY / MIT`,
+            copyright: `Copyright © ${new Date().getFullYear()} AID Contributors.`,
         },
     },
     presets: [
@@ -121,11 +126,16 @@ module.exports = {
                 docs: {
                     path: './docs/' + language,
                     sidebarPath: require.resolve('./sidebar.json'),
-                    editUrl: 'https://github.com/facebook/docusaurus/edit/master/website/',
+                    editUrl: 'https://github.com/autoai-org/AID/edit/v1.3/docs/',
                 },
                 theme: {
                     customCss: require.resolve('./src/css/custom.css'),
                 },
+                blog: {
+                    path: 'blog',
+                    blogTitle: 'AID Blog',
+                    feedOptions: { type: 'rss' },
+                }
             },
         ],
     ],

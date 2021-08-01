@@ -1,0 +1,28 @@
+type Container implements Node {
+    id: ID!
+    uid: String,
+    port: String,
+    running: Boolean,
+    createdAt: Time
+}
+
+enum ContainerOrderField {
+    CREATED_AT
+    UID
+}
+
+input ContainerOrder {
+    direction: OrderDirection!
+    field: ContainerOrderField
+}
+
+type ContainerEdge {
+    node: Container
+    cursor: Cursor!
+}
+
+type ContainerConnection {
+    totalCount: Int!
+    pageInfo: PageInfo!
+    edges: [ContainerEdge]
+}

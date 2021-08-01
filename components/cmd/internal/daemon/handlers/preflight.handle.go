@@ -17,16 +17,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// PreflightRequests specfies the request body to determine the endpoint
 type PreflightRequests struct {
 	Vendor      string `json:"vendor"`
 	PackageName string `json:"package"`
 	Solver      string `json:"solver"`
 }
 
+// PreflightResponse returns the port to the server
 type PreflightResponse struct {
 	Port string `json:"port"`
 }
 
+// PreflightHandler handles the request
 func PreflightHandler(c *gin.Context) {
 	var preflightRequests PreflightRequests
 	c.BindJSON(&preflightRequests)

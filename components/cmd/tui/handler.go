@@ -20,6 +20,7 @@ import (
 	"github.com/autoai-org/aid/internal/runtime/requests"
 	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/autoai-org/aid/internal/workflow"
+	"github.com/manifoldco/promptui"
 	"github.com/urfave/cli/v2"
 )
 
@@ -37,21 +38,21 @@ func startServer(port string) {
 	daemon.RunServer(port)
 }
 
-func buildImage(buildContext string) {
+func buildImage(buildContext string, gpu bool) {
 	buildInfo := strings.Split(buildContext, "/")
-	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2])
+	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2], gpu)
 }
 
 func buildImageByPath(path string, solver string, autoRemove bool) {
 	workflow.BuildDockerImageWithPath(path, solver, autoRemove)
 }
 
-func createContainer(imageID string, hostPort string) {
+func createContainer(imageID string, hostPort string, gpu bool) {
 	if hostPort == "" {
 		utilities.Formatter.Error("Hostport is not given... Aborted")
 		os.Exit(4)
 	}
-	workflow.CreateContainer(imageID, hostPort)
+	workflow.CreateContainer(imageID, hostPort, gpu)
 }
 
 func startContainer(containerID string) {
@@ -109,4 +110,32 @@ func remove(entity string, identifier string) error {
 		os.Exit(3)
 	}
 	return err
+}
+
+func initRepo(c *cli.Context) {
+	prompt := promptui.Prompt{
+		Label: "Your Name (Please use the same username with your GitHub account for now)",
+	}
+	vendorName, err := prompt.Run()
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+	}
+	prompt = promptui.Prompt{
+		Label: "Your Package Name",
+	}
+	repoName, err := prompt.Run()
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+	}
+	prompt = promptui.Prompt{
+		Label: "One-line Description (You can change it in README.md file later as well)",
+	}
+	description, err := prompt.Run()
+
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+	}
+	workflow.InitNewRepo(vendorName, repoName, description)
+	utilities.Formatter.Info(repoName + " created!")
+	utilities.Formatter.Info("Check https://aid.autoai.org/docs/usage/manual/publish/prepare_locally for what to do next.")
 }

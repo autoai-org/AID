@@ -28,6 +28,8 @@ func getRouter() *gin.Engine {
 	r.POST("/preflight", handlers.PreflightHandler)
 	r.POST("/query", graphqlHandler())
 	r.GET("/playground", playgroundHandler())
+	r.GET("/solver/:solverID", handlers.SolverInformationHandler)
+	r.POST("/running/:runningId/:path", handlers.ForwardHandler)
 	r.GET("/", handlers.HelloHandler)
 	return r
 }
