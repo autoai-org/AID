@@ -9,6 +9,7 @@ import { useEffect, useState } from "react"
 import ReactMarkdown from 'react-markdown'
 import Moment from 'react-moment';
 import { getInitials } from '../../services/utility'
+import InstallModelDialog from "./InstallModelDialog"
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
@@ -18,7 +19,13 @@ export default function ModelDetail(props: any) {
 
     const [detailedInfo, setDetailedInfo] = useState<any>({})
     const [loaded, setLoaded] = useState(false)
-    
+    const [open, setOpen] = useState(false)
+    function handleClose() {
+        setOpen(false);
+    }
+    function openInstallDialog() {
+        setOpen(true);
+    }
     useEffect(() => {
         getModelInfo(vendor, name).then(function (res: any) {
             setDetailedInfo(res.data)
@@ -27,8 +34,8 @@ export default function ModelDetail(props: any) {
         })
     }, [vendor, name])
     return (
-
         <MainLayout>
+            <InstallModelDialog model={{vendor:vendor, name:name, githubURL: 'https://github.com/'+vendor+'/'+name}} open={open} onClose={handleClose} />
             <div className="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8 pt-4">
                 <div className="flex items-center space-x-5">
                     <div className="flex-shrink-0">
@@ -60,6 +67,7 @@ export default function ModelDetail(props: any) {
                         Close
                     </a>
                     <button
+                        onClick={openInstallDialog}
                         type="button"
                         className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
                     >
@@ -173,12 +181,13 @@ export default function ModelDetail(props: any) {
                                 </ul>
                             </div>
                             <div className="mt-6 flex flex-col justify-stretch">
-                                <button
+                                <a
+                                    href={"https://github.com/"+vendor+"/"+name+"/commits/master"}
                                     type="button"
                                     className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >
                                     View on GitHub
-                                </button>
+                                </a>
                             </div>
                         </div>
                     </section>

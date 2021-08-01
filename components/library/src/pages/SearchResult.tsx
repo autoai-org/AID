@@ -9,7 +9,7 @@ import MainLayout from "../Layouts/MainLayout";
 import { parseQuery } from "../services/utility";
 import { findModelsByKeyword, analyseRepos } from "../services/api"
 import ModelList from "../components/Models/ModelList";
-
+import Filters from '../components/Models/ModelFilters'
 export default function SearchResult() {
     const [packages, setPackages] = useState([])
     const [loading, setLoading] = useState(false)
@@ -53,7 +53,7 @@ export default function SearchResult() {
                 </div>
             }
             {!loading &&
-                <DoubleColumn main={<ModelList models={packages}/>}></DoubleColumn>
+                <DoubleColumn left={<Filters/>} main={<ModelList models={packages}/>}></DoubleColumn>
             }
         </MainLayout>
     )

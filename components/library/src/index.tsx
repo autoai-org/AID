@@ -20,6 +20,18 @@ import {
   Route,
 } from "react-router-dom"
 import ReactGA, { ga } from 'react-ga'
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
+
+Sentry.init({
+  dsn: "https://af50717a734e41ada1ada89d286667e9@o465689.ingest.sentry.io/5888093",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
 
 const TRACKING_ID = "281386144";
 ReactGA.initialize(TRACKING_ID);
