@@ -2,10 +2,16 @@
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-
+OSFLAG 				:=
+ifeq ($(shell uname -s),Linux)
+	OSFLAG +=-linux
+endif
+ifeq ($(shell uname -s),Darwin)
+	OSFLAG +=-macOS
+endif
 prepare-binaries:
 	mkdir src-tauri/binaries
-	mv ../cmd/aid src-tauri/binaries/aid
+	mv ../cmd/aid$(strip $(OSFLAG)) src-tauri/binaries/aid
 	node scripts/append.js
 
 build_binaries:
