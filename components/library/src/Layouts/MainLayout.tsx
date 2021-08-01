@@ -8,18 +8,15 @@ import AIDFooter from "../components/Footer";
 
 export default function MainLayout(props: any) {
     return (
-        <div className="bg-white">
-            <div className="relative overflow-hidden">
-                <AIDHeader />
-                <div className="bg-white">
-                    <div className="relative overflow-hidden">
-                        <main>
-                            {props.children}
-                        </main>
-                    </div>
+        <div className="flex flex-col">
+            <AIDHeader />
+            <main>
+                <div>
+                    {props.children}
                 </div>
-                <AIDFooter />
-            </div>
+            </main>
+            <AIDFooter />
         </div>
+       
     );
 }

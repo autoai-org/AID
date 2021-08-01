@@ -8,7 +8,7 @@ import DoubleColumn from '../Layouts/DoubleColumn'
 import MainLayout from "../Layouts/MainLayout";
 import { parseQuery } from "../services/utility";
 import { findModelsByKeyword, analyseRepos } from "../services/api"
-import ModelList from "../components/Models/NewModelListCards";
+import ModelList from "../components/Models/ModelList";
 
 export default function SearchResult() {
     const [packages, setPackages] = useState([])
@@ -16,7 +16,7 @@ export default function SearchResult() {
     const [progress, setProgress] = useState(0)
     useEffect(() => {
         let keyword = parseQuery("kw")
-        console.log(keyword)
+        console.log("Querying...")
         setLoading(true)
         setProgress(1)
         findModelsByKeyword(keyword).then(function (res: any) {
@@ -38,7 +38,6 @@ export default function SearchResult() {
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         <p className="text-2xl" style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>Listing Repositories...</p>
-
                     </div>
                 </div>
             }
@@ -55,9 +54,8 @@ export default function SearchResult() {
                 </div>
             }
             {!loading &&
-                <DoubleColumn main={<ModelList models={packages} />}></DoubleColumn>
+                <DoubleColumn main={<ModelList models={packages}/>}></DoubleColumn>
             }
-
         </MainLayout>
     )
 }
