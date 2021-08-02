@@ -11,7 +11,7 @@ ifeq ($(shell uname -s),Darwin)
 endif
 prepare-binaries:
 	mkdir src-tauri/binaries
-	mv ../cmd/tui/aid$(strip $(OSFLAG)) src-tauri/binaries/aid
+	cp ../cmd/tui/aid$(strip $(OSFLAG)) src-tauri/binaries/aid
 	node scripts/append.js
 
 build_binaries:
