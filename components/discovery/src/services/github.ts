@@ -19,31 +19,65 @@ async function fetchGithubSummary(vendor, name) {
     return resp.data
 }
 
+async function getConfiguration(vendor, name) {
+    let configuration
+    try {
+        configuration = await octokit.rest.repos.getContent({
+            owner: vendor,
+            repo: name,
+            path: 'aid.toml',
+        })
+    } catch(error){
+        configuration = ""
+    } finally {
+        return tomlParse(configuration.data['content'])
+    }
+}
+async function getPretrained(vendor, name) {
+    let pretrained
+    try {
+        pretrained = await octokit.rest.repos.getContent({
+            owner: vendor,
+            repo: name,
+            path: 'pretrained.toml',
+        })
+        pretrained = tomlParse(pretrained.data['content'])
+    } catch(error){
+        pretrained = {
+            "models": []
+        }
+    } finally {
+        return pretrained
+    }
+}
+
+async function getReadme(vendor, name) {
+    let readme
+    try {
+        readme = await octokit.rest.repos.getReadme({
+            owner: vendor,
+            repo: name,
+        })
+        readme = base64.decode(readme.data['content'])
+    } catch(error){
+        readme = "# No Readme Found"
+    } finally {
+        return readme
+    }
+}
+
 async function getGitHubDetails(vendor, name) {
-    const configuration = await octokit.rest.repos.getContent({
-        owner: vendor,
-        repo: name,
-        path: 'aid.toml',
-    })
-    const pretrained = await octokit.rest.repos.getContent({
-        owner: vendor,
-        repo: name,
-        path: 'pretrained.toml',
-    })
     const commits = await octokit.rest.repos.listCommits({
         owner: vendor,
         repo: name,
     });
-    const readme = await octokit.rest.repos.getReadme({
-        owner: vendor,
-        repo: name,
-    });
     return {
-        'configuration': tomlParse(configuration.data['content']),
-        'pretrained': tomlParse(pretrained.data['content']),
+        'configuration': await getConfiguration(vendor, name),
+        'pretrained': await getPretrained(vendor, name),
         'commits': commits.data,
-        'readme': base64.decode(readme.data['content'])
+        'readme': await getReadme(vendor, name)
     }
+
 }
 
 export {
