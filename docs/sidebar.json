@@ -43,6 +43,14 @@
                 "specs/error-code",
                 "specs/cli"
             ]
+        },
+        {
+            "label": "Contributing",
+            "type":"category",
+            "items": [
+                "contribution/code-of-conduct",
+                "contribution/testflight"
+            ]
         }
     ],
     "about": [
