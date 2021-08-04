@@ -16,7 +16,6 @@ var tracer = otel.Tracer("gin-server")
 // beforeResponse set global header to enable cors and set response header
 func beforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("Content-Security-Policy", "")
 		c.Writer.Header().Set("aid-version", "1.0.1 @ dev")
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
