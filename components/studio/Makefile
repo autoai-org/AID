@@ -16,4 +16,5 @@ prepare-binaries:
 
 build_binaries:
 	make prepare-binaries
+	yarn build
 	yarn tauri build

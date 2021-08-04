@@ -4,12 +4,15 @@ import config from '../config'
 import { Octokit } from "@octokit/rest";
 import toml from 'toml'
 import base64 from 'base-64'
+import { isEmpty } from '../utilities/object_checker'
 const octokit = new Octokit({
     auth: config.GITHUB_TOKEN,
 })
+
 function tomlParse(inputBase64: string) {
     return toml.parse(base64.decode(inputBase64))
 }
+
 async function fetchGithubSummary(vendor, name) {
     const resp = await axios.get(GITHUB_ENDPOINT + "repos/" + vendor + "/" + name, {
         headers: {
@@ -27,10 +30,12 @@ async function getConfiguration(vendor, name) {
             repo: name,
             path: 'aid.toml',
         })
-    } catch(error){
-        configuration = ""
+        configuration = tomlParse(configuration.data['content'])
+    } catch(error) {
+        console.log(error)
+        configuration = "An error occurred"
     } finally {
-        return tomlParse(configuration.data['content'])
+        return configuration
     }
 }
 async function getPretrained(vendor, name) {
@@ -42,6 +47,9 @@ async function getPretrained(vendor, name) {
             path: 'pretrained.toml',
         })
         pretrained = tomlParse(pretrained.data['content'])
+        if (isEmpty(pretrained)) {
+            throw new Error("empty pretrained.toml file");
+        }
     } catch(error){
         pretrained = {
             "models": []
@@ -60,7 +68,7 @@ async function getReadme(vendor, name) {
         })
         readme = base64.decode(readme.data['content'])
     } catch(error){
-        readme = "# No Readme Found"
+        readme = "**No Readme Found**"
     } finally {
         return readme
     }
