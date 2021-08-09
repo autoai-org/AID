@@ -13,11 +13,7 @@ import { restclient } from '../services/apis';
 import Moment from 'react-moment';
 import { getInitials } from '../services/utilities/initials'
 import { serverEndpoint } from '../services/apis'
-const attachments = [
-  { name: 'pretrained_1.pt', href: '#' },
-  { name: 'pretrained_2.pt', href: '#' },
-]
-
+import toml from 'toml'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -41,6 +37,7 @@ interface SolverInfo {
   vendorname: string;
   remoteURL: string;
   commits: commit[];
+  pretrained: any[];
   containers: container[];
 }
 
@@ -50,24 +47,33 @@ export default function Details(props: any) {
     description: "Awesome Description",
     vendorname: "Awesome Company",
     remoteURL: "",
+    pretrained: [],
     commits: [],
     containers: [],
   }
   const [solverInfo, setSolverInfo] = useState(defaultSolverInfoInfo);
   const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setIsLoading(true))
     restclient.get(serverEndpoint+ "/solver/" + props.match.params.solverID).then(function (res: any) {
-      setSolverInfo(res.data)
+      let pretrained = toml.parse(res.data.pretrained)
+      res.data.pretrained = pretrained.models
       console.log(res.data)
+      setSolverInfo(res.data)
+      
     }).catch(function (err) {
     }).finally(function () {
       dispatch(setIsLoading(false))
       setLoaded(true)
     })
   }, [])
+
+  function loadContainerCreation() {
+    console.log("-===")
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <BackToHomepage />
@@ -112,12 +118,11 @@ export default function Details(props: any) {
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                     )}
                   >
-                    <button
-                      type="button"
+                    <div
                       className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
                     >
                       Inference
-                    </button>
+                    </div>
                   </Popover.Button>
                   <Transition
                     show={open}
@@ -146,7 +151,8 @@ export default function Details(props: any) {
                           ))}
                         </div>
                         <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                            Above are the running solvers.
+                            Above are the running solvers. 
+                            <div className="rounded items-center justify-center border border-transparent bg-blue-600 hover:bg-blue-700 text-white ml-2" onClick={loadContainerCreation}>Create</div>
                         </div>
                       </div>
                     </Popover.Panel>
@@ -199,7 +205,7 @@ export default function Details(props: any) {
                       <dt className="text-sm font-medium text-gray-500">Attachments</dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                          {attachments.map((attachment) => (
+                          {solverInfo.pretrained.map((attachment) => (
                             <li
                               key={attachment.name}
                               className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
@@ -209,7 +215,7 @@ export default function Details(props: any) {
                                 <span className="ml-2 flex-1 w-0 truncate">{attachment.name}</span>
                               </div>
                               <div className="ml-4 flex-shrink-0">
-                                <a href={attachment.href} className="font-medium text-blue-600 hover:text-blue-500">
+                                <a href={attachment.url} className="font-medium text-blue-600 hover:text-blue-500">
                                   Download
                                 </a>
                               </div>
@@ -230,10 +236,7 @@ export default function Details(props: any) {
                 </div>
               </div>
             </section>
-
-
           </div>
-
           <section aria-labelledby="timeline-title" className="lg:col-start-3 lg:col-span-1">
             <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
               <h2 id="timeline-title" className="text-lg font-medium text-gray-900">

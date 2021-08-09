@@ -42,7 +42,24 @@ query AllSolvers {
 }
 `
 
+const SOLVER_AND_IMAGES = gql`
+query solvers {
+    solvers {
+        uid,
+        image {
+        id,
+        createdAt,
+        container {
+            uid,
+            running
+        }
+    }
+  }
+}
+`
+
 export {
     ALL_REPOSITORIES,
-    ALL_SOLVERS
+    ALL_SOLVERS,
+    SOLVER_AND_IMAGES
 }

@@ -29,6 +29,7 @@ func getRouter() *gin.Engine {
 	r.POST("/query", graphqlHandler())
 	r.GET("/playground", playgroundHandler())
 	r.GET("/solver/:solverID", handlers.SolverInformationHandler)
+	r.PUT("/containers/", handlers.CreateContainerHandler)
 	r.POST("/running/:runningId/:path", handlers.ForwardHandler)
 	r.GET("/", handlers.HelloHandler)
 	return r

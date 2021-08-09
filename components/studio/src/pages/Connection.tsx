@@ -48,6 +48,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ url: e.target.value })
     }
     handleCompleteConnection = () => {
+        setServer(this.state.url)
         setServerEndpoint(this.state.url)
         this.setState({ open: false })
     }

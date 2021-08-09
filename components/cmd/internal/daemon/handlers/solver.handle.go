@@ -1,3 +1,5 @@
+// This file describes the API endpoints for the daemon (solver part).
+// Licensed under MIT License (see LICENSE).
 package handlers
 
 import (
@@ -8,6 +10,7 @@ import (
 	"github.com/autoai-org/aid/ent/generated"
 	entSolver "github.com/autoai-org/aid/ent/generated/solver"
 	"github.com/autoai-org/aid/internal/database"
+	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/autoai-org/aid/internal/runtime/vcs"
 	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/gin-gonic/gin"
@@ -15,16 +18,26 @@ import (
 	"github.com/go-git/go-git/v5/plumbing/object"
 )
 
+// SolverHandler is the handler for the solver information.
 type SolverInfoResponse struct {
 	Solvername  string                 `json:"solvername"`
 	Reponame    string                 `json:"reponame"`
 	Vendorname  string                 `json:"vendorname"`
 	RemoteURL   string                 `json:"remoteURL"`
 	Description string                 `json:"description"`
+	Pretrained  string                 `json:"pretrained"`
 	Containers  []*generated.Container `json:"containers"`
 	GitCommits  vcs.GitCommits         `json:"commits"`
 }
 
+// CreateContainerRequest is  the struct for the request to create a container.
+type CreateContainerRequest struct {
+	ImageUID string `json:"imageUID"`
+	HostPort string `json:"hostPort"`
+	GPU      bool   `json:"gpu"`
+}
+
+// SolverInformationHandler is the handler for the solver information fetching.
 func SolverInformationHandler(c *gin.Context) {
 	solverID := c.Param("solverID")
 	solver, err := database.NewDefaultDB().Solver.Query().Where(
@@ -39,6 +52,10 @@ func SolverInformationHandler(c *gin.Context) {
 	description, err := utilities.ReadFileContent(filepath.Join(repo.Localpath, "README.md"))
 	if err != nil {
 		description = err.Error()
+	}
+	pretrainedFileContent, err := utilities.ReadFileContent(filepath.Join(repo.Localpath, "pretrained.toml"))
+	if err != nil {
+		pretrainedFileContent = ""
 	}
 	r, err := git.PlainOpen(repo.Localpath)
 	if err != nil {
@@ -74,8 +91,16 @@ func SolverInformationHandler(c *gin.Context) {
 		Containers:  containers,
 		Reponame:    repo.Name,
 		Vendorname:  repo.Vendor,
+		Pretrained:  pretrainedFileContent,
 		RemoteURL:   repo.RemoteURL,
 		Description: description,
 		GitCommits:  gitcommits,
 	})
+}
+
+// CreateContainerHandler is the handler for the container creation.
+func CreateContainerHandler(c *gin.Context) {
+	var req CreateContainerRequest
+	c.BindJSON(req)
+	docker.Create(req.ImageUID, req.HostPort, docker.GPURequest{NeedGPU: req.GPU})
 }

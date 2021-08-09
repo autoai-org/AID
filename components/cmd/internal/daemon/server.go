@@ -7,16 +7,14 @@ import (
 	"syscall"
 
 	"github.com/autoai-org/aid/internal/utilities"
+	"github.com/common-nighthawk/go-figure"
 	"github.com/gin-gonic/gin"
-	"go.opentelemetry.io/otel"
 )
-
-var tracer = otel.Tracer("gin-server")
 
 // beforeResponse set global header to enable cors and set response header
 func beforeResponse() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Writer.Header().Set("aid-version", "1.0.1 @ dev")
+		c.Writer.Header().Set("aid-version", "1.3.0 @ dev")
 		c.Writer.Header().Set("Access-Control-Allow-Origin", "*")
 		c.Writer.Header().Set("Access-Control-Allow-Credentials", "true")
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "GET,POST,PUT,PATCH,DELETE,OPTIONS")
@@ -33,8 +31,11 @@ func RunServer(port string) {
 		port = "17415"
 		utilities.Formatter.Warn("Port not specified, using the default " + port)
 	}
+	welcomeFigure := figure.NewFigure("AID Project", "", true)
 	utilities.Formatter.Info("Starting the server...")
 	r := getRouter()
+	welcomeFigure.Print()
+	utilities.Formatter.Info("Open https://console.autoai.dev to connect to this server.")
 	err := r.Run("0.0.0.0:" + port)
 	utilities.ReportError(err, "Cannot start server")
 	quit := make(chan os.Signal)
