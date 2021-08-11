@@ -1,10 +1,10 @@
 import React from 'react';
-import { Fragment, useRef, useState } from 'react'
+import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ServerIcon, CheckIcon } from '@heroicons/react/outline'
 import { connectServer } from '../services/apis/system.query';
-import { setServer } from '../services/store/connectivity/server'
 import { serverEndpoint, setServerEndpoint } from '../services/apis'
+
 interface ConnectState {
     url: string;
     isConnected: boolean;
@@ -48,7 +48,6 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ url: e.target.value })
     }
     handleCompleteConnection = () => {
-        setServer(this.state.url)
         setServerEndpoint(this.state.url)
         this.setState({ open: false })
     }

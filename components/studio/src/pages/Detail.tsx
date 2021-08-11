@@ -42,7 +42,7 @@ interface SolverInfo {
 }
 
 export default function Details(props: any) {
-  let defaultSolverInfoInfo: SolverInfo = {
+  let defaultSolverInfo: SolverInfo = {
     solvername: "An Awesome Solver!",
     description: "Awesome Description",
     vendorname: "Awesome Company",
@@ -51,22 +51,22 @@ export default function Details(props: any) {
     commits: [],
     containers: [],
   }
-  const [solverInfo, setSolverInfo] = useState(defaultSolverInfoInfo);
-  const [loaded, setLoaded] = useState(false);
+  const [solverInfo, setSolverInfo] = useState(defaultSolverInfo);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setIsLoading(true))
     restclient.get(serverEndpoint+ "/solver/" + props.match.params.solverID).then(function (res: any) {
+      console.log(res.data)
       let pretrained = toml.parse(res.data.pretrained)
+      console.log(pretrained)
       res.data.pretrained = pretrained.models
       console.log(res.data)
       setSolverInfo(res.data)
-      
     }).catch(function (err) {
     }).finally(function () {
       dispatch(setIsLoading(false))
-      setLoaded(true)
+
     })
   }, [])
 

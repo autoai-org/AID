@@ -5,6 +5,27 @@ import {store} from '../store/store'
 
 let serverEndpoint = "http://localhost:17415"
 
+class RestClient {
+    private axios
+    constructor() {
+        this.axios = axios
+    }
+    get(url: string) {
+        return this.axios.get(url)
+    }
+    query(gql:string) {
+        return this.axios({
+            method: 'post',
+            url: serverEndpoint+"/query",
+            data: {
+                query: gql
+            }
+        })
+    }
+}
+
+let restclient = new RestClient()
+
 function setServerEndpoint(endpoint:string) {
     serverEndpoint = endpoint
     store.dispatch(setServer(endpoint))
@@ -20,17 +41,9 @@ function initServerEndpoint() {
     }
 }
 
-let gqlclient = new ApolloClient ({
-    uri:serverEndpoint+"/query",
-    cache: new InMemoryCache()
-})
-
-let restclient = axios
-
 export { 
     serverEndpoint,
     restclient,
-    gqlclient,
     setServerEndpoint,
     getServerEndpoint,
     initServerEndpoint

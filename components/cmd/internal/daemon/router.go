@@ -2,13 +2,39 @@ package daemon
 
 import (
 	"context"
+	"embed"
+	"io/fs"
 	"log"
+	"net/http"
 	"os"
 
 	"github.com/autoai-org/aid/internal/daemon/handlers"
+	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
 )
+
+//go:embed build
+var console embed.FS
+
+type embedFileSystem struct {
+	http.FileSystem
+}
+
+func (e embedFileSystem) Exists(prefix string, path string) bool {
+	_, err := e.Open(path)
+	return err == nil
+}
+
+func EmbedFolder(fsEmbed embed.FS, targetPath string) static.ServeFileSystem {
+	fsys, err := fs.Sub(fsEmbed, targetPath)
+	if err != nil {
+		panic(err)
+	}
+	return embedFileSystem{
+		FileSystem: http.FS(fsys),
+	}
+}
 
 func getRouter() *gin.Engine {
 	if os.Getenv("AID_PROD") == "true" {
@@ -24,13 +50,17 @@ func getRouter() *gin.Engine {
 	r.Use(beforeResponse())
 	r.Use(gin.Recovery())
 	r.Use(otelgin.Middleware("aid-server"))
-	r.GET("/ping", handlers.PingHandler)
-	r.POST("/preflight", handlers.PreflightHandler)
-	r.POST("/query", graphqlHandler())
-	r.GET("/playground", playgroundHandler())
-	r.GET("/solver/:solverID", handlers.SolverInformationHandler)
-	r.PUT("/containers/", handlers.CreateContainerHandler)
-	r.POST("/running/:runningId/:path", handlers.ForwardHandler)
-	r.GET("/", handlers.HelloHandler)
+	r.Use(static.Serve("/", EmbedFolder(console, "build")))
+	api := r.Group("/api")
+	{
+		api.GET("/ping", handlers.PingHandler)
+		api.POST("/preflight", handlers.PreflightHandler)
+		api.POST("/query", graphqlHandler())
+		api.GET("/playground", playgroundHandler())
+		api.GET("/solver/:solverID", handlers.SolverInformationHandler)
+		api.PUT("/containers/", handlers.CreateContainerHandler)
+		api.POST("/running/:runningId/:path", handlers.ForwardHandler)
+
+	}
 	return r
 }

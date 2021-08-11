@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import type { RootState } from '../store'
 import {connect, ConnectedProps} from 'react-redux';
-
 interface ConnectivityState {
     isLoading: boolean,
     server: string

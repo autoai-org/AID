@@ -1,6 +1,9 @@
 import { Menu } from '@headlessui/react'
-import { useQuery } from '@apollo/client'
 import { ALL_SOLVERS } from '../services/apis/queries'
+import { restclient } from '../services/apis';
+import { setIsLoading } from '../services/store/connectivity/server'
+import { useDispatch } from 'react-redux'
+
 import {
     ChevronDownIcon,
     ChevronRightIcon,
@@ -8,16 +11,26 @@ import {
     StarIcon,
 } from '@heroicons/react/solid'
 import Moment from 'react-moment';
+import { useEffect, useState } from 'react';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
 export default function SolverColumn() {
-    const { loading, error, data } = useQuery(ALL_SOLVERS);
-    if (loading) return (<p>Loaindg</p>);
-    if (error) return (<p>Error :(</p>);
-    const solvers = data.solvers
+    const dispatch = useDispatch();
+    const [solvers, setSolvers] = useState<object[]>([]);
+
+    useEffect(() => {
+        dispatch(setIsLoading(true))
+        restclient.query(ALL_SOLVERS).then((res:any) => {
+            console.log(res.data.data.solvers)
+            setSolvers(res.data.data.solvers)
+            
+        }).finally(()=>{
+            dispatch(setIsLoading(false))
+        })
+    }, [])
     return (
         <div className="bg-white lg:min-w-0 lg:flex-1">
             <div className="pl-4 pr-6 pt-4 pb-4 border-b border-t border-gray-200 sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-6 xl:border-t-0">

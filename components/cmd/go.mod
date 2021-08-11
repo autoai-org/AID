@@ -21,6 +21,7 @@ require (
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.8.0
 	github.com/gin-contrib/cors v1.3.1 // indirect
+	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19 // indirect
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect
