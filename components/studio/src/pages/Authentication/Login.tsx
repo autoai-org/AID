@@ -79,7 +79,6 @@ export default function Login() {
                                             <div>
                                                 <div
                                                     onClick={() => firebase.auth().signInWithPopup(githubAuthProvider).then(function(res){
-                                                        console.log(res)
                                                         history.replace("/");
                                                     }).catch(function(err){
                                                         setError(err.message)

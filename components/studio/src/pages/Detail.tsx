@@ -57,16 +57,13 @@ export default function Details(props: any) {
   useEffect(() => {
     dispatch(setIsLoading(true))
     restclient.get(serverEndpoint+ "/api/solver/" + props.match.params.solverID).then(function (res: any) {
-      console.log(res.data)
       let pretrained = toml.parse(res.data.pretrained)
-      console.log(pretrained)
       if (typeof(pretrained.models) === 'undefined') {
         pretrained = {
           models: []
         };
       } 
       res.data.pretrained = pretrained.models
-      console.log(res.data)
       setSolverInfo(res.data)
     }).catch(function (err) {
     }).finally(function () {

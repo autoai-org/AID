@@ -17,7 +17,6 @@ export default function Account() {
                             <FirebaseAuthConsumer>
                                 {({ isSignedIn, user, providerId }) => {
                                     if (isSignedIn) {
-                                        console.log(user)
                                         return (
                                             <div className="flex items-center space-x-3">
                                                 <div className="flex-shrink-0 h-12 w-12">

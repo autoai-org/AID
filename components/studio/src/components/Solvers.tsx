@@ -25,7 +25,6 @@ export default function SolverColumn() {
     useEffect(() => {
         dispatch(setIsLoading(true))
         restclient.query(ALL_SOLVERS).then((res: any) => {
-            console.log(res.data.data.solvers)
             setSolvers(res.data.data.solvers)
 
         }).finally(() => {
