@@ -56,7 +56,7 @@ export default function Details(props: any) {
 
   useEffect(() => {
     dispatch(setIsLoading(true))
-    restclient.get(serverEndpoint+ "/solver/" + props.match.params.solverID).then(function (res: any) {
+    restclient.get(serverEndpoint+ "/api/solver/" + props.match.params.solverID).then(function (res: any) {
       console.log(res.data)
       let pretrained = toml.parse(res.data.pretrained)
       console.log(pretrained)
@@ -66,12 +66,10 @@ export default function Details(props: any) {
     }).catch(function (err) {
     }).finally(function () {
       dispatch(setIsLoading(false))
-
     })
   }, [])
 
   function loadContainerCreation() {
-    console.log("-===")
   }
 
   return (

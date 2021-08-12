@@ -38,7 +38,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
     handleConnect = () => {
         let self = this
         this.setState({ connecting: true })
-        connectServer(this.state.url + "/ping").then(function (res) {
+        connectServer(this.state.url + "/api/ping").then(function (res) {
             self.setState({ sysInfo: res.data })
             self.setState({ isConnected: true })  
         })

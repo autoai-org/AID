@@ -16,7 +16,7 @@ class RestClient {
     query(gql:string) {
         return this.axios({
             method: 'post',
-            url: serverEndpoint+"/query",
+            url: serverEndpoint+"/api/query",
             data: {
                 query: gql
             }
