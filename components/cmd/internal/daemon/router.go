@@ -7,8 +7,10 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/autoai-org/aid/internal/daemon/handlers"
+	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/gin-gonic/contrib/static"
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/contrib/instrumentation/github.com/gin-gonic/gin/otelgin"
@@ -62,5 +64,13 @@ func getRouter() *gin.Engine {
 		api.PUT("/packages", handlers.InstallPackageHandler)
 		api.POST("/running/:runningId/:path", handlers.ForwardHandler)
 	}
+	r.NoRoute(func(c *gin.Context) {
+		filecontent, err := console.ReadFile(filepath.Join("build", "index.html"))
+		if err != nil {
+			utilities.Formatter.Error(err.Error())
+			c.JSON(http.StatusNotFound, handlers.ErrorResponse{})
+		}
+		c.Data(200, "text/html;charset=utf-8", filecontent)
+	})
 	return r
 }
