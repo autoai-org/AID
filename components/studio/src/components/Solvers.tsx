@@ -3,7 +3,7 @@ import { ALL_SOLVERS } from '../services/apis/queries'
 import { restclient } from '../services/apis';
 import { setIsLoading } from '../services/store/connectivity/server'
 import { useDispatch } from 'react-redux'
-
+import { useHistory } from 'react-router-dom';
 import {
     ChevronDownIcon,
     ChevronRightIcon,
@@ -21,7 +21,7 @@ function classNames(...classes: any) {
 export default function SolverColumn() {
     const dispatch = useDispatch();
     const [solvers, setSolvers] = useState<object[]>([]);
-
+    const history = useHistory();
     useEffect(() => {
         dispatch(setIsLoading(true))
         restclient.query(ALL_SOLVERS).then((res: any) => {
@@ -168,12 +168,14 @@ export default function SolverColumn() {
                                 <div className="hidden sm:flex flex-col flex-shrink-0 items-end space-y-3">
                                     <p className="flex items-center space-x-4">
 
-                                        <a
-                                            href={"/details/" + solver.uid}
+                                        <button
+                                            onClick={()=>{
+                                                history.push("/details/"+solver.uid)
+                                            }}
                                             className="relative text-sm text-gray-500 hover:text-gray-900 font-medium"
                                         >
                                             Details
-                                        </a>
+                                        </button>
 
                                         <button
                                             className="relative bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

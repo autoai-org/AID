@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import React from 'react'
-import client from '../../services/apis/solver'
+import { restclient } from '../../services/apis'
 import {Link} from 'react-router-dom'
 
 interface RequestFormState {
@@ -19,7 +19,6 @@ class RequestForm extends React.Component<any, RequestFormState> {
         };
     }
     sendRequest = () => {
-        let httpc = client;
         let self = this
         let payload = new FormData()
         if (this.state.file) {
@@ -31,7 +30,7 @@ class RequestForm extends React.Component<any, RequestFormState> {
             payload.append("text", this.state.textValue)
         }
         let beginTime = new Date().getTime()
-        httpc.request("POST", "running/" + window.location.href.split("/")[4] + "/infer", payload).then(function (res) {
+        restclient.infer("POST", "/api/running/" + window.location.href.split("/")[4] + "/infer", payload).then(function (res) {
             let endTime = new Date().getTime()
             Object.assign(res, {startTime: beginTime, endTime: endTime})
             self.props.onReceivedResponse(res)

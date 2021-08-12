@@ -60,6 +60,11 @@ export default function Details(props: any) {
       console.log(res.data)
       let pretrained = toml.parse(res.data.pretrained)
       console.log(pretrained)
+      if (typeof(pretrained.models) === 'undefined') {
+        pretrained = {
+          models: []
+        };
+      } 
       res.data.pretrained = pretrained.models
       console.log(res.data)
       setSolverInfo(res.data)

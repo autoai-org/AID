@@ -1,5 +1,4 @@
-import {ApolloClient, InMemoryCache} from '@apollo/client';
-import axios from 'axios'
+import axios, { Method } from 'axios'
 import { setServer } from '../store/connectivity/server'
 import {store} from '../store/store'
 
@@ -21,6 +20,14 @@ class RestClient {
                 query: gql
             }
         })
+    }
+    infer(method: Method, url: string, payload: any) {
+        const options = {
+            method: method,
+            url: serverEndpoint+url,
+            data: payload
+        }
+        return this.axios.request(options)
     }
 }
 

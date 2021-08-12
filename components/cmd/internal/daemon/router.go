@@ -59,8 +59,8 @@ func getRouter() *gin.Engine {
 		api.GET("/playground", playgroundHandler())
 		api.GET("/solver/:solverID", handlers.SolverInformationHandler)
 		api.PUT("/containers/", handlers.CreateContainerHandler)
+		api.PUT("/packages", handlers.InstallPackageHandler)
 		api.POST("/running/:runningId/:path", handlers.ForwardHandler)
-
 	}
 	return r
 }
