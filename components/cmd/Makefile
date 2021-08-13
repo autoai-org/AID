@@ -64,6 +64,7 @@ ci-build:
 	@go mod verify
 	@make generate-all 
 	@make build-studio-site
+	@make cp-studio-site
 	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(strip $(OSFLAG))"
 
 xbuild:
