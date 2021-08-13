@@ -57,10 +57,10 @@ export default class Inference extends React.Component<any, InferenceState> {
             <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep} />} middle={<RequestForm onReceivedResponse={this.handleResponse} />} right={<AboutRepository solver={this.state.solver}/>} />
           }
           {this.state.finished && !this.state.analysis &&
-            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep} />} middle={<Result onNextStep={this.handleAnalysisPage} src={this.state.result} />} right={<AboutRepository />} />
+            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep} />} middle={<Result onNextStep={this.handleAnalysisPage} src={this.state.result} />} right={<AboutRepository solver={this.state.solver} />} />
           }
           {this.state.analysis && this.state.analysis &&
-            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep} />} middle={<Analysis src={this.state.result} />} right={<AboutRepository />} />
+            <ThreeColumnLayout left={<StepsIndicator currentStep={this.state.currentStep} />} middle={<Analysis src={this.state.result} />} right={<AboutRepository solver={this.state.solver} />} />
           }
         </main>
       </div>

@@ -6,7 +6,6 @@
 import Divider from '../Common/Divider'
 
 export default function AboutRepository(props:any) {
-    console.log(props)
     return (
         <div className="md:grid md:grid-cols-3 md:gap-6">
           <div className="md:col-span-2">
