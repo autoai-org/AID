@@ -1,21 +1,32 @@
 import axios, { Method } from 'axios'
-import { setServer } from '../store/connectivity/server'
+import { setServer, getServer } from '../store/connectivity/server'
 import {store} from '../store/store'
-
-let serverEndpoint = "http://localhost:17415"
 
 class RestClient {
     private axios
-    constructor() {
+    private serverEndpoint
+    constructor(serverEndpoint: string) {
         this.axios = axios
+        this.serverEndpoint = serverEndpoint
+    }
+    setEndpoint(url:string) {
+        this.serverEndpoint = url
+    }
+    getEndpoint() {
+        return this.serverEndpoint
     }
     get(url: string) {
-        return this.axios.get(url)
+        return this.axios.get(this.serverEndpoint + url)
     }
     query(gql:string) {
+        console.log(this.serverEndpoint)
+        if (this.serverEndpoint==="") {
+            this.setEndpoint(getServer(store.getState()))
+        }
+        console.log(getServer(store.getState()))
         return this.axios({
             method: 'post',
-            url: serverEndpoint+"/api/query",
+            url: this.serverEndpoint+"/api/query",
             data: {
                 query: gql
             }
@@ -24,17 +35,17 @@ class RestClient {
     infer(method: Method, url: string, payload: any) {
         const options = {
             method: method,
-            url: serverEndpoint+url,
+            url: this.serverEndpoint+url,
             data: payload
         }
         return this.axios.request(options)
     }
 }
 
-let restclient = new RestClient()
+let restclient: RestClient = new RestClient("")
 
 function setServerEndpoint(endpoint:string) {
-    serverEndpoint = endpoint
+    restclient.setEndpoint(endpoint)
     store.dispatch(setServer(endpoint))
 }
 
@@ -44,12 +55,12 @@ function getServerEndpoint() {
 
 function initServerEndpoint() {
     if (store.getState().connectivity.server) {
-        serverEndpoint = store.getState().connectivity.server
+        let serverEndpoint = store.getState().connectivity.server
+        restclient.setEndpoint(serverEndpoint)
     }
 }
 
 export { 
-    serverEndpoint,
     restclient,
     setServerEndpoint,
     getServerEndpoint,

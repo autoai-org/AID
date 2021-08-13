@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux'
 import { restclient } from '../services/apis';
 import Moment from 'react-moment';
 import { getInitials } from '../services/utilities/initials'
-import { serverEndpoint } from '../services/apis'
 import toml from 'toml'
 
 function classNames(...classes: any) {
@@ -56,7 +55,7 @@ export default function Details(props: any) {
 
   useEffect(() => {
     dispatch(setIsLoading(true))
-    restclient.get(serverEndpoint+ "/api/solver/" + props.match.params.solverID).then(function (res: any) {
+    restclient.get("/api/solver/" + props.match.params.solverID).then(function (res: any) {
       let pretrained = toml.parse(res.data.pretrained)
       if (typeof(pretrained.models) === 'undefined') {
         pretrained = {

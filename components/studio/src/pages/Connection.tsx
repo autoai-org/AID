@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { ServerIcon, CheckIcon } from '@heroicons/react/outline'
 import { connectServer } from '../services/apis/system.query';
-import { serverEndpoint, setServerEndpoint } from '../services/apis'
+import { restclient, setServerEndpoint } from '../services/apis'
 
 interface ConnectState {
     url: string;
@@ -23,7 +23,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
             handler: props.handler,
         };
         this.state = {
-            url: serverEndpoint,
+            url: restclient.getEndpoint(),
             isConnected: false,
             error: "",
             sysInfo: {},
@@ -48,6 +48,7 @@ class ConnectPage extends React.Component<any, ConnectState>{
         this.setState({ url: e.target.value })
     }
     handleCompleteConnection = () => {
+        restclient.setEndpoint(this.state.url)
         setServerEndpoint(this.state.url)
         this.setState({ open: false })
     }

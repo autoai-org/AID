@@ -18,6 +18,9 @@ class RequestForm extends React.Component<any, RequestFormState> {
             textValue: '',
         };
     }
+    componentDidMount() {
+        console.log(this.props);
+    }
     sendRequest = () => {
         let self = this
         let payload = new FormData()
@@ -95,16 +98,15 @@ class RequestForm extends React.Component<any, RequestFormState> {
                                         {this.state.file &&
                                             <p>{this.state.file[0].name}</p>
                                         }
-                                        <div className="flex text-sm text-gray-600">
-
+                                        <div className="flex text-sm text-gray-600 justify-center">
+                                            
                                             <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                className="cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                             >
-                                                <span>Upload a file</span>
+                                                Upload a file
                                                 <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={this.onFileChange} />
                                             </label>
-                                            <p className="pl-1">or drag and drop</p>
                                         </div>
                                         <p className="pl-1 text-gray-600 text-sm">Please only upload one file.</p>
                                     </div>

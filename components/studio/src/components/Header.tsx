@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import {
     SearchIcon,
@@ -13,6 +13,14 @@ export default function Header() {
     function disconnect() {
         setServerEndpoint("")
     }
+    const handleKeyDown =(event: any) => {
+        if (event.key === 'Enter') {
+            if (queryKW.trim() !== '') {
+                window.open('https://hub.autoai.dev/search?kw='+queryKW.trim())
+            }
+        }
+    }
+    const [queryKW, setQueryKW] = useState("");
     return (
         <Disclosure as="nav" className="flex-shrink-0 bg-indigo-600">
             {({ open }) => (
@@ -41,10 +49,14 @@ export default function Header() {
                                             <SearchIcon className="h-5 w-5" aria-hidden="true" />
                                         </div>
                                         <input
+                                            onKeyDown={handleKeyDown}
                                             id="search"
                                             name="search"
+                                            onChange={e=>{
+                                                setQueryKW(e.target.value)
+                                            }}
                                             className="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-indigo-400 bg-opacity-25 text-indigo-100 placeholder-indigo-200 focus:outline-none focus:bg-white focus:ring-0 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm"
-                                            placeholder="Search projects"
+                                            placeholder="Search packages"
                                             type="search"
                                         />
                                     </div>

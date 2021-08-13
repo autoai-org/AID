@@ -26,7 +26,7 @@ export default function SolverColumn() {
         dispatch(setIsLoading(true))
         restclient.query(ALL_SOLVERS).then((res: any) => {
             setSolvers(res.data.data.solvers)
-
+            localStorage.setItem("aid-solvers", JSON.stringify(res.data.data.solvers))
         }).finally(() => {
             dispatch(setIsLoading(false))
         })
