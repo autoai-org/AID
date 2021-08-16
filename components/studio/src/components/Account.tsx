@@ -1,12 +1,25 @@
+import { useState } from 'react'
 import {
     BadgeCheckIcon,
     CollectionIcon,
 } from '@heroicons/react/solid'
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import firebase from "firebase/app";
+import InstallInstallPackageDialog from "./Workflow/InstallPackageDialog"
 import "firebase/auth";
 
 export default function Account() {
+    const [open, setOpen] = useState(false)
+   
+    const openInstallDialog = () => {
+        //console.log('test');
+        setOpen(true)
+    }
+
+    const CloseInstallDialog = () => {
+        console.log('close click')
+        setOpen(false)
+    }
     return (
         <div className="xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
             <div className="pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
@@ -52,6 +65,7 @@ export default function Account() {
                             {/* Action buttons */}
                             <div className="flex flex-col sm:flex-row xl:flex-col">
                                 <button
+                                    onClick={openInstallDialog}
                                     type="button"
                                     className="inline-flex items-center justify-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 xl:w-full"
                                 >
@@ -80,6 +94,8 @@ export default function Account() {
                     </div>
                 </div>
             </div>
+            <InstallInstallPackageDialog open={open} onClose={CloseInstallDialog}/>
         </div>
+        
     )
 }
