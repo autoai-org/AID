@@ -5,13 +5,13 @@ function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
-export default function Toggles(props:any) {
-  const enabled = props.enabled 
+export default function Example() {
+  const [enabled, setEnabled] = useState(false)
 
   return (
     <Switch
       checked={enabled}
-      onChange={props.handleEnabled}
+      onChange={setEnabled}
       className="flex-shrink-0 group relative rounded-full inline-flex items-center justify-center h-5 w-10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
     >
       <span className="sr-only">Use setting</span>

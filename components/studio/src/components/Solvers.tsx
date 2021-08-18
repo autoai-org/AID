@@ -1,8 +1,7 @@
 import { Menu } from '@headlessui/react'
 import { ALL_SOLVERS } from '../services/apis/queries'
 import { restclient } from '../services/apis';
-import { setIsLoading } from '../services/store/connectivity/server';
-import Toggles from "../components/Common/Toggles";
+import { setIsLoading } from '../services/store/connectivity/server'
 import { useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom';
 import {
@@ -14,7 +13,6 @@ import {
 } from '@heroicons/react/solid'
 import Moment from 'react-moment';
 import { useEffect, useState } from 'react';
-import { constants } from 'buffer';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -33,11 +31,6 @@ export default function SolverColumn() {
             dispatch(setIsLoading(false))
         })
     }, [])
-
-    const handleToggling = () =>{
-
-    } 
-
     return (
         <div className="bg-white lg:min-w-0 lg:flex-1">
             <div className="pl-4 pr-6 pt-4 pb-4 border-b border-t border-gray-200 sm:pl-6 lg:pl-8 xl:pl-6 xl:pt-6 xl:border-t-0">
@@ -115,12 +108,10 @@ export default function SolverColumn() {
             {solvers.length > 0 &&
                 <ul className="relative z-0 divide-y divide-gray-200 border-b border-gray-200">
                     {solvers.map((solver: any) => (
-    
                         <li
                             key={solver.name}
                             className="relative pl-4 pr-6 py-5 hover:bg-gray-50 sm:py-6 sm:pl-6 lg:pl-8 xl:pl-6"
                         >
-            
                             <div className="flex items-center justify-between space-x-4">
                                 {/* Repo name and link */}
                                 <div className="min-w-0 space-y-3">
@@ -141,7 +132,7 @@ export default function SolverColumn() {
                                         </span>
                                         <span className="block">
                                             <h2 className="text-sm font-medium">
-                                                <a href={"/details/"+solver.uid}>
+                                                <a href={solver.repository.name}>
                                                     <span className="absolute inset-0" aria-hidden="true" />
                                                     {solver.name}{' '}
                                                     <span className="sr-only">{solver.repository.name ? 'Running' : 'Not running'}</span>
@@ -176,7 +167,14 @@ export default function SolverColumn() {
                                 <div className="hidden sm:flex flex-col flex-shrink-0 items-end space-y-3">
                                     <p className="flex items-center space-x-4">
 
-                                        <Toggles enabled={solver.status} handleEnabled={handleToggling}/>
+                                        <button
+                                            onClick={()=>{
+                                                history.push("/details/"+solver.uid)
+                                            }}
+                                            className="relative text-sm text-gray-500 hover:text-gray-900 font-medium"
+                                        >
+                                            Details
+                                        </button>
 
                                         <button
                                             className="relative bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -203,9 +201,7 @@ export default function SolverColumn() {
                                     </p>
                                 </div>
                             </div>
-                         
                         </li>
-                        
                     ))}
                 </ul>
             }
