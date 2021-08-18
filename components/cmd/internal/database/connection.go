@@ -9,7 +9,7 @@ import (
 	"github.com/autoai-org/aid/internal/utilities"
 
 	// import sqlite3
-	_ "github.com/mattn/go-sqlite3"
+	_ "modernc.org/sqlite"
 )
 
 // DefaultDB is the instance shared by all modules
