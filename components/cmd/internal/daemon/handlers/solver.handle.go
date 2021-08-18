@@ -37,12 +37,6 @@ type CreateContainerRequest struct {
 	GPU      bool   `json:"gpu"`
 }
 
-// MutationRequest is the struct for the request to create a mutation.
-type MutationRequest struct {
-	Operation string `json:"operation"`
-	SolverUID string `json:"solverUID"`
-}
-
 // SolverInformationHandler is the handler for the solver information fetching.
 func SolverInformationHandler(c *gin.Context) {
 	solverID := c.Param("solverID")
@@ -109,25 +103,4 @@ func CreateContainerHandler(c *gin.Context) {
 	var req CreateContainerRequest
 	c.BindJSON(req)
 	docker.Create(req.ImageUID, req.HostPort, docker.GPURequest{NeedGPU: req.GPU})
-}
-
-// MutationHandler is the handler for the mutation.
-func MutationHandler(c *gin.Context) {
-	var req MutationRequest
-	c.BindJSON(req)
-	// find the corresponding solver with the given solverID
-	solver, err := database.NewDefaultDB().Solver.Query().Where(
-		entSolver.UID(req.SolverUID)).First(context.Background())
-	if err != nil {
-		c.JSON(http.StatusNotFound, ErrorResponse{Error: err.Error()})
-	}
-	// find the corresponding containers with the given imageUID
-	image, err := solver.QueryImage().First(context.Background())
-	if err != nil {
-		c.JSON(http.StatusNotFound, ErrorResponse{Error: err.Error()})
-	}
-	_, err = image.QueryContainer().First(context.Background())
-	if err != nil {
-		c.JSON(http.StatusNotFound, ErrorResponse{Error: err.Error()})
-	}
 }
