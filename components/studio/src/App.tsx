@@ -1,7 +1,15 @@
 import React from 'react';
 import MainLayout from './layouts/MainLayout'
+import SignIn from './pages/Authentication/Login'
+import Register from './pages/Authentication/Register'
 import './App.css';
 import { initServerEndpoint } from './services/apis'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
 type AppProps = {
 }
 
@@ -28,7 +36,13 @@ class Application extends React.Component<AppProps, AppState> {
   render() {
     
     return (
-      <MainLayout />
+      <Router>
+        <Switch>
+          <Route path="/signin"><SignIn /></Route>
+          <Route path="/signup"><Register /></Route>
+          <Route path="/"><MainLayout /></Route>
+        </Switch>
+      </Router>
     );
   }
 }

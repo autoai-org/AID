@@ -12,7 +12,7 @@ export default function DoubleColumn(props: any) {
             <div className="h-full pl-4 pr-6 py-6 sm:pl-6 lg:pl-8 xl:pl-0">
               {/* Start left column area */}
               <div className="h-full relative" style={{ minHeight: '12rem' }}>
-                <div className="absolute inset-0  rounded-lg" />
+                {props.left}
               </div>
               {/* End left column area */}
             </div>

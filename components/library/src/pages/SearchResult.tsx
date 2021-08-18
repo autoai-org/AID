@@ -9,18 +9,16 @@ import MainLayout from "../Layouts/MainLayout";
 import { parseQuery } from "../services/utility";
 import { findModelsByKeyword, analyseRepos } from "../services/api"
 import ModelList from "../components/Models/ModelList";
-
+import Filters from '../components/Models/ModelFilters'
 export default function SearchResult() {
     const [packages, setPackages] = useState([])
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(0)
     useEffect(() => {
         let keyword = parseQuery("kw")
-        console.log("Querying...")
         setLoading(true)
         setProgress(1)
         findModelsByKeyword(keyword).then(function (res: any) {
-            console.log(res.data)
             setProgress(2)
             analyseRepos(res.data).then(function (res) {
                 setPackages(res)
@@ -38,6 +36,7 @@ export default function SearchResult() {
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         <p className="text-2xl" style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>Listing Repositories...</p>
+                        <p className="text-2xl" style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>1/2 Please wait patiently, it may take few minutes...</p>
                     </div>
                 </div>
             }
@@ -49,12 +48,12 @@ export default function SearchResult() {
                             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
                         <p className="text-2xl" style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>Analysing and Fetching Metadata...</p>
-
+                        <p className="text-2xl" style={{ marginLeft: 'auto', marginRight: 'auto', textAlign: 'center' }}>2/2 Please wait patiently, it may take few minutes...</p>
                     </div>
                 </div>
             }
             {!loading &&
-                <DoubleColumn main={<ModelList models={packages}/>}></DoubleColumn>
+                <DoubleColumn left={<Filters/>} main={<ModelList models={packages}/>}></DoubleColumn>
             }
         </MainLayout>
     )

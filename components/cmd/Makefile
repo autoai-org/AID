@@ -35,6 +35,12 @@ generate-gql:
 	@echo -e ">>> Generating graphql bindings..."
 	@go generate
 
+build-studio-site:
+	cd ../studio && yarn && yarn build
+
+cp-studio-site:
+	cp -r ../studio/build internal/daemon/
+
 generate-all:
 	@make generate-ent
 	@make generate-gql
@@ -44,6 +50,7 @@ describe-ent:
 
 build-cli:
 	@echo -e ">>> Building CLI utilities..."
+	@make cp-studio-site
 	@cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid
 	@cd tui && mv aid ../
 
@@ -56,6 +63,8 @@ ci-build:
 	@go mod download
 	@go mod verify
 	@make generate-all 
+	@make build-studio-site
+	@make cp-studio-site
 	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(strip $(OSFLAG))"
 
 xbuild:

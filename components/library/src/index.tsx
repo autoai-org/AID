@@ -19,7 +19,22 @@ import {
   Switch,
   Route,
 } from "react-router-dom"
+import ReactGA, { ga } from 'react-ga'
+import * as Sentry from "@sentry/react";
+import { Integrations } from "@sentry/tracing";
 
+Sentry.init({
+  dsn: "https://af50717a734e41ada1ada89d286667e9@o465689.ingest.sentry.io/5888093",
+  integrations: [new Integrations.BrowserTracing()],
+
+  // Set tracesSampleRate to 1.0 to capture 100%
+  // of transactions for performance monitoring.
+  // We recommend adjusting this value in production
+  tracesSampleRate: 1.0,
+});
+
+const TRACKING_ID = "281386144";
+ReactGA.initialize(TRACKING_ID);
 
 ReactDOM.render(
   <React.StrictMode>
@@ -55,7 +70,14 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+function sendToAnalytics({ id, name, value }:any) {
+  ga('send', 'event', {
+    eventCategory: 'Web Vitals',
+    eventAction: name,
+    eventValue: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+    eventLabel: id, // id unique to current page load
+    nonInteraction: true, // avoids affecting bounce rate
+  });
+}
+
+reportWebVitals(sendToAnalytics);

@@ -2,18 +2,27 @@
 # 
 # This software is released under the MIT License.
 # https://opensource.org/licenses/MIT
-
-prepare:
-	cp ../cmd/aid ./aid-x86_64-apple-darwin
-	
-
-build-osx:
-	yarn run build
-	yarn run build
-	cp build/index.html build/200.html
-	yarn tauri build
+OSFLAG 				:=
+ifeq ($(shell uname -s),Linux)
+	OSFLAG +=-linux
+endif
+ifeq ($(shell uname -s),Darwin)
+	OSFLAG +=-macOS
+endif
 
 prepare-binaries:
 	mkdir src-tauri/binaries
-	mv ../cmd/aid src-tauri/binaries/aid
+	cp ../cmd/tui/aid$(strip $(OSFLAG)) src-tauri/binaries/aid
 	node scripts/append.js
+
+build-binaries:
+	rm -r src-tauri/binaries
+	make prepare-binaries
+	yarn build
+	yarn tauri build
+
+build-binaries-debug:
+	rm -r src-tauri/binaries
+	make prepare-binaries
+	yarn build
+	yarn tauri build --debug

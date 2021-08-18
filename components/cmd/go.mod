@@ -10,6 +10,7 @@ require (
 	github.com/MichaelMure/go-term-markdown v0.1.3
 	github.com/Microsoft/hcsshim v0.8.7 // indirect
 	github.com/alexeyco/simpletable v0.0.0-20200730140406-5bb24159ccfb
+	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
 	github.com/containerd/containerd v1.4.2 // indirect
 	github.com/containerd/continuity v0.0.0-20200107194136-26c1120b8d41 // indirect
 	github.com/docker/distribution v2.7.1+incompatible // indirect
@@ -19,6 +20,8 @@ require (
 	github.com/elastic/go-sysinfo v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.8.0
+	github.com/gin-contrib/cors v1.3.1 // indirect
+	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19 // indirect
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect

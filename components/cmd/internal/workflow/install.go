@@ -56,6 +56,7 @@ func PullPackageSource(remoteURL string) {
 		_, err = database.NewDefaultDB().Solver.Create().SetUID(utilities.GenerateUUIDv4()).SetName(solver.Name).SetRepository(installedRepository).SetClass(solver.Class).SetStatus("Code Installed").Save(context.Background())
 		utilities.ReportError(err, "cannot save new solver to database")
 	}
+	utilities.CreateFolderIfNotExist(filepath.Join(installedRepository.Localpath, "pretrained"))
 	pretrainedTomlString, err := utilities.ReadFileContent(filepath.Join(installedRepository.Localpath, "pretrained.toml"))
 	pretraineds := configuration.LoadPretrainedsFromConfig(pretrainedTomlString)
 	for _, pretrained := range pretraineds.Models {

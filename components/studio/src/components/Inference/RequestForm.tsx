@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 import React from 'react'
-import client from '../../services/apis/solver'
+import { restclient } from '../../services/apis'
 import {Link} from 'react-router-dom'
 
 interface RequestFormState {
@@ -18,8 +18,10 @@ class RequestForm extends React.Component<any, RequestFormState> {
             textValue: '',
         };
     }
+    componentDidMount() {
+        console.log(this.props);
+    }
     sendRequest = () => {
-        let httpc = client;
         let self = this
         let payload = new FormData()
         if (this.state.file) {
@@ -31,7 +33,7 @@ class RequestForm extends React.Component<any, RequestFormState> {
             payload.append("text", this.state.textValue)
         }
         let beginTime = new Date().getTime()
-        httpc.request("POST", "running/" + window.location.href.split("/")[4] + "/infer", payload).then(function (res) {
+        restclient.infer("POST", "/api/running/" + window.location.href.split("/")[4] + "/infer", payload).then(function (res) {
             let endTime = new Date().getTime()
             Object.assign(res, {startTime: beginTime, endTime: endTime})
             self.props.onReceivedResponse(res)
@@ -96,16 +98,15 @@ class RequestForm extends React.Component<any, RequestFormState> {
                                         {this.state.file &&
                                             <p>{this.state.file[0].name}</p>
                                         }
-                                        <div className="flex text-sm text-gray-600">
-
+                                        <div className="flex text-sm text-gray-600 justify-center">
+                                            
                                             <label
                                                 htmlFor="file-upload"
-                                                className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
+                                                className="cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
                                             >
-                                                <span>Upload a file</span>
+                                                Upload a file
                                                 <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={this.onFileChange} />
                                             </label>
-                                            <p className="pl-1">or drag and drop</p>
                                         </div>
                                         <p className="pl-1 text-gray-600 text-sm">Please only upload one file.</p>
                                     </div>

@@ -12,6 +12,8 @@ import (
 	oteltrace "go.opentelemetry.io/otel/trace"
 )
 
+var tracer = otel.Tracer("gin-server")
+
 func initTracer() *sdktrace.TracerProvider {
 	exporter, err := stdout.New(stdout.WithPrettyPrint())
 	if err != nil {
