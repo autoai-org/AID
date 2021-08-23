@@ -1,11 +1,20 @@
 import { Fragment, useState } from 'react'
 import { Dialog, Transition, Disclosure } from '@headlessui/react'
-import { InformationCircleIcon, XIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronUpIcon, ArrowDownIcon } from '@heroicons/react/outline'
+import { restclient } from '../../services/apis'
 import Toggles from "../Common/Toggles"
 
 export default function InstallPackagesDialog(props: any) {
     const [buildImage, setBuildImage] = useState(true);
     const [createContainer, setCreateContainer] = useState(true);
+    const [readLog, setReadLog] = useState(false);
+
+    const makeInstall = () => {
+        const events: EventSource = restclient.subscribe("logs/12345678")
+        events.onmessage = event => {
+            console.log(event)
+        }
+    }
 
     return (
         <Transition.Root show={props.open} as={Fragment}>
@@ -22,7 +31,6 @@ export default function InstallPackagesDialog(props: any) {
                     >
                         <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
                     </Transition.Child>
-
                     {/* This element is to trick the browser into centering the modal contents. */}
                     <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
                         &#8203;
@@ -36,11 +44,10 @@ export default function InstallPackagesDialog(props: any) {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-
                         <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
                             <div>
                                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
-                                    <InformationCircleIcon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
+                                    <ArrowDownIcon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
                                 </div>
                                 <div className="mt-3 text-center sm:mt-5">
                                     <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
@@ -50,7 +57,6 @@ export default function InstallPackagesDialog(props: any) {
                                         <label htmlFor="package" className="block text-sm font-medium text-gray-700">
                                             URL or Identifer
                                         </label>
-
                                         <div className="mt-1 w-full">
                                             <input
                                                 type="text"
@@ -60,14 +66,20 @@ export default function InstallPackagesDialog(props: any) {
                                                 aria-describedby="package-description"
                                             />
                                         </div>
-
-                                        <p className="mt-2 text-sm text-gray-500" id="package-description">
-                                            e.g. https://github.com/aidmodels/detectron
-                                        </p>
+                                        <ul>
+                                            <li>
+                                                <p className="mt-2 text-sm text-gray-500" id="package-description">
+                                                    e.g. https://github.com/aidmodels/detectron
+                                                </p>
+                                            </li>
+                                            <li>
+                                                <p className="mt-2 text-sm text-gray-500" id="package-description">
+                                                    Note: Expert users are suggested to use the CLI.
+                                                </p></li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-
                             <div className="mt-5">
                                 <div className="w-full max-w-md mx-auto bg-white rounded-2xl">
                                     <Disclosure>
@@ -79,29 +91,26 @@ export default function InstallPackagesDialog(props: any) {
                                                             } w-5 h-5 text-indigo-500`}
                                                     />
                                                 </Disclosure.Button>
-                                                <Disclosure.Panel className="pt-4 pb-2 text-sm text-gray-500 inline-block w-full text-sm font-medium text-left">
+                                                <Disclosure.Panel className="pt-4 pb-2 text-sm text-gray-500 inline-block w-full font-medium text-left">
                                                     <div className="flex justify-between">
                                                         Build Image
-                                                        <Toggles enabled={buildImage} handleEnabled={setBuildImage}/>
+                                                        <Toggles enabled={buildImage} handleEnabled={setBuildImage} />
                                                     </div>
                                                     <div className="flex justify-between mt-2">
                                                         Create Container
-                                                        <Toggles enabled={createContainer} handleEnabled={setCreateContainer}/>
+                                                        <Toggles enabled={createContainer} handleEnabled={setCreateContainer} />
                                                     </div>
-
                                                 </Disclosure.Panel>
                                             </>
                                         )}
                                     </Disclosure>
                                 </div>
                             </div>
-
-
                             <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
                                 <button
                                     type="button"
                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                                    onClick={props.onClose}
+                                    onClick={makeInstall}
                                 >
                                     Confirm
                                 </button>

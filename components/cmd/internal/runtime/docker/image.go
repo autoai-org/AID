@@ -66,8 +66,7 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger) 
 // prepareBuild will prepare everything for the building process.
 func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
 	utilities.Formatter.Info("Building Image for " + solver.Name + " ...")
-	logUID := utilities.GenerateUUIDv4()
-	fmt.Println(logUID)
+	logUID := utilities.GenerateUUIDv4()[0:8]
 	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID[0:8])
 	log, err := database.NewDefaultDB().SystemLog.Create().SetFilepath(logPath).SetUID(logUID[0:8]).SetTitle(logUID[0:8]).SetSource("build").Save(context.Background())
 	utilities.ReportError(err, "Cannot save to database")
@@ -109,16 +108,21 @@ func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
 }
 
 // BuildImage builds the image
-func BuildImage(vendor string, packageName string, solverName string, gpu bool) {
+func BuildImage(vendor string, packageName string, solverName string, gpu bool) string {
+	var logID string
 	repos, err := database.NewDefaultDB().Repository.Query().Where(repository.And(repository.Name(packageName), repository.Vendor(vendor))).First(context.Background())
 	utilities.ReportError(err, "cannot find repos "+packageName)
 	solvers, err := repos.QuerySolvers().All(context.Background())
 	utilities.ReportError(err, "cannot find solvers of "+packageName)
 	for _, solver := range solvers {
 		if solver.Name == solverName {
-			prepareBuild(*solver, gpu)
+			log, err := prepareBuild(*solver, gpu)
+			if err != nil {
+				logID = log.UID
+			}
 		}
 	}
+	return logID
 }
 
 // RemoveImage deletes the image

@@ -63,6 +63,9 @@ func getRouter() *gin.Engine {
 		api.PUT("/containers/", handlers.CreateContainerHandler)
 		api.PUT("/packages", handlers.InstallPackageHandler)
 		api.POST("/running/:runningId/:path", handlers.ForwardHandler)
+		api.POST("/mutations", handlers.MutateSolverStatusHandler)
+		api.GET("/install", handlers.InstallPackageHandler)
+		api.GET("/logs/:logUID", handlers.StreamLogHandler)
 	}
 	r.NoRoute(func(c *gin.Context) {
 		filecontent, err := console.ReadFile(filepath.Join("build", "index.html"))

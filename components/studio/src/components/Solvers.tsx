@@ -185,15 +185,7 @@ export default function SolverColumn() {
                                             <span className="sr-only">
                                                 {solver.repository.vendor ? 'Add to favorites' : 'Remove from favorites'}
                                             </span>
-                                            <StarIcon
-                                                className={classNames(
-                                                    solver.repository.name
-                                                        ? 'text-yellow-300 hover:text-yellow-400'
-                                                        : 'text-gray-300 hover:text-gray-400',
-                                                    'h-5 w-5'
-                                                )}
-                                                aria-hidden="true"
-                                            />
+                                            
                                         </button>
                                     </p>
                                     <p className="flex text-gray-500 text-sm space-x-2">

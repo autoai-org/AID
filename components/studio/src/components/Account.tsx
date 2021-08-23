@@ -12,12 +12,10 @@ export default function Account() {
     const [open, setOpen] = useState(false)
    
     const openInstallDialog = () => {
-        //console.log('test');
         setOpen(true)
     }
 
     const CloseInstallDialog = () => {
-        console.log('close click')
         setOpen(false)
     }
     return (

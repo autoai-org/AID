@@ -40,6 +40,9 @@ class RestClient {
         }
         return this.axios.request(options)
     }
+    subscribe(url:string) {
+        return new EventSource(this.serverEndpoint+"/api/"+url)
+    }
 }
 
 let restclient: RestClient = new RestClient("")
