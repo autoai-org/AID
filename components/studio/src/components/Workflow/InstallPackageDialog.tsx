@@ -22,7 +22,28 @@ export default function InstallPackagesDialog(props: any) {
     }
 
     function makeInstall() {
-
+        let vendor = remoteURL.split("/")[3]
+        let name = remoteURL.split("/")[4]
+        restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
+            let solvers = res.data.Solvers
+            if (solvers.length == 1) {
+                let solverName = solvers[0]
+                if (buildImage) {
+                    restclient.post('/api/mutations', {
+                        "operation": "build",
+                        "vendorName": vendor,
+                        "packageName": name,
+                        "solverName": solverName.name
+                    }).then(function(res) {
+                        setReadLog(true);
+                        streamLog(res.data.logID);
+                    })
+                }
+            } else {
+                alert("")
+            }
+        })
+        /*
         restclient.post('/api/install',{
             'remoteURL': remoteURL
         }).then(function(res:any) {
@@ -31,7 +52,7 @@ export default function InstallPackagesDialog(props: any) {
                     
                 })
             }
-        })
+        })*/
         setReadLog(true);
         streamLog('12345678');
     }

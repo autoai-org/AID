@@ -68,10 +68,10 @@ func MutateSolverStatusHandler(c *gin.Context) {
 	c.BindJSON(&request)
 	switch request.Operation {
 	case "build":
-		filepath := workflow.BuildDockerImage(request.VendorName, request.PackageName, request.SolverName, false)
-		if filepath != "" {
+		logID := workflow.BuildDockerImage(request.VendorName, request.PackageName, request.SolverName, false)
+		if logID != "" {
 			c.JSON(200, gin.H{
-				"filepath": filepath,
+				"logID": logID,
 			})
 		} else {
 			c.JSON(500, gin.H{
