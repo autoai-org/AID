@@ -3,6 +3,14 @@
 package handlers
 
 import (
+	"context"
+	"net/http"
+	"path/filepath"
+
+	entRepository "github.com/autoai-org/aid/ent/generated/repository"
+	"github.com/autoai-org/aid/internal/configuration"
+	"github.com/autoai-org/aid/internal/database"
+	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/autoai-org/aid/internal/workflow"
 	"github.com/gin-gonic/gin"
 )
@@ -25,7 +33,7 @@ type MutateSolverStatus struct {
 // InstallPackageHandler is the handler for installing a package.
 func InstallPackageHandler(c *gin.Context) {
 	var request InstallPackageRequest
-	c.BindJSON(request)
+	c.BindJSON(&request)
 	err := workflow.PullPackageSource(request.RemoteURL)
 	if err != nil {
 		c.JSON(500, gin.H{
@@ -37,11 +45,27 @@ func InstallPackageHandler(c *gin.Context) {
 		})
 	}
 }
+func GetPackageConfiguration(c *gin.Context) {
+	vendor := c.Param("vendor")
+	packageName := c.Param("package")
+	repository, err := database.NewDefaultDB().Repository.Query().Where(
+		entRepository.Vendor(vendor), entRepository.Name(packageName)).First(context.Background())
+	if err != nil {
+		c.JSON(http.StatusNotFound, ErrorResponse{Error: err.Error()})
+	}
+	configurationFilePath := filepath.Join(repository.Localpath, "aid.toml")
+	configurationToml, err := utilities.ReadFileContent(configurationFilePath)
+	if err != nil {
+		c.JSON(http.StatusNotFound, ErrorResponse{Error: err.Error()})
+	}
+	packageConfig := configuration.LoadPackageFromConfig(configurationToml)
+	c.JSON(http.StatusOK, packageConfig)
+}
 
 // MutateSolverStatusHandler is the handler for mutating the status of a solver.
 func MutateSolverStatusHandler(c *gin.Context) {
 	var request MutateSolverStatus
-	c.BindJSON(request)
+	c.BindJSON(&request)
 	switch request.Operation {
 	case "build":
 		filepath := workflow.BuildDockerImage(request.VendorName, request.PackageName, request.SolverName, false)

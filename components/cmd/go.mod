@@ -20,13 +20,13 @@ require (
 	github.com/elastic/go-sysinfo v1.7.0
 	github.com/flosch/pongo2 v0.0.0-20190707114632-bbf5a6c351f4
 	github.com/getsentry/sentry-go v0.8.0
-	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/gin-gonic/contrib v0.0.0-20201101042839-6a891bf89f19
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/gogo/protobuf v1.3.1 // indirect
 	github.com/google/uuid v1.2.0
 	github.com/gookit/color v1.3.2
+	github.com/gorilla/websocket v1.4.2
 	github.com/hashicorp/go-multierror v1.1.1
 	github.com/levigross/grequests v0.0.0-20190908174114-253788527a1a
 	github.com/manifoldco/promptui v0.8.0

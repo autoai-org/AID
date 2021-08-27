@@ -8,12 +8,32 @@ export default function InstallPackagesDialog(props: any) {
     const [buildImage, setBuildImage] = useState(true);
     const [createContainer, setCreateContainer] = useState(true);
     const [readLog, setReadLog] = useState(false);
+    const [remoteURL, setRemoteURL] = useState("");
+    const [logs, setLogs] = useState("");
 
-    const makeInstall = () => {
-        const events: EventSource = restclient.subscribe("logs/12345678")
-        events.onmessage = event => {
-            console.log(event)
-        }
+    function handleURLChange(e: any) {
+        setRemoteURL(e.target.value)
+    }
+
+    function streamLog(logid:string) {
+        restclient.ws_log(logid,(e:any)=>{
+            setLogs(e)
+        });
+    }
+
+    function makeInstall() {
+
+        restclient.post('/api/install',{
+            'remoteURL': remoteURL
+        }).then(function(res:any) {
+            if (res.message == 'success') {
+                restclient.post('/api/mutations', {
+                    
+                })
+            }
+        })
+        setReadLog(true);
+        streamLog('12345678');
     }
 
     return (
@@ -64,6 +84,8 @@ export default function InstallPackagesDialog(props: any) {
                                                 id="package"
                                                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-md border-gray-300 rounded-md"
                                                 aria-describedby="package-description"
+                                                value={remoteURL}
+                                                onChange={handleURLChange}
                                             />
                                         </div>
                                         <ul>
@@ -122,6 +144,11 @@ export default function InstallPackagesDialog(props: any) {
                                     Cancel
                                 </button>
                             </div>
+                            {readLog &&
+                                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
+                                <textarea className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none resize-none text-xs" value={logs} disabled/>
+                                </div>
+                            }
                         </div>
                     </Transition.Child>
                 </div>
