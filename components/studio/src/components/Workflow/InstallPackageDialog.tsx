@@ -36,8 +36,8 @@ export default function InstallPackagesDialog(props: any) {
                         "packageName": name,
                         "solverName": solverName.name
                     }).then(function(res) {
-                        setReadLog(true);
                         streamLog(res.data.logID);
+                        setReadLog(true);
                     })
                 }
             } else {
@@ -54,7 +54,7 @@ export default function InstallPackagesDialog(props: any) {
                 })
             }
         })*/
-        setReadLog(true);
+        //setReadLog(true);
         streamLog('12345678');
     }
 
@@ -86,7 +86,7 @@ export default function InstallPackagesDialog(props: any) {
                         leaveFrom="opacity-100 translate-y-0 sm:scale-100"
                         leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                     >
-                        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                        <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all lg:my-8 lg:align-middle lg:max-w-lg lg:w-full lg:p-6">
                             <div>
                                 <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100">
                                     <ArrowDownIcon className="h-6 w-6 text-indigo-600" aria-hidden="true" />
@@ -167,8 +167,10 @@ export default function InstallPackagesDialog(props: any) {
                                 </button>
                             </div>
                             {readLog &&
-                                <div className="mt-5 sm:mt-4 sm:flex sm:flex-row-reverse">
-                                <textarea className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none resize-none text-xs" value={logs} disabled/>
+                                <div className="mt-5">
+                                <textarea 
+                                    rows={8}
+                                    className="w-full px-3 py-2 text-gray-700 border-gray-300 rounded-md focus:outline-none resize-y text-xs" value={logs} disabled/>
                                 </div>
                             }
                         </div>
