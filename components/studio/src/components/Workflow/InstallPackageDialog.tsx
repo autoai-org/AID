@@ -24,6 +24,7 @@ export default function InstallPackagesDialog(props: any) {
     function makeInstall() {
         let vendor = remoteURL.split("/")[3]
         let name = remoteURL.split("/")[4]
+        
         restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
             let solvers = res.data.Solvers
             if (solvers.length == 1) {
@@ -40,7 +41,7 @@ export default function InstallPackagesDialog(props: any) {
                     })
                 }
             } else {
-                alert("")
+                alert("The package contains several solvers. Hence automatic build is disabled.")
             }
         })
         /*
