@@ -3,6 +3,9 @@ import "firebase/auth";
 import { useState } from "react";
 import Alert from '../../components/Common/Alert';
 import { useHistory } from "react-router-dom";
+import { useAlert } from 'react-alert'
+import { useEffect } from "react";
+
 export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -10,13 +13,19 @@ export default function Login() {
     const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
     const githubAuthProvider = new firebase.auth.GithubAuthProvider();
     const history = useHistory();
-
+    const alert = useAlert();
     function handleEmailChange(e: any) {
         setEmail(e.target.value)
     }
     function handlePasswordChange(e: any) {
         setPassword(e.target.value)
     }
+    useEffect (()=> {
+        const allowedDomain = ['https://console.autoai.dev/signin', 'http://172.30.0.3/signin']
+        if (!allowedDomain.includes(window.location.href)) {
+            alert.info("AID is not running on authorized domains, sign in will NOT behave properly!")
+        }
+    }, [])
     return (
         <div className="relative bg-gray-800 overflow-hidden" style={{ height: '100vh' }}>
             <div className="hidden sm:block sm:absolute sm:inset-0" aria-hidden="true">

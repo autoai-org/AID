@@ -4,13 +4,11 @@ import {
     CollectionIcon,
 } from '@heroicons/react/solid'
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
-import firebase from "firebase/app";
 import InstallInstallPackageDialog from "./Workflow/InstallPackageDialog"
 import "firebase/auth";
 
 export default function Account() {
     const [open, setOpen] = useState(false)
-   
     const openInstallDialog = () => {
         setOpen(true)
     }

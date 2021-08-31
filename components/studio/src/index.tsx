@@ -23,7 +23,6 @@ const options = {
 }
 
 ReactDOM.render(
-
   <React.StrictMode>
     <AlertProvider template={AlertTemplate} {...options}>
     <FirebaseAuthProvider firebase={firebase} {...config}>
