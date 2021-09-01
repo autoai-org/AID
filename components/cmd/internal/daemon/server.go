@@ -1,9 +1,12 @@
 package daemon
 
 import (
+	"fmt"
+	"net"
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 
 	"github.com/autoai-org/aid/internal/utilities"
@@ -25,6 +28,32 @@ func beforeResponse() gin.HandlerFunc {
 	}
 }
 
+func printIpAddress(port string) {
+	// https://stackoverflow.com/questions/23558425/how-do-i-get-the-local-ip-address-in-go
+	ifaces, err := net.Interfaces()
+	for _, i := range ifaces {
+		addrs, err := i.Addrs()
+		for _, addrs := range addrs {
+			var ip string
+			switch v := addrs.(type) {
+			case *net.IPNet:
+				ip = v.IP.String()
+				if strings.Count(ip, ":") < 2 {
+					fmt.Println("\t IP Address: " + ip + ":" + port)
+				}
+			case *net.IPAddr:
+			}
+		}
+		if err != nil {
+			utilities.Formatter.Error(err.Error())
+		}
+	}
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+	}
+
+}
+
 // RunServer starts the http(s) service
 func RunServer(port string) {
 	if port == "" {
@@ -35,7 +64,9 @@ func RunServer(port string) {
 	utilities.Formatter.Info("Starting the server...")
 	r := getRouter()
 	welcomeFigure.Print()
-	utilities.Formatter.Info("Open https://console.autoai.dev to connect to this server.")
+	utilities.Formatter.Info("If you are on public network, open https://console.autoai.dev to connect to this server.")
+	utilities.Formatter.Info("Listening on the following network: ")
+	printIpAddress(port)
 	err := r.Run("0.0.0.0:" + port)
 	utilities.ReportError(err, "Cannot start server")
 	quit := make(chan os.Signal)
