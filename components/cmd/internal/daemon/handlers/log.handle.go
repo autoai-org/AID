@@ -9,6 +9,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// StreamLogHandler streams the content of a certain log file to the frontend, via a websocket
 func StreamLogHandler(c *gin.Context) {
 	logUID := c.Param("logUID")
 	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID)

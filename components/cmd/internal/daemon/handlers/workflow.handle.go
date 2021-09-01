@@ -15,11 +15,13 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// InstallPackageRequest is the request struct for installing a package.
 type InstallPackageRequest struct {
 	RemoteURL string `json:"remoteURL"`
 }
 
-type MutateSolverStatus struct {
+// MutateSolverStatusRequest is the request struct for mutating the status of a solver.
+type MutateSolverStatusRequest struct {
 	Operation   string `json:"operation"`
 	SolverID    string `json:"solverId"`
 	ImageID     string `json:"imageID"`
@@ -45,6 +47,8 @@ func InstallPackageHandler(c *gin.Context) {
 		})
 	}
 }
+
+// GetPackageConfiguration returns parsed the aid.toml content, such that the front end could utilized it.
 func GetPackageConfiguration(c *gin.Context) {
 	vendor := c.Param("vendor")
 	packageName := c.Param("package")
@@ -64,7 +68,7 @@ func GetPackageConfiguration(c *gin.Context) {
 
 // MutateSolverStatusHandler is the handler for mutating the status of a solver.
 func MutateSolverStatusHandler(c *gin.Context) {
-	var request MutateSolverStatus
+	var request MutateSolverStatusRequest
 	c.BindJSON(&request)
 	switch request.Operation {
 	case "build":
@@ -83,5 +87,4 @@ func MutateSolverStatusHandler(c *gin.Context) {
 	case "stop":
 		workflow.StopContainer(request.ContainerID)
 	}
-
 }
