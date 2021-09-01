@@ -1,7 +1,10 @@
+import { useAlert } from "react-alert"
 const activityItems = [
     { project: 'encodingSolver', commit: '2d89f0c8', environment: 'localhost', time: '1h' },
 ]
 export default function Activity() {
+    const alert = useAlert()
+
     return (
         <div className="bg-gray-50 pr-4 sm:pr-6 lg:pr-8 lg:flex-shrink-0 lg:border-l lg:border-gray-200 xl:pr-0">
             <div className="pl-6 lg:w-80">
@@ -33,9 +36,11 @@ export default function Activity() {
                         ))}
                     </ul>
                     <div className="py-4 text-sm border-t border-gray-200">
-                        <a href="#" className="text-indigo-600 font-semibold hover:text-indigo-900">
+                        <button onClick={()=>{
+                            alert.show("This feature is not ready yet!")
+                        }} className="text-indigo-600 font-semibold hover:text-indigo-900">
                             View all activity <span aria-hidden="true">&rarr;</span>
-                        </a>
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,0 +1,26 @@
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+name: CodeSee Map
+
+jobs:
+  test_map_action:
+    runs-on: ubuntu-latest
+    name: Run map action on action code
+    steps:
+      - name: checkout
+        id: checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: run
+        id: run
+        uses: Codesee-io/codesee-map-action@latest
+        with:
+          api_token: ${{ secrets.CODESEE_ARCH_DIAG_API_TOKEN }}
+          github_ref: ${{ github.ref }}
+          support_typescript: true

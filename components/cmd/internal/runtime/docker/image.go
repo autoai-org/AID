@@ -27,7 +27,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger) (types.ImageInspect, error) {
+func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger, solver ent.Solver) {
 	buildResponse, err := NewDockerRuntime().ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
 		Tags:       []string{strings.ToLower(imageName)},
 		Dockerfile: filepath.Base(dockerfile),
@@ -56,18 +56,23 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger) 
 		buildLogger.Error("Cannot show log from " + imageName)
 		buildLogger.Error(err.Error())
 	}
-	imageInspect, _, err := NewDockerRuntime().ImageInspectWithRaw(context.Background(), strings.ToLower(imageName))
+	inspect, _, err := NewDockerRuntime().ImageInspectWithRaw(context.Background(), strings.ToLower(imageName))
 	if err != nil {
 		utilities.ReportError(err, "Cannot fetch image detail from docker host")
 	}
-	return imageInspect, err
+	utilities.ReportError(err, "Cannot build image")
+	if err == nil {
+		utilities.Formatter.Info("Finishing building" + solver.Name + " ...")
+		_, err = database.NewDefaultDB().Image.Create().SetUID(inspect.ID[7:15]).SetTitle(imageName).SetSolver(&solver).Save(context.Background())
+		utilities.ReportError(err, "cannot save image to db")
+		utilities.Formatter.Info("Please use " + inspect.ID[7:15] + " as the reference of the image.")
+	}
 }
 
 // prepareBuild will prepare everything for the building process.
-func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
+func prepareBuild(solver ent.Solver, gpu bool, block bool) (*ent.SystemLog, error) {
 	utilities.Formatter.Info("Building Image for " + solver.Name + " ...")
-	logUID := utilities.GenerateUUIDv4()
-	fmt.Println(logUID)
+	logUID := utilities.GenerateUUIDv4()[0:8]
 	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID[0:8])
 	log, err := database.NewDefaultDB().SystemLog.Create().SetFilepath(logPath).SetUID(logUID[0:8]).SetTitle(logUID[0:8]).SetSource("build").Save(context.Background())
 	utilities.ReportError(err, "Cannot save to database")
@@ -97,28 +102,31 @@ func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
 		RenderRunnerTpl(filepath.Dir(dockerfile), solvers.Solvers)
 	}
 	title := "aid/" + repo.Vendor + "/" + repo.Name + "/" + solver.Name
-	inspect, err := realBuild(dockerfile, title, buildLogger)
-	utilities.ReportError(err, "Cannot build image")
-	if err == nil {
-		utilities.Formatter.Info("Finishing building" + solver.Name + " ...")
-		_, err = database.NewDefaultDB().Image.Create().SetUID(inspect.ID[7:15]).SetTitle(title).SetSolver(&solver).Save(context.Background())
-		utilities.ReportError(err, "cannot save image to db")
-		utilities.Formatter.Info("Please use " + inspect.ID[7:15] + " as the reference of the image.")
+	if block {
+		realBuild(dockerfile, title, buildLogger, solver)
+	} else {
+		go realBuild(dockerfile, title, buildLogger, solver)
 	}
 	return log, err
 }
 
 // BuildImage builds the image
-func BuildImage(vendor string, packageName string, solverName string, gpu bool) {
+func BuildImage(vendor string, packageName string, solverName string, gpu bool, block bool) string {
+	var logID string
 	repos, err := database.NewDefaultDB().Repository.Query().Where(repository.And(repository.Name(packageName), repository.Vendor(vendor))).First(context.Background())
 	utilities.ReportError(err, "cannot find repos "+packageName)
 	solvers, err := repos.QuerySolvers().All(context.Background())
 	utilities.ReportError(err, "cannot find solvers of "+packageName)
 	for _, solver := range solvers {
 		if solver.Name == solverName {
-			prepareBuild(*solver, gpu)
+			log, err := prepareBuild(*solver, gpu, block)
+			if err != nil {
+				utilities.Formatter.Error(err.Error())
+			}
+			logID = log.UID
 		}
 	}
+	return logID
 }
 
 // RemoveImage deletes the image

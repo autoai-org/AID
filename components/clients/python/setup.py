@@ -4,7 +4,7 @@ long_description = "For full description, please go to [Documentation](https://a
 
 setuptools.setup(
     name="mlpm_client",
-    version="1.0.0.10",
+    version="1.0.0.11",
     author="Xiaozhe Yao",
     author_email="askxzyao@gmail.com",
     description="Python Client for AID Project",

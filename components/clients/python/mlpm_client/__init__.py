@@ -50,7 +50,7 @@ class Client(object):
             endpoint = self.endpoints[vendor + package + solver]
         else:
             params = {'vendor': vendor, 'package': package, 'solver': solver}
-            resp = requests.post(self.host + ":17415/preflight",
+            resp = requests.post(self.host + ":17415/api/preflight",
                                  json=params,
                                  headers={'Content-type': "application/json"})
             data = resp.json()

@@ -18,6 +18,9 @@ class RestClient {
     get(url: string) {
         return this.axios.get(this.serverEndpoint + url)
     }
+    post(url: string, payload: any) {
+        return this.axios.post(this.serverEndpoint+url, payload)
+    }
     query(gql:string) {
         console.log(this.serverEndpoint)
         if (this.serverEndpoint==="") {
@@ -39,6 +42,14 @@ class RestClient {
             data: payload
         }
         return this.axios.request(options)
+    }
+    ws_log(logid: string, onEvent: Function) {
+        const wsEndpoint = this.serverEndpoint.replace("http", "ws")
+        console.log(wsEndpoint+"/api/logs/"+logid)
+        const socket = new WebSocket(wsEndpoint+"/api/logs/"+logid)
+        socket.addEventListener('message', function(event){
+            onEvent(event.data)
+        })
     }
 }
 

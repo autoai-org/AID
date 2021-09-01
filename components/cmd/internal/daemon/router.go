@@ -60,9 +60,14 @@ func getRouter() *gin.Engine {
 		api.POST("/query", graphqlHandler())
 		api.GET("/playground", playgroundHandler())
 		api.GET("/solver/:solverID", handlers.SolverInformationHandler)
+		api.GET("/package/:vendor/:package", handlers.GetPackageConfiguration)
 		api.PUT("/containers/", handlers.CreateContainerHandler)
-		api.PUT("/packages", handlers.InstallPackageHandler)
 		api.POST("/running/:runningId/:path", handlers.ForwardHandler)
+		api.POST("/mutations", handlers.MutateSolverStatusHandler)
+		api.POST("/install", handlers.InstallPackageHandler)
+		api.GET("/logs/:logid", func(c *gin.Context) {
+			serveWS(c)
+		})
 	}
 	r.NoRoute(func(c *gin.Context) {
 		filecontent, err := console.ReadFile(filepath.Join("build", "index.html"))

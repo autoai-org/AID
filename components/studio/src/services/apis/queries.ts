@@ -56,9 +56,16 @@ query solvers {
   }
 }
 `
-
+const ALL_CONTAINERS = `
+query ALLContainers {
+    containers {
+        port,
+    }
+}
+`
 export {
     ALL_REPOSITORIES,
     ALL_SOLVERS,
-    SOLVER_AND_IMAGES
+    SOLVER_AND_IMAGES,
+    ALL_CONTAINERS
 }

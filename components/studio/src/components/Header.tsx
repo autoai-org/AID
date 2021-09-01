@@ -5,7 +5,7 @@ import {
 } from '@heroicons/react/solid'
 import { MenuAlt1Icon, XIcon } from '@heroicons/react/outline'
 import { setServerEndpoint, getServerEndpoint } from '../services/apis'
-
+import Terminal from './Common/Terminal'
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
@@ -13,12 +13,16 @@ export default function Header() {
     function disconnect() {
         setServerEndpoint("")
     }
-    const handleKeyDown =(event: any) => {
+    const [termOpen, setOpen] = useState(false)
+    const handleKeyDown = (event: any) => {
         if (event.key === 'Enter') {
             if (queryKW.trim() !== '') {
-                window.open('https://hub.autoai.dev/search?kw='+queryKW.trim())
+                window.open('https://hub.autoai.dev/search?kw=' + queryKW.trim())
             }
         }
+    }
+    const CloseTerminalDialog = () => {
+        setOpen(false)
     }
     const [queryKW, setQueryKW] = useState("");
     return (
@@ -52,7 +56,7 @@ export default function Header() {
                                             onKeyDown={handleKeyDown}
                                             id="search"
                                             name="search"
-                                            onChange={e=>{
+                                            onChange={e => {
                                                 setQueryKW(e.target.value)
                                             }}
                                             className="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5 bg-indigo-400 bg-opacity-25 text-indigo-100 placeholder-indigo-200 focus:outline-none focus:bg-white focus:ring-0 focus:placeholder-gray-400 focus:text-gray-900 sm:text-sm"
@@ -77,7 +81,14 @@ export default function Header() {
                             <div className="hidden lg:block lg:w-80">
                                 <div className="flex items-center justify-end">
                                     <div className="flex">
-
+                                        <div className="ml-4 relative flex-shrink-0">
+                                            <button className="flex text-sm rounded-full hover:text-white text-indigo-100" onClick={()=>{alert("Not Available Yet.")}}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                                    
+                                                </svg>
+                                            </button>
+                                        </div>
                                         <Menu as="div" className="ml-4 relative flex-shrink-0">
                                             {({ open }) => (
                                                 <>
@@ -120,15 +131,16 @@ export default function Header() {
                                                 </>
                                             )}
                                         </Menu>
-
                                     </div>
-                                    {/* Profile dropdown */}
+                                    
+                                    <Terminal open={termOpen} onClose={CloseTerminalDialog}/>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </>
             )}
+            
         </Disclosure>
     )
 }

@@ -4,17 +4,14 @@ import { restclient } from '../services/apis';
 import { setIsLoading } from '../services/store/connectivity/server';
 import Toggles from "../components/Common/Toggles";
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom';
 import {
     ChevronDownIcon,
     ChevronRightIcon,
     SortAscendingIcon,
-    StarIcon,
     PlusIcon
 } from '@heroicons/react/solid'
 import Moment from 'react-moment';
 import { useEffect, useState } from 'react';
-import { constants } from 'buffer';
 
 function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
@@ -23,7 +20,6 @@ function classNames(...classes: any) {
 export default function SolverColumn() {
     const dispatch = useDispatch();
     const [solvers, setSolvers] = useState<object[]>([]);
-    const history = useHistory();
     useEffect(() => {
         dispatch(setIsLoading(true))
         restclient.query(ALL_SOLVERS).then((res: any) => {
@@ -185,15 +181,7 @@ export default function SolverColumn() {
                                             <span className="sr-only">
                                                 {solver.repository.vendor ? 'Add to favorites' : 'Remove from favorites'}
                                             </span>
-                                            <StarIcon
-                                                className={classNames(
-                                                    solver.repository.name
-                                                        ? 'text-yellow-300 hover:text-yellow-400'
-                                                        : 'text-gray-300 hover:text-gray-400',
-                                                    'h-5 w-5'
-                                                )}
-                                                aria-hidden="true"
-                                            />
+                                            
                                         </button>
                                     </p>
                                     <p className="flex text-gray-500 text-sm space-x-2">

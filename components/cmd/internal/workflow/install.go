@@ -19,7 +19,7 @@ import (
 
 // PullPackageSource tried to download the source code of the file from remote
 // address, it now supports github and other git-based server.
-func PullPackageSource(remoteURL string) {
+func PullPackageSource(remoteURL string) error {
 	targetPath := filepath.Join(utilities.GetBasePath(), "models")
 	var remoteType string
 	var installedRepository *ent.Repository
@@ -68,4 +68,5 @@ func PullPackageSource(remoteURL string) {
 	if err == nil {
 		utilities.Formatter.Info(installedRepository.Name + " installed successfully")
 	}
+	return err
 }
