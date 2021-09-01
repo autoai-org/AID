@@ -66,5 +66,6 @@ query ALLContainers {
 export {
     ALL_REPOSITORIES,
     ALL_SOLVERS,
-    SOLVER_AND_IMAGES
+    SOLVER_AND_IMAGES,
+    ALL_CONTAINERS
 }

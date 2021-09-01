@@ -12,7 +12,7 @@ import "firebase/auth"
 import { config } from './services/apis/firebase'
 import { FirebaseAuthProvider } from '@react-firebase/auth'
 import {transitions, positions, Provider as AlertProvider} from 'react-alert'
-import AlertTemplate from './services/utilities/alert';
+import AlertTemplate from './components/Common/Alert';
 const options = {
   // you can also just use 'bottom center'
   position: positions.TOP_CENTER,
