@@ -28,7 +28,6 @@ import (
 )
 
 func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger, solver ent.Solver) {
-	fmt.Println("real build...")
 	buildResponse, err := NewDockerRuntime().ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
 		Tags:       []string{strings.ToLower(imageName)},
 		Dockerfile: filepath.Base(dockerfile),
@@ -71,9 +70,8 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger, 
 }
 
 // prepareBuild will prepare everything for the building process.
-func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
+func prepareBuild(solver ent.Solver, gpu bool, block bool) (*ent.SystemLog, error) {
 	utilities.Formatter.Info("Building Image for " + solver.Name + " ...")
-	fmt.Println("ppp")
 	logUID := utilities.GenerateUUIDv4()[0:8]
 	logPath := filepath.Join(utilities.GetBasePath(), "logs", "builds", logUID[0:8])
 	log, err := database.NewDefaultDB().SystemLog.Create().SetFilepath(logPath).SetUID(logUID[0:8]).SetTitle(logUID[0:8]).SetSource("build").Save(context.Background())
@@ -104,13 +102,16 @@ func prepareBuild(solver ent.Solver, gpu bool) (*ent.SystemLog, error) {
 		RenderRunnerTpl(filepath.Dir(dockerfile), solvers.Solvers)
 	}
 	title := "aid/" + repo.Vendor + "/" + repo.Name + "/" + solver.Name
-	go realBuild(dockerfile, title, buildLogger, solver)
+	if block {
+		realBuild(dockerfile, title, buildLogger, solver)
+	} else {
+		go realBuild(dockerfile, title, buildLogger, solver)
+	}
 	return log, err
 }
 
 // BuildImage builds the image
-func BuildImage(vendor string, packageName string, solverName string, gpu bool) string {
-	fmt.Println("-====-")
+func BuildImage(vendor string, packageName string, solverName string, gpu bool, block bool) string {
 	var logID string
 	repos, err := database.NewDefaultDB().Repository.Query().Where(repository.And(repository.Name(packageName), repository.Vendor(vendor))).First(context.Background())
 	utilities.ReportError(err, "cannot find repos "+packageName)
@@ -118,14 +119,13 @@ func BuildImage(vendor string, packageName string, solverName string, gpu bool) 
 	utilities.ReportError(err, "cannot find solvers of "+packageName)
 	for _, solver := range solvers {
 		if solver.Name == solverName {
-			log, err := prepareBuild(*solver, gpu)
+			log, err := prepareBuild(*solver, gpu, block)
 			if err != nil {
 				utilities.Formatter.Error(err.Error())
 			}
 			logID = log.UID
 		}
 	}
-	fmt.Println(logID)
 	return logID
 }
 
