@@ -4,7 +4,6 @@ import { restclient } from '../services/apis';
 import { setIsLoading } from '../services/store/connectivity/server';
 import Toggles from "../components/Common/Toggles";
 import { useDispatch } from 'react-redux'
-import { useHistory } from 'react-router-dom';
 import {
     ChevronDownIcon,
     ChevronRightIcon,
@@ -21,7 +20,6 @@ function classNames(...classes: any) {
 export default function SolverColumn() {
     const dispatch = useDispatch();
     const [solvers, setSolvers] = useState<object[]>([]);
-    const history = useHistory();
     useEffect(() => {
         dispatch(setIsLoading(true))
         restclient.query(ALL_SOLVERS).then((res: any) => {
