@@ -21,10 +21,6 @@ export default function Header() {
             }
         }
     }
-    const openTerminalDialog = () => {
-        console.log('===')
-        setOpen(true)
-    }
     const CloseTerminalDialog = () => {
         setOpen(false)
     }
