@@ -38,7 +38,7 @@ export default function ModelCard(props: any) {
                 <div>
                     <div className="flex space-x-3">
                         <div className="flex-shrink-0">
-                            {!(model.avatar) ? (
+                            {(model.avatar || !(model.avatar ==="null") || !(model.avatar ==="undefined")) ? (
                                 <img className="h-10 w-10 rounded-full" src={model.avatar} alt="" />
                             ) :
                                 (

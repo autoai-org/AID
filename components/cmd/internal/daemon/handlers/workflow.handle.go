@@ -83,6 +83,10 @@ func MutateSolverStatusHandler(c *gin.Context) {
 			})
 		}
 	case "create":
+		// if the port is not specified, we let the system choose one
+		if request.Hostport == "" {
+
+		}
 		workflow.CreateContainer(request.ImageID, request.Hostport, false)
 	case "stop":
 		workflow.StopContainer(request.ContainerID)

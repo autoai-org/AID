@@ -137,11 +137,11 @@ export default function InstallPackagesDialog(props: any) {
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel className="pt-4 pb-2 text-sm text-gray-500 inline-block w-full font-medium text-left">
                                                     <div className="flex justify-between">
-                                                        Build Image
+                                                        Build image after installation
                                                         <Toggles enabled={buildImage} handleEnabled={setBuildImage} />
                                                     </div>
                                                     <div className="flex justify-between mt-2">
-                                                        Create Container
+                                                        Create container after build
                                                         <Toggles enabled={createContainer} handleEnabled={setCreateContainer} />
                                                     </div>
                                                 </Disclosure.Panel>
