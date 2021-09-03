@@ -17,11 +17,25 @@ export default function InstallPackagesDialog(props: any) {
 
     function streamLog(logid:string) {
         restclient.ws_log(logid,(e:any)=>{
-            setLogs(e)
+            let message = ""
+            let logs = e.split(/\r?\n/)
+            logs.slice(1).map(function(each:any){
+                console.log(each)
+                if(each) {
+                    let jsonStr:any = JSON.parse(('{"' + each.replace(/^\s+|\s+$/g,'').replace(/=(?=\s|$)/g, '="" ').replace(/\s+(?=([^"]*"[^"]*")*[^"]*$)/g, '", "').replace(/=/g, '": "') + '"}').replace(/""/g, '"'));
+                    console.log(jsonStr)
+                    let info = jsonStr.time + " ["+jsonStr.level+"]" + " "+jsonStr.msg
+                    message += info
+                }
+            })
+            setLogs(message)
         });
     }
 
     function makeInstall() {
+        streamLog("6290e809")
+        setReadLog(true)
+        /*
         let vendor = remoteURL.split("/")[3]
         let name = remoteURL.split("/")[4]
         
@@ -44,6 +58,7 @@ export default function InstallPackagesDialog(props: any) {
                 alert("The package contains several solvers. Hence automatic build is disabled.")
             }
         })
+        */
         /*
         restclient.post('/api/install',{
             'remoteURL': remoteURL
@@ -54,8 +69,8 @@ export default function InstallPackagesDialog(props: any) {
                 })
             }
         })*/
-        //setReadLog(true);
-        streamLog('12345678');
+        // setReadLog(true);
+        // streamLog('12345678');
     }
 
     return (
