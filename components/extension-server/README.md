@@ -7,4 +7,4 @@ This component is responsible for
 * Schedule tasks.
 * Save running status.
 
-It should be run in a docker container.
+It should be run in a docker container, together with a redis server.
