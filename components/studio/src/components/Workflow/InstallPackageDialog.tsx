@@ -15,17 +15,22 @@ export default function InstallPackagesDialog(props: any) {
         setRemoteURL(e.target.value)
     }
 
-    function streamLog(logid:string) {
-        restclient.ws_log(logid,(e:any)=>{
+    function streamLog(logid: string) {
+        restclient.ws_log(logid, (e: any) => {
             let message = ""
             let logs = e.split(/\r?\n/)
-            logs.slice(1).map(function(each:any){
+            logs.map(function (each: any) {
                 console.log(each)
-                if(each) {
-                    let jsonStr:any = JSON.parse(('{"' + each.replace(/^\s+|\s+$/g,'').replace(/=(?=\s|$)/g, '="" ').replace(/\s+(?=([^"]*"[^"]*")*[^"]*$)/g, '", "').replace(/=/g, '": "') + '"}').replace(/""/g, '"'));
-                    console.log(jsonStr)
-                    let info = jsonStr.time + " ["+jsonStr.level+"]" + " "+jsonStr.msg
-                    message += info
+                if (each) {
+                    try {
+                        let jsonStr: any = JSON.parse(('{"' + each.replace(/^\s+|\s+$/g, '').replace(/=(?=\s|$)/g, '="" ').replace(/\s+(?=([^"]*"[^"]*")*[^"]*$)/g, '", "').replace(/=/g, '": "') + '"}').replace(/""/g, '"'));
+                        console.log(jsonStr)
+                        let info = jsonStr.time + " [" + jsonStr.level + "]" + " " + jsonStr.msg
+                        message += info
+                    } catch (error) {
+                        message += each
+                    }
+
                 }
             })
             setLogs(message)
@@ -33,17 +38,15 @@ export default function InstallPackagesDialog(props: any) {
     }
 
     function makeInstall() {
-        streamLog("6290e809")
-        setReadLog(true)
-
-        restclient.post('/api/install',{
+        setLogs(">>> Installing...\n Loading logs...");
+        restclient.post('/api/install', {
             'remoteURL': remoteURL
-        }).then(function(res:any) {
-            if (res.message == 'success') {
+        }).then(function (res: any) {
+            if (res.data.message == 'success') {
                 let vendor = remoteURL.split("/")[3]
                 let name = remoteURL.split("/")[4]
-                
-                restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
+
+                restclient.get('/api/package/' + vendor + "/" + name).then(function (res: any) {
                     let solvers = res.data.Solvers
                     if (solvers.length == 1) {
                         let solverName = solvers[0]
@@ -53,10 +56,12 @@ export default function InstallPackagesDialog(props: any) {
                                 "vendorName": vendor,
                                 "packageName": name,
                                 "solverName": solverName.name
-                            }).then(function(res) {
-                                setLogs("Loading logs...");
+                            }).then(function (res) {
+                                console.log(res)
                                 streamLog(res.data.logID);
                                 setReadLog(true);
+                            }).catch(function(err) {
+                                console.error(err)
                             })
                         }
                     } else {
@@ -178,9 +183,9 @@ export default function InstallPackagesDialog(props: any) {
                             </div>
                             {readLog &&
                                 <div className="mt-5">
-                                <textarea 
-                                    rows={8}
-                                    className="w-full px-3 py-2 text-gray-700 border-gray-300 rounded-md focus:outline-none resize-y text-xs" value={logs} disabled/>
+                                    <textarea
+                                        rows={8}
+                                        className="w-full px-3 py-2 text-gray-700 border-gray-300 rounded-md focus:outline-none resize-y text-xs" value={logs} disabled />
                                 </div>
                             }
                         </div>
