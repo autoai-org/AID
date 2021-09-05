@@ -5,16 +5,23 @@ import {
 } from '@heroicons/react/solid'
 import { FirebaseAuthConsumer } from '@react-firebase/auth'
 import InstallInstallPackageDialog from "./Workflow/InstallPackageDialog"
+import ImageList from './Workflow/ImageList'
 import "firebase/auth";
 
 export default function Account() {
     const [open, setOpen] = useState(false)
+    const [openRepos, setOpenRepos] = useState(false)
     const openInstallDialog = () => {
         setOpen(true)
     }
-
+    const openRepoList = () =>{
+        setOpenRepos(true)
+    }
     const CloseInstallDialog = () => {
         setOpen(false)
+    }
+    const CloseRepoList = () => {
+        setOpenRepos(false)
     }
     return (
         <div className="xl:flex-shrink-0 xl:w-64 xl:border-r xl:border-gray-200 bg-white">
@@ -69,9 +76,10 @@ export default function Account() {
                                 </button>
                                 <button
                                     type="button"
+                                    onClick={openRepoList}
                                     className="mt-3 inline-flex items-center justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 xl:ml-0 xl:mt-3 xl:w-full"
                                 >
-                                    Build Solvers
+                                    Installed Repositories
                                 </button>
                             </div>
                         </div>
@@ -91,6 +99,7 @@ export default function Account() {
                 </div>
             </div>
             <InstallInstallPackageDialog open={open} onClose={CloseInstallDialog}/>
+            <ImageList open={openRepos} onClose={CloseRepoList}/>
         </div>
         
     )

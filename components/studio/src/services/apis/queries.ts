@@ -63,9 +63,22 @@ query ALLContainers {
     }
 }
 `
+
+const ALL_IMAGES = `
+query Allimages {
+	images {
+    title
+    container {
+      port
+      running
+    }
+  }
+}
+`
 export {
     ALL_REPOSITORIES,
     ALL_SOLVERS,
     SOLVER_AND_IMAGES,
-    ALL_CONTAINERS
+    ALL_CONTAINERS,
+    ALL_IMAGES
 }

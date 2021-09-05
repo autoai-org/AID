@@ -35,42 +35,37 @@ export default function InstallPackagesDialog(props: any) {
     function makeInstall() {
         streamLog("6290e809")
         setReadLog(true)
-        /*
-        let vendor = remoteURL.split("/")[3]
-        let name = remoteURL.split("/")[4]
-        
-        restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
-            let solvers = res.data.Solvers
-            if (solvers.length == 1) {
-                let solverName = solvers[0]
-                if (buildImage) {
-                    restclient.post('/api/mutations', {
-                        "operation": "build",
-                        "vendorName": vendor,
-                        "packageName": name,
-                        "solverName": solverName.name
-                    }).then(function(res) {
-                        streamLog(res.data.logID);
-                        setReadLog(true);
-                    })
-                }
-            } else {
-                alert("The package contains several solvers. Hence automatic build is disabled.")
-            }
-        })
-        */
-        /*
+
         restclient.post('/api/install',{
             'remoteURL': remoteURL
         }).then(function(res:any) {
             if (res.message == 'success') {
-                restclient.post('/api/mutations', {
-                    
+                let vendor = remoteURL.split("/")[3]
+                let name = remoteURL.split("/")[4]
+                
+                restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
+                    let solvers = res.data.Solvers
+                    if (solvers.length == 1) {
+                        let solverName = solvers[0]
+                        if (buildImage) {
+                            restclient.post('/api/mutations', {
+                                "operation": "build",
+                                "vendorName": vendor,
+                                "packageName": name,
+                                "solverName": solverName.name
+                            }).then(function(res) {
+                                setLogs("Loading logs...");
+                                streamLog(res.data.logID);
+                                setReadLog(true);
+                            })
+                        }
+                    } else {
+                        alert("The package contains several solvers. Hence automatic build is disabled.")
+                    }
                 })
             }
-        })*/
-        // setReadLog(true);
-        // streamLog('12345678');
+        })
+        setReadLog(true);
     }
 
     return (
