@@ -18,7 +18,7 @@
     <a href="https://aid.autoai.org"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://www.youtube.com/watch?v=B7K3tQE2RcM">Video Demo</a>
+    <a href="https://www.youtube.com/watch?v=18ulW_8phgs">Video Demo</a>
     ·
     <a href="https://github.com/autoai-org/aid/issues">Report Bug</a>
     ·
@@ -26,7 +26,7 @@
   </p>
 </p>
 
-**AID is still under heavy development and APIs may change! Stay tuned. The next major revision will be released Q1,2021.**
+**AID is still under heavy development and APIs may change!**
 
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
