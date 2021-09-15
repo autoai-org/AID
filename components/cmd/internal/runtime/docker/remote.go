@@ -24,3 +24,14 @@ func Pull(imageName string) error {
 	io.Copy(os.Stdout, reader)
 	return nil
 }
+
+// Push will push an existing package into a remote docker registry
+func Push(imageName string) error {
+	reader, err := Client.ImagePush(context.Background(), imageName, types.ImagePushOptions{})
+	if err != nil {
+		utilities.ReportError(err, "Cannot Push image "+imageName+": "+err.Error())
+		return err
+	}
+	io.Copy(os.Stdout, reader)
+	return nil
+}

@@ -2,10 +2,12 @@ from enum import Enum
 from typing import Optional
 from sqlmodel import Field, SQLModel
 
+
 class ExtensionType(str, Enum):
     DOCKER = 'DOCKER'
     WEBHOOK = 'WEBHOOK'
     BINARY = 'BINARY'
+
 
 class Extension(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -19,4 +21,6 @@ class Extension(SQLModel, table=True):
     # 2. for webhook, it should be a url address.
     # 3. for a local binary, it should be a shell command
     entrypoint: str
-
+    remote_url: Optional[str]
+    vendor: str
+    name: str
