@@ -8,10 +8,8 @@ queue = Celery('tasks', backend='redis://localhost:63791/1', broker='redis://loc
 
 @queue.task
 def webhook_task(url, payload):
-    print(payload)
     response = requests.post(url, json=payload)
     res = response.text
-    print(res)
     return res
 
 class Pipeline(object):
@@ -20,7 +18,6 @@ class Pipeline(object):
     
     def run_event_through_all_extensions(self, event: Event):
         # first we get all extensions
-        print(event)
         extensions = DB().fetch_extensions()
         for each in extensions:
             conditions = ast.literal_eval(each.condition)
