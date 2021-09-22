@@ -121,7 +121,9 @@ func Stop(containerID string) error {
 	return nil
 }
 
-// RemoveContainer will remove a docker container
+// RemoveContainer will remove a docker container from the system
+// It also removes the entry from the database
+// TODO: there might be some errors during the process, it should not block the users, but just a warning.
 func RemoveContainer(containerID string) error {
 	containerEnt, err := database.NewDefaultDB().Container.Query().Where(entContainer.UID(containerID)).First(context.Background())
 	if err != nil {

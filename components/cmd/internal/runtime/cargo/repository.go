@@ -38,3 +38,13 @@ func RemovePackage(packageID string) error {
 	utilities.Formatter.Info("Repository: " + repo.Vendor + "/" + repo.Name + "(" + fmt.Sprint(packageID) + ") deleted from your disk.")
 	return err
 }
+
+// ExportRepository is for exporting the repositories into a portable format such that it is installable
+func ExportRepository(vendorName string, repoName string) {
+
+}
+
+// ImportRepository is for importing the repositories into the system such that it can be read and used on the system as well
+func ImportRepository(vendorName string, repoName string) {
+
+}

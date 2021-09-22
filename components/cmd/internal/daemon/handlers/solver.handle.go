@@ -37,6 +37,11 @@ type CreateContainerRequest struct {
 	GPU      bool   `json:"gpu"`
 }
 
+// DeleteContainerRequest is the struct for deleting a solver
+type DeleteContainerRequest struct {
+	ContainerUID string `json:"containerUID"`
+}
+
 // SolverInformationHandler is the handler for the solver information fetching.
 func SolverInformationHandler(c *gin.Context) {
 	solverID := c.Param("solverID")
@@ -103,4 +108,16 @@ func CreateContainerHandler(c *gin.Context) {
 	var req CreateContainerRequest
 	c.BindJSON(req)
 	docker.Create(req.ImageUID, req.HostPort, docker.GPURequest{NeedGPU: req.GPU})
+}
+
+// DeleteContainerHandler is the handler for the deletion of a container
+func DeleteContainerHandler(c *gin.Context) {
+	var req DeleteContainerRequest
+	c.BindJSON(req)
+	docker.RemoveContainer(req.ContainerUID)
+}
+
+// GenerateContainerConfigurationsHandler
+func GenerateContainerConfigurationsHandler() {
+
 }

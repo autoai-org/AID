@@ -112,7 +112,10 @@ func prepareBuild(solver ent.Solver, gpu bool, block bool) (*ent.SystemLog, erro
 	return log, err
 }
 
-// BuildImage builds the image
+// BuildImage builds the image from the vendor+packagename+solverName
+// there are two options for it, blocking/non-blocking
+// if it is blocking mode, then the users cannot proceed until the process is finished - useful for terminal priting
+// if it is in non-blocking mode, then the users can proceed even the process has not been finished.
 func BuildImage(vendor string, packageName string, solverName string, gpu bool, block bool) string {
 	var logID string
 	repos, err := database.NewDefaultDB().Repository.Query().Where(repository.And(repository.Name(packageName), repository.Vendor(vendor))).First(context.Background())
@@ -191,6 +194,7 @@ func BuildWithPath(path string, solver string, removeAfterBuild bool) error {
 	return err
 }
 
+// buildWithDockerfile allows the users to build with existing dockerfile, and the solName, such that users could modify the dockerfile as they prefer.
 func buildWithDockerfile(dockerfile string, solName string) {
 	utilities.Formatter.Info(dockerfile)
 	utilities.Formatter.Info(solName)
