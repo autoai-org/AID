@@ -15,47 +15,62 @@ export default function InstallPackagesDialog(props: any) {
         setRemoteURL(e.target.value)
     }
 
-    function streamLog(logid:string) {
-        restclient.ws_log(logid,(e:any)=>{
-            setLogs(e)
+    function streamLog(logid: string) {
+        restclient.ws_log(logid, (e: any) => {
+            let message = ""
+            let logs = e.split(/\r?\n/)
+            logs.map(function (each: any) {
+                console.log(each)
+                if (each) {
+                    try {
+                        let jsonStr: any = JSON.parse(('{"' + each.replace(/^\s+|\s+$/g, '').replace(/=(?=\s|$)/g, '="" ').replace(/\s+(?=([^"]*"[^"]*")*[^"]*$)/g, '", "').replace(/=/g, '": "') + '"}').replace(/""/g, '"'));
+                        console.log(jsonStr)
+                        let info = jsonStr.time + " [" + jsonStr.level + "]" + " " + jsonStr.msg
+                        message += info
+                    } catch (error) {
+                        message += each
+                    }
+
+                }
+            })
+            setLogs(message)
         });
     }
 
     function makeInstall() {
-        let vendor = remoteURL.split("/")[3]
-        let name = remoteURL.split("/")[4]
-        
-        restclient.get('/api/package/'+vendor+"/"+name).then(function(res:any) {
-            let solvers = res.data.Solvers
-            if (solvers.length == 1) {
-                let solverName = solvers[0]
-                if (buildImage) {
-                    restclient.post('/api/mutations', {
-                        "operation": "build",
-                        "vendorName": vendor,
-                        "packageName": name,
-                        "solverName": solverName.name
-                    }).then(function(res) {
-                        streamLog(res.data.logID);
-                        setReadLog(true);
-                    })
-                }
-            } else {
-                alert("The package contains several solvers. Hence automatic build is disabled.")
-            }
-        })
-        /*
-        restclient.post('/api/install',{
+        setLogs(">>> Installing...\n Loading logs...");
+        restclient.post('/api/install', {
             'remoteURL': remoteURL
-        }).then(function(res:any) {
-            if (res.message == 'success') {
-                restclient.post('/api/mutations', {
-                    
+        }).then(function (res: any) {
+            if (res.data.message == 'success') {
+                let vendor = remoteURL.split("/")[3]
+                let name = remoteURL.split("/")[4]
+
+                restclient.get('/api/package/' + vendor + "/" + name).then(function (res: any) {
+                    let solvers = res.data.Solvers
+                    if (solvers.length == 1) {
+                        let solverName = solvers[0]
+                        if (buildImage) {
+                            restclient.post('/api/mutations', {
+                                "operation": "build",
+                                "vendorName": vendor,
+                                "packageName": name,
+                                "solverName": solverName.name
+                            }).then(function (res) {
+                                console.log(res)
+                                streamLog(res.data.logID);
+                                setReadLog(true);
+                            }).catch(function(err) {
+                                console.error(err)
+                            })
+                        }
+                    } else {
+                        alert("The package contains several solvers. Hence automatic build is disabled.")
+                    }
                 })
             }
-        })*/
-        //setReadLog(true);
-        streamLog('12345678');
+        })
+        setReadLog(true);
     }
 
     return (
@@ -137,11 +152,11 @@ export default function InstallPackagesDialog(props: any) {
                                                 </Disclosure.Button>
                                                 <Disclosure.Panel className="pt-4 pb-2 text-sm text-gray-500 inline-block w-full font-medium text-left">
                                                     <div className="flex justify-between">
-                                                        Build Image
+                                                        Build image after installation
                                                         <Toggles enabled={buildImage} handleEnabled={setBuildImage} />
                                                     </div>
                                                     <div className="flex justify-between mt-2">
-                                                        Create Container
+                                                        Create container after build
                                                         <Toggles enabled={createContainer} handleEnabled={setCreateContainer} />
                                                     </div>
                                                 </Disclosure.Panel>
@@ -168,9 +183,9 @@ export default function InstallPackagesDialog(props: any) {
                             </div>
                             {readLog &&
                                 <div className="mt-5">
-                                <textarea 
-                                    rows={8}
-                                    className="w-full px-3 py-2 text-gray-700 border-gray-300 rounded-md focus:outline-none resize-y text-xs" value={logs} disabled/>
+                                    <textarea
+                                        rows={8}
+                                        className="w-full px-3 py-2 text-gray-700 border-gray-300 rounded-md focus:outline-none resize-y text-xs" value={logs} disabled />
                                 </div>
                             }
                         </div>
