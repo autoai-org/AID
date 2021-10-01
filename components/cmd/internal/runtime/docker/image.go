@@ -27,6 +27,7 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+// realBuild calls the Docker daemon to actually perform the build operation.
 func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger, solver ent.Solver) {
 	buildResponse, err := NewDockerRuntime().ImageBuild(context.Background(), getBuildCtx(path.Dir(dockerfile)), types.ImageBuildOptions{
 		Tags:       []string{strings.ToLower(imageName)},
@@ -42,6 +43,7 @@ func realBuild(dockerfile string, imageName string, buildLogger *logrus.Logger, 
 	reader := buildResponse.Body
 	defer reader.Close()
 	scanner := bufio.NewScanner(reader)
+	// then scanning the build response and stream them to build logger.
 	for scanner.Scan() {
 		var buildLog BuildLog
 		json.Unmarshal(scanner.Bytes(), &buildLog)
