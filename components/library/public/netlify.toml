@@ -2,3 +2,6 @@
   for = "/*"
     [headers.values]
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods: GET, POST, PATCH, OPTIONS
+    Access-Control-Allow-Headers: Content-Type, Authorization, Time-Zone
+    Access-Control-Allow-Credentials: true
