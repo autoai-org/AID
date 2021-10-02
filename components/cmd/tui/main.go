@@ -192,7 +192,14 @@ func main() {
 					} else {
 						startServer(c.Args().Get(0))
 					}
-
+					return nil
+				},
+			},
+			{
+				Name:  "generate",
+				Usage: "Generate required files",
+				Action: func(c *cli.Context) error {
+					generate(c)
 					return nil
 				},
 			},

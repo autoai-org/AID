@@ -171,3 +171,21 @@ func headlessDaemon(c *cli.Context) {
 	}
 	workflow.StartContainer(container.UID)
 }
+
+func generate(c *cli.Context) {
+	remoteURL := os.Getenv("AID_MODEL")
+	installPackage(remoteURL)
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	localFolderName := strings.Split(remoteURL, "/")
+	vendorName := localFolderName[len(localFolderName)-2]
+	repoName := localFolderName[len(localFolderName)-1]
+	targetSubFolder := filepath.Join(targetPath, vendorName, repoName)
+	absTargetSubFolder, _ := filepath.Abs(targetSubFolder)
+
+	tomlString, err := utilities.ReadFileContent(filepath.Join(absTargetSubFolder, "aid.toml"))
+
+	utilities.ReportError(err, "cannot parse aid.toml file")
+	solvers := configuration.LoadSolversFromConfig(tomlString)
+	docker.RenderRunnerTpl(absTargetSubFolder, solvers.Solvers)
+	utilities.Formatter.Info("Generated runner_sentimentSolver.py")
+}
