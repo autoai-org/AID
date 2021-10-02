@@ -10,11 +10,11 @@ import (
 	"os"
 	"sort"
 
-	_ "github.com/autoai-org/aid/internal/initialization"
-	"github.com/autoai-org/aid/internal/utilities"
-
-	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/urfave/cli/v2"
+
+	"github.com/autoai-org/aid/internal/initialization"
+	"github.com/autoai-org/aid/internal/runtime/docker"
+	"github.com/autoai-org/aid/internal/utilities"
 )
 
 var (
@@ -25,6 +25,9 @@ var (
 )
 
 func main() {
+	if !initialization.Initialized {
+		cli.Exit("Failed to start", 1)
+	}
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("Version: %s Build: %s\n", c.App.Version, Build)
 	}

@@ -7,6 +7,10 @@ import (
 	"path/filepath"
 )
 
+var (
+	Initialized bool = false
+)
+
 func getHomeDir() string {
 	usr, err := user.Current()
 	if err != nil {
@@ -43,4 +47,5 @@ func init() {
 	for _, each := range requiredFolders {
 		createFolderIfNotExist(filepath.Join(aidDir, each))
 	}
+	Initialized = true
 }

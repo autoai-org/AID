@@ -8,8 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/autoai-org/aid/internal/configuration"
 	_ "github.com/autoai-org/aid/internal/initialization"
+
+	"github.com/autoai-org/aid/internal/configuration"
 
 	markdown "github.com/MichaelMure/go-term-markdown"
 	entRepository "github.com/autoai-org/aid/ent/generated/repository"
