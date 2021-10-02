@@ -2,7 +2,9 @@ package local
 
 import (
 	"fmt"
-	"log"
+	"os/exec"
+
+	"github.com/autoai-org/aid/internal/utilities"
 )
 
 var (
@@ -24,14 +26,10 @@ func Pip(args []string) {
 
 // Python calls the Python Program
 func Python(args []string, envs string) {
-	log.Println(args)
 	// handles environment variables
-	proc := NewProcess(PythonPath, "", args...)
-	out := proc.StreamOutput()
-	go func() {
-		for out.Scan() {
-			fmt.Println(out.Text())
-		}
-	}()
-	proc.Start()
+	cmd := exec.Command(PythonPath, args...)
+	err := cmd.Run()
+	if err != nil {
+		utilities.Formatter.Error(err.Error())
+	}
 }

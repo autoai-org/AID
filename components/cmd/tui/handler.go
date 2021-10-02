@@ -19,6 +19,8 @@ import (
 
 	"github.com/autoai-org/aid/internal/runtime/cargo"
 	"github.com/autoai-org/aid/internal/runtime/docker"
+	"github.com/autoai-org/aid/internal/runtime/local"
+
 	"github.com/autoai-org/aid/internal/runtime/requests"
 	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/autoai-org/aid/internal/workflow"
@@ -187,5 +189,7 @@ func generate(c *cli.Context) {
 	utilities.ReportError(err, "cannot parse aid.toml file")
 	solvers := configuration.LoadSolversFromConfig(tomlString)
 	docker.RenderRunnerTpl(absTargetSubFolder, solvers.Solvers)
-	utilities.Formatter.Info("Generated runner_sentimentSolver.py")
+	runnerFile := filepath.Join(absTargetSubFolder, "runner_"+solvers.Solvers[0].Name+".py")
+	utilities.Formatter.Info("Generated " + runnerFile)
+	local.Python([]string{runnerFile, "8080"}, "")
 }
