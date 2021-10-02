@@ -174,8 +174,22 @@ func main() {
 				Name:     "up",
 				Usage:    "Server Up",
 				Category: "daemon",
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name:    "headless",
+						Aliases: []string{"hl"},
+						Value:   false,
+						Usage:   "Headless mode",
+					},
+				},
 				Action: func(c *cli.Context) error {
-					startServer(c.Args().Get(0))
+					if c.Bool("headless") {
+						fmt.Println("headless mode")
+						headlessDaemon(c)
+					} else {
+						startServer(c.Args().Get(0))
+					}
+
 					return nil
 				},
 			},

@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/autoai-org/aid/internal/configuration"
 	_ "github.com/autoai-org/aid/internal/initialization"
 
 	markdown "github.com/MichaelMure/go-term-markdown"
@@ -138,4 +139,34 @@ func initRepo(c *cli.Context) {
 	workflow.InitNewRepo(vendorName, repoName, description)
 	utilities.Formatter.Info(repoName + " created!")
 	utilities.Formatter.Info("Check https://aid.autoai.org/docs/usage/manual/publish/prepare_locally for what to do next.")
+}
+
+func headlessDaemon(c *cli.Context) {
+	Port := os.Getenv("AID_PORT")
+	remoteURL := os.Getenv("AID_MODEL")
+	installPackage(remoteURL)
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	localFolderName := strings.Split(remoteURL, "/")
+	vendorName := localFolderName[len(localFolderName)-2]
+	repoName := localFolderName[len(localFolderName)-1]
+	targetSubFolder := filepath.Join(targetPath, vendorName, repoName)
+
+	absTargetSubFolder, _ := filepath.Abs(targetSubFolder)
+
+	tomlString, err := utilities.ReadFileContent(filepath.Join(absTargetSubFolder, "aid.toml"))
+
+	utilities.ReportError(err, "cannot parse aid.toml file")
+	packageConfig := configuration.LoadPackageFromConfig(tomlString)
+	solver := packageConfig.Solvers[0]
+	workflow.BuildDockerImage(vendorName, repoName, solver.Name, false, true)
+	image, err := database.DefaultDB.Image.Query().First(context.Background())
+	if err != nil {
+		utilities.ReportError(err, "cannot find container")
+	}
+	workflow.CreateContainer(image.UID, Port, false)
+	container, err := database.DefaultDB.Container.Query().First(context.Background())
+	if err != nil {
+		utilities.ReportError(err, "cannot find container")
+	}
+	workflow.StartContainer(container.UID)
 }
