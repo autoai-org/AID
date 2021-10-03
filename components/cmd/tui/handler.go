@@ -19,7 +19,6 @@ import (
 
 	"github.com/autoai-org/aid/internal/runtime/cargo"
 	"github.com/autoai-org/aid/internal/runtime/docker"
-	"github.com/autoai-org/aid/internal/runtime/local"
 
 	"github.com/autoai-org/aid/internal/runtime/requests"
 	"github.com/autoai-org/aid/internal/utilities"
@@ -190,8 +189,5 @@ func generate(c *cli.Context) {
 	solvers := configuration.LoadSolversFromConfig(tomlString)
 	docker.RenderRunnerTpl(absTargetSubFolder, solvers.Solvers)
 	runnerFile := filepath.Join(absTargetSubFolder, "runner_"+solvers.Solvers[0].Name+".py")
-	requirements := filepath.Join(absTargetSubFolder, "requirements.txt")
 	utilities.Formatter.Info("Generated " + runnerFile)
-	local.Pip(([]string{"install", "-r", requirements}))
-	local.Python([]string{runnerFile, "8080"}, "")
 }
