@@ -40,7 +40,7 @@ func startServer(port string) {
 
 func buildImage(buildContext string, gpu bool) {
 	buildInfo := strings.Split(buildContext, "/")
-	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2], gpu)
+	workflow.BuildDockerImage(buildInfo[0], buildInfo[1], buildInfo[2], gpu, false)
 }
 
 func buildImageByPath(path string, solver string, autoRemove bool) {

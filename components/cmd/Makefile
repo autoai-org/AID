@@ -4,15 +4,15 @@
 # https://opensource.org/licenses/MIT
 
 default:
-	@echo -e "==========================================="
-	@echo -e "==== This Makefile is for AID TUI Only ===="
-	@echo -e "==========================================="
-	@echo -e "Usage:"
-	@echo -e -e "\tmake format\t\t Format all go code"
-	@echo -e "\tmake generate-bins\t Ensemble binary assets"
-	@echo -e "\tmake generate-ent\t Generate entities"
-	@echo -e "\tmake build-cli\t\t Build binary executable"
-	@echo -e "\tmake xbuild\t\t Build binary executable for linux/macOS"
+	@echo  "==========================================="
+	@echo  "==== This Makefile is for AID TUI Only ===="
+	@echo  "==========================================="
+	@echo  "Usage:"
+	@echo   "\tmake format\t\t Format all go code"
+	@echo  "\tmake generate-bins\t Ensemble binary assets"
+	@echo  "\tmake generatent\t Generate entities"
+	@echo  "\tmake build-cli\t\t Build binary executable"
+	@echo  "\tmake xbuild\t\t Build binary executable for linux/macOS"
 
 BUILDTIME := $(shell date +%FT%T%Z)
 BUILDVERSION := $(shell git rev-parse --short HEAD)
@@ -24,30 +24,39 @@ ifeq ($(shell uname -s),Darwin)
 	OSFLAG +=-macOS
 endif
 
+
 format:
 	@gofmt -l -s -w **/**/*.go
 
-generate-ent:
-	@echo -e ">>> Generating entities..."
+generatent:
+	@echo  ">>> Generating entities..."
 	@cd ent && go generate
 
 generate-gql:
-	@echo -e ">>> Generating graphql bindings..."
+	@echo  ">>> Generating graphql bindings..."
 	@go generate
 
+build-studio-site:
+	cd ../studio && yarn && yarn build
+
+cp-studio-site:
+	cp -r ../studio/build internal/daemon/
+
 generate-all:
-	@make generate-ent
+	@make generatent
 	@make generate-gql
 
-describe-ent:
+describent:
 	@cd ent && go run entgo.io/ent/cmd/ent describe ./schema
 
 build-cli:
-	@echo -e ">>> Building CLI utilities..."
+	@go env -w CC=gcc CXX="g++"
+	@echo  ">>> Building CLI utilities..."
 	@cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o aid
 	@cd tui && mv aid ../
 
 build-all-cli:
+	@go env -w CC=gcc CXX="g++"
 	@make generate-all
 	@make build-cli
 
@@ -56,12 +65,14 @@ ci-build:
 	@go mod download
 	@go mod verify
 	@make generate-all 
+	@make build-studio-site
+	@make cp-studio-site
 	cd tui && go build -ldflags "-s -w -X main.Version="$(BUILDVERSION)" -X main.Build=$(BUILDTIME)"  -o "aid$(strip $(OSFLAG))"
 
 xbuild:
-	@echo -e ">>> Starting cross-platform building..."
-	@echo -e ">>> This command is supposed to be running on CI Server with cross-platform toolkits"
-	@echo -e ">>> Make sure you know what you are doing:)"
+	@echo  ">>> Starting cross-platform building..."
+	@echo  ">>> This command is supposed to be running on CI Server with cross-platform toolkits"
+	@echo  ">>> Make sure you know what you are doing:)"
 	@go mod download
 	@go mod verify
 	@make generate-all

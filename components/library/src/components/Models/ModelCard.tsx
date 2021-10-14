@@ -38,7 +38,7 @@ export default function ModelCard(props: any) {
                 <div>
                     <div className="flex space-x-3">
                         <div className="flex-shrink-0">
-                            {!(model.avatar) ? (
+                            {(model.avatar || !(model.avatar ==="null") || !(model.avatar ==="undefined")) ? (
                                 <img className="h-10 w-10 rounded-full" src={model.avatar} alt="" />
                             ) :
                                 (
@@ -150,17 +150,22 @@ export default function ModelCard(props: any) {
                     </h2>
                 </div>
                 <div>
-                    {model.analysis.requirements.map((item: any, idx: number) => (
-                        <span
-                            key={'requirements-' + idx}
-                            className={classNames(
-                                tagcolor[Math.ceil(idx % 5)],
-                                'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium mr-1 mt-8'
-                            )}
-                        >
-                            {item}
-                        </span>
-                    ))}
+                    {model.analysis.requirements.map((item: any, idx: number) => {
+                        item = item.replace(/(\r\n|\n|\r)/gm, "");
+                        if (!(["mlpm","cython","h5py"].includes(item))) {
+                            return(
+                                <span
+                                    key={'requirements-' + idx}
+                                    className={classNames(
+                                        tagcolor[Math.ceil(idx % 5)],
+                                        'inline-flex items-center px-3 py-0.5 rounded-full text-sm font-medium mr-1 mt-8'
+                                    )}
+                                >
+                                    {item}
+                                </span>
+                            )
+                        } else {return null}
+                    })}
                 </div>
                 <div className="mt-6 flex justify-between space-x-8">
                     <div className="flex space-x-6">
@@ -174,7 +179,10 @@ export default function ModelCard(props: any) {
                         <span className="inline-flex items-center text-sm">
                             <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                 <ArrowDownIcon className="h-5 w-5" aria-hidden="true" />
-                                <span className="font-medium text-gray-900">N/A</span>
+                                <div className='has-tooltip'>
+                                <span className='tooltip rounded shadow-lg p-1 bg-gray-100 text-gray-500 -mt-8'>We have not collected the installation statistics yet, stay tuned.</span>
+                                N/A
+                                </div>
                                 <span className="sr-only">N/A</span>
                             </button>
                         </span>
@@ -189,7 +197,7 @@ export default function ModelCard(props: any) {
                         <span className="inline-flex items-center text-sm">
                             <button onClick={handlePopup} className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                 <DownloadIcon className="h-5 w-5" aria-hidden="true" />
-                                <span className="font-medium text-gray-900">Install</span>
+                                <span className="font-medium text-gray-900">Install</span>
                             </button>
                         </span>
 

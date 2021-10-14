@@ -5,7 +5,6 @@
 import Moment from "react-moment"
 import { Link } from "react-router-dom"
 export default function Analysis(props: any) {
-    console.log(props.src)
     return (
         <form className="space-y-8 divide-y divide-gray-200">
             <div className="space-y-8 divide-y divide-gray-200">

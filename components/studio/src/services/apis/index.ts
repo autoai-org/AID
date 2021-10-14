@@ -1,12 +1,62 @@
-import {ApolloClient, InMemoryCache} from '@apollo/client';
-import axios from 'axios'
-import { setServer } from '../store/connectivity/server'
+import axios, { Method } from 'axios'
+import { setServer, getServer } from '../store/connectivity/server'
 import {store} from '../store/store'
 
-let serverEndpoint = "http://127.0.0.1:17415"
+class RestClient {
+    private axios
+    private serverEndpoint
+    constructor(serverEndpoint: string) {
+        this.axios = axios
+        this.serverEndpoint = serverEndpoint
+    }
+    setEndpoint(url:string) {
+        this.serverEndpoint = url
+    }
+    getEndpoint() {
+        return this.serverEndpoint
+    }
+    get(url: string) {
+        return this.axios.get(this.serverEndpoint + url)
+    }
+    post(url: string, payload: any) {
+        return this.axios.post(this.serverEndpoint+url, payload)
+    }
+    query(gql:string) {
+        console.log(this.serverEndpoint)
+        if (this.serverEndpoint==="") {
+            this.setEndpoint(getServer(store.getState()))
+        }
+        console.log(getServer(store.getState()))
+        return this.axios({
+            method: 'post',
+            url: this.serverEndpoint+"/api/query",
+            data: {
+                query: gql
+            }
+        })
+    }
+    infer(method: Method, url: string, payload: any) {
+        const options = {
+            method: method,
+            url: this.serverEndpoint+url,
+            data: payload
+        }
+        return this.axios.request(options)
+    }
+    ws_log(logid: string, onEvent: Function) {
+        const wsEndpoint = this.serverEndpoint.replace("http", "ws")
+        console.log(wsEndpoint+"/api/logs/"+logid)
+        const socket = new WebSocket(wsEndpoint+"/api/logs/"+logid)
+        socket.addEventListener('message', function(event){
+            onEvent(event.data)
+        })
+    }
+}
+
+let restclient: RestClient = new RestClient("")
 
 function setServerEndpoint(endpoint:string) {
-    serverEndpoint = endpoint
+    restclient.setEndpoint(endpoint)
     store.dispatch(setServer(endpoint))
 }
 
@@ -16,21 +66,13 @@ function getServerEndpoint() {
 
 function initServerEndpoint() {
     if (store.getState().connectivity.server) {
-        serverEndpoint = store.getState().connectivity.server
+        let serverEndpoint = store.getState().connectivity.server
+        restclient.setEndpoint(serverEndpoint)
     }
 }
 
-let gqlclient = new ApolloClient ({
-    uri:serverEndpoint+"/query",
-    cache: new InMemoryCache()
-})
-
-let restclient = axios
-
 export { 
-    serverEndpoint,
     restclient,
-    gqlclient,
     setServerEndpoint,
     getServerEndpoint,
     initServerEndpoint

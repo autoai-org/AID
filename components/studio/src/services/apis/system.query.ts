@@ -3,7 +3,7 @@
 // This software is released under the MIT License.
 // https://opensource.org/licenses/MIT
 
-import {restclient} from './index'
+import { restclient } from './index'
 
 function connectServer(url:string) {
     return restclient.get(url)

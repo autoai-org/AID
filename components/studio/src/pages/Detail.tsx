@@ -12,12 +12,7 @@ import { useDispatch } from 'react-redux'
 import { restclient } from '../services/apis';
 import Moment from 'react-moment';
 import { getInitials } from '../services/utilities/initials'
-import { serverEndpoint } from '../services/apis'
-const attachments = [
-  { name: 'pretrained_1.pt', href: '#' },
-  { name: 'pretrained_2.pt', href: '#' },
-]
-
+import toml from 'toml'
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
@@ -40,34 +35,47 @@ interface SolverInfo {
   description: string;
   vendorname: string;
   remoteURL: string;
+  reponame: string;
   commits: commit[];
+  pretrained: any[];
   containers: container[];
 }
 
 export default function Details(props: any) {
-  let defaultSolverInfoInfo: SolverInfo = {
+  let defaultSolverInfo: SolverInfo = {
     solvername: "An Awesome Solver!",
     description: "Awesome Description",
     vendorname: "Awesome Company",
     remoteURL: "",
+    pretrained: [],
+    reponame:"",
     commits: [],
     containers: [],
   }
-  const [solverInfo, setSolverInfo] = useState(defaultSolverInfoInfo);
-  const [loaded, setLoaded] = useState(false);
-  const dispatch = useDispatch()
+  const [solverInfo, setSolverInfo] = useState(defaultSolverInfo);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(setIsLoading(true))
-    restclient.get(serverEndpoint+ "/solver/" + props.match.params.solverID).then(function (res: any) {
+    restclient.get("/api/solver/" + props.match.params.solverID).then(function (res: any) {
+      console.log(res)
+      let pretrained = toml.parse(res.data.pretrained)
+      if (typeof(pretrained.models) === 'undefined') {
+        pretrained = {
+          models: []
+        };
+      } 
+      res.data.pretrained = pretrained.models
       setSolverInfo(res.data)
-      console.log(res.data)
     }).catch(function (err) {
     }).finally(function () {
       dispatch(setIsLoading(false))
-      setLoaded(true)
     })
   }, [])
+
+  function loadContainerCreation() {
+  }
+
   return (
     <div className="min-h-screen bg-gray-100">
       <BackToHomepage />
@@ -112,12 +120,11 @@ export default function Details(props: any) {
                       'group bg-white rounded-md inline-flex items-center text-base font-medium hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500'
                     )}
                   >
-                    <button
-                      type="button"
+                    <div
                       className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-blue-500"
                     >
                       Inference
-                    </button>
+                    </div>
                   </Popover.Button>
                   <Transition
                     show={open}
@@ -146,7 +153,8 @@ export default function Details(props: any) {
                           ))}
                         </div>
                         <div className="px-5 py-5 bg-gray-50 space-y-6 sm:flex sm:space-y-0 sm:space-x-10 sm:px-8">
-                            Above are the running solvers.
+                            Above are the running solvers. 
+                            <div className="rounded items-center justify-center border border-transparent bg-blue-600 hover:bg-blue-700 text-white ml-2" onClick={loadContainerCreation}>Create</div>
                         </div>
                       </div>
                     </Popover.Panel>
@@ -171,7 +179,7 @@ export default function Details(props: any) {
                   <dl className="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
                     <div className="sm:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">Made for</dt>
-                      <dd className="mt-1 text-sm text-gray-900">Image Encoding</dd>
+                      <dd className="mt-1 text-sm text-gray-900">N/A</dd>
                     </div>
                     <div className="sm:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">GPU Necessary?</dt>
@@ -179,16 +187,16 @@ export default function Details(props: any) {
                     </div>
                     <div className="sm:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">Required Input</dt>
-                      <dd className="mt-1 text-sm text-gray-900">Image</dd>
+                      <dd className="mt-1 text-sm text-gray-900">N/A</dd>
                     </div>
                     <div className="sm:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">Frameworks</dt>
-                      <dd className="mt-1 text-sm text-gray-900">TensorFlow</dd>
+                      <dd className="mt-1 text-sm text-gray-900">N/A</dd>
                     </div>
                     <div className="sm:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">CI Status</dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        <img src="https://github.com/aidmodels/image_encoding/actions/workflows/aid-ci.yml/badge.svg"></img>
+                        <img src={"https://github.com/"+solverInfo.vendorname+"/"+solverInfo.reponame+"/actions/workflows/aid-ci.yml/badge.svg"} alt="Unknown (CI is not configured)"></img>
                       </dd>
                     </div>
                     <div className="sm:col-span-2 prose">
@@ -199,7 +207,7 @@ export default function Details(props: any) {
                       <dt className="text-sm font-medium text-gray-500">Attachments</dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                          {attachments.map((attachment) => (
+                          {solverInfo.pretrained.map((attachment) => (
                             <li
                               key={attachment.name}
                               className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
@@ -209,7 +217,7 @@ export default function Details(props: any) {
                                 <span className="ml-2 flex-1 w-0 truncate">{attachment.name}</span>
                               </div>
                               <div className="ml-4 flex-shrink-0">
-                                <a href={attachment.href} className="font-medium text-blue-600 hover:text-blue-500">
+                                <a href={attachment.url} className="font-medium text-blue-600 hover:text-blue-500">
                                   Download
                                 </a>
                               </div>
@@ -222,7 +230,7 @@ export default function Details(props: any) {
                 </div>
                 <div>
                   <a
-                    href="#"
+                    href={"https://hub.autoai.dev/model/"+solverInfo.vendorname+"/"+solverInfo.reponame}
                     className="block bg-gray-50 text-sm font-medium text-gray-500 text-center px-4 py-4 hover:text-gray-700 sm:rounded-b-lg"
                   >
                     Read in Model Hub
@@ -230,10 +238,7 @@ export default function Details(props: any) {
                 </div>
               </div>
             </section>
-
-
           </div>
-
           <section aria-labelledby="timeline-title" className="lg:col-start-3 lg:col-span-1">
             <div className="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
               <h2 id="timeline-title" className="text-lg font-medium text-gray-900">

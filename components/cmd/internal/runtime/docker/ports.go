@@ -63,3 +63,13 @@ func ImportImage(imageName string, quiet bool) error {
 	utilities.Formatter.Info("Imported your image from " + targetFile)
 	return nil
 }
+
+// UploadImage uploads an image to a remote server such that the solver will be loaded on that server as well
+func UploadImage(remoteAddr string, solverID string) error {
+	return nil
+}
+
+// DownloadImage downloads an image remotely, such that the solver will be loaded in the local server
+func DownloadImage(remoteAddr string, solverID string) error {
+	return nil
+}

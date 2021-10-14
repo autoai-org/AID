@@ -16,3 +16,4 @@ components/cmd/entry/logs/system.log.201912230000
 components/cmd/test.jpg
 components/mlserve/tests/test.jpg
 components/cmd/entry/db.db
+components/extension-server/database.db

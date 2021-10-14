@@ -17,3 +17,8 @@ func CreateContainer(imageUID string, hostPort string, gpu bool) {
 func StartContainer(containerUID string) {
 	docker.Start(containerUID)
 }
+
+// StopContainer stops a running container
+func StopContainer(containerUID string) {
+	docker.Stop(containerUID)
+}
