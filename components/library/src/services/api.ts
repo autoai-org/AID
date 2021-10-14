@@ -6,7 +6,7 @@
 import axios from 'axios'
 import { analyseGithubRepo } from './github'
 
-export const serverEndpoint = 'https://discovery.autoai.org/'
+export const serverEndpoint = 'https://discovery.autoai.dev/'
 // export const serverEndpoint = 'http://127.0.0.1:3000/'
 function _get(endpoint:string) {
     return new Promise((resolve, reject)=>{

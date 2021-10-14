@@ -10,6 +10,8 @@ import (
 
 	_ "github.com/autoai-org/aid/internal/initialization"
 
+	"github.com/autoai-org/aid/internal/configuration"
+
 	markdown "github.com/MichaelMure/go-term-markdown"
 	entRepository "github.com/autoai-org/aid/ent/generated/repository"
 	"github.com/autoai-org/aid/internal/daemon"
@@ -17,6 +19,7 @@ import (
 
 	"github.com/autoai-org/aid/internal/runtime/cargo"
 	"github.com/autoai-org/aid/internal/runtime/docker"
+
 	"github.com/autoai-org/aid/internal/runtime/requests"
 	"github.com/autoai-org/aid/internal/utilities"
 	"github.com/autoai-org/aid/internal/workflow"
@@ -138,4 +141,53 @@ func initRepo(c *cli.Context) {
 	workflow.InitNewRepo(vendorName, repoName, description)
 	utilities.Formatter.Info(repoName + " created!")
 	utilities.Formatter.Info("Check https://aid.autoai.org/docs/usage/manual/publish/prepare_locally for what to do next.")
+}
+
+func headlessDaemon(c *cli.Context) {
+	Port := os.Getenv("AID_PORT")
+	remoteURL := os.Getenv("AID_MODEL")
+	installPackage(remoteURL)
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	localFolderName := strings.Split(remoteURL, "/")
+	vendorName := localFolderName[len(localFolderName)-2]
+	repoName := localFolderName[len(localFolderName)-1]
+	targetSubFolder := filepath.Join(targetPath, vendorName, repoName)
+
+	absTargetSubFolder, _ := filepath.Abs(targetSubFolder)
+
+	tomlString, err := utilities.ReadFileContent(filepath.Join(absTargetSubFolder, "aid.toml"))
+
+	utilities.ReportError(err, "cannot parse aid.toml file")
+	packageConfig := configuration.LoadPackageFromConfig(tomlString)
+	solver := packageConfig.Solvers[0]
+	workflow.BuildDockerImage(vendorName, repoName, solver.Name, false, true)
+	image, err := database.DefaultDB.Image.Query().First(context.Background())
+	if err != nil {
+		utilities.ReportError(err, "cannot find container")
+	}
+	workflow.CreateContainer(image.UID, Port, false)
+	container, err := database.DefaultDB.Container.Query().First(context.Background())
+	if err != nil {
+		utilities.ReportError(err, "cannot find container")
+	}
+	workflow.StartContainer(container.UID)
+}
+
+func generate(c *cli.Context) {
+	remoteURL := os.Getenv("AID_MODEL")
+	installPackage(remoteURL)
+	targetPath := filepath.Join(utilities.GetBasePath(), "models")
+	localFolderName := strings.Split(remoteURL, "/")
+	vendorName := localFolderName[len(localFolderName)-2]
+	repoName := localFolderName[len(localFolderName)-1]
+	targetSubFolder := filepath.Join(targetPath, vendorName, repoName)
+	absTargetSubFolder, _ := filepath.Abs(targetSubFolder)
+
+	tomlString, err := utilities.ReadFileContent(filepath.Join(absTargetSubFolder, "aid.toml"))
+
+	utilities.ReportError(err, "cannot parse aid.toml file")
+	solvers := configuration.LoadSolversFromConfig(tomlString)
+	docker.RenderRunnerTpl(absTargetSubFolder, solvers.Solvers)
+	runnerFile := filepath.Join(absTargetSubFolder, "runner_"+solvers.Solvers[0].Name+".py")
+	utilities.Formatter.Info("Generated " + runnerFile)
 }

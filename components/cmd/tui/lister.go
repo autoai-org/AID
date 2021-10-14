@@ -128,7 +128,6 @@ func listSolvers() {
 		Cells: []*simpletable.Cell{
 			{Align: simpletable.AlignCenter, Text: "#"},
 			{Align: simpletable.AlignCenter, Text: "Unique ID"},
-			{Align: simpletable.AlignCenter, Text: "Repository"},
 			{Align: simpletable.AlignCenter, Text: "Name"},
 		},
 	}
@@ -137,12 +136,20 @@ func listSolvers() {
 		r := []*simpletable.Cell{
 			{Align: simpletable.AlignCenter, Text: fmt.Sprint(idx + 1)},
 			{Text: solver.UID},
-			{Text: solver.Edges.Repository.Vendor + "/" + solver.Edges.Repository.Name},
 			{Text: fmt.Sprint(solver.Name)},
 		}
 		rows = append(rows, r)
 	}
 	baseList(headers, rows)
+}
+
+func listLast() {
+	solver, err := database.NewDefaultDB().Solver.Query().First(context.Background())
+	if err != nil {
+		utilities.Formatter.Error("Cannot fetch solver: " + err.Error())
+		os.Exit(3)
+	}
+	println(solver.Name)
 }
 
 func listEntity(entityName string) {
@@ -157,6 +164,8 @@ func listEntity(entityName string) {
 		listRepositores()
 	case "solvers":
 		listSolvers()
+	case "last":
+		listLast()
 	default:
 		utilities.Formatter.Error("Unsupported Entity Name")
 	}

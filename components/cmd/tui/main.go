@@ -10,11 +10,11 @@ import (
 	"os"
 	"sort"
 
-	_ "github.com/autoai-org/aid/internal/initialization"
-	"github.com/autoai-org/aid/internal/utilities"
-
-	"github.com/autoai-org/aid/internal/runtime/docker"
 	"github.com/urfave/cli/v2"
+
+	"github.com/autoai-org/aid/internal/initialization"
+	"github.com/autoai-org/aid/internal/runtime/docker"
+	"github.com/autoai-org/aid/internal/utilities"
 )
 
 var (
@@ -25,6 +25,9 @@ var (
 )
 
 func main() {
+	if !initialization.Initialized {
+		cli.Exit("Failed to start", 1)
+	}
 	cli.VersionPrinter = func(c *cli.Context) {
 		fmt.Printf("Version: %s Build: %s\n", c.App.Version, Build)
 	}
@@ -174,8 +177,29 @@ func main() {
 				Name:     "up",
 				Usage:    "Server Up",
 				Category: "daemon",
+				Flags: []cli.Flag{
+					&cli.BoolFlag{
+						Name:    "headless",
+						Aliases: []string{"hl"},
+						Value:   false,
+						Usage:   "Headless mode",
+					},
+				},
 				Action: func(c *cli.Context) error {
-					startServer(c.Args().Get(0))
+					if c.Bool("headless") {
+						fmt.Println("headless mode")
+						headlessDaemon(c)
+					} else {
+						startServer(c.Args().Get(0))
+					}
+					return nil
+				},
+			},
+			{
+				Name:  "generate",
+				Usage: "Generate required files",
+				Action: func(c *cli.Context) error {
+					generate(c)
 					return nil
 				},
 			},

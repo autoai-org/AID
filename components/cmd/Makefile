@@ -82,3 +82,6 @@ xbuild:
 
 install:
 	cp ./aid /usr/local/bin
+
+build-docker:
+	docker build -t autoai/aid .

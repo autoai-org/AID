@@ -23,7 +23,7 @@ PUBLIC_FOLDER = os.path.join("./", "temp", "public")
 
 @aidserver.route("/", methods=["GET"])
 async def ping():
-    return await json_resp({"status": "OK"}, status=200)
+    return "It works!"
 
 
 @aidserver.route("/infer", methods=["GET", "POST"])
@@ -52,6 +52,7 @@ async def batch_infer():
 @aidserver.route("/static/<filename>")
 async def send_static(filename):
     return await send_from_directory(os.path.abspath(PUBLIC_FOLDER), filename)
+
 
 def run_server(solver, port=None):
     if port is None:
