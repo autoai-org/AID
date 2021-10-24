@@ -10,8 +10,8 @@ import { useHistory } from "react-router-dom";
 const navigation = [
     { name: 'Documents', href: 'https://aid.autoai.org' },
     { name: 'Status', href: 'https://status.autoai.org/' },
-    { name: 'Donate', href: 'https://github.com/sponsors/xzyaoi' },
     { name: 'About', href: 'https://aid.autoai.org/docs/about/intro' },
+    { name: 'Leaderboard', href: '/leaderboard' },
 ]
 
 export default function AIDHeader() {
