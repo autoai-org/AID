@@ -77,7 +77,6 @@ export default function PublishForm() {
             }).then(function (res: any) {
 
                 setAIDToml(toml.parse(atob(res.data.content)))
-                console.log(toml.parse(atob(res.data.content)))
                 setRepoConfirmed(true)
             })
         })
@@ -89,7 +88,6 @@ export default function PublishForm() {
             'description': aidTOML.package.tagline,
             'githubURL': "https://github.com/" + selectedLogin + "/" + selectedRepo
         }).then(function (res) {
-            console.log(res)
             setAdded(true)
         })
     }

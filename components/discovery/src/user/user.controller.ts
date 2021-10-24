@@ -1,5 +1,5 @@
-import { Controller, Get, Post, Body, UseGuards, Req, Render } from '@nestjs/common'
-import { CreateUserDTO } from './user.schema'
+import { Controller, Get, Post, Body, UseGuards, Req, Render } from '@nestjs/common';
+import { CreateUserDTO } from './user.schema';
 import { UserService } from './user.service';
 import { ApiTags } from '@nestjs/swagger';
 import * as bcrypt from 'bcrypt';

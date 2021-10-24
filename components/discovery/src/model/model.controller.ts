@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common'
-import { AIDModel, CreateModelDto } from './model.schema'
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { AIDModel, CreateModelDto } from './model.schema';
 import { ModelService } from './model.service';
 import { ApiTags } from '@nestjs/swagger';
-import { fetchGithubSummary, getGitHubDetails} from '../services/github'
+import { fetchGithubSummary, getGitHubDetails} from '../services/github';
 
 @ApiTags('Model')
 @Controller('model')
