@@ -20,7 +20,7 @@ export default function SearchResult() {
         setProgress(1)
         findModelsByKeyword(keyword).then(function (res: any) {
             setProgress(2)
-            analyseRepos(res.data).then(function (res) {
+            analyseRepos(res.data, false).then(function (res) {
                 setPackages(res)
                 setLoading(false)
             });

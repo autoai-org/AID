@@ -14,7 +14,6 @@ export class SystemController {
         private readonly modelService: ModelService,
         private readonly systemService: SystemService,
         private readonly health: HealthCheckService,
-        private readonly dns: DNSHealthIndicator,
         private readonly mongo: MongooseHealthIndicator,
     ) {
 
@@ -32,8 +31,7 @@ export class SystemController {
     @HealthCheck()
     check() {
         return this.health.check([
-            () => this.dns.pingCheck('aid-docs', 'https://aid.autoai.org')
-            //() => this.mongo.pingCheck('aid-database', { connection: config.MONGO_URI })
+            () => this.mongo.pingCheck('aid-database', { connection: config.MONGO_URI })
         ]);
     }
 }

@@ -33,14 +33,15 @@ export function findModelsByKeyword(keyword:string) {
     return _get(serverEndpoint+"model/keyword/"+keyword)
 }
 
-export async function analyseRepos(repos:any) {
+export async function analyseRepos(repos:any, meta_only:boolean) {
     for (let i=0;i<repos.length;i++) {
-        console.log(repos[i])
         if (repos[i].githubURL !== "" && repos[i].githubURL) {
             let vendor = repos[i].githubURL.split("/")[3]
             let name = repos[i].githubURL.split("/")[4]
-            let result = await analyseGithubRepo(vendor, name, repos[i]._id)
-            repos[i].analysis=result
+            if (!meta_only) {
+                let result = await analyseGithubRepo(vendor, name, repos[i]._id)
+                repos[i].analysis=result
+            }
         }
     }
     return repos

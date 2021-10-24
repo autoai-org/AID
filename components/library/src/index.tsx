@@ -8,6 +8,7 @@ import Signup from './pages/Authentication/Register'
 import Publish from './pages/Publish'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
+import LeaderboardPage from './pages/Leaderboard'
 import reportWebVitals from './reportWebVitals'
 import ModelDetail from './components/Models/ModelDetail'
 import { FirebaseAuthProvider } from '@react-firebase/auth'
@@ -49,6 +50,9 @@ ReactDOM.render(
           </Route>
           <Route path="/search">
             <SearchResult />
+          </Route>
+          <Route path="/leaderboard">
+            <LeaderboardPage />
           </Route>
           <Route path="/profile">
             <Profile />

@@ -4,7 +4,6 @@ import {
     QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
 export default function InstallModelDialog (props:any) {
-    console.log(props);
     function close() {
         props.onClose()
     }
