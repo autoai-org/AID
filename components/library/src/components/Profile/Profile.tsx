@@ -13,7 +13,7 @@ function classNames(...classes: any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Example() {
+export default function Profile() {
     return (
         <div>
             <div className="bg-white rounded-lg shadow overflow-hidden">
@@ -49,7 +49,6 @@ export default function Example() {
                     <div className="divide-y divide-gray-200 lg:col-span-9">
                         <FirebaseAuthConsumer>
                             {({ isSignedIn, user, providerId }) => {
-                                console.log(user)
                                 if (isSignedIn === true) {
                                     return (
                                         <div className="py-6 px-4 sm:p-6 lg:pb-8">
