@@ -48,6 +48,7 @@
             "label": "Contributing",
             "type":"category",
             "items": [
+                "contribution/contributing",
                 "contribution/code-of-conduct",
                 "contribution/testflight"
             ]
