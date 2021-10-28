@@ -48,6 +48,11 @@ module.exports = {
                     position: 'left',
                 },
                 {
+                    label: t.navbar.hub,
+                    position: 'left',
+                    to:"https://hub.autoai.dev"
+                },
+                {
                     label: t.navbar.community,
                     position: 'left',
                     items: [

@@ -38,7 +38,7 @@ export default function ModelCard(props: any) {
                 <div>
                     <div className="flex space-x-3">
                         <div className="flex-shrink-0">
-                            {(model.avatar || !(model.avatar ==="null") || !(model.avatar ==="undefined")) ? (
+                            {(model.avatar || !(model.avatar === "null") || !(model.avatar === "undefined")) ? (
                                 <img className="h-10 w-10 rounded-full" src={model.avatar} alt="" />
                             ) :
                                 (
@@ -152,8 +152,8 @@ export default function ModelCard(props: any) {
                 <div>
                     {model.analysis.requirements.map((item: any, idx: number) => {
                         item = item.replace(/(\r\n|\n|\r)/gm, "");
-                        if (!(["mlpm","cython","h5py"].includes(item))) {
-                            return(
+                        if (!(["mlpm", "cython", "h5py"].includes(item))) {
+                            return (
                                 <span
                                     key={'requirements-' + idx}
                                     className={classNames(
@@ -164,7 +164,7 @@ export default function ModelCard(props: any) {
                                     {item}
                                 </span>
                             )
-                        } else {return null}
+                        } else { return null }
                     })}
                 </div>
                 <div className="mt-6 flex justify-between space-x-8">
@@ -180,8 +180,8 @@ export default function ModelCard(props: any) {
                             <button className="inline-flex space-x-2 text-gray-400 hover:text-gray-500">
                                 <ArrowDownIcon className="h-5 w-5" aria-hidden="true" />
                                 <div className='has-tooltip'>
-                                <span className='tooltip rounded shadow-lg p-1 bg-gray-100 text-gray-500 -mt-8'>We have not collected the installation statistics yet, stay tuned.</span>
-                                N/A
+                                    <span className='tooltip rounded shadow-lg p-1 bg-gray-100 text-gray-500 -mt-8'>We have not collected the installation statistics yet, stay tuned.</span>
+                                    N/A
                                 </div>
                                 <span className="sr-only">N/A</span>
                             </button>
