@@ -1,0 +1,169 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{package_name}} - AID Package Information</title>
+    <script defer
+        src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+        integrity="sha512-wnea99uKIC3TJF7v4eKk4Y+lMz2Mklv18+r4na2Gn1abDRPPOeef95xTzdwGD9e6zXJBteMIhZ1+68QC5byJZw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet"
+        href="https://assets_cache.autoai.workers.dev/css/accordian.tailwind.css"
+        crossorigin="anonymous" referrerpolicy="no-referrer">
+</head>
+
+<body>
+    <div class='main'>
+        <header style="height: 8rem"
+            class="bg-white fixed flex items-center justify-between left-0 right-0 top-0 z-10">
+            <div
+                class="text-2xl font-semibold md:w-64 text-gray-800 hover:text-gray-900 pl-6 py-0">
+                <a href="/" class="flex items-center">
+                    <img src="https://raw.githubusercontent.com/autoai-org/AID/main/assets/logo_transparent.png"
+                        class="w-[290px]" alt="">
+                </a>
+            </div>
+            <div
+                class="space-x-6 text-brand-dark hidden md:flex justify-end items-center w-64 pr-6 py-4">
+                <a href="https://github.com/autoai-org"
+                    class="block hover:text-gray-600"><svg
+                        class="fill-current w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <title>GitHub</title>
+                        <path
+                            d="M10 0a10 10 0 0 0-3.16 19.49c.5.1.68-.22.68-.48l-.01-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.9 1.52 2.34 1.08 2.91.83.1-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.1.39-1.99 1.03-2.69a3.6 3.6 0 0 1 .1-2.64s.84-.27 2.75 1.02a9.58 9.58 0 0 1 5 0c1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.4.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85l-.01 2.75c0 .26.18.58.69.48A10 10 0 0 0 10 0">
+                        </path>
+                    </svg></a>
+                <a href="https://twitter.com/autoaiHQ"
+                    class="block hover:text-gray-600"><svg
+                        class="fill-current w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <title>Twitter</title>
+                        <path
+                            d="M6.29 18.25c7.55 0 11.67-6.25 11.67-11.67v-.53c.8-.59 1.49-1.3 2.04-2.13-.75.33-1.54.55-2.36.65a4.12 4.12 0 0 0 1.8-2.27c-.8.48-1.68.81-2.6 1a4.1 4.1 0 0 0-7 3.74 11.65 11.65 0 0 1-8.45-4.3 4.1 4.1 0 0 0 1.27 5.49C2.01 8.2 1.37 8.03.8 7.7v.05a4.1 4.1 0 0 0 3.3 4.03 4.1 4.1 0 0 1-1.86.07 4.1 4.1 0 0 0 3.83 2.85A8.23 8.23 0 0 1 0 16.4a11.62 11.62 0 0 0 6.29 1.84">
+                        </path>
+                    </svg></a>
+                <a href="https://discord.gg/y44fqHArnJ"
+                    class="block hover:text-gray-600"><svg
+                        class="fill-current w-5 h-5"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 146 146">
+                        <title>Discord</title>
+                        <path
+                            d="M107.75 125.001s-4.5-5.375-8.25-10.125c16.375-4.625 22.625-14.875 22.625-14.875-5.125 3.375-10 5.75-14.375 7.375-6.25 2.625-12.25 4.375-18.125 5.375-12 2.25-23 1.625-32.375-.125-7.125-1.375-13.25-3.375-18.375-5.375-2.875-1.125-6-2.5-9.125-4.25-.375-.25-.75-.375-1.125-.625-.25-.125-.375-.25-.5-.375-2.25-1.25-3.5-2.125-3.5-2.125s6 10 21.875 14.75c-3.75 4.75-8.375 10.375-8.375 10.375-27.625-.875-38.125-19-38.125-19 0-40.25 18-72.875 18-72.875 18-13.5 35.125-13.125 35.125-13.125l1.25 1.5c-22.5 6.5-32.875 16.375-32.875 16.375s2.75-1.5 7.375-3.625c13.375-5.875 24-7.5 28.375-7.875.75-.125 1.375-.25 2.125-.25 7.625-1 16.25-1.25 25.25-.25 11.875 1.375 24.625 4.875 37.625 12 0 0-9.875-9.375-31.125-15.875l1.75-2S110 19.626 128 33.126c0 0 18 32.625 18 72.875 0 0-10.625 18.125-38.25 19zM49.625 66.626c-7.125 0-12.75 6.25-12.75 13.875s5.75 13.875 12.75 13.875c7.125 0 12.75-6.25 12.75-13.875.125-7.625-5.625-13.875-12.75-13.875zm45.625 0c-7.125 0-12.75 6.25-12.75 13.875s5.75 13.875 12.75 13.875c7.125 0 12.75-6.25 12.75-13.875s-5.625-13.875-12.75-13.875z"
+                            fill-rule="nonzero"></path>
+                    </svg></a>
+            </div>
+            <div class="md:hidden flex items-center pr-6"
+                x-data="{ show: false }">
+                <button class="text-gray-600 focus:outline-none"
+                    x-on:click="show = ! show">
+                    <svg x-show="! show" class="fill-current w-6 h-6"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z">
+                        </path>
+                    </svg>
+                    <svg x-show="show" class="h-6 w-6" stroke="currentColor"
+                        fill="none" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+        <div id="package_description" class="text-center">
+            <h2
+                class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl pt-36">
+                {{package_name}}
+            </h2>
+            <p class="mt-4 text-lg leading-6 text-gray-500">
+                {{package_description}}
+            </p>
+        </div>
+        <div id="solver_testing" class="w-full md:w-3/5 mx-auto p-8">
+            <p>Available Solvers</p>
+            <div class="shadow-md">
+                <div class="tab w-full overflow-hidden border-t">
+                    <input class="absolute opacity-0 " id="tab-multi-one"
+                        type="checkbox" name="tabs">
+                    <label class="block p-5 leading-normal cursor-pointer"
+                        for="tab-multi-one">{{solver_name}}</label>
+                    <div
+                        class="tab-content overflow-hidden border-l-2 bg-gray-100 border-indigo-500 leading-normal text-center">
+                        <p class="p-5">Text Input</p>
+                        <textarea class="w-80" style="resize: none;"
+                            x-model="message"
+                            placeholder="Text Input."></textarea>
+                        <p class="p-5 form-textarea mt-1 block w-full">File
+                            Upload
+                        </p>
+                        <input type="file" x-model="file"></input>
+                        <span x-text="message"></span>
+                        </br>
+                        <button
+                            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                            Submit
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    </div>
+    <div class="bg-indigo-200 bg-opacity-25 footer">
+        <div class="max-w-7xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
+            <div class="lg:grid lg:grid-cols-2 lg:gap-8">
+                <h2
+                    class="max-w-md mx-auto text-3xl font-extrabold text-indigo-900 text-center lg:max-w-xl lg:text-left">
+                    Proudly with our partners
+                </h2>
+                <div class="flow-root self-center mt-8 lg:mt-0">
+                    <div
+                        class="-mt-4 -ml-8 flex flex-wrap justify-between lg:-ml-4">
+                        <div
+                            class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
+                            <img class="h-12"
+                                src="https://hub.autoai.dev/assets/logos/eth-library-lab.svg"
+                                alt="Workcation">
+                        </div>
+                        <div
+                            class="mt-4 ml-8 flex flex-grow flex-shrink-0 justify-center lg:flex-grow-0 lg:ml-4">
+                            <img class="h-12"
+                                src="https://hub.autoai.dev/assets/logos/cyberport.png"
+                                alt="Tuple">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <style>
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer {
+            flex-shrink: 0;
+        }
+
+        .main {
+            flex: 1 0 auto;
+        }
+    </style>
+</footer>
+
+</html>
