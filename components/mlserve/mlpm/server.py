@@ -1,7 +1,6 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+# Copyright (c) 2021 Xiaozhe Yao
 #
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
+
 
 # coding:utf-8
 import os
@@ -48,7 +47,12 @@ async def batch_infer():
         return await handle_batch_infer_request(request, UPLOAD_INFER_FOLDER,
                                                 PUBLIC_FOLDER)
 
+@aidserver.route("/change", methods=["POST"])
+async def change():
+    if request.method=="POST":
+        return await handle_change(request)
 
+        
 @aidserver.route("/static/<filename>")
 async def send_static(filename):
     return await send_from_directory(os.path.abspath(PUBLIC_FOLDER), filename)

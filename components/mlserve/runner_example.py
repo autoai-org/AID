@@ -1,7 +1,6 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+# Copyright (c) 2021 Xiaozhe Yao
 # 
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
+
 # coding:utf-8
 from mlpm.solver import Solver
 from mlpm.metrics import Metrics
