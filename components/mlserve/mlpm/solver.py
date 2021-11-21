@@ -37,3 +37,6 @@ class Solver(object):
 
     def infer(self, data):
         raise NotImplementedError
+
+    def change(self):
+        raise NotImplementedError

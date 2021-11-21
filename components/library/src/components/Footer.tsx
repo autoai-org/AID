@@ -49,7 +49,7 @@ const footerNavigation = {
         },
     ],
 }
-export default function Footer() {
+export default function AIDFooter() {
     return (
         <footer className="bg-gray-50" aria-labelledby="footer-heading">
             <h2 id="footer-heading" className="sr-only">

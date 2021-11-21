@@ -24,7 +24,6 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
     if 'file' in req_files:
         uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
-        print(filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
@@ -79,3 +78,6 @@ async def handle_batch_infer_request(request, upload_folder, target_folder):
     except Exception as e:
         traceback.print_exc()
         return json_resp({"error": str(e), "code": "500"}, status=500)
+
+async def handle_change(request):
+    aidserver.solver.change(request)
