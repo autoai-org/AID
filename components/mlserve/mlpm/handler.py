@@ -32,6 +32,7 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
         data['input_file_path'] = file_abs_path
     try:
         if request_type == "infer":
+            print(aidserver.solver)
             results = aidserver.solver.infer(data)
         else:
             raise NotImplementedError
