@@ -1,10 +1,10 @@
-# Copyright (c) 2021 Xiaozhe Yao
-#
-
 #coding:utf-8
 
-from quart import Quart
+from quart_openapi import Pint
 
-aidserver = Quart(__name__)
-# Explicitly declare solver in the aidserver
-aidserver.solver = None
+aidserver = Pint(
+    __name__, 
+    title="AID Solver API",
+    no_openapi=True,
+    static_folder='static'
+)

@@ -1,0 +1,46 @@
+<!-- HTML for static distribution bundle build -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/swagger-ui-dist@3.52.5/swagger-ui.css"/>
+    <title>AID Solver API Definition</title>
+    <style>
+      html
+      {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after
+      {
+        box-sizing: inherit;
+      }
+
+      body
+      {
+        margin:0;
+        background: #fafafa;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="swagger-ui"></div>
+
+    <script src="https://unpkg.com/swagger-ui-dist@3.52.5/swagger-ui-bundle.js" charset="UTF-8"> </script>
+    <script>
+    window.onload = function() {
+      const ui = SwaggerUIBundle({
+        "dom_id": "#swagger-ui",
+        validatorUrl: "https://validator.swagger.io/validator",
+        url: "/",
+      })
+      window.ui = ui;
+    };
+  </script>
+  </body>
+</html>
