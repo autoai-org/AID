@@ -11,10 +11,15 @@ import { findModelsByKeyword, analyseRepos } from "../services/api"
 import ModelList from "../components/Models/ModelList";
 import Filters from '../components/Models/ModelFilters'
 export default function SearchResult() {
+    const [isSearch, setIssearch] = useState(false)
     const [packages, setPackages] = useState([])
     const [loading, setLoading] = useState(false)
     const [progress, setProgress] = useState(0)
     useEffect(() => {
+        
+        if(packages.length && !isSearch) {
+            return
+        }
         let keyword = parseQuery("kw")
         setLoading(true)
         setProgress(1)
@@ -23,9 +28,11 @@ export default function SearchResult() {
             analyseRepos(res.data, false).then(function (res) {
                 setPackages(res)
                 setLoading(false)
+                setIssearch(false)
             });
         })
-    }, [])
+        
+    }, [isSearch, packages])
     return (
         <MainLayout>
             {loading && progress === 1 &&
@@ -53,7 +60,7 @@ export default function SearchResult() {
                 </div>
             }
             {!loading &&
-                <DoubleColumn left={<Filters/>} main={<ModelList models={packages}/>}></DoubleColumn>
+                <DoubleColumn left={<Filters search={setIssearch} />} main={<ModelList models={packages}/>}></DoubleColumn>
             }
         </MainLayout>
     )
