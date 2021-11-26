@@ -207,6 +207,5 @@ func main() {
 	}
 	sort.Sort(cli.FlagsByName(app.Flags))
 	sort.Sort(cli.CommandsByName(app.Commands))
-	err := app.Run(os.Args)
-	utilities.ReportError(err, "AID Starting Error")
+	app.Run(os.Args)
 }

@@ -4,9 +4,9 @@ long_description = "For full description, please go to [Documentation](https://a
 
 setuptools.setup(
     name="mlpm",
-    version="1.0.0.10",
+    version="1.4.1.1",
     author="Xiaozhe Yao",
-    author_email="xiaozhe.yaoi@gmail.com",
+    author_email="askxzyao@gmail.com",
     description="Machine Learning Package Manager",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -32,7 +32,8 @@ setuptools.setup(
         "toml",
         "requests",
         "numpy",
-        "werkzeug"
+        "werkzeug",
+        "quart-openapi",
     ],
     project_urls={
         "Bug Tracker": "https://github.com/autoai-org/aid/issues",
