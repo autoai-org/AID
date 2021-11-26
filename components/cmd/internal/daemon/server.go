@@ -39,7 +39,7 @@ func printIpAddress(port string) {
 			case *net.IPNet:
 				ip = v.IP.String()
 				if strings.Count(ip, ":") < 2 {
-					fmt.Println("\t IP Address: " + ip + ":" + port)
+					fmt.Println("\t IP Address: " + "http://" + ip + ":" + port)
 				}
 			case *net.IPAddr:
 			}
