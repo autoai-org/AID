@@ -2,6 +2,10 @@
 title: Clients
 ---
 
+:::caution
+These clients are not thoroughly tested yet. There might be problems.
+:::
+
 ## cURL
 
 You probably already have curl installed. You can try to interact with AID as below:
