@@ -112,7 +112,7 @@ export default function ModelDetail(props: any) {
                                             <dd className="mt-1 text-sm text-gray-900">
 
                                                 {detailedInfo.pretrained.models.map((model: any) => (
-                                                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
+                                                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200" key={model.name}>
                                                         <li
                                                             key={model.name}
                                                             className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
