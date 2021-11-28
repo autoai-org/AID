@@ -3,13 +3,20 @@ import { Fragment } from 'react'
 import {
     QuestionMarkCircleIcon,
 } from '@heroicons/react/solid'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function InstallModelDialog (props:any) {
     function close() {
         props.onClose()
     }
+    function copy_to_clipboard() {
+        navigator.clipboard.writeText("aid install"+props.model.githubURL)
+        toast.success("Copied!")
+    }
     return (
         <Transition.Root show={props.open} as={Fragment}>
                             <Dialog as="div" static className="fixed z-10 inset-0 overflow-y-auto" open={props.open} onClose={close}>
+                                <ToastContainer />
                                 <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                                     <Transition.Child
                                         as={Fragment}
@@ -55,6 +62,18 @@ export default function InstallModelDialog (props:any) {
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div className="mt-5 sm:mt-6">
+                                            
+                                                <button
+                                                    type="button"
+                                                    className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-100 text-base font-medium text-indigo-700 hover:bg-indigo-200 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                                                    onClick={() => {
+                                                        copy_to_clipboard()
+                                                    }}
+                                                >
+                                                    Copy to Clipboard
+                                                </button>
                                             </div>
                                             <div className="mt-5 sm:mt-6">
                                                 <button

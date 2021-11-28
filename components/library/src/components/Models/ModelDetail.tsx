@@ -35,7 +35,7 @@ export default function ModelDetail(props: any) {
     }, [vendor, name])
     return (
         <MainLayout>
-            <InstallModelDialog model={{vendor:vendor, name:name, githubURL: 'https://github.com/'+vendor+'/'+name}} open={open} onClose={handleClose} />
+            <InstallModelDialog model={{ vendor: vendor, name: name, githubURL: 'https://github.com/' + vendor + '/' + name }} open={open} onClose={handleClose} />
             <div className="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8 pt-4">
                 <div className="flex items-center space-x-5">
                     <div className="flex-shrink-0">
@@ -110,8 +110,9 @@ export default function ModelDetail(props: any) {
                                         <div className="sm:col-span-2">
                                             <dt className="text-sm font-medium text-gray-500">Pretrained Weights</dt>
                                             <dd className="mt-1 text-sm text-gray-900">
-                                                <ul className="border border-gray-200 rounded-md divide-y divide-gray-200">
-                                                    {detailedInfo.pretrained.models.map((model: any) => (
+
+                                                {detailedInfo.pretrained.models.map((model: any) => (
+                                                    <ul className="border border-gray-200 rounded-md divide-y divide-gray-200" key={model.name}>
                                                         <li
                                                             key={model.name}
                                                             className="pl-3 pr-4 py-3 flex items-center justify-between text-sm"
@@ -126,8 +127,9 @@ export default function ModelDetail(props: any) {
                                                                 </a>
                                                             </div>
                                                         </li>
-                                                    ))}
-                                                </ul>
+                                                    </ul>
+                                                ))}
+
                                             </dd>
                                         </div>
                                     </dl>
@@ -182,7 +184,7 @@ export default function ModelDetail(props: any) {
                             </div>
                             <div className="mt-6 flex flex-col justify-stretch">
                                 <a
-                                    href={"https://github.com/"+vendor+"/"+name+"/commits/master"}
+                                    href={"https://github.com/" + vendor + "/" + name + "/commits/master"}
                                     type="button"
                                     className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
                                 >

@@ -13,7 +13,7 @@ AID relies on several dependencies to contain the machine learning algorithms. I
 You can install the edge releases of the command line utility by running the command below:
 
 ```
-curl https://releases.autoai.org/aid/install.sh | sudo bash -s -- edge
+sudo curl https://releases.autoai.org/aid/install.sh | sudo bash -s -- edge
 ```
 
 :::caution

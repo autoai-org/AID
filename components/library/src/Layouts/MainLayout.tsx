@@ -8,9 +8,9 @@ import AIDFooter from "../components/Footer";
 
 export default function MainLayout(props: any) {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col h-screen">
             <AIDHeader />
-            <main>
+            <main className="flex-grow">
                 <div>
                     {props.children}
                 </div>

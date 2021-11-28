@@ -1,7 +1,6 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
+# Copyright (c) 2021 Xiaozhe Yao
 #
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
+
 # coding:utf-8
 import os
 import traceback
@@ -25,7 +24,6 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
     if 'file' in req_files:
         uploaded_file = req_files['file']
         filename = secure_filename(uploaded_file.filename)
-        print(filename)
         # make sure the UPLOAD_FOLDER exsits
         if not os.path.isdir(upload_folder):
             os.makedirs(upload_folder)
@@ -34,6 +32,7 @@ async def handle_post_solver_train_or_infer(request, upload_folder,
         data['input_file_path'] = file_abs_path
     try:
         if request_type == "infer":
+            print(aidserver.solver)
             results = aidserver.solver.infer(data)
         else:
             raise NotImplementedError
@@ -80,3 +79,6 @@ async def handle_batch_infer_request(request, upload_folder, target_folder):
     except Exception as e:
         traceback.print_exc()
         return json_resp({"error": str(e), "code": "500"}, status=500)
+
+async def handle_change(request):
+    aidserver.solver.change(request)

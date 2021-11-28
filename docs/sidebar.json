@@ -35,6 +35,14 @@
             ]
         },
         {
+            "label": "References",
+            "type":"category",
+            "items": [
+                "usage/manual/cmd",
+                "usage/manual/clients"
+            ]
+        },
+        {
             "label": "Specification",
             "type":"category",
             "items": [

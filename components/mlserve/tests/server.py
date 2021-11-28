@@ -1,23 +1,23 @@
-# Copyright (c) 2020 Xiaozhe Yao & AICAMP.CO.,LTD
-#
-# This software is released under the MIT License.
-# https://opensource.org/licenses/MIT
+# Copyright (c) 2021 Xiaozhe Yao
 
-from mlpm.server import aidserver
+from mlpm.solver import Solver
+from mlpm.server import aidserver, run_server
 
-app = aidserver
+class ExampleSolver(Solver):
+    def __init__(self,toml_file=None):
+        super().__init__(toml_file)
+        self.predictor = ''
+        self.acc = [1,2,3,4]
 
+    def infer(self, data):
+        return {'data': [0, 1, 2, 3]}
 
-def test_index_returns_200():
-    request, response = app.test_client.get('/')
-    assert response.status == 200
+    def train(self, data):
+        epochs = int(data['epochs'])
+        for i in range(epochs):
+            print(i)
+        print(data)
+        return data
 
-
-def test_index_put_not_allowed():
-    request, response = app.test_client.put('/')
-    assert response.status == 405
-
-
-if __name__ == '__main__':
-    test_index_returns_200()
-    test_index_put_not_allowed()
+solver = ExampleSolver()
+aidserver.solver = solver
