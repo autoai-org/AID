@@ -16,7 +16,7 @@ curl -X POST -F file=@test.jpg http://127.0.0.1:8080/infer
 
 ## Python Client
 
-You can install the Python client by using ```pip install mlpm_client```.
+You can install the Python client by using `pip install mlpm_client`.
 
 An example of using the Python client to interact with AID is illustrated below:
 
@@ -33,9 +33,9 @@ with open('test.jpg', 'rb') as file:
 ## NodeJS/JavaScript Client
 
 ```javascript title="Example of Javascript Client"
-let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/38a64faa/infer")
-httpc.addPayload("text", this.state.textValue)
+let httpc = new HTTPClient("http://127.0.0.1:17415/runnings/38a64faa/infer");
+httpc.addPayload("text", this.state.textValue);
 httpc.send().then(function (res) {
-    // do something
-})
+  // do something
+});
 ```

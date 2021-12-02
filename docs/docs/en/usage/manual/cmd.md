@@ -24,6 +24,7 @@ aid --help
 ```
 
 You can also print the help message of a single repositories
+
 ```sh
 aid help {repository_id}
 ```

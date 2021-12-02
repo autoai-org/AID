@@ -12,8 +12,9 @@ class Solver(object):
         self._hyperparameters = {}
         self._enable_train = False
         self.server = aidserver
-        if hasattr(self.__class__, 'train') and callable(
-                getattr(self.__class__, 'train')):
+        if hasattr(self.__class__, "train") and callable(
+            getattr(self.__class__, "train")
+        ):
             self._enable_train = True
 
     @property
@@ -32,7 +33,7 @@ class Solver(object):
         self._isReady = True
 
     def start(self, port=None):
-        print('Server will run on port: ' + str(port))
+        print("Server will run on port: " + str(port))
         run_server(self, port)
 
     def infer(self, data):

@@ -16,17 +16,17 @@ You can either use the edge build of AID from [Installation](/docs/getting-start
 
 ## Find Models
 
-We have an experimental new [Model Hub](https://hub.autoai.dev), please try it out! 
+We have an experimental new [Model Hub](https://hub.autoai.dev), please try it out!
 
 ## Build Models
 
-Probably you will choose ```ocr``` model, after installation as described on the Model Hub, you need to start to build it by the following command:
+Probably you will choose `ocr` model, after installation as described on the Model Hub, you need to start to build it by the following command:
 
 ```shell
 aid build aidmodels/ocr/ocrSolver
 ```
 
-Then the system will let you know the ```id``` of the result, and you will need to bind it to a local port:
+Then the system will let you know the `id` of the result, and you will need to bind it to a local port:
 
 ```shell
 aid create {YOUR_ID_HERE} {YOUR_PORT_HERE}
@@ -38,7 +38,7 @@ For example:
 aid create ef6782b0 8081
 ```
 
-Then AID will show the new ```id``` of the service. Please note that it will be **different** from the id before. You can start the service by:
+Then AID will show the new `id` of the service. Please note that it will be **different** from the id before. You can start the service by:
 
 ```shell
 aid start {YOUR_ID_HERE}
@@ -46,9 +46,9 @@ aid start {YOUR_ID_HERE}
 
 Some of the solver names are listed below:
 
-* aidmodels/ocr/ocrSolver
-* aidmodels/detectron/detection
-* eth-library-lab/speech-analysis/speechSolver
+- aidmodels/ocr/ocrSolver
+- aidmodels/detectron/detection
+- eth-library-lab/speech-analysis/speechSolver
 
 ## Testing Predicion with Curl
 

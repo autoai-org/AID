@@ -1,41 +1,41 @@
 {
-    "navbar": {
-        "about": "About",
-        "docs": "Docs",
-        "api": "API",
-        "community": "Community",
-        "hub": "Model Hub",
-        "partners": "Partners",
-        "showcase": "Showcase",
-        "usage": "Usage",
-        "gettingStarted": "Getting started",
-        "contact": "Contact",
-        "mail": "Mail",
-        "network": "Network"
-    },
-    "navigation": {
-        "pagination": {
-            "next": "Next",
-            "previous": "Previous"
-        }
-    },
-    "pages": {
-        "partners": {
-            "partnersLabel": "Partners",
-            "founders": [
-                {
-                    "description": "Cyberport is an innovative digital community with over 1,650 start-ups and technology companies. It is managed by Hong Kong Cyberport Management Company Limited, which is wholly owned by the Hong Kong SAR Government."
-                },
-                {
-                    "description": "ETH Library is a incubator for open knowledge ecosystems. It strives to advance information infrastructure and services for science, research and education. By boosting related ideas, practices and strategies, the initiative contributes to future scientific work environments."
-                }
-            ],
-            "collaboratorsLabel": "Collaborators",
-            "collaborators": [],
-            "patronsLabel": "Patrons"
-        }
-    },
-    "global": {
-        "discover": "Discover"
+  "navbar": {
+    "about": "About",
+    "docs": "Docs",
+    "api": "API",
+    "community": "Community",
+    "hub": "Model Hub",
+    "partners": "Partners",
+    "showcase": "Showcase",
+    "usage": "Usage",
+    "gettingStarted": "Getting started",
+    "contact": "Contact",
+    "mail": "Mail",
+    "network": "Network"
+  },
+  "navigation": {
+    "pagination": {
+      "next": "Next",
+      "previous": "Previous"
     }
+  },
+  "pages": {
+    "partners": {
+      "partnersLabel": "Partners",
+      "founders": [
+        {
+          "description": "Cyberport is an innovative digital community with over 1,650 start-ups and technology companies. It is managed by Hong Kong Cyberport Management Company Limited, which is wholly owned by the Hong Kong SAR Government."
+        },
+        {
+          "description": "ETH Library is a incubator for open knowledge ecosystems. It strives to advance information infrastructure and services for science, research and education. By boosting related ideas, practices and strategies, the initiative contributes to future scientific work environments."
+        }
+      ],
+      "collaboratorsLabel": "Collaborators",
+      "collaborators": [],
+      "patronsLabel": "Patrons"
+    }
+  },
+  "global": {
+    "discover": "Discover"
+  }
 }

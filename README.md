@@ -3,6 +3,7 @@
 ![https://github.com/autoai-org/aid/actions](https://github.com/autoai-org/aid/workflows/dashboard/badge.svg)
 [![Go Report Card](https://goreportcard.com/badge/github.com/autoai-org/aid)](https://goreportcard.com/report/github.com/autoai-org/aid)
 [![CodeFactor](https://www.codefactor.io/repository/github/autoai-org/aid/badge)](https://www.codefactor.io/repository/github/autoai-org/aid)
+
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -27,6 +28,7 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -41,26 +43,30 @@
 
 AID is a DevOps System that is dedicated to machine learning. It consists of the following components:
 
-* **M**achine **L**earning **P**ackage **M**anager that could search, download, and deploy machine learning models.
-* A dashboard to monitor the status of installed services, trigger build, test/evaluate services.
-* A registry that provides plugins for notifications, security checks, etc.
+- **M**achine **L**earning **P**ackage **M**anager that could search, download, and deploy machine learning models.
+- A dashboard to monitor the status of installed services, trigger build, test/evaluate services.
+- A registry that provides plugins for notifications, security checks, etc.
 
 <!-- USAGE EXAMPLES -->
+
 ## Usage
 
 For more examples, please refer to the [Documentation](https://aid.autoai.org).
 
 <!-- ROADMAP -->
+
 ## Roadmap
 
 See the [open issues](https://github.com/autoai-org/aid/issues) for a list of proposed features (and known issues).
 
 <!-- MODELS -->
+
 ## Models
 
 We share our officially tested models with our github organization [aidmodels](https://github.com/aidmodels). We are also working on an open registry that could provide you with more features. Stay tuned!
 
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -72,6 +78,7 @@ Contributions are what make the open source community such an amazing place to b
 5. Open a Pull Request
 
 <!-- LICENSE -->
+
 ## License
 
 Personal uses are governed by the MIT License. See `LICENSE` for more information.

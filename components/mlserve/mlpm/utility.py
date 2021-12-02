@@ -13,7 +13,7 @@ def str2bool(v):
 
 def _isPortOpen(port):
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    result = s.connect_ex(('127.0.0.1', port))
+    result = s.connect_ex(("127.0.0.1", port))
     s.close()
     if result == 0:
         return True
@@ -36,6 +36,7 @@ def process_unready_requests(solver):
         return json_resp(
             {
                 "error": "Solver is not ready yet, please wait patiently...",
-                "code": "500"
+                "code": "500",
             },
-            status=500)
+            status=500,
+        )

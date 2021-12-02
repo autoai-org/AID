@@ -1,76 +1,63 @@
 {
-    "docs": [
-        {
-            "label": "Getting Started",
-            "type":"category",
-            "items": [
-                "getting-started/intro",
-                "getting-started/installation"
-            ]
-        },
-        {
-            "label": "Concepts",
-            "type":"category",
-            "items": [
-                "usage/concepts/package",
-                "usage/concepts/event"
-            ]
-        },
-        {
-            "label": "Install Models",
-            "type":"category",
-            "items": [
-                "usage/manual/installation/search",
-                "usage/manual/installation/download",
-                "usage/manual/installation/run"
-            ]
-        },
-        {
-            "label": "Publish Models",
-            "type":"category",
-            "items": [
-                "usage/manual/publish/prepare_locally",
-                "usage/manual/publish/build_locally",
-                "usage/manual/publish/upload"
-            ]
-        },
-        {
-            "label": "References",
-            "type":"category",
-            "items": [
-                "usage/manual/cmd",
-                "usage/manual/clients"
-            ]
-        },
-        {
-            "label": "Specification",
-            "type":"category",
-            "items": [
-                "specs/configurations",
-                "specs/data-format",
-                "specs/error-code",
-                "specs/cli"
-            ]
-        },
-        {
-            "label": "Contributing",
-            "type":"category",
-            "items": [
-                "contribution/contributing",
-                "contribution/code-of-conduct",
-                "contribution/testflight"
-            ]
-        }
-    ],
-    "about": [
-        {
-          "label": "About AID",
-          "type": "category",
-          "items": [
-            "about/intro",
-            "about/news",
-            "community/examples/showroom"
-          ]
-        }
+  "docs": [
+    {
+      "label": "Getting Started",
+      "type": "category",
+      "items": ["getting-started/intro", "getting-started/installation"]
+    },
+    {
+      "label": "Concepts",
+      "type": "category",
+      "items": ["usage/concepts/package", "usage/concepts/event"]
+    },
+    {
+      "label": "Install Models",
+      "type": "category",
+      "items": [
+        "usage/manual/installation/search",
+        "usage/manual/installation/download",
+        "usage/manual/installation/run"
       ]
+    },
+    {
+      "label": "Publish Models",
+      "type": "category",
+      "items": [
+        "usage/manual/publish/prepare_locally",
+        "usage/manual/publish/build_locally",
+        "usage/manual/publish/upload"
+      ]
+    },
+    {
+      "label": "References",
+      "type": "category",
+      "items": ["usage/manual/cmd", "usage/manual/clients"]
+    },
+    {
+      "label": "Specification",
+      "type": "category",
+      "items": [
+        "specs/configurations",
+        "specs/data-format",
+        "specs/error-code",
+        "specs/cli"
+      ]
+    },
+    {
+      "label": "Contributing",
+      "type": "category",
+      "items": [
+        "contribution/contributing",
+        "contribution/code-of-conduct",
+        "contribution/testflight"
+      ]
+    }
+  ],
+  "about": [
+    {
+      "label": "About AID",
+      "type": "category",
+      "items": ["about/intro", "about/news", "community/examples/showroom"]
+    }
+  ]
 }
