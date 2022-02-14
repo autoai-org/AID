@@ -32,7 +32,7 @@ from mlpm.solver import Solver
 class SampleSolver(Solver):
     def __init__(self, toml_file=None):
         super().__init__(toml_file)
-        # Do you Init Work here
+        # Do your initialisation here
         self.classifer = get_classifier()
         self.ready()
     def infer(self, data):
