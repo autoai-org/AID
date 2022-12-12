@@ -35,7 +35,7 @@
     "base-64": "^1.0.0",
     "bcrypt": "^5.0.0",
     "cookie-parser": "^1.4.5",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "express-formidable": "^1.2.0",
     "express-rate-limit": "^5.2.6",
     "express-session": "^1.17.1",
